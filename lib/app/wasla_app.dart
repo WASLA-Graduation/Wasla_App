@@ -21,6 +21,7 @@ class WaslaApp extends StatelessWidget {
       child: BlocBuilder<GlobalCubit, GlobalState>(
         builder: (context, state) {
           final globalCubit = context.read<GlobalCubit>();
+          globalCubit.changeLanguage(locale: Locale('ar'));
 
           return MaterialApp(
             supportedLocales: const [Locale('ar'), Locale('en')],

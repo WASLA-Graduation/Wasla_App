@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
@@ -22,7 +23,6 @@ class SignUpView extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 5),
-
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -34,7 +34,9 @@ class SignUpView extends StatelessWidget {
               height: SizeConfig.screenWidth * 0.4,
             ),
             Align(
-              child: CustomDescriptionTextWidget(text: "Create your account"),
+              child: CustomDescriptionTextWidget(
+                text: "createAccount".tr(context),
+              ),
             ),
             VerticalSpace(height: 4),
             CustomAuthForm(formKey: cubit.singUpformKey),
@@ -45,18 +47,18 @@ class SignUpView extends StatelessWidget {
                   context.pushScreen(AppRoutes.verifyScreen);
                 }
               },
-              text: "Sign Up",
+              text: "signUp".tr(context),
             ),
             VerticalSpace(height: 3),
-            CustomDividerText(text: " Or Continue with "),
+            CustomDividerText(text: "orContinueWith".tr(context)),
             VerticalSpace(height: 3),
             CustomSocialAuthWidget(),
             VerticalSpace(height: 3),
             CustomTextSpanWidget(
               onTap: () =>
                   context.pushReplacementScreen(AppRoutes.signInScreen),
-              leadingText: "Already have an account?",
-              suffixText: "Sign In",
+              leadingText: "alreadyHaveAccount".tr(context),
+              suffixText: "signIn".tr(context),
             ),
           ],
         ),

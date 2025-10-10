@@ -1,23 +1,26 @@
-String? validateEmail(String? value) {
+import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
+
+String? validateEmail(BuildContext context, String? value) {
   if (value == null || value.isEmpty) {
-    return 'Email is required';
+    return 'email_required'.tr(context);
   }
 
   final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
   if (!emailRegex.hasMatch(value)) {
-    return 'Enter a valid email address';
+    return 'email_invalid'.tr(context);
   }
 
   return null;
 }
 
-String? validatePassword(String? value) {
+String? validatePassword(BuildContext context, String? value) {
   if (value == null || value.isEmpty) {
-    return 'Password is required';
+    return 'password_required'.tr(context);
   }
 
   if (value.length < 6) {
-    return 'Password must be at least 6 characters';
+    return 'password_short'.tr(context);
   }
 
   return null;

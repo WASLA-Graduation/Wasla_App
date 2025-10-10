@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
@@ -27,32 +28,31 @@ class ChooseAuthView extends StatelessWidget {
               width: SizeConfig.screenWidth * 0.6,
               height: SizeConfig.screenWidth * 0.6,
             ),
-            CustomDescriptionTextWidget(text: "Let's you in"),
+            CustomDescriptionTextWidget(text: "letsYouIn".tr(context)),
             VerticalSpace(height: 7),
-
             CustomSocialMediaButton(
               onPressed: () {},
               image: Assets.assetsImagesFacebook,
-              text: "Continue with Facebook",
+              text: "continueWithFacebook".tr(context),
             ),
             CustomSocialMediaButton(
               onPressed: () {},
               image: Assets.assetsImagesGoogle,
-              text: "Continue with Google",
+              text: "continueWithGoogle".tr(context),
             ),
             VerticalSpace(height: 2),
-            CustomDividerText(text: " Or "),
+            CustomDividerText(text: "or".tr(context)),
             VerticalSpace(height: 2),
             GeneralButton(
               onPressed: () {
                 context.pushScreen(AppRoutes.signInScreen);
               },
-              text: "Sign in with Password",
+              text: "signInWithPassword".tr(context),
             ),
             VerticalSpace(height: 3),
             CustomTextSpanWidget(
-              leadingText: "Don't have an account ? ",
-              suffixText: "Sign Up",
+              leadingText: "dontHaveAccount".tr(context),
+              suffixText: "signUp".tr(context),
               onTap: () {
                 context.pushScreen(AppRoutes.signUpScreen);
               },

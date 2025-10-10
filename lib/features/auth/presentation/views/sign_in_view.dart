@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
@@ -24,7 +25,6 @@ class SignInView extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 5),
-
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -36,7 +36,7 @@ class SignInView extends StatelessWidget {
             ),
             VerticalSpace(height: 3),
             Align(
-              child: CustomDescriptionTextWidget(text: "Login to your account"),
+              child: CustomDescriptionTextWidget(text: "login".tr(context)),
             ),
             VerticalSpace(height: 3),
             CustomAuthForm(formKey: cubit.singInformKey),
@@ -44,10 +44,10 @@ class SignInView extends StatelessWidget {
             GeneralButton(
               onPressed: () {
                 if (cubit.singInformKey.currentState!.validate()) {
-                  // handle sign up
+                  // handle sign in
                 }
               },
-              text: "Sign In",
+              text: "signIn".tr(context),
             ),
             VerticalSpace(height: 3),
             Align(
@@ -56,7 +56,7 @@ class SignInView extends StatelessWidget {
                   context.pushScreen(AppRoutes.forgotScreen);
                 },
                 child: Text(
-                  "Forgot the password ?",
+                  "forgotPassword".tr(context),
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                     color: AppColors.primaryColor,
                   ),
@@ -64,15 +64,15 @@ class SignInView extends StatelessWidget {
               ),
             ),
             VerticalSpace(height: 3),
-            CustomDividerText(text: " Or Continue with "),
+            CustomDividerText(text: "orContinueWith".tr(context)),
             VerticalSpace(height: 3),
-            CustomSocialAuthWidget(),
+            const CustomSocialAuthWidget(),
             VerticalSpace(height: 3),
             CustomTextSpanWidget(
               onTap: () =>
                   context.pushReplacementScreen(AppRoutes.signUpScreen),
-              leadingText: "Don't have an account?",
-              suffixText: "Sign Up",
+              leadingText: "dontHaveAccount".tr(context),
+              suffixText: "signUp".tr(context),
             ),
           ],
         ),

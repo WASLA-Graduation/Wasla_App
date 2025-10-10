@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
@@ -16,29 +17,28 @@ class CustomAuthForm extends StatelessWidget {
 
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
-
         return Form(
           key: formKey,
           child: Column(
             children: [
               CustomTextFormField(
-                hint: "Email",
+                hint: "email".tr(context),
                 prefixIcon: Icon(
                   Icons.email,
                   color: AppColors.gray,
                 ),
                 onChanged: (email) => cubit.email = email,
-                validator: validateEmail,
+                validator: (value) => validateEmail(context, value),
               ),
               const VerticalSpace(height: 3),
               CustomTextFormField(
-                hint: "Password",
+                hint: "password".tr(context),
                 prefixIcon: Icon(
                   Icons.lock,
-                  color:  AppColors.gray,
+                  color: AppColors.gray,
                 ),
                 onChanged: (pass) => cubit.password = pass,
-                validator: validatePassword,
+                validator: (value) => validatePassword(context, value),
                 isSecure: !cubit.isPasswordVisible,
                 suffixIcon: IconButton(
                   onPressed: cubit.togglePassIcon,

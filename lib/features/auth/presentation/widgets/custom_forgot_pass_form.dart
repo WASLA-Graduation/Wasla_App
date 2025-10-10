@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
@@ -21,21 +23,24 @@ class CustomForgotPassForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 13),
-            child: CustomLableAddressWidget(text: "Email Address"),
+            padding: EdgeInsets.only(
+              left: context.isArabic ? 0 : 13,
+              right: context.isArabic ? 13 : 0,
+            ),
+            child: CustomLableAddressWidget(text: "emailAddress".tr(context)),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 13),
           CustomTextFormField(
             prefixIcon: const Icon(Icons.email),
-            hint: "Email Address",
+            hint: "emailAddress".tr(context),
             onChanged: (email) {
               cubit.email = email;
             },
-            validator: validateEmail,
+            validator: (value) => validateEmail(context, value),
           ),
           const VerticalSpace(height: 5),
           GeneralButton(
-            text: "Send Verification Code",
+            text: "sendVerificationCode".tr(context),
             onPressed: () {
               if (cubit.forgotPassformKey.currentState!.validate()) {
                 context.pushScreen(AppRoutes.resetPassScreen);
@@ -47,4 +52,3 @@ class CustomForgotPassForm extends StatelessWidget {
     );
   }
 }
-

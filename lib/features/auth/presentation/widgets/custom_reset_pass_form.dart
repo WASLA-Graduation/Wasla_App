@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
@@ -8,6 +9,7 @@ import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_done_widget.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_lable_add_widget.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_text_form_field.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 
 class CustomResetPassForm extends StatelessWidget {
   const CustomResetPassForm({super.key});
@@ -25,20 +27,23 @@ class CustomResetPassForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 13),
+                padding: EdgeInsets.only(
+                  left: context.isArabic ? 0 : 13,
+                  right: context.isArabic ? 13 : 0,
+                ),
                 child: CustomLableAddressWidget(
-                  text: "Create Your New Password",
+                  text: "createNewPassword".tr(context),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 13),
               CustomTextFormField(
-                hint: "Password",
+                hint: "password".tr(context),
                 isSecure: !cubit.isPasswordVisible,
                 onChanged: (pass) {
                   cubit.password = pass;
                 },
-                validator: validatePassword,
-                prefixIcon: Icon(Icons.lock),
+                validator: (value) => validatePassword(context, value),
+                prefixIcon: const Icon(Icons.lock),
                 suffixIcon: IconButton(
                   onPressed: cubit.togglePassIcon,
                   icon: Icon(
@@ -49,15 +54,15 @@ class CustomResetPassForm extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               CustomTextFormField(
-                hint: "Confirm Password",
+                hint: "confirmPassword".tr(context),
                 isSecure: !cubit.isPasswordVisible,
                 onChanged: (pass) {
                   cubit.confirmPassword = pass;
                 },
-                validator: validatePassword,
-                prefixIcon: Icon(Icons.lock),
+                validator: (value) => validatePassword(context, value),
+                prefixIcon: const Icon(Icons.lock),
                 suffixIcon: IconButton(
                   onPressed: cubit.togglePassIcon,
                   icon: Icon(
@@ -68,17 +73,17 @@ class CustomResetPassForm extends StatelessWidget {
                   ),
                 ),
               ),
-              VerticalSpace(height: 6),
+              const VerticalSpace(height: 6),
               GeneralButton(
                 onPressed: () {
                   if (cubit.resetPassformKey.currentState!.validate()) {
                     showDialog(
                       context: context,
-                      builder: (context) => CustomDoneWidget(),
+                      builder: (context) => const CustomDoneWidget(),
                     );
                   }
                 },
-                text: "Save Password",
+                text: "savePassword".tr(context),
               ),
             ],
           ),

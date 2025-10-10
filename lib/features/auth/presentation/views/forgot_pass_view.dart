@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/utils/size_config.dart';
@@ -19,9 +20,8 @@ class ForgotPassView extends StatelessWidget {
           children: [
             VerticalSpace(height: 2),
             CustomLableSubLableWidget(
-              title: "Forgot Password?",
-              subTitle:
-                  "Enter your email address to verify and reset your password",
+              title: "forgotPasswordTitle".tr(context),
+              subTitle: "forgotPasswordSubTitle".tr(context),
             ),
             VerticalSpace(height: 3),
             Image.asset(
@@ -30,7 +30,7 @@ class ForgotPassView extends StatelessWidget {
               height: SizeConfig.screenWidth * 0.6,
             ),
             VerticalSpace(height: 2),
-            CustomForgotPassForm(),
+            const CustomForgotPassForm(),
           ],
         ),
       ),

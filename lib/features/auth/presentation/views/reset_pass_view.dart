@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/utils/size_config.dart';
@@ -10,12 +11,11 @@ class ResetPassView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Create New Password")),
+      appBar: AppBar(title: Text("createNewPassword".tr(context))),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 5),
         child: ListView(
           padding: EdgeInsets.zero,
-
           children: [
             VerticalSpace(height: 2),
             Image.asset(
@@ -24,7 +24,7 @@ class ResetPassView extends StatelessWidget {
               height: SizeConfig.screenWidth * 0.7,
             ),
             VerticalSpace(height: 3),
-            CustomResetPassForm(),
+            const CustomResetPassForm(),
           ],
         ),
       ),
