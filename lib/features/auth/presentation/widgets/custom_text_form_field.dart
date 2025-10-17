@@ -8,6 +8,10 @@ class CustomTextFormField extends StatelessWidget {
   final bool? isSecure;
   final IconButton? suffixIcon;
   final Widget? prefixIcon;
+  final TextInputType? keyboardTyp;
+  final void Function()? onTap;
+  final TextEditingController? controller;
+  final bool? readOnly;
 
   const CustomTextFormField({
     super.key,
@@ -17,14 +21,19 @@ class CustomTextFormField extends StatelessWidget {
     this.isSecure,
     this.suffixIcon,
     this.prefixIcon,
+    this.keyboardTyp,
+    this.onTap,
+    this.controller, this.readOnly,
   });
 
   @override
   Widget build(BuildContext context) {
-
-
     return TextFormField(
+      readOnly: readOnly ?? false,
+      controller: controller,
+      keyboardType: keyboardTyp,
       cursorColor: AppColors.primaryColor,
+      onTap: onTap,
       onChanged: onChanged,
       validator: validator,
       obscureText: isSecure ?? false,

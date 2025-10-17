@@ -7,6 +7,7 @@ import 'package:wasla/features/auth/presentation/views/choose_auth_view.dart';
 import 'package:wasla/features/auth/presentation/views/choose_service_view.dart';
 import 'package:wasla/features/auth/presentation/views/forgot_pass_view.dart';
 import 'package:wasla/features/auth/presentation/views/reset_pass_view.dart';
+import 'package:wasla/features/auth/presentation/views/resident_info_view.dart';
 import 'package:wasla/features/auth/presentation/views/sign_in_view.dart';
 import 'package:wasla/features/auth/presentation/views/sign_up_view.dart';
 import 'package:wasla/features/auth/presentation/views/verification_code_view.dart';
@@ -66,6 +67,7 @@ abstract class AppRouter {
             child: ForgotPassView(),
           ),
         );
+
       case AppRoutes.verifyScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -73,7 +75,13 @@ abstract class AppRouter {
             child: VerificationCodeView(),
           ),
         );
-
+      case AppRoutes.residentInfoScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => sl<AuthCubit>(),
+            child: ResidentInfoView(),
+          ),
+        );
       default:
         return MaterialPageRoute(builder: (_) => Container());
     }

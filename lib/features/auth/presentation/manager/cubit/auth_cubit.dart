@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,12 +15,18 @@ class AuthCubit extends Cubit<AuthState> {
   final singUpformKey = GlobalKey<FormState>();
   final forgotPassformKey = GlobalKey<FormState>();
   final resetPassformKey = GlobalKey<FormState>();
+  final residentInfoformKey = GlobalKey<FormState>();
+
   bool isPasswordVisible = false, enableButton = false;
   String email = '', password = '', confirmPassword = '', otpCode = '';
-
+  final TextEditingController residentDateController = TextEditingController();
+  final TextEditingController residentAddressController =
+      TextEditingController();
+  String lat = '0', lan = '0';
 
   Timer? timer;
   int remainingSeconds = 60;
+  File? residentImage;
 
   void enableVerifyButton() {
     enableButton = true;
@@ -36,18 +43,21 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthTogglePass());
   }
 
-
-
   void resendCodeTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if(remainingSeconds>0){
+      if (remainingSeconds > 0) {
         remainingSeconds--;
         emit(AuthTimer());
-      }
-      else{
+      } else {
         timer.cancel();
+
         ///handle your logic
       }
     });
+  }
+
+  void updateResidentImage(File image) {
+    residentImage = image;
+    emit(AuthUpdateResidentImage());
   }
 }

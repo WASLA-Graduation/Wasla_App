@@ -7,4 +7,5 @@ abstract class AppRoutes {
   static const String resetPassScreen = '/resetPassScreen';
   static const String verifyScreen = '/verifyScreen';
   static const String forgotScreen = '/forgotScreen';
+  static const String residentInfoScreen = '/residentInfoScreen';
 }

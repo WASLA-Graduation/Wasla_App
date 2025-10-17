@@ -8,3 +8,4 @@ final class AuthTogglePass extends AuthState {}
 final class AuthFocusOnTextFeild extends AuthState {}
 final class AuthEnableVerifyButton extends AuthState {}
 final class AuthTimer extends AuthState {}
+final class AuthUpdateResidentImage extends AuthState {}

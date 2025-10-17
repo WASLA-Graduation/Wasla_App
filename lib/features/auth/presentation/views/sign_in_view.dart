@@ -44,7 +44,7 @@ class SignInView extends StatelessWidget {
             GeneralButton(
               onPressed: () {
                 if (cubit.singInformKey.currentState!.validate()) {
-                  // handle sign in
+                  context.pushScreen(AppRoutes.residentInfoScreen);
                 }
               },
               text: "signIn".tr(context),
