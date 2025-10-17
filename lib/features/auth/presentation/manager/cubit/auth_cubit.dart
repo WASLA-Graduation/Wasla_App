@@ -19,10 +19,11 @@ class AuthCubit extends Cubit<AuthState> {
 
   bool isPasswordVisible = false, enableButton = false;
   String email = '', password = '', confirmPassword = '', otpCode = '';
-  final TextEditingController residentDateController = TextEditingController();
-  final TextEditingController residentAddressController =
+  final TextEditingController dateController = TextEditingController();
+  final TextEditingController addressController =
       TextEditingController();
   String lat = '0', lan = '0';
+  String name = '', phone = '', nakeName = '';
 
   Timer? timer;
   int remainingSeconds = 60;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:wasla/core/manager/cubit/global_cubit.dart';
+import 'package:wasla/core/manager/global/global_cubit.dart';
 
 Future<String> selectDate({required BuildContext context}) async {
   final locale = context.read<GlobalCubit>().locale;
@@ -18,7 +18,7 @@ Future<String> selectDate({required BuildContext context}) async {
   );
 
   if (pickedDate != null) {
-    return DateFormat('MM/dd/yyyy').format(pickedDate);
+    return DateFormat('dd/MM/yyyy').format(pickedDate);
   } else {
     return '';
   }

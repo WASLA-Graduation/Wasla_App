@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/service/maps/cubit/maps_helper_cubit.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
+import 'package:wasla/features/auth/presentation/views/auth_map_view.dart';
 import 'package:wasla/features/auth/presentation/views/choose_auth_view.dart';
 import 'package:wasla/features/auth/presentation/views/choose_service_view.dart';
 import 'package:wasla/features/auth/presentation/views/forgot_pass_view.dart';
@@ -65,6 +67,16 @@ abstract class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => sl<AuthCubit>(),
             child: ForgotPassView(),
+          ),
+        );
+      case AppRoutes.authMapScreen:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => sl<AuthCubit>()),
+              BlocProvider(create: (context) => MapsHelperCubit()..getCurrentLocation()),
+            ],
+            child: AuthMapView(),
           ),
         );
 

@@ -5,7 +5,7 @@ import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_router.dart';
 import 'package:wasla/core/config/themes/app_theme.dart';
 import 'package:wasla/core/functions/handle_initial_route.dart';
-import 'package:wasla/core/manager/cubit/global_cubit.dart';
+import 'package:wasla/core/manager/global/global_cubit.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/utils/size_config.dart';
 

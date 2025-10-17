@@ -8,4 +8,5 @@ abstract class AppRoutes {
   static const String verifyScreen = '/verifyScreen';
   static const String forgotScreen = '/forgotScreen';
   static const String residentInfoScreen = '/residentInfoScreen';
+  static const String authMapScreen = '/authMapScreen';
 }
