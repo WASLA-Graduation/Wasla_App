@@ -25,6 +25,7 @@ class DioConsumer extends ApiConsumer {
         path,
         queryParameters: queryParameters,
         options: Options(headers: headers),
+        data: body,
       );
       return response.data;
     } on DioException catch (dioError) {
@@ -46,6 +47,7 @@ class DioConsumer extends ApiConsumer {
         path,
         queryParameters: queryParameters,
         options: Options(headers: headers),
+        data: body,
       );
       return response.data;
     } on DioException catch (dioError) {
@@ -67,6 +69,7 @@ class DioConsumer extends ApiConsumer {
         path,
         queryParameters: queryParameters,
         options: Options(headers: headers),
+        data: body,
       );
       return response.data;
     } on DioException catch (dioError) {
@@ -88,6 +91,7 @@ class DioConsumer extends ApiConsumer {
         path,
         queryParameters: queryParameters,
         options: Options(headers: headers),
+        data: body,
       );
       return response.data;
     } on DioException catch (dioError) {
@@ -109,6 +113,7 @@ class DioConsumer extends ApiConsumer {
         path,
         queryParameters: queryParameters,
         options: Options(headers: headers),
+        data: body,
       );
       return response.data;
     } on DioException catch (dioError) {

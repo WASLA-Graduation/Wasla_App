@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
-import 'package:wasla/core/utils/app_spaces.dart';
-import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/utils/size_config.dart';
-import 'package:wasla/features/auth/presentation/widgets/custom_reset_pass_form.dart';
+import 'package:wasla/features/auth/presentation/widgets/reset_pass_body.dart';
 
 class ResetPassView extends StatelessWidget {
   const ResetPassView({super.key});
@@ -14,19 +12,7 @@ class ResetPassView extends StatelessWidget {
       appBar: AppBar(title: Text("createNewPassword".tr(context))),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 5),
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            VerticalSpace(height: 2),
-            Image.asset(
-              Assets.assetsImagesForgotPass,
-              width: SizeConfig.screenWidth * 0.7,
-              height: SizeConfig.screenWidth * 0.7,
-            ),
-            VerticalSpace(height: 3),
-            const CustomResetPassForm(),
-          ],
-        ),
+        child: ResetPassBody(),
       ),
     );
   }

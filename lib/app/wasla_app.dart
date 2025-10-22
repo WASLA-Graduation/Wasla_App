@@ -1,13 +1,17 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_router.dart';
 import 'package:wasla/core/config/themes/app_theme.dart';
+import 'package:wasla/core/database/api/dio_consumer.dart';
 import 'package:wasla/core/functions/handle_initial_route.dart';
 import 'package:wasla/core/manager/global/global_cubit.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/features/auth/data/repo/auth_repo_impl.dart';
+import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
 
 class WaslaApp extends StatelessWidget {
   const WaslaApp({super.key});
@@ -16,8 +20,15 @@ class WaslaApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
 
-    return BlocProvider(
-      create: (context) => GlobalCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => GlobalCubit()),
+        BlocProvider(
+          create: (context) =>
+              AuthCubit(AuthRepoImpl(api: DioConsumer(dio: Dio()))),
+          lazy: true,
+        ),
+      ],
       child: BlocBuilder<GlobalCubit, GlobalState>(
         builder: (context, state) {
           final globalCubit = context.read<GlobalCubit>();
@@ -44,6 +55,7 @@ class WaslaApp extends StatelessWidget {
                   : 'Roboto',
             ),
             themeMode: globalCubit.themeMode,
+
             initialRoute: handleInitialRoute(),
             onGenerateRoute: AppRouter.onGenerateRoute,
           );

@@ -8,5 +8,4 @@ void initializeServiceLocator() async {
   
 
   //iinit cubits
-  sl.registerSingleton<AuthCubit>(AuthCubit());
 }

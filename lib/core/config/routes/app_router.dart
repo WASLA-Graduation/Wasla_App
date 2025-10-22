@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/service/maps/cubit/maps_helper_cubit.dart';
-import 'package:wasla/core/service/service_locator.dart';
-import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import 'package:wasla/features/auth/presentation/views/auth_map_view.dart';
 import 'package:wasla/features/auth/presentation/views/choose_auth_view.dart';
 import 'package:wasla/features/auth/presentation/views/choose_service_view.dart';
@@ -15,10 +13,13 @@ import 'package:wasla/features/auth/presentation/views/sign_up_view.dart';
 import 'package:wasla/features/auth/presentation/views/verification_code_view.dart';
 import 'package:wasla/features/onboarding/presentation/manager/cubit/onboarding_cubit.dart';
 import 'package:wasla/features/onboarding/presentation/views/onboarding_view.dart';
+import 'package:wasla/features/splash/presentation/views/splash_view.dart';
 
 abstract class AppRouter {
   static Route<dynamic>? onGenerateRoute(RouteSettings settigns) {
     switch (settigns.name) {
+      case AppRoutes.splashScreen:
+        return MaterialPageRoute(builder: (_) => SplashView());
       case AppRoutes.onboardingScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -26,74 +27,31 @@ abstract class AppRouter {
             child: const OnboardingView(),
           ),
         );
-
       case AppRoutes.chooseServiceScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => sl<AuthCubit>(),
-            child: ChooseServiceView(),
-          ),
-        );
+        return MaterialPageRoute(builder: (_) => ChooseServiceView());
       case AppRoutes.chooseAuthScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => sl<AuthCubit>(),
-            child: ChooseAuthView(),
-          ),
-        );
+        return MaterialPageRoute(builder: (_) => ChooseAuthView());
       case AppRoutes.signInScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => sl<AuthCubit>(),
-            child: SignInView(),
-          ),
-        );
+        return MaterialPageRoute(builder: (_) => SignInView());
       case AppRoutes.signUpScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => sl<AuthCubit>(),
-            child: SignUpView(),
-          ),
-        );
+        return MaterialPageRoute(builder: (_) => SignUpView());
       case AppRoutes.resetPassScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => sl<AuthCubit>(),
-            child: ResetPassView(),
-          ),
-        );
+        return MaterialPageRoute(builder: (_) => ResetPassView());
       case AppRoutes.forgotScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => sl<AuthCubit>(),
-            child: ForgotPassView(),
-          ),
-        );
+        return MaterialPageRoute(builder: (_) => ForgotPassView());
       case AppRoutes.authMapScreen:
         return MaterialPageRoute(
-          builder: (_) => MultiBlocProvider(
-            providers: [
-              BlocProvider(create: (context) => sl<AuthCubit>()),
-              BlocProvider(create: (context) => MapsHelperCubit()..getCurrentLocation()),
-            ],
+          builder: (_) => BlocProvider(
+            create: (context) => MapsHelperCubit()..getCurrentLocation(),
+
             child: AuthMapView(),
           ),
         );
-
       case AppRoutes.verifyScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => AuthCubit()..resendCodeTimer(),
-            child: VerificationCodeView(),
-          ),
-        );
+        final String nextRoute = settigns.arguments as String;
+        return MaterialPageRoute(builder: (_) => VerificationCodeView(nextRoute: nextRoute,));
       case AppRoutes.residentInfoScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => sl<AuthCubit>(),
-            child: ResidentInfoView(),
-          ),
-        );
+        return MaterialPageRoute(builder: (_) => ResidentInfoView());
       default:
         return MaterialPageRoute(builder: (_) => Container());
     }

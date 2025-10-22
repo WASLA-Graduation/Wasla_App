@@ -40,6 +40,7 @@ class MapsHelperCubit extends Cubit<MapsHelperState> {
   }
 
   Future<void> getCurrentLocation() async {
+    emit(MapsHelperGetLocationLoading());
     Location location = Location();
     bool serviceEnabled;
     PermissionStatus permissionGranted;

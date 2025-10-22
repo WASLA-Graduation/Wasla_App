@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
+import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
@@ -19,7 +20,16 @@ class CustomResetPassForm extends StatelessWidget {
     final cubit = context.read<AuthCubit>();
 
     return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is AuthResetPassFailure) {
+          toastAlert(color: AppColors.error, msg: state.errMsg);
+        } else if (state is AuthResetPassSuccess) {
+          showDialog(
+            context: context,
+            builder: (context) => const CustomDoneWidget(),
+          );
+        }
+      },
       builder: (context, state) {
         return Form(
           key: cubit.resetPassformKey,
@@ -74,16 +84,16 @@ class CustomResetPassForm extends StatelessWidget {
                 ),
               ),
               const VerticalSpace(height: 6),
+
               GeneralButton(
-                onPressed: () {
+                onPressed: () async {
                   if (cubit.resetPassformKey.currentState!.validate()) {
-                    showDialog(
-                      context: context,
-                      builder: (context) => const CustomDoneWidget(),
-                    );
+                    await cubit.resetPassword();
                   }
                 },
-                text: "savePassword".tr(context),
+                text: state is AuthResetPassLoading
+                    ? "Loading..."
+                    : "savePassword".tr(context),
               ),
             ],
           ),

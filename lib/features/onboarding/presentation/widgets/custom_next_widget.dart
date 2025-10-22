@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/features/onboarding/data/models/onboarding_model.dart';
@@ -17,10 +18,15 @@ class CustomNextWidget extends StatelessWidget {
     return BlocBuilder<OnboardingCubit, OnboardingState>(
       builder: (context, state) {
         return GeneralButton(
-          onPressed: () {
+          onPressed: () async {
             if (onboardingManager.currentIndex ==
                 OnboardingModel.onboardingList.length - 1) {
-              context.pushReplacementScreen(AppRoutes.chooseServiceScreen);
+              await SharedPreferencesHelper.set(
+                key: 'onboardingVisited',
+                value: true,
+              ).then((value) {
+                context.pushScreen(AppRoutes.chooseServiceScreen);
+              });
             }
             onboardingManager.nextPage();
           },

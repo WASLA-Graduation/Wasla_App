@@ -8,7 +8,7 @@ import 'package:wasla/core/utils/size_config.dart';
 class CustomProfilePicture extends StatelessWidget {
   const CustomProfilePicture({super.key, this.image, this.onPressed});
   final File? image;
-  final void Function()? onPressed;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
