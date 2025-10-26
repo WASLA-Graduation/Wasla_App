@@ -25,6 +25,15 @@ final class AuthSignUpFailure extends AuthState {
 
   AuthSignUpFailure({required this.errMsg});
 }
+final class AuthSignInLoading extends AuthState {}
+
+final class AuthSignInSuccess extends AuthState {}
+
+final class AuthSignInFailure extends AuthState {
+  final String errMsg;
+
+  AuthSignInFailure({required this.errMsg});
+}
 
 final class AuthVerifyEmailLoading extends AuthState {}
 

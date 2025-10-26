@@ -55,16 +55,16 @@ class CustomForgotPassForm extends StatelessWidget {
                 validator: (value) => validateEmail(context, value),
               ),
               const VerticalSpace(height: 5),
-              state is AuthForgotPassCheckEmailLoading
-                  ? Center(child: CircularProgressIndicator())
-                  : GeneralButton(
-                      text: "sendVerificationCode".tr(context),
-                      onPressed: () async {
-                        if (cubit.forgotPassformKey.currentState!.validate()) {
-                          await cubit.forgotPassCheckEmail();
-                        }
-                      },
-                    ),
+              GeneralButton(
+                text: state is AuthForgotPassCheckEmailLoading
+                    ? "loading".tr(context)
+                    : "sendVerificationCode".tr(context),
+                onPressed: () async {
+                  if (cubit.forgotPassformKey.currentState!.validate()) {
+                    await cubit.forgotPassCheckEmail();
+                  }
+                },
+              ),
             ],
           ),
         );

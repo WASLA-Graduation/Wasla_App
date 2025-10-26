@@ -47,17 +47,17 @@ class VerificationCodeBody extends StatelessWidget {
               ).textTheme.titleSmall!.copyWith(color: AppColors.primaryColor),
             ),
             const VerticalSpace(height: 5),
-            state is AuthVerifyEmailLoading
-                ? Center(child: CircularProgressIndicator())
-                : GeneralButton(
-                    color: cubit.enableButton
-                        ? AppColors.primaryColor
-                        : AppColors.gray,
-                    onPressed: () async {
-                      await cubit.verifyEmail();
-                    },
-                    text: "verify".tr(context),
-                  ),
+            GeneralButton(
+              color: cubit.enableButton
+                  ? AppColors.primaryColor
+                  : AppColors.gray,
+              onPressed: () async {
+                await cubit.verifyEmail();
+              },
+              text: state is AuthVerifyEmailLoading
+                  ? "loading".tr(context)
+                  : "verify".tr(context),
+            ),
           ],
         );
       },

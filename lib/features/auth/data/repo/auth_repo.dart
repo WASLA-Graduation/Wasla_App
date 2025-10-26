@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:wasla/features/auth/data/models/sign_in_model.dart';
 
 abstract class AuthRepo {
   Future<Either<String, Null>> signUpWithEmailAndPassword({
@@ -15,5 +16,9 @@ abstract class AuthRepo {
   Future<Either<String, Null>> resetPassword({
     required String email,
     required String newPassword,
+  });
+  Future<Either<String, SignInDataModel>> signInWithEmailAndPassword({
+    required String email,
+    required String password,
   });
 }

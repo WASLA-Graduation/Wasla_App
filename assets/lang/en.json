@@ -45,7 +45,8 @@
       "verify": "Verify",
       "congratulations": "Congratulations!",
       "accountReady": "Your account is ready to use. You will be redirected to the sign in page.",
-      "skip":"Skip"
+      "skip":"Skip",
+      "loading":"Loding..."
 
 
 }

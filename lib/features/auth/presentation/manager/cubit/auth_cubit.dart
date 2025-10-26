@@ -3,7 +3,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/database/api/api_keys.dart';
+import 'package:wasla/core/database/cache/secure_storage_helper.dart';
+import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
 import 'package:wasla/core/enums/service_role.dart';
+import 'package:wasla/core/utils/app_strings.dart';
+import 'package:wasla/features/auth/data/models/sign_in_model.dart';
 import 'package:wasla/features/auth/data/repo/auth_repo.dart';
 
 part 'auth_state.dart';
@@ -30,6 +35,7 @@ class AuthCubit extends Cubit<AuthState> {
   Timer? timer;
   int remainingSeconds = 60;
   File? residentImage;
+  late final SignInDataModel dataModel;
 
   void enableVerifyButton() {
     enableButton = true;
@@ -130,5 +136,34 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthResetPassSuccess());
       },
     );
+  }
+
+  Future<void> signInWithEmailAndPassword() async {
+    emit(AuthSignInLoading());
+    final response = await authRepo.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    response.fold(
+      (error) {
+        emit(AuthSignInFailure(errMsg: error));
+      },
+      (success) {
+        dataModel = success;
+        _saveSignInData(dataModel);
+        emit(AuthSignInSuccess());
+      },
+    );
+  }
+
+  void _saveSignInData(SignInDataModel dataModel) async {
+    SecureStorageHelper.set(key: ApiKeys.token, value: dataModel.token);
+    SecureStorageHelper.set(
+      key: ApiKeys.refreshToken,
+      value: dataModel.refreshToken,
+    );
+    SecureStorageHelper.set(key: ApiKeys.userId, value: dataModel.userId);
+    SharedPreferencesHelper.set(key: ApiKeys.role, value: dataModel.role.name);
+    await SharedPreferencesHelper.set(key: AppStrings.isSingedIn, value: true);
   }
 }

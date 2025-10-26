@@ -34,7 +34,9 @@ class SignUpButton extends StatelessWidget {
                     await cubit.signUpWithEmailAndPassword();
                   }
                 },
-                text: "signUp".tr(context),
+                text: state is AuthSignUpLoading
+                    ? "loading".tr(context)
+                    : "signUp".tr(context),
               );
       },
     );
