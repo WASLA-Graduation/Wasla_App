@@ -12,6 +12,7 @@ import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/utils/size_config.dart';
 import 'package:wasla/features/auth/data/repo/auth_repo_impl.dart';
 import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
 
 class WaslaApp extends StatelessWidget {
   const WaslaApp({super.key});
@@ -22,12 +23,13 @@ class WaslaApp extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => GlobalCubit()),
+        BlocProvider(create: (context) => GlobalCubit(), lazy: true),
         BlocProvider(
           create: (context) =>
               AuthCubit(AuthRepoImpl(api: DioConsumer(dio: Dio()))),
           lazy: true,
         ),
+        BlocProvider(create: (context) => HomeResidentCubit(), lazy: true),
       ],
       child: BlocBuilder<GlobalCubit, GlobalState>(
         builder: (context, state) {
@@ -54,6 +56,7 @@ class WaslaApp extends StatelessWidget {
                   ? 'Cairo'
                   : 'Roboto',
             ),
+
             themeMode: globalCubit.themeMode,
 
             initialRoute: handleInitialRoute(),

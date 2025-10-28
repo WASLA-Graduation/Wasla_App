@@ -7,7 +7,11 @@ class ResidentInfoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Fill Your Profile"), leading: SizedBox()),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text("Fill Your Profile"),
+      ),
       body: ResidentViewBody(),
     );
   }

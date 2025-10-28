@@ -55,7 +55,7 @@ flutter:
 
     - family: Roboto
       fonts:
-        - asset: assets/fonts/Roboto-VariableFont_wdth,wght.ttf
+        - asset: assets/fonts/Roboto-Regular.ttf
 
 flutter_assets:
   assets_path: assets/images/

@@ -20,6 +20,10 @@ abstract class AppThemes {
       textTheme: TextTheme(
         labelLarge: AppStyles.bigDesdcriptionStyle,
         titleSmall: AppStyles.smallDesdcriptionStyle,
+        labelMedium: AppStyles.meduimLableStyle,
+        labelSmall: AppStyles.smalTextStyle13Bold,
+        bodySmall: AppStyles.smalTextStyle16Bold,
+        bodyMedium: AppStyles.meduimTextStyle20Bold,
       ),
     );
   }
@@ -43,6 +47,14 @@ abstract class AppThemes {
           color: AppColors.whiteColor,
         ),
         titleSmall: AppStyles.smallDesdcriptionStyle,
+        labelMedium: AppStyles.meduimLableStyle.copyWith(
+          color: AppColors.whiteColor,
+        ),
+        labelSmall: AppStyles.smalTextStyle13Bold,
+        bodySmall: AppStyles.smalTextStyle16Bold.copyWith(
+          color: AppColors.whiteColor,
+        ),
+        bodyMedium: AppStyles.meduimTextStyle20Bold,
       ),
     );
   }

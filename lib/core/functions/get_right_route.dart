@@ -4,12 +4,12 @@ import 'package:wasla/core/enums/service_role.dart';
 String getRightRoute({required ServiceRole role}) {
   switch (role) {
     case ServiceRole.resident:
-      return AppRoutes.residentInfoScreen;
+      return AppRoutes.residenBottomNavBar;
     case ServiceRole.driver:
       return AppRoutes.residentInfoScreen;
 
     case ServiceRole.doctor:
-      return AppRoutes.residentInfoScreen;
+      return AppRoutes.residenBottomNavBar;
 
     case ServiceRole.technician:
       return AppRoutes.residentInfoScreen;
