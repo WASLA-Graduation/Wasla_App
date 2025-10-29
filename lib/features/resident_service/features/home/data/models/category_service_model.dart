@@ -39,10 +39,5 @@ class CategoryServiceModel {
       name: "Doctor",
       color: AppColors.cyan,
     ),
-    CategoryServiceModel(
-      img: Assets.assetsImagesMore,
-      name: "More",
-      color: AppColors.red,
-    ),
   ];
 }

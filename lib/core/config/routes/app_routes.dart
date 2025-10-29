@@ -12,4 +12,6 @@ abstract class AppRoutes {
   static const String authMapScreen = '/authMapScreen';
   static const String residentHomeScreen = '/residentHomeScreen';
   static const String residenBottomNavBar = '/residenBottomNavBar';
+  static const String allServicesScreen = '/allServicesScreen';
+  static const String residentSearchScreen = '/residentSearchScreen';
 }

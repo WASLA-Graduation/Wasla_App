@@ -6,9 +6,11 @@ class CustomIdentfierWidget extends StatelessWidget {
     super.key,
     required this.leadingText,
     required this.actionText,
+    this.onTap,
   });
   final String leadingText;
   final String actionText;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +22,14 @@ class CustomIdentfierWidget extends StatelessWidget {
           children: [
             Text(leadingText, style: Theme.of(context).textTheme.labelMedium),
             Spacer(),
-            Text(
-              actionText,
-              style: Theme.of(
-                context,
-              ).textTheme.titleSmall!.copyWith(color: AppColors.primaryColor),
+            InkWell(
+              onTap: onTap,
+              child: Text(
+                actionText,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleSmall!.copyWith(color: AppColors.primaryColor),
+              ),
             ),
           ],
         ),

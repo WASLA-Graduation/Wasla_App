@@ -3,12 +3,17 @@ import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  const CustomSearchBar({super.key});
+  const CustomSearchBar({super.key, this.onTap, this.onChanged, this.readOnly});
+  final VoidCallback? onTap;
+  final ValueChanged<String>? onChanged;
+  final bool? readOnly;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      onChanged: (value) {},
+      readOnly: readOnly ?? true,
+      onTap: onTap,
+      onChanged: onChanged,
       decoration: InputDecoration(
         filled: true,
         fillColor: AppColors.gray.withOpacity(0.1),

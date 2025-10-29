@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/features/resident_service/features/home/data/models/category_service_model.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_bannar_widget.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_home_app_bar.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_identfier_widget.dart';
@@ -21,17 +24,27 @@ class ResidentHomeBody extends StatelessWidget {
       children: [
         const CustomHomeAppBar(),
         const SizedBox(height: 20),
-        const CustomSearchBar(),
-        const CustomIdentfierWidget(
+        CustomSearchBar(
+          onTap: () {
+            context.pushScreen(AppRoutes.residentSearchScreen);
+          },
+        ),
+        CustomIdentfierWidget(
           leadingText: "Spacial Offers",
           actionText: "See All",
+          onTap: () {},
         ),
         CustomBannarWidget(),
-        const CustomIdentfierWidget(
+        CustomIdentfierWidget(
           leadingText: "Services",
           actionText: "See All",
+          onTap: () {
+            context.pushScreen(AppRoutes.allServicesScreen);
+          },
         ),
-        CustomServiceCategoryList(),
+        CustomServiceCategoryList(
+          listLength: CategoryServiceModel.categories.length,
+        ),
       ],
     );
   }
