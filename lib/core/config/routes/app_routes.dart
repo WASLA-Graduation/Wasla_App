@@ -14,4 +14,5 @@ abstract class AppRoutes {
   static const String residenBottomNavBar = '/residenBottomNavBar';
   static const String allServicesScreen = '/allServicesScreen';
   static const String residentSearchScreen = '/residentSearchScreen';
+  static const String doctorScreen = '/doctorScreen';
 }

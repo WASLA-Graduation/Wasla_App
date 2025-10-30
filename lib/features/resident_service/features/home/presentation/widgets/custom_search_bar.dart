@@ -3,10 +3,17 @@ import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  const CustomSearchBar({super.key, this.onTap, this.onChanged, this.readOnly});
+  const CustomSearchBar({
+    super.key,
+    this.onTap,
+    this.onChanged,
+    this.readOnly,
+    this.title,
+  });
   final VoidCallback? onTap;
   final ValueChanged<String>? onChanged;
   final bool? readOnly;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +24,7 @@ class CustomSearchBar extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor: AppColors.gray.withOpacity(0.1),
-        hintText: "Search for services",
+        hintText: title??"Search",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide.none,

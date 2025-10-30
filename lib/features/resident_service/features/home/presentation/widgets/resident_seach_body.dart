@@ -27,7 +27,7 @@ class ResidentSearchBody extends StatelessWidget {
           ),
           // CustomResultSearchTextWidget(title: "Doctor",total: 7099,),
 
-          // Expanded(child: CustumSliverSearchRecentList()),
+          // Expanded(child: CustumSearchRecentList()),
           Expanded(child: CustomNotFoundWidget()),
         ],
       ),

@@ -54,7 +54,9 @@ abstract class AppThemes {
         bodySmall: AppStyles.smalTextStyle16Bold.copyWith(
           color: AppColors.whiteColor,
         ),
-        bodyMedium: AppStyles.meduimTextStyle20Bold,
+        bodyMedium: AppStyles.meduimTextStyle20Bold.copyWith(
+          color: AppColors.whiteColor
+        ),
       ),
     );
   }

@@ -13,6 +13,7 @@ import 'package:wasla/features/auth/presentation/views/sign_up_view.dart';
 import 'package:wasla/features/auth/presentation/views/verification_code_view.dart';
 import 'package:wasla/features/onboarding/presentation/manager/cubit/onboarding_cubit.dart';
 import 'package:wasla/features/onboarding/presentation/views/onboarding_view.dart';
+import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_view.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/views/all_services_view.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/views/home_resident_navbar.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/views/resident_home_view.dart';
@@ -67,6 +68,8 @@ abstract class AppRouter {
         return MaterialPageRoute(builder: (_) => AllServicesView());
       case AppRoutes.residentSearchScreen:
         return MaterialPageRoute(builder: (_) => ResidentSearchViwe());
+      case AppRoutes.doctorScreen:
+        return MaterialPageRoute(builder: (_) => DoctorView());
 
       default:
         return MaterialPageRoute(builder: (_) => Container());
