@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 
 class VerticalSpace extends StatelessWidget {
   final double height;

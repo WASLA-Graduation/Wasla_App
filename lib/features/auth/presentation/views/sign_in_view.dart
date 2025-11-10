@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/features/auth/presentation/widgets/sign_in_body.dart';
 
 class SignInView extends StatelessWidget {

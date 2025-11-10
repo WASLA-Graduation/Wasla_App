@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
-import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/features/auth/presentation/widgets/reset_pass_body.dart';
 
 class ResetPassView extends StatelessWidget {

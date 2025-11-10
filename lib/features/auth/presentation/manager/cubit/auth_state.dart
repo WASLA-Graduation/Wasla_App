@@ -6,6 +6,8 @@ final class AuthInitial extends AuthState {}
 
 final class AuthChangeRole extends AuthState {}
 
+final class AuthSuccessChooseFile extends AuthState {}
+
 final class AuthTogglePass extends AuthState {}
 
 final class AuthFocusOnTextFeild extends AuthState {}
@@ -25,6 +27,7 @@ final class AuthSignUpFailure extends AuthState {
 
   AuthSignUpFailure({required this.errMsg});
 }
+
 final class AuthSignInLoading extends AuthState {}
 
 final class AuthSignInSuccess extends AuthState {}

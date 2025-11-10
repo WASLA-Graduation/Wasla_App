@@ -4,7 +4,7 @@ import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
 import 'package:wasla/core/utils/assets.dart';
-import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/widgets/custom_lable_sub_lable_widget.dart';
 
 class CustomDoneWidget extends StatelessWidget {

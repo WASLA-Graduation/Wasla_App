@@ -46,7 +46,32 @@
       "congratulations": "Congratulations!",
       "accountReady": "Your account is ready to use. You will be redirected to the sign in page.",
       "skip":"Skip",
-      "loading":"Loding..."
+      "loading":"Loding...",
+      "uplodCv":"Uplode CV",
+      "selectYourSpecialty":"Select your specialty",
+      "experience":"Experience Years",
+      "descriptionAboutYou":"Description About You",
+      "save":"Save",
+      "completYourProfile":"Complete Your Profile",
+      "fillYourProfile":"Fill Your Profile",
+      "chooseImage":"Choose Imagee",
+      "fullName":"Full Name",
+      "phoneNumber": "Phone Number",
+      "dateOfBirth": "Date of Birth",
+      "address": "Address",
+      "nameRequired": "Name is required",
+      "nameTooShort": "Name must be at least 3 characters",
+      "nameLettersOnly": "Name can only contain letters",
+      "phoneRequired": "Phone number is required",
+      "invalidPhone": "Invalid phone number",
+      "addressRequired": "Address is required",
+      "addressTooShort": "Address must be at least 5 characters",
+      "dateRequired": "Date is required",
+      "invalidDateFormat": "Invalid date format"
+
+
+
+
 
 
 }

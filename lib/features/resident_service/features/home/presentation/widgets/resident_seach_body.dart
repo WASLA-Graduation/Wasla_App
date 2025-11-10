@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_identfier_widget.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_not_found_widget.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_search_bar.dart';

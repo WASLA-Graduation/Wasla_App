@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
@@ -24,13 +25,21 @@ class AuthCubit extends Cubit<AuthState> {
   final forgotPassformKey = GlobalKey<FormState>();
   final resetPassformKey = GlobalKey<FormState>();
   final residentInfoformKey = GlobalKey<FormState>();
+  final doctortInfoformKey = GlobalKey<FormState>();
+  final doctorCompletetInfoformKey = GlobalKey<FormState>();
 
   bool isPasswordVisible = false, enableButton = false;
   String email = '', password = '', confirmPassword = '', otpCode = '';
   final TextEditingController dateController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   String lat = '0', lan = '0';
-  String name = '', phone = '', nakeName = '';
+  String name = '',
+      phone = '',
+      nakeName = '',
+      experienceYears = '',
+      description = '',
+      speciality = '';
+  PlatformFile? file;
 
   Timer? timer;
   int remainingSeconds = 60;
@@ -40,6 +49,11 @@ class AuthCubit extends Cubit<AuthState> {
   void enableVerifyButton() {
     enableButton = true;
     emit(AuthEnableVerifyButton());
+  }
+
+  void updateFile(PlatformFile f) {
+    file = f;
+    emit(AuthSuccessChooseFile());
   }
 
   void changeRole(ServiceRole role) {

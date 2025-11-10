@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/features/auth/presentation/widgets/forgot_pass_body.dart';
 
 class ForgotPassView extends StatelessWidget {

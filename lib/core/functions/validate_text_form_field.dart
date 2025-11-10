@@ -28,45 +28,53 @@ String? validatePassword(BuildContext context, String? value) {
 }
 
 
-String? validateName(String? value) {
+
+String? validateName(String? value, BuildContext context) {
   if (value == null || value.trim().isEmpty) {
-    return 'Name is required';
+    return "nameRequired".tr(context);
   } else if (value.trim().length < 3) {
-    return 'Name must be at least 3 characters';
+    return "nameTooShort".tr(context);
   } else if (!RegExp(r"^[a-zA-Z\s]+$").hasMatch(value)) {
-    return 'Name can only contain letters';
+    return "nameLettersOnly".tr(context);
   }
   return null;
 }
 
-
-String? validatePhone(String? value) {
+String? validatePhone(String? value, BuildContext context) {
   if (value == null || value.trim().isEmpty) {
-    return 'Phone number is required';
+    return "phoneRequired".tr(context);
   } else if (!RegExp(r"^01[0-9]{9}$").hasMatch(value)) {
-    return 'Invalid phone number';
+    return "invalidPhone".tr(context);
   }
   return null;
 }
 
-String? validateAddress(String? value) {
+String? validateAddress(String? value, BuildContext context) {
   if (value == null || value.trim().isEmpty) {
-    return 'Address is required';
+    return "addressRequired".tr(context);
   } else if (value.trim().length < 5) {
-    return 'Address must be at least 5 characters';
+    return "addressTooShort".tr(context);
   }
   return null;
 }
 
-String? validateDate(String? value) {
+String? validateDate(String? value, BuildContext context) {
   if (value == null || value.trim().isEmpty) {
-    return 'Date is required';
+    return "dateRequired".tr(context);
   }
 
   try {
     DateFormat('dd/MM/yyyy').parseStrict(value);
   } catch (e) {
-    return 'Invalid date format';
+    return "invalidDateFormat".tr(context);
+  }
+
+  return null;
+}
+
+String? validateSimpleData(String? value, BuildContext context) {
+  if (value == null || value.trim().isEmpty) {
+    return "dateRequired".tr(context);
   }
 
   return null;

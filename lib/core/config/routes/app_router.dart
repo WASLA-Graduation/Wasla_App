@@ -5,6 +5,8 @@ import 'package:wasla/core/service/maps/cubit/maps_helper_cubit.dart';
 import 'package:wasla/features/auth/presentation/views/auth_map_view.dart';
 import 'package:wasla/features/auth/presentation/views/choose_auth_view.dart';
 import 'package:wasla/features/auth/presentation/views/choose_service_view.dart';
+import 'package:wasla/features/auth/presentation/views/doctor_complete_info_view.dart';
+import 'package:wasla/features/auth/presentation/views/doctor_info_view.dart';
 import 'package:wasla/features/auth/presentation/views/forgot_pass_view.dart';
 import 'package:wasla/features/auth/presentation/views/reset_pass_view.dart';
 import 'package:wasla/features/auth/presentation/views/resident_info_view.dart';
@@ -48,7 +50,6 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => MapsHelperCubit()..getCurrentLocation(),
-
             child: AuthMapView(),
           ),
         );
@@ -59,6 +60,10 @@ abstract class AppRouter {
         );
       case AppRoutes.residentInfoScreen:
         return MaterialPageRoute(builder: (_) => ResidentInfoView());
+      case AppRoutes.doctorInfoScreen:
+        return MaterialPageRoute(builder: (_) => DoctorInfoView());
+      case AppRoutes.doctorCompleteInfoScreen:
+        return MaterialPageRoute(builder: (_) => DoctorCompleteInfoView());
 
       case AppRoutes.residentHomeScreen:
         return MaterialPageRoute(builder: (_) => ResidentHomeView());

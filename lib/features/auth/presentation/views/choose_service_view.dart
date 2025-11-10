@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/features/auth/presentation/widgets/choose_service_body.dart';
 
 class ChooseServiceView extends StatelessWidget {

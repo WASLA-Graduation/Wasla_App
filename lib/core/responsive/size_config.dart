@@ -6,6 +6,8 @@ abstract class SizeConfig {
   static late double blockWidth;
   static late double blockHeight;
   static late double textSize;
+  static double mobileBreakpoint = 600.0;
+  static double tabletBreakPoint = 1200.0;
 
   static void init(BuildContext context) {
     screenWidth = isLandScape(context)
@@ -22,7 +24,7 @@ abstract class SizeConfig {
   static bool isLandScape(BuildContext context) =>
       MediaQuery.of(context).orientation == Orientation.landscape;
 
-  static bool get isMobile => screenWidth <= 450.0;
-  static bool get isTablet => screenWidth > 450.0 && screenWidth < 800;
-  static bool get isDesktop => screenWidth >= 800.0;
+  static bool get isMobile => screenWidth <= 600.0;
+  static bool get isTablet => screenWidth > 600.0 && screenWidth <= 1200;
+  static bool get isDesktop => screenWidth > 1200.0;
 }

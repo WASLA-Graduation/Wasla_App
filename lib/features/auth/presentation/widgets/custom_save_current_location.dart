@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/service/maps/cubit/maps_helper_cubit.dart';
-import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
 

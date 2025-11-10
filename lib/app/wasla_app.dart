@@ -4,12 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_router.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/config/themes/app_theme.dart';
 import 'package:wasla/core/database/api/dio_consumer.dart';
-import 'package:wasla/core/functions/handle_initial_route.dart';
 import 'package:wasla/core/manager/global/global_cubit.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/utils/app_strings.dart';
-import 'package:wasla/core/utils/size_config.dart';
 import 'package:wasla/features/auth/data/repo/auth_repo_impl.dart';
 import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
@@ -35,6 +35,8 @@ class WaslaApp extends StatelessWidget {
         builder: (context, state) {
           final globalCubit = context.read<GlobalCubit>();
 
+          globalCubit.changeTheme(themeMode: ThemeMode.dark);
+
           return MaterialApp(
             supportedLocales: const [Locale('ar'), Locale('en')],
             localizationsDelegates: const [
@@ -46,20 +48,11 @@ class WaslaApp extends StatelessWidget {
             locale: globalCubit.locale,
             title: AppStrings.appName,
             debugShowCheckedModeBanner: false,
-            theme: AppThemes.lightTheme(
-              fontFamily: globalCubit.locale.languageCode == 'ar'
-                  ? 'Cairo'
-                  : 'Roboto',
-            ),
-            darkTheme: AppThemes.darkTheme(
-              fontFamily: globalCubit.locale.languageCode == 'ar'
-                  ? 'Cairo'
-                  : 'Roboto',
-            ),
-
+            theme: AppThemes.lightTheme(context),
+            darkTheme: AppThemes.darkTheme(context),
             themeMode: globalCubit.themeMode,
-
-            initialRoute: handleInitialRoute(),
+            // initialRoute: handleInitialRoute(),
+            initialRoute: AppRoutes.doctorInfoScreen,
             onGenerateRoute: AppRouter.onGenerateRoute,
           );
         },

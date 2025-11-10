@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
-import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/category_service_model.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_bannar_widget.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_home_app_bar.dart';

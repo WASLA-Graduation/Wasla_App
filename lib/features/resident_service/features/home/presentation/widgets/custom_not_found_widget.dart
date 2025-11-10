@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/utils/assets.dart';
-import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 
 class CustomNotFoundWidget extends StatelessWidget {
   const CustomNotFoundWidget({super.key});

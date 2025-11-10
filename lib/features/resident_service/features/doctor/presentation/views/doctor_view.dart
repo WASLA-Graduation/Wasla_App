@@ -5,6 +5,7 @@ class DoctorView extends StatelessWidget {
   const DoctorView({super.key});
 
   @override
+  
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Doctors"), centerTitle: true),

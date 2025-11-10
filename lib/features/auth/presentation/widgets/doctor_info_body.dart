@@ -3,23 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
 import 'package:wasla/core/widgets/custom_profile_picture.dart';
 import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
-import 'package:wasla/features/auth/presentation/widgets/custom_resident_info_form.dart';
+import 'package:wasla/features/auth/presentation/widgets/custom_docotor_info_form.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_show_Bottom_sheet_image.dart';
 
-class ResidentViewBody extends StatelessWidget {
-  const ResidentViewBody({super.key});
+class DoctorInfoBody extends StatelessWidget {
+  const DoctorInfoBody({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<AuthCubit>();
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {},
       builder: (context, state) {
-        final cubit = context.read<AuthCubit>();
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: CustomScrollView(
             slivers: [
-              SliverToBoxAdapter(child: const SizedBox(height: 16)),
+              SliverToBoxAdapter(child: const SizedBox(height: 20)),
               SliverToBoxAdapter(
                 child: Center(
                   child: CustomProfilePicture(
@@ -37,7 +37,7 @@ class ResidentViewBody extends StatelessWidget {
               SliverToBoxAdapter(child: const VerticalSpace(height: 4)),
               SliverFillRemaining(
                 hasScrollBody: false,
-                child: const CustomResidentInfoForm(),
+                child: CustomDocotorInfoForm(),
               ),
             ],
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 
 class CustomSocialMediaButton extends StatelessWidget {
   const CustomSocialMediaButton({

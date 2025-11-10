@@ -1,10 +1,11 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
 import 'package:wasla/core/utils/assets.dart';
-import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/widgets/custom_get_image_source_widget.dart';
 
 class CustomChooseImageWidget extends StatelessWidget {
@@ -32,7 +33,7 @@ class CustomChooseImageWidget extends StatelessWidget {
         children: [
           VerticalSpace(height: 2),
           Text(
-            "Choose Image",
+            "chooseImage".tr(context),
             style: TextStyle(color: AppColors.blackColor, fontSize: 20,fontWeight: FontWeight.bold),
           ),
           VerticalSpace(height: 3),

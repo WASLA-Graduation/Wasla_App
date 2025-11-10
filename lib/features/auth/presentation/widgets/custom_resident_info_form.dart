@@ -68,13 +68,15 @@ class CustomResidentInfoForm extends StatelessWidget {
             hint: "Address",
             validator: validateAddress,
           ),
-          VerticalSpace(height: 3),
+          Spacer(),
           GeneralButton(
             text: "Continue",
             onPressed: () {
               if (cubit.residentInfoformKey.currentState!.validate()) {}
             },
           ),
+
+          SizedBox(height: 20),
         ],
       ),
     );

@@ -4,7 +4,7 @@ import 'package:wasla/core/utils/app_colors.dart';
 class CustomTextFormField extends StatelessWidget {
   final void Function(String)? onChanged;
   final String? Function(String?)? validator;
-  final String hint;
+  final String? hint;
   final bool? isSecure;
   final IconButton? suffixIcon;
   final Widget? prefixIcon;
@@ -12,6 +12,7 @@ class CustomTextFormField extends StatelessWidget {
   final void Function()? onTap;
   final TextEditingController? controller;
   final bool? readOnly;
+  final int? maxLines;
 
   const CustomTextFormField({
     super.key,
@@ -23,12 +24,15 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.keyboardTyp,
     this.onTap,
-    this.controller, this.readOnly,
+    this.controller,
+    this.readOnly,
+    this.maxLines,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: maxLines ?? 1,
       readOnly: readOnly ?? false,
       controller: controller,
       keyboardType: keyboardTyp,
@@ -38,7 +42,7 @@ class CustomTextFormField extends StatelessWidget {
       validator: validator,
       obscureText: isSecure ?? false,
       decoration: InputDecoration(
-        prefixIcon: prefixIcon ?? const SizedBox(),
+        prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         filled: true,
         fillColor: AppColors.gray.withOpacity(0.1),
@@ -51,7 +55,7 @@ class CustomTextFormField extends StatelessWidget {
         focusedBorder: _customBorder(color: AppColors.primaryColor),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide.none,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(14),
         ),
         hintText: hint,
       ),

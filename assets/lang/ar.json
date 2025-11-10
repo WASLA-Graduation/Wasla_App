@@ -46,7 +46,33 @@
       "congratulations": "تهانينا!",
       "accountReady": "تم إعداد حسابك بنجاح. سيتم تحويلك إلى صفحة تسجيل الدخول.",
       "skip":"تخطي",
-      "loading":"جاري التحميل..."
+      "loading":"جاري التحميل...",
+      "uplodCv":"رفع السيرة الذاتية",
+      "selectYourSpecialty":"اختر التخصص الخاص بك",
+      "experience":"سنوات الخبرة",
+      "descriptionAboutYou":"وصف عنك",
+      "save":"حفظ",
+      "completYourProfile":"اكمل ملفك الشخصي",
+      "fillYourProfile":"املأ ملفك الشخصي",
+      "chooseImage":"اختر صورة",
+      "fullName":"الاسم الكامل",
+      "phoneNumber": "رقم الهاتف",
+      "dateOfBirth": "تاريخ الميلاد",
+      "address": "العنوان",
+      "nameRequired": "يجب إدخال الاسم",
+      "nameTooShort": "يجب أن لا يقل الاسم عن 3 أحرف",
+      "nameLettersOnly": "يُسمح فقط بالأحرف في الاسم",
+      "phoneRequired": "يجب إدخال رقم الهاتف",
+      "invalidPhone": "رقم الهاتف غير صالح",
+      "addressRequired": "يجب إدخال العنوان",
+      "addressTooShort": "يجب أن لا يقل العنوان عن 5 أحرف",
+      "dateRequired": "يجب إدخال التاريخ",
+      "invalidDateFormat": "صيغة التاريخ غير صحيحة"
+
+
+    
+
+    
 
 
 }

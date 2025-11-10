@@ -9,6 +9,8 @@ abstract class AppRoutes {
   static const String verifyScreen = '/verifyScreen';
   static const String forgotScreen = '/forgotScreen';
   static const String residentInfoScreen = '/residentInfoScreen';
+  static const String doctorInfoScreen = '/doctorInfoScreen';
+  static const String doctorCompleteInfoScreen = '/doctorCompleteInfoScreen';
   static const String authMapScreen = '/authMapScreen';
   static const String residentHomeScreen = '/residentHomeScreen';
   static const String residenBottomNavBar = '/residenBottomNavBar';

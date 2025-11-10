@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/responsive/responsive_font_size.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 
 abstract class AppStyles {
   static TextStyle bigDesdcriptionStyle = TextStyle(
@@ -33,4 +34,19 @@ abstract class AppStyles {
     fontWeight: FontWeight.bold,
     fontSize: SizeConfig.textSize * 1.6,
   );
+
+  static TextStyle styleMeduim20(BuildContext context) {
+    return TextStyle(
+      color: AppColors.blackColor,
+      fontWeight: FontWeight.w500,
+      fontSize: getResponsiveFontSize(context, fontSize: 20),
+    );
+  }
+  static TextStyle styleMeduim17(BuildContext context) {
+    return TextStyle(
+      color: AppColors.blackColor,
+      fontWeight: FontWeight.w500,
+      fontSize: getResponsiveFontSize(context, fontSize: 17),
+    );
+  }
 }

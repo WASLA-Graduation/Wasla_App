@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasla/core/utils/size_config.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/category_service_model.dart';
 
 class CustomServiceCategoryItem extends StatelessWidget {
