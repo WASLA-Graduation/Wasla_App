@@ -24,9 +24,8 @@ class VerificationCodeBody extends StatelessWidget {
         if (state is AuthVerifyEmailFailure) {
           toastAlert(color: AppColors.error, msg: state.errMsg);
         } else if (state is AuthVerifyEmailSuccess) {
-          //go to page accourding to his role
           context.pushReplacementScreen(
-            getRightRoute(role: ServiceRoleExtension.fromString(cubit.role)),
+            getRightCompleteServiceRoute(role: ServiceRoleExtension.fromString(cubit.role)),
           );
         }
       },

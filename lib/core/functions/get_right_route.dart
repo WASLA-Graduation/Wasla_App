@@ -21,3 +21,23 @@ String getRightRoute({required ServiceRole role}) {
       return AppRoutes.residentInfoScreen;
   }
 }
+String getRightCompleteServiceRoute({required ServiceRole role}) {
+  switch (role) {
+    case ServiceRole.resident:
+      return AppRoutes.residentInfoScreen;
+    case ServiceRole.driver:
+      return AppRoutes.residentInfoScreen;
+
+    case ServiceRole.doctor:
+      return AppRoutes.doctorInfoScreen;
+
+    case ServiceRole.technician:
+      return AppRoutes.residentInfoScreen;
+
+    case ServiceRole.restaurantOwner:
+      return AppRoutes.residentInfoScreen;
+
+    case ServiceRole.gymOwner:
+      return AppRoutes.residentInfoScreen;
+  }
+}

@@ -32,14 +32,14 @@ class AuthCubit extends Cubit<AuthState> {
   String email = '', password = '', confirmPassword = '', otpCode = '';
   final TextEditingController dateController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
-  String lat = '0', lan = '0';
+  double lat = 0.0, lan = 0.0;
   String name = '',
       phone = '',
       experienceYears = '',
       description = '',
-      speciality = '',
       nationalId = '';
   PlatformFile? file;
+  int? spacializationID;
 
   List<RolesModel> roles = [];
   List<DoctorSpecializationaModel> doctorSpecialization = [];
@@ -88,6 +88,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthSignUpFailure(errMsg: "Please Choose Role"));
       return;
     }
+
     emit(AuthSignUpLoading());
     final response = await authRepo.signUpWithEmailAndPassword(
       email: email,
@@ -100,6 +101,45 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (success) {
         emit(AuthSignUpSuccess());
+      },
+    );
+  }
+
+  Future<void> doctorCompleteInfo() async {
+    if (spacializationID == null) {
+      emit(
+        AuthDoctorCompleteInfoFailure(errMsg: "Please Choose Specialization"),
+      );
+      return;
+    } else if (file == null) {
+      emit(AuthDoctorCompleteInfoFailure(errMsg: "Please Choose CV"));
+      return;
+    } else if (residentImage == null) {
+      emit(AuthDoctorCompleteInfoFailure(errMsg: "Please Choose Image"));
+      return;
+    }
+    emit(AuthDoctorCompleteInfoLoading());
+    final response = await authRepo.doctorCompleteInfo(
+      email: email,
+      fullName: name,
+      phone: phone,
+      bDate: dateController.text,
+      universtiyName: 'Ain Shams University',
+      description: description,
+      image: residentImage!,
+      lat: lat,
+      lng: lan,
+      graduationYear: 2026,
+      spacializationID: spacializationID!,
+      experienceYears: int.parse(experienceYears),
+      cv: file!,
+    );
+    response.fold(
+      (error) {
+        emit(AuthDoctorCompleteInfoFailure(errMsg: error));
+      },
+      (success) {
+        emit(AuthDoctorCompleteInfoSuccess());
       },
     );
   }
@@ -117,14 +157,15 @@ class AuthCubit extends Cubit<AuthState> {
       phone: phone,
       bDate: dateController.text,
       image: residentImage!,
-      lat: double.parse(lat),
-      lng: double.parse(lan),
+      lat: lat,
+      lng: lan,
     );
     response.fold(
       (error) {
         emit(ResidentCompleteInfoFailure(errMsg: error));
       },
       (success) {
+        spacializationID = null;
         emit(AuthResidentCompleteInfoSuccess());
       },
     );

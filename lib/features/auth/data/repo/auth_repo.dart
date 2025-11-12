@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:wasla/features/auth/data/models/doctor_specializationa_model.dart';
 import 'package:wasla/features/auth/data/models/roles_model.dart';
 import 'package:wasla/features/auth/data/models/sign_in_model.dart';
@@ -36,5 +37,20 @@ abstract class AuthRepo {
     required File image ,
     required double lat,
     required double lng,
+  });
+  Future<Either<String, Null>> doctorCompleteInfo({
+    required String email,
+    required String fullName,
+    required String phone,
+    required String bDate,
+    required String universtiyName,
+    required String description,
+    required File image,
+    required double lat,
+    required double lng,
+    required double graduationYear,
+    required int spacializationID,
+    required int experienceYears,
+    required PlatformFile cv,
   });
 }

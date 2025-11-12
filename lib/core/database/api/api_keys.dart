@@ -22,4 +22,10 @@ abstract class ApiKeys {
   static const birthDay = 'BirthDay';
   static const phone = 'Phone';
   static const emailCapital = 'Email';
+  static const specializationId = 'SpecializationId';
+  static const experienceYears = 'ExperienceYears';
+  static const universityName = 'UniversityName';
+  static const graduationYear = 'GraduationYear';
+  static const description = 'Description';
+  static const cv = 'CV';
 }

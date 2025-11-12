@@ -14,8 +14,8 @@ class RolesModel {
 
   factory RolesModel.fromJson(Map<String, dynamic> json) {
     return RolesModel(
-      id: json[ApiKeys.data][ApiKeys.id],
-      roleName: json[ApiKeys.data][ApiKeys.roleName],
+      id: json[ApiKeys.id],
+      roleName: json[ApiKeys.roleName],
       serviceRole: ServiceRoleExtension.fromString(
         json[ApiKeys.data][ApiKeys.value],
       ),

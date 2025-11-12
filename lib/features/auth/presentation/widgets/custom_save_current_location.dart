@@ -24,8 +24,8 @@ class SaveCurrentLocationWidget extends StatelessWidget {
               value,
             ) {
               authCubit.addressController.text = cubit.locationAddress;
-              authCubit.lat = cubit.lat.toString();
-              authCubit.lan = cubit.long.toString();
+              authCubit.lat = cubit.lat;
+              authCubit.lan = cubit.long;
               context.popScreen();
             });
           },

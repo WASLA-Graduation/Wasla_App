@@ -74,6 +74,15 @@ final class ResidentCompleteInfoFailure extends AuthState {
 
   ResidentCompleteInfoFailure({required this.errMsg});
 }
+final class AuthDoctorCompleteInfoLoading extends AuthState {}
+
+final class AuthDoctorCompleteInfoSuccess extends AuthState {}
+
+final class AuthDoctorCompleteInfoFailure extends AuthState {
+  final String errMsg;
+
+  AuthDoctorCompleteInfoFailure({required this.errMsg});
+}
 
 final class AuthGetRolesSuccess extends AuthState {}
 

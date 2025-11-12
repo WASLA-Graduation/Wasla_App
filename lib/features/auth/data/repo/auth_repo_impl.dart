@@ -1,7 +1,7 @@
 import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:file_picker/src/platform_file.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
@@ -164,6 +164,55 @@ class AuthRepoImpl extends AuthRepo {
         }),
         headers: {"Content-Type": "multipart/form-data"},
       );
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> doctorCompleteInfo({
+    required String email,
+    required String fullName,
+    required String phone,
+    required String bDate,
+    required String universtiyName,
+    required String description,
+    required File image,
+    required double lat,
+    required double lng,
+    required double graduationYear,
+    required int spacializationID,
+    required int experienceYears,
+    required PlatformFile cv,
+  }) async {
+    try {
+      final formData = FormData.fromMap({
+        ApiKeys.emailCapital: email,
+        ApiKeys.fullName: fullName,
+        ApiKeys.phone: phone,
+        ApiKeys.birthDay: bDate,
+        ApiKeys.universityName: universtiyName,
+        ApiKeys.description: description,
+        ApiKeys.latitude: lat,
+        ApiKeys.longitude: lng,
+        ApiKeys.graduationYear: graduationYear,
+        ApiKeys.specializationId: spacializationID,
+        ApiKeys.experienceYears: experienceYears,
+        ApiKeys.image: await MultipartFile.fromFile(
+          image.path,
+          filename: image.path.split('/').last,
+        ),
+
+        ApiKeys.cv: await MultipartFile.fromFile(cv.path!, filename: cv.name),
+      });
+
+      await api.post(
+        ApiEndPoints.doctorCompleteInfo,
+        body: formData,
+        headers: {"Content-Type": "multipart/form-data"},
+      );
+
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);

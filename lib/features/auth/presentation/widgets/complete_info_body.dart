@@ -14,7 +14,6 @@ import 'package:wasla/features/auth/presentation/widgets/custom_text_form_field.
 class CompleteInfoBody extends StatelessWidget {
   const CompleteInfoBody({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<AuthCubit>();
@@ -32,13 +31,15 @@ class CompleteInfoBody extends StatelessWidget {
                       .map(
                         (specialization) => DropDownItem(
                           label: specialization.specialization,
-                          value: specialization.specialization,
+                          value: specialization.id.toString(),
                         ),
                       )
                       .toList(),
                   hint: 'selectYourSpecialty'.tr(context),
                   onSelecte: (value) {
-                    cubit.speciality = value ?? '';
+                    cubit.spacializationID = value == null
+                        ? null
+                        : int.parse(value);
                   },
                 );
               },
@@ -55,7 +56,7 @@ class CompleteInfoBody extends StatelessWidget {
             const VerticalSpace(height: 2),
             CustomTextFormField(
               hint: "descriptionAboutYou".tr(context),
-              onChanged: (years) => cubit.name = years,
+              onChanged: (description) => cubit.description = description,
               validator: (value) => validateDate(value, context),
               maxLines: 5,
             ),
