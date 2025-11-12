@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/cache/secure_storage_helper.dart';
 import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
-import 'package:wasla/core/enums/service_role.dart';
 import 'package:wasla/core/utils/app_strings.dart';
+import 'package:wasla/features/auth/data/models/doctor_specializationa_model.dart';
+import 'package:wasla/features/auth/data/models/roles_model.dart';
 import 'package:wasla/features/auth/data/models/sign_in_model.dart';
 import 'package:wasla/features/auth/data/repo/auth_repo.dart';
 
@@ -19,7 +19,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   final AuthRepo authRepo;
 
-  ServiceRole role = ServiceRole.resident;
+  String role = '';
   final singInformKey = GlobalKey<FormState>();
   final singUpformKey = GlobalKey<FormState>();
   final forgotPassformKey = GlobalKey<FormState>();
@@ -35,11 +35,14 @@ class AuthCubit extends Cubit<AuthState> {
   String lat = '0', lan = '0';
   String name = '',
       phone = '',
-      nakeName = '',
       experienceYears = '',
       description = '',
-      speciality = '';
+      speciality = '',
+      nationalId = '';
   PlatformFile? file;
+
+  List<RolesModel> roles = [];
+  List<DoctorSpecializationaModel> doctorSpecialization = [];
 
   Timer? timer;
   int remainingSeconds = 60;
@@ -54,11 +57,6 @@ class AuthCubit extends Cubit<AuthState> {
   void updateFile(PlatformFile f) {
     file = f;
     emit(AuthSuccessChooseFile());
-  }
-
-  void changeRole(ServiceRole role) {
-    this.role = role;
-    emit(AuthChangeRole());
   }
 
   void togglePassIcon() {
@@ -86,12 +84,15 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> signUpWithEmailAndPassword() async {
+    if (role.isEmpty) {
+      emit(AuthSignUpFailure(errMsg: "Please Choose Role"));
+      return;
+    }
     emit(AuthSignUpLoading());
     final response = await authRepo.signUpWithEmailAndPassword(
       email: email,
       pass: password,
-      // role: role.name,
-      role: "Doctor",
+      role: role,
     );
     response.fold(
       (error) {
@@ -99,6 +100,32 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (success) {
         emit(AuthSignUpSuccess());
+      },
+    );
+  }
+
+  Future<void> residentCompleteInfo() async {
+    if (residentImage == null) {
+      emit(ResidentCompleteInfoFailure(errMsg: "Please Choose Image"));
+      return;
+    }
+    emit(AuthResidentCompleteInfoLoading());
+    final response = await authRepo.residentCompleteInfo(
+      email: email,
+      fullName: name,
+      nationalId: nationalId,
+      phone: phone,
+      bDate: dateController.text,
+      image: residentImage!,
+      lat: double.parse(lat),
+      lng: double.parse(lan),
+    );
+    response.fold(
+      (error) {
+        emit(ResidentCompleteInfoFailure(errMsg: error));
+      },
+      (success) {
+        emit(AuthResidentCompleteInfoSuccess());
       },
     );
   }
@@ -166,6 +193,35 @@ class AuthCubit extends Cubit<AuthState> {
         dataModel = success;
         _saveSignInData(dataModel);
         emit(AuthSignInSuccess());
+      },
+    );
+  }
+
+  Future<void> getRoles() async {
+    roles.clear();
+
+    final response = await authRepo.getRoles();
+    response.fold(
+      (error) {
+        emit(AuthGetRolesFailure(errMsg: error));
+      },
+      (success) {
+        roles = success;
+        emit(AuthGetRolesSuccess());
+      },
+    );
+  }
+
+  Future<void> getDoctorSpecialization() async {
+    doctorSpecialization.clear();
+    final response = await authRepo.getSpecialization();
+    response.fold(
+      (error) {
+        emit(AuthGetSepcializationFailure(errMsg: error));
+      },
+      (success) {
+        doctorSpecialization = success;
+        emit(AuthGetSepcializationSuccess());
       },
     );
   }

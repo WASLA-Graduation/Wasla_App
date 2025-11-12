@@ -4,8 +4,6 @@ sealed class AuthState {}
 
 final class AuthInitial extends AuthState {}
 
-final class AuthChangeRole extends AuthState {}
-
 final class AuthSuccessChooseFile extends AuthState {}
 
 final class AuthTogglePass extends AuthState {}
@@ -66,4 +64,28 @@ final class AuthResetPassFailure extends AuthState {
   final String errMsg;
 
   AuthResetPassFailure({required this.errMsg});
+}
+final class AuthResidentCompleteInfoLoading extends AuthState {}
+
+final class AuthResidentCompleteInfoSuccess extends AuthState {}
+
+final class ResidentCompleteInfoFailure extends AuthState {
+  final String errMsg;
+
+  ResidentCompleteInfoFailure({required this.errMsg});
+}
+
+final class AuthGetRolesSuccess extends AuthState {}
+
+final class AuthGetRolesFailure extends AuthState {
+  final String errMsg;
+
+  AuthGetRolesFailure({required this.errMsg});
+}
+final class AuthGetSepcializationSuccess extends AuthState {}
+
+final class AuthGetSepcializationFailure extends AuthState {
+  final String errMsg;
+
+  AuthGetSepcializationFailure({required this.errMsg});
 }

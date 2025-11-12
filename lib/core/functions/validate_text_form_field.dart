@@ -79,3 +79,13 @@ String? validateSimpleData(String? value, BuildContext context) {
 
   return null;
 }
+String? validateNationalId(String? value, BuildContext context) {
+  if (value == null || value.trim().isEmpty) {
+    return "dateRequired".tr(context);
+  }
+  else if(value.length != 14){
+    return "invalidNationalId".tr(context);
+  }
+
+  return null;
+}

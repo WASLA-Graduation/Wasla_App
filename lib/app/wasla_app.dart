@@ -7,6 +7,7 @@ import 'package:wasla/core/config/routes/app_router.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/config/themes/app_theme.dart';
 import 'package:wasla/core/database/api/dio_consumer.dart';
+import 'package:wasla/core/functions/handle_initial_route.dart';
 import 'package:wasla/core/manager/global/global_cubit.dart';
 import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/utils/app_strings.dart';
@@ -35,7 +36,7 @@ class WaslaApp extends StatelessWidget {
         builder: (context, state) {
           final globalCubit = context.read<GlobalCubit>();
 
-          globalCubit.changeTheme(themeMode: ThemeMode.dark);
+          globalCubit.changeTheme(themeMode: ThemeMode.light);
 
           return MaterialApp(
             supportedLocales: const [Locale('ar'), Locale('en')],
@@ -52,7 +53,7 @@ class WaslaApp extends StatelessWidget {
             darkTheme: AppThemes.darkTheme(context),
             themeMode: globalCubit.themeMode,
             // initialRoute: handleInitialRoute(),
-            initialRoute: AppRoutes.doctorInfoScreen,
+            initialRoute: AppRoutes.doctorCompleteInfoScreen,
             onGenerateRoute: AppRouter.onGenerateRoute,
           );
         },

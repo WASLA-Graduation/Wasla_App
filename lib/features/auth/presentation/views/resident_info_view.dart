@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/features/auth/presentation/widgets/resident_view_body.dart';
 
 class ResidentInfoView extends StatelessWidget {
@@ -10,7 +11,7 @@ class ResidentInfoView extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Text("Fill Your Profile"),
+        title: Text("fillYourProfile".tr(context)),
       ),
       body: ResidentViewBody(),
     );

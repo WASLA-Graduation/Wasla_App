@@ -5,15 +5,15 @@ import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
 import 'package:wasla/core/widgets/general_button.dart';
+import 'package:wasla/features/auth/data/models/drop_down_menu_item.dart';
 import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import 'package:wasla/features/auth/presentation/widgets/certificate_uploade_button.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_drop_down_menu.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_text_form_field.dart';
 
 class CompleteInfoBody extends StatelessWidget {
-  const CompleteInfoBody({super.key, required this.items});
+  const CompleteInfoBody({super.key});
 
-  final List<String> items;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +25,22 @@ class CompleteInfoBody extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: 30),
-            CustomDropDownMenu(
-              items: items,
-              hint: 'selectYourSpecialty'.tr(context),
-              onSelecte: (value) {
-                cubit.speciality = value ?? '';
+            BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, state) {
+                return CustomDropDownMenu(
+                  items: cubit.doctorSpecialization
+                      .map(
+                        (specialization) => DropDownItem(
+                          label: specialization.specialization,
+                          value: specialization.specialization,
+                        ),
+                      )
+                      .toList(),
+                  hint: 'selectYourSpecialty'.tr(context),
+                  onSelecte: (value) {
+                    cubit.speciality = value ?? '';
+                  },
+                );
               },
             ),
             const VerticalSpace(height: 2),
@@ -39,13 +50,13 @@ class CompleteInfoBody extends StatelessWidget {
               hint: "experience".tr(context),
               prefixIcon: Icon(Icons.work, color: AppColors.gray),
               onChanged: (years) => cubit.experienceYears = years,
-              validator: (value) =>validateDate(value, context),
+              validator: (value) => validateDate(value, context),
             ),
             const VerticalSpace(height: 2),
             CustomTextFormField(
               hint: "descriptionAboutYou".tr(context),
               onChanged: (years) => cubit.name = years,
-              validator: (value) =>validateDate(value, context),
+              validator: (value) => validateDate(value, context),
               maxLines: 5,
             ),
             const VerticalSpace(height: 2),

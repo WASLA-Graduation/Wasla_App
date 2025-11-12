@@ -56,6 +56,7 @@
       "fillYourProfile":"Fill Your Profile",
       "chooseImage":"Choose Imagee",
       "fullName":"Full Name",
+      "nakeName":"Nake Name",
       "phoneNumber": "Phone Number",
       "dateOfBirth": "Date of Birth",
       "address": "Address",
@@ -67,7 +68,11 @@
       "addressRequired": "Address is required",
       "addressTooShort": "Address must be at least 5 characters",
       "dateRequired": "Date is required",
-      "invalidDateFormat": "Invalid date format"
+      "invalidDateFormat": "Invalid date format",
+      "selectRole": "Select Role",
+      "nationalId": "National ID",
+      "invalidNationalId": "Invalid National ID",
+      "sending": "Sending..."
 
 
 

@@ -47,6 +47,7 @@
       "accountReady": "تم إعداد حسابك بنجاح. سيتم تحويلك إلى صفحة تسجيل الدخول.",
       "skip":"تخطي",
       "loading":"جاري التحميل...",
+      "sending":"جاري الارسال...",
       "uplodCv":"رفع السيرة الذاتية",
       "selectYourSpecialty":"اختر التخصص الخاص بك",
       "experience":"سنوات الخبرة",
@@ -56,6 +57,7 @@
       "fillYourProfile":"املأ ملفك الشخصي",
       "chooseImage":"اختر صورة",
       "fullName":"الاسم الكامل",
+      "nakeName":"الاسم المستعار",
       "phoneNumber": "رقم الهاتف",
       "dateOfBirth": "تاريخ الميلاد",
       "address": "العنوان",
@@ -67,7 +69,11 @@
       "addressRequired": "يجب إدخال العنوان",
       "addressTooShort": "يجب أن لا يقل العنوان عن 5 أحرف",
       "dateRequired": "يجب إدخال التاريخ",
-      "invalidDateFormat": "صيغة التاريخ غير صحيحة"
+      "invalidDateFormat": "صيغة التاريخ غير صحيحة",
+      "selectRole": "اختر الوظيفة",
+      "nationalId": "الرقم القومي",
+      "invalidNationalId": "الرقم القومي غي  صحيح"
+
 
 
     

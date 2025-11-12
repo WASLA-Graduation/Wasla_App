@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-
 import 'package:wasla/core/utils/app_styles.dart';
+import 'package:wasla/features/auth/data/models/drop_down_menu_item.dart';
+
+
 
 class CustomDropDownMenu extends StatelessWidget {
   const CustomDropDownMenu({
@@ -12,7 +14,7 @@ class CustomDropDownMenu extends StatelessWidget {
     this.onSelecte,
   });
 
-  final List<String> items;
+  final List<DropDownItem> items;
   final String? hint;
   final void Function(String?)? onSelecte;
 
@@ -24,22 +26,24 @@ class CustomDropDownMenu extends StatelessWidget {
       hintText: hint,
       textStyle: AppStyles.styleMeduim20(context),
       inputDecorationTheme: _buildInputDecoration(context),
-      menuStyle: _buitldMenuStyle(context),
+      menuStyle: _buildMenuStyle(context),
       dropdownMenuEntries: items.map((item) {
         return _buildItems(item, context);
       }).toList(),
     );
   }
 
-  DropdownMenuEntry<String> _buildItems(String item, BuildContext context) {
+  DropdownMenuEntry<String> _buildItems(DropDownItem item, BuildContext context) {
     return DropdownMenuEntry<String>(
-      value: item,
-      label: item,
+      value: item.value,
+      label: item.label,
       style: ButtonStyle(
         padding: WidgetStateProperty.all(
           const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ),
-        foregroundColor: WidgetStateProperty.all(Colors.grey.shade400),
+        foregroundColor: WidgetStateProperty.all(
+          context.isDarkMode ? Colors.grey.shade400 : Colors.black,
+        ),
         textStyle: WidgetStateProperty.all(
           Theme.of(context).textTheme.labelMedium,
         ),
@@ -51,7 +55,7 @@ class CustomDropDownMenu extends StatelessWidget {
     return InputDecorationTheme(
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       filled: true,
-      fillColor:AppColors.gray.withOpacity(0.1),
+      fillColor: AppColors.gray.withOpacity(0.1),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
         borderSide: BorderSide(color: Colors.grey.shade400),
@@ -59,10 +63,10 @@ class CustomDropDownMenu extends StatelessWidget {
     );
   }
 
-  MenuStyle _buitldMenuStyle(BuildContext context) {
+  MenuStyle _buildMenuStyle(BuildContext context) {
     return MenuStyle(
       maximumSize: WidgetStateProperty.all(
-        Size(double.infinity, double.maxFinite),
+        const Size(double.infinity, double.maxFinite),
       ),
       backgroundColor: WidgetStateProperty.all(
         context.isDarkMode ? Colors.grey.shade800 : Colors.white,

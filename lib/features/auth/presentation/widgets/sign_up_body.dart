@@ -7,9 +7,11 @@ import 'package:wasla/core/utils/app_spaces.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/widgets/custom_desc_text_widget.dart';
+import 'package:wasla/features/auth/data/models/drop_down_menu_item.dart';
 import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_auth_form.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_divder_text.dart';
+import 'package:wasla/features/auth/presentation/widgets/custom_drop_down_menu.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_social_auth_widget.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_text_span_widget.dart';
 import 'package:wasla/features/auth/presentation/widgets/sign_up_button.dart';
@@ -24,7 +26,6 @@ class SignUpBody extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: [
         VerticalSpace(height: 8),
-        VerticalSpace(height: 5),
         Image.asset(
           Assets.assetsImagesLogin,
           width: SizeConfig.screenWidth * 0.4,
@@ -35,6 +36,27 @@ class SignUpBody extends StatelessWidget {
         ),
         VerticalSpace(height: 4),
         CustomAuthForm(formKey: cubit.singUpformKey),
+        const VerticalSpace(height: 3),
+        BlocBuilder<AuthCubit, AuthState>(
+          builder: (context, state) {
+            return CustomDropDownMenu(
+              hint: "selectRole".tr(context),
+
+              items: cubit.roles
+                  .map(
+                    (role) => DropDownItem(
+                      label: role.roleName,
+                      value: role.serviceRole.name,
+                    ),
+                  )
+                  .toList(),
+
+              onSelecte: (role) {
+                cubit.role = role ?? '';
+              },
+            );
+          },
+        ),
         const VerticalSpace(height: 3),
         SignUpButton(),
         VerticalSpace(height: 3),

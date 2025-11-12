@@ -16,7 +16,7 @@ class DioConsumer extends ApiConsumer {
   @override
   Future delete(
     String path, {
-    Map<String, dynamic>? body,
+    dynamic body,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {
@@ -38,7 +38,7 @@ class DioConsumer extends ApiConsumer {
   @override
   Future get(
     String path, {
-    Map<String, dynamic>? body,
+    dynamic body,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {
@@ -60,7 +60,7 @@ class DioConsumer extends ApiConsumer {
   @override
   Future patch(
     String path, {
-    Map<String, dynamic>? body,
+    dynamic body,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {
@@ -82,7 +82,7 @@ class DioConsumer extends ApiConsumer {
   @override
   Future post(
     String path, {
-    Map<String, dynamic>? body,
+    dynamic body,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {
@@ -104,7 +104,7 @@ class DioConsumer extends ApiConsumer {
   @override
   Future put(
     String path, {
-    Map<String, dynamic>? body,
+    dynamic body,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {

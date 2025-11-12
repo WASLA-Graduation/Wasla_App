@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/show_date_picker.dart';
@@ -21,20 +22,20 @@ class CustomResidentInfoForm extends StatelessWidget {
         children: [
           CustomTextFormField(
             prefixIcon: Icon(Icons.person),
-            hint: "Full Name",
+            hint: "fullName".tr(context),
             onChanged: (name) {
               cubit.name = name;
             },
-            validator: validateName,
+            validator: (value) => validateNationalId(value, context),
           ),
           VerticalSpace(height: 2),
           CustomTextFormField(
             prefixIcon: Icon(Icons.person),
-            hint: "Nake Name",
-            onChanged: (nakeName) {
-              cubit.nakeName = nakeName;
+            hint: "nationalId".tr(context),
+            onChanged: (id) {
+              cubit.nationalId = id;
             },
-            validator: validateName,
+            validator: (value) => validateName(value, context),
           ),
           VerticalSpace(height: 2),
           CustomTextFormField(
@@ -44,18 +45,18 @@ class CustomResidentInfoForm extends StatelessWidget {
             readOnly: true,
             controller: cubit.dateController,
             prefixIcon: Icon(Icons.date_range),
-            hint: "Date Of Birth",
-            validator: validateDate,
+            hint: "dateOfBirth".tr(context),
+            validator: (value) => validateDate(value, context),
           ),
           VerticalSpace(height: 2),
           CustomTextFormField(
             keyboardTyp: TextInputType.phone,
             prefixIcon: Icon(Icons.phone),
-            hint: "Phone Number",
+            hint: "phoneNumber".tr(context),
             onChanged: (phone) {
               cubit.phone = phone;
             },
-            validator: validatePhone,
+            validator: (value) => validatePhone(value, context),
           ),
           VerticalSpace(height: 2),
           CustomTextFormField(
@@ -65,14 +66,22 @@ class CustomResidentInfoForm extends StatelessWidget {
             },
             controller: cubit.addressController,
             prefixIcon: Icon(Icons.location_on),
-            hint: "Address",
-            validator: validateAddress,
+            hint: "address".tr(context),
+            validator: (value) => validateAddress(value, context),
           ),
           Spacer(),
-          GeneralButton(
-            text: "Continue",
-            onPressed: () {
-              if (cubit.residentInfoformKey.currentState!.validate()) {}
+          BlocBuilder<AuthCubit, AuthState>(
+            builder: (context, state) {
+              return GeneralButton(
+                text: state is AuthResidentCompleteInfoLoading
+                    ? "sending".tr(context)
+                    : "continue".tr(context),
+                onPressed: () async {
+                  if (cubit.residentInfoformKey.currentState!.validate()) {
+                    await cubit.residentCompleteInfo();
+                  }
+                },
+              );
             },
           ),
 

@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
+import 'package:wasla/features/auth/data/models/doctor_specializationa_model.dart';
+import 'package:wasla/features/auth/data/models/roles_model.dart';
 import 'package:wasla/features/auth/data/models/sign_in_model.dart';
 
 abstract class AuthRepo {
@@ -20,5 +24,17 @@ abstract class AuthRepo {
   Future<Either<String, SignInDataModel>> signInWithEmailAndPassword({
     required String email,
     required String password,
+  });
+  Future<Either<String, List<RolesModel>>> getRoles();
+  Future<Either<String, List<DoctorSpecializationaModel>>> getSpecialization();
+  Future<Either<String, Null>> residentCompleteInfo({
+    required String email,
+    required String fullName,
+    required String nationalId,
+    required String phone,
+    required String bDate,
+    required File image ,
+    required double lat,
+    required double lng,
   });
 }

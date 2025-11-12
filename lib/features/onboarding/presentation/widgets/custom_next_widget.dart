@@ -26,7 +26,7 @@ class CustomNextWidget extends StatelessWidget {
                 key: AppStrings.onboardingVisited,
                 value: true,
               ).then((value) {
-                context.pushScreen(AppRoutes.chooseServiceScreen);
+                context.pushScreen(AppRoutes.chooseAuthScreen);
               });
             }
             onboardingManager.nextPage();

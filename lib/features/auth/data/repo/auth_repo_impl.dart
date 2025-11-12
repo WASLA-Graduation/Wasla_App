@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/features/auth/data/models/doctor_specializationa_model.dart';
+import 'package:wasla/features/auth/data/models/roles_model.dart';
 import 'package:wasla/features/auth/data/models/sign_in_model.dart';
 import 'package:wasla/features/auth/data/repo/auth_repo.dart';
 
@@ -94,6 +99,72 @@ class AuthRepoImpl extends AuthRepo {
         body: {ApiKeys.email: email, ApiKeys.password: password},
       );
       return Right(SignInDataModel.fromJson(response));
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, List<RolesModel>>> getRoles() async {
+    try {
+      final response = await api.get(ApiEndPoints.getRols);
+      final List<RolesModel> roles = [];
+      for (var role in response[ApiKeys.data]) {
+        roles.add(RolesModel.fromJson(role));
+      }
+      return Right(roles);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, List<DoctorSpecializationaModel>>>
+  getSpecialization() async {
+    try {
+      final response = await api.get(ApiEndPoints.getDoctorSpecializations);
+      final List<DoctorSpecializationaModel> specializations = [];
+      for (var specialization in response[ApiKeys.data]) {
+        specializations.add(
+          DoctorSpecializationaModel.fromJson(specialization),
+        );
+      }
+      return Right(specializations);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> residentCompleteInfo({
+    required String email,
+    required String fullName,
+    required String nationalId,
+    required String phone,
+    required String bDate,
+    required File image,
+    required double lat,
+    required double lng,
+  }) async {
+    try {
+      await api.post(
+        ApiEndPoints.residentCompleteRegister,
+        body: FormData.fromMap({
+          ApiKeys.email: email,
+          ApiKeys.fullName: fullName,
+          ApiKeys.nationalId: nationalId,
+          ApiKeys.phone: phone,
+          ApiKeys.birthDay: bDate,
+          ApiKeys.latitude: lat,
+          ApiKeys.longitude: lng,
+          ApiKeys.image: await MultipartFile.fromFile(
+            image.path,
+            filename: image.path.split('/').last,
+          ),
+        }),
+        headers: {"Content-Type": "multipart/form-data"},
+      );
+      return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

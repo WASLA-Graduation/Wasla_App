@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
+import 'package:wasla/core/extensions/service_role_extension.dart';
+import 'package:wasla/core/functions/get_right_route.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
@@ -23,7 +25,9 @@ class VerificationCodeBody extends StatelessWidget {
           toastAlert(color: AppColors.error, msg: state.errMsg);
         } else if (state is AuthVerifyEmailSuccess) {
           //go to page accourding to his role
-          context.pushReplacementScreen(nextRoute);
+          context.pushReplacementScreen(
+            getRightRoute(role: ServiceRoleExtension.fromString(cubit.role)),
+          );
         }
       },
       builder: (context, state) {

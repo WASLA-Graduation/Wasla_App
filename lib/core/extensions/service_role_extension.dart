@@ -4,6 +4,6 @@ extension ServiceRoleExtension on ServiceRole {
   String get stringValue => name;
 
   static ServiceRole fromString(String value) {
-    return ServiceRole.values.firstWhere((e) => e.name == value.toLowerCase());
+    return ServiceRole.values.firstWhere((e) => e.name == value);
   }
 }
