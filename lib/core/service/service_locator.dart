@@ -1,11 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
+import 'package:wasla/core/database/api/api_consumer.dart';
+import 'package:wasla/core/database/api/dio_consumer.dart';
 
 final GetIt sl = GetIt.instance;
 
 void initializeServiceLocator() async {
   //init app services
-  
+
+  sl.registerSingleton<ApiConsumer>(DioConsumer(dio: Dio()));
 
   //iinit cubits
 }

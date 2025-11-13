@@ -7,7 +7,7 @@ import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/cache/secure_storage_helper.dart';
 import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
 import 'package:wasla/core/utils/app_strings.dart';
-import 'package:wasla/features/auth/data/models/doctor_specializationa_model.dart';
+import 'package:wasla/core/models/doctor_specializationa_model.dart';
 import 'package:wasla/features/auth/data/models/roles_model.dart';
 import 'package:wasla/features/auth/data/models/sign_in_model.dart';
 import 'package:wasla/features/auth/data/repo/auth_repo.dart';

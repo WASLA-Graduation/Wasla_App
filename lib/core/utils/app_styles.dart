@@ -42,11 +42,20 @@ abstract class AppStyles {
       fontSize: getResponsiveFontSize(context, fontSize: 20),
     );
   }
+
   static TextStyle styleMeduim17(BuildContext context) {
     return TextStyle(
       color: AppColors.blackColor,
       fontWeight: FontWeight.w500,
       fontSize: getResponsiveFontSize(context, fontSize: 17),
+    );
+  }
+
+  static TextStyle styleSemiBold16(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 16),
+      fontWeight: FontWeight.w600,
+      color: AppColors.blackColor,
     );
   }
 }
