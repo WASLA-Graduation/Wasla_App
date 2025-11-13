@@ -26,16 +26,16 @@ class CustomResidentInfoForm extends StatelessWidget {
             onChanged: (name) {
               cubit.name = name;
             },
-            validator: (value) => validateNationalId(value, context),
+            validator: (value) => validateName(value, context),
           ),
           VerticalSpace(height: 2),
           CustomTextFormField(
-            prefixIcon: Icon(Icons.person),
+            prefixIcon: Icon(Icons.perm_identity_outlined),
             hint: "nationalId".tr(context),
             onChanged: (id) {
               cubit.nationalId = id;
             },
-            validator: (value) => validateName(value, context),
+            validator: (value) => validateNationalId(value, context),
           ),
           VerticalSpace(height: 2),
           CustomTextFormField(

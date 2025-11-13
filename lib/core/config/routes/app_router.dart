@@ -9,6 +9,7 @@ import 'package:wasla/features/auth/presentation/views/doctor_info_view.dart';
 import 'package:wasla/features/auth/presentation/views/forgot_pass_view.dart';
 import 'package:wasla/features/auth/presentation/views/reset_pass_view.dart';
 import 'package:wasla/features/auth/presentation/views/resident_info_view.dart';
+import 'package:wasla/features/auth/presentation/views/resurent_info_view.dart';
 import 'package:wasla/features/auth/presentation/views/sign_in_view.dart';
 import 'package:wasla/features/auth/presentation/views/sign_up_view.dart';
 import 'package:wasla/features/auth/presentation/views/verification_code_view.dart';
@@ -62,6 +63,8 @@ abstract class AppRouter {
         return MaterialPageRoute(builder: (_) => DoctorInfoView());
       case AppRoutes.doctorCompleteInfoScreen:
         return MaterialPageRoute(builder: (_) => DoctorCompleteInfoView());
+      case AppRoutes.resturentInfoScreen:
+        return MaterialPageRoute(builder: (_) => ResurentInfoView());
 
       case AppRoutes.residentHomeScreen:
         return MaterialPageRoute(builder: (_) => ResidentHomeView());

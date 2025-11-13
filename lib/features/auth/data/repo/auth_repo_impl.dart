@@ -150,7 +150,7 @@ class AuthRepoImpl extends AuthRepo {
       await api.post(
         ApiEndPoints.residentCompleteRegister,
         body: FormData.fromMap({
-          ApiKeys.email: email,
+          ApiKeys.emailCapital: email,
           ApiKeys.fullName: fullName,
           ApiKeys.nationalId: nationalId,
           ApiKeys.phone: phone,
@@ -214,6 +214,7 @@ class AuthRepoImpl extends AuthRepo {
       );
 
       return Right(null);
+      
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

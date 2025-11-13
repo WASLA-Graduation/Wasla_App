@@ -20,7 +20,7 @@ class ResidentViewBody extends StatelessWidget {
         if (state is ResidentCompleteInfoFailure) {
           toastAlert(color: AppColors.error, msg: state.errMsg);
         } else if (state is AuthResidentCompleteInfoSuccess) {
-          context.pushReplacementScreen(AppRoutes.residenBottomNavBar);
+          context.pushReplacementScreen(AppRoutes.signInScreen);
         }
       },
       builder: (context, state) {

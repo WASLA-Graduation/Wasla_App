@@ -16,9 +16,7 @@ class RolesModel {
     return RolesModel(
       id: json[ApiKeys.id],
       roleName: json[ApiKeys.roleName],
-      serviceRole: ServiceRoleExtension.fromString(
-        json[ApiKeys.data][ApiKeys.value],
-      ),
+      serviceRole: ServiceRoleExtension.fromString(json[ApiKeys.value]),
     );
   }
 }

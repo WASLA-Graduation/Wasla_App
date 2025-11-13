@@ -72,7 +72,16 @@
       "selectRole": "Select Role",
       "nationalId": "National ID",
       "invalidNationalId": "Invalid National ID",
-      "sending": "Sending..."
+      "sending": "Sending...",
+      "graduationYear": "Graduation Year",
+      "universityName": "University Name",
+      "invalidGraduationYear": "Invalid Graduation Year",
+      "resturentName": "Resturent Name",
+      "ownerName": "Owner Name",
+      "descriptionAboutResturent": "Description about the resturent",
+      "resturentImage": "Resturent Image",
+      "fillResturentData": "Fill Resturent Data"
+      
 
 
 

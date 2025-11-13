@@ -10,6 +10,7 @@ abstract class AppRoutes {
   static const String residentInfoScreen = '/residentInfoScreen';
   static const String doctorInfoScreen = '/doctorInfoScreen';
   static const String doctorCompleteInfoScreen = '/doctorCompleteInfoScreen';
+  static const String resturentInfoScreen = '/resturentInfoScreen';
   static const String authMapScreen = '/authMapScreen';
   static const String residentHomeScreen = '/residentHomeScreen';
   static const String residenBottomNavBar = '/residenBottomNavBar';

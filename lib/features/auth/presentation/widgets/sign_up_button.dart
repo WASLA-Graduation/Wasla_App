@@ -26,9 +26,7 @@ class SignUpButton extends StatelessWidget {
       },
       builder: (context, state) {
         final cubit = context.read<AuthCubit>();
-        return state is AuthSignUpLoading
-            ? Center(child: CircularProgressIndicator())
-            : GeneralButton(
+        return GeneralButton(
                 onPressed: () async {
                   if (cubit.singUpformKey.currentState!.validate()) {
                     await cubit.signUpWithEmailAndPassword();

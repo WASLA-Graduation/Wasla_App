@@ -27,17 +27,19 @@ class AuthCubit extends Cubit<AuthState> {
   final residentInfoformKey = GlobalKey<FormState>();
   final doctortInfoformKey = GlobalKey<FormState>();
   final doctorCompletetInfoformKey = GlobalKey<FormState>();
+  final resturentInfoformKey = GlobalKey<FormState>();
 
   bool isPasswordVisible = false, enableButton = false;
   String email = '', password = '', confirmPassword = '', otpCode = '';
   final TextEditingController dateController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
-  double lat = 0.0, lan = 0.0;
+  double lat = 0.0, lan = 0.0, graduationYear = 0.0;
   String name = '',
       phone = '',
       experienceYears = '',
       description = '',
-      nationalId = '';
+      nationalId = '',
+      universtiyName = '',owner='',resturentName='';
   PlatformFile? file;
   int? spacializationID;
 
@@ -46,7 +48,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Timer? timer;
   int remainingSeconds = 60;
-  File? residentImage;
+  File? residentImage,resturentImage;
   late final SignInDataModel dataModel;
 
   void enableVerifyButton() {
@@ -56,6 +58,10 @@ class AuthCubit extends Cubit<AuthState> {
 
   void updateFile(PlatformFile f) {
     file = f;
+    emit(AuthSuccessChooseFile());
+  }
+  void updateImage(File f) {
+    resturentImage = f;
     emit(AuthSuccessChooseFile());
   }
 
@@ -124,12 +130,12 @@ class AuthCubit extends Cubit<AuthState> {
       fullName: name,
       phone: phone,
       bDate: dateController.text,
-      universtiyName: 'Ain Shams University',
+      universtiyName: universtiyName,
       description: description,
       image: residentImage!,
       lat: lat,
       lng: lan,
-      graduationYear: 2026,
+      graduationYear: graduationYear,
       spacializationID: spacializationID!,
       experienceYears: int.parse(experienceYears),
       cv: file!,
@@ -149,6 +155,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(ResidentCompleteInfoFailure(errMsg: "Please Choose Image"));
       return;
     }
+
     emit(AuthResidentCompleteInfoLoading());
     final response = await authRepo.residentCompleteInfo(
       email: email,
@@ -240,7 +247,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> getRoles() async {
     roles.clear();
-
     final response = await authRepo.getRoles();
     response.fold(
       (error) {

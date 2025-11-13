@@ -9,7 +9,6 @@ class DoctorCompleteInfoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(title: Text("completYourProfile".tr(context))),
       body: Padding(
         padding: const EdgeInsets.all(16),

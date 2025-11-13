@@ -27,15 +27,11 @@ String? validatePassword(BuildContext context, String? value) {
   return null;
 }
 
-
-
 String? validateName(String? value, BuildContext context) {
   if (value == null || value.trim().isEmpty) {
     return "nameRequired".tr(context);
   } else if (value.trim().length < 3) {
     return "nameTooShort".tr(context);
-  } else if (!RegExp(r"^[a-zA-Z\s]+$").hasMatch(value)) {
-    return "nameLettersOnly".tr(context);
   }
   return null;
 }
@@ -79,12 +75,22 @@ String? validateSimpleData(String? value, BuildContext context) {
 
   return null;
 }
+
 String? validateNationalId(String? value, BuildContext context) {
   if (value == null || value.trim().isEmpty) {
     return "dateRequired".tr(context);
-  }
-  else if(value.length != 14){
+  } else if (value.length != 14) {
     return "invalidNationalId".tr(context);
+  }
+
+  return null;
+}
+
+String? validateNationalGraduation(String? value, BuildContext context) {
+  if (value == null || value.trim().isEmpty) {
+    return "dateRequired".tr(context);
+  } else if (value.length != 4) {
+    return "invalidGraduationYear".tr(context);
   }
 
   return null;
