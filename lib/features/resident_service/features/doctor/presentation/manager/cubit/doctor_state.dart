@@ -3,6 +3,7 @@ part of 'doctor_cubit.dart';
 sealed class DoctorState {}
 
 final class DoctorInitial extends DoctorState {}
+final class DoctorUpdateState extends DoctorState {}
 
 final class DoctorGetSpecialityListSuccess extends DoctorState {}
 

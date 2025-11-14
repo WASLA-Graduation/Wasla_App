@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/core/utils/app_styles.dart';
 import 'package:wasla/features/auth/data/models/drop_down_menu_item.dart';
-
-
 
 class CustomDropDownMenu extends StatelessWidget {
   const CustomDropDownMenu({
@@ -24,7 +21,7 @@ class CustomDropDownMenu extends StatelessWidget {
       width: double.infinity,
       onSelected: onSelecte,
       hintText: hint,
-      textStyle: AppStyles.styleMeduim20(context),
+      textStyle: Theme.of(context).textTheme.headlineMedium,
       inputDecorationTheme: _buildInputDecoration(context),
       menuStyle: _buildMenuStyle(context),
       dropdownMenuEntries: items.map((item) {
@@ -33,7 +30,10 @@ class CustomDropDownMenu extends StatelessWidget {
     );
   }
 
-  DropdownMenuEntry<String> _buildItems(DropDownItem item, BuildContext context) {
+  DropdownMenuEntry<String> _buildItems(
+    DropDownItem item,
+    BuildContext context,
+  ) {
     return DropdownMenuEntry<String>(
       value: item.value,
       label: item.label,

@@ -23,7 +23,9 @@ ThemeData buildLightTheme(BuildContext context, {required bool isArabic}) {
       labelSmall: AppStyles.smalTextStyle13Bold,
       bodySmall: AppStyles.smalTextStyle16Bold,
       bodyMedium: AppStyles.meduimTextStyle20Bold,
-      headlineSmall: AppStyles.styleSemiBold16(context)
+      headlineSmall: AppStyles.styleSemiBold16(context),
+      headlineMedium: AppStyles.styleSemiBold20(context),
+      displaySmall: AppStyles.styleMeduim17(context),
     ),
   );
 }

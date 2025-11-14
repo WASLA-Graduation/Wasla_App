@@ -35,10 +35,10 @@ abstract class AppStyles {
     fontSize: SizeConfig.textSize * 1.6,
   );
 
-  static TextStyle styleMeduim20(BuildContext context) {
+  static TextStyle styleSemiBold20(BuildContext context) {
     return TextStyle(
       color: AppColors.blackColor,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w600,
       fontSize: getResponsiveFontSize(context, fontSize: 20),
     );
   }

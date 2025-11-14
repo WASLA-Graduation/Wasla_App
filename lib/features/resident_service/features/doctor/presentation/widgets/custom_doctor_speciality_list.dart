@@ -16,12 +16,17 @@ class CustomDoctorSpecialityList extends StatelessWidget {
         return SizedBox(
           height: 40,
           child: state is DoctorGetSpecialityListLoading
-              ?const SpecialityLoadingList()
+              ? const SpecialityLoadingList()
               : ListView.builder(
+                  physics: const BouncingScrollPhysics(),
                   itemCount: cubit.specialityList.length,
                   scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => DoctorSpecialityitem(
-                    doctorSpecializationaModel: cubit.specialityList[index],
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: () => cubit.changeSpecializationIndex(index),
+                    child: DoctorSpecialityitem(
+                      isSelected: cubit.specializationIndex == index,
+                      doctorSpecializationaModel: cubit.specialityList[index],
+                    ),
                   ),
                 ),
         );

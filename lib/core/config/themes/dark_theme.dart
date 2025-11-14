@@ -35,6 +35,9 @@ ThemeData buildDarkTheme(BuildContext context, {required bool isArabic}) {
       headlineSmall: AppStyles.styleSemiBold16(
         context,
       ).copyWith(color: AppColors.whiteColor),
+
+      headlineMedium: AppStyles.styleSemiBold20(context),
+      displaySmall: AppStyles.styleMeduim17(context)
     ),
   );
 }

@@ -9,6 +9,13 @@ class DoctorCubit extends Cubit<DoctorState> {
   DoctorCubit(this.doctorRepo) : super(DoctorInitial());
   List<DoctorSpecializationaModel> specialityList = [];
 
+  int specializationIndex = 0;
+
+  void changeSpecializationIndex(int index) {
+    specializationIndex = index;
+    emit(DoctorUpdateState());
+  }
+
   Future<void> getDoctorSpecialization() async {
     emit(DoctorGetSpecialityListLoading());
     specialityList.clear();
