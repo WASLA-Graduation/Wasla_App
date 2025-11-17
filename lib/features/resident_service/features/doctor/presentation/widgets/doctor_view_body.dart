@@ -12,7 +12,7 @@ class DoctorViewBody extends StatelessWidget {
       child: Column(
         children: [
           CustomDoctorSpecialityList(),
-          const SizedBox(height: 10),
+          const SizedBox(height: 15),
           Expanded(child: DoctorListWidget()),
         ],
       ),

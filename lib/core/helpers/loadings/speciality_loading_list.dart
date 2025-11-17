@@ -22,7 +22,6 @@ class SpecialityLoadingList extends StatelessWidget {
               color: AppColors.gray.withOpacity(0.1),
               shape: StadiumBorder(),
             ),
-            child: Text("Loading Speciality"),
           ),
         ),
       ),

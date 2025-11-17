@@ -6,6 +6,8 @@ import 'package:wasla/core/config/routes/app_router.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/config/themes/app_theme.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
+import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
+import 'package:wasla/core/functions/handle_initial_route.dart';
 import 'package:wasla/core/manager/global/global_cubit.dart';
 import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/service/service_locator.dart';
@@ -40,9 +42,9 @@ class WaslaApp extends StatelessWidget {
       child: BlocBuilder<GlobalCubit, GlobalState>(
         builder: (context, state) {
           final globalCubit = context.read<GlobalCubit>();
-          // SharedPreferencesHelper.clear();
+          SharedPreferencesHelper.clear();
 
-          // globalCubit.changeTheme(themeMode: ThemeMode.light);
+          globalCubit.changeTheme(themeMode: ThemeMode.light);
 
           return MaterialApp(
             supportedLocales: const [Locale('ar'), Locale('en')],
@@ -67,3 +69,5 @@ class WaslaApp extends StatelessWidget {
     );
   }
 }
+
+

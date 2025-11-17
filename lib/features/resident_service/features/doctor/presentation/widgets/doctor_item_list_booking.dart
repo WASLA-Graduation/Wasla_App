@@ -42,7 +42,7 @@ class DoctorItemListBooking extends StatelessWidget {
 
   MaterialButton _buildBookButton(BuildContext context) {
     return MaterialButton(
-        onPressed: () {},
+        onPressed:(){},
         padding: EdgeInsets.symmetric(horizontal: 3, vertical: 3),
         color: AppColors.primaryColor,
         height: 35,

@@ -26,6 +26,10 @@ class DoctorCubit extends Cubit<DoctorState> {
       },
       (success) {
         specialityList = success;
+        specialityList.insert(
+          0,
+          DoctorSpecializationaModel(id: 100, specialization: "All"),
+        );
         emit(DoctorGetSpecialityListSuccess());
       },
     );

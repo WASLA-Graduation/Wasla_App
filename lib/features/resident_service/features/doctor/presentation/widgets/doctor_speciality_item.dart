@@ -15,12 +15,12 @@ class DoctorSpecialityitem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(right: 10),
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       decoration: ShapeDecoration(
-        color: isSelected
-            ? AppColors.primaryColor
-            : AppColors.gray.withOpacity(0.1),
-        shape: StadiumBorder(),
+        color: isSelected ? AppColors.primaryColor : null,
+        shape: StadiumBorder(
+          side: BorderSide(width: 2, color: AppColors.primaryColor),
+        ),
       ),
       child: Center(
         child: Text(
@@ -29,7 +29,9 @@ class DoctorSpecialityitem extends StatelessWidget {
               ? Theme.of(
                   context,
                 ).textTheme.headlineSmall!.copyWith(color: AppColors.whiteColor)
-              : Theme.of(context).textTheme.headlineSmall,
+              : Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  color: AppColors.primaryColor,
+                ),
         ),
       ),
     );

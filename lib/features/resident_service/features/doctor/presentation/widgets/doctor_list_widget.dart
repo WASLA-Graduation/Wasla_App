@@ -6,13 +6,17 @@ class DoctorListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (_, index) => const SizedBox(height: 5,),
       itemCount: 10,
-      physics: BouncingScrollPhysics(),
-
+      physics: const BouncingScrollPhysics(),
       itemBuilder: (_, index) => Padding(
         padding: const EdgeInsets.only(top: 10),
-        child: DoctorListItem(),
+        child: InkWell(
+          onTap: () {
+          },
+          child: DoctorListItem(),
+        ),
       ),
     );
   }
