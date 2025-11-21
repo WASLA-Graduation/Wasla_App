@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_profile_body.dart';
+import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details_body.dart';
 
-class DoctorProfileView extends StatelessWidget {
-  const DoctorProfileView({super.key});
+class DoctorDetailsView extends StatelessWidget {
+  const DoctorDetailsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class DoctorProfileView extends StatelessWidget {
         centerTitle: true,
         forceMaterialTransparency: true,
       ),
-      body: DoctorProfileBody(),
+      body: DoctorDetailsBody(),
     );
   }
 }

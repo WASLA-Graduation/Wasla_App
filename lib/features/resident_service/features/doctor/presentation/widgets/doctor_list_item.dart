@@ -4,7 +4,8 @@ import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/custom_doc_list_item_desc.dart';
 
 class DoctorListItem extends StatelessWidget {
-  const DoctorListItem({super.key});
+  const DoctorListItem({super.key, required this.index});
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -15,28 +16,38 @@ class DoctorListItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
 
-      child: IntrinsicHeight(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildDocImage(),
-            const SizedBox(width: 18),
-            Expanded(child: DoctorListItemDescriptionWidget()),
-          ],
-        ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildDocImage(),
+          const SizedBox(width: 18),
+          Expanded(child: DoctorListItemDescriptionWidget(index: index)),
+        ],
       ),
     );
   }
 
-  AspectRatio _buildDocImage() {
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.gray.withOpacity(0.3),
-          borderRadius: BorderRadius.circular(15),
-          image: DecorationImage(image: AssetImage(Assets.assetsImagesTest)),
-        ),
+  Container _buildDocImage() {
+    return Container(
+      width: 90,
+      height: 90,
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+        color: AppColors.gray.withOpacity(0.3),
+        borderRadius: BorderRadius.circular(15),
+
+        // image: DecorationImage(image: AssetImage(Assets.assetsImagesOnboardingTwo)),
+      ),
+
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            width: 112,
+            height: 112,
+            child: Image.asset(Assets.assetsImagesOnboardingTwo),
+          ),
+        ],
       ),
     );
   }

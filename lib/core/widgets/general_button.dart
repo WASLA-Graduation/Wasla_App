@@ -8,11 +8,13 @@ class GeneralButton extends StatelessWidget {
     this.color,
     this.height,
     required this.text,
+    this.fontSize,
   });
   final VoidCallback onPressed;
   final Color? color;
   final double? height;
   final String text;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class GeneralButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: TextStyle(fontSize: 18, color: AppColors.whiteColor),
+        style: TextStyle(fontSize: fontSize ?? 18, color: AppColors.whiteColor),
       ),
     );
   }

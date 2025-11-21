@@ -18,7 +18,7 @@ class CustomDoctorSpecialityList extends StatelessWidget {
           child: state is DoctorGetSpecialityListLoading
               ? const SpecialityLoadingList()
               : ListView.builder(
-                  physics: const BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   itemCount: cubit.specialityList.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => GestureDetector(

@@ -17,4 +17,6 @@ abstract class AppRoutes {
   static const String allServicesScreen = '/allServicesScreen';
   static const String residentSearchScreen = '/residentSearchScreen';
   static const String doctorScreen = '/doctorScreen';
+  static const String doctorDetailsScreen = '/doctorDetailsScreen';
+  static const String chnageLangScreen = '/chnageLangScreen';
 }

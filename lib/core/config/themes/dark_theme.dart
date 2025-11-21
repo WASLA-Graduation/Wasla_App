@@ -6,11 +6,9 @@ import 'package:wasla/core/responsive/size_config.dart';
 ThemeData buildDarkTheme(BuildContext context, {required bool isArabic}) {
   return ThemeData(
     appBarTheme: AppBarTheme(
-      
       titleTextStyle: AppStyles.bigDesdcriptionStyle.copyWith(
         fontSize: SizeConfig.textSize * 2.2,
         color: AppColors.whiteColor,
-
       ),
       iconTheme: IconThemeData(color: AppColors.whiteColor),
       backgroundColor: AppColors.darkbackgroundColor,
@@ -39,7 +37,10 @@ ThemeData buildDarkTheme(BuildContext context, {required bool isArabic}) {
       ).copyWith(color: AppColors.whiteColor),
 
       headlineMedium: AppStyles.styleSemiBold20(context),
-      displaySmall: AppStyles.styleMeduim17(context)
+      displaySmall: AppStyles.styleMeduim17(context),
+      displayMedium: AppStyles.styleBold25(
+        context,
+      ).copyWith(color: AppColors.whiteColor),
     ),
   );
 }

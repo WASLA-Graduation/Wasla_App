@@ -58,4 +58,11 @@ abstract class AppStyles {
       color: AppColors.blackColor,
     );
   }
+  static TextStyle styleBold25(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context, fontSize: 25),
+      fontWeight: FontWeight.bold,
+      color: AppColors.blackColor,
+    );
+  }
 }

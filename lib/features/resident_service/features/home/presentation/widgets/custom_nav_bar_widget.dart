@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
@@ -21,49 +20,51 @@ class CustomNavBarWidget extends StatelessWidget {
           name: "Home",
           color: cubit.navBarcurrentIndex == 0
               ? AppColors.primaryColor
-              : context.isDarkMode
-              ? AppColors.whiteColor
-              : AppColors.blackColor,
+              : AppColors.gray,
+
           onPressed: () {
+            
             cubit.updateNavBarCurrentIndex(0);
           },
-          icon: Assets.assetsImagesHome,
+          icon: cubit.navBarcurrentIndex == 0
+              ? Assets.assetsImagesHomeFilled
+              : Assets.assetsImagesHomeOutlined,
         ),
         CustomNavBarItem(
-          name: "Notification",
+          name: "Booking",
           color: cubit.navBarcurrentIndex == 1
               ? AppColors.primaryColor
-              : context.isDarkMode
-              ? AppColors.whiteColor
-              : AppColors.blackColor,
+              : AppColors.gray,
           onPressed: () {
             cubit.updateNavBarCurrentIndex(1);
           },
-          icon: Assets.assetsImagesNotification,
+          icon: cubit.navBarcurrentIndex == 1
+              ? Assets.assetsImagesBookingFilled
+              : Assets.assetsImagesBookingOutlined,
         ),
         CustomNavBarItem(
-          name: "Cart",
+          name: "Chat",
           color: cubit.navBarcurrentIndex == 2
               ? AppColors.primaryColor
-              : context.isDarkMode
-              ? AppColors.whiteColor
-              : AppColors.blackColor,
+              : AppColors.gray,
           onPressed: () {
             cubit.updateNavBarCurrentIndex(2);
           },
-          icon: Assets.assetsImagesBookmark,
+          icon: cubit.navBarcurrentIndex == 2
+              ? Assets.assetsImagesChatFilled
+              : Assets.assetsImagesChatOutlined,
         ),
         CustomNavBarItem(
           name: "Profile",
           color: cubit.navBarcurrentIndex == 3
               ? AppColors.primaryColor
-              : context.isDarkMode
-              ? AppColors.whiteColor
-              : AppColors.blackColor,
+              : AppColors.gray,
           onPressed: () {
             cubit.updateNavBarCurrentIndex(3);
           },
-          icon: Assets.assetsImagesUser,
+          icon: cubit.navBarcurrentIndex == 3
+              ? Assets.assetsImagesPeronFilled
+              : Assets.assetsImagesPersonOutlined,
         ),
       ],
     );

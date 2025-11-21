@@ -15,6 +15,8 @@ import 'package:wasla/features/auth/presentation/views/sign_up_view.dart';
 import 'package:wasla/features/auth/presentation/views/verification_code_view.dart';
 import 'package:wasla/features/onboarding/presentation/manager/cubit/onboarding_cubit.dart';
 import 'package:wasla/features/onboarding/presentation/views/onboarding_view.dart';
+import 'package:wasla/features/profile/presentation/views/change_lang_view.dart';
+import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_details_view.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_view.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/views/all_services_view.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/views/home_resident_navbar.dart';
@@ -76,6 +78,10 @@ abstract class AppRouter {
         return MaterialPageRoute(builder: (_) => ResidentSearchViwe());
       case AppRoutes.doctorScreen:
         return MaterialPageRoute(builder: (_) => DoctorView());
+      case AppRoutes.doctorDetailsScreen:
+        return MaterialPageRoute(builder: (_) => DoctorDetailsView());
+      case AppRoutes.chnageLangScreen:
+        return MaterialPageRoute(builder: (_) => ChangeLangView());
 
       default:
         return MaterialPageRoute(builder: (_) => Container());

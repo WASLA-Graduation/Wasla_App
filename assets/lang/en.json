@@ -80,7 +80,12 @@
       "ownerName": "Owner Name",
       "descriptionAboutResturent": "Description about the resturent",
       "resturentImage": "Resturent Image",
-      "fillResturentData": "Fill Resturent Data"
+      "fillResturentData": "Fill Resturent Data",
+      "english":"English",
+      "arabic":"Arabic",
+      "language":"Language",
+      "suggested":"Suggested :"
+
       
 
 

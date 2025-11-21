@@ -20,11 +20,14 @@ class CustomNavBarItem extends StatelessWidget {
       children: [
         IconButton(
           onPressed: onPressed,
-          icon: Image.asset(icon, width: 25, color: color),
+          icon: Image.asset(icon, width: 24, color: color),
         ),
-        Text(
-          name,
-          style: Theme.of(context).textTheme.labelSmall!.copyWith(color: color),
+        Transform.translate(
+          offset: const Offset(0, -7),
+          child: Text(
+            name,
+            style: Theme.of(context).textTheme.labelSmall!.copyWith(color: color),
+          ),
         ),
       ],
     );

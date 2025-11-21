@@ -10,9 +10,15 @@ class DoctorCubit extends Cubit<DoctorState> {
   List<DoctorSpecializationaModel> specialityList = [];
 
   int specializationIndex = 0;
+  List<bool> favouriteDocs = List.filled(10, false);
 
   void changeSpecializationIndex(int index) {
     specializationIndex = index;
+    emit(DoctorUpdateState());
+  }
+
+  void toggleFavouriteIcon({required index}) {
+    favouriteDocs[index] = !favouriteDocs[index];
     emit(DoctorUpdateState());
   }
 

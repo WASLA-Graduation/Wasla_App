@@ -25,27 +25,35 @@ class _DoctorViewState extends State<DoctorView> {
       appBar: AppBar(
         title: Text("Doctors"),
         forceMaterialTransparency: true,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Image.asset(
-              Assets.assetsImagesSearch,
-              width: 21,
-              color: AppColors.gray,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 7),
-            child: IconButton(
-              onPressed: () {},
-              icon: Image.asset(Assets.assetsImagesMore, width: 20),
-            ),
-          ),
-        ],
+        actions: _buildAppBarActons,
       ),
 
       body: DoctorViewBody(),
     );
+  }
+
+  List<Widget> get _buildAppBarActons {
+    return [
+        IconButton(
+          onPressed: () {},
+          icon: Image.asset(
+            Assets.assetsImagesSearch,
+            width: 21,
+            color: AppColors.gray,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 7),
+          child: IconButton(
+            onPressed: () {},
+            icon: Image.asset(
+              Assets.assetsImagesMore,
+              width: 21,
+              color: AppColors.gray,
+            ),
+          ),
+        ),
+      ];
   }
 
   void getDoctorSpeciality() async =>

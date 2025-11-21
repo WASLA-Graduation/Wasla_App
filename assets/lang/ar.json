@@ -75,11 +75,17 @@
       "invalidNationalId": "الرقم القومي غي  صحيح",
       "invalidGraduationYear": "سنة التخرج غير صحيحة",
       "graduationYear": " سنة التخرج",
+      "universityName": "اسم الجامعة",
       "resturentName": "اسم المطعم",
       "ownerName": "اسم المالك",
       "descriptionAboutResturent": "وصف عن المطعم",
       "resturentImage": "صورة للمطعم",
-      "fillResturentData": "اكمل بيانات المطعم"
+      "fillResturentData": "اكمل بيانات المطعم",
+      "english":"الانجليزية",
+      "arabic":"العربية",
+      "language":"اللغة",
+      "suggested":"مقترح :"
+
 
 
 

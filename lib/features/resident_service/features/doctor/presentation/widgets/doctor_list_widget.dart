@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_list_item.dart';
 
 class DoctorListWidget extends StatelessWidget {
@@ -7,15 +9,16 @@ class DoctorListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      separatorBuilder: (_, index) => const SizedBox(height: 5,),
+      separatorBuilder: (_, index) => const SizedBox(height: 5),
       itemCount: 10,
-      physics: const BouncingScrollPhysics(),
+      physics:  BouncingScrollPhysics(),
       itemBuilder: (_, index) => Padding(
         padding: const EdgeInsets.only(top: 10),
         child: InkWell(
           onTap: () {
+            context.pushScreen(AppRoutes.doctorDetailsScreen);
           },
-          child: DoctorListItem(),
+          child: DoctorListItem(index: index,),
         ),
       ),
     );

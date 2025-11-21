@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
+import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
+import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/custom_bottom_sheet_romove_fav.dart';
 
 class DoctorListItemDescriptionWidget extends StatelessWidget {
-  const DoctorListItemDescriptionWidget({super.key});
+  const DoctorListItemDescriptionWidget({super.key, required this.index});
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +25,8 @@ class DoctorListItemDescriptionWidget extends StatelessWidget {
 
   Text _buildSpecialityWidget(BuildContext context) {
     return Text(
+      maxLines: 1,
+      overflow: TextOverflow.clip,
       "Dentist | Christ Hospital",
       style: Theme.of(
         context,
@@ -33,19 +39,39 @@ class DoctorListItemDescriptionWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
 
       children: [
-        Text(
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          "Dr.Randy",
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
-        const Spacer(),
-        InkWell(
-          child: Image.asset(
-            Assets.assetsImagesHeartOutline,
-            width: 18,
-            color: AppColors.primaryColor,
+        Expanded(
+          child: Text(
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            "Dr.Randy Wigham",
+            style: Theme.of(
+              context,
+            ).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w700),
           ),
+        ),
+        BlocBuilder<DoctorCubit, DoctorState>(
+          builder: (context, state) {
+            final cubit = context.read<DoctorCubit>();
+            return InkWell(
+              onTap: () {
+                if (cubit.favouriteDocs[index]) {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (_) => CustomBottomSheetRemoveFav(index: index),
+                  );
+                } else {
+                  cubit.toggleFavouriteIcon(index: index);
+                }
+              },
+              child: Image.asset(
+                cubit.favouriteDocs[index]
+                    ? Assets.assetsImagesFavourite
+                    : Assets.assetsImagesHeartOutline,
+                width: 20,
+                color: AppColors.primaryColor,
+              ),
+            );
+          },
         ),
       ],
     );
@@ -56,13 +82,15 @@ class DoctorListItemDescriptionWidget extends StatelessWidget {
       children: [
         Icon(Icons.star, color: AppColors.primaryColor, size: 18),
         const SizedBox(width: 6),
-        Text(
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          "4.5  (4,577 reviwes)",
-          style: Theme.of(
-            context,
-          ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
+        Flexible(
+          child: Text(
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            "4.5  (4,577 reviwes)",
+            style: Theme.of(
+              context,
+            ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
+          ),
         ),
       ],
     );
