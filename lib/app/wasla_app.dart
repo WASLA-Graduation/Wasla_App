@@ -14,7 +14,7 @@ import 'package:wasla/core/utils/app_strings.dart';
 class WaslaApp extends StatelessWidget {
   const WaslaApp({super.key});
 
-  //this new update in this branch
+  //another commit in this test branch
 
   @override
   Widget build(BuildContext context) {
