@@ -14,7 +14,7 @@ import 'package:wasla/core/utils/app_strings.dart';
 class WaslaApp extends StatelessWidget {
   const WaslaApp({super.key});
 
-  ///you in branch Disha Test
+//leo messi
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
