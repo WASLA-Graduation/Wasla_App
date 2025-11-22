@@ -19,6 +19,7 @@ abstract class ApiKeys {
   static const longitude = 'Longitude';
   static const nationalId = 'NationalId';
   static const image = 'Image';
+  static const imageSmall = 'image';
   static const birthDay = 'BirthDay';
   static const phone = 'Phone';
   static const emailCapital = 'Email';
@@ -37,4 +38,5 @@ abstract class ApiKeys {
   static const latitudeSmall = 'latitude';
   static const longitudeSmall = 'longitude';
   static const currentPassword = 'currentPassword';
+  static const phoneSmall = 'phone';
 }

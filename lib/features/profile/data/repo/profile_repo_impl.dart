@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
@@ -32,13 +35,48 @@ class ProfileRepoImpl extends ProfileRepo {
     required String newPassword,
   }) async {
     try {
-      final response = await api.post(
+      await api.post(
         ApiEndPoints.resetPasswordForProfile,
         body: {
           ApiKeys.email: email,
           ApiKeys.currentPassword: currentPassword,
           ApiKeys.newPassword: newPassword,
         },
+      );
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> updateResidentInfo({
+    required String userId,
+    required String fullName,
+    required String phone,
+    required double lat,
+    required double lng,
+    File? image,
+  }) async {
+    try {
+      await api.put(
+        ApiEndPoints.residentEditProfile,
+        queryParameters: {
+          ApiKeys.id: userId,
+          ApiKeys.fullname: fullName,
+          ApiKeys.phoneSmall: phone,
+          ApiKeys.latitudeSmall: lat,
+          ApiKeys.longitudeSmall: lng,
+        },
+        body: FormData.fromMap({
+          ApiKeys.imageSmall: image != null
+              ? await MultipartFile.fromFile(
+                  image.path,
+                  filename: image.path.split('/').last,
+                )
+              : null,
+        }),
+        headers: {"Content-Type": "multipart/form-data"},
       );
       return Right(null);
     } on ServerException catch (e) {

@@ -18,6 +18,7 @@ class ProfileList extends StatelessWidget {
 
       itemBuilder: (context, index) => InkWell(
         onTap: () {
+          if (index == 4) return;
           if (index == 0) {
             context.pushScreen(
               ProfileItemModel.items[index].route,

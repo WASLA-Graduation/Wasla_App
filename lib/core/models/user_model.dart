@@ -20,8 +20,8 @@ class UserModel {
       email: json[ApiKeys.email],
       phoneNumber: json[ApiKeys.phoneNumber],
       imageUrl: ApiEndPoints.imageBaseUrl + json[ApiKeys.imageUrl],
-      lat: json[ApiKeys.latitudeSmall],
-      lng: json[ApiKeys.longitudeSmall],
+      lat: json[ApiKeys.latitudeSmall].toDouble(),
+      lng: json[ApiKeys.longitudeSmall].toDouble(),
     );
   }
 
@@ -34,5 +34,23 @@ class UserModel {
       ApiKeys.latitudeSmall: lat,
       ApiKeys.longitudeSmall: lng,
     };
+  }
+
+  UserModel copyWith({
+    String? fullName,
+    String? email,
+    String? phoneNumber,
+    String? imageUrl,
+    double? lat,
+    double? lng,
+  }) {
+    return UserModel(
+      fullName: fullName ?? this.fullName,
+      email: email ?? this.email,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      imageUrl: imageUrl ?? this.imageUrl,
+      lat: lat ?? this.lat,
+      lng: lng ?? this.lng,
+    );
   }
 }
