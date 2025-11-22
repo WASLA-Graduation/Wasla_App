@@ -1,13 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/get_image_from_device.dart';
-import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/custom_choose_image_widget.dart';
 import 'package:wasla/core/widgets/profile_image_widget.dart';
 import 'package:wasla/features/profile/presentation/manager/cubit/profile_cubit.dart';
+import 'package:wasla/features/profile/presentation/widgets/custom_logout_widget.dart';
 import 'package:wasla/features/profile/presentation/widgets/custom_profile_appbar.dart';
 import 'package:wasla/features/profile/presentation/widgets/profile_list.dart';
 import 'package:wasla/features/profile/presentation/widgets/user_name_email_widget.dart';
@@ -28,7 +27,7 @@ class ProfileViewBody extends StatelessWidget {
           SliverToBoxAdapter(child: SizedBox(height: 10)),
           SliverToBoxAdapter(child: UserNameAndEmailWidget()),
           ProfileList(),
-          SliverToBoxAdapter(child: _buildLogoutWidget(context)),
+          SliverToBoxAdapter(child: CustomLogoutWidget()),
         ],
       ),
     );
@@ -64,23 +63,7 @@ class ProfileViewBody extends StatelessWidget {
     );
   }
 
-  Row _buildLogoutWidget(BuildContext context) {
-    return Row(
-      children: [
-        Image.asset(
-          Assets.assetsImagesLogout,
-          height: 24,
-          width: 24,
-          color: Colors.red,
-        ),
-        const SizedBox(width: 16),
-        Text(
-          "logout".tr(context),
-          style: Theme.of(
-            context,
-          ).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),
-        ),
-      ],
-    );
-  }
+
 }
+
+

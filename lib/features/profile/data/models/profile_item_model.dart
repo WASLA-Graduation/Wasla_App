@@ -17,8 +17,7 @@ class ProfileItemModel {
     ProfileItemModel(
       image: Assets.assetsImagesPersonOutlined,
       title: "editProfile",
-      // route: getRightEditProfileRoute(),
-      route: AppRoutes.residentEditProfileScreen,
+      route: getRightEditProfileRoute(),
     ),
     const ProfileItemModel(
       image: Assets.assetsImagesNotification,

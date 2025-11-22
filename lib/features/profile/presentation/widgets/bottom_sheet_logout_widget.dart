@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
+import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/core/widgets/under_line_widget.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_list_item.dart';
 
-class CustomBottomSheetRemoveFav extends StatelessWidget {
-  const CustomBottomSheetRemoveFav({super.key, required this.index});
-  final int index;
+class BottomSheetLogoutWidget extends StatelessWidget {
+  const BottomSheetLogoutWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +24,32 @@ class CustomBottomSheetRemoveFav extends StatelessWidget {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        spacing: 15,
+        spacing: 13,
         children: [
           UnderLineWidget(),
           _buildTextWidget(context),
-          const SizedBox(),
-          DoctorListItem(index: index),
+          const Divider(thickness: 0.3),
+          _buildTextDescWidget(context),
+          const SizedBox(height: 10),
           _buildButtons(context),
-          const SizedBox(),
         ],
       ),
+    );
+  }
+
+  Text _buildTextWidget(BuildContext context) => Text(
+    "logout".tr(context),
+    style: Theme.of(
+      context,
+    ).textTheme.headlineMedium!.copyWith(color: Colors.red),
+  );
+
+  Text _buildTextDescWidget(BuildContext context) {
+    return Text(
+      "logout_desc".tr(context),
+      style: Theme.of(
+        context,
+      ).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w900),
     );
   }
 
@@ -45,7 +61,7 @@ class CustomBottomSheetRemoveFav extends StatelessWidget {
             onPressed: () {
               context.popScreen();
             },
-            text: "Cancel",
+            text: "cancel".tr(context),
             height: 45,
             fontSize: 15,
           ),
@@ -54,10 +70,14 @@ class CustomBottomSheetRemoveFav extends StatelessWidget {
         Expanded(
           child: GeneralButton(
             onPressed: () {
-              context.read<DoctorCubit>().toggleFavouriteIcon(index: index);
               context.popScreen();
+              SharedPreferencesHelper.remove(key: AppStrings.isSingedIn).then((
+                val,
+              ) {
+                context.pushAndRemoveAllScreens(AppRoutes.signInScreen);
+              });
             },
-            text: "Yes , Remove",
+            text: "yes_logout".tr(context),
             height: 45,
             fontSize: 15,
           ),
@@ -65,11 +85,4 @@ class CustomBottomSheetRemoveFav extends StatelessWidget {
       ],
     );
   }
-
-  Text _buildTextWidget(BuildContext context) => Text(
-    "Remove from favourite ?",
-    style: Theme.of(context).textTheme.headlineMedium,
-  );
-
-
 }

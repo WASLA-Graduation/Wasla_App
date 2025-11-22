@@ -26,9 +26,9 @@ class HomeResidentCubit extends Cubit<HomeResidentState> {
 
   Future<void> getResidentProfile() async {
     emit(HomeResidentGetProfileLoading());
-    final userId = await SecureStorageHelper.get(key: ApiKeys.userId);
+    final String? userId = await SecureStorageHelper.get(key: ApiKeys.userId);
     final response = await homeRepo.getResidentProfile(
-      userId: "18f1ce3b-83eb-4d63-9e4e-e64debce6192",
+      userId: userId!,
     );
     response.fold(
       (error) {

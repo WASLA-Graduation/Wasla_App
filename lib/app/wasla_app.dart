@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_router.dart';
-import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/config/themes/app_theme.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/functions/change_status_bar_theme.dart';
@@ -69,8 +68,7 @@ class WaslaApp extends StatelessWidget {
             theme: AppThemes.lightTheme(context),
             darkTheme: AppThemes.darkTheme(context),
             themeMode: globalCubit.themeMode,
-            // initialRoute: handleInitialRoute(),
-            initialRoute: AppRoutes.residenBottomNavBar,
+            initialRoute: handleInitialRoute(),
             onGenerateRoute: AppRouter.onGenerateRoute,
           );
         },

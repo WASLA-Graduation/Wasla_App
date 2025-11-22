@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/models/user_model.dart';
 import 'package:wasla/features/profile/presentation/widgets/resident_edit_profile_body.dart';
 
@@ -9,7 +10,7 @@ class ResidentEditProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Edit Profile")),
+      appBar: AppBar(title: Text("edit_profile".tr(context))),
       body: ResidentEditProfileBody(user: user),
     );
   }

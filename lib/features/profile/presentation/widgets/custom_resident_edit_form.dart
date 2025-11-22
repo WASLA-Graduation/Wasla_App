@@ -20,6 +20,7 @@ class CustomResidetnEditInfoForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
+
     return BlocConsumer<ProfileCubit, ProfileState>(
       listener: (context, state) {
         if (state is ProfileResidentUpdateInfoFailure) {
@@ -27,7 +28,7 @@ class CustomResidetnEditInfoForm extends StatelessWidget {
         } else if (state is ProfileResidentUpdateInfoSuccess) {
           toastAlert(
             color: AppColors.green,
-            msg: "Successfully,Profile Updated",
+            msg: "profile_updated_success".tr(context),
           );
         }
       },
@@ -38,23 +39,25 @@ class CustomResidetnEditInfoForm extends StatelessWidget {
             children: [
               CustomTextFormField(
                 initealValue: user.fullName,
-                hint: "fullName".tr(context),
+                hint: "full_name".tr(context),
                 onChanged: (name) {
                   cubit.fullName = name;
                 },
                 validator: (value) => validateName(value, context),
               ),
               VerticalSpace(height: 4),
+
               CustomTextFormField(
                 initealValue: user.phoneNumber,
                 keyboardTyp: TextInputType.phone,
-                hint: "phoneNumber".tr(context),
+                hint: "phone_number".tr(context),
                 onChanged: (phone) {
                   cubit.phoneNumber = phone;
                 },
                 validator: (value) => validatePhone(value, context),
               ),
               VerticalSpace(height: 4),
+
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
@@ -62,7 +65,9 @@ class CustomResidetnEditInfoForm extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
+
               VerticalSpace(height: 2),
+
               InkWell(
                 onTap: () {
                   context.pushScreen(AppRoutes.authMapScreen);
@@ -72,14 +77,18 @@ class CustomResidetnEditInfoForm extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
+
               const Spacer(),
+
               GeneralButton(
                 onPressed: () {
                   context.pushScreen(AppRoutes.accountChangePassScreen);
                 },
-                text: "Change Password",
+                text: "change_password".tr(context),
               ),
+
               VerticalSpace(height: 4),
+
               GeneralButton(
                 onPressed: () {
                   if (cubit.residentFormKey.currentState!.validate()) {
@@ -88,8 +97,9 @@ class CustomResidetnEditInfoForm extends StatelessWidget {
                 },
                 text: state is ProfileResidentUpdateInfoLoading
                     ? "loading".tr(context)
-                    : "Update",
+                    : "update".tr(context),
               ),
+
               const SizedBox(height: 30),
             ],
           ),

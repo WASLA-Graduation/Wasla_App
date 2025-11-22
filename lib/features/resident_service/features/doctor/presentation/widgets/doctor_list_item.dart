@@ -16,38 +16,43 @@ class DoctorListItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
 
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildDocImage(),
-          const SizedBox(width: 18),
-          Expanded(child: DoctorListItemDescriptionWidget(index: index)),
-        ],
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildDocImage(),
+            const SizedBox(width: 18),
+            Expanded(child: DoctorListItemDescriptionWidget(index: index)),
+          ],
+        ),
       ),
     );
   }
 
-  Container _buildDocImage() {
-    return Container(
-      width: 90,
-      height: 90,
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        color: AppColors.gray.withOpacity(0.3),
-        borderRadius: BorderRadius.circular(15),
+  AspectRatio _buildDocImage() {
+    return AspectRatio(
+      aspectRatio: 1,
+      child: Container(
+        // width: 90,
+        // height: 90,
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          color: AppColors.gray.withOpacity(0.3),
+          borderRadius: BorderRadius.circular(15),
 
-        // image: DecorationImage(image: AssetImage(Assets.assetsImagesOnboardingTwo)),
-      ),
+          // image: DecorationImage(image: AssetImage(Assets.assetsImagesOnboardingTwo)),
+        ),
 
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Positioned(
-            width: 112,
-            height: 112,
-            child: Image.asset(Assets.assetsImagesOnboardingTwo),
-          ),
-        ],
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Positioned(
+              width: 112,
+              height: 112,
+              child: Image.asset(Assets.assetsImagesOnboardingTwo),
+            ),
+          ],
+        ),
       ),
     );
   }

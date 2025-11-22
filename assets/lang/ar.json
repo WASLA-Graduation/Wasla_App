@@ -105,9 +105,16 @@
       "suspended_title": "الحساب موقوف",
       "disabled_title": "الحساب معطّل",
       "suspended_desc": "تم إيقاف حسابك، برجاء التواصل مع الدعم إذا كنت تعتقد أن هذا خطأ.",
-      "disabled_desc": "هذا الحساب لم يعد نشطًا."
-
-
+      "disabled_desc": "هذا الحساب لم يعد نشطًا.",
+      "cancel": "إلغاء",
+      "logout_desc": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+      "yes_logout": "نعم، تسجيل الخروج",
+        "edit_profile": "تعديل الحساب",
+        "full_name": "الاسم الكامل",
+        "profile_updated_success": "تم تحديث البيانات بنجاح",
+        "change_password": "تغيير كلمة المرور",
+        "phone_number": "رقم الهاتف",
+        "update": "تحديث"
 
 }
 
