@@ -4,64 +4,30 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_router.dart';
 import 'package:wasla/core/config/themes/app_theme.dart';
-import 'package:wasla/core/database/api/api_consumer.dart';
+import 'package:wasla/core/functions/buid_appCubits.dart';
 import 'package:wasla/core/functions/change_status_bar_theme.dart';
 import 'package:wasla/core/functions/handle_initial_route.dart';
 import 'package:wasla/core/manager/global/global_cubit.dart';
 import 'package:wasla/core/responsive/size_config.dart';
-import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/core/utils/app_strings.dart';
-import 'package:wasla/features/auth/data/repo/auth_repo_impl.dart';
-import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
-import 'package:wasla/features/profile/data/repo/profile_repo_impl.dart';
-import 'package:wasla/features/profile/presentation/manager/cubit/profile_cubit.dart';
-import 'package:wasla/features/resident_service/features/doctor/data/repo/doctor_repo_impl.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
-import 'package:wasla/features/resident_service/features/home/data/repo/home_repo_impl.dart';
-import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
 
 class WaslaApp extends StatelessWidget {
   const WaslaApp({super.key});
 
+  ///you in branch Disha Test
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
 
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => GlobalCubit(), lazy: true),
-        BlocProvider(
-          create: (context) => AuthCubit(AuthRepoImpl(api: sl<ApiConsumer>())),
-          lazy: true,
-        ),
-        BlocProvider(
-          create: (context) =>
-              HomeResidentCubit(HomeRepoImpl(api: sl<ApiConsumer>())),
-          lazy: true,
-        ),
-        BlocProvider(
-          create: (context) =>
-              DoctorCubit(DoctorRepoImpl(api: sl<ApiConsumer>())),
-          lazy: true,
-        ),
-        BlocProvider(
-          create: (context) =>
-              ProfileCubit(ProfileRepoImpl(api: sl<ApiConsumer>())),
-          lazy: true,
-        ),
-      ],
+      providers: buildAppCubits,
       child: BlocBuilder<GlobalCubit, GlobalState>(
         builder: (context, state) {
           final globalCubit = context.read<GlobalCubit>();
           changeThemeStatusBar(globalCubit.themeMode);
           return MaterialApp(
             supportedLocales: const [Locale('ar'), Locale('en')],
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              AppLocalizations.delegate,
-            ],
+            localizationsDelegates: _getDelegates,
             locale: globalCubit.locale,
             title: AppStrings.appName,
             debugShowCheckedModeBanner: false,
@@ -74,5 +40,14 @@ class WaslaApp extends StatelessWidget {
         },
       ),
     );
+  }
+
+  List<LocalizationsDelegate<dynamic>> get _getDelegates {
+    return const [
+      GlobalMaterialLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      AppLocalizations.delegate,
+    ];
   }
 }
