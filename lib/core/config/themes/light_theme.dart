@@ -13,7 +13,7 @@ ThemeData buildLightTheme(BuildContext context, {required bool isArabic}) {
         fontSize: SizeConfig.textSize * 2.2,
       ),
     ),
-    fontFamily: isArabic ? 'Cairo' : 'Roboto',
+    fontFamily: isArabic ? 'Cairo' : 'Inter',
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColors.lightbackgroundColor,
     textTheme: TextTheme(

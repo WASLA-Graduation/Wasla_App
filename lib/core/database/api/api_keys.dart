@@ -28,4 +28,13 @@ abstract class ApiKeys {
   static const graduationYear = 'GraduationYear';
   static const description = 'Description';
   static const cv = 'CV';
+  static const isVerfied = 'isVerfied';
+  static const isCompletedRegister = 'isCompletedRegister';
+  static const statue = 'statue';
+  static const fullname = 'fullname';
+  static const phoneNumber = 'phoneNumber';
+  static const imageUrl = 'imageUrl';
+  static const latitudeSmall = 'latitude';
+  static const longitudeSmall = 'longitude';
+  static const currentPassword = 'currentPassword';
 }

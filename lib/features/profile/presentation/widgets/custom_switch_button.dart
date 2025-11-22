@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 
 import 'package:wasla/core/utils/app_colors.dart';
 
@@ -16,7 +17,7 @@ class CustomSwitchButton extends StatelessWidget {
     return Transform.scale(
       scale: 0.8,
       child: Transform.translate(
-        offset: Offset(20, 0),
+        offset: context.isArabic ? Offset(-10, 0) : Offset(20, 0),
         child: CupertinoSwitch(
           inactiveThumbColor: AppColors.whiteColor,
           inactiveTrackColor: AppColors.grayDark.withOpacity(0.2),

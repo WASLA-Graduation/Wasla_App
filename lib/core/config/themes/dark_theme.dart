@@ -14,7 +14,7 @@ ThemeData buildDarkTheme(BuildContext context, {required bool isArabic}) {
       backgroundColor: AppColors.darkbackgroundColor,
       elevation: 0,
     ),
-    fontFamily: isArabic ? 'Cairo' : 'Roboto',
+    fontFamily: isArabic ? 'Cairo' : 'Inter',
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.darkbackgroundColor,
     textTheme: TextTheme(
@@ -36,8 +36,12 @@ ThemeData buildDarkTheme(BuildContext context, {required bool isArabic}) {
         context,
       ).copyWith(color: AppColors.whiteColor),
 
-      headlineMedium: AppStyles.styleSemiBold20(context),
-      displaySmall: AppStyles.styleMeduim17(context),
+      headlineMedium: AppStyles.styleSemiBold20(
+        context,
+      ).copyWith(color: AppColors.whiteColor),
+      displaySmall: AppStyles.styleMeduim17(
+        context,
+      ).copyWith(color: AppColors.whiteColor),
       displayMedium: AppStyles.styleBold25(
         context,
       ).copyWith(color: AppColors.whiteColor),

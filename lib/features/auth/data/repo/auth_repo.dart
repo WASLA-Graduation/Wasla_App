@@ -34,7 +34,7 @@ abstract class AuthRepo {
     required String nationalId,
     required String phone,
     required String bDate,
-    required File image ,
+    required File image,
     required double lat,
     required double lng,
   });

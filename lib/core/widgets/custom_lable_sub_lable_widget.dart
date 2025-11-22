@@ -16,12 +16,15 @@ class CustomLableSubLableWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: color != null
-              ? Theme.of(context).textTheme.labelLarge!.copyWith(color: color)
-              : Theme.of(context).textTheme.labelLarge,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+            style: color != null
+                ? Theme.of(context).textTheme.labelLarge!.copyWith(color: color)
+                : Theme.of(context).textTheme.labelLarge,
+          ),
         ),
         SizedBox(height: 5),
         Text(

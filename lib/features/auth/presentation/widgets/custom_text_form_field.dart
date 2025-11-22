@@ -13,6 +13,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final bool? readOnly;
   final int? maxLines;
+  final String? initealValue;
 
   const CustomTextFormField({
     super.key,
@@ -27,11 +28,13 @@ class CustomTextFormField extends StatelessWidget {
     this.controller,
     this.readOnly,
     this.maxLines,
+    this.initealValue,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: initealValue,
       maxLines: maxLines ?? 1,
       readOnly: readOnly ?? false,
       controller: controller,
@@ -42,6 +45,9 @@ class CustomTextFormField extends StatelessWidget {
       validator: validator,
       obscureText: isSecure ?? false,
       decoration: InputDecoration(
+        errorStyle: Theme.of(context).textTheme.labelSmall!.copyWith(
+          color: AppColors.error,
+        ),
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         filled: true,

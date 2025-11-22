@@ -126,6 +126,10 @@ class Assets {
   /// assets/images/language.png
   static const String assetsImagesLanguage = "assets/images/language.png";
 
+  /// Assets for assetsImagesLocation
+  /// assets/images/location.png
+  static const String assetsImagesLocation = "assets/images/location.png";
+
   /// Assets for assetsImagesLock
   /// assets/images/lock.png
   static const String assetsImagesLock = "assets/images/lock.png";
@@ -166,9 +170,17 @@ class Assets {
   /// assets/images/onboardingTwo.png
   static const String assetsImagesOnboardingTwo = "assets/images/onboardingTwo.png";
 
+  /// Assets for assetsImagesPannd
+  /// assets/images/pannd.png
+  static const String assetsImagesPannd = "assets/images/pannd.png";
+
   /// Assets for assetsImagesPayment
   /// assets/images/payment.png
   static const String assetsImagesPayment = "assets/images/payment.png";
+
+  /// Assets for assetsImagesPending
+  /// assets/images/pending.png
+  static const String assetsImagesPending = "assets/images/pending.png";
 
   /// Assets for assetsImagesPeronFilled
   /// assets/images/peronFilled.png
@@ -205,6 +217,14 @@ class Assets {
   /// Assets for assetsImagesSecurity
   /// assets/images/security.png
   static const String assetsImagesSecurity = "assets/images/security.png";
+
+  /// Assets for assetsImagesSuspend
+  /// assets/images/suspend.png
+  static const String assetsImagesSuspend = "assets/images/suspend.png";
+
+  /// Assets for assetsImagesSuspended
+  /// assets/images/suspended.jpg
+  static const String assetsImagesSuspended = "assets/images/suspended.jpg";
 
   /// Assets for assetsImagesTest
   /// assets/images/test.png

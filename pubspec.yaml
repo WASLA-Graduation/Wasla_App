@@ -57,9 +57,9 @@ flutter:
       fonts:
         - asset: assets/fonts/Cairo-VariableFont_slnt,wght.ttf
 
-    - family: Roboto
+    - family: Inter
       fonts:
-        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Inter_18pt-Regular.ttf
 
 flutter_assets:
   assets_path: assets/images/

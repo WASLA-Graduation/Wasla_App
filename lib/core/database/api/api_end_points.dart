@@ -9,6 +9,12 @@ abstract class ApiEndPoints {
   static const String forgotPass = 'api/Account/forget-password';
   static const String getRols = 'api/Roles';
   static const String doctorCompleteInfo = 'api/Doctor/CompleteData';
-  static const String getDoctorSpecializations = 'api/Doctor/DoctorSpecializations';
-  static const String residentCompleteRegister = 'api/Resident/CompleteRegister';
+  static const String getDoctorSpecializations =
+      'api/Doctor/DoctorSpecializations';
+  static const String residentCompleteRegister =
+      'api/Resident/CompleteRegister';
+  static const String residentGetProfile = 'api/Account/get-Profile';
+  static const String imageBaseUrl =
+      'http://wasla1.runasp.net/assets/images/user/';
+  static const String residentEditProfile = 'api/Account/edit-Profile';
 }

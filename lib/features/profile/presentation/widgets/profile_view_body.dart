@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/profile_image_widget.dart';
 import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
@@ -30,16 +31,12 @@ class ProfileViewBody extends StatelessWidget {
                       ShowResidentBottomSheetImage(cubit: cubit),
                 );
               },
-              imageUrl:
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTktNmey-marKhm3jOKUfA1Ode3dO_9AHww4g&s",
             ),
           ),
-          SliverToBoxAdapter(child: SizedBox(height: 15)),
+          SliverToBoxAdapter(child: SizedBox(height: 10)),
           SliverToBoxAdapter(child: UserNameAndEmailWidget()),
           ProfileList(),
-          SliverToBoxAdapter(
-            child: _buildLogoutWidget(context),
-          ),
+          SliverToBoxAdapter(child: _buildLogoutWidget(context)),
         ],
       ),
     );
@@ -47,8 +44,8 @@ class ProfileViewBody extends StatelessWidget {
 
   Row _buildLogoutWidget(BuildContext context) {
     return Row(
-            children: [
-              Image.asset(
+      children: [
+        Image.asset(
           Assets.assetsImagesLogout,
           height: 24,
           width: 24,
@@ -56,12 +53,12 @@ class ProfileViewBody extends StatelessWidget {
         ),
         const SizedBox(width: 16),
         Text(
-          "Logout",
+          "logout".tr(context),
           style: Theme.of(
             context,
           ).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),
         ),
-            ],
-          );
+      ],
+    );
   }
 }

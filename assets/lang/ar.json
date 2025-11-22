@@ -37,7 +37,10 @@
       "emailAddress": "البريد الإلكتروني",
       "sendVerificationCode": "إرسال رمز التحقق",
       "createNewPassword": "أنشئ كلمة مرور جديدة",
+      "changePassword": "تغيير كلمة المرور",
       "confirmPassword": "تأكيد كلمة المرور",
+      "newPassword": "كلمة المرور الجديدة",
+      "currentPassword": "كلمة المرور الحالية",
       "savePassword": "حفظ كلمة المرور",
       "verificationCode": "رمز التحقق",
       "codeSentToEmail": "تم إرسال رمز التحقق إلى بريدك الإلكتروني",
@@ -84,8 +87,25 @@
       "english":"الانجليزية",
       "arabic":"العربية",
       "language":"اللغة",
-      "suggested":"مقترح :"
-
+      "suggested":"مقترح :",
+      "editProfile": "تعديل الملف الشخصي",
+      "notification": "الإشعارات",
+      "payment": "المدفوعات",
+      "security": "الأمان",
+      "darkMode": "الوضع الداكن",
+      "helpCenter": "مركز المساعدة",
+      "privacyPolicy": "سياسة الخصوصية",
+      "logout":"تسجيل الخروج",
+      "home": "الرئيسية",
+      "chat": "الدردشة",
+      "profile": "الملف الشخصي",
+      "booking": "الحجوزات",
+      "pending_title": "الحساب قيد المراجعة",
+      "pending_desc": "جاري مراجعة حسابك، برجاء الانتظار حتى يتم الموافقة من قبل الإدارة.",
+      "suspended_title": "الحساب موقوف",
+      "disabled_title": "الحساب معطّل",
+      "suspended_desc": "تم إيقاف حسابك، برجاء التواصل مع الدعم إذا كنت تعتقد أن هذا خطأ.",
+      "disabled_desc": "هذا الحساب لم يعد نشطًا."
 
 
 

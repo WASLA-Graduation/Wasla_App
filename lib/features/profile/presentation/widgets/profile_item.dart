@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/features/profile/data/models/profile_item_model.dart';
 
 class ProfileItem extends StatelessWidget {
@@ -16,20 +18,24 @@ class ProfileItem extends StatelessWidget {
         children: [
           Image.asset(
             profileItemModel.image,
-            height: 24,
-            width: 24,
-            color: Colors.black,
+            height: 22,
+            width: 22,
+            color: context.isDarkMode ? Colors.white : Colors.black,
           ),
           const SizedBox(width: 16),
           Text(
-            profileItemModel.title,
+            profileItemModel.title.tr(context),
             style: Theme.of(
               context,
             ).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),
           ),
           const Spacer(),
           trailing ??
-          Icon(Icons.arrow_forward_ios, color: Colors.black, size: 16),
+              Icon(
+                Icons.arrow_forward_ios,
+                color: context.isDarkMode ? Colors.white : Colors.black,
+                size: 16,
+              ),
         ],
       ),
     );

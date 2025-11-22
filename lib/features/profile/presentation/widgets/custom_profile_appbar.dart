@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/assets.dart';
 
 class CustomProfileAppbar extends StatelessWidget {
@@ -11,13 +13,15 @@ class CustomProfileAppbar extends StatelessWidget {
 
       children: [
         Text(
-          "Profile",
-          style: Theme.of(
-            context,
-          ).textTheme.displayMedium,
+          "profile".tr(context),
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
 
-        Image.asset(Assets.assetsImagesMore, width: 20),
+        Image.asset(
+          Assets.assetsImagesMore,
+          width: 20,
+          color: context.isDarkMode ? Colors.white : Colors.black,
+        ),
       ],
     );
   }

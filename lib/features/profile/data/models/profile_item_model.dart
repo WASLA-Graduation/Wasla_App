@@ -1,3 +1,5 @@
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/functions/get_right_route.dart';
 import 'package:wasla/core/utils/assets.dart';
 
 class ProfileItemModel {
@@ -11,40 +13,41 @@ class ProfileItemModel {
     required this.route,
   });
 
-  static const List<ProfileItemModel> items = [
+  static List<ProfileItemModel> items = [
     ProfileItemModel(
       image: Assets.assetsImagesPersonOutlined,
-      title: "Edit Profile",
-      route: "",
+      title: "editProfile",
+      // route: getRightEditProfileRoute(),
+      route: AppRoutes.residentEditProfileScreen,
     ),
-    ProfileItemModel(
+    const ProfileItemModel(
       image: Assets.assetsImagesNotification,
-      title: "Notification",
+      title: "notification",
       route: "",
     ),
-    ProfileItemModel(
+    const ProfileItemModel(
       image: Assets.assetsImagesPayment,
-      title: "Payment",
+      title: "payment",
       route: "",
     ),
-    ProfileItemModel(
-      image: Assets.assetsImagesSecurity,
-      title: "Security",
-      route: "",
+    const ProfileItemModel(
+      image: Assets.assetsImagesLanguage,
+      title: "language",
+      route: AppRoutes.chnageLangScreen,
     ),
-    ProfileItemModel(
+    const ProfileItemModel(
       image: Assets.assetsImagesVision,
-      title: "Dark Mode",
+      title: "darkMode",
       route: "",
     ),
-    ProfileItemModel(
+    const ProfileItemModel(
       image: Assets.assetsImagesLock,
-      title: "Privacy Policy",
+      title: "privacyPolicy",
       route: "",
     ),
-    ProfileItemModel(
+    const ProfileItemModel(
       image: Assets.assetsImagesHelp,
-      title: "Help Center",
+      title: "helpCenter",
       route: "",
     ),
   ];

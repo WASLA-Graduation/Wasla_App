@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/models/user_model.dart';
 import 'package:wasla/core/service/maps/cubit/maps_helper_cubit.dart';
 import 'package:wasla/features/auth/presentation/views/auth_map_view.dart';
 import 'package:wasla/features/auth/presentation/views/choose_auth_view.dart';
@@ -15,7 +16,9 @@ import 'package:wasla/features/auth/presentation/views/sign_up_view.dart';
 import 'package:wasla/features/auth/presentation/views/verification_code_view.dart';
 import 'package:wasla/features/onboarding/presentation/manager/cubit/onboarding_cubit.dart';
 import 'package:wasla/features/onboarding/presentation/views/onboarding_view.dart';
+import 'package:wasla/features/profile/presentation/views/account_change_pass_view.dart';
 import 'package:wasla/features/profile/presentation/views/change_lang_view.dart';
+import 'package:wasla/features/profile/presentation/views/resident_edit_profile_view.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_details_view.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_view.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/views/all_services_view.dart';
@@ -82,6 +85,13 @@ abstract class AppRouter {
         return MaterialPageRoute(builder: (_) => DoctorDetailsView());
       case AppRoutes.chnageLangScreen:
         return MaterialPageRoute(builder: (_) => ChangeLangView());
+      case AppRoutes.residentEditProfileScreen:
+        final UserModel userModel = settigns.arguments as UserModel;
+        return MaterialPageRoute(
+          builder: (_) => ResidentEditProfileView(user: userModel),
+        );
+      case AppRoutes.accountChangePassScreen:
+        return MaterialPageRoute(builder: (_) => AccountChangePassView());
 
       default:
         return MaterialPageRoute(builder: (_) => Container());

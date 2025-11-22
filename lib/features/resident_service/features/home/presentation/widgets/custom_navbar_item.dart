@@ -24,9 +24,14 @@ class CustomNavBarItem extends StatelessWidget {
         ),
         Transform.translate(
           offset: const Offset(0, -7),
-          child: Text(
-            name,
-            style: Theme.of(context).textTheme.labelSmall!.copyWith(color: color),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              name,
+              style: Theme.of(
+                context,
+              ).textTheme.labelSmall!.copyWith(color: color),
+            ),
           ),
         ),
       ],

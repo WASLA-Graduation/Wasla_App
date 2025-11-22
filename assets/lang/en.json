@@ -32,8 +32,11 @@
       "password_short": "Password must be at least 6 characters",
       "login": "Login",
       "forgotPassword": "Forgot your password?",
+      "changePassword": "Change Password",
       "forgotPasswordSubTitle": "Enter your email address to verify and reset your password",
       "forgotPasswordTitle": "Forgot Password?",
+      "newPassword": "New Password",
+      "currentPassword": "Current Password",
       "emailAddress": "Email Address",
       "sendVerificationCode": "Send Verification Code",
       "createNewPassword": "Create Your New Password",
@@ -84,7 +87,25 @@
       "english":"English",
       "arabic":"Arabic",
       "language":"Language",
-      "suggested":"Suggested :"
+      "suggested":"Suggested :",
+      "editProfile": "Edit Profile",
+      "payment": "Payment",
+      "notification": "Notification",
+      "darkMode": "Dark Mode",
+      "security": "Security",
+      "helpCenter": "Help Center",
+      "privacyPolicy": "Privacy Policy",
+      "logout":"Logout",
+      "booking": "Booking",
+      "home": "Home",
+      "profile": "Profile",
+      "chat": "Chat",
+      "pending_title": "Account Under Review",
+      "pending_desc": "Your account is being reviewed. Please wait for the admin's approval.",
+      "suspended_desc": "Your account has been suspended. Contact support if you think this is a mistake.",
+      "suspended_title": "Account Suspended",
+      "disabled_desc": "This account is no longer active.",
+      "disabled_title": "Account Disabled"
 
       
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
@@ -17,13 +18,11 @@ class CustomNavBarWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         CustomNavBarItem(
-          name: "Home",
+          name: "home".tr(context),
           color: cubit.navBarcurrentIndex == 0
               ? AppColors.primaryColor
               : AppColors.gray,
-
           onPressed: () {
-            
             cubit.updateNavBarCurrentIndex(0);
           },
           icon: cubit.navBarcurrentIndex == 0
@@ -31,7 +30,7 @@ class CustomNavBarWidget extends StatelessWidget {
               : Assets.assetsImagesHomeOutlined,
         ),
         CustomNavBarItem(
-          name: "Booking",
+          name: "booking".tr(context),
           color: cubit.navBarcurrentIndex == 1
               ? AppColors.primaryColor
               : AppColors.gray,
@@ -43,7 +42,7 @@ class CustomNavBarWidget extends StatelessWidget {
               : Assets.assetsImagesBookingOutlined,
         ),
         CustomNavBarItem(
-          name: "Chat",
+          name: "chat".tr(context),
           color: cubit.navBarcurrentIndex == 2
               ? AppColors.primaryColor
               : AppColors.gray,
@@ -55,7 +54,7 @@ class CustomNavBarWidget extends StatelessWidget {
               : Assets.assetsImagesChatOutlined,
         ),
         CustomNavBarItem(
-          name: "Profile",
+          name: "profile".tr(context),
           color: cubit.navBarcurrentIndex == 3
               ? AppColors.primaryColor
               : AppColors.gray,

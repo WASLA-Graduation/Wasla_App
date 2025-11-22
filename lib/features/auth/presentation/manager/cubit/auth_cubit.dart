@@ -239,7 +239,6 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (success) {
         dataModel = success;
-        _saveSignInData(dataModel);
         emit(AuthSignInSuccess());
       },
     );
@@ -273,7 +272,7 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  void _saveSignInData(SignInDataModel dataModel) async {
+  void saveSignInData() async {
     SecureStorageHelper.set(key: ApiKeys.token, value: dataModel.token);
     SecureStorageHelper.set(
       key: ApiKeys.refreshToken,

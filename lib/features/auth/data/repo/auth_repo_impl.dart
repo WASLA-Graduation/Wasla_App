@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:file_picker/src/platform_file.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
@@ -219,4 +219,6 @@ class AuthRepoImpl extends AuthRepo {
       return Left(e.errorModel.errorMessage);
     }
   }
+  
+
 }
