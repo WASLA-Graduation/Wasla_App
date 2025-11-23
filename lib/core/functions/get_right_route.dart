@@ -12,7 +12,7 @@ String getRightRoute({required ServiceRole role}) {
       return AppRoutes.residentInfoScreen;
 
     case ServiceRole.doctor:
-      return AppRoutes.residenBottomNavBar;
+      return AppRoutes.doctorNavbarScreen;
 
     case ServiceRole.technician:
       return AppRoutes.residentInfoScreen;

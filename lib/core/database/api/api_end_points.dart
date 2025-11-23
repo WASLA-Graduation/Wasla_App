@@ -13,7 +13,7 @@ abstract class ApiEndPoints {
       'api/Doctor/DoctorSpecializations';
   static const String residentCompleteRegister =
       'api/Resident/CompleteRegister';
-  static const String residentGetProfile = 'api/Account/get-Profile';
+  static const String residentGetProfile = 'api/Resident/get-Profile';
   static const String imageBaseUrl =
       'http://wasla1.runasp.net/assets/images/user/';
   static const String residentEditProfile = 'api/Account/edit-Profile';

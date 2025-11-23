@@ -9,6 +9,7 @@ import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/cache/secure_storage_helper.dart';
 import 'package:wasla/core/functions/buid_appCubits.dart';
 import 'package:wasla/core/functions/change_status_bar_theme.dart';
+import 'package:wasla/core/functions/handle_initial_route.dart';
 import 'package:wasla/core/manager/global/global_cubit.dart';
 import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/utils/app_strings.dart';
@@ -19,6 +20,7 @@ class WaslaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    getCurrentUserId();
     return MultiBlocProvider(
       providers: buildAppCubits,
       child: BlocBuilder<GlobalCubit, GlobalState>(
@@ -34,8 +36,7 @@ class WaslaApp extends StatelessWidget {
             theme: AppThemes.lightTheme(context),
             darkTheme: AppThemes.darkTheme(context),
             themeMode: globalCubit.themeMode,
-            // initialRoute: handleInitialRoute(),
-            initialRoute: AppRoutes.doctorNavbarScreen,
+            initialRoute: handleInitialRoute(),
             onGenerateRoute: AppRouter.onGenerateRoute,
           );
         },
