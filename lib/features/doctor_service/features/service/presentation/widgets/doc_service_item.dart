@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
+import 'package:wasla/features/doctor_service/features/service/presentation/widgets/doc_remove_service_dialog.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/doc_service_item_header.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/doctor_day_widget.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/doctor_service_button.dart';
@@ -46,7 +47,12 @@ class DocServiceItem extends StatelessWidget {
               const SizedBox(width: 20),
               Expanded(
                 child: DoctorServiceButton(
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) => DoctorRemoveServiceDialog(),
+                    );
+                  },
                   text: "Delete",
                   isDeleteButton: true,
                 ),
