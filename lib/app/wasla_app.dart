@@ -4,6 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_router.dart';
 import 'package:wasla/core/config/themes/app_theme.dart';
+import 'package:wasla/core/database/api/api_keys.dart';
+import 'package:wasla/core/database/cache/secure_storage_helper.dart';
 import 'package:wasla/core/functions/buid_appCubits.dart';
 import 'package:wasla/core/functions/change_status_bar_theme.dart';
 import 'package:wasla/core/functions/handle_initial_route.dart';
@@ -14,11 +16,10 @@ import 'package:wasla/core/utils/app_strings.dart';
 class WaslaApp extends StatelessWidget {
   const WaslaApp({super.key});
 
-  ///you in branch Disha Test
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-
+    getCurrentUserId();
     return MultiBlocProvider(
       providers: buildAppCubits,
       child: BlocBuilder<GlobalCubit, GlobalState>(
@@ -50,4 +51,12 @@ class WaslaApp extends StatelessWidget {
       AppLocalizations.delegate,
     ];
   }
+}
+
+void getCurrentUserId() async {
+  print("******************************************");
+  print(
+    "************** ${await SecureStorageHelper.get(key: ApiKeys.userId)}  ********************",
+  );
+  print("******************************************");
 }
