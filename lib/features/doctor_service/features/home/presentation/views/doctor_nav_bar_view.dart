@@ -5,6 +5,8 @@ import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/bottom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/manager/cubit/doctor_home_cubit.dart';
+import 'package:wasla/features/doctor_service/features/service/presentation/views/service_view.dart';
+import 'package:wasla/features/doctor_service/features/service/presentation/widgets/custom_doc_add_service_float_button.dart';
 import 'package:wasla/features/profile/presentation/views/profile_view.dart';
 
 class DoctorNavBarView extends StatelessWidget {
@@ -17,6 +19,9 @@ class DoctorNavBarView extends StatelessWidget {
         final cubit = context.read<DoctorHomeCubit>();
 
         return Scaffold(
+          floatingActionButton: cubit.navBarCurrentIndex == 1
+              ? CustomAddDoctorServiceButton()
+              : null,
           body: screens[cubit.navBarCurrentIndex],
           bottomNavigationBar: CustomBottomNavBar(
             selectedIndex: cubit.navBarCurrentIndex,
@@ -41,28 +46,28 @@ class DoctorNavBarView extends StatelessWidget {
 
   static List<Widget> screens = [
     Container(),
-    Container(),
+    ServiceView(),
     Container(),
     const ProfileView(),
   ];
 
   List<String> getTitles(BuildContext context) => [
     'home'.tr(context),
-    'booking'.tr(context),
+    'service'.tr(context),
     'chat'.tr(context),
     'profile'.tr(context),
   ];
 
   List<String> get unSelectedIcons => [
     Assets.assetsImagesHomeOutlined,
-    Assets.assetsImagesBookingOutlined,
+    Assets.assetsImagesDoctorKitOutlined,
     Assets.assetsImagesChatOutlined,
     Assets.assetsImagesPersonOutlined,
   ];
 
   List<String> get selectedIcons => [
     Assets.assetsImagesHomeFilled,
-    Assets.assetsImagesBookingFilled,
+    Assets.assetsImagesDoctorKitFilled,
     Assets.assetsImagesChatFilled,
     Assets.assetsImagesPeronFilled,
   ];

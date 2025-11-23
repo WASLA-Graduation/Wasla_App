@@ -6,6 +6,7 @@ import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/auth/data/repo/auth_repo_impl.dart';
 import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/manager/cubit/doctor_home_cubit.dart';
+import 'package:wasla/features/doctor_service/features/service/presentation/manager/cubit/doctor_service_mangement_cubit.dart';
 import 'package:wasla/features/profile/data/repo/profile_repo_impl.dart';
 import 'package:wasla/features/profile/presentation/manager/cubit/profile_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/repo/doctor_repo_impl.dart';
@@ -35,5 +36,6 @@ List<SingleChildWidget> get buildAppCubits {
       lazy: true,
     ),
     BlocProvider(create: (context) => DoctorHomeCubit(), lazy: true),
+    BlocProvider(create: (context) => DoctorServiceMangementCubit(), lazy: true),
   ];
 }

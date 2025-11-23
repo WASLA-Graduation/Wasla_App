@@ -14,7 +14,7 @@ ThemeData buildDarkTheme(BuildContext context, {required bool isArabic}) {
       backgroundColor: AppColors.darkbackgroundColor,
       elevation: 0,
     ),
-    fontFamily: isArabic ? 'Cairo' : 'Inter',
+    fontFamily: 'Cairo',
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.darkbackgroundColor,
     textTheme: TextTheme(

@@ -62,6 +62,14 @@ class Assets {
   /// assets/images/doctor.png
   static const String assetsImagesDoctor = "assets/images/doctor.png";
 
+  /// Assets for assetsImagesDoctorKitFilled
+  /// assets/images/doctor_kit_filled.png
+  static const String assetsImagesDoctorKitFilled = "assets/images/doctor_kit_filled.png";
+
+  /// Assets for assetsImagesDoctorKitOutlined
+  /// assets/images/doctor_kit_outlined.png
+  static const String assetsImagesDoctorKitOutlined = "assets/images/doctor_kit_outlined.png";
+
   /// Assets for assetsImagesDone
   /// assets/images/done.png
   static const String assetsImagesDone = "assets/images/done.png";
@@ -221,10 +229,6 @@ class Assets {
   /// Assets for assetsImagesSuspend
   /// assets/images/suspend.png
   static const String assetsImagesSuspend = "assets/images/suspend.png";
-
-  /// Assets for assetsImagesSuspended
-  /// assets/images/suspended.jpg
-  static const String assetsImagesSuspended = "assets/images/suspended.jpg";
 
   /// Assets for assetsImagesTest
   /// assets/images/test.png
