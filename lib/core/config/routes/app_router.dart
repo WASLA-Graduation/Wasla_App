@@ -14,6 +14,7 @@ import 'package:wasla/features/auth/presentation/views/resurent_info_view.dart';
 import 'package:wasla/features/auth/presentation/views/sign_in_view.dart';
 import 'package:wasla/features/auth/presentation/views/sign_up_view.dart';
 import 'package:wasla/features/auth/presentation/views/verification_code_view.dart';
+import 'package:wasla/features/doctor_service/features/home/presentation/views/doctor_nav_bar_view.dart';
 import 'package:wasla/features/onboarding/presentation/manager/cubit/onboarding_cubit.dart';
 import 'package:wasla/features/onboarding/presentation/views/onboarding_view.dart';
 import 'package:wasla/features/profile/presentation/views/account_change_pass_view.dart';
@@ -92,6 +93,8 @@ abstract class AppRouter {
         );
       case AppRoutes.accountChangePassScreen:
         return MaterialPageRoute(builder: (_) => AccountChangePassView());
+      case AppRoutes.doctorNavbarScreen:
+        return MaterialPageRoute(builder: (_) => DoctorNavBarView());
 
       default:
         return MaterialPageRoute(builder: (_) => Container());

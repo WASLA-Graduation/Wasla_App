@@ -3,23 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/bottom_nav_bar/custom_bottom_nav_bar.dart';
-import 'package:wasla/features/profile/presentation/views/profile_view.dart';
-import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
-import 'package:wasla/features/resident_service/features/home/presentation/views/resident_home_view.dart';
+import 'package:wasla/features/doctor_service/features/home/presentation/manager/cubit/doctor_home_cubit.dart';
 
-class HomeResidentNavbar extends StatelessWidget {
-  const HomeResidentNavbar({super.key});
+class DoctorNavBarView extends StatelessWidget {
+  const DoctorNavBarView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeResidentCubit, HomeResidentState>(
+    return BlocBuilder<DoctorHomeCubit, DoctorHomeState>(
       builder: (context, state) {
-        final cubit = context.read<HomeResidentCubit>();
+        final cubit = context.read<DoctorHomeCubit>();
 
         return Scaffold(
-          body: screens[cubit.navBarcurrentIndex],
+          body: screens[cubit.navBarCurrentIndex],
           bottomNavigationBar: CustomBottomNavBar(
-            selectedIndex: cubit.navBarcurrentIndex,
+            selectedIndex: cubit.navBarCurrentIndex,
             titles: getTitles(context),
             selectedIcons: selectedIcons,
             unSelectedIcons: unSelectedIcons,
@@ -27,7 +25,7 @@ class HomeResidentNavbar extends StatelessWidget {
               cubit.updateNavBarCurrentIndex(value);
             },
             onPop: () {
-              if (cubit.navBarcurrentIndex != 0) {
+              if (cubit.navBarCurrentIndex != 0) {
                 cubit.updateNavBarCurrentIndex(0);
               }
             },
@@ -38,10 +36,10 @@ class HomeResidentNavbar extends StatelessWidget {
   }
 
   static List<Widget> screens = [
-    const ResidentHomeView(),
     Container(),
     Container(),
-    const ProfileView(),
+    Container(),
+    Container(),
   ];
 
   List<String> getTitles(BuildContext context) => [

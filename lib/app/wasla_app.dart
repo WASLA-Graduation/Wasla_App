@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_router.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/config/themes/app_theme.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/cache/secure_storage_helper.dart';
@@ -35,7 +36,8 @@ class WaslaApp extends StatelessWidget {
             theme: AppThemes.lightTheme(context),
             darkTheme: AppThemes.darkTheme(context),
             themeMode: globalCubit.themeMode,
-            initialRoute: handleInitialRoute(),
+            // initialRoute: handleInitialRoute(),
+            initialRoute: AppRoutes.doctorNavbarScreen,
             onGenerateRoute: AppRouter.onGenerateRoute,
           );
         },

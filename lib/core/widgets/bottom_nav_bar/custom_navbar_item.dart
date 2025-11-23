@@ -19,6 +19,7 @@ class CustomNavBarItem extends StatelessWidget {
     return Column(
       children: [
         IconButton(
+          highlightColor: Colors.transparent,
           onPressed: onPressed,
           icon: Image.asset(icon, width: 24, color: color),
         ),
