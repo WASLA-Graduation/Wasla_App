@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
-import 'package:wasla/core/models/user_model.dart';
+import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
 import 'package:wasla/features/profile/presentation/widgets/resident_edit_profile_body.dart';
 
 class ResidentEditProfileView extends StatelessWidget {

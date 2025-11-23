@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:wasla/core/responsive/size_config.dart';
+import 'package:wasla/core/widgets/can_pop_widget.dart';
 import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
 
 import 'package:wasla/features/auth/presentation/widgets/sign_up_body.dart';
@@ -25,7 +25,7 @@ class _SignUpViewState extends State<SignUpView> {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockWidth * 5),
-        child: SignUpBody(),
+        child: CanPopScreen(child: SignUpBody()),
       ),
     );
   }

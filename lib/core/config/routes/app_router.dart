@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
-import 'package:wasla/core/models/user_model.dart';
+import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
 import 'package:wasla/core/service/maps/cubit/maps_helper_cubit.dart';
 import 'package:wasla/features/auth/presentation/views/auth_map_view.dart';
 import 'package:wasla/features/auth/presentation/views/choose_auth_view.dart';

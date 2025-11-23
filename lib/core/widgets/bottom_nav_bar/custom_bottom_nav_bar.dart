@@ -23,7 +23,7 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: selectedIndex == 0,
+      canPop: false,
       onPopInvokedWithResult: (didPop, result) {
         onPop();
       },

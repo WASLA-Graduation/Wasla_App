@@ -74,7 +74,7 @@ class SignInButton extends StatelessWidget {
             );
           } else {
             cubit.saveSignInData();
-            context.pushScreen(getRightRoute(role: cubit.dataModel.role));
+            context.pushReplacementScreen(getRightRoute(role: cubit.dataModel.role));
           }
         }
       },

@@ -28,7 +28,7 @@ class ProfileImageWidget extends StatelessWidget {
                     )
                   : ClipOval(
                       child: CustomCachedNetworkImage(
-                        imageUrl: cubit.user!.imageUrl,
+                        imageUrl: cubit.user!.imageUrlBase,
                         width: 95,
                         height: 95,
                         fit: BoxFit.cover,

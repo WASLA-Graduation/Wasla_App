@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/cache/secure_storage_helper.dart';
-import 'package:wasla/core/models/user_model.dart';
+import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
 import 'package:wasla/features/resident_service/features/home/data/repo/home_repo.dart';
 
 part 'home_resident_state.dart';

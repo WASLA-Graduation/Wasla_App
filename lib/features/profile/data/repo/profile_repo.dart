@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:wasla/core/models/user_model.dart';
+import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
+import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
 
 abstract class ProfileRepo {
   Future<Either<String, UserModel>> getResidentProfile({
@@ -19,5 +20,9 @@ abstract class ProfileRepo {
     required double lat,
     required double lng,
     File? image,
+  });
+
+  Future<Either<String, DoctorModel>> getDoctorProfile({
+    required String userId,
   });
 }

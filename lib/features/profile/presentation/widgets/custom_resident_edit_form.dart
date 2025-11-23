@@ -5,7 +5,7 @@ import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/functions/validate_text_form_field.dart';
-import 'package:wasla/core/models/user_model.dart';
+import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
 import 'package:wasla/core/utils/assets.dart';
@@ -23,9 +23,9 @@ class CustomResidetnEditInfoForm extends StatelessWidget {
 
     return BlocConsumer<ProfileCubit, ProfileState>(
       listener: (context, state) {
-        if (state is ProfileResidentUpdateInfoFailure) {
+        if (state is ProfileUpdateInfoFailure) {
           toastAlert(color: AppColors.error, msg: state.errMsg);
-        } else if (state is ProfileResidentUpdateInfoSuccess) {
+        } else if (state is ProfileUpdateInfoSuccess) {
           toastAlert(
             color: AppColors.green,
             msg: "profile_updated_success".tr(context),
@@ -92,10 +92,10 @@ class CustomResidetnEditInfoForm extends StatelessWidget {
               GeneralButton(
                 onPressed: () {
                   if (cubit.residentFormKey.currentState!.validate()) {
-                    cubit.updateResidentInfo();
+                    cubit.updateUsertInfo();
                   }
                 },
-                text: state is ProfileResidentUpdateInfoLoading
+                text: state is ProfileUpdateInfoLoading
                     ? "loading".tr(context)
                     : "update".tr(context),
               ),

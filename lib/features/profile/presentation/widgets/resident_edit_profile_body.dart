@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasla/core/models/user_model.dart';
+import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
 import 'package:wasla/features/profile/presentation/widgets/custom_resident_edit_form.dart';
 
 class ResidentEditProfileBody extends StatelessWidget {

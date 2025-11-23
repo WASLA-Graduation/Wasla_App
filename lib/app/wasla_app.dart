@@ -20,7 +20,6 @@ class WaslaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    getCurrentUserId();
     return MultiBlocProvider(
       providers: buildAppCubits,
       child: BlocBuilder<GlobalCubit, GlobalState>(

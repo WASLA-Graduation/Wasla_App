@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/assets.dart';
@@ -29,6 +31,8 @@ class HomeResidentNavbar extends StatelessWidget {
             onPop: () {
               if (cubit.navBarcurrentIndex != 0) {
                 cubit.updateNavBarCurrentIndex(0);
+              } else {
+                SystemNavigator.pop();
               }
             },
           ),

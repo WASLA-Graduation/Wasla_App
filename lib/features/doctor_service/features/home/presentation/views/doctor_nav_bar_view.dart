@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/bottom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/manager/cubit/doctor_home_cubit.dart';
+import 'package:wasla/features/profile/presentation/views/profile_view.dart';
 
 class DoctorNavBarView extends StatelessWidget {
   const DoctorNavBarView({super.key});
@@ -27,6 +29,8 @@ class DoctorNavBarView extends StatelessWidget {
             onPop: () {
               if (cubit.navBarCurrentIndex != 0) {
                 cubit.updateNavBarCurrentIndex(0);
+              } else {
+                SystemNavigator.pop();
               }
             },
           ),
@@ -39,7 +43,7 @@ class DoctorNavBarView extends StatelessWidget {
     Container(),
     Container(),
     Container(),
-    Container(),
+    const ProfileView(),
   ];
 
   List<String> getTitles(BuildContext context) => [

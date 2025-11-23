@@ -20,7 +20,7 @@ class UserNameAndEmailWidget extends StatelessWidget {
                 child: state is ProfileGetProfileLoading
                     ? _buildTextLoading(context)
                     : Text(
-                        cubit.user!.fullName,
+                        cubit.user!.fullNameBase,
                         style: Theme.of(context).textTheme.displayMedium,
                       ),
               ),
@@ -28,14 +28,13 @@ class UserNameAndEmailWidget extends StatelessWidget {
               FittedBox(
                 fit: BoxFit.scaleDown,
 
-                child:state is ProfileGetProfileLoading
+                child: state is ProfileGetProfileLoading
                     ? _buildTextLoading(context)
                     : Text(
-                  cubit.user!.email,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.displaySmall!.copyWith(color: AppColors.gray),
-                ),
+                        cubit.user!.emailBase,
+                        style: Theme.of(context).textTheme.displaySmall!
+                            .copyWith(color: AppColors.gray),
+                      ),
               ),
               const Divider(height: 40, thickness: 0.3),
             ],
@@ -47,10 +46,10 @@ class UserNameAndEmailWidget extends StatelessWidget {
 
   Skeletonizer _buildTextLoading(BuildContext context) {
     return Skeletonizer(
-                      child: Text(
-                        "Mostafa Salah",
-                        style: Theme.of(context).textTheme.displayMedium,
-                      ),
-                    );
+      child: Text(
+        "Mostafa Salah",
+        style: Theme.of(context).textTheme.displayMedium,
+      ),
+    );
   }
 }

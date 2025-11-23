@@ -3,7 +3,7 @@ import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
-import 'package:wasla/core/models/user_model.dart';
+import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
 import 'package:wasla/features/resident_service/features/home/data/repo/home_repo.dart';
 
 class HomeRepoImpl extends HomeRepo {

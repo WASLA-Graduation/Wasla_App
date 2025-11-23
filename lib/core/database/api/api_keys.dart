@@ -39,4 +39,12 @@ abstract class ApiKeys {
   static const longitudeSmall = 'longitude';
   static const currentPassword = 'currentPassword';
   static const phoneSmall = 'phone';
+  static const fullNameCamel = 'fullName';
+  static const specializationName = 'specializationName';
+  static const experienceYearsCamel = 'experienceYears';
+  static const universityNameCamel = 'universityName';
+  static const graduationYearCamel = 'graduationYear';
+  static const birthDayCamel = 'birthDay';
+  static const descriptionSmall = 'description';
+  static const cvSmall = 'cv';
 }

@@ -45,7 +45,7 @@ class ProfileViewBody extends StatelessWidget {
               File? image = await getImageFromMobile(fromGallary: false);
               if (image != null) {
                 cubit.image = image;
-                cubit.updateResidentInfo();
+                cubit.updateUsertInfo();
               }
               context.popScreen();
             },
@@ -53,7 +53,7 @@ class ProfileViewBody extends StatelessWidget {
               File? image = await getImageFromMobile(fromGallary: true);
               if (image != null) {
                 cubit.image = image;
-                cubit.updateResidentInfo();
+                cubit.updateUsertInfo();
               }
               context.popScreen();
             },

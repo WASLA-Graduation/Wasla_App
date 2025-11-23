@@ -24,11 +24,11 @@ final class ProfileChangePassFailure extends ProfileState {
   ProfileChangePassFailure({required this.errMsg});
 }
 
-final class ProfileResidentUpdateInfoLoading extends ProfileState {}
+final class ProfileUpdateInfoLoading extends ProfileState {}
 
-final class ProfileResidentUpdateInfoSuccess extends ProfileState {}
+final class ProfileUpdateInfoSuccess extends ProfileState {}
 
-final class ProfileResidentUpdateInfoFailure extends ProfileState {
+final class ProfileUpdateInfoFailure extends ProfileState {
   final String errMsg;
-  ProfileResidentUpdateInfoFailure({required this.errMsg});
+  ProfileUpdateInfoFailure({required this.errMsg});
 }
