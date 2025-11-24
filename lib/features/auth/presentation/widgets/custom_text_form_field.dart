@@ -13,6 +13,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final bool? readOnly;
   final int? maxLines;
+  final int? minLines;
   final String? initealValue;
   final String? labelText;
   final Color? fillColor;
@@ -39,6 +40,7 @@ class CustomTextFormField extends StatelessWidget {
     this.withTitle,
     this.title,
     this.withBorder,
+    this.minLines,
   });
 
   @override
@@ -53,6 +55,7 @@ class CustomTextFormField extends StatelessWidget {
         TextFormField(
           initialValue: initealValue,
           maxLines: maxLines ?? 1,
+          minLines: minLines ?? 1,
           readOnly: readOnly ?? false,
           controller: controller,
           keyboardType: keyboardTyp,

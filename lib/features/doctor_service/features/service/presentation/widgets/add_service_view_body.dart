@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/manager/cubit/doctor_service_mangement_cubit.dart';
+import 'package:wasla/features/doctor_service/features/service/presentation/widgets/custom_choose_time_doc_service_widget.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/date_timeline_picker.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/doc_add_service_form.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/doc_weak_day_widget.dart';
@@ -21,6 +22,8 @@ class AddServiceViewBody extends StatelessWidget {
               padding: EdgeInsets.zero,
               children: [
                 DateTimelinePicker(title: "Select Date"),
+                const SizedBox(height: 15),
+                CustomChooseTimeDocServiceWidget(),
                 const SizedBox(height: 10),
                 CustomWeakDaysWidget(),
                 const SizedBox(height: 20),

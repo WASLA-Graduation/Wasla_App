@@ -1,6 +1,8 @@
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/utils/app_colors.dart';
+import 'package:wasla/features/doctor_service/features/service/presentation/manager/cubit/doctor_service_mangement_cubit.dart';
 
 class DateTimelinePicker extends StatelessWidget {
   const DateTimelinePicker({super.key, required this.title});
@@ -20,7 +22,9 @@ class DateTimelinePicker extends StatelessWidget {
           selectionColor: AppColors.primaryColor,
           selectedTextColor: Colors.white,
           width: 60,
-          onDateChange: (date) {},
+          onDateChange: (date) {
+            context.read<DoctorServiceMangementCubit>().selectedDate = date;
+          },
         ),
       ],
     );

@@ -13,6 +13,9 @@ class DoctorServiceMangementCubit extends Cubit<DoctorServiceMangementState> {
       serviceDescAr = '',
       serviceDescEn = '';
   int price = 0;
+  TimeOfDay timeFrom = TimeOfDay(hour: 8, minute: 0);
+  TimeOfDay timeTo = TimeOfDay(hour: 10, minute: 0);
+  DateTime? selectedDate;
 
   void addOrRemoveDaysIndex(int index) {
     if (daysIndices.contains(index)) {
@@ -23,13 +26,22 @@ class DoctorServiceMangementCubit extends Cubit<DoctorServiceMangementState> {
     emit(DoctorServiceMangementUpdate());
   }
 
-
   void checkDaysSelected() {
     if (daysIndices.isEmpty) {
       daysSelected = false;
     } else {
       daysSelected = true;
     }
+    emit(DoctorServiceMangementUpdate());
+  }
+
+  void upadteTimeFrom({required TimeOfDay time}) {
+    timeFrom = time;
+    emit(DoctorServiceMangementUpdate());
+  }
+
+  void upadteTimeTo({required TimeOfDay time}) {
+    timeTo = time;
     emit(DoctorServiceMangementUpdate());
   }
 }

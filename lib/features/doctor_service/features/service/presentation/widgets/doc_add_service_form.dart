@@ -30,7 +30,6 @@ class CustomDoctorAddServiceForm extends StatelessWidget {
               cubit.serviceNameAr = value;
             },
             validator: (value) => validateSimpleData(value, context),
-
             withBorder: true,
             fillColor: Colors.transparent,
             withTitle: true,
@@ -42,6 +41,7 @@ class CustomDoctorAddServiceForm extends StatelessWidget {
               cubit.serviceDescEn = value;
             },
             validator: (value) => validateSimpleData(value, context),
+            maxLines: 2,
 
             withBorder: true,
             fillColor: Colors.transparent,
@@ -54,6 +54,7 @@ class CustomDoctorAddServiceForm extends StatelessWidget {
               cubit.serviceDescAr = value;
             },
             validator: (value) => validateSimpleData(value, context),
+            maxLines: 2,
 
             withBorder: true,
             fillColor: Colors.transparent,

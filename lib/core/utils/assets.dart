@@ -46,6 +46,10 @@ class Assets {
   /// assets/images/choose_auth.png
   static const String assetsImagesChooseAuth = "assets/images/choose_auth.png";
 
+  /// Assets for assetsImagesClock
+  /// assets/images/clock.png
+  static const String assetsImagesClock = "assets/images/clock.png";
+
   /// Assets for assetsImagesCloseIcon
   /// assets/images/close_Icon.png
   static const String assetsImagesCloseIcon = "assets/images/close_Icon.png";
