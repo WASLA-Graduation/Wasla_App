@@ -13,7 +13,7 @@ class DocServiceItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(25),
+      padding: const EdgeInsets.all(22),
       margin: const EdgeInsets.only(bottom: 20),
       width: double.infinity,
       decoration: BoxDecoration(

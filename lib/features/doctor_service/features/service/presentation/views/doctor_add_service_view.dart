@@ -7,7 +7,10 @@ class DoctorAddServiceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Add New Service")),
+      appBar: AppBar(
+        title: Text("Add New Service"),
+        forceMaterialTransparency: true,
+      ),
       body: AddServiceViewBody(),
     );
   }
