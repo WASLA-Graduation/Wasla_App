@@ -115,7 +115,34 @@
         "change_password": "تغيير كلمة المرور",
         "phone_number": "رقم الهاتف",
         "update": "تحديث",
-        "service": "الخدمات"
+        "service": "الخدمات",
+        "egb": "جنيه",
+        "sat": "السبت",
+        "mon": "الإثنين",
+        "tue": "الثلاثاء",
+        "wed": "الأربعاء",
+        "thu": "الخميس",
+        "fri": "الجمعة",
+        "sun": "الأحد",
+        "edit": "تعديل",
+        "delete": "حذف",
+        "to": "الى",
+        "from": "من",
+        "areYouSure": "هل انت متاكد ؟",
+        "douYouWantRelly": "هل تريد حقًا حذف  ",
+        "add": "اضافة",
+        "selectDate": "اختر التاريخ",
+        "selectAtLeastOneDay": "اختر يومًا واحدًا على الأقل",
+        "selectDays": "اختر الأيام",
+        "serviceNameAr": "اسم الخدمة (AR)",
+        "descriptionEn": "الوصف (EN)",
+        "descriptionAr": "الوصف (AR)",
+        "price": "السعر",
+        "serviceNameEn": "اسم الخدمة (EN)",
+          "addNewService": "إضافة خدمة جديدة",
+          "editService": "تعديل الخدمة"
+
+
 
 }
 

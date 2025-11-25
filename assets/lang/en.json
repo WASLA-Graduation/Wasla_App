@@ -115,7 +115,34 @@
       "full_name": "Full Name",
       "update": "Update",
       "change_password": "Change Password",
-      "service": "Services"
+      "service": "Services",
+      "egb": "EGP",
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "edit": "Edit",
+      "delete": "Delete",
+        "to": "to",
+        "from": "from",
+        "areYouSure": "Are you sure ?",
+        "douYouWantRelly": "Do you really want to delete ",
+        "add": "Add",
+        "selectDate": "Select Date",
+        "selectDays": "Select Days",
+        "selectAtLeastOneDay": "Select at least one day",
+        "serviceNameAr": "Service Name (AR)",
+        "descriptionEn": "Description (EN)",
+        "descriptionAr": "Description (AR)",
+        "price": "Price",
+        "serviceNameEn": "Service Name (EN)",
+        "addNewService": "Add New Service",
+        "editService": "Edit Service"
+        
+
 
       
 

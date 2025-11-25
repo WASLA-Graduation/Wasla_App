@@ -46,5 +46,22 @@ abstract class ApiKeys {
   static const graduationYearCamel = 'graduationYear';
   static const birthDayCamel = 'birthDay';
   static const descriptionSmall = 'description';
+  static const price = 'price';
   static const cvSmall = 'cv';
+  static const serviceName = 'serviceName';
+  static const serviceDays = 'serviceDays';
+  static const serviceDates = 'serviceDates';
+  static const timeSlots = 'timeSlots';
+  static const dayOfWeek = 'dayOfWeek';
+  static const date = 'date';
+  static const start = 'start';
+  static const end = 'end';
+  static const serviceNameArabic = 'serviceNameArabic';
+  static const descriptionArabic = 'descriptionArabic';
+  static const serviceNameEnglish = 'serviceNameEnglish';
+  static const descriptionEnglish = 'descriptionEnglish';
+  static const doctorId = 'doctorId';
+  static const english = 'english';
+  static const arabic = 'arabic';
+  static const serviceId = 'serviceId';
 }

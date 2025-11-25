@@ -9,6 +9,7 @@ ThemeData buildDarkTheme(BuildContext context, {required bool isArabic}) {
       titleTextStyle: AppStyles.bigDesdcriptionStyle.copyWith(
         fontSize: SizeConfig.textSize * 2.2,
         color: AppColors.whiteColor,
+        fontFamily: 'Cairo',
       ),
       iconTheme: IconThemeData(color: AppColors.whiteColor),
       backgroundColor: AppColors.darkbackgroundColor,

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_text_form_field.dart';
+import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/manager/cubit/doctor_service_mangement_cubit.dart';
 
 class CustomDoctorAddServiceForm extends StatelessWidget {
-  const CustomDoctorAddServiceForm({super.key});
+  const CustomDoctorAddServiceForm({super.key, this.model});
+  final DoctorServiceModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +21,16 @@ class CustomDoctorAddServiceForm extends StatelessWidget {
             onChanged: (value) {
               cubit.serviceNameEn = value;
             },
+            initealValue: model?.serviceNameEn,
             validator: (value) => validateSimpleData(value, context),
             withBorder: true,
             fillColor: Colors.transparent,
             withTitle: true,
-            title: "Service Name (EN)",
+            title: "serviceNameEn".tr(context),
           ),
           const SizedBox(height: 15),
           CustomTextFormField(
+            initealValue: model?.serviceNameAr,
             onChanged: (value) {
               cubit.serviceNameAr = value;
             },
@@ -33,46 +38,46 @@ class CustomDoctorAddServiceForm extends StatelessWidget {
             withBorder: true,
             fillColor: Colors.transparent,
             withTitle: true,
-            title: "Service Name (AR)",
+            title: "serviceNameAr".tr(context),
           ),
           const SizedBox(height: 15),
           CustomTextFormField(
+            initealValue: model?.descriptionEn,
             onChanged: (value) {
               cubit.serviceDescEn = value;
             },
             validator: (value) => validateSimpleData(value, context),
             maxLines: 2,
-
             withBorder: true,
             fillColor: Colors.transparent,
             withTitle: true,
-            title: "Description (EN)",
+            title: "descriptionEn".tr(context),
           ),
           const SizedBox(height: 15),
           CustomTextFormField(
+            initealValue: model?.descriptionAr,
             onChanged: (value) {
               cubit.serviceDescAr = value;
             },
             validator: (value) => validateSimpleData(value, context),
             maxLines: 2,
-
             withBorder: true,
             fillColor: Colors.transparent,
             withTitle: true,
-            title: "Description (AR)",
+            title: "descriptionAr".tr(context),
           ),
           const SizedBox(height: 15),
           CustomTextFormField(
+            initealValue: model?.price.toString(),
             keyboardTyp: TextInputType.number,
             onChanged: (value) {
               cubit.price = int.parse(value);
             },
             validator: (value) => validateSimpleData(value, context),
-
             withBorder: true,
             fillColor: Colors.transparent,
             withTitle: true,
-            title: "Price",
+            title: "price".tr(context),
           ),
           const SizedBox(height: 15),
         ],

@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/general_button.dart';
+import 'package:wasla/features/doctor_service/features/service/presentation/manager/cubit/doctor_service_mangement_cubit.dart';
 
 class DoctorRemoveServiceDialog extends StatelessWidget {
-  const DoctorRemoveServiceDialog({super.key});
+  const DoctorRemoveServiceDialog({
+    super.key,
+    required this.serviceNameAR,
+    required this.serviceNameEn,
+    required this.serviceId,
+  });
+
+  final String serviceNameAR;
+  final String serviceNameEn;
+  final int serviceId;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +42,13 @@ class DoctorRemoveServiceDialog extends StatelessWidget {
               color: AppColors.red,
             ),
             Text(
-              "Are you Sure ?",
+              "areYouSure".tr(context),
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             FittedBox(
               fit: BoxFit.scaleDown,
               child: Text(
-                "Do you really want to delete Teeth Cleaning?",
+                "${"douYouWantRelly".tr(context)}${context.isArabic ? "$serviceNameAR؟" : "$serviceNameEn?"}",
                 style: Theme.of(
                   context,
                 ).textTheme.displaySmall!.copyWith(color: AppColors.gray),
@@ -48,7 +61,7 @@ class DoctorRemoveServiceDialog extends StatelessWidget {
                     onPressed: () {
                       context.popScreen();
                     },
-                    text: 'Cancel',
+                    text: 'cancel'.tr(context),
                     color: const Color(0xFFd1d5db),
                     height: 40,
                   ),
@@ -56,8 +69,13 @@ class DoctorRemoveServiceDialog extends StatelessWidget {
                 const SizedBox(width: 20),
                 Expanded(
                   child: GeneralButton(
-                    onPressed: () {},
-                    text: 'Delete',
+                    onPressed: () {
+                      context
+                          .read<DoctorServiceMangementCubit>()
+                          .deletDoctorService(serviceId: serviceId)
+                          .then((val) => context.popScreen());
+                    },
+                    text: 'delete'.tr(context),
                     color: AppColors.red,
                     height: 40,
                   ),

@@ -14,3 +14,13 @@ String formatTimeWithIntl(TimeOfDay time) {
 
   return DateFormat('hh:mm a').format(date);
 }
+
+String convertBackendTimeToAmPm(String apiTime) {
+  try {
+    final parsedTime = DateFormat("HH:mm:ss").parse(apiTime);
+    return DateFormat("h:mm a").format(parsedTime);
+  } catch (e) {
+    return apiTime; 
+  }
+}
+

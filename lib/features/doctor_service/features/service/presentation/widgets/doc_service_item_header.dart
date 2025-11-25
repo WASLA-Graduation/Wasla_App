@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 
 class DocServiceItemHeader extends StatelessWidget {
-  const DocServiceItemHeader({super.key});
+  const DocServiceItemHeader({
+    super.key,
+    required this.seviceName,
+    required this.sevicePrice,
+  });
+  final String seviceName;
+  final double sevicePrice;
 
   @override
   Widget build(BuildContext context) {
@@ -11,12 +18,15 @@ class DocServiceItemHeader extends StatelessWidget {
           child: Text(
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            "Teeth Cleaning",
+            seviceName,
             style: Theme.of(context).textTheme.headlineMedium,
           ),
         ),
         const SizedBox(width: 20),
-        Text("500  EGP", style: Theme.of(context).textTheme.headlineMedium),
+        Text(
+          "$sevicePrice ${"egb".tr(context)}",
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
       ],
     );
   }

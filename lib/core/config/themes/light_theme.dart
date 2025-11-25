@@ -11,6 +11,7 @@ ThemeData buildLightTheme(BuildContext context, {required bool isArabic}) {
       iconTheme: IconThemeData(color: AppColors.blackColor),
       titleTextStyle: AppStyles.bigDesdcriptionStyle.copyWith(
         fontSize: SizeConfig.textSize * 2.2,
+        fontFamily: 'Cairo',
       ),
     ),
     fontFamily: 'Cairo',

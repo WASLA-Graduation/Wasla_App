@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/functions/localizedDays.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/manager/cubit/doctor_service_mangement_cubit.dart';
 
-class CustomWeakDaysWidget extends StatelessWidget {
-  CustomWeakDaysWidget({super.key});
+class CustomWeakDaysWidget extends StatefulWidget {
+  const CustomWeakDaysWidget({super.key, this.daysIndex});
+  final List<int>? daysIndex;
+
+  @override
+  State<CustomWeakDaysWidget> createState() => _CustomWeakDaysWidgetState();
+}
+
+class _CustomWeakDaysWidgetState extends State<CustomWeakDaysWidget> {
+  @override
+  void initState() {
+    checkDaysSelected();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +32,7 @@ class CustomWeakDaysWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Select Days",
+              "selectDays".tr(context),
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 12),
@@ -51,7 +65,7 @@ class CustomWeakDaysWidget extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        days[index],
+                        localizedDays(index: index).tr(context),
                         style: Theme.of(context).textTheme.headlineMedium!
                             .copyWith(
                               fontWeight: FontWeight.w400,
@@ -75,7 +89,7 @@ class CustomWeakDaysWidget extends StatelessWidget {
                 children: [
                   const SizedBox(height: 5),
                   Text(
-                    "Select at least one day",
+                    "selectAtLeastOneDay".tr(context),
                     style: Theme.of(
                       context,
                     ).textTheme.headlineSmall!.copyWith(color: AppColors.red),
@@ -89,5 +103,12 @@ class CustomWeakDaysWidget extends StatelessWidget {
     );
   }
 
-  final List<String> days = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+  void checkDaysSelected() {
+    final cubit = context.read<DoctorServiceMangementCubit>();
+
+    if (widget.daysIndex != null) {
+      cubit.daysIndices = {};
+      cubit.daysIndices.addAll(widget.daysIndex!);
+    }
+  }
 }

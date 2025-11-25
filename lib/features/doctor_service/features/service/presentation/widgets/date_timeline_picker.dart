@@ -5,8 +5,9 @@ import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/manager/cubit/doctor_service_mangement_cubit.dart';
 
 class DateTimelinePicker extends StatelessWidget {
-  const DateTimelinePicker({super.key, required this.title});
+  const DateTimelinePicker({super.key, required this.title, required this.initialSelectedDate});
   final String title;
+  final DateTime initialSelectedDate;
 
   @override
   Widget build(BuildContext context) {
