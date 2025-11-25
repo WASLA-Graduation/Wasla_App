@@ -122,6 +122,14 @@ class Assets {
   /// assets/images/google.png
   static const String assetsImagesGoogle = "assets/images/google.png";
 
+  /// Assets for assetsImagesGroup
+  /// assets/images/group.png
+  static const String assetsImagesGroup = "assets/images/group.png";
+
+  /// Assets for assetsImagesHalfStar
+  /// assets/images/half_star.png
+  static const String assetsImagesHalfStar = "assets/images/half_star.png";
+
   /// Assets for assetsImagesHeartOutline
   /// assets/images/heart_outline.png
   static const String assetsImagesHeartOutline = "assets/images/heart_outline.png";
@@ -161,6 +169,10 @@ class Assets {
   /// Assets for assetsImagesMale
   /// assets/images/male.png
   static const String assetsImagesMale = "assets/images/male.png";
+
+  /// Assets for assetsImagesMessanger
+  /// assets/images/messanger.png
+  static const String assetsImagesMessanger = "assets/images/messanger.png";
 
   /// Assets for assetsImagesMore
   /// assets/images/more.png

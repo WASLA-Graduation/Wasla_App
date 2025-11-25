@@ -6,8 +6,13 @@ import 'package:wasla/features/resident_service/features/doctor/presentation/man
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/custom_bottom_sheet_romove_fav.dart';
 
 class DoctorListItemDescriptionWidget extends StatelessWidget {
-  const DoctorListItemDescriptionWidget({super.key, required this.index});
+  const DoctorListItemDescriptionWidget({
+    super.key,
+    required this.index,
+    this.withoutFav,
+  });
   final int index;
+  final bool? withoutFav;
 
   @override
   Widget build(BuildContext context) {
@@ -49,30 +54,34 @@ class DoctorListItemDescriptionWidget extends StatelessWidget {
             ).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w700),
           ),
         ),
-        BlocBuilder<DoctorCubit, DoctorState>(
-          builder: (context, state) {
-            final cubit = context.read<DoctorCubit>();
-            return InkWell(
-              onTap: () {
-                if (cubit.favouriteDocs[index]) {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (_) => CustomBottomSheetRemoveFav(index: index),
+        const SizedBox(width: 10),
+        withoutFav == null || withoutFav == false
+            ? BlocBuilder<DoctorCubit, DoctorState>(
+                builder: (context, state) {
+                  final cubit = context.read<DoctorCubit>();
+                  return InkWell(
+                    onTap: () {
+                      if (cubit.favouriteDocs[index]) {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (_) =>
+                              CustomBottomSheetRemoveFav(index: index),
+                        );
+                      } else {
+                        cubit.toggleFavouriteIcon(index: index);
+                      }
+                    },
+                    child: Image.asset(
+                      cubit.favouriteDocs[index]
+                          ? Assets.assetsImagesFavourite
+                          : Assets.assetsImagesHeartOutline,
+                      width: 20,
+                      color: AppColors.primaryColor,
+                    ),
                   );
-                } else {
-                  cubit.toggleFavouriteIcon(index: index);
-                }
-              },
-              child: Image.asset(
-                cubit.favouriteDocs[index]
-                    ? Assets.assetsImagesFavourite
-                    : Assets.assetsImagesHeartOutline,
-                width: 20,
-                color: AppColors.primaryColor,
-              ),
-            );
-          },
-        ),
+                },
+              )
+            : SizedBox(),
       ],
     );
   }

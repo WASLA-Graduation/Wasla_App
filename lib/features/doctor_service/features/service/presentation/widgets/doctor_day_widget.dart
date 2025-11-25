@@ -10,23 +10,31 @@ class DoctorDaysList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: List.generate(serviceDay.length, (index) {
-        return Container(
-          margin: const EdgeInsets.only(right: 7),
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-          decoration: ShapeDecoration(
-            shape: StadiumBorder(),
-            color: colors[index].withOpacity(0.1),
-          ),
-          child: Text(
-            localizedDays(index: serviceDay[index].dayOfWeek).tr(context),
-            style: Theme.of(
-              context,
-            ).textTheme.displaySmall!.copyWith(color: colors[index]),
-          ),
-        );
-      }),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minWidth: MediaQuery.of(context).size.width,
+        ),
+        child: Row(
+          children: List.generate(serviceDay.length, (index) {
+            return Container(
+              margin: const EdgeInsets.only(right: 7),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: ShapeDecoration(
+                shape: const StadiumBorder(),
+                color: colors[index % colors.length].withOpacity(0.1),
+              ),
+              child: Text(
+                localizedDays(index: serviceDay[index].dayOfWeek).tr(context),
+                style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                  color: colors[index % colors.length],
+                ),
+              ),
+            );
+          }),
+        ),
+      ),
     );
   }
 

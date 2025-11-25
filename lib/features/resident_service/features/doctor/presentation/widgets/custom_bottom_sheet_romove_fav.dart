@@ -29,7 +29,7 @@ class CustomBottomSheetRemoveFav extends StatelessWidget {
           UnderLineWidget(),
           _buildTextWidget(context),
           const SizedBox(),
-          DoctorListItem(index: index),
+          DoctorListItem(index: index, withoutFav: true),
           _buildButtons(context),
           const SizedBox(),
         ],
@@ -70,6 +70,4 @@ class CustomBottomSheetRemoveFav extends StatelessWidget {
     "Remove from favourite ?",
     style: Theme.of(context).textTheme.headlineMedium,
   );
-
-
 }

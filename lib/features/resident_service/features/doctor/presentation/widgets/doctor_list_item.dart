@@ -4,8 +4,9 @@ import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/custom_doc_list_item_desc.dart';
 
 class DoctorListItem extends StatelessWidget {
-  const DoctorListItem({super.key, required this.index});
+  const DoctorListItem({super.key, required this.index, this.withoutFav});
   final int index;
+  final bool? withoutFav;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,12 @@ class DoctorListItem extends StatelessWidget {
           children: [
             _buildDocImage(),
             const SizedBox(width: 18),
-            Expanded(child: DoctorListItemDescriptionWidget(index: index)),
+            Expanded(
+              child: DoctorListItemDescriptionWidget(
+                index: index,
+                withoutFav: withoutFav,
+              ),
+            ),
           ],
         ),
       ),

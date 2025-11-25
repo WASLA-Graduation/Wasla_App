@@ -227,7 +227,6 @@ class DoctorServiceMangementCubit extends Cubit<DoctorServiceMangementState> {
   }
 
   void _resetState() {
-    daysSelected = false;
     daysIndices.clear();
     selectedDate = null;
     serviceNameAr = '';
