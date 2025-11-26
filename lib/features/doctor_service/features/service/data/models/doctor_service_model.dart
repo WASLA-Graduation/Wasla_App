@@ -88,11 +88,11 @@ class ServiceDate {
   }
 
   Map<String, dynamic> toJson() {
-    return {ApiKeys.data: date};
+    return {ApiKeys.date: date};
   }
 
   Map<String, dynamic> toJsonWithId() {
-    return {ApiKeys.data: date, ApiKeys.id: id};
+    return {ApiKeys.date: date, ApiKeys.id: id};
   }
 }
 

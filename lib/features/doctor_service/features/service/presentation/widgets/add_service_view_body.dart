@@ -28,7 +28,7 @@ class AddServiceViewBody extends StatelessWidget {
               children: [
                 DateTimelinePicker(
                   title: "selectDate".tr(context),
-                  initialSelectedDate: isEdit()
+                  initialSelectedDate: isEdit() && doctorServiceModel!.serviceDates.isNotEmpty
                       ? DateTime.parse(
                           doctorServiceModel!.serviceDates.first.date,
                         )

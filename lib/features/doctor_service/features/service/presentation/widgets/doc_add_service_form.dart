@@ -71,7 +71,7 @@ class CustomDoctorAddServiceForm extends StatelessWidget {
             initealValue: model?.price.toString(),
             keyboardTyp: TextInputType.number,
             onChanged: (value) {
-              cubit.price = int.parse(value);
+              cubit.price = value.isEmpty ? 0 : int.parse(value);
             },
             validator: (value) => validateSimpleData(value, context),
             withBorder: true,
