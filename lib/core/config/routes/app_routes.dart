@@ -23,4 +23,5 @@ abstract class AppRoutes {
   static const String accountChangePassScreen = '/accountChangePassScreen';
   static const String doctorNavbarScreen = '/doctorNavbarScreen';
   static const String doctorAddServiceScreen = '/doctorAddServiceScreen';
+  static const String doctorReviewScreen = '/doctorReviewScreen';
 }

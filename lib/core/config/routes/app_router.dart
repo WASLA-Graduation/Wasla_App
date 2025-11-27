@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/views/doctor_add_service_view.dart';
+import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_review_view.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
 import 'package:wasla/core/service/maps/cubit/maps_helper_cubit.dart';
 import 'package:wasla/features/auth/presentation/views/auth_map_view.dart';
@@ -98,6 +99,8 @@ abstract class AppRouter {
         return MaterialPageRoute(builder: (_) => DoctorNavBarView());
       case AppRoutes.doctorAddServiceScreen:
         return MaterialPageRoute(builder: (_) => DoctorAddServiceView());
+      case AppRoutes.doctorReviewScreen:
+        return MaterialPageRoute(builder: (_) => DoctorReviewView());
 
       default:
         return MaterialPageRoute(builder: (_) => Container());

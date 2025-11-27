@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/widgets/readmore_text.dart';
+import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/custom_doc_reviws_list.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_circle_with_data_list.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_details_card_widget.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_review_item.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_text_identfier_widget.dart';
 
 class DoctorDetailsBody extends StatelessWidget {
@@ -11,7 +13,7 @@ class DoctorDetailsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+      padding: const EdgeInsets.only(top: 10, right: 20, left: 20),
       children: [
         CustomDoctorDatailsCardWeiget(),
         const SizedBox(height: 18),
@@ -34,10 +36,16 @@ class DoctorDetailsBody extends StatelessWidget {
           "Monday-Friday,9:00 AM-20:00 PM",
           style: Theme.of(context).textTheme.labelSmall,
         ),
-        const SizedBox(height: 10),
-        TextDetailsIdentfierWidget(leading: "Reviwes", trailing: "See All"),
+        const SizedBox(height: 15),
+        TextDetailsIdentfierWidget(
+          leading: "Reviwes",
+          trailing: "See All",
+          onTap: () {
+            context.pushScreen(AppRoutes.doctorReviewScreen);
+          },
+        ),
         const SizedBox(height: 20),
-        CustomReviewItem(),
+        DoctorReviewsList(length: 3, shrinkWrap: true),
       ],
     );
   }
