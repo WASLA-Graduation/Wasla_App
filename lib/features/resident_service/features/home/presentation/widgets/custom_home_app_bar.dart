@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/cached_network_image_widget.dart';
@@ -16,7 +17,7 @@ class CustomHomeAppBar extends StatelessWidget {
         final cubit = context.read<HomeResidentCubit>();
         return ListTile(
           contentPadding: EdgeInsets.zero,
-          leading: state is HomeResidentGetProfileLoading
+          leading: cubit.user == null
               ? Skeletonizer(child: _buildCircleAvatarLoading())
               : ClipOval(
                   child: CustomCachedNetworkImage(
@@ -25,7 +26,7 @@ class CustomHomeAppBar extends StatelessWidget {
                     width: 44,
                   ),
                 ),
-          title: state is HomeResidentGetProfileLoading
+          title: cubit.user == null
               ? Skeletonizer(child: _buildSubTitle(context))
               : Text(
                   cubit.user!.fullName,
@@ -60,7 +61,10 @@ class CustomHomeAppBar extends StatelessWidget {
   }
 
   Text _buildSubTitle(BuildContext context) {
-    return Text("Welcome back!", style: Theme.of(context).textTheme.labelSmall);
+    return Text(
+      "welcomeBack".tr(context),
+      style: Theme.of(context).textTheme.labelSmall,
+    );
   }
 
   CircleAvatar _buildCircleAvatarLoading() {

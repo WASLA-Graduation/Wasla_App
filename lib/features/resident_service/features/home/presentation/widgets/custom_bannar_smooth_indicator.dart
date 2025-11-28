@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
 
@@ -12,7 +13,9 @@ class CustomBannarSmoothIndicator extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<HomeResidentCubit>();
         return Padding(
-          padding: const EdgeInsets.only(bottom: 10,right: 60),
+          padding: context.isArabic
+              ? const EdgeInsets.only(bottom: 10, left: 60)
+              : const EdgeInsets.only(bottom: 10, right: 60),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(

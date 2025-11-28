@@ -19,7 +19,7 @@ class ProfileImageWidget extends StatelessWidget {
         return Center(
           child: Stack(
             children: [
-              state is ProfileGetProfileLoading
+              cubit.user == null
                   ? Skeletonizer(
                       child: CircleAvatar(
                         radius: 47,

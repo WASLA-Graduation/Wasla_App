@@ -64,4 +64,8 @@ abstract class ApiKeys {
   static const english = 'english';
   static const arabic = 'arabic';
   static const serviceId = 'serviceId';
+  static const hospitalName = 'hospitalName';
+  static const roleId = 'roleId';
+  static const hospitalname = 'hospitalname';
+  static const numberOfpatients = 'numberOfpatients';
 }

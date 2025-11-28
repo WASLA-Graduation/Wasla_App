@@ -29,7 +29,7 @@ class AuthRepoImpl extends AuthRepo {
           ApiKeys.email: email,
           ApiKeys.password: pass,
           ApiKeys.confirmPassword: pass,
-          ApiKeys.role: role,
+          ApiKeys.roleId: role,
         },
       );
       return Right(null);
@@ -178,6 +178,7 @@ class AuthRepoImpl extends AuthRepo {
     required String bDate,
     required String universtiyName,
     required String description,
+    required String hospitalName,
     required File image,
     required double lat,
     required double lng,
@@ -199,6 +200,7 @@ class AuthRepoImpl extends AuthRepo {
         ApiKeys.graduationYear: graduationYear,
         ApiKeys.specializationId: spacializationID,
         ApiKeys.experienceYears: experienceYears,
+        ApiKeys.hospitalName: hospitalName,
         ApiKeys.image: await MultipartFile.fromFile(
           image.path,
           filename: image.path.split('/').last,
@@ -214,11 +216,8 @@ class AuthRepoImpl extends AuthRepo {
       );
 
       return Right(null);
-      
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
   }
-  
-
 }

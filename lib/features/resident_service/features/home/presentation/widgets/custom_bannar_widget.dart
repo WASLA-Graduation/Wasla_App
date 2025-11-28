@@ -12,7 +12,7 @@ class CustomBannarWidget extends StatelessWidget {
     return Container(
       clipBehavior: Clip.hardEdge,
 
-      padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+      padding: const EdgeInsets.only(top: 20),
       width: double.infinity,
       height: 160,
       decoration: BoxDecoration(

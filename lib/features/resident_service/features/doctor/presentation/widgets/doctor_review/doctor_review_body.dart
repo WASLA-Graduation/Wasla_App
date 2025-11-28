@@ -12,9 +12,12 @@ class DoctorReviewBody extends StatelessWidget {
         children: [
           DoctorReviewsListByRating(),
           const SizedBox(height: 20),
-          DoctorReviewsList(length: 10,shrinkWrap: true,),
+          DoctorReviewsList(length: 10,shrinkWrap: true,)
         ],
       ),
     );
   }
 }
+
+
+

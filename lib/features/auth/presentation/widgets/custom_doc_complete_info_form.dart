@@ -66,6 +66,12 @@ class CustomDoctorCompleteInfoForm extends StatelessWidget {
           ),
           const VerticalSpace(height: 2),
           CustomTextFormField(
+            hint: "hostpitalName".tr(context),
+            onChanged: (hospital) => cubit.hosptialName = hospital,
+            validator: (value) => validateSimpleData(value, context),
+          ),
+          const VerticalSpace(height: 2),
+          CustomTextFormField(
             hint: "descriptionAboutYou".tr(context),
             onChanged: (description) => cubit.description = description,
             validator: (value) => validateSimpleData(value, context),

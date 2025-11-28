@@ -44,15 +44,13 @@ class SignUpBody extends StatelessWidget {
 
               items: cubit.roles
                   .map(
-                    (role) => DropDownItem(
-                      label: role.roleName,
-                      value: role.serviceRole.name,
-                    ),
+                    (role) =>
+                        DropDownItem(label: role.roleName, value: role.id),
                   )
                   .toList(),
 
               onSelecte: (role) {
-                cubit.role = role ?? '';
+                cubit.roleId = role ?? '';
               },
             );
           },

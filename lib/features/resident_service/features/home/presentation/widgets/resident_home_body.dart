@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/responsive/size_config.dart';
@@ -30,14 +31,14 @@ class ResidentHomeBody extends StatelessWidget {
           },
         ),
         CustomIdentfierWidget(
-          leadingText: "Spacial Offers",
-          actionText: "See All",
+          leadingText: "spacialOffers".tr(context),
+          actionText: "seeAll".tr(context),
           onTap: () {},
         ),
         CustomBannarWidget(),
         CustomIdentfierWidget(
-          leadingText: "Services",
-          actionText: "See All",
+          leadingText: "services".tr(context),
+          actionText: "seeAll".tr(context),
           onTap: () {
             context.pushScreen(AppRoutes.allServicesScreen);
           },

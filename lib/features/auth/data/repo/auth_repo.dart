@@ -45,6 +45,7 @@ abstract class AuthRepo {
     required String bDate,
     required String universtiyName,
     required String description,
+    required String hospitalName,
     required File image,
     required double lat,
     required double lng,
@@ -52,5 +53,6 @@ abstract class AuthRepo {
     required int spacializationID,
     required int experienceYears,
     required PlatformFile cv,
+
   });
 }

@@ -140,7 +140,12 @@
         "price": "السعر",
         "serviceNameEn": "اسم الخدمة (EN)",
           "addNewService": "إضافة خدمة جديدة",
-          "editService": "تعديل الخدمة"
+          "editService": "تعديل الخدمة",
+          "welcomeBack": "مرحبا بعودتك",
+          "spacialOffers": "عروض خاصة",
+        "seeAll": "اظهار الكل",
+        "services": "الخدمات",
+        "hostpitalName": "اسم المستشفى"
 
 
 

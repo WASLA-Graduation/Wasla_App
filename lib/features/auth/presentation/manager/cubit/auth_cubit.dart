@@ -34,12 +34,16 @@ class AuthCubit extends Cubit<AuthState> {
   final TextEditingController dateController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   double lat = 0.0, lan = 0.0, graduationYear = 0.0;
+  String roleId = '';
   String name = '',
       phone = '',
       experienceYears = '',
       description = '',
       nationalId = '',
-      universtiyName = '',owner='',resturentName='';
+      universtiyName = '',
+      owner = '',
+      resturentName = '',
+      hosptialName = '';
   PlatformFile? file;
   int? spacializationID;
 
@@ -48,7 +52,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Timer? timer;
   int remainingSeconds = 60;
-  File? residentImage,resturentImage;
+  File? residentImage, resturentImage;
   late final SignInDataModel dataModel;
 
   void enableVerifyButton() {
@@ -60,6 +64,7 @@ class AuthCubit extends Cubit<AuthState> {
     file = f;
     emit(AuthSuccessChooseFile());
   }
+
   void updateImage(File f) {
     resturentImage = f;
     emit(AuthSuccessChooseFile());
@@ -90,7 +95,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> signUpWithEmailAndPassword() async {
-    if (role.isEmpty) {
+    if (roleId.isEmpty) {
       emit(AuthSignUpFailure(errMsg: "Please Choose Role"));
       return;
     }
@@ -99,7 +104,7 @@ class AuthCubit extends Cubit<AuthState> {
     final response = await authRepo.signUpWithEmailAndPassword(
       email: email,
       pass: password,
-      role: role,
+      role: roleId,
     );
     response.fold(
       (error) {
@@ -135,6 +140,7 @@ class AuthCubit extends Cubit<AuthState> {
       image: residentImage!,
       lat: lat,
       lng: lan,
+      hospitalName: hosptialName,
       graduationYear: graduationYear,
       spacializationID: spacializationID!,
       experienceYears: int.parse(experienceYears),

@@ -4,6 +4,8 @@ sealed class GlobalState {}
 
 final class GlobalInitial extends GlobalState {}
 
+final class GlobalUpdate extends GlobalState {}
+
 final class GlobalChangeTheme extends GlobalState {
   ThemeMode themeMode;
   GlobalChangeTheme({required this.themeMode});

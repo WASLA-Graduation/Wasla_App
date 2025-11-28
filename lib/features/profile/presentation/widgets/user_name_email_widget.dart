@@ -17,7 +17,7 @@ class UserNameAndEmailWidget extends StatelessWidget {
             children: [
               FittedBox(
                 fit: BoxFit.scaleDown,
-                child: state is ProfileGetProfileLoading
+                child: cubit.user == null
                     ? _buildTextLoading(context)
                     : Text(
                         cubit.user!.fullNameBase,
@@ -28,7 +28,7 @@ class UserNameAndEmailWidget extends StatelessWidget {
               FittedBox(
                 fit: BoxFit.scaleDown,
 
-                child: state is ProfileGetProfileLoading
+                child: cubit.user == null
                     ? _buildTextLoading(context)
                     : Text(
                         cubit.user!.emailBase,

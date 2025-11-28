@@ -11,9 +11,10 @@ class DoctorModel extends UserBaseModel {
       phone,
       description,
       image,
-      cv;
+      cv,
+      hospitalname;
 
-  final int experienceYears, graduationYear;
+  final int experienceYears, graduationYear, numberOfpatients;
   final double latitude, longitude;
 
   DoctorModel({
@@ -30,6 +31,8 @@ class DoctorModel extends UserBaseModel {
     required this.graduationYear,
     required this.latitude,
     required this.longitude,
+    required this.hospitalname,
+    required this.numberOfpatients,
   }) : super(
          fullNameBase: fullName,
          emailBase: email,
@@ -54,6 +57,8 @@ class DoctorModel extends UserBaseModel {
       graduationYear: json[ApiKeys.graduationYearCamel],
       latitude: json[ApiKeys.latitudeSmall].toDouble(),
       longitude: json[ApiKeys.longitudeSmall].toDouble(),
+      hospitalname: json[ApiKeys.hospitalname],
+      numberOfpatients: json[ApiKeys.numberOfpatients],
     );
   }
 }

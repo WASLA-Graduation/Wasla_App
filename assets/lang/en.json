@@ -140,7 +140,12 @@
         "price": "Price",
         "serviceNameEn": "Service Name (EN)",
         "addNewService": "Add New Service",
-        "editService": "Edit Service"
+        "editService": "Edit Service",
+        "welcomeBack": "Welcome Back",
+        "spacialOffers": "Spacial Offers",
+        "seeAll": "See All",
+        "services": "Services",
+        "hostpitalName": "Hospital Name"
         
 
 
