@@ -145,7 +145,10 @@
           "spacialOffers": "عروض خاصة",
         "seeAll": "اظهار الكل",
         "services": "الخدمات",
-        "hostpitalName": "اسم المستشفى"
+        "hostpitalName": "اسم المستشفى",
+        "errorFetchData": "حدث خطأ أثناء جلب البيانات. يرجى المحاولة لاحقًا.",
+        "noServices": "لا يوجد خدمات"
+
 
 
 

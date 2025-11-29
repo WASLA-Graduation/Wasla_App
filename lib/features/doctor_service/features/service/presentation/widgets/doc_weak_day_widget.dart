@@ -107,7 +107,6 @@ class _CustomWeakDaysWidgetState extends State<CustomWeakDaysWidget> {
     final cubit = context.read<DoctorServiceMangementCubit>();
 
     if (widget.daysIndex != null) {
-      cubit.daysIndices = {};
       cubit.daysIndices.addAll(widget.daysIndex!);
     }
   }

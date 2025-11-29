@@ -6,7 +6,7 @@ import 'package:wasla/features/doctor_service/features/service/data/models/docto
 
 class DoctorDaysList extends StatelessWidget {
   DoctorDaysList({super.key, required this.serviceDay});
-  final List<ServiceDay> serviceDay;
+  final List<ServiceDayModel> serviceDay;
 
   @override
   Widget build(BuildContext context) {

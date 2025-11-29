@@ -8,7 +8,7 @@ import 'package:wasla/features/doctor_service/features/service/presentation/widg
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/doc_service_item_header.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/doctor_day_widget.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/doctor_service_button.dart';
-import 'package:wasla/features/doctor_service/features/service/presentation/widgets/doctor_tiems_widget.dart';
+import 'package:wasla/features/doctor_service/features/service/presentation/widgets/show_time_service_widget.dart';
 
 class DocServiceItem extends StatelessWidget {
   const DocServiceItem({super.key, required this.doctorServiceModel});
@@ -33,19 +33,17 @@ class DocServiceItem extends StatelessWidget {
         ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 12,
         children: [
           DocServiceItemHeader(
             seviceName: context.isArabic
-                ? doctorServiceModel.serviceNameAr
-                : doctorServiceModel.serviceNameEn,
-            sevicePrice: doctorServiceModel.price,
+                ? doctorServiceModel.serviceNameArabic
+                : doctorServiceModel.serviceNameEnglish,
+            sevicePrice: doctorServiceModel.price.toDouble(),
           ),
           DoctorDaysList(serviceDay: doctorServiceModel.serviceDays),
-          DoctorTimesWidget(
-            serviceDates: doctorServiceModel.serviceDates,
-            timeSlots: doctorServiceModel.timeSlots,
-          ),
+          ShowTimeServiceWidget(doctorServiceModel: doctorServiceModel),
           Divider(color: AppColors.gray, thickness: 0.2),
           Row(
             children: [
@@ -71,8 +69,8 @@ class DocServiceItem extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (_) => DoctorRemoveServiceDialog(
-                        serviceNameAR: doctorServiceModel.serviceNameAr,
-                        serviceNameEn: doctorServiceModel.serviceNameEn,
+                        serviceNameAR: doctorServiceModel.serviceNameArabic,
+                        serviceNameEn: doctorServiceModel.serviceNameEnglish,
                         serviceId: doctorServiceModel.id,
                       ),
                     );

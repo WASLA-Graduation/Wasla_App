@@ -10,18 +10,16 @@ abstract class DoctorServiceMangementRepo {
     required String doctorId,
     required Map<String, String> serviceName,
     required Map<String, String> description,
-    required List<ServiceDay> serviceDays,
-    required List<ServiceDate> serviceDates,
-    required List<TimeSlot> timeSlots,
     required double price,
+    required List<Map<String, int>> serviceDays,
+    required List<Map<String, String>> timeSlots,
   });
   Future<Either<String, Null>> updateDoctorService({
     required int serviceId,
     required Map<String, String> serviceName,
     required Map<String, String> description,
-    required List<ServiceDay> serviceDays,
-    required List<ServiceDate> serviceDates,
-    required List<TimeSlot> timeSlots,
     required double price,
+    required List<Map<String, int>> serviceDays,
+    required List<Map<String, String>> timeSlots,
   });
 }

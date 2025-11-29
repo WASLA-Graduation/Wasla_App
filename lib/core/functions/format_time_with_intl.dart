@@ -4,13 +4,7 @@ import 'package:intl/intl.dart';
 String formatTimeWithIntl(TimeOfDay time) {
   final now = DateTime.now();
 
-  final date = DateTime(
-    now.year,
-    now.month,
-    now.day,
-    time.hour,
-    time.minute,
-  );
+  final date = DateTime(now.year, now.month, now.day, time.hour, time.minute);
 
   return DateFormat('hh:mm a').format(date);
 }
@@ -20,7 +14,15 @@ String convertBackendTimeToAmPm(String apiTime) {
     final parsedTime = DateFormat("HH:mm:ss").parse(apiTime);
     return DateFormat("h:mm a").format(parsedTime);
   } catch (e) {
-    return apiTime; 
+    return apiTime;
   }
 }
 
+TimeOfDay convertStringToTimeOfDay(String apiTime) {
+  try {
+    final parsedTime = DateFormat("HH:mm:ss").parse(apiTime);
+    return TimeOfDay(hour: parsedTime.hour, minute: parsedTime.minute);
+  } catch (e) {
+    return TimeOfDay(hour: 0, minute: 0);
+  }
+}

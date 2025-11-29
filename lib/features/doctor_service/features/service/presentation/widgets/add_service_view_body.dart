@@ -6,8 +6,8 @@ import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/manager/cubit/doctor_service_mangement_cubit.dart';
-import 'package:wasla/features/doctor_service/features/service/presentation/widgets/custom_choose_time_doc_service_widget.dart';
-import 'package:wasla/features/doctor_service/features/service/presentation/widgets/date_timeline_picker.dart';
+import 'package:wasla/features/doctor_service/features/service/presentation/widgets/add_slot_list.dart';
+import 'package:wasla/features/doctor_service/features/service/presentation/widgets/add_slotes_design_widget.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/doc_add_service_form.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/doc_weak_day_widget.dart';
 
@@ -26,26 +26,19 @@ class AddServiceViewBody extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                DateTimelinePicker(
-                  title: "selectDate".tr(context),
-                  initialSelectedDate: isEdit() && doctorServiceModel!.serviceDates.isNotEmpty
-                      ? DateTime.parse(
-                          doctorServiceModel!.serviceDates.first.date,
-                        )
-                      : DateTime.now(),
-                ),
-                const SizedBox(height: 15),
-                CustomChooseTimeDocServiceWidget(
-                  selectedTime: isEdit()
-                      ? doctorServiceModel!.timeSlots.first
-                      : null,
-                ),
-                const SizedBox(height: 10),
                 CustomWeakDaysWidget(
                   daysIndex: isEdit()
                       ? doctorServiceModel!.serviceDays
                             .map((e) => e.dayOfWeek)
                             .toList()
+                      : null,
+                ),
+                const SizedBox(height: 15),
+                AddSlotesDesignWidget(),
+                const SizedBox(height: 20),
+                AddSlotList(
+                  timeSlots: isEdit()
+                      ? doctorServiceModel!.serviceDays.first.timeSlots
                       : null,
                 ),
                 const SizedBox(height: 20),

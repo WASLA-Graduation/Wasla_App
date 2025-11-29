@@ -145,7 +145,10 @@
         "spacialOffers": "Spacial Offers",
         "seeAll": "See All",
         "services": "Services",
-        "hostpitalName": "Hospital Name"
+        "hostpitalName": "Hospital Name",
+        "errorFetchData": "An error occurred while fetching the data. Please try again later.",
+        "noServices": "No Services"
+
         
 
 

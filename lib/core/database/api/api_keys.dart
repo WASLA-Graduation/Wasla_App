@@ -68,4 +68,5 @@ abstract class ApiKeys {
   static const roleId = 'roleId';
   static const hospitalname = 'hospitalname';
   static const numberOfpatients = 'numberOfpatients';
+  static const isBooking = 'isBooking';
 }

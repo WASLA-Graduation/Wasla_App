@@ -19,7 +19,7 @@ abstract class ApiEndPoints {
   static const String residentEditProfile = 'api/Resident/edit-Profile';
   static const String doctorGetProfile = 'api/Doctor/GetDoctorProfile/';
   static const String doctorGetServices = 'api/Service/GetServices/';
-  static const String doctorAddService = 'api/Service/AddService';
   static const String doctorUpdateService = 'api/Service/UpdateService';
+  static const String doctorAddService = 'api/Service/AddService';
   static const String doctorDeleteService = 'api/Service/DeleteService/';
 }

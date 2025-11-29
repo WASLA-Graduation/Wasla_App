@@ -43,10 +43,9 @@ class DoctorServiceMangementRepoImpl extends DoctorServiceMangementRepo {
     required String doctorId,
     required Map<String, String> serviceName,
     required Map<String, String> description,
-    required List<ServiceDay> serviceDays,
-    required List<ServiceDate> serviceDates,
-    required List<TimeSlot> timeSlots,
     required double price,
+    required List<Map<String, int>> serviceDays,
+    required List<Map<String, String>> timeSlots,
   }) async {
     try {
       await api.post(
@@ -55,9 +54,8 @@ class DoctorServiceMangementRepoImpl extends DoctorServiceMangementRepo {
           ApiKeys.doctorId: doctorId,
           ApiKeys.serviceName: serviceName,
           ApiKeys.description: description,
-          ApiKeys.serviceDays: serviceDays.map((e) => e.toJson()).toList(),
-          ApiKeys.serviceDates: serviceDates.map((e) => e.toJson()).toList(),
-          ApiKeys.timeSlots: timeSlots.map((e) => e.toJson()).toList(),
+          ApiKeys.serviceDays: serviceDays,
+          ApiKeys.timeSlots: timeSlots,
           ApiKeys.price: price,
         },
       );
@@ -72,10 +70,9 @@ class DoctorServiceMangementRepoImpl extends DoctorServiceMangementRepo {
     required int serviceId,
     required Map<String, String> serviceName,
     required Map<String, String> description,
-    required List<ServiceDay> serviceDays,
-    required List<ServiceDate> serviceDates,
-    required List<TimeSlot> timeSlots,
     required double price,
+    required List<Map<String, int>> serviceDays,
+    required List<Map<String, String>> timeSlots,
   }) async {
     try {
       await api.put(
@@ -84,13 +81,8 @@ class DoctorServiceMangementRepoImpl extends DoctorServiceMangementRepo {
           ApiKeys.serviceId: serviceId,
           ApiKeys.serviceName: serviceName,
           ApiKeys.description: description,
-          ApiKeys.serviceDays: serviceDays
-              .map((e) => e.toJsonWithId())
-              .toList(),
-          ApiKeys.serviceDates: serviceDates
-              .map((e) => e.toJsonWithId())
-              .toList(),
-          ApiKeys.timeSlots: timeSlots.map((e) => e.toJsonWithId()).toList(),
+          ApiKeys.serviceDays: serviceDays,
+          ApiKeys.timeSlots: timeSlots,
           ApiKeys.price: price,
         },
       );

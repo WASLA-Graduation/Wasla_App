@@ -21,7 +21,7 @@ class CustomDoctorAddServiceForm extends StatelessWidget {
             onChanged: (value) {
               cubit.serviceNameEn = value;
             },
-            initealValue: model?.serviceNameEn,
+            initealValue: model?.serviceNameEnglish,
             validator: (value) => validateSimpleData(value, context),
             withBorder: true,
             fillColor: Colors.transparent,
@@ -30,7 +30,7 @@ class CustomDoctorAddServiceForm extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           CustomTextFormField(
-            initealValue: model?.serviceNameAr,
+            initealValue: model?.serviceNameArabic,
             onChanged: (value) {
               cubit.serviceNameAr = value;
             },
@@ -42,7 +42,7 @@ class CustomDoctorAddServiceForm extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           CustomTextFormField(
-            initealValue: model?.descriptionEn,
+            initealValue: model?.descriptionEnglish,
             onChanged: (value) {
               cubit.serviceDescEn = value;
             },
@@ -55,7 +55,7 @@ class CustomDoctorAddServiceForm extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           CustomTextFormField(
-            initealValue: model?.descriptionAr,
+            initealValue: model?.descriptionArabic,
             onChanged: (value) {
               cubit.serviceDescAr = value;
             },
@@ -71,7 +71,7 @@ class CustomDoctorAddServiceForm extends StatelessWidget {
             initealValue: model?.price.toString(),
             keyboardTyp: TextInputType.number,
             onChanged: (value) {
-              cubit.price = value.isEmpty ? 0 : int.parse(value);
+              cubit.price = value.isEmpty ? 0 : double.parse(value);
             },
             validator: (value) => validateSimpleData(value, context),
             withBorder: true,

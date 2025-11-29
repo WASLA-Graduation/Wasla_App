@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
+import 'package:wasla/core/functions/format_date_from_string.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/doctor_service/features/service/data/repo/doctor_service_mangement_repo.dart';
-
 part 'doctor_service_mangement_state.dart';
 
 class DoctorServiceMangementCubit extends Cubit<DoctorServiceMangementState> {
@@ -20,10 +19,61 @@ class DoctorServiceMangementCubit extends Cubit<DoctorServiceMangementState> {
       serviceNameEn = '',
       serviceDescAr = '',
       serviceDescEn = '';
-  int price = 0;
-  TimeOfDay timeFrom = TimeOfDay(hour: 8, minute: 0);
-  TimeOfDay timeTo = TimeOfDay(hour: 10, minute: 0);
-  DateTime? selectedDate;
+
+  List<Map<String, TimeOfDay>> timeSlotsList = [];
+  double price = 0;
+  TimeOfDay inintailTime = TimeOfDay(hour: 8, minute: 0);
+
+  void addTimeSlot() {
+    if (timeSlotsList.isEmpty) {
+      final DateTime date = _addHourToLastTime(inintailTime);
+
+      timeSlotsList.add({
+        'from': inintailTime,
+        'to': TimeOfDay(hour: date.hour, minute: date.minute),
+      });
+    } else {
+      final Map<String, TimeOfDay> lastTimeSlot = timeSlotsList.last;
+      DateTime date = _addHourToLastTime(lastTimeSlot['to']!);
+      timeSlotsList.add({
+        'from': lastTimeSlot['to']!,
+        'to': TimeOfDay(hour: date.hour, minute: date.minute),
+      });
+    }
+
+    emit(DoctorServiceMangementUpdate());
+  }
+
+  void upadeTimeSlot({
+    required int index,
+    required TimeOfDay time,
+    required bool isFrom,
+  }) {
+    if (isFrom) {
+      timeSlotsList[index]['from'] = time;
+    } else {
+      timeSlotsList[index]['to'] = time;
+    }
+    emit(DoctorServiceMangementUpdate());
+  }
+
+  DateTime _addHourToLastTime(TimeOfDay lastTimeSlot) {
+    final DateTime now = DateTime.now();
+    DateTime date = DateTime(
+      now.year,
+      now.day,
+      now.day,
+      lastTimeSlot.hour,
+      lastTimeSlot.minute,
+    );
+    date = date.add(Duration(hours: 1));
+    return date;
+  }
+
+  void removeTimeSlot({required int index}) {
+    timeSlotsList.removeAt(index);
+    emit(DoctorServiceMangementUpdate());
+  }
 
   void addOrRemoveDaysIndex(int index) {
     if (daysIndices.contains(index)) {
@@ -43,16 +93,6 @@ class DoctorServiceMangementCubit extends Cubit<DoctorServiceMangementState> {
     emit(DoctorServiceMangementUpdate());
   }
 
-  void upadteTimeFrom({required TimeOfDay time}) {
-    timeFrom = time;
-    emit(DoctorServiceMangementUpdate());
-  }
-
-  void upadteTimeTo({required TimeOfDay time}) {
-    timeTo = time;
-    emit(DoctorServiceMangementUpdate());
-  }
-
   Future<void> getDoctorServices() async {
     sevices.clear();
     emit(DoctorServiceMangementGetServiceLoading());
@@ -64,7 +104,7 @@ class DoctorServiceMangementCubit extends Cubit<DoctorServiceMangementState> {
       },
       (success) {
         sevices = success;
-        _resetState();
+        resetState();
         emit(DoctorServiceMangementGetServiceSuccess());
       },
     );
@@ -86,30 +126,19 @@ class DoctorServiceMangementCubit extends Cubit<DoctorServiceMangementState> {
   }
 
   Future<void> addDoctorService() async {
-    int checkTime = timeFrom.hour - timeTo.hour;
-    checkTime = checkTime.abs();
-    if (checkTime > 1) {
+    if (timeSlotsList.isEmpty) {
       emit(
         DoctorServiceMangementAddOrUpdateServiceFailure(
-          errorMessage: "Time must not exceed one hour",
+          errorMessage: 'You Must Choose At Least One Time Slot',
         ),
       );
       return;
     }
-    if (selectedDate == null) {
-      emit(
-        DoctorServiceMangementAddOrUpdateServiceFailure(
-          errorMessage: "You Must Select Date",
-        ),
-      );
-      return;
-    }
-
     emit(DoctorServiceMangementAddOrUpdateServiceLoading());
     final String? doctorId = await getUserId();
     final response = await doctorRepo.addDoctorService(
       doctorId: doctorId!,
-      price: price.toDouble(),
+      price: price,
       serviceName: {
         ApiKeys.arabic: serviceNameAr,
         ApiKeys.english: serviceNameEn,
@@ -119,23 +148,16 @@ class DoctorServiceMangementCubit extends Cubit<DoctorServiceMangementState> {
         ApiKeys.english: serviceDescEn,
       },
 
-      serviceDays: daysIndices
-          .map((e) => ServiceDay(dayOfWeek: e, id: e))
-          .toList(),
+      serviceDays: daysIndices.map((e) => {ApiKeys.dayOfWeek: e}).toList(),
 
-      serviceDates: [
-        ServiceDate(
-          date: DateFormat('yyyy-MM-dd').format(selectedDate!),
-          id: 0,
-        ),
-      ],
-      timeSlots: [
-        TimeSlot(
-          start: _formatTimeOfDay(timeFrom),
-          end: _formatTimeOfDay(timeTo),
-          id: 0,
-        ),
-      ],
+      timeSlots: timeSlotsList
+          .map(
+            (e) => {
+              ApiKeys.start: formatTimeOfDay(e["from"]!),
+              ApiKeys.end: formatTimeOfDay(e["from"]!),
+            },
+          )
+          .toList(),
     );
 
     response.fold(
@@ -154,12 +176,10 @@ class DoctorServiceMangementCubit extends Cubit<DoctorServiceMangementState> {
   Future<void> updateDoctorService({
     required DoctorServiceModel service,
   }) async {
-    int checkTime = timeFrom.hour - timeTo.hour;
-    checkTime = checkTime.abs();
-    if (checkTime > 1) {
+    if (timeSlotsList.isEmpty) {
       emit(
         DoctorServiceMangementAddOrUpdateServiceFailure(
-          errorMessage: "Time must not exceed one hour",
+          errorMessage: 'You Must Choose At Least One Time Slot',
         ),
       );
       return;
@@ -168,43 +188,34 @@ class DoctorServiceMangementCubit extends Cubit<DoctorServiceMangementState> {
     emit(DoctorServiceMangementAddOrUpdateServiceLoading());
     final response = await doctorRepo.updateDoctorService(
       serviceId: service.id,
-      price: price.toDouble() == 0 ? service.price : price.toDouble(),
+      price: price == 0 ? service.price : price,
       serviceName: {
         ApiKeys.arabic: serviceNameAr.isEmpty
-            ? service.serviceNameAr
+            ? service.serviceNameArabic
             : serviceNameAr,
         ApiKeys.english: serviceNameEn.isEmpty
-            ? service.serviceNameEn
+            ? service.serviceNameEnglish
             : serviceNameEn,
       },
       description: {
         ApiKeys.arabic: serviceDescAr.isEmpty
-            ? service.descriptionAr
+            ? service.descriptionArabic
             : serviceDescAr,
         ApiKeys.english: serviceDescEn.isEmpty
-            ? service.descriptionEn
+            ? service.descriptionEnglish
             : serviceDescEn,
       },
 
-      serviceDays: daysIndices.isEmpty
-          ? service.serviceDays
-          : daysIndices.map((e) => ServiceDay(dayOfWeek: e, id: e)).toList(),
+      serviceDays: daysIndices.map((e) => {ApiKeys.dayOfWeek: e}).toList(),
 
-      serviceDates: selectedDate == null
-          ? service.serviceDates
-          : [
-              ServiceDate(
-                date: DateFormat('yyyy-MM-dd').format(selectedDate!),
-                id: 0,
-              ),
-            ],
-      timeSlots: [
-        TimeSlot(
-          start: _formatTimeOfDay(timeFrom),
-          end: _formatTimeOfDay(timeTo),
-          id: 0,
-        ),
-      ],
+      timeSlots: timeSlotsList
+          .map(
+            (e) => {
+              ApiKeys.start: formatTimeOfDay(e["from"]!),
+              ApiKeys.end: formatTimeOfDay(e["from"]!),
+            },
+          )
+          .toList(),
     );
 
     response.fold(
@@ -220,19 +231,16 @@ class DoctorServiceMangementCubit extends Cubit<DoctorServiceMangementState> {
     );
   }
 
-  String _formatTimeOfDay(TimeOfDay time) {
-    final hour = time.hour.toString().padLeft(2, '0');
-    final minute = time.minute.toString().padLeft(2, '0');
-    return "$hour:$minute:00";
-  }
 
-  void _resetState() {
+
+  void resetState() {
     daysIndices.clear();
-    selectedDate = null;
     serviceNameAr = '';
     serviceNameEn = '';
     serviceDescAr = '';
     serviceDescEn = '';
     price = 0;
+    inintailTime = TimeOfDay(hour: 8, minute: 0);
+    timeSlotsList.clear();
   }
 }
