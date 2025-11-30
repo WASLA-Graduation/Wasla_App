@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/core/utils/assets.dart';
+import 'package:wasla/core/widgets/cached_network_image_widget.dart';
+import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/custom_doc_list_item_desc.dart';
 
 class DoctorListItem extends StatelessWidget {
-  const DoctorListItem({super.key, required this.index, this.withoutFav});
+  const DoctorListItem({
+    super.key,
+    required this.index,
+    this.withoutFav,
+    required this.doctor,
+  });
   final int index;
   final bool? withoutFav;
+  final DoctorDataModel doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +28,11 @@ class DoctorListItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildDocImage(),
+            Hero(tag: doctor.imageUrl, child: _buildDocImage()),
             const SizedBox(width: 18),
             Expanded(
               child: DoctorListItemDescriptionWidget(
+                doctor: doctor,
                 index: index,
                 withoutFav: withoutFav,
               ),
@@ -55,7 +63,10 @@ class DoctorListItem extends StatelessWidget {
             Positioned(
               width: 112,
               height: 112,
-              child: Image.asset(Assets.assetsImagesOnboardingTwo),
+              child: CustomCachedNetworkImage(
+                imageUrl: doctor.imageUrl,
+                fit: BoxFit.cover,
+              ),
             ),
           ],
         ),

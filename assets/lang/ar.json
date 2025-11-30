@@ -134,6 +134,7 @@
         "selectDate": "اختر التاريخ",
         "selectAtLeastOneDay": "اختر يومًا واحدًا على الأقل",
         "selectDays": "اختر الأيام",
+        "selectDay": "اختر اليوم",
         "serviceNameAr": "اسم الخدمة (AR)",
         "descriptionEn": "الوصف (EN)",
         "descriptionAr": "الوصف (AR)",
@@ -147,7 +148,19 @@
         "services": "الخدمات",
         "hostpitalName": "اسم المستشفى",
         "errorFetchData": "حدث خطأ أثناء جلب البيانات. يرجى المحاولة لاحقًا.",
-        "noServices": "لا يوجد خدمات"
+        "noServices": "لا يوجد خدمات",
+        "noDoctors": "لا يوجد طبيبين",
+        "doctors": "الطبيبين",
+        "dr": "دكتور",
+        "aboutMe": "حولي",
+        "workingSchedule": "جدول العمل",
+        "seeServices": "اظهار الخدمات",
+        "reviwes": "التقييمات",
+        "patients": "المرضى",
+        "rating": "التقييم",
+        "all": "الكل",
+                "book": "Book"
+
 
 
 

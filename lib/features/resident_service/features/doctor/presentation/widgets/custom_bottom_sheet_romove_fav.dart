@@ -3,12 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/core/widgets/under_line_widget.dart';
+import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_list_item.dart';
 
 class CustomBottomSheetRemoveFav extends StatelessWidget {
-  const CustomBottomSheetRemoveFav({super.key, required this.index});
+  const CustomBottomSheetRemoveFav({
+    super.key,
+    required this.index,
+    required this.doctor,
+  });
   final int index;
+  final DoctorDataModel doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +35,7 @@ class CustomBottomSheetRemoveFav extends StatelessWidget {
           UnderLineWidget(),
           _buildTextWidget(context),
           const SizedBox(),
-          DoctorListItem(index: index, withoutFav: true),
+          DoctorListItem(index: index, withoutFav: true, doctor: doctor),
           _buildButtons(context),
           const SizedBox(),
         ],

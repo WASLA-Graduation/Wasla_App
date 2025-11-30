@@ -133,6 +133,7 @@
         "add": "Add",
         "selectDate": "Select Date",
         "selectDays": "Select Days",
+        "selectDay": "Select Day",
         "selectAtLeastOneDay": "Select at least one day",
         "serviceNameAr": "Service Name (AR)",
         "descriptionEn": "Description (EN)",
@@ -147,7 +148,19 @@
         "services": "Services",
         "hostpitalName": "Hospital Name",
         "errorFetchData": "An error occurred while fetching the data. Please try again later.",
-        "noServices": "No Services"
+        "noServices": "No Services",
+              "noDoctors": "لا يوجد طبيبين",
+        "doctors": "Doctors",
+        "dr": "Dr.",
+        "aboutMe": "About Me",
+        "workingSchedule": "Working Schedule",
+        "seeServices": "See Services",
+        "reviwes": "Reviwes",
+        "patients": "Patients",
+        "rating": "Rating",
+        "all": "All",
+        "book": "Book"
+ 
 
         
 

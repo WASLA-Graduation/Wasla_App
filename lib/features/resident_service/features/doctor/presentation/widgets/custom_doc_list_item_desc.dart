@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
+import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/custom_bottom_sheet_romove_fav.dart';
 
@@ -10,9 +12,11 @@ class DoctorListItemDescriptionWidget extends StatelessWidget {
     super.key,
     required this.index,
     this.withoutFav,
+    required this.doctor,
   });
   final int index;
   final bool? withoutFav;
+  final DoctorDataModel doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +36,7 @@ class DoctorListItemDescriptionWidget extends StatelessWidget {
     return Text(
       maxLines: 1,
       overflow: TextOverflow.clip,
-      "Dentist | Christ Hospital",
+      "${doctor.specialtyName} | ${fixHospital(doctor.hospitalname)}",
       style: Theme.of(
         context,
       ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
@@ -48,7 +52,7 @@ class DoctorListItemDescriptionWidget extends StatelessWidget {
           child: Text(
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            "Dr.Randy Wigham",
+            "${"dr".tr(context)} ${doctor.fullName}",
             style: Theme.of(
               context,
             ).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w700),
@@ -64,8 +68,10 @@ class DoctorListItemDescriptionWidget extends StatelessWidget {
                       if (cubit.favouriteDocs[index]) {
                         showModalBottomSheet(
                           context: context,
-                          builder: (_) =>
-                              CustomBottomSheetRemoveFav(index: index),
+                          builder: (_) => CustomBottomSheetRemoveFav(
+                            index: index,
+                            doctor: doctor,
+                          ),
                         );
                       } else {
                         cubit.toggleFavouriteIcon(index: index);
@@ -104,4 +110,16 @@ class DoctorListItemDescriptionWidget extends StatelessWidget {
       ],
     );
   }
+
+String fixHospital(String? word) {
+  final w = (word ?? "").trim();
+  if (w.isEmpty) return "hospital";
+  if (w.toLowerCase().contains("hospital")) {
+    return w;
+  }
+  return "$w hospital";
+}
+
+
+
 }

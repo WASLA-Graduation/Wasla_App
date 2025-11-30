@@ -7,12 +7,17 @@ abstract class ApiKeys {
   static const role = 'role';
   static const token = 'token';
   static const data = 'data';
+  static const bookingDate = 'bookingDate';
   static const userId = 'userId';
   static const refreshToken = 'refreshToken';
   static const verificationCode = 'verificationCode';
   static const roleName = 'roleName';
+  static const images = 'images';
   static const value = 'value';
+  static const serviceDayId = 'serviceDayId';
+  static const serviceProviderType = 'serviceProviderType';
   static const id = 'id';
+  static const bookingType = 'bookingType';
   static const name = 'name';
   static const fullName = 'FullName';
   static const latitude = 'Latitude';
@@ -41,6 +46,7 @@ abstract class ApiKeys {
   static const phoneSmall = 'phone';
   static const fullNameCamel = 'fullName';
   static const specializationName = 'specializationName';
+  static const specialtyName = 'specialtyName';
   static const experienceYearsCamel = 'experienceYears';
   static const universityNameCamel = 'universityName';
   static const graduationYearCamel = 'graduationYear';
@@ -61,6 +67,7 @@ abstract class ApiKeys {
   static const serviceNameEnglish = 'serviceNameEnglish';
   static const descriptionEnglish = 'descriptionEnglish';
   static const doctorId = 'doctorId';
+  static const serviceProviderId = 'serviceProviderId';
   static const english = 'english';
   static const arabic = 'arabic';
   static const serviceId = 'serviceId';
@@ -69,4 +76,6 @@ abstract class ApiKeys {
   static const hospitalname = 'hospitalname';
   static const numberOfpatients = 'numberOfpatients';
   static const isBooking = 'isBooking';
+  static const rating = 'rating';
+  static const cvUrl = 'cvUrl';
 }

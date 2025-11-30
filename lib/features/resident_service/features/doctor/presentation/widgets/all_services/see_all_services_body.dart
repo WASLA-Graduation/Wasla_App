@@ -7,18 +7,17 @@ import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_list_item.dart';
+import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/all_services/resident_doctor_service_item.dart';
 
-class DoctorListWidget extends StatelessWidget {
-  const DoctorListWidget({super.key});
+class DoctorSeeSerevicesViewBody extends StatelessWidget {
+  const DoctorSeeSerevicesViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<DoctorCubit>();
     return BlocBuilder<DoctorCubit, DoctorState>(
       builder: (context, state) {
-        if (state is DoctorGetBySpecialityListFailure ||
-            state is DoctorGetSpecialityListFailure) {
+        final cubit = context.read<DoctorCubit>();
+        if (state is DoctorGetServicesListFailure) {
           return Center(
             child: Column(
               children: [
@@ -35,8 +34,7 @@ class DoctorListWidget extends StatelessWidget {
               ],
             ),
           );
-        } else if (state is DoctorGetBySpecialityListLoading ||
-            state is DoctorGetSpecialityListLoading) {
+        } else if (state is DoctorGetServicesListLoading) {
           return Center(
             child: SpinKitFadingCircle(
               color: AppColors.primaryColor,
@@ -44,32 +42,29 @@ class DoctorListWidget extends StatelessWidget {
             ),
           );
         } else {
-          return cubit.doctors.isEmpty
+          return cubit.services.isEmpty
               ? Center(
                   child: Text(
-                    "noDoctors".tr(context),
+                    "noServices".tr(context),
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 )
               : ListView.separated(
-                  separatorBuilder: (_, index) => const SizedBox(height: 5),
-                  itemCount: cubit.doctors.length,
-                  physics: BouncingScrollPhysics(),
-                  itemBuilder: (_, index) => Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: InkWell(
-                      onTap: () {
-                        context.pushScreen(
-                          AppRoutes.doctorDetailsScreen,
-                          arguments: cubit.doctors[index],
-                        );
-                      },
-                      child: cubit.doctors[index].imageUrl.isEmpty
-                          ? const SizedBox()
-                          : DoctorListItem(
-                              index: index,
-                              doctor: cubit.doctors[index],
-                            ),
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                  itemCount: cubit.services.length,
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10),
+                  physics: const BouncingScrollPhysics(),
+
+                  itemBuilder: (_, index) => InkWell(
+                    onTap: () {
+                      context.pushScreen(
+                        AppRoutes.doctorBookingScreen,
+                        arguments: cubit.services[index],
+                      );
+                    },
+                    child: ResidentDoctorServiceItem(
+                      doctorServiceModel: cubit.services[index],
                     ),
                   ),
                 );

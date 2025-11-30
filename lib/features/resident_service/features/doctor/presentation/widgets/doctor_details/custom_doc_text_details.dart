@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
+import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 
 class CustomDoctorDetailsText extends StatelessWidget {
-  const CustomDoctorDetailsText({super.key});
+  const CustomDoctorDetailsText({super.key, required this.doctor});
+  final DoctorDataModel doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,32 +23,40 @@ class CustomDoctorDetailsText extends StatelessWidget {
 
   Text _buildDoctorSpaciality(BuildContext context) {
     return Text(
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        "Dematology",
-        style: Theme.of(
-          context,
-        ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
-      );
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      doctor.specialtyName,
+      style: Theme.of(
+        context,
+      ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
+    );
   }
 
   Text _buildDoctorHostpital(BuildContext context) {
     return Text(
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        "Christ Hospital",
-        style: Theme.of(
-          context,
-        ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
-      );
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      checkHospital(doctor.hospitalname),
+      style: Theme.of(
+        context,
+      ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
+    );
   }
 
   Text _buildDoctorName(BuildContext context) {
     return Text(
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        "Dr.Randy Wigham",
-        style: Theme.of(context).textTheme.headlineMedium,
-      );
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      "${"dr".tr(context)} ${doctor.fullName}",
+      style: Theme.of(context).textTheme.headlineMedium,
+    );
+  }
+
+  String checkHospital(String word) {
+    if (word.toLowerCase().contains("hospital")) {
+      return word;
+    } else {
+      return "$word hospital";
+    }
   }
 }

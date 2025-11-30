@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/helpers/loadings/speciality_loading_list.dart';
+import 'package:wasla/core/models/doctor_specializationa_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_speciality_item.dart';
 
@@ -22,10 +24,24 @@ class CustomDoctorSpecialityList extends StatelessWidget {
                   itemCount: cubit.specialityList.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => GestureDetector(
-                    onTap: () => cubit.changeSpecializationIndex(index),
+                    onTap: () {
+                      cubit.changeSpecializationIndex(index);
+                      if (index == 0) {
+                        cubit.getDoctorsBySpecialization(specializationId: 0);
+                      } else {
+                        cubit.getDoctorsBySpecialization(
+                          specializationId: cubit.specialityList[index].id,
+                        );
+                      }
+                    },
                     child: DoctorSpecialityitem(
                       isSelected: cubit.specializationIndex == index,
-                      doctorSpecializationaModel: cubit.specialityList[index],
+                      doctorSpecializationaModel: index == 0
+                          ? DoctorSpecializationaModel(
+                              id: 0,
+                              specialization: "all".tr(context),
+                            )
+                          : cubit.specialityList[index],
                     ),
                   ),
                 ),

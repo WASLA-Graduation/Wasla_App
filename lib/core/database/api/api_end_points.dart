@@ -22,4 +22,6 @@ abstract class ApiEndPoints {
   static const String doctorUpdateService = 'api/Service/UpdateService';
   static const String doctorAddService = 'api/Service/AddService';
   static const String doctorDeleteService = 'api/Service/DeleteService/';
+  static const String getDoctorBySpecialist = 'api/Doctor/GetDoctorBySpecialist/';
+  static const String doctorBookService = 'api/Book/BookService';
 }

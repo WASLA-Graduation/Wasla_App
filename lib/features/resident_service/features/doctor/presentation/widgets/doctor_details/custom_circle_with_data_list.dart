@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/assets.dart';
+import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_circle_with_data.dart';
 
 class CustomCircleWithDataList extends StatelessWidget {
-  CustomCircleWithDataList({super.key});
+  CustomCircleWithDataList({super.key, required this.doctor});
+  final DoctorDataModel doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class CustomCircleWithDataList extends StatelessWidget {
         return Expanded(
           child: CircleAvatarWithDetailsWidget(
             icon: icons[index],
-            title: titles[index],
+            title: titles[index].tr(context).toLowerCase(),
             num: numsString[index],
           ),
         );
@@ -27,6 +30,11 @@ class CustomCircleWithDataList extends StatelessWidget {
     Assets.assetsImagesHalfStar,
     Assets.assetsImagesChatFilled,
   ];
-  final List<String> titles = ["patients", "experience", "rating", "reviews"];
-  final List<String> numsString = ["5,000+", "10+", "4.8", "4.942"];
+  final List<String> titles = ["patients", "experience", "rating", "reviwes"];
+  late final List<String> numsString = [
+    "${doctor.numberOfpatients.toString()}+",
+    "${doctor.experienceYears.toString()}+",
+    (doctor.rating.toString()),
+    (doctor.rating.toString()),
+  ];
 }
