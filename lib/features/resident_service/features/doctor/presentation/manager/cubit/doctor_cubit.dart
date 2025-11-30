@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:wasla/core/functions/get_time_between_now_and_any_time.dart';
@@ -31,6 +33,12 @@ class DoctorCubit extends Cubit<DoctorState> {
   Set<int> timeSlotIds = {};
   String? doctorId;
   int? dayOfWeek;
+  List<File> images = [];
+
+  void uploadIImages(List<File> image) {
+    images = image;
+    emit(DoctorUpdateState());
+  }
 
   void updateDoctorGroupValue(String value) {
     doctorBookingTypeGroupValue = value;
@@ -154,7 +162,7 @@ class DoctorCubit extends Cubit<DoctorState> {
         price: doctorServiceModel.price,
         bookingType: gruoupValueIndex,
         serviceProviderType: 1,
-        images: null,
+        images: images.isEmpty ? null : images,
         bookingDate: DateFormat(
           "yyyy-MM-dd",
         ).format(getNextDayFromZeroIndex(dayOfWeek!)),
@@ -168,5 +176,12 @@ class DoctorCubit extends Cubit<DoctorState> {
         },
       );
     }
+  }
+
+  void resetState() {
+    dayListTimeSlots = [];
+    timeCurrentIndex = -1;
+    dayCurrentIndex = 0;
+    images = [];
   }
 }

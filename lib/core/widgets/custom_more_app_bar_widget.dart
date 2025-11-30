@@ -10,7 +10,9 @@ class CustomMoreAppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: rightPadding ?? 20),
+      padding: context.isArabic
+          ? EdgeInsets.only(left: rightPadding ?? 20)
+          : EdgeInsets.only(right: rightPadding ?? 20),
       child: Image.asset(
         Assets.assetsImagesMore,
         width: 21,

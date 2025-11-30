@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/category_service_model.dart';
 
@@ -19,13 +20,13 @@ class CustomServiceCategoryItem extends StatelessWidget {
             color: service.color.withOpacity(0.1),
             shape: BoxShape.circle,
           ),
-          child: Image.asset(
-            service.img,
-            color: service.color,
-          ),
+          child: Image.asset(service.img, color: service.color),
         ),
         SizedBox(height: 10),
-        Text(service.name, style: Theme.of(context).textTheme.bodyMedium),
+        Text(
+          service.name.tr(context),
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
       ],
     );
   }

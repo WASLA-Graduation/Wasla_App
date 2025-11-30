@@ -20,34 +20,34 @@ class CategoryServiceModel {
     CategoryServiceModel(
       route: '',
       img: Assets.assetsImagesDumble,
-      name: "Gym",
+      name: "gym",
       color: AppColors.purple,
     ),
     CategoryServiceModel(
       route: '',
 
       img: Assets.assetsImagesCutlery,
-      name: "Restaurant",
+      name: "restaurant",
       color: AppColors.orange,
     ),
     CategoryServiceModel(
       route: '',
 
       img: Assets.assetsImagesDriver,
-      name: "Driver",
+      name: "driver",
       color: AppColors.blue,
     ),
     CategoryServiceModel(
       route: '',
 
       img: Assets.assetsImagesCustomerSupport,
-      name: "Technician",
+      name: "technician",
       color: AppColors.green,
     ),
     CategoryServiceModel(
       route: AppRoutes.doctorScreen,
       img: Assets.assetsImagesDoctor,
-      name: "Doctor",
+      name: "doctor",
       color: AppColors.cyan,
     ),
   ];

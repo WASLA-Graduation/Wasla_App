@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
 
@@ -24,7 +25,7 @@ class CustomSearchBar extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor: AppColors.gray.withOpacity(0.1),
-        hintText: title??"Search",
+        hintText: title??"search".tr(context),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide.none,

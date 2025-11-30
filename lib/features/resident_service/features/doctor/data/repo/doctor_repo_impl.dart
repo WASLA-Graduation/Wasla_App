@@ -88,7 +88,9 @@ class DoctorRepoImpl extends DoctorRepo {
           ApiKeys.bookingDate: bookingDate,
           ApiKeys.bookingType: bookingType,
           ApiKeys.serviceProviderType: 1,
-          ApiKeys.images: null,
+          ApiKeys.images: images == null
+              ? null
+              : await _convertFilesToMultipart(images),
         }),
 
         headers: {"Content-Type": "multipart/form-data"},
@@ -97,5 +99,16 @@ class DoctorRepoImpl extends DoctorRepo {
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
+  }
+
+  Future<List<MultipartFile>> _convertFilesToMultipart(List<File> files) async {
+    return Future.wait(
+      files.map(
+        (file) async => await MultipartFile.fromFile(
+          file.path,
+          filename: file.path.split('/').last,
+        ),
+      ),
+    );
   }
 }

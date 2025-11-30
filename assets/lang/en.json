@@ -159,7 +159,19 @@
         "patients": "Patients",
         "rating": "Rating",
         "all": "All",
-        "book": "Book"
+        "book": "Book",
+        "gym": "Gym",
+    "restaurant": "Restaurant",
+    "search": "Search",
+    "viewMore": "View More",
+    "showLess": "Show Less",
+    "selectHour": "Select Hour",
+    "bookingType": "booking Type",
+    "examination": "Examination",
+    "consultation": "Consultation",
+    "uploadImages": "Upload Images",
+    "bookingService": "Booking Service"
+  
  
 
         

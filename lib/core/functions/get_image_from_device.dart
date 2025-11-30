@@ -12,3 +12,13 @@ Future<File?> getImageFromMobile({required bool fromGallary}) async {
     return xFile == null ? null : File(xFile.path);
   }
 }
+
+Future<List<File>> pickMultipleImages() async {
+  final ImagePicker imagePicker = ImagePicker();
+
+  final List<XFile> xFiles = await imagePicker.pickMultiImage();
+
+  if (xFiles.isEmpty) return [];
+
+  return xFiles.map((x) => File(x.path)).toList();
+}

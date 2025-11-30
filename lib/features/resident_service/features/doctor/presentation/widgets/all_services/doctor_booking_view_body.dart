@@ -29,7 +29,7 @@ class DoctorBookingViewBody extends StatelessWidget {
             SliverToBoxAdapter(child: const SizedBox(height: 15)),
             SliverToBoxAdapter(
               child: Text(
-                "Select Hour",
+                "selectHour".tr(context),
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
@@ -38,7 +38,7 @@ class DoctorBookingViewBody extends StatelessWidget {
             SliverToBoxAdapter(child: const SizedBox(height: 15)),
             SliverToBoxAdapter(
               child: Text(
-                "Booking Type : ",
+                "${"bookingType".tr(context)} : ",
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),

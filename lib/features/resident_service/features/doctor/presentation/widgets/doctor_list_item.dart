@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/cached_network_image_widget.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
@@ -20,7 +21,7 @@ class DoctorListItem extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: AppColors.whiteColor,
+        color:context.isDarkMode?AppColors.blackColor.withOpacity(0.2): AppColors.whiteColor,
         borderRadius: BorderRadius.circular(15),
       ),
 

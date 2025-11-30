@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/widgets/custom_more_app_bar_widget.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
@@ -24,7 +25,7 @@ class _DoctorBookingViewState extends State<DoctorBookingView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Booking Service"),
+        title: Text("bookingService".tr(context)),
         actions: [CustomMoreAppBarWidget()],
       ),
 
@@ -38,9 +39,7 @@ class _DoctorBookingViewState extends State<DoctorBookingView> {
   }
 
   void callFristDay() {
-    context.read<DoctorCubit>().dayListTimeSlots = [];
-    context.read<DoctorCubit>().timeCurrentIndex = -1;
-    context.read<DoctorCubit>().dayCurrentIndex = 0;
+    context.read<DoctorCubit>().resetState();
     context.read<DoctorCubit>().dayOfWeek =
         widget.doctorServiceModel.serviceDays[0].dayOfWeek;
     context.read<DoctorCubit>().addDayTimeSlotToList(

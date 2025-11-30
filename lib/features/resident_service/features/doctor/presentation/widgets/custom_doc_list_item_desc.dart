@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
@@ -52,7 +51,7 @@ class DoctorListItemDescriptionWidget extends StatelessWidget {
           child: Text(
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            "${"dr".tr(context)} ${doctor.fullName}",
+            "${"Dr"} ${doctor.fullName}",
             style: Theme.of(
               context,
             ).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w700),

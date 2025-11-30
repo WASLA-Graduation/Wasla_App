@@ -159,8 +159,19 @@
         "patients": "المرضى",
         "rating": "التقييم",
         "all": "الكل",
-                "book": "Book"
-
+        "book": "حجز",
+        "gym": "جيم",
+        "restaurant": "مطعم",
+        "search": "بحث",
+          "viewMore": "اظهار المزيد",
+    "showLess": "اظهار اقل",
+    "selectHour": "اختر الساعة",
+    "bookingType": "نوع الحجز",
+      "examination": "كشف",
+    "consultation": "استشارة",
+    "uploadImages": "تحميل الصور",
+    "bookingService": " حجز الخدمة"
+    
 
 
 
