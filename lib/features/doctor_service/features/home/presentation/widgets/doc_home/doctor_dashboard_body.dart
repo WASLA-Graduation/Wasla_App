@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wasla/core/utils/app_colors.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/features/doctor_service/features/home/presentation/widgets/doc_home/custom_doc_dashboard_card.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/widgets/doc_home/custom_doctor_chart.dart';
 
 class DoctorDashboardBody extends StatelessWidget {
@@ -12,64 +13,40 @@ class DoctorDashboardBody extends StatelessWidget {
       children: [
         Row(
           children: [
-            Expanded(child: CustomDocDashboardCard()),
+            Expanded(
+              child: CustomDocDashboardCard(
+                title: "patients".tr(context),
+                value: 1.toString(),
+              ),
+            ),
             const SizedBox(width: 20),
-            Expanded(child: CustomDocDashboardCard()),
+            Expanded(
+              child: CustomDocDashboardCard(
+                title: "noOfBookings".tr(context),
+                value: 2.toString(),
+              ),
+            ),
           ],
         ),
         Row(
           children: [
-            Expanded(child: CustomDocDashboardCard()),
+            Expanded(
+              child: CustomDocDashboardCard(
+                title: "completedBookings".tr(context),
+                value: 0.toString(),
+              ),
+            ),
             const SizedBox(width: 20),
-            Expanded(child: CustomDocDashboardCard()),
+            Expanded(
+              child: CustomDocDashboardCard(
+                title: "totalRevenue".tr(context),
+                value: 0.toString() + 'egb'.tr(context),
+              ),
+            ),
           ],
         ),
         CustomDoctorChart(),
       ],
-    );
-  }
-}
-
-class CustomDocDashboardCard extends StatelessWidget {
-  const CustomDocDashboardCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: AppColors.whiteColor,
-        borderRadius: BorderRadius.circular(13),
-      ),
-
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-
-        spacing: 13,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  color: AppColors.green.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Icon(Icons.save, size: 17, color: AppColors.green),
-              ),
-              Text(
-                'Revenue',
-                style: Theme.of(
-                  context,
-                ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
-              ),
-            ],
-          ),
-
-          Text("245K", style: Theme.of(context).textTheme.displayMedium),
-        ],
-      ),
     );
   }
 }

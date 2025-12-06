@@ -172,7 +172,11 @@
     "uploadImages": "تحميل الصور",
     "bookingService": " حجز الخدمة",
         "addTime": "اضافة وقت",
-    "addMoreSlots": "اضافة مواعيد اخري"
+    "addMoreSlots": "اضافة مواعيد اخري",
+        "noOfBookings": "عدد الحجوزات",
+    "completedBookings": "الحجوزات المكتملة",
+    "totalRevenue": "اجمالي الدخل"
+  
   
     
 

@@ -172,7 +172,9 @@
     "uploadImages": "Upload Images",
     "bookingService": "Booking Service",
     "addTime": "Add Time",
-    "addMoreSlots": "Add More Time Slots"
+    "noOfBookings": "no of Bookings",
+    "completedBookings": "completedBookings",
+    "totalRevenue": "Total Revenue"
   
  
 
