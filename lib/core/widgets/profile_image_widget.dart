@@ -19,14 +19,18 @@ class ProfileImageWidget extends StatelessWidget {
         return Center(
           child: Stack(
             children: [
-              cubit.user == null
-                  ? Skeletonizer(
-                      child: CircleAvatar(
-                        radius: 47,
-                        backgroundColor: AppColors.gray.withOpacity(0.1),
-                      ),
-                    )
-                  : ClipOval(
+              if (cubit.user == null)
+                Skeletonizer(
+                  child: CircleAvatar(
+                    radius: 47,
+                    backgroundColor: AppColors.gray.withOpacity(0.1),
+                  ),
+                )
+              else
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    ClipOval(
                       child: CustomCachedNetworkImage(
                         imageUrl: cubit.user!.imageUrlBase,
                         width: 95,
@@ -36,6 +40,14 @@ class ProfileImageWidget extends StatelessWidget {
                         loadingWidget: _buildLoadingWidget(),
                       ),
                     ),
+
+                    state is ProfileUpdateInfoLoading
+                        ? const CircularProgressIndicator(
+                            color: AppColors.primaryColor,
+                          )
+                        : const SizedBox(),
+                  ],
+                ),
               _buildEditWidget(),
             ],
           ),

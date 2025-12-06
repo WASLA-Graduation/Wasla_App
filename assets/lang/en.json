@@ -49,10 +49,10 @@
       "congratulations": "Congratulations!",
       "accountReady": "Your account is ready to use. You will be redirected to the sign in page.",
       "skip":"Skip",
-      "loading":"Loding...",
+      "loading":"Loading...",
       "uplodCv":"Uplode CV",
       "selectYourSpecialty":"Select your specialty",
-      "experience":"Experience Years",
+      "experience":"Experience",
       "descriptionAboutYou":"Description About You",
       "save":"Save",
       "completYourProfile":"Complete Your Profile",
@@ -149,7 +149,7 @@
         "hostpitalName": "Hospital Name",
         "errorFetchData": "An error occurred while fetching the data. Please try again later.",
         "noServices": "No Services",
-              "noDoctors": "لا يوجد طبيبين",
+              "noDoctors": "No Doctors",
         "doctors": "Doctors",
         "dr": "Dr.",
         "aboutMe": "About Me",
@@ -170,7 +170,9 @@
     "examination": "Examination",
     "consultation": "Consultation",
     "uploadImages": "Upload Images",
-    "bookingService": "Booking Service"
+    "bookingService": "Booking Service",
+    "addTime": "Add Time",
+    "addMoreSlots": "Add More Time Slots"
   
  
 

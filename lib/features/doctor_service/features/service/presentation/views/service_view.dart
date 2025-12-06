@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/manager/cubit/doctor_service_mangement_cubit.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/service_view_body.dart';
 
@@ -19,7 +20,10 @@ class _ServiceViewState extends State<ServiceView> {
 
   @override
   Widget build(BuildContext context) {
-    return ServiceViewBody();
+    return Scaffold(
+      appBar: AppBar(title: Text("services".tr(context))),
+      body: ServiceViewBody(),
+    );
   }
 
   void getDoctorSevices() async {

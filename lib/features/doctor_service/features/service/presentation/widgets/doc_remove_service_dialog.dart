@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
+import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/general_button.dart';
@@ -36,11 +37,7 @@ class DoctorRemoveServiceDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           spacing: 15,
           children: [
-            Image.asset(
-              Assets.assetsImagesDelete,
-              height: 60,
-              color: AppColors.red,
-            ),
+            Image.asset(Assets.assetsImagesDelete, height: 60),
             Text(
               "areYouSure".tr(context),
               style: Theme.of(context).textTheme.headlineMedium,
@@ -68,17 +65,34 @@ class DoctorRemoveServiceDialog extends StatelessWidget {
                 ),
                 const SizedBox(width: 20),
                 Expanded(
-                  child: GeneralButton(
-                    onPressed: () {
-                      context
-                          .read<DoctorServiceMangementCubit>()
-                          .deletDoctorService(serviceId: serviceId)
-                          .then((val) => context.popScreen());
-                    },
-                    text: 'delete'.tr(context),
-                    color: AppColors.red,
-                    height: 40,
-                  ),
+                  child:
+                      BlocConsumer<
+                        DoctorServiceMangementCubit,
+                        DoctorServiceMangementState
+                      >(
+                        listener: (context, state) {
+                          if (state
+                              is DoctorServiceMangementDelateServiceFailure) {
+                            toastAlert(
+                              color: AppColors.red,
+                              msg: state.errorMessage,
+                            );
+                          }
+                        },
+                        builder: (context, state) {
+                          return GeneralButton(
+                            onPressed: () {
+                              context.popScreen();
+                              context
+                                  .read<DoctorServiceMangementCubit>()
+                                  .deletDoctorService(serviceId: serviceId);
+                            },
+                            text: 'delete'.tr(context),
+                            color: AppColors.red,
+                            height: 40,
+                          );
+                        },
+                      ),
                 ),
               ],
             ),

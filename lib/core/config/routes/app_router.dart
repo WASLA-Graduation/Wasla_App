@@ -10,7 +10,6 @@ import 'package:wasla/features/resident_service/features/doctor/presentation/vie
 import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
 import 'package:wasla/core/service/maps/cubit/maps_helper_cubit.dart';
 import 'package:wasla/features/auth/presentation/views/auth_map_view.dart';
-import 'package:wasla/features/auth/presentation/views/choose_auth_view.dart';
 import 'package:wasla/features/auth/presentation/views/doctor_complete_info_view.dart';
 import 'package:wasla/features/auth/presentation/views/doctor_info_view.dart';
 import 'package:wasla/features/auth/presentation/views/forgot_pass_view.dart';
@@ -47,8 +46,6 @@ abstract class AppRouter {
           ),
         );
 
-      case AppRoutes.chooseAuthScreen:
-        return MaterialPageRoute(builder: (_) => ChooseAuthView());
       case AppRoutes.signInScreen:
         return MaterialPageRoute(builder: (_) => SignInView());
       case AppRoutes.signUpScreen:

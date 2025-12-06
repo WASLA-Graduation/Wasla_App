@@ -5,6 +5,7 @@ import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/bottom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/manager/cubit/doctor_home_cubit.dart';
+import 'package:wasla/features/doctor_service/features/home/presentation/views/doctor_dashboard_view.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/views/service_view.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/custom_doc_add_service_float_button.dart';
 import 'package:wasla/features/profile/presentation/views/profile_view.dart';
@@ -45,7 +46,7 @@ class DoctorNavBarView extends StatelessWidget {
   }
 
   static List<Widget> screens = [
-    Container(),
+    DoctorDashboardView(),
     ServiceView(),
     Container(),
     const ProfileView(),

@@ -46,26 +46,5 @@ class GlobalCubit extends Cubit<GlobalState> {
     emit(GlobalChangeLanguage(locale: locale));
   }
 
-  // TimeOfDay selectedTimeFrom = TimeOfDay(hour: 10, minute: 0);
-  // TimeOfDay selectedTimeTo = TimeOfDay(hour: 10, minute: 0);
-
   
-
-  // final List<Map<String, TimeOfDay>> slots = [];
-  // void addTimeSlot(Map<String, TimeOfDay> timeSlot) {
-  //   slots.add(timeSlot);
-  //   emit(GlobalUpdate());
-  // }
-
-
-  // void updateSlotes({required Map<String, TimeOfDay> timeSlot, required int index}) {
-  //   slots[index] = timeSlot;
-  //   emit(GlobalUpdate());
-  // }
-
-
-  // void removeTimeSlot(int index) {
-  //   slots.removeAt(index);
-  //   emit(GlobalUpdate());
-  // }
 }

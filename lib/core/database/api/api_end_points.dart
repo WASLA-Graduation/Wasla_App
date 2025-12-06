@@ -1,5 +1,5 @@
 abstract class ApiEndPoints {
-  static const String baseUrl = 'http://wasla1.runasp.net/';
+  static const String baseUrl = 'http://waslammka.runasp.net/';
   static const String register = 'api/Account/register';
   static const String login = 'api/Account/login';
   static const String resetPasswordForProfile = 'api/Account/change-password';
@@ -14,14 +14,22 @@ abstract class ApiEndPoints {
   static const String residentCompleteRegister =
       'api/Resident/CompleteRegister';
   static const String residentGetProfile = 'api/Resident/get-Profile';
-  static const String imageBaseUrl =
-      'http://wasla1.runasp.net/assets/images/user/';
+  static const String imageBaseUrl = '${baseUrl}assets/images/user/';
   static const String residentEditProfile = 'api/Resident/edit-Profile';
   static const String doctorGetProfile = 'api/Doctor/GetDoctorProfile/';
   static const String doctorGetServices = 'api/Service/GetServices/';
   static const String doctorUpdateService = 'api/Service/UpdateService';
   static const String doctorAddService = 'api/Service/AddService';
   static const String doctorDeleteService = 'api/Service/DeleteService/';
-  static const String getDoctorBySpecialist = 'api/Doctor/GetDoctorBySpecialist/';
+  static const String getDoctorBySpecialist =
+      'api/Doctor/GetDoctorBySpecialist/';
   static const String doctorBookService = 'api/Book/BookService';
+  static const String doctorUpdateProfile = 'api/Doctor/UpdateDoctorProfile';
+  static const String doctorGetChart = 'api/Doctor/GetDoctorChart/';
+  static const String doctorGetAllBooking =
+      'api/Doctor/GetAllBookingsOfDoctor/';
+  static const String updateBooking = 'api/Book/UpdateBooking';
+  static const String updateBookingStatus = 'api/Book/UpdateBookingStatus';
+  static const String getBookingDetailsForUser =
+      'api/Book/GetBookingDetailsForUser';
 }

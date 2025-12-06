@@ -39,6 +39,7 @@ dependencies:
   readmore: ^3.0.0
   shared_preferences: ^2.5.3
   skeletonizer: ^2.1.0+1
+  syncfusion_flutter_charts: ^31.2.16
   syncfusion_flutter_datepicker: ^31.2.2
 
 dev_dependencies:

@@ -53,7 +53,7 @@
       "sending":"جاري الارسال...",
       "uplodCv":"رفع السيرة الذاتية",
       "selectYourSpecialty":"اختر التخصص الخاص بك",
-      "experience":"سنوات الخبرة",
+      "experience":" الخبرة",
       "descriptionAboutYou":"وصف عنك",
       "save":"حفظ",
       "completYourProfile":"اكمل ملفك الشخصي",
@@ -170,7 +170,10 @@
       "examination": "كشف",
     "consultation": "استشارة",
     "uploadImages": "تحميل الصور",
-    "bookingService": " حجز الخدمة"
+    "bookingService": " حجز الخدمة",
+        "addTime": "اضافة وقت",
+    "addMoreSlots": "اضافة مواعيد اخري"
+  
     
 
 

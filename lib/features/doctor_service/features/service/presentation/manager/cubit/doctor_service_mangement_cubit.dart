@@ -231,8 +231,6 @@ class DoctorServiceMangementCubit extends Cubit<DoctorServiceMangementState> {
     );
   }
 
-
-
   void resetState() {
     daysIndices.clear();
     serviceNameAr = '';
