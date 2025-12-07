@@ -188,7 +188,8 @@
     "cancelBooking": "Cancel Booking",
     "editBooking": "Edit Booking",
     "confirm": "Confirm",
-    "areYouSureCancel": "Are you sure you want to cancel this booking?"
+    "areYouSureCancel": "Are you sure you want to cancel this booking?",
+    "bookingSuccess": "Booking Update Successfully"
 
     
   

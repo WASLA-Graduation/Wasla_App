@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/features/doctor_service/features/home/data/models/doctor_booking_model.dart';
+import 'package:wasla/features/doctor_service/features/home/presentation/views/doctor_edit_booking_view.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/views/doctor_add_service_view.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
@@ -116,6 +118,13 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) =>
               DoctorBookingView(doctorServiceModel: doctorServiceModel),
+        );
+      case AppRoutes.doctorEditBookingScreen:
+        final DoctorBookingModel doctorBookingModel =
+            settigns.arguments as DoctorBookingModel;
+        return MaterialPageRoute(
+          builder: (_) =>
+              DoctorEditBookingView(bookingModel: doctorBookingModel),
         );
 
       default:

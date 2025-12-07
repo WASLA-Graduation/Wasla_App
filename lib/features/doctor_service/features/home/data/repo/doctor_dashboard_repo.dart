@@ -14,4 +14,11 @@ abstract class DoctorDashboardRepo {
     required String doctorId,
     required int status,
   });
+  Future<Either<String, Null>> updateDoctorBooking({
+    required int bookingId,
+    required int dayofWeek,
+    required String startTime,
+    required String endTime,
+    required String bookingDate,
+  });
 }

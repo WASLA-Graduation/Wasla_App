@@ -26,3 +26,12 @@ TimeOfDay convertStringToTimeOfDay(String apiTime) {
     return TimeOfDay(hour: 0, minute: 0);
   }
 }
+
+DateTime convertStringToDateTime(String apiTime) {
+  try {
+    final parsedTime = DateFormat("yyyy-MM-dd").parse(apiTime);
+    return parsedTime;
+  } catch (e) {
+    return DateTime.now();
+  }
+}

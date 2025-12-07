@@ -63,4 +63,30 @@ class DoctorDashboardRepoImpl extends DoctorDashboardRepo {
       return Left(e.errorModel.errorMessage);
     }
   }
+
+  @override
+  Future<Either<String, Null>> updateDoctorBooking({
+    required int bookingId,
+    required int dayofWeek,
+    required String startTime,
+    required String endTime,
+    required String bookingDate,
+  }) async {
+    try {
+      await api.put(
+        ApiEndPoints.updateBooking,
+        body: {
+          ApiKeys.bookingId: bookingId,
+          ApiKeys.newDayOfWeek: dayofWeek,
+          ApiKeys.newStart: startTime,
+          ApiKeys.newEnd: endTime,
+          ApiKeys.bookingDate: bookingDate,
+        },
+      );
+
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
 }

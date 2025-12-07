@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/format_time_with_intl.dart';
 import 'package:wasla/core/functions/localizedDays.dart';
 import 'package:wasla/core/utils/app_colors.dart';
@@ -110,7 +112,12 @@ class DocBookingDataCard extends StatelessWidget {
             color: AppColors.red,
           ),
           GeneralButton(
-            onPressed: () {},
+            onPressed: () {
+              context.pushScreen(
+                AppRoutes.doctorEditBookingScreen,
+                arguments: model,
+              );
+            },
             text: "editBooking".tr(context),
             height: 45,
           ),

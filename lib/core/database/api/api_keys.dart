@@ -89,4 +89,7 @@ abstract class ApiKeys {
   static const day = 'day';
   static const bookingImages = 'bookingImages';
   static const status = 'status';
+  static const String newDayOfWeek = "newDayOfWeek";
+  static const String newStart = "newStart";
+  static const String newEnd = "newEnd";
 }

@@ -188,7 +188,8 @@
         "cancelBooking": "الغاء الحجز",
     "editBooking": "تعديل الحجز",
       "confirm": "تاكيد",
-          "areYouSureCancel": "هل تريد حقًا الغاء هذا الحجز؟"
+          "areYouSureCancel": "هل تريد حقًا الغاء هذا الحجز؟",
+          "bookingSuccess": "تم تحديث الحجز بنجاح"
 
 
 

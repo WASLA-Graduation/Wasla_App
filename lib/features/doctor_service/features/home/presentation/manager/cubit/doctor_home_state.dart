@@ -27,3 +27,11 @@ final class DoctorRemoveBookingFailure extends DoctorHomeState {
   final String errorMessage;
   DoctorRemoveBookingFailure({required this.errorMessage});
 }
+final class DoctorUpdateBookingSuccess extends DoctorHomeState {}
+
+final class DoctorUpdateBookingLoading extends DoctorHomeState {}
+
+final class DoctorUpdateBookingFailure extends DoctorHomeState {
+  final String errorMessage;
+  DoctorUpdateBookingFailure({required this.errorMessage});
+}
