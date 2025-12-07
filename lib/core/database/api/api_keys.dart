@@ -88,4 +88,5 @@ abstract class ApiKeys {
   static const userImage = 'userImage';
   static const day = 'day';
   static const bookingImages = 'bookingImages';
+  static const status = 'status';
 }

@@ -177,7 +177,20 @@
     "completedBookings": "الحجوزات المكتملة",
     "totalRevenue": "اجمالي الدخل",
         "dashboardOverview": "نظرة على لوحة التحكم",
-        "monthlyRevenue": "الدخل الشهري"
+        "monthlyRevenue": "الدخل الشهري",
+            "bookingList": "قائمة الحجوزات",
+              "patientName": "اسم المريض",
+    "serviceName": "اسم الخدمة",
+    "phone": "رقم الهاتف",
+    "date": "التاريخ",
+    "day": "اليوم",
+    "time": "الوقت",
+        "cancelBooking": "الغاء الحجز",
+    "editBooking": "تعديل الحجز",
+      "confirm": "تاكيد",
+          "areYouSureCancel": "هل تريد حقًا الغاء هذا الحجز؟"
+
+
 
   
   

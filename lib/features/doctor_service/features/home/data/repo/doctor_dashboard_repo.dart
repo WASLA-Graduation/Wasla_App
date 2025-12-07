@@ -1,8 +1,17 @@
 import 'package:dartz/dartz.dart';
+import 'package:wasla/features/doctor_service/features/home/data/models/doctor_booking_model.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_chart_model.dart';
 
 abstract class DoctorDashboardRepo {
   Future<Either<String, DoctorChartModel>> getDoctorChart({
     required String doctorId,
+  });
+  Future<Either<String, Null>> removeBooking({
+    required int bookingId,
+    required int status,
+  });
+  Future<Either<String, List<DoctorBookingModel>>> getDoctorBookings({
+    required String doctorId,
+    required int status,
   });
 }

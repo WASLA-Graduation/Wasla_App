@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wasla/core/utils/app_colors.dart';
@@ -11,23 +11,22 @@ class DoctorDashboardBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: BlocBuilder<DoctorHomeCubit, DoctorHomeState>(
-        builder: (context, state) {
-          if (state is DoctorGetDataFailure) {
-            return CustomGetDataWidget();
-          } else if (state is DoctorGetChartLoading) {
-            return Center(
-              child: SpinKitFadingCircle(
-                color: AppColors.primaryColor,
-                size: 50.0,
-              ),
-            );
-          } else {
-            return DoctorDashboardContent();
-          }
-        },
-      ),
+    return BlocBuilder<DoctorHomeCubit, DoctorHomeState>(
+      builder: (context, state) {
+        if (state is DoctorGetDataFailure) {
+          return const Center(child: CustomGetDataWidget());
+        }
+
+        if (state is DoctorGetChartLoading ||
+            state is DoctorGetBookingsLoading ||
+            state is DoctorRemoveBookingLoading) {
+          return const Center(
+            child: SpinKitFadingCircle(color: AppColors.primaryColor, size: 50),
+          );
+        }
+
+        return SingleChildScrollView(child: DoctorDashboardContent());
+      },
     );
   }
 }

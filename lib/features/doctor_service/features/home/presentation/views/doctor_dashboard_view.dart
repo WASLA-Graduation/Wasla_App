@@ -14,14 +14,17 @@ class DoctorDashboardView extends StatefulWidget {
 class _DoctorDashboardViewState extends State<DoctorDashboardView> {
   @override
   void initState() {
-    getDoctorChart();
+    getDoctorChartAndBookings();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('dashboardOverview'.tr(context))),
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+        title: Text('dashboardOverview'.tr(context)),
+      ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
         child: DoctorDashboardBody(),
@@ -29,7 +32,8 @@ class _DoctorDashboardViewState extends State<DoctorDashboardView> {
     );
   }
 
-  void getDoctorChart() async {
+  void getDoctorChartAndBookings() async {
     context.read<DoctorHomeCubit>().getDoctorChart();
+    context.read<DoctorHomeCubit>().getDoctorBookings(status: 1);
   }
 }

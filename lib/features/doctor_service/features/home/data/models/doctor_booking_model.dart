@@ -1,7 +1,7 @@
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 
-class DoctorBooking {
+class DoctorBookingModel {
   final int bookingId;
   final String serviceName;
   final String userName;
@@ -12,10 +12,10 @@ class DoctorBooking {
   final int day;
   final int bookingType;
   final String phone;
-  final int price;
-  final List<String> bookingImages;
+  final double price;
+  // final List<String> bookingImages;
 
-  DoctorBooking({
+  DoctorBookingModel({
     required this.bookingId,
     required this.serviceName,
     required this.userName,
@@ -27,15 +27,15 @@ class DoctorBooking {
     required this.bookingType,
     required this.phone,
     required this.price,
-    required this.bookingImages,
+    // required this.bookingImages,
   });
 
-  factory DoctorBooking.fromJson(Map<String, dynamic> json) {
-    return DoctorBooking(
+  factory DoctorBookingModel.fromJson(Map<String, dynamic> json) {
+    return DoctorBookingModel(
       bookingId: json[ApiKeys.bookingId] ?? 0,
       serviceName: json[ApiKeys.serviceName] ?? "",
       userName: json[ApiKeys.userName] ?? "",
-      userImage: json[ApiKeys.userImage] ?? "",
+      userImage: (ApiEndPoints.imageBaseUrl + json[ApiKeys.userImage]),
       date: json[ApiKeys.date] ?? "",
       start: json[ApiKeys.start] ?? "",
       end: json[ApiKeys.end] ?? "",
@@ -43,11 +43,11 @@ class DoctorBooking {
       bookingType: json[ApiKeys.bookingType] ?? 0,
       phone: json[ApiKeys.phoneSmall] ?? "",
       price: json[ApiKeys.price] ?? 0,
-      bookingImages:
-          (json[ApiKeys.bookingImages] as List<String>?)
-              ?.map((e) => ApiEndPoints.imageBaseUrl + e)
-              .toList() ??
-          [],
+      // bookingImages:
+      //     (json[ApiKeys.bookingImages] as List<String>?)
+      //         ?.map((e) => ApiEndPoints.imageBaseUrl + e)
+      //         .toList() ??
+      //     [],
     );
   }
 }

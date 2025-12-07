@@ -172,11 +172,25 @@
     "uploadImages": "Upload Images",
     "bookingService": "Booking Service",
     "addTime": "Add Time",
+    "addMoreSlots": "Add More Slots",
     "noOfBookings": "no of Bookings",
     "completedBookings": "completed Bookings",
     "totalRevenue": "Total Revenue",
     "dashboardOverview": "Dashboard Overview",
-    "monthlyRevenue": "Monthly Revenue"
+    "monthlyRevenue": "Monthly Revenue",
+    "bookingList": "Your Booking List",
+    "patientName": "Patient Name",
+    "serviceName": "Service Name",
+    "phone": "Phone",
+    "date": "Date",
+    "day": "Day",
+    "time": "Time",
+    "cancelBooking": "Cancel Booking",
+    "editBooking": "Edit Booking",
+    "confirm": "Confirm",
+    "areYouSureCancel": "Are you sure you want to cancel this booking?"
+
+    
   
  
 
