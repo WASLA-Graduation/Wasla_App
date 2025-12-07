@@ -175,7 +175,10 @@
     "addMoreSlots": "اضافة مواعيد اخري",
         "noOfBookings": "عدد الحجوزات",
     "completedBookings": "الحجوزات المكتملة",
-    "totalRevenue": "اجمالي الدخل"
+    "totalRevenue": "اجمالي الدخل",
+        "dashboardOverview": "نظرة على لوحة التحكم",
+        "monthlyRevenue": "الدخل الشهري"
+
   
   
     

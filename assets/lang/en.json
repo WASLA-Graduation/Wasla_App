@@ -173,8 +173,10 @@
     "bookingService": "Booking Service",
     "addTime": "Add Time",
     "noOfBookings": "no of Bookings",
-    "completedBookings": "completedBookings",
-    "totalRevenue": "Total Revenue"
+    "completedBookings": "completed Bookings",
+    "totalRevenue": "Total Revenue",
+    "dashboardOverview": "Dashboard Overview",
+    "monthlyRevenue": "Monthly Revenue"
   
  
 

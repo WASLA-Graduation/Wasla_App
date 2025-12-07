@@ -17,7 +17,7 @@ class CustomDocDashboardCard extends StatelessWidget {
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(13),
         border: Border.all(color: AppColors.primaryColor, width: 0.5),
       ),
 
@@ -27,10 +27,13 @@ class CustomDocDashboardCard extends StatelessWidget {
         spacing: 17,
         children: [
           Text(
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+
             title,
             style: Theme.of(
               context,
-            ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
+            ).textTheme.displaySmall!.copyWith(color: AppColors.gray),
           ),
 
           Text(

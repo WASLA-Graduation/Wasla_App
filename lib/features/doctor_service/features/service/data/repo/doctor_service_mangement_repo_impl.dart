@@ -91,4 +91,5 @@ class DoctorServiceMangementRepoImpl extends DoctorServiceMangementRepo {
       return Left(e.errorModel.errorMessage);
     }
   }
+
 }

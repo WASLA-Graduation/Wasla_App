@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/dashboard_data_model.dart';
 
@@ -9,7 +10,7 @@ class CustomDoctorChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SfCartesianChart(
-      title: ChartTitle(text: 'Weekly Sales'),
+      title: ChartTitle(text: 'monthlyRevenue'.tr(context)),
 
       primaryXAxis: CategoryAxis(
         majorGridLines: const MajorGridLines(width: 0),

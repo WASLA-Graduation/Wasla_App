@@ -78,4 +78,14 @@ abstract class ApiKeys {
   static const isBooking = 'isBooking';
   static const rating = 'rating';
   static const cvUrl = 'cvUrl';
+  static const numOfPatients = 'numOfPatients';
+  static const numOfBookings = 'numOfBookings';
+  static const numOfCompletedBookings = 'numOfCompletedBookings';
+  static const totalAmount = 'totalAmount';
+  static const years = 'years';
+  static const bookingId = 'bookingId';
+  static const userName = 'userName';
+  static const userImage = 'userImage';
+  static const day = 'day';
+  static const bookingImages = 'bookingImages';
 }

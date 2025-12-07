@@ -41,3 +41,5 @@ final class DoctorServiceMangementAddOrUpdateServiceFailure
   final String errorMessage;
   DoctorServiceMangementAddOrUpdateServiceFailure({required this.errorMessage});
 }
+
+
