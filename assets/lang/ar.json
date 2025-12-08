@@ -194,7 +194,11 @@
                   "upComing": "القادمة",
     "completed": "مكتملة",
     "cancelled": "ملغية",
-        "bookingStatus": "حالة الحجز"
+        "bookingStatus": "حالة الحجز",
+            "myBookings": "حجوزاتي",
+                "bookingCaceledSuccess": "تم الغاء الحجز بنجاح"
+
+
 
 
 

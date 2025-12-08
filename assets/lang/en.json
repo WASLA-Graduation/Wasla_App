@@ -190,11 +190,13 @@
     "confirm": "Confirm",
     "areYouSureCancel": "Are you sure you want to cancel this booking?",
     "bookingSuccess": "Booking Update Successfully",
+    "bookingCaceledSuccess": "Booking Canceled Successfully",
     "noBookings": "You don't have bookings yet.",
     "upComing": "Upcoming",
     "completed": "Completed",
     "cancelled": "Cancelled",
-    "bookingStatus": "Booking Status"
+    "bookingStatus": "Booking Status",
+    "myBookings": "My Bookings"
 
     
   
