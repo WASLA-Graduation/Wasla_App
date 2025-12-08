@@ -87,40 +87,53 @@ class DocBookingDataCard extends StatelessWidget {
             value: "${model.price} ${"egb".tr(context)}",
           ),
           const SizedBox(height: 3),
-          GeneralButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (dialogcontext) => GeneralConfirmDialog(
-                  title: 'cancelBooking'.tr(context),
-                  cancelText: 'cancel'.tr(context),
-                  confirmText: 'confirm'.tr(context),
-                  message: 'areYouSureCancel'.tr(context),
-                  icon: Image.asset(Assets.assetsImagesDelete, height: 60),
-                  onConfirm: () async {
-                    await context.read<DoctorHomeCubit>().cancelBooking(
-                      bookingId: model.bookingId,
-                      index: index,
-                    );
-                  },
-                  onCancel: () {},
-                ),
-              );
-            },
-            text: "cancelBooking".tr(context),
-            height: 45,
-            color: AppColors.red,
-          ),
-          GeneralButton(
-            onPressed: () {
-              context.pushScreen(
-                AppRoutes.doctorEditBookingScreen,
-                arguments: model,
-              );
-            },
-            text: "editBooking".tr(context),
-            height: 45,
-          ),
+
+          context.read<DoctorHomeCubit>().bookingStatus == 1
+              ? Column(
+                  spacing: 10,
+                  children: [
+                    GeneralButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (dialogcontext) => GeneralConfirmDialog(
+                            title: 'cancelBooking'.tr(context),
+                            cancelText: 'cancel'.tr(context),
+                            confirmText: 'confirm'.tr(context),
+                            message: 'areYouSureCancel'.tr(context),
+                            icon: Image.asset(
+                              Assets.assetsImagesDelete,
+                              height: 60,
+                            ),
+                            onConfirm: () async {
+                              await context
+                                  .read<DoctorHomeCubit>()
+                                  .cancelBooking(
+                                    bookingId: model.bookingId,
+                                    index: index,
+                                  );
+                            },
+                            onCancel: () {},
+                          ),
+                        );
+                      },
+                      text: "cancelBooking".tr(context),
+                      height: 45,
+                      color: AppColors.red,
+                    ),
+                    GeneralButton(
+                      onPressed: () {
+                        context.pushScreen(
+                          AppRoutes.doctorEditBookingScreen,
+                          arguments: model,
+                        );
+                      },
+                      text: "editBooking".tr(context),
+                      height: 45,
+                    ),
+                  ],
+                )
+              : const SizedBox(),
         ],
       ),
     );

@@ -189,7 +189,12 @@
     "editBooking": "Edit Booking",
     "confirm": "Confirm",
     "areYouSureCancel": "Are you sure you want to cancel this booking?",
-    "bookingSuccess": "Booking Update Successfully"
+    "bookingSuccess": "Booking Update Successfully",
+    "noBookings": "You don't have bookings yet.",
+    "upComing": "Upcoming",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "bookingStatus": "Booking Status"
 
     
   

@@ -18,6 +18,8 @@ class DoctorHomeCubit extends Cubit<DoctorHomeState> {
   TimeOfDay? currentChoosenFromTime;
   TimeOfDay? currentChoosenToTime;
 
+  int bookingStatus = 1;
+
   void updateTime() {
     emit(DoctorUpdate());
   }
@@ -98,7 +100,7 @@ class DoctorHomeCubit extends Cubit<DoctorHomeState> {
         emit(DoctorUpdateBookingFailure(errorMessage: error));
       },
       (success) {
-        getDoctorBookings(status: 1);
+        getDoctorBookings(status: bookingStatus);
 
         emit(DoctorUpdateBookingSuccess());
       },

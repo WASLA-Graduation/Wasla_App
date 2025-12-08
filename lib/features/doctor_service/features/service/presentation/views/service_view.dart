@@ -21,7 +21,11 @@ class _ServiceViewState extends State<ServiceView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("services".tr(context))),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+
+        title: Text("services".tr(context)),
+      ),
       body: ServiceViewBody(),
     );
   }

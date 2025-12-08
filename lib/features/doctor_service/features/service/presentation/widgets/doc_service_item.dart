@@ -21,7 +21,9 @@ class DocServiceItem extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 20),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: context.isDarkMode ? AppColors.blackColor : AppColors.whiteColor,
+        color: context.isDarkMode
+            ? AppColors.blackColor.withOpacity(0.1)
+            : AppColors.whiteColor,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(

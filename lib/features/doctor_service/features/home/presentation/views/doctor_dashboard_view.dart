@@ -24,6 +24,7 @@ class _DoctorDashboardViewState extends State<DoctorDashboardView> {
       appBar: AppBar(
         forceMaterialTransparency: true,
         title: Text('dashboardOverview'.tr(context)),
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
@@ -34,6 +35,7 @@ class _DoctorDashboardViewState extends State<DoctorDashboardView> {
 
   void getDoctorChartAndBookings() async {
     context.read<DoctorHomeCubit>().getDoctorChart();
+    context.read<DoctorHomeCubit>().bookingStatus = 1;
     context.read<DoctorHomeCubit>().getDoctorBookings(status: 1);
   }
 }

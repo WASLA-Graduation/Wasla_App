@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/manager/cubit/doctor_home_cubit.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/widgets/booking/booking_list_header.dart';
@@ -24,16 +25,24 @@ class DoctorBookingList extends StatelessWidget {
         spacing: 20,
         children: [
           BookingListHeader(),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            separatorBuilder: (context, index) => const SizedBox(height: 20),
-            itemCount: cubit.doctorBookings.length,
-            itemBuilder: (_, index) => DocBookingDataCard(
-              model: cubit.doctorBookings[index],
-              index: index,
-            ),
-          ),
+          cubit.doctorBookings.isEmpty
+              ? Center(
+                  child: Text(
+                    "noBookings".tr(context),
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                )
+              : ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 20),
+                  itemCount: cubit.doctorBookings.length,
+                  itemBuilder: (_, index) => DocBookingDataCard(
+                    model: cubit.doctorBookings[index],
+                    index: index,
+                  ),
+                ),
         ],
       ),
     );

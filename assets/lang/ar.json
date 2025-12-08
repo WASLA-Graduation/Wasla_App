@@ -189,7 +189,14 @@
     "editBooking": "تعديل الحجز",
       "confirm": "تاكيد",
           "areYouSureCancel": "هل تريد حقًا الغاء هذا الحجز؟",
-          "bookingSuccess": "تم تحديث الحجز بنجاح"
+          "bookingSuccess": "تم تحديث الحجز بنجاح",
+              "noBookings": "لا يوجد حجوزات",
+                  "upComing": "القادمة",
+    "completed": "مكتملة",
+    "cancelled": "ملغية",
+        "bookingStatus": "حالة الحجز"
+
+
 
 
 

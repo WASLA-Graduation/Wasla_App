@@ -9,10 +9,12 @@ class CustomDropDownMenu extends StatelessWidget {
     required this.items,
     this.hint,
     this.onSelecte,
+    this.initialSelection,
   });
 
   final List<DropDownItem> items;
   final String? hint;
+  final String? initialSelection;
   final void Function(String?)? onSelecte;
 
   @override
@@ -21,6 +23,7 @@ class CustomDropDownMenu extends StatelessWidget {
       width: double.infinity,
       onSelected: onSelecte,
       hintText: hint,
+      initialSelection: initialSelection,
       textStyle: Theme.of(context).textTheme.headlineMedium,
       inputDecorationTheme: _buildInputDecoration(context),
       menuStyle: _buildMenuStyle(context),
