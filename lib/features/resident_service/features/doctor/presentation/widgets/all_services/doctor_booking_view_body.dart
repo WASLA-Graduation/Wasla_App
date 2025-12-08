@@ -56,6 +56,10 @@ class DoctorBookingViewBody extends StatelessWidget {
                       } else if (state is DoctorBookServiceSuccess) {
                         context.popScreen();
                         context.popScreen();
+                        toastAlert(
+                          color: AppColors.primaryColor,
+                          msg: "bookingDone".tr(context),
+                        );
                       }
                     },
                     builder: (context, state) {

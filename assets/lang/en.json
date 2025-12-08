@@ -196,7 +196,12 @@
     "completed": "Completed",
     "cancelled": "Cancelled",
     "bookingStatus": "Booking Status",
-    "myBookings": "My Bookings"
+    "myBookings": "My Bookings",
+    "specialty": "Specialty",
+    "hospital": "Hospital",
+    "bookingDone": "Booking Done Successfully",
+    "serviceAddedSuccess": "Service Added Successfully",
+    "allTimesBooked": "All Times are Booked"
 
     
   

@@ -59,7 +59,11 @@ class AddServiceViewBody extends StatelessWidget {
                   is DoctorServiceMangementAddOrUpdateServiceSuccess) {
                 isEdit()
                     ? toastAlert(color: AppColors.green, msg: "Successfully")
-                    : Navigator.pop(context);
+                    : toastAlert(
+                        color: AppColors.green,
+                        msg: "serviceAddedSuccess".tr(context),
+                      );
+                Navigator.pop(context);
               }
             },
             builder: (context, state) {

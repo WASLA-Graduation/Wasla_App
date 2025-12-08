@@ -8,11 +8,10 @@ class DoctorViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20,right: 20,left: 20),
+      padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
       child: Column(
         children: [
           CustomDoctorSpecialityList(),
-          const SizedBox(height: 15),
           Expanded(child: DoctorListWidget()),
         ],
       ),

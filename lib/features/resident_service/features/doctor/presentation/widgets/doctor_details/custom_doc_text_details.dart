@@ -13,30 +13,21 @@ class CustomDoctorDetailsText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildDoctorName(context),
-        Divider(height: 24, color: AppColors.primaryColor, thickness: .1),
-        _buildDoctorHostpital(context),
-        const SizedBox(height: 10),
-        _buildDoctorSpaciality(context),
+        Divider(height: 15, color: AppColors.primaryColor, thickness: .1),
+        _buildDoctorData(context,doctor.hospitalname, "hospital".tr(context)),
+        const SizedBox(height: 3),
+        _buildDoctorData(context, doctor.specialtyName, "specialty".tr(context)),
+        const SizedBox(height: 3),
+        _buildDoctorData(context, doctor.phone, "phone".tr(context)),
       ],
     );
   }
 
-  Text _buildDoctorSpaciality(BuildContext context) {
+  Text _buildDoctorData(BuildContext context, String date, String title) {
     return Text(
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      doctor.specialtyName,
-      style: Theme.of(
-        context,
-      ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
-    );
-  }
-
-  Text _buildDoctorHostpital(BuildContext context) {
-    return Text(
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-      checkHospital(doctor.hospitalname),
+      "$title : $date",
       style: Theme.of(
         context,
       ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
@@ -47,7 +38,7 @@ class CustomDoctorDetailsText extends StatelessWidget {
     return Text(
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      "${"dr".tr(context)} ${doctor.fullName}",
+      doctor.fullName,
       style: Theme.of(context).textTheme.headlineMedium,
     );
   }

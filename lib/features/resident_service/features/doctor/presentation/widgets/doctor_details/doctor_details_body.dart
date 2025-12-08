@@ -24,15 +24,13 @@ class DoctorDetailsBody extends StatelessWidget {
         const SizedBox(height: 18),
         CustomCircleWithDataList(doctor: doctor),
         const SizedBox(height: 20),
-        Text(
-          "aboutMe".tr(context),
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
-        const SizedBox(height: 10),
-        ReadmoreText(maxLines: 3, text: doctor.description),
-        const SizedBox(height: 20),
+
+        // Text(
+        //   "aboutMe".tr(context),
+        //   style: Theme.of(context).textTheme.headlineMedium,
+        // ),
         TextDetailsIdentfierWidget(
-          leading: "workingSchedule".tr(context),
+          leading: "aboutMe".tr(context),
           trailing: "seeServices".tr(context),
           onTap: () {
             context.read<DoctorCubit>().doctorId = doctor.id;
@@ -43,6 +41,8 @@ class DoctorDetailsBody extends StatelessWidget {
           },
         ),
 
+        const SizedBox(height: 10),
+        ReadmoreText(maxLines: 3, text: doctor.description),
         const SizedBox(height: 15),
         TextDetailsIdentfierWidget(
           leading: "reviwes".tr(context),

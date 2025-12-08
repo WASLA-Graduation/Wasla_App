@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/functions/format_time_with_intl.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
@@ -13,9 +14,9 @@ class ChooseBookingTimeList extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<DoctorCubit>();
     return cubit.dayListTimeSlots.isEmpty
-        ? const SliverToBoxAdapter(
+        ? SliverToBoxAdapter(
             child: Text(
-              "All Times are Booked",
+              "allTimesBooked".tr(context),
               style: TextStyle(color: AppColors.primaryColor),
             ),
           )
@@ -23,7 +24,7 @@ class ChooseBookingTimeList extends StatelessWidget {
             itemCount: cubit.dayListTimeSlots.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              crossAxisSpacing: 14,
+              crossAxisSpacing: 10,
               mainAxisSpacing: 14,
               mainAxisExtent: 40,
             ),
@@ -61,6 +62,8 @@ class ChooseBookingTimeList extends StatelessWidget {
           fit: BoxFit.scaleDown,
           child: Text(
             convertBackendTimeToAmPm(time),
+
+            // '${convertBackendTimeToAmPm(splitTime(time)[0])}:${convertBackendTimeToAmPm(splitTime(time)[1])}',
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
               color: isSelected ? AppColors.whiteColor : AppColors.primaryColor,
               fontWeight: FontWeight.bold,
@@ -70,4 +73,6 @@ class ChooseBookingTimeList extends StatelessWidget {
       ),
     );
   }
+
+  List<String> splitTime(time) => time.split('-');
 }
