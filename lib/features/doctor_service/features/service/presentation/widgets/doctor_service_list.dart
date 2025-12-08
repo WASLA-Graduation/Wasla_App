@@ -19,7 +19,7 @@ class DoctorServiceList extends StatelessWidget {
     >(
       builder: (context, state) {
         if (state is DoctorServiceMangementGetServiceFailure) {
-          return CustomGetDataWidget();
+          return CustomErrGetData();
         } else if (state is DoctorServiceMangementGetServiceLoading ||
             state is DoctorServiceMangementDelateServiceLoading) {
           return Center(

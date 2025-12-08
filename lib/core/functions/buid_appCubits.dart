@@ -11,6 +11,8 @@ import 'package:wasla/features/doctor_service/features/service/data/repo/doctor_
 import 'package:wasla/features/doctor_service/features/service/presentation/manager/cubit/doctor_service_mangement_cubit.dart';
 import 'package:wasla/features/profile/data/repo/profile_repo_impl.dart';
 import 'package:wasla/features/profile/presentation/manager/cubit/profile_cubit.dart';
+import 'package:wasla/features/resident_service/features/booking/data/repo/resident_booking_repo_impl.dart';
+import 'package:wasla/features/resident_service/features/booking/presentation/manager/cubit/resident_booking_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/repo/doctor_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
 import 'package:wasla/features/resident_service/features/home/data/repo/home_repo_impl.dart';
@@ -46,6 +48,11 @@ List<SingleChildWidget> get buildAppCubits {
       create: (context) => DoctorServiceMangementCubit(
         DoctorServiceMangementRepoImpl(api: sl<ApiConsumer>()),
       ),
+      lazy: true,
+    ),
+    BlocProvider(
+      create: (context) =>
+          ResidentBookingCubit(ResidentBookingRepoImpl(api: sl<ApiConsumer>())),
       lazy: true,
     ),
   ];

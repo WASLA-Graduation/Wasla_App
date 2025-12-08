@@ -14,7 +14,7 @@ class DoctorDashboardBody extends StatelessWidget {
     return BlocBuilder<DoctorHomeCubit, DoctorHomeState>(
       builder: (context, state) {
         if (state is DoctorGetDataFailure) {
-          return const Center(child: CustomGetDataWidget());
+          return const Center(child: CustomErrGetData());
         }
 
         if (state is DoctorGetChartLoading ||
