@@ -35,7 +35,7 @@ class DoctorListItemDescriptionWidget extends StatelessWidget {
     return Text(
       maxLines: 1,
       overflow: TextOverflow.clip,
-      "${doctor.specialtyName} | ${fixHospital(doctor.hospitalname)}",
+      "${doctor.specialtyName} | ${doctor.hospitalname}",
       style: Theme.of(
         context,
       ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
@@ -51,7 +51,7 @@ class DoctorListItemDescriptionWidget extends StatelessWidget {
           child: Text(
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            "${"Dr"} ${doctor.fullName}",
+            doctor.fullName,
             style: Theme.of(
               context,
             ).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w700),
@@ -110,15 +110,12 @@ class DoctorListItemDescriptionWidget extends StatelessWidget {
     );
   }
 
-String fixHospital(String? word) {
-  final w = (word ?? "").trim();
-  if (w.isEmpty) return "hospital";
-  if (w.toLowerCase().contains("hospital")) {
-    return w;
+  String fixHospital(String? word) {
+    final w = (word ?? "").trim();
+    if (w.isEmpty) return "hospital";
+    if (w.toLowerCase().contains("hospital")) {
+      return w;
+    }
+    return "$w hospital";
   }
-  return "$w hospital";
-}
-
-
-
 }

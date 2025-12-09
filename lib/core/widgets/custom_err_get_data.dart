@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/assets.dart';
 
-class CustomGetDataWidget extends StatelessWidget {
-  const CustomGetDataWidget({super.key});
+class CustomErrGetData extends StatelessWidget {
+  const CustomErrGetData({super.key});
 
   @override
   Widget build(BuildContext context) {

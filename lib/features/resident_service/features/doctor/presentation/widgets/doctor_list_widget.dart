@@ -52,6 +52,7 @@ class DoctorListWidget extends StatelessWidget {
                   ),
                 )
               : ListView.separated(
+                  padding: const EdgeInsets.only(top: 0),
                   separatorBuilder: (_, index) => const SizedBox(height: 5),
                   itemCount: cubit.doctors.length,
                   physics: BouncingScrollPhysics(),

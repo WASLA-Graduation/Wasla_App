@@ -194,7 +194,19 @@
                   "upComing": "القادمة",
     "completed": "مكتملة",
     "cancelled": "ملغية",
-        "bookingStatus": "حالة الحجز"
+        "bookingStatus": "حالة الحجز",
+            "myBookings": "حجوزاتي",
+                "bookingCaceledSuccess": "تم الغاء الحجز بنجاح",
+                "specialty": "التخصص",
+    "hospital": "المستشفى",
+        "bookingDone": "تم الحجز بنجاح",
+            "allTimesBooked": "جميع التوقيتات محجوزة",
+                "serviceAddedSuccess": "تم اضافة الخدمة بنجاح"
+
+
+
+
+
 
 
 

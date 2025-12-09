@@ -154,7 +154,7 @@ class DoctorServiceMangementCubit extends Cubit<DoctorServiceMangementState> {
           .map(
             (e) => {
               ApiKeys.start: formatTimeOfDay(e["from"]!),
-              ApiKeys.end: formatTimeOfDay(e["from"]!),
+              ApiKeys.end: formatTimeOfDay(e["to"]!),
             },
           )
           .toList(),

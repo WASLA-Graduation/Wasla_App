@@ -53,6 +53,8 @@ class DoctorCubit extends Cubit<DoctorState> {
     dayOfWeek = null;
     dayOfWeek = serviceDay.dayOfWeek;
     addDayTimeSlotToList(serviceDay: serviceDay);
+    doctorBookingTypeGroupValue = "Examination";
+    gruoupValueIndex = 1;
     emit(DoctorUpdateState());
   }
 
@@ -62,6 +64,7 @@ class DoctorCubit extends Cubit<DoctorState> {
     serviceSelectedDayAndTimeId = null;
     for (var time in serviceDay.timeSlots) {
       if (!time.isBooking) {
+        // dayListTimeSlots.add("${time.start}-${time.end}");
         dayListTimeSlots.add(time.start);
         timeSlotIds.add(time.id);
       }
@@ -183,5 +186,7 @@ class DoctorCubit extends Cubit<DoctorState> {
     timeCurrentIndex = -1;
     dayCurrentIndex = 0;
     images = [];
+    doctorBookingTypeGroupValue = "Examination";
+    gruoupValueIndex = 1;
   }
 }
