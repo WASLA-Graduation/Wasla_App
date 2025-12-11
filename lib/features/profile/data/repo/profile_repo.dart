@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:wasla/core/models/doctor_specializationa_model.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
 
@@ -21,8 +22,24 @@ abstract class ProfileRepo {
     required double lng,
     File? image,
   });
+  Future<Either<String, Null>> updateDoctorInfo({
+    required String userId,
+    required String fullName,
+    required String phone,
+    required String birthDay,
+    required double lat,
+    required double lng,
+    required double graduationYear,
+    required int specializationId,
+    required int experienceYears,
+    required String universityName,
+    required String hospitalName,
+    File? image,
+  });
 
   Future<Either<String, DoctorModel>> getDoctorProfile({
     required String userId,
   });
+    Future<Either<String, List<DoctorSpecializationaModel>>> getSpecialization();
+
 }

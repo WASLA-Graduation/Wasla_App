@@ -48,6 +48,7 @@ class DoctorBookingModel {
       //         ?.map((e) => ApiEndPoints.imageBaseUrl + e)
       //         .toList() ??
       //     [],
+      
     );
   }
 }

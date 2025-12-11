@@ -49,7 +49,10 @@ class CustomTextFormField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         withTitle != null
-            ? Text(title!, style: Theme.of(context).textTheme.headlineMedium)
+            ? Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(title!, style: Theme.of(context).textTheme.labelMedium),
+            )
             : SizedBox(height: 0),
         const SizedBox(height: 11),
         TextFormField(

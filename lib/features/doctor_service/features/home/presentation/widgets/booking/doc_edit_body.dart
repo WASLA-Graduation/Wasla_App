@@ -10,6 +10,7 @@ import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_booking_model.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/manager/cubit/doctor_home_cubit.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/custom_choose_time_widget.dart';
+import 'package:wasla/features/profile/presentation/manager/cubit/profile_cubit.dart';
 
 class DocEditBookingBody extends StatelessWidget {
   const DocEditBookingBody({super.key, required this.bookingModel});
@@ -61,7 +62,13 @@ class DocEditBookingBody extends StatelessWidget {
                   const Spacer(),
                   GeneralButton(
                     onPressed: () async {
-                      await cubit.updateBooking(booking: bookingModel);
+                      if (context
+                          .read<ProfileCubit>()
+                          .doctorEditKey
+                          .currentState!
+                          .validate()) {
+                        await cubit.updateBooking(booking: bookingModel);
+                      }
                     },
                     text: state is DoctorUpdateBookingLoading
                         ? "loading".tr(context)

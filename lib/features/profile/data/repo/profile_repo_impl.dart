@@ -6,6 +6,7 @@ import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/models/doctor_specializationa_model.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
 import 'package:wasla/features/profile/data/repo/profile_repo.dart';
@@ -96,4 +97,68 @@ class ProfileRepoImpl extends ProfileRepo {
       return Left(e.errorModel.errorMessage);
     }
   }
+
+  @override
+  Future<Either<String, Null>> updateDoctorInfo({
+    required String userId,
+    required String fullName,
+    required String phone,
+    required String birthDay,
+    required double lat,
+    required double lng,
+    required double graduationYear,
+    required int specializationId,
+    required int experienceYears,
+    required String universityName,
+    required String hospitalName,
+    File? image,
+  }) async {
+    try {
+      await api.put(
+        ApiEndPoints.doctorUpdateProfile,
+        body: FormData.fromMap({
+          ApiKeys.userId: userId,
+          ApiKeys.fullNameCamel: fullName,
+          ApiKeys.phoneSmall: phone,
+          ApiKeys.latitudeSmall: lat,
+          ApiKeys.longitudeSmall: lng,
+          ApiKeys.birthDayCamel: birthDay,
+          ApiKeys.graduationYearCamel: graduationYear,
+          ApiKeys.specializationIdSmall: specializationId,
+          ApiKeys.experienceYearsCamel: experienceYears,
+          ApiKeys.universityNameCamel: universityName,
+          ApiKeys.hospitalName: hospitalName,
+          ApiKeys.cvSmall:null,
+          ApiKeys.profilePhoto: image != null
+              ? await MultipartFile.fromFile(
+                  image.path,
+                  filename: image.path.split('/').last,
+                )
+              : null,
+        }),
+        headers: {"Content-Type": "multipart/form-data"},
+      );
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+@override
+  Future<Either<String, List<DoctorSpecializationaModel>>>
+  getSpecialization() async {
+    try {
+      final response = await api.get(ApiEndPoints.getDoctorSpecializations);
+      final List<DoctorSpecializationaModel> specializations = [];
+      for (var specialization in response[ApiKeys.data]) {
+        specializations.add(
+          DoctorSpecializationaModel.fromJson(specialization),
+        );
+      }
+      return Right(specializations);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
 }

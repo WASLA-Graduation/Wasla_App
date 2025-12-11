@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_booking_model.dart';
+import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/views/doctor_edit_booking_view.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/views/doctor_add_service_view.dart';
+import 'package:wasla/features/profile/presentation/views/doctor_edit_profile_view.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_booking_view.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_review_view.dart';
@@ -125,6 +127,13 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) =>
               DoctorEditBookingView(bookingModel: doctorBookingModel),
+        );
+      case AppRoutes.doctorEditProfileScreen:
+        final DoctorModel doctorModel =
+            settigns.arguments as DoctorModel;
+        return MaterialPageRoute(
+          builder: (_) =>
+              DoctorEditProfileView(doctor: doctorModel),
         );
 
       default:

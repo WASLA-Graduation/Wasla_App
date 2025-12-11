@@ -32,3 +32,11 @@ final class ProfileUpdateInfoFailure extends ProfileState {
   final String errMsg;
   ProfileUpdateInfoFailure({required this.errMsg});
 }
+final class ProfileGetDocSpecializationLoading extends ProfileState {}
+
+final class ProfileGetDocSpecializationSuccess extends ProfileState {}
+
+final class ProfileGetDocSpecializationFailure extends ProfileState {
+  final String errMsg;
+  ProfileGetDocSpecializationFailure({required this.errMsg});
+}

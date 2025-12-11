@@ -9,6 +9,8 @@ abstract class ApiKeys {
   static const data = 'data';
   static const bookingDate = 'bookingDate';
   static const userId = 'userId';
+  static const profilePhoto = 'profilePhoto';
+  
   static const refreshToken = 'refreshToken';
   static const verificationCode = 'verificationCode';
   static const roleName = 'roleName';
@@ -29,6 +31,7 @@ abstract class ApiKeys {
   static const phone = 'Phone';
   static const emailCapital = 'Email';
   static const specializationId = 'SpecializationId';
+  static const specializationIdSmall = 'specializationId';
   static const experienceYears = 'ExperienceYears';
   static const universityName = 'UniversityName';
   static const graduationYear = 'GraduationYear';
