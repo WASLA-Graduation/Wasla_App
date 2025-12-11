@@ -64,8 +64,6 @@ abstract class ApiKeys {
   static const date = 'date';
   static const start = 'start';
   static const end = 'end';
-  static const serviceProviderName = 'serviceProviderName';
-  static const serviceProviderProfilePhoto = 'serviceProviderProfilePhoto';
   static const serviceNameArabic = 'serviceNameArabic';
   static const descriptionArabic = 'descriptionArabic';
   static const serviceNameEnglish = 'serviceNameEnglish';

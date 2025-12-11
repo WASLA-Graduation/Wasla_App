@@ -52,7 +52,7 @@ class DoctorModel extends UserBaseModel {
       phone: json[ApiKeys.phoneSmall],
       description: json[ApiKeys.descriptionSmall],
       image: ApiEndPoints.imageBaseUrl + json[ApiKeys.imageSmall],
-      cv: json[ApiKeys.cvSmall],
+      cv: json[ApiKeys.cvSmall]??'',
       experienceYears: json[ApiKeys.experienceYearsCamel],
       graduationYear: json[ApiKeys.graduationYearCamel],
       latitude: json[ApiKeys.latitudeSmall].toDouble(),
