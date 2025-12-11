@@ -11,6 +11,7 @@ abstract class ApiKeys {
   static const userId = 'userId';
   static const refreshToken = 'refreshToken';
   static const verificationCode = 'verificationCode';
+  static const serviceProviderProfilePhoto = 'serviceProviderProfilePhoto';
   static const roleName = 'roleName';
   static const images = 'images';
   static const value = 'value';
@@ -26,6 +27,7 @@ abstract class ApiKeys {
   static const image = 'Image';
   static const imageSmall = 'image';
   static const birthDay = 'BirthDay';
+  static const serviceProviderName = 'serviceProviderName';
   static const phone = 'Phone';
   static const emailCapital = 'Email';
   static const specializationId = 'SpecializationId';
