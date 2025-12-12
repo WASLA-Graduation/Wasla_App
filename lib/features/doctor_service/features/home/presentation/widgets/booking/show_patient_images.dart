@@ -15,7 +15,6 @@ class ShowPatientImagesWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<DoctorHomeCubit>();
 
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 15,
