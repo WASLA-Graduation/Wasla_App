@@ -16,12 +16,8 @@ class ShowPatientImagesWidget extends StatelessWidget {
     final cubit = context.read<DoctorHomeCubit>();
 
 
-    print("*************************************");
-    print("*************************************");
-    print("*****************${model.bookingImages.first}**************");
-    print("*************************************");
-    print("*************************************");
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 15,
       children: [
         Visibility(
@@ -50,6 +46,7 @@ class ShowPatientImagesWidget extends StatelessWidget {
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 10,
               children: List.generate(
                 model.bookingImages.length,
