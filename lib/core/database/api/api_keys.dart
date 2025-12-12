@@ -94,4 +94,8 @@ abstract class ApiKeys {
   static const String newDayOfWeek = "newDayOfWeek";
   static const String newStart = "newStart";
   static const String newEnd = "newEnd";
+  static const String year = "year";
+  static const String months = "months";
+  static const String month = "month";
+  static const String amount = "amount";
 }

@@ -13,7 +13,8 @@ class DoctorBookingModel {
   final int bookingType;
   final String phone;
   final double price;
-  // final List<String> bookingImages;
+  final int status;
+  final List<String> bookingImages;
 
   DoctorBookingModel({
     required this.bookingId,
@@ -27,7 +28,8 @@ class DoctorBookingModel {
     required this.bookingType,
     required this.phone,
     required this.price,
-    // required this.bookingImages,
+    required this.status,
+    required this.bookingImages,
   });
 
   factory DoctorBookingModel.fromJson(Map<String, dynamic> json) {
@@ -35,19 +37,19 @@ class DoctorBookingModel {
       bookingId: json[ApiKeys.bookingId] ?? 0,
       serviceName: json[ApiKeys.serviceName] ?? "",
       userName: json[ApiKeys.userName] ?? "",
-      userImage: (ApiEndPoints.imageBaseUrl + json[ApiKeys.userImage]),
+      userImage: ApiEndPoints.imageBaseUrl + (json[ApiKeys.userImage] ?? ""),
       date: json[ApiKeys.date] ?? "",
       start: json[ApiKeys.start] ?? "",
       end: json[ApiKeys.end] ?? "",
       day: json[ApiKeys.day] ?? 0,
       bookingType: json[ApiKeys.bookingType] ?? 0,
       phone: json[ApiKeys.phoneSmall] ?? "",
-      price: json[ApiKeys.price] ?? 0,
-      // bookingImages:
-      //     (json[ApiKeys.bookingImages] as List<String>?)
-      //         ?.map((e) => ApiEndPoints.imageBaseUrl + e)
-      //         .toList() ??
-      //     [],
+      price: (json[ApiKeys.price] ?? 0).toDouble(),
+      status: json[ApiKeys.status] ?? 0,
+      bookingImages: (json[ApiKeys.bookingImages] as List<dynamic>?)
+              ?.map((e) => ApiEndPoints.imageBaseUrl + e.toString())
+              .toList() ??
+          [],
     );
   }
 }

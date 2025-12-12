@@ -12,6 +12,7 @@ import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/core/widgets/general_confirmation_widget.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_booking_model.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/manager/cubit/doctor_home_cubit.dart';
+import 'package:wasla/features/doctor_service/features/home/presentation/widgets/booking/show_patient_images.dart';
 
 class DocBookingDataCard extends StatelessWidget {
   const DocBookingDataCard({
@@ -134,6 +135,8 @@ class DocBookingDataCard extends StatelessWidget {
                   ],
                 )
               : const SizedBox(),
+
+          ShowPatientImagesWidget(model: model),
         ],
       ),
     );

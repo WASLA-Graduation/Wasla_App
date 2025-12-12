@@ -201,7 +201,12 @@
     "hospital": "المستشفى",
         "bookingDone": "تم الحجز بنجاح",
             "allTimesBooked": "جميع التوقيتات محجوزة",
-                "serviceAddedSuccess": "تم اضافة الخدمة بنجاح"
+                "serviceAddedSuccess": "تم اضافة الخدمة بنجاح",
+                "showImages":"اظهار الصور",
+                    "patientImages":"صور المريض",
+                        "hideImages":"اخفاء الصور"
+
+
 
 
 

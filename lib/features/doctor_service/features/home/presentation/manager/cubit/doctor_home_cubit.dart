@@ -20,6 +20,18 @@ class DoctorHomeCubit extends Cubit<DoctorHomeState> {
 
   int bookingStatus = 1;
 
+  Set<int> bookingWithImagesIds = {};
+  Set<int> showPatientImages = {};
+
+  void toggleShowPatientImages(int bookingId) {
+    if (showPatientImages.contains(bookingId)) {
+      showPatientImages.remove(bookingId);
+    } else {
+      showPatientImages.add(bookingId);
+    }
+    emit(DoctorUpdate());
+  }
+
   void updateTime() {
     emit(DoctorUpdate());
   }
@@ -49,6 +61,8 @@ class DoctorHomeCubit extends Cubit<DoctorHomeState> {
   Future<void> getDoctorBookings({required int status}) async {
     emit(DoctorGetBookingsLoading());
     doctorBookings.clear();
+    bookingWithImagesIds.clear();
+    showPatientImages.clear();
     final String? doctorId = await getUserId();
     final response = await dashboardRepo.getDoctorBookings(
       doctorId: doctorId!,
@@ -61,6 +75,11 @@ class DoctorHomeCubit extends Cubit<DoctorHomeState> {
       },
       (success) {
         doctorBookings = success;
+        for (var booking in doctorBookings) {
+          if (booking.bookingImages.isNotEmpty) {
+            bookingWithImagesIds.add(booking.bookingId);
+          }
+        }
         emit(DoctorGetBookingsSuccess());
       },
     );

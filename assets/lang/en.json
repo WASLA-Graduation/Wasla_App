@@ -201,7 +201,10 @@
     "hospital": "Hospital",
     "bookingDone": "Booking Done Successfully",
     "serviceAddedSuccess": "Service Added Successfully",
-    "allTimesBooked": "All Times are Booked"
+    "allTimesBooked": "All Times are Booked",
+    "showImages":"Show Images",
+    "hideImages":"Hide Images",
+    "patientImages":"Patient Images"
 
     
   
