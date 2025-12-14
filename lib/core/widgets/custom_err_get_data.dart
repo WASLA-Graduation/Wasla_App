@@ -10,15 +10,12 @@ class CustomErrGetData extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          Image.asset(Assets.assetsImagesError, height: 200),
+          Image.asset(Assets.assetsImagesError, height: 150),
           const SizedBox(height: 20),
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              "errorFetchData".tr(context),
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+          Text(
+            "errorFetchData".tr(context),
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
         ],
       ),

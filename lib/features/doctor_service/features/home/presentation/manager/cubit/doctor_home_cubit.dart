@@ -17,6 +17,8 @@ class DoctorHomeCubit extends Cubit<DoctorHomeState> {
   DateTime? currentChoosenDate;
   TimeOfDay? currentChoosenFromTime;
   TimeOfDay? currentChoosenToTime;
+  String initalSelectedYear = '';
+  YearDataModel? yearDataModel;
 
   int bookingStatus = 1;
 
@@ -53,7 +55,15 @@ class DoctorHomeCubit extends Cubit<DoctorHomeState> {
       },
       (success) {
         doctorChartModel = success;
-        emit(DoctorGetChartSuccess());
+
+        if (doctorChartModel != null && doctorChartModel!.years.isNotEmpty) {
+          List<YearDataModel> sortedYears = doctorChartModel!.sortedYearsDesc;
+
+          getChartDataByYear(year: sortedYears.first.year);
+        } else {
+          initalSelectedYear = DateTime.now().year.toString();
+          emit(DoctorGetChartSuccess());
+        }
       },
     );
   }
@@ -124,5 +134,16 @@ class DoctorHomeCubit extends Cubit<DoctorHomeState> {
         emit(DoctorUpdateBookingSuccess());
       },
     );
+  }
+
+  void getChartDataByYear({required int year}) {
+    initalSelectedYear = year.toString();
+
+    for (var chart in doctorChartModel!.years) {
+      if (chart.year == year) {
+        yearDataModel = chart;
+        emit(DoctorGetChartSuccess());
+      }
+    }
   }
 }

@@ -56,7 +56,7 @@ class CustomDropDownMenu extends StatelessWidget {
 
   InputDecorationTheme _buildInputDecoration(BuildContext context) {
     return InputDecorationTheme(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
       filled: true,
       fillColor: AppColors.gray.withOpacity(0.1),
       border: OutlineInputBorder(

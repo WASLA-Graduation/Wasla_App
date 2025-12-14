@@ -5,7 +5,7 @@ class DoctorChartModel {
   final int numOfBookings;
   final int numOfCompletedBookings;
   final double totalAmount;
-  final List<YearDataModel> years;
+  List<YearDataModel> years;
 
   DoctorChartModel({
     required this.numOfPatients,
@@ -21,11 +21,17 @@ class DoctorChartModel {
       numOfBookings: json[ApiKeys.numOfBookings] ?? 0,
       numOfCompletedBookings: json[ApiKeys.numOfCompletedBookings] ?? 0,
       totalAmount: (json[ApiKeys.totalAmount] ?? 0).toDouble(),
-      years: (json[ApiKeys.years] as List<dynamic>?)
+      years:
+          (json[ApiKeys.years] as List<dynamic>?)
               ?.map((e) => YearDataModel.fromJson(e))
               .toList() ??
           [],
     );
+  }
+  List<YearDataModel> get sortedYearsDesc {
+    final sortedList = List<YearDataModel>.from(years);
+    sortedList.sort((a, b) => b.year.compareTo(a.year));
+    return sortedList;
   }
 }
 
@@ -33,15 +39,13 @@ class YearDataModel {
   final int year;
   final List<MonthDataModel> months;
 
-  YearDataModel({
-    required this.year,
-    required this.months,
-  });
+  YearDataModel({required this.year, required this.months});
 
   factory YearDataModel.fromJson(Map<String, dynamic> json) {
     return YearDataModel(
-      year: json[ApiKeys.year] ?? 0,
-      months: (json[ApiKeys.months] as List<dynamic>?)
+      year: json[ApiKeys.year] ?? DateTime.now().year,
+      months:
+          (json[ApiKeys.months] as List<dynamic>?)
               ?.map((e) => MonthDataModel.fromJson(e))
               .toList() ??
           [],
@@ -53,10 +57,7 @@ class MonthDataModel {
   final int month;
   final double amount;
 
-  MonthDataModel({
-    required this.month,
-    required this.amount,
-  });
+  MonthDataModel({required this.month, required this.amount});
 
   factory MonthDataModel.fromJson(Map<String, dynamic> json) {
     return MonthDataModel(
