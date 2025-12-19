@@ -217,7 +217,11 @@
   "month_10": "Oct",
   "month_11": "Nov",
   "month_12": "Dec",
-  "writeReview": "Write Review"
+  "writeReview": "Write Review",
+  "copy":"Copy",
+  "textCopied":"Text Copied",
+  "reviewDeleted":"Review Deleted Successfully"
+  
 
     
   

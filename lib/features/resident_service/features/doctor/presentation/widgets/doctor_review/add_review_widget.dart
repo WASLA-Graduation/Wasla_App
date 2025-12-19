@@ -15,6 +15,13 @@ class CustomAddReviweWidget extends StatefulWidget {
 }
 
 class _CustomAddReviweWidgetState extends State<CustomAddReviweWidget> {
+  @override
+  void dispose() {
+    reviewValueController.dispose();
+
+    super.dispose();
+  }
+
   final reviewValueController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -47,8 +54,6 @@ class _CustomAddReviweWidgetState extends State<CustomAddReviweWidget> {
               onChanged: (value) {
                 cubit.updateReviewValue(value);
               },
-              maxLines: 3,
-              minLines: 1,
               decoration: InputDecoration(
                 suffixIcon: IconButton(
                   icon: Image.asset(

@@ -33,4 +33,10 @@ abstract class DoctorRepo {
   });
 
   Future<Either<String, List<ReviewModel>>> getReview({required String userId});
+  Future<Either<String, Null>> deleteReview({required int reviewId});
+  Future<Either<String, Null>> updateReview({
+    required int reviewId,
+    required String content,
+    required int rating,
+  });
 }

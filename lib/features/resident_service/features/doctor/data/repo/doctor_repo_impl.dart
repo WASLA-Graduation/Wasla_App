@@ -9,7 +9,6 @@ import 'package:wasla/core/database/api/errors/api_exceptions.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
 import 'package:wasla/core/models/review_model.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
-import 'package:wasla/features/doctor_service/features/service/presentation/widgets/add_service_view_body.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/repo/doctor_repo.dart';
 
@@ -145,6 +144,37 @@ class DoctorRepoImpl extends DoctorRepo {
           ApiKeys.content: comment,
           ApiKeys.rating: rating,
           ApiKeys.serviceProviderId: serviceProviderId,
+        },
+      );
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> deleteReview({required int reviewId}) async {
+    try {
+      await api.delete(ApiEndPoints.getReviewsByRating + reviewId.toString());
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> updateReview({
+    required int reviewId,
+    required String content,
+    required int rating,
+  }) async {
+    try {
+      await api.put(
+        ApiEndPoints.updateReview,
+        body: {
+          ApiKeys.content: content,
+          ApiKeys.rating: rating,
+          ApiKeys.reviewId: reviewId,
         },
       );
       return Right(null);

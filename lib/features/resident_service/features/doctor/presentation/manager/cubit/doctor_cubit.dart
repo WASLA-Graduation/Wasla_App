@@ -236,6 +236,20 @@ class DoctorCubit extends Cubit<DoctorState> {
     );
   }
 
+  Future<void> deleteReview({required int reviewId}) async {
+    emit(DoctorDeleteReviweLoading());
+    final response = await doctorRepo.deleteReview(reviewId: reviewId);
+    response.fold(
+      (error) {
+        emit(DoctorDeleteReviweFailure(errMsg: error));
+      },
+      (success) {
+        reviewList.removeWhere((element) => element.reviewId == reviewId);
+        emit(DoctorDeleteReviweSuccess());
+      },
+    );
+  }
+
   void resetState() {
     dayListTimeSlots = [];
     timeCurrentIndex = -1;

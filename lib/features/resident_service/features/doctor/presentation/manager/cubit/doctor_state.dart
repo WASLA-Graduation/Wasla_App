@@ -55,6 +55,7 @@ final class DoctorGetReviwesFailure extends DoctorState {
 
   DoctorGetReviwesFailure({required this.errMsg});
 }
+
 final class DoctorAddReviweSuccess extends DoctorState {}
 
 final class DoctorAddReviweLoading extends DoctorState {}
@@ -63,4 +64,24 @@ final class DoctorAddReviweFailure extends DoctorState {
   final String errMsg;
 
   DoctorAddReviweFailure({required this.errMsg});
+}
+
+final class DoctorDeleteReviweSuccess extends DoctorState {}
+
+final class DoctorDeleteReviweLoading extends DoctorState {}
+
+final class DoctorDeleteReviweFailure extends DoctorState {
+  final String errMsg;
+
+  DoctorDeleteReviweFailure({required this.errMsg});
+}
+
+final class DoctorUpdateReviweSuccess extends DoctorState {}
+
+final class DoctorUpdateReviweLoading extends DoctorState {}
+
+final class DoctorUpdateReviweFailure extends DoctorState {
+  final String errMsg;
+
+  DoctorUpdateReviweFailure({required this.errMsg});
 }
