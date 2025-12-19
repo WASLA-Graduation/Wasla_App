@@ -10,6 +10,7 @@ import 'package:wasla/features/resident_service/features/doctor/presentation/wid
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_circle_with_data_list.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_details_card_widget.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_text_identfier_widget.dart';
+import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_review/add_review_widget.dart';
 
 class DoctorDetailsBody extends StatelessWidget {
   const DoctorDetailsBody({super.key, required this.doctor});
@@ -51,8 +52,12 @@ class DoctorDetailsBody extends StatelessWidget {
             context.pushScreen(AppRoutes.doctorReviewScreen);
           },
         ),
-        const SizedBox(height: 20),
-        DoctorReviewsList(length: 3, shrinkWrap: true),
+        const SizedBox(height: 15),
+        CustomAddReviweWidget(
+          doctorId: doctor.id,
+        ),
+        const SizedBox(height: 15),
+        DoctorReviewsList(length: 7, shrinkWrap: true),
       ],
     );
   }

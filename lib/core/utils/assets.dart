@@ -254,6 +254,18 @@ class Assets {
   /// assets/images/security.png
   static const String assetsImagesSecurity = "assets/images/security.png";
 
+  /// Assets for assetsImagesSendFilled
+  /// assets/images/sendFilled.png
+  static const String assetsImagesSendFilled = "assets/images/sendFilled.png";
+
+  /// Assets for assetsImagesSendOutlined
+  /// assets/images/sendOutlined.png
+  static const String assetsImagesSendOutlined = "assets/images/sendOutlined.png";
+
+  /// Assets for assetsImagesStarOutlined
+  /// assets/images/starOutlined.png
+  static const String assetsImagesStarOutlined = "assets/images/starOutlined.png";
+
   /// Assets for assetsImagesSuspend
   /// assets/images/suspend.png
   static const String assetsImagesSuspend = "assets/images/suspend.png";

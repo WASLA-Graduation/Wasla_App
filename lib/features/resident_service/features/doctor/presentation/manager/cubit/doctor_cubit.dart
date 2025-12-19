@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:wasla/core/functions/get_time_between_now_and_any_time.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
+import 'package:wasla/core/models/review_model.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/repo/doctor_repo.dart';
@@ -15,10 +16,11 @@ class DoctorCubit extends Cubit<DoctorState> {
   final DoctorRepo doctorRepo;
   DoctorCubit(this.doctorRepo) : super(DoctorInitial());
   List<DoctorSpecializationaModel> specialityList = [];
+  List<ReviewModel> reviewList = [];
 
   int specializationIndex = 0;
   List<bool> favouriteDocs = List.filled(10, false);
-
+  Set<int> starsIds = {};
   int ratingIndex = 0;
   List<DoctorDataModel> doctors = [];
   List<DoctorServiceModel> services = [];
@@ -34,6 +36,23 @@ class DoctorCubit extends Cubit<DoctorState> {
   String? doctorId;
   int? dayOfWeek;
   List<File> images = [];
+  String reviewValue = '';
+
+  void updateReviewValue(String value) {
+    reviewValue = value;
+    if (value.length <= 1) {
+      emit(DoctorUpdateState());
+    }
+  }
+
+  void toggleRatingStars(int index) {
+    if (starsIds.contains(index)) {
+      starsIds.remove(index);
+    } else {
+      starsIds.add(index);
+    }
+    emit(DoctorUpdateState());
+  }
 
   void uploadIImages(List<File> image) {
     images = image;
@@ -179,6 +198,42 @@ class DoctorCubit extends Cubit<DoctorState> {
         },
       );
     }
+  }
+
+  Future<void> getDoctorReveiws(String docId) async {
+    emit(DoctorGetReviwesLoading());
+
+    reviewList.clear();
+    final response = await doctorRepo.getReview(userId: docId);
+    response.fold(
+      (error) {
+        emit(DoctorGetReviwesFailure(errMsg: error));
+      },
+      (success) {
+        reviewList = success;
+        emit(DoctorGetReviwesSuccess());
+      },
+    );
+  }
+
+  Future<void> addReview(String docId) async {
+    emit(DoctorAddReviweLoading());
+    String? userId = await getUserId();
+    final response = await doctorRepo.addReview(
+      comment: reviewValue,
+      rating: starsIds.isEmpty ? 4 : starsIds.length,
+      serviceProviderId: docId,
+      userId: userId!,
+    );
+    response.fold(
+      (error) {
+        emit(DoctorAddReviweFailure(errMsg: error));
+      },
+      (success) {
+        reviewValue = "";
+        getDoctorReveiws(docId);
+      },
+    );
   }
 
   void resetState() {

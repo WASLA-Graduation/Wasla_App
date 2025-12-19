@@ -13,9 +13,23 @@ String formatStringDate(String stringDate) {
   }
 }
 
+String formatTimeOfDay(TimeOfDay time) {
+  final hour = time.hour.toString().padLeft(2, '0');
+  final minute = time.minute.toString().padLeft(2, '0');
+  return "$hour:$minute:00";
+}
 
-  String formatTimeOfDay(TimeOfDay time) {
-    final hour = time.hour.toString().padLeft(2, '0');
-    final minute = time.minute.toString().padLeft(2, '0');
-    return "$hour:$minute:00";
+String formatDateToCustomString(DateTime date) {
+  final now = DateTime.now();
+  final diff = now.difference(date);
+
+  if (diff.inDays == 0) {
+    return DateFormat('hh:mm a').format(date);
+  } else if (diff.inDays == 1) {
+    return 'Yesterday';
+  } else if (diff.inDays < 7) {
+    return DateFormat('EEEE').format(date); // Mon, Tue, etc.
+  } else {
+    return DateFormat('dd MMM').format(date); // 10 May
   }
+}

@@ -35,6 +35,7 @@ final class DoctorGetServicesListFailure extends DoctorState {
 
   DoctorGetServicesListFailure({required this.errMsg});
 }
+
 final class DoctorBookServiceSuccess extends DoctorState {}
 
 final class DoctorBookServiceLoading extends DoctorState {}
@@ -43,4 +44,23 @@ final class DoctorBookServiceFailure extends DoctorState {
   final String errMsg;
 
   DoctorBookServiceFailure({required this.errMsg});
+}
+
+final class DoctorGetReviwesSuccess extends DoctorState {}
+
+final class DoctorGetReviwesLoading extends DoctorState {}
+
+final class DoctorGetReviwesFailure extends DoctorState {
+  final String errMsg;
+
+  DoctorGetReviwesFailure({required this.errMsg});
+}
+final class DoctorAddReviweSuccess extends DoctorState {}
+
+final class DoctorAddReviweLoading extends DoctorState {}
+
+final class DoctorAddReviweFailure extends DoctorState {
+  final String errMsg;
+
+  DoctorAddReviweFailure({required this.errMsg});
 }

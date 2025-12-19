@@ -98,4 +98,10 @@ abstract class ApiKeys {
   static const String months = "months";
   static const String month = "month";
   static const String amount = "amount";
+  static const String reviewId = 'reviewId';
+  static const String reviewerName = 'reviewerName';
+  static const String userImageUrl = 'userImageUrl';
+  static const String comment = 'comment';
+  static const String content = 'content';
+  static const String createdAt = 'createdAt';
 }
