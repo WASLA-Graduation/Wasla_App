@@ -108,9 +108,13 @@ class DoctorCubit extends Cubit<DoctorState> {
     emit(DoctorUpdateState());
   }
 
-  void changeRatingIndex(int index) {
+  void changeRatingIndex(int index, int rating) {
     ratingIndex = index;
-    emit(DoctorUpdateState());
+    if (index == 0) {
+      getDoctorReveiws(doctorId!);
+    } else {
+      getDoctorReveiwsByRating(rating);
+    }
   }
 
   void toggleFavouriteIcon({required index}) {
@@ -214,6 +218,7 @@ class DoctorCubit extends Cubit<DoctorState> {
       },
       (success) {
         reviewList = success;
+        // reviewsByRatingList = reviewList;
         emit(DoctorGetReviwesSuccess());
       },
     );
@@ -278,6 +283,22 @@ class DoctorCubit extends Cubit<DoctorState> {
     );
   }
 
+  Future<void> getDoctorReveiwsByRating(int rating) async {
+    emit(DoctorGetReviwesLoading());
+
+    reviewList.clear();
+    final response = await doctorRepo.getReviewsByRating(rating: rating);
+    response.fold(
+      (error) {
+        emit(DoctorGetReviwesFailure(errMsg: error));
+      },
+      (success) {
+        reviewList = success;
+        emit(DoctorGetReviwesSuccess());
+      },
+    );
+  }
+
   void resetState() {
     dayListTimeSlots = [];
     timeCurrentIndex = -1;
@@ -288,5 +309,6 @@ class DoctorCubit extends Cubit<DoctorState> {
     reviewValue = "";
     starsIds = {};
     reviewValueController.clear();
+    ratingIndex = 0;
   }
 }

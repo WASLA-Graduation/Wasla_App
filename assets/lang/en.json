@@ -223,7 +223,8 @@
   "reviewDeleted":"Review Deleted Successfully",
   "reviewUpdated":"Review Updated Successfully",
   "somethingWentWrong":"somethingWentWrong",
-    "editReview": "Edit Review"
+    "editReview": "Edit Review",
+    "noReviews": "No Reviews yet."
 
   
 

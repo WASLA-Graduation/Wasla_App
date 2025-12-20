@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skeletonizer/skeletonizer.dart';
-import 'package:wasla/core/models/review_model.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_review_item.dart';
@@ -18,7 +18,19 @@ class DoctorReviewsList extends StatelessWidget {
     return BlocBuilder<DoctorCubit, DoctorState>(
       builder: (context, state) {
         return state is DoctorGetReviwesLoading
-            ? _loadingList()
+            ? Center(
+            child: SpinKitFadingCircle(
+              color: AppColors.primaryColor,
+              size: 50.0,
+            ),
+          )
+            : cubit.reviewList.isEmpty
+            ? Center(
+                child: Text(
+                  "noReviews".tr(context),
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              )
             : ListView.separated(
                 padding: const EdgeInsets.only(bottom: 20),
                 shrinkWrap: shrinkWrap ?? false,
@@ -38,27 +50,5 @@ class DoctorReviewsList extends StatelessWidget {
     );
   }
 
-  Skeletonizer _loadingList() {
-    return Skeletonizer(
-      child: ListView.separated(
-        padding: const EdgeInsets.only(bottom: 20),
-        shrinkWrap: shrinkWrap ?? false,
-        separatorBuilder: (context, index) =>
-            const Divider(thickness: 0.019, color: AppColors.gray, height: 20),
-        itemCount: 8,
-        physics: NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) => CustomReviewItem(
-          reviewModel: ReviewModel(
-            comment: "",
-            createdAt: DateTime.now(),
-            rating: 0,
-            reviewerName: "",
-            userImageUrl: "",
-            userId: '',
-            reviewId: 1,
-          ),
-        ),
-      ),
-    );
-  }
+
 }

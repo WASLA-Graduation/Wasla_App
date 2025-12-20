@@ -182,4 +182,22 @@ class DoctorRepoImpl extends DoctorRepo {
       return Left(e.errorModel.errorMessage);
     }
   }
+
+  @override
+  Future<Either<String, List<ReviewModel>>> getReviewsByRating({
+    required int rating,
+  }) async {
+    try {
+      final response = await api.get(
+        ApiEndPoints.getReviewsByRating + rating.toString(),
+      );
+      final List<ReviewModel> reviews = [];
+      for (var review in response[ApiKeys.data]) {
+        reviews.add(ReviewModel.fromJson(review));
+      }
+      return Right(reviews);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
 }

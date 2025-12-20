@@ -39,4 +39,6 @@ abstract class DoctorRepo {
     required String content,
     required int rating,
   });
+    Future<Either<String, List<ReviewModel>>> getReviewsByRating({required int rating});
+
 }

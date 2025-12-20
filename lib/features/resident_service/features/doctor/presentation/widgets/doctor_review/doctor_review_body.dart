@@ -14,9 +14,13 @@ class DoctorReviewBody extends StatelessWidget {
         children: [
           DoctorReviewsListByRating(),
           const SizedBox(height: 20),
-          DoctorReviewsList(
-            length: context.read<DoctorCubit>().reviewList.length,
-            shrinkWrap: true,
+          BlocBuilder<DoctorCubit, DoctorState>(
+            builder: (context, state) {
+              return DoctorReviewsList(
+                length: context.read<DoctorCubit>().reviewList.length,
+                shrinkWrap: true,
+              );
+            },
           ),
         ],
       ),

@@ -18,7 +18,7 @@ class DoctorReviewsListByRating extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.only(right: 8),
                 child: GestureDetector(
-                  onTap: () => cubit.changeRatingIndex(index),
+                  onTap: () => cubit.changeRatingIndex(index,6-index),
                   child: CustomRatingWidget(
                     rating: index == 0 ? "All" : "${6 - index}",
                     isSelected: cubit.ratingIndex == index,
