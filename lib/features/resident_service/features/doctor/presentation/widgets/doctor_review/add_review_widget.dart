@@ -2,27 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
+import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_review/custom_review_text_field.dart';
 
-class CustomAddReviweWidget extends StatefulWidget {
+class CustomAddReviweWidget extends StatelessWidget {
   const CustomAddReviweWidget({super.key, required this.doctorId});
 
   final String doctorId;
 
   @override
-  State<CustomAddReviweWidget> createState() => _CustomAddReviweWidgetState();
-}
-
-class _CustomAddReviweWidgetState extends State<CustomAddReviweWidget> {
-  @override
-  void dispose() {
-    reviewValueController.dispose();
-
-    super.dispose();
-  }
-
-  final reviewValueController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<DoctorCubit>();
@@ -49,32 +37,18 @@ class _CustomAddReviweWidgetState extends State<CustomAddReviweWidget> {
               }),
             ),
 
-            TextField(
-              controller: reviewValueController,
+            ReviewInputField(
+              controller: cubit.reviewValueController,
+              hintText: "writeReview".tr(context),
               onChanged: (value) {
                 cubit.updateReviewValue(value);
               },
-              decoration: InputDecoration(
-                suffixIcon: IconButton(
-                  icon: Image.asset(
-                    color: AppColors.primaryColor,
-                    width: 25,
-                    cubit.reviewValue.isEmpty
-                        ? Assets.assetsImagesSendOutlined
-                        : Assets.assetsImagesSendFilled,
-                  ),
-                  onPressed: () async {
-                    if (cubit.reviewValue.isNotEmpty) {
-                      cubit.addReview(widget.doctorId);
-                      reviewValueController.clear();
-                    }
-                  },
-                ),
-                hintText: "writeReview".tr(context),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
+              onSend: () async {
+                if (cubit.reviewValue.isNotEmpty) {
+                  cubit.reviewValueController.clear();
+                  await cubit.addReview(doctorId);
+                }
+              },
             ),
           ],
         );

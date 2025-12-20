@@ -7,7 +7,7 @@ class ReviewModel {
   final String reviewerName;
   final String userImageUrl;
   final int rating;
-  final String comment;
+   String comment;
   final DateTime createdAt;
 
   ReviewModel({

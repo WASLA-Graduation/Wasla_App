@@ -220,7 +220,13 @@
     "writeReview": "كتابة التقييم",
     "copy":"نسخ",
       "textCopied":"تم نسخ النص ",
-        "reviewDeleted":"تم حذف التقييم بنجاح"
+        "reviewDeleted":"تم حذف التقييم بنجاح",
+        "reviewUpdated":"تم تحديث التقييم بنجاح",
+          "somethingWentWrong":" حدث خطأ ما",
+              "editReview": "تعديل التقييم"
+
+
+        
 
   }
 

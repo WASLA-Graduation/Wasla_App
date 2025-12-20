@@ -220,7 +220,11 @@
   "writeReview": "Write Review",
   "copy":"Copy",
   "textCopied":"Text Copied",
-  "reviewDeleted":"Review Deleted Successfully"
+  "reviewDeleted":"Review Deleted Successfully",
+  "reviewUpdated":"Review Updated Successfully",
+  "somethingWentWrong":"somethingWentWrong",
+    "editReview": "Edit Review"
+
   
 
     

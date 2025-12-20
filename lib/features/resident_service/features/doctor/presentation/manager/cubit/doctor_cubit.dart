@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:wasla/core/functions/get_time_between_now_and_any_time.dart';
@@ -17,6 +18,8 @@ class DoctorCubit extends Cubit<DoctorState> {
   DoctorCubit(this.doctorRepo) : super(DoctorInitial());
   List<DoctorSpecializationaModel> specialityList = [];
   List<ReviewModel> reviewList = [];
+  final reviewValueController = TextEditingController();
+  final reviewEditValueController = TextEditingController();
 
   int specializationIndex = 0;
   List<bool> favouriteDocs = List.filled(10, false);
@@ -250,6 +253,31 @@ class DoctorCubit extends Cubit<DoctorState> {
     );
   }
 
+  Future<void> updateReview({required ReviewModel selectedReviwe}) async {
+    emit(DoctorUpdateReviweLoading());
+
+    final response = await doctorRepo.updateReview(
+      reviewId: selectedReviwe.reviewId,
+      content: reviewValue,
+      rating: selectedReviwe.rating,
+    );
+    response.fold(
+      (error) {
+        emit(DoctorUpdateReviweFailure(errMsg: error));
+      },
+      (success) {
+        for (var review in reviewList) {
+          if (review.reviewId == selectedReviwe.reviewId) {
+            review.comment = reviewValue;
+          }
+        }
+        reviewValue = "";
+
+        emit(DoctorUpdateReviweSuccess());
+      },
+    );
+  }
+
   void resetState() {
     dayListTimeSlots = [];
     timeCurrentIndex = -1;
@@ -257,5 +285,8 @@ class DoctorCubit extends Cubit<DoctorState> {
     images = [];
     doctorBookingTypeGroupValue = "Examination";
     gruoupValueIndex = 1;
+    reviewValue = "";
+    starsIds = {};
+    reviewValueController.clear();
   }
 }

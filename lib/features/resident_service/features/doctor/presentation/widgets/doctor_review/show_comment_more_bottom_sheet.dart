@@ -17,7 +17,8 @@ class ShowCommentMoreBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final options = ReviewBottomSheetModel.commentOptions.where((item) {
-      if (item.action == ReviewAction.delete) {
+      if (item.action == ReviewAction.delete ||
+          item.action == ReviewAction.edit) {
         return canDelete;
       }
       return true;

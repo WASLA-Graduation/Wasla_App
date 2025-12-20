@@ -38,6 +38,7 @@ class _DoctorDetailsViewState extends State<DoctorDetailsView> {
   }
 
   void getDoctorReveiws() async {
+    context.read<DoctorCubit>().resetState();
     context.read<DoctorCubit>().getDoctorReveiws(widget.doctor.id);
   }
 }
