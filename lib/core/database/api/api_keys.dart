@@ -31,6 +31,7 @@ abstract class ApiKeys {
   static const phone = 'Phone';
   static const emailCapital = 'Email';
   static const specializationId = 'SpecializationId';
+  static const specializationIdCamel = 'specializationId';
   static const experienceYears = 'ExperienceYears';
   static const universityName = 'UniversityName';
   static const graduationYear = 'GraduationYear';
@@ -72,6 +73,7 @@ abstract class ApiKeys {
   static const serviceProviderId = 'serviceProviderId';
   static const english = 'english';
   static const arabic = 'arabic';
+  static const profilePhoto = 'profilePhoto';
   static const serviceId = 'serviceId';
   static const hospitalName = 'hospitalName';
   static const roleId = 'roleId';

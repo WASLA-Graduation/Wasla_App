@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/functions/get_file_from_device.dart';
 import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
 import 'package:wasla/core/widgets/general_button.dart';
@@ -42,7 +43,21 @@ class CustomDoctorCompleteInfoForm extends StatelessWidget {
             },
           ),
           const VerticalSpace(height: 2),
-          CertificateUploadButton(),
+          BlocBuilder<AuthCubit, AuthState>(
+            builder: (context, state) {
+              return UploadFileButton(
+                title: "uplodCv".tr(context),
+                fileName: cubit.file?.name,
+                isUploaded: cubit.file != null,
+                onTap: () async {
+                  final file = await getFileFromDevice();
+                  if (file != null) {
+                    cubit.updateFile(file);
+                  }
+                },
+              );
+            },
+          ),
           const VerticalSpace(height: 2),
           CustomTextFormField(
             keyboardTyp: TextInputType.number,
@@ -75,6 +90,7 @@ class CustomDoctorCompleteInfoForm extends StatelessWidget {
             hint: "descriptionAboutYou".tr(context),
             onChanged: (description) => cubit.description = description,
             validator: (value) => validateSimpleData(value, context),
+            minLines: 1,
             maxLines: 5,
           ),
           const VerticalSpace(height: 2),

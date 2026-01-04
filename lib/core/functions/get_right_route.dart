@@ -55,7 +55,7 @@ String getRightEditProfileRoute() {
       return AppRoutes.residentEditProfileScreen;
 
     case ServiceRole.doctor:
-      return AppRoutes.residentEditProfileScreen;
+      return AppRoutes.doctorEditProfileScreen;
 
     case ServiceRole.technician:
       return AppRoutes.residentEditProfileScreen;

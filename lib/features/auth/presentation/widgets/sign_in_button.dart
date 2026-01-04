@@ -22,20 +22,20 @@ class SignInButton extends StatelessWidget {
         if (state is AuthSignInFailure) {
           toastAlert(color: AppColors.error, msg: state.errMsg);
         } else if (state is AuthSignInSuccess) {
-          if (!cubit.dataModel.isVerified) {
+          if (!cubit.dataModel!.isVerified) {
             cubit.forgotPassCheckEmail().then((value) {
               context.pushReplacementScreen(
                 AppRoutes.verifyScreen,
                 arguments: getRightCompleteServiceRoute(
-                  role: cubit.dataModel.role,
+                  role: cubit.dataModel!.role,
                 ),
               );
             });
-          } else if (!cubit.dataModel.isCompleteRegister) {
+          } else if (!cubit.dataModel!.isCompleteRegister) {
             context.pushReplacementScreen(
-              getRightCompleteServiceRoute(role: cubit.dataModel.role),
+              getRightCompleteServiceRoute(role: cubit.dataModel!.role),
             );
-          } else if (cubit.dataModel.statue == 2) {
+          } else if (cubit.dataModel!.statue == 2) {
             ///user is pending
             Navigator.push(
               context,
@@ -47,7 +47,7 @@ class SignInButton extends StatelessWidget {
                 ),
               ),
             );
-          } else if (cubit.dataModel.statue == 1) {
+          } else if (cubit.dataModel!.statue == 1) {
             //user suspended
 
             Navigator.push(
@@ -60,7 +60,7 @@ class SignInButton extends StatelessWidget {
                 ),
               ),
             );
-          } else if (cubit.dataModel.statue == 3) {
+          } else if (cubit.dataModel!.statue == 3) {
             //user disabled
             Navigator.push(
               context,
@@ -74,7 +74,7 @@ class SignInButton extends StatelessWidget {
             );
           } else {
             cubit.saveSignInData();
-            context.pushReplacementScreen(getRightRoute(role: cubit.dataModel.role));
+            context.pushReplacementScreen(getRightRoute(role: cubit.dataModel!.role));
           }
         }
       },

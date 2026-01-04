@@ -53,7 +53,7 @@ class AuthCubit extends Cubit<AuthState> {
   Timer? timer;
   int remainingSeconds = 60;
   File? residentImage, resturentImage;
-  late final SignInDataModel dataModel;
+  SignInDataModel? dataModel;
 
   void enableVerifyButton() {
     enableButton = true;
@@ -277,13 +277,13 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void saveSignInData() async {
-    SecureStorageHelper.set(key: ApiKeys.token, value: dataModel.token);
+    SecureStorageHelper.set(key: ApiKeys.token, value: dataModel!.token);
     SecureStorageHelper.set(
       key: ApiKeys.refreshToken,
-      value: dataModel.refreshToken,
+      value: dataModel!.refreshToken,
     );
-    SecureStorageHelper.set(key: ApiKeys.userId, value: dataModel.userId);
-    SharedPreferencesHelper.set(key: ApiKeys.role, value: dataModel.role.name);
+    SecureStorageHelper.set(key: ApiKeys.userId, value: dataModel!.userId);
+    SharedPreferencesHelper.set(key: ApiKeys.role, value: dataModel!.role.name);
     await SharedPreferencesHelper.set(key: AppStrings.isSingedIn, value: true);
   }
 }

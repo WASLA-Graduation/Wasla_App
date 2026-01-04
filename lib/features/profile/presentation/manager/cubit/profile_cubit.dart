@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
@@ -6,6 +7,7 @@ import 'package:wasla/core/database/cache/secure_storage_helper.dart';
 import 'package:wasla/core/enums/service_role.dart';
 import 'package:wasla/core/functions/get_service_role.dart';
 import 'package:wasla/core/models/user_base_model.dart';
+import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
 import 'package:wasla/features/profile/data/repo/profile_repo.dart';
 part 'profile_state.dart';
 
@@ -13,10 +15,16 @@ class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit(this.profileRepo) : super(ProfileInitial());
   final ProfileRepo profileRepo;
 
+  PlatformFile? file;
+
   String fullName = '',
       phoneNumber = '',
       newPassword = '',
-      currentPassword = '';
+      currentPassword = '',
+      hospitalName = '',
+      universityName = '';
+
+  int experienceYears = 0, specializationId = 0;
   double lat = 0, lng = 0;
   bool isPasswordVisible = false;
   UserBaseModel? user;
@@ -27,6 +35,11 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   void toggglePassIcon() {
     isPasswordVisible = !isPasswordVisible;
+    emit(ProfileUpdate());
+  }
+
+  void updateFile(PlatformFile f) {
+    file = f;
     emit(ProfileUpdate());
   }
 
@@ -89,6 +102,13 @@ class ProfileCubit extends Cubit<ProfileState> {
     lat = 0;
     fullName = '';
     phoneNumber = '';
+    newPassword = '';
+    currentPassword = '';
+    hospitalName = '';
+    universityName = '';
+    experienceYears = 0;
+    specializationId = 0;
+    file = null;
   }
 
   _getRightProfileAccordingToRole({required String userId}) async {
@@ -127,8 +147,27 @@ class ProfileCubit extends Cubit<ProfileState> {
         // TODO: Handle this case.
         throw UnimplementedError();
       case ServiceRole.doctor:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        final doctor = user as DoctorModel;
+        return await profileRepo.updateDoctorInfo(
+          fullName: fullName.isEmpty ? doctor.fullNameBase : fullName,
+          phone: phoneNumber.isEmpty ? doctor.phoneNumberBase : phoneNumber,
+          lat: lat == 0 ? doctor.latitude : lat,
+          lng: lng == 0 ? doctor.longitude : lng,
+          profilePhoto: image,
+          userId: userId,
+          birthDay: doctor.birthDay,
+          universityName: doctor.universityName,
+          hospitalName: hospitalName.isEmpty
+              ? doctor.hospitalname
+              : hospitalName,
+          graduationYear: doctor.graduationYear.toDouble(),
+          experienceYears: experienceYears == 0
+              ? doctor.experienceYears
+              : experienceYears,
+          specializationId: 1,
+          cv: file,
+        );
+
       case ServiceRole.technician:
         // TODO: Handle this case.
         throw UnimplementedError();

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
@@ -92,6 +93,60 @@ class ProfileRepoImpl extends ProfileRepo {
     try {
       final response = await api.get(ApiEndPoints.doctorGetProfile + userId);
       return Right(DoctorModel.fromJson(response[ApiKeys.data]));
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> updateDoctorInfo({
+    required String userId,
+    required String fullName,
+    required String phone,
+    required String birthDay,
+    required String universityName,
+    required String hospitalName,
+    required double lat,
+    required double lng,
+    required double graduationYear,
+    required int experienceYears,
+    int? specializationId,
+    File? profilePhoto,
+    PlatformFile? cv,
+  }) async {
+    try {
+      final formData = FormData.fromMap({
+        ApiKeys.userId: userId,
+        ApiKeys.fullNameCamel: fullName,
+        ApiKeys.phoneSmall: phone,
+        ApiKeys.latitudeSmall: lat,
+        ApiKeys.longitude: lng,
+        ApiKeys.birthDay: birthDay,
+        ApiKeys.experienceYearsCamel: experienceYears,
+        ApiKeys.universityNameCamel: universityName,
+        ApiKeys.graduationYearCamel: graduationYear,
+        ApiKeys.hospitalName: hospitalName,
+        ApiKeys.specializationIdCamel: specializationId,
+
+        if (profilePhoto != null)
+          ApiKeys.profilePhoto: await MultipartFile.fromFile(
+            profilePhoto.path,
+            filename: profilePhoto.path.split('/').last,
+          ),
+
+        if (cv != null)
+          ApiKeys.cvSmall: await MultipartFile.fromFile(
+            cv.path!,
+            filename: cv.name,
+          ),
+      });
+
+      await api.put(
+        ApiEndPoints.doctorUpdateProfile,
+        body: formData,
+        headers: {"Content-Type": "multipart/form-data"},
+      );
+      return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

@@ -10,7 +10,7 @@ import 'package:wasla/core/functions/handle_initial_route.dart';
 import 'package:wasla/core/manager/global/global_cubit.dart';
 import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/utils/app_strings.dart';
-import 'package:wasla/features/doctor_service/features/home/presentation/views/doctor_dashboard_view.dart';
+import 'package:wasla/features/auth/presentation/views/doctor_complete_info_view.dart';
 
 class WaslaApp extends StatelessWidget {
   const WaslaApp({super.key});
@@ -35,7 +35,7 @@ class WaslaApp extends StatelessWidget {
             darkTheme: AppThemes.darkTheme(context),
             themeMode: globalCubit.themeMode,
             initialRoute: handleInitialRoute(),
-            // home: DoctorDashboardView(),
+            // home: DoctorCompleteInfoView(),
             onGenerateRoute: AppRouter.onGenerateRoute,
           );
         },
