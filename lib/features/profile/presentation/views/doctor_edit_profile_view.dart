@@ -10,7 +10,10 @@ class DoctorEditProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("edit_profile".tr(context))),
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+        title: Text("edit_profile".tr(context)),
+      ),
       body: DocEditProfileBody(doc: doc),
     );
   }
