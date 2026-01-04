@@ -1,8 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
 import 'package:wasla/core/enums/service_role.dart';
 import 'package:wasla/core/extensions/service_role_extension.dart';
+import 'package:wasla/features/doctor_service/features/home/presentation/manager/cubit/doctor_home_cubit.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
 
 String getRightRoute({required ServiceRole role}) {
   switch (role) {
@@ -65,5 +69,27 @@ String getRightEditProfileRoute() {
 
     case ServiceRole.gymOwner:
       return AppRoutes.residentEditProfileScreen;
+  }
+}
+
+void resetDataInSpecificRole(BuildContext context) {
+  final String? role = SharedPreferencesHelper.get(key: ApiKeys.role);
+  switch (ServiceRoleExtension.fromString(role!)) {
+    case ServiceRole.resident:
+      context.read<HomeResidentCubit>().navBarcurrentIndex = 0;
+    case ServiceRole.driver:
+      AppRoutes.residentEditProfileScreen;
+
+    case ServiceRole.doctor:
+      context.read<DoctorHomeCubit>().navBarCurrentIndex = 0;
+
+    case ServiceRole.technician:
+      AppRoutes.residentEditProfileScreen;
+
+    case ServiceRole.restaurantOwner:
+      AppRoutes.residentEditProfileScreen;
+
+    case ServiceRole.gymOwner:
+      AppRoutes.residentEditProfileScreen;
   }
 }

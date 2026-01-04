@@ -35,4 +35,11 @@ abstract class SharedPreferencesHelper {
   static Future<bool> clear() async {
     return _sharedPreferences.clear();
   }
+
+  // Remove list of keys
+  static Future<void> removeKeys({required List<String> keys}) async {
+    for (final key in keys) {
+      await _sharedPreferences.remove(key);
+    }
+  }
 }

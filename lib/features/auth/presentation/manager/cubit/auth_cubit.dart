@@ -282,8 +282,15 @@ class AuthCubit extends Cubit<AuthState> {
       key: ApiKeys.refreshToken,
       value: dataModel!.refreshToken,
     );
-    SecureStorageHelper.set(key: ApiKeys.userId, value: dataModel!.userId);
-    SharedPreferencesHelper.set(key: ApiKeys.role, value: dataModel!.role.name);
+    await SecureStorageHelper.set(
+      key: ApiKeys.userId,
+      value: dataModel!.userId,
+    );
+    await SharedPreferencesHelper.set(
+      key: ApiKeys.role,
+      value: dataModel!.role.name,
+    );
+
     await SharedPreferencesHelper.set(key: AppStrings.isSingedIn, value: true);
   }
 }
