@@ -34,7 +34,7 @@ class CustomCircleWithDataList extends StatelessWidget {
   late final List<String> numsString = [
     "${doctor.numberOfpatients.toString()}+",
     "${doctor.experienceYears.toString()}+",
-    (doctor.rating.toString()),
-    (doctor.rating.toString()),
+    (doctor.rating.toStringAsPrecision(2)),
+    ("100+"),
   ];
 }

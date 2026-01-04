@@ -312,3 +312,5 @@ class DoctorCubit extends Cubit<DoctorState> {
     ratingIndex = 0;
   }
 }
+
+

@@ -83,8 +83,6 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthTimer());
       } else {
         timer.cancel();
-
-        ///handle your logic
       }
     });
   }

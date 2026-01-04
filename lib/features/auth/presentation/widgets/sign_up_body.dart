@@ -51,6 +51,13 @@ class SignUpBody extends StatelessWidget {
 
               onSelecte: (role) {
                 cubit.roleId = role ?? '';
+                for (var selectedRole in cubit.roles) {
+                  if (selectedRole.id == role) {
+                    cubit.role = selectedRole.serviceRole.name;
+
+                    break;
+                  }
+                }
               },
             );
           },
