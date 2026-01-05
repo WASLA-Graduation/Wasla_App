@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
-import 'package:wasla/core/models/review_model.dart';
+import 'package:wasla/features/reviews/data/models/review_model.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 

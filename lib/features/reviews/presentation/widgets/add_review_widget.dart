@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_review/custom_review_text_field.dart';
+import 'package:wasla/features/reviews/presentation/manager/cubit/reviews_cubit.dart';
+import 'package:wasla/features/reviews/presentation/widgets/custom_review_text_field.dart';
 
 class CustomAddReviweWidget extends StatelessWidget {
-  const CustomAddReviweWidget({super.key, required this.doctorId});
+  const CustomAddReviweWidget({super.key, required this.serviceProviderId});
 
-  final String doctorId;
+  final String serviceProviderId;
 
   @override
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<DoctorCubit>();
-    return BlocBuilder<DoctorCubit, DoctorState>(
+    final cubit = context.read<ReviewsCubit>();
+    return BlocBuilder<ReviewsCubit, ReviewsState>(
       builder: (context, state) {
         return Column(
           spacing: 10,
@@ -45,8 +45,9 @@ class CustomAddReviweWidget extends StatelessWidget {
               },
               onSend: () async {
                 if (cubit.reviewValue.isNotEmpty) {
+                  FocusScope.of(context).unfocus();
                   cubit.reviewValueController.clear();
-                  await cubit.addReview(doctorId);
+                  await cubit.addReview(serviceProviderId);
                 }
               },
             ),

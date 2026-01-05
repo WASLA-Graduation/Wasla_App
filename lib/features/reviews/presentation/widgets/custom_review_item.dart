@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/functions/format_date_from_string.dart';
-import 'package:wasla/core/models/review_model.dart';
+import 'package:wasla/features/reviews/data/models/review_model.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/cached_network_image_widget.dart';
 import 'package:wasla/core/widgets/readmore_text.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/custom_rating_widget.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_review/build__more_comment_widget.dart';
+import 'package:wasla/features/reviews/presentation/widgets/custom_rating_widget.dart';
+import 'package:wasla/features/reviews/presentation/widgets/build__more_comment_widget.dart';
 
 class CustomReviewItem extends StatelessWidget {
   const CustomReviewItem({super.key, required this.reviewModel});

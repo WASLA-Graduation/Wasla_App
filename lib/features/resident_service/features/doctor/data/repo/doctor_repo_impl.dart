@@ -7,7 +7,7 @@ import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
-import 'package:wasla/core/models/review_model.dart';
+import 'package:wasla/features/reviews/data/models/review_model.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/repo/doctor_repo.dart';
@@ -200,4 +200,6 @@ class DoctorRepoImpl extends DoctorRepo {
       return Left(e.errorModel.errorMessage);
     }
   }
+
+
 }

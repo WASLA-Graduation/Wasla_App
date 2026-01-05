@@ -3,21 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_review_item.dart';
+import 'package:wasla/features/reviews/presentation/widgets/custom_review_item.dart';
+import 'package:wasla/features/reviews/presentation/manager/cubit/reviews_cubit.dart';
 
-class DoctorReviewsList extends StatelessWidget {
-  const DoctorReviewsList({super.key, required this.length, this.shrinkWrap});
+class ReviewsList extends StatelessWidget {
+  const ReviewsList({super.key, required this.length, this.shrinkWrap});
 
   final int length;
   final bool? shrinkWrap;
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<DoctorCubit>();
-    return BlocBuilder<DoctorCubit, DoctorState>(
+    final cubit = context.read<ReviewsCubit>();
+    return BlocBuilder<ReviewsCubit, ReviewsState>(
       builder: (context, state) {
-        return state is DoctorGetReviwesLoading
+        return state is GetReviewsLoading
             ? Center(
             child: SpinKitFadingCircle(
               color: AppColors.primaryColor,

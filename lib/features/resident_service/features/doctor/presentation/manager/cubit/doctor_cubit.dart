@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:wasla/core/functions/get_time_between_now_and_any_time.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
-import 'package:wasla/core/models/review_model.dart';
+import 'package:wasla/features/reviews/data/models/review_model.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/repo/doctor_repo.dart';
@@ -306,10 +306,10 @@ class DoctorCubit extends Cubit<DoctorState> {
     images = [];
     doctorBookingTypeGroupValue = "Examination";
     gruoupValueIndex = 1;
-    reviewValue = "";
-    starsIds = {};
-    reviewValueController.clear();
-    ratingIndex = 0;
+    // reviewValue = "";
+    // starsIds = {};
+    // reviewValueController.clear();
+    // ratingIndex = 0;
   }
 }
 

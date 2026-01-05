@@ -9,7 +9,7 @@ import 'package:wasla/features/doctor_service/features/service/presentation/view
 import 'package:wasla/features/profile/presentation/views/doctor_edit_profile_view.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_booking_view.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_review_view.dart';
+import 'package:wasla/features/reviews/presentation/views/reviews_view.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_see_serevices_view.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
 import 'package:wasla/core/service/maps/cubit/maps_helper_cubit.dart';
@@ -112,8 +112,8 @@ abstract class AppRouter {
         return MaterialPageRoute(builder: (_) => DoctorNavBarView());
       case AppRoutes.doctorAddServiceScreen:
         return MaterialPageRoute(builder: (_) => DoctorAddServiceView());
-      case AppRoutes.doctorReviewScreen:
-        return MaterialPageRoute(builder: (_) => DoctorReviewView());
+      case AppRoutes.reviewScreen:
+        return MaterialPageRoute(builder: (_) => ReviewsView());
       case AppRoutes.doctorSeeSevicesScreen:
         final String doctorId = settigns.arguments as String;
         return MaterialPageRoute(

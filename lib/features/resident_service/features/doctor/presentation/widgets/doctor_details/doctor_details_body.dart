@@ -6,11 +6,11 @@ import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/widgets/readmore_text.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/custom_doc_reviws_list.dart';
+import 'package:wasla/features/reviews/presentation/widgets/custom_reviws_list.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_circle_with_data_list.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_details_card_widget.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_text_identfier_widget.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_review/add_review_widget.dart';
+import 'package:wasla/features/reviews/presentation/widgets/add_review_widget.dart';
 
 class DoctorDetailsBody extends StatelessWidget {
   const DoctorDetailsBody({super.key, required this.doctor});
@@ -49,15 +49,15 @@ class DoctorDetailsBody extends StatelessWidget {
           leading: "reviwes".tr(context),
           trailing: "seeAll".tr(context),
           onTap: () {
-            context.pushScreen(AppRoutes.doctorReviewScreen);
+            context.pushScreen(AppRoutes.reviewScreen);
           },
         ),
         const SizedBox(height: 15),
         CustomAddReviweWidget(
-          doctorId: doctor.id,
+          serviceProviderId: doctor.id,
         ),
         const SizedBox(height: 15),
-        DoctorReviewsList(length: 7, shrinkWrap: true),
+        ReviewsList(length: 7, shrinkWrap: true),
       ],
     );
   }

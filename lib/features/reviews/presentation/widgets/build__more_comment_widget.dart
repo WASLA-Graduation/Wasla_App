@@ -6,12 +6,12 @@ import 'package:wasla/core/enums/review_action.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
-import 'package:wasla/core/models/review_model.dart';
+import 'package:wasla/features/reviews/data/models/review_model.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_review/show_comment_more_bottom_sheet.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_review/show_edit_review_dialog.dart';
+import 'package:wasla/features/reviews/presentation/widgets/show_comment_more_bottom_sheet.dart';
+import 'package:wasla/features/reviews/presentation/widgets/show_edit_review_dialog.dart';
+import 'package:wasla/features/reviews/presentation/manager/cubit/reviews_cubit.dart';
 
 class BuildMoreCommentWidget extends StatelessWidget {
   const BuildMoreCommentWidget({super.key, required this.reviewModel});
@@ -20,22 +20,22 @@ class BuildMoreCommentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<DoctorCubit>();
+    final cubit = context.read<ReviewsCubit>();
 
-    return BlocConsumer<DoctorCubit, DoctorState>(
+    return BlocConsumer<ReviewsCubit, ReviewsState>(
       listener: (context, state) {
-        if (state is DoctorDeleteReviweSuccess) {
+        if (state is DeleteReviewsuccess) {
           toastAlert(
             color: AppColors.primaryColor,
             msg: "reviewDeleted".tr(context),
           );
-        } else if (state is DoctorUpdateReviweSuccess) {
+        } else if (state is UpdateReviewsuccess) {
           toastAlert(
             color: AppColors.primaryColor,
             msg: "reviewUpdated".tr(context),
           );
-        } else if (state is DoctorDeleteReviweFailure ||
-            state is DoctorUpdateReviweFailure) {
+        } else if (state is DeleteReviewFailure ||
+            state is UpdateReviewFailure) {
           toastAlert(
             color: AppColors.error,
             msg: "somethingWentWrong".tr(context),
@@ -68,14 +68,12 @@ class BuildMoreCommentWidget extends StatelessWidget {
                         break;
 
                       case ReviewAction.delete:
-                        Navigator.pop(bottomSheetContext);
                         await cubit.deleteReview(
                           reviewId: reviewModel.reviewId,
                         );
                         break;
 
                       case ReviewAction.copy:
-                        Navigator.pop(bottomSheetContext);
                         Clipboard.setData(
                           ClipboardData(text: reviewModel.comment),
                         );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/enums/review_action.dart';
-import 'package:wasla/core/models/review_bottom_sheet_model.dart';
+import 'package:wasla/features/reviews/data/models/review_bottom_sheet_model.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 
 class ShowCommentMoreBottomSheet extends StatelessWidget {

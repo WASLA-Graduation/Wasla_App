@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
-import 'package:wasla/core/models/review_model.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_review/custom_review_text_field.dart';
+import 'package:wasla/features/reviews/data/models/review_model.dart';
+import 'package:wasla/features/reviews/presentation/widgets/custom_review_text_field.dart';
+import 'package:wasla/features/reviews/presentation/manager/cubit/reviews_cubit.dart';
 
 class ShowReviewDialog extends StatelessWidget {
   const ShowReviewDialog({super.key, required this.reviewModel});
@@ -12,7 +12,7 @@ class ShowReviewDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<DoctorCubit>();
+    final cubit = context.read<ReviewsCubit>();
 
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -30,7 +30,7 @@ class ShowReviewDialog extends StatelessWidget {
         onSend: () async {
           if (cubit.reviewValue.isEmpty) return;
           Navigator.pop(context);
-          await cubit.updateReview(selectedReviwe: reviewModel);
+          await cubit.updateReview(selectedReveiw: reviewModel);
         },
       ),
       actions: [
