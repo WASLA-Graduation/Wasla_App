@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_booking_model.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_chart_model.dart';
+import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
 
 abstract class DoctorDashboardRepo {
   Future<Either<String, DoctorChartModel>> getDoctorChart({
@@ -21,4 +22,8 @@ abstract class DoctorDashboardRepo {
     required String endTime,
     required String bookingDate,
   });
+    Future<Either<String, DoctorModel>> getDoctorProfile({
+    required String userId,
+  });
+
 }

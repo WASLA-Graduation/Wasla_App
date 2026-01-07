@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/manager/cubit/doctor_home_cubit.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/widgets/doc_home/doctor_dashboard_body.dart';
 
@@ -21,13 +20,8 @@ class _DoctorDashboardViewState extends State<DoctorDashboardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        forceMaterialTransparency: true,
-        title: Text('dashboardOverview'.tr(context)),
-        automaticallyImplyLeading: false,
-      ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+        padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
         child: DoctorDashboardBody(),
       ),
     );
@@ -37,5 +31,6 @@ class _DoctorDashboardViewState extends State<DoctorDashboardView> {
     context.read<DoctorHomeCubit>().getDoctorChart();
     context.read<DoctorHomeCubit>().bookingStatus = 1;
     context.read<DoctorHomeCubit>().getDoctorBookings(status: 1);
+    context.read<DoctorHomeCubit>().getUserProfile();
   }
 }

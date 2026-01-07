@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/category_service_model.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_bannar_widget.dart';
-import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_home_app_bar.dart';
+import 'package:wasla/core/widgets/custom_home_app_bar.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_identfier_widget.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_search_bar.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_service_category_list.dart';
@@ -15,6 +17,7 @@ class ResidentHomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return ListView(
       padding: EdgeInsets.only(
         left: SizeConfig.blockWidth * 6,
@@ -23,7 +26,19 @@ class ResidentHomeBody extends StatelessWidget {
         bottom: 0,
       ),
       children: [
-        const CustomHomeAppBar(),
+        BlocBuilder<HomeResidentCubit, HomeResidentState>(
+          builder: (context, state) {
+            final cubit = context.read<HomeResidentCubit>();
+
+            return CustomHomeAppBar(
+              isLoading: cubit.user == null,
+              userName: cubit.user?.fullName,
+              imageUrl: cubit.user?.imageUrl,
+              onNotificationTap: () {},
+              onBookmarkTap: () {},
+            );
+          },
+        ),
         const SizedBox(height: 20),
         CustomSearchBar(
           onTap: () {

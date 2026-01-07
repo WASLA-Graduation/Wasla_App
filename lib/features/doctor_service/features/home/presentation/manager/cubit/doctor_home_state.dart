@@ -41,3 +41,13 @@ final class DoctorGetChartByYear extends DoctorHomeState {
   final YearDataModel yearDataModel;
   DoctorGetChartByYear({required this.yearDataModel});
 }
+
+
+final class GetProfileLoading extends DoctorHomeState {}
+
+final class GetProfileSuccess extends DoctorHomeState {}
+
+final class GetProfileFailure extends DoctorHomeState {
+  final String errMsg;
+  GetProfileFailure({required this.errMsg});
+}

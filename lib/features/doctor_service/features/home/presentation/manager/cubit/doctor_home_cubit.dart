@@ -5,6 +5,7 @@ import 'package:wasla/core/functions/format_date_from_string.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_booking_model.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_chart_model.dart';
+import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
 import 'package:wasla/features/doctor_service/features/home/data/repo/doctor_dashboard_repo.dart';
 
 part 'doctor_home_state.dart';
@@ -19,6 +20,7 @@ class DoctorHomeCubit extends Cubit<DoctorHomeState> {
   TimeOfDay? currentChoosenToTime;
   String initalSelectedYear = '';
   YearDataModel? yearDataModel;
+  DoctorModel? user;
 
   int bookingStatus = 1;
 
@@ -145,5 +147,21 @@ class DoctorHomeCubit extends Cubit<DoctorHomeState> {
         emit(DoctorGetChartSuccess());
       }
     }
+  }
+
+  Future<void> getUserProfile() async {
+    emit(GetProfileLoading());
+    final String? userId = await getUserId();
+
+    final response = await dashboardRepo.getDoctorProfile(userId: userId!);
+    response.fold(
+      (error) {
+        emit(GetProfileFailure(errMsg: error));
+      },
+      (success) {
+        user = success;
+        emit(GetProfileSuccess());
+      },
+    );
   }
 }

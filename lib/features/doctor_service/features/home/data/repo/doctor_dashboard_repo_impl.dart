@@ -5,6 +5,7 @@ import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_booking_model.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_chart_model.dart';
+import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
 import 'package:wasla/features/doctor_service/features/home/data/repo/doctor_dashboard_repo.dart';
 
 class DoctorDashboardRepoImpl extends DoctorDashboardRepo {
@@ -85,6 +86,18 @@ class DoctorDashboardRepoImpl extends DoctorDashboardRepo {
       );
 
       return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, DoctorModel>> getDoctorProfile({
+    required String userId,
+  }) async {
+    try {
+      final response = await api.get(ApiEndPoints.doctorGetProfile + userId);
+      return Right(DoctorModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

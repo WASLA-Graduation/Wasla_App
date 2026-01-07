@@ -4,6 +4,8 @@ import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
+import 'package:wasla/core/widgets/custom_home_app_bar.dart';
+import 'package:wasla/features/doctor_service/features/home/presentation/manager/cubit/doctor_home_cubit.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/widgets/booking/doc_booking_list.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/widgets/doc_home/doc_chart_dev.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/widgets/doc_home/doc_dash_cards_data.dart';
@@ -18,6 +20,20 @@ class DoctorDashboardContent extends StatelessWidget {
     return Column(
       spacing: 25,
       children: [
+        BlocBuilder<DoctorHomeCubit, DoctorHomeState>(
+          builder: (context, state) {
+            final cubit = context.read<DoctorHomeCubit>();
+            return CustomHomeAppBar(
+              isLoading: cubit.user == null,
+              userName: cubit.user?.fullName,
+              imageUrl: cubit.user?.image,
+              onNotificationTap: () {},
+              onBookmarkTap: () {},
+              showBookmark: false,
+            );
+          },
+        ),
+
         DoctorDashboardCardData(),
         TextDetailsIdentfierWidget(
           leading: "reviwes".tr(context),
@@ -37,3 +53,5 @@ class DoctorDashboardContent extends StatelessWidget {
     );
   }
 }
+
+
