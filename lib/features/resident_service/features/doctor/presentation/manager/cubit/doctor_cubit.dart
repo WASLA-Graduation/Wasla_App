@@ -41,22 +41,6 @@ class DoctorCubit extends Cubit<DoctorState> {
   List<File> images = [];
   String reviewValue = '';
 
-  void updateReviewValue(String value) {
-    reviewValue = value;
-    if (value.length <= 1) {
-      emit(DoctorUpdateState());
-    }
-  }
-
-  void toggleRatingStars(int index) {
-    if (starsIds.contains(index)) {
-      starsIds.remove(index);
-    } else {
-      starsIds.add(index);
-    }
-    emit(DoctorUpdateState());
-  }
-
   void uploadIImages(List<File> image) {
     images = image;
     emit(DoctorUpdateState());
@@ -106,15 +90,6 @@ class DoctorCubit extends Cubit<DoctorState> {
   void changeSpecializationIndex(int index) {
     specializationIndex = index;
     emit(DoctorUpdateState());
-  }
-
-  void changeRatingIndex(int index, int rating) {
-    ratingIndex = index;
-    if (index == 0) {
-      getDoctorReveiws(doctorId!);
-    } else {
-      getDoctorReveiwsByRating(rating);
-    }
   }
 
   void toggleFavouriteIcon({required index}) {
@@ -207,98 +182,6 @@ class DoctorCubit extends Cubit<DoctorState> {
     }
   }
 
-  Future<void> getDoctorReveiws(String docId) async {
-    emit(DoctorGetReviwesLoading());
-
-    reviewList.clear();
-    final response = await doctorRepo.getReview(userId: docId);
-    response.fold(
-      (error) {
-        emit(DoctorGetReviwesFailure(errMsg: error));
-      },
-      (success) {
-        reviewList = success;
-        // reviewsByRatingList = reviewList;
-        emit(DoctorGetReviwesSuccess());
-      },
-    );
-  }
-
-  Future<void> addReview(String docId) async {
-    emit(DoctorAddReviweLoading());
-    String? userId = await getUserId();
-    final response = await doctorRepo.addReview(
-      comment: reviewValue,
-      rating: starsIds.isEmpty ? 4 : starsIds.length,
-      serviceProviderId: docId,
-      userId: userId!,
-    );
-    response.fold(
-      (error) {
-        emit(DoctorAddReviweFailure(errMsg: error));
-      },
-      (success) {
-        reviewValue = "";
-        getDoctorReveiws(docId);
-      },
-    );
-  }
-
-  Future<void> deleteReview({required int reviewId}) async {
-    emit(DoctorDeleteReviweLoading());
-    final response = await doctorRepo.deleteReview(reviewId: reviewId);
-    response.fold(
-      (error) {
-        emit(DoctorDeleteReviweFailure(errMsg: error));
-      },
-      (success) {
-        reviewList.removeWhere((element) => element.reviewId == reviewId);
-        emit(DoctorDeleteReviweSuccess());
-      },
-    );
-  }
-
-  Future<void> updateReview({required ReviewModel selectedReviwe}) async {
-    emit(DoctorUpdateReviweLoading());
-
-    final response = await doctorRepo.updateReview(
-      reviewId: selectedReviwe.reviewId,
-      content: reviewValue,
-      rating: selectedReviwe.rating,
-    );
-    response.fold(
-      (error) {
-        emit(DoctorUpdateReviweFailure(errMsg: error));
-      },
-      (success) {
-        for (var review in reviewList) {
-          if (review.reviewId == selectedReviwe.reviewId) {
-            review.comment = reviewValue;
-          }
-        }
-        reviewValue = "";
-
-        emit(DoctorUpdateReviweSuccess());
-      },
-    );
-  }
-
-  Future<void> getDoctorReveiwsByRating(int rating) async {
-    emit(DoctorGetReviwesLoading());
-
-    reviewList.clear();
-    final response = await doctorRepo.getReviewsByRating(rating: rating);
-    response.fold(
-      (error) {
-        emit(DoctorGetReviwesFailure(errMsg: error));
-      },
-      (success) {
-        reviewList = success;
-        emit(DoctorGetReviwesSuccess());
-      },
-    );
-  }
-
   void resetState() {
     dayListTimeSlots = [];
     timeCurrentIndex = -1;
@@ -306,11 +189,5 @@ class DoctorCubit extends Cubit<DoctorState> {
     images = [];
     doctorBookingTypeGroupValue = "Examination";
     gruoupValueIndex = 1;
-    // reviewValue = "";
-    // starsIds = {};
-    // reviewValueController.clear();
-    // ratingIndex = 0;
   }
 }
-
-

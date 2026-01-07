@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
-import 'package:wasla/features/reviews/data/models/review_model.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 
@@ -25,20 +24,6 @@ abstract class DoctorRepo {
     required int serviceProviderType,
     List<File>? images,
   });
-  Future<Either<String, Null>> addReview({
-    required String userId,
-    required String comment,
-    required int rating,
-    required String serviceProviderId,
-  });
 
-  Future<Either<String, List<ReviewModel>>> getReview({required String userId});
-  Future<Either<String, Null>> deleteReview({required int reviewId});
-  Future<Either<String, Null>> updateReview({
-    required int reviewId,
-    required String content,
-    required int rating,
-  });
-    Future<Either<String, List<ReviewModel>>> getReviewsByRating({required int rating});
 
 }

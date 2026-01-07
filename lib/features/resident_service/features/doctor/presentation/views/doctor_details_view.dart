@@ -42,7 +42,6 @@ class _DoctorDetailsViewState extends State<DoctorDetailsView> {
     context.read<DoctorCubit>().resetState(); 
     context.read<ReviewsCubit>().resetState(); 
     context.read<ReviewsCubit>().getReveiws(widget.doctor.id);
-    // context.read<DoctorCubit>().doctorId = widget.doctor.id;
     context.read<ReviewsCubit>().selectedUserId = widget.doctor.id;
   }
 }
