@@ -38,7 +38,9 @@ class ChoosePatientManyImageWidget extends StatelessWidget {
                 Icon(Icons.image, color: AppColors.primaryColor, size: 26),
                 const SizedBox(width: 10),
                 Text(
-                  "uploadImages".tr(context),
+                  cubit.images.isNotEmpty
+                      ? cubit.images.length.toString()
+                      : "uploadImages".tr(context),
                   style: Theme.of(context).textTheme.labelMedium!.copyWith(
                     color: context.isDarkMode
                         ? AppColors.whiteColor70

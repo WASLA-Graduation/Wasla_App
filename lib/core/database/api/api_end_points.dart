@@ -1,5 +1,5 @@
 abstract class ApiEndPoints {
-  static const String baseUrl = 'http://waslammka.runasp.net/';
+  static const String baseUrl = 'https://waslammka.runasp.net/';
   static const String register = 'api/Account/register';
   static const String login = 'api/Account/login';
   static const String resetPasswordForProfile = 'api/Account/change-password';

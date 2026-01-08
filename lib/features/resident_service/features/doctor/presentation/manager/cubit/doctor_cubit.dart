@@ -39,7 +39,6 @@ class DoctorCubit extends Cubit<DoctorState> {
   String? doctorId;
   int? dayOfWeek;
   List<File> images = [];
-  String reviewValue = '';
 
   void uploadIImages(List<File> image) {
     images = image;

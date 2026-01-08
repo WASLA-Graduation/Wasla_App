@@ -164,7 +164,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           experienceYears: experienceYears == 0
               ? doctor.experienceYears
               : experienceYears,
-          specializationId: 1,
+          specializationId: 0,
           cv: file,
         );
 
