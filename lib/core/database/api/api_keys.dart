@@ -71,6 +71,7 @@ abstract class ApiKeys {
   static const descriptionEnglish = 'descriptionEnglish';
   static const doctorId = 'doctorId';
   static const serviceProviderId = 'serviceProviderId';
+  static const favouriteId = 'favouriteId';
   static const english = 'english';
   static const arabic = 'arabic';
   static const profilePhoto = 'profilePhoto';
@@ -106,4 +107,7 @@ abstract class ApiKeys {
   static const String comment = 'comment';
   static const String content = 'content';
   static const String createdAt = 'createdAt';
+  static const String residentId = 'residentId';
+  static const serviceProviderPhone = 'serviceProviderPhone';
+  static const serviceType  = 'serviceType ';
 }

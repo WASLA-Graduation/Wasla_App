@@ -1,7 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
+import 'package:wasla/core/manager/Favourite/favourite_cubit.dart';
 import 'package:wasla/core/manager/global/global_cubit.dart';
+import 'package:wasla/core/repo/favourite_repo_impl.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/auth/data/repo/auth_repo_impl.dart';
 import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
@@ -60,6 +62,11 @@ List<SingleChildWidget> get buildAppCubits {
     BlocProvider(
       create: (context) =>
           ReviewsCubit(ReviewsRepoImpl(api: sl<ApiConsumer>())),
+      lazy: true,
+    ),
+    BlocProvider(
+      create: (context) =>
+          FavouriteCubit(FavouriteRepoImpl(api: sl<ApiConsumer>())),
       lazy: true,
     ),
   ];
