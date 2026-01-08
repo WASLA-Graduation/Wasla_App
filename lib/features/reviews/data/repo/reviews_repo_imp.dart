@@ -11,7 +11,7 @@ class ReviewsRepoImpl extends ReviewsRepo {
 
   ReviewsRepoImpl({required this.api});
 
-@override
+  @override
   Future<Either<String, List<ReviewModel>>> getReview({
     required String userId,
   }) async {
@@ -84,10 +84,11 @@ class ReviewsRepoImpl extends ReviewsRepo {
   @override
   Future<Either<String, List<ReviewModel>>> getReviewsByRating({
     required int rating,
+    required String serviceProviderId,
   }) async {
     try {
       final response = await api.get(
-        ApiEndPoints.getReviewsByRating + rating.toString(),
+        "${ApiEndPoints.getReviewsByRating}$rating/service-providers/$serviceProviderId",
       );
       final List<ReviewModel> reviews = [];
       for (var review in response[ApiKeys.data]) {
@@ -98,6 +99,4 @@ class ReviewsRepoImpl extends ReviewsRepo {
       return Left(e.errorModel.errorMessage);
     }
   }
-
-
 }

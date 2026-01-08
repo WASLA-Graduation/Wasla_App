@@ -33,7 +33,7 @@ abstract class ApiEndPoints {
   static const String getBookingDetailsForUser =
       'api/Book/GetBookingDetailsForUser';
   static const String getReviews = 'api/Review/service-provider/';
-  static const String getReviewsByRating = 'api/Review/rating/';
+  static const String getReviewsByRating = 'api/Review/ratings/';
   static const String addReview = 'api/Review/AddReview';
   static const String updateReview = 'api/Review/UpdateReview';
   static const String addToFavourite = 'api/Favourite/AddFavourite';

@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:wasla/features/reviews/data/models/review_model.dart';
 
 abstract class ReviewsRepo {
-    Future<Either<String, Null>> addReview({
+  Future<Either<String, Null>> addReview({
     required String userId,
     required String comment,
     required int rating,
@@ -16,5 +16,8 @@ abstract class ReviewsRepo {
     required String content,
     required int rating,
   });
-    Future<Either<String, List<ReviewModel>>> getReviewsByRating({required int rating});
+  Future<Either<String, List<ReviewModel>>> getReviewsByRating({
+    required int rating,
+    required String serviceProviderId,
+  });
 }

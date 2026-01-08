@@ -122,7 +122,10 @@ class ReviewsCubit extends Cubit<ReviewsState> {
     emit(GetReviewsLoading());
 
     reviewList.clear();
-    final response = await reviewsRepo.getReviewsByRating(rating: rating);
+    final response = await reviewsRepo.getReviewsByRating(
+      rating: rating,
+      serviceProviderId: selectedUserId!,
+    );
     response.fold(
       (error) {
         emit(GetReviewsFailure(errMsg: error));
