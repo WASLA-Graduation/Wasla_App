@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:wasla/core/models/service_provider_fav_model.dart';
+import 'package:wasla/features/favourite/data/models/service_provider_fav_model.dart';
 
 abstract class FavouriteRepo {
   Future<Either<String, Null>> addToFavorite({

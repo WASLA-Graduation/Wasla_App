@@ -3,8 +3,8 @@ import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
-import 'package:wasla/core/models/service_provider_fav_model.dart';
-import 'package:wasla/core/repo/favourite_repo.dart';
+import 'package:wasla/features/favourite/data/models/service_provider_fav_model.dart';
+import 'package:wasla/features/favourite/data/repo/favourite_repo.dart';
 
 class FavouriteRepoImpl extends FavouriteRepo {
   final ApiConsumer api;
