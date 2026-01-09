@@ -12,10 +12,10 @@ class ReviewsCubit extends Cubit<ReviewsState> {
   List<ReviewModel> reviewList = [];
   final reviewValueController = TextEditingController();
   final reviewEditValueController = TextEditingController();
-  Set<int> starsIds = {};
   String reviewValue = '';
   int ratingIndex = 0;
   String? selectedUserId;
+  int starsCount = -1;
 
   void updateReviewValue(String value) {
     reviewValue = value;
@@ -24,11 +24,11 @@ class ReviewsCubit extends Cubit<ReviewsState> {
     }
   }
 
-  void toggleRatingStars(int index) {
-    if (starsIds.contains(index)) {
-      starsIds.remove(index);
+  void updateRatingStars(int index) {
+    if (index == starsCount) {
+      starsCount = -1;
     } else {
-      starsIds.add(index);
+      starsCount = index;
     }
     emit(ReviewsUpdate());
   }
@@ -64,7 +64,7 @@ class ReviewsCubit extends Cubit<ReviewsState> {
     String? userId = await getUserId();
     final response = await reviewsRepo.addReview(
       comment: reviewValue,
-      rating: starsIds.isEmpty ? 4 : starsIds.length,
+      rating: starsCount == -1 ? 3 : starsCount + 1,
       serviceProviderId: serviceProviderId,
       userId: userId!,
     );
@@ -139,8 +139,8 @@ class ReviewsCubit extends Cubit<ReviewsState> {
 
   void resetState() {
     reviewValue = "";
-    starsIds = {};
     reviewValueController.clear();
     ratingIndex = 0;
+    starsCount = -1;
   }
 }

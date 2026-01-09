@@ -38,6 +38,6 @@ abstract class ApiEndPoints {
   static const String updateReview = 'api/Review/UpdateReview';
   static const String addToFavourite = 'api/Favourite/AddFavourite';
   static const String removeFromFavourite = 'api/Favourite/RemoveFavourite';
-  static const String getAllFavourites = 'api/Favourite/RemoveFavourite';
+  static const String getAllFavourites = 'api/Favourite/GetAllFavourites';
   static const String getFavouritesByType = 'api/Favourite/GetFavouritesByType';
 }

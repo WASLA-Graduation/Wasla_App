@@ -1,3 +1,4 @@
+import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 
 class ServiceProviderModel {
@@ -26,7 +27,7 @@ class ServiceProviderModel {
       serviceProviderId: json[ApiKeys.serviceProviderId],
       serviceProviderName: json[ApiKeys.serviceProviderName],
       serviceProviderProfilePhoto:
-          json[ApiKeys.serviceProviderProfilePhoto],
+          ApiEndPoints.imageBaseUrl + json[ApiKeys.serviceProviderProfilePhoto],
       serviceProviderPhone: json[ApiKeys.serviceProviderPhone],
       serviceProviderType: json[ApiKeys.serviceProviderType],
     );
@@ -38,8 +39,7 @@ class ServiceProviderModel {
       ApiKeys.residentId: residentId,
       ApiKeys.serviceProviderId: serviceProviderId,
       ApiKeys.serviceProviderName: serviceProviderName,
-      ApiKeys.serviceProviderProfilePhoto:
-          serviceProviderProfilePhoto,
+      ApiKeys.serviceProviderProfilePhoto: serviceProviderProfilePhoto,
       ApiKeys.serviceProviderPhone: serviceProviderPhone,
       ApiKeys.serviceProviderType: serviceProviderType,
     };

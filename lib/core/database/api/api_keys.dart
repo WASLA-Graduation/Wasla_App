@@ -109,5 +109,5 @@ abstract class ApiKeys {
   static const String createdAt = 'createdAt';
   static const String residentId = 'residentId';
   static const serviceProviderPhone = 'serviceProviderPhone';
-  static const serviceType  = 'serviceType ';
+  static const serviceType  = 'serviceType';
 }

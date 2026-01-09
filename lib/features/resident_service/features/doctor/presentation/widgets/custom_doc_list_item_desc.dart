@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
+import 'package:wasla/features/favourite/presentation/manager/cubit/favourite_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/custom_bottom_sheet_romove_fav.dart';
 
 class DoctorListItemDescriptionWidget extends StatelessWidget {
@@ -59,25 +59,27 @@ class DoctorListItemDescriptionWidget extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         withoutFav == null || withoutFav == false
-            ? BlocBuilder<DoctorCubit, DoctorState>(
+            ? BlocBuilder<FavouriteCubit, FavouriteState>(
                 builder: (context, state) {
-                  final cubit = context.read<DoctorCubit>();
+                  // final cubit = context.read<DoctorCubit>();
+                  final cubit = context.read<FavouriteCubit>();
                   return InkWell(
                     onTap: () {
-                      if (cubit.favouriteDocs[index]) {
+                      if (cubit.checkFavourite(doctor.id)) {
                         showModalBottomSheet(
                           context: context,
                           builder: (_) => CustomBottomSheetRemoveFav(
+                            favId: cubit.getFavIdForSpecificService(doctor.id),
                             index: index,
                             doctor: doctor,
                           ),
                         );
                       } else {
-                        cubit.toggleFavouriteIcon(index: index);
+                        cubit.addToFavourite(serviceId: doctor.id);
                       }
                     },
                     child: Image.asset(
-                      cubit.favouriteDocs[index]
+                      cubit.checkFavourite(doctor.id)
                           ? Assets.assetsImagesFavourite
                           : Assets.assetsImagesHeartOutline,
                       width: 20,
@@ -110,12 +112,5 @@ class DoctorListItemDescriptionWidget extends StatelessWidget {
     );
   }
 
-  String fixHospital(String? word) {
-    final w = (word ?? "").trim();
-    if (w.isEmpty) return "hospital";
-    if (w.toLowerCase().contains("hospital")) {
-      return w;
-    }
-    return "$w hospital";
-  }
+
 }

@@ -17,7 +17,6 @@ class ResidentHomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ListView(
       padding: EdgeInsets.only(
         left: SizeConfig.blockWidth * 6,
@@ -35,7 +34,9 @@ class ResidentHomeBody extends StatelessWidget {
               userName: cubit.user?.fullName,
               imageUrl: cubit.user?.imageUrl,
               onNotificationTap: () {},
-              onBookmarkTap: () {},
+              onBookmarkTap: () {
+                context.pushScreen(AppRoutes.allFavouritesScreen);
+              },
             );
           },
         ),

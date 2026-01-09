@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/features/favourite/data/models/service_provider_fav_model.dart';
 import 'package:wasla/features/favourite/data/repo/favourite_repo.dart';
 
@@ -10,14 +11,15 @@ class FavouriteCubit extends Cubit<FavouriteState> {
 
   List<ServiceProviderModel> allFavouriteList = [];
   List<ServiceProviderModel> favouritesByTypeList = [];
-  List<int> favouriteListId = [];
+  List<String> favouriteListId = [];
 
-  Future<void> getAllFavourites({required String residentId}) async {
+  Future<void> getAllFavourites() async {
     emit(GetFavouriteLoading());
+    final String? residentId = await getUserId();
     allFavouriteList.clear();
     favouriteListId.clear();
     final response = await favouriteRepo.getAllFavourites(
-      residentId: residentId,
+      residentId: residentId!,
     );
     response.fold(
       (error) {
@@ -26,22 +28,20 @@ class FavouriteCubit extends Cubit<FavouriteState> {
       (success) {
         allFavouriteList = success;
         for (var element in allFavouriteList) {
-          favouriteListId.add(element.id);
+          favouriteListId.add(element.serviceProviderId);
         }
         emit(GetFavouriteSuccess());
       },
     );
   }
 
-  Future<void> getFavouritesByType({
-    required String residentId,
-    required int serviceType,
-  }) async {
+  Future<void> getFavouritesByType({required int serviceType}) async {
+    final String? residentId = await getUserId();
     emit(GetFavouriteLoading());
     favouritesByTypeList.clear();
     favouriteListId.clear();
     final response = await favouriteRepo.getFavouritesByType(
-      residentId: residentId,
+      residentId: residentId!,
       serviceType: serviceType,
     );
     response.fold(
@@ -51,27 +51,24 @@ class FavouriteCubit extends Cubit<FavouriteState> {
       (success) {
         favouritesByTypeList = success;
         for (var element in favouritesByTypeList) {
-          favouriteListId.add(element.id);
+          favouriteListId.add(element.serviceProviderId);
         }
         emit(GetFavouriteSuccess());
       },
     );
   }
 
-  Future<void> addToFavourite({
-    required String residentId,
-    required String serviceId,
-    required int favouriteId,
-  }) async {
-    favouriteListId.add(favouriteId);
+  Future<void> addToFavourite({required String serviceId}) async {
+    favouriteListId.add(serviceId);
     emit(AddToFavouriteLoading());
+    final String? residentId = await getUserId();
     final response = await favouriteRepo.addToFavorite(
-      residentId: residentId,
+      residentId: residentId!,
       serviceId: serviceId,
     );
     response.fold(
       (error) {
-        favouriteListId.remove(favouriteId);
+        favouriteListId.remove(serviceId);
         emit(AddToFavouriteFailure(message: error));
       },
       (success) {
@@ -80,15 +77,18 @@ class FavouriteCubit extends Cubit<FavouriteState> {
     );
   }
 
-  Future<void> removeFromFavorite({required int favouriteId}) async {
-    favouriteListId.remove(favouriteId);
+  Future<void> removeFromFavorite({
+    required int favouriteId,
+    required String serviceProviderId,
+  }) async {
+    favouriteListId.remove(serviceProviderId);
     emit(RemoveFromFavouriteLoading());
     final response = await favouriteRepo.removeFromFavorite(
       favouriteId: favouriteId,
     );
     response.fold(
       (error) {
-        favouriteListId.add(favouriteId);
+        favouriteListId.add(serviceProviderId);
         emit(RemoveFromFavouriteFailure(message: error));
       },
       (success) {
@@ -97,8 +97,17 @@ class FavouriteCubit extends Cubit<FavouriteState> {
     );
   }
 
-  bool checkFavourite(int id) {
-    return favouriteListId.contains(id);
+  bool checkFavourite(String serviceProviderId) {
+    return favouriteListId.contains(serviceProviderId);
+  }
+
+  int getFavIdForSpecificService(String serviceProviderId) {
+    for (var element in favouritesByTypeList) {
+      if (element.serviceProviderId == serviceProviderId) {
+        return element.id;
+      }
+    }
+    return 0;
   }
 
   void reset() {

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/core/widgets/under_line_widget.dart';
+import 'package:wasla/features/favourite/presentation/manager/cubit/favourite_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_list_item.dart';
 
 class CustomBottomSheetRemoveFav extends StatelessWidget {
@@ -12,9 +12,11 @@ class CustomBottomSheetRemoveFav extends StatelessWidget {
     super.key,
     required this.index,
     required this.doctor,
+    required this.favId,
   });
   final int index;
   final DoctorDataModel doctor;
+  final int favId;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,10 @@ class CustomBottomSheetRemoveFav extends StatelessWidget {
         Expanded(
           child: GeneralButton(
             onPressed: () {
-              context.read<DoctorCubit>().toggleFavouriteIcon(index: index);
+              context.read<FavouriteCubit>().removeFromFavorite(
+                favouriteId: favId,
+                serviceProviderId: doctor.id,
+              );
               context.popScreen();
             },
             text: "Yes , Remove",

@@ -224,7 +224,9 @@
         "reviewUpdated":"تم تحديث التقييم بنجاح",
           "somethingWentWrong":" حدث خطأ ما",
               "editReview": "تعديل التقييم",
-              "noReviews": "لا يوجد تقييمات"
+              "noReviews": "لا يوجد تقييمات",
+              "myFavourites": "المفضلة",
+              "noFavourites": "لا يوجد عناصر مفضلة"
 
 
         

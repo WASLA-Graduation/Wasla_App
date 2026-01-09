@@ -24,11 +24,11 @@ class CustomAddReviweWidget extends StatelessWidget {
               children: List.generate(5, (index) {
                 return InkWell(
                   onTap: () {
-                    cubit.toggleRatingStars(index + 1);
+                    cubit.updateRatingStars(index);
                   },
                   child: Icon(
                     Icons.star,
-                    color: cubit.starsIds.contains(index + 1)
+                    color: index <= cubit.starsCount
                         ? AppColors.primaryColor
                         : AppColors.gray,
                     size: 22,

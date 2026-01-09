@@ -224,7 +224,9 @@
   "reviewUpdated":"Review Updated Successfully",
   "somethingWentWrong":"somethingWentWrong",
     "editReview": "Edit Review",
-    "noReviews": "No Reviews yet."
+    "noReviews": "No Reviews yet.",
+    "myFavourites": "My Favourites",
+    "noFavourites": "No Favourites yet."
 
   
 

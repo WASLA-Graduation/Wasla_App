@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/custom_more_app_bar_widget.dart';
+import 'package:wasla/features/favourite/presentation/manager/cubit/favourite_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_view_body.dart';
 
@@ -26,7 +27,7 @@ class _DoctorViewState extends State<DoctorView> {
       appBar: AppBar(
         title: Text("doctors".tr(context)),
         forceMaterialTransparency: true,
-        actions: [CustomMoreAppBarWidget(image: Assets.assetsImagesSearch,)],
+        actions: [CustomMoreAppBarWidget(image: Assets.assetsImagesSearch)],
       ),
 
       body: DoctorViewBody(),
@@ -38,5 +39,6 @@ class _DoctorViewState extends State<DoctorView> {
     await context.read<DoctorCubit>().getDoctorsBySpecialization(
       specializationId: 0,
     );
+    await context.read<FavouriteCubit>().getFavouritesByType(serviceType: 1);
   }
 }
