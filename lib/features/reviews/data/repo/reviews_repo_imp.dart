@@ -53,7 +53,7 @@ class ReviewsRepoImpl extends ReviewsRepo {
   @override
   Future<Either<String, Null>> deleteReview({required int reviewId}) async {
     try {
-      await api.delete(ApiEndPoints.getReviewsByRating + reviewId.toString());
+      await api.delete(ApiEndPoints.removeReview + reviewId.toString());
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);

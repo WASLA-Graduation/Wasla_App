@@ -36,6 +36,7 @@ abstract class ApiEndPoints {
   static const String getReviewsByRating = 'api/Review/ratings/';
   static const String addReview = 'api/Review/AddReview';
   static const String updateReview = 'api/Review/UpdateReview';
+  static const String removeReview = 'api/Review/rating/';
   static const String addToFavourite = 'api/Favourite/AddFavourite';
   static const String removeFromFavourite = 'api/Favourite/RemoveFavourite';
   static const String getAllFavourites = 'api/Favourite/GetAllFavourites';
