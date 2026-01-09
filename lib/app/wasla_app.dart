@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_router.dart';
 import 'package:wasla/core/config/themes/app_theme.dart';
+import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
 import 'package:wasla/core/functions/buid_appCubits.dart';
 import 'package:wasla/core/functions/change_status_bar_theme.dart';
 import 'package:wasla/core/functions/handle_initial_route.dart';
@@ -24,6 +25,7 @@ class WaslaApp extends StatelessWidget {
         builder: (context, state) {
           final globalCubit = context.read<GlobalCubit>();
           changeThemeStatusBar(globalCubit.themeMode);
+          // SharedPreferencesHelper.remove(key: AppStrings.onboardingVisited);
 
           return MaterialApp(
             supportedLocales: const [Locale('ar'), Locale('en')],

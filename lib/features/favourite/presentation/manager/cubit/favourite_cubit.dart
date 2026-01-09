@@ -60,6 +60,7 @@ class FavouriteCubit extends Cubit<FavouriteState> {
 
   Future<void> addToFavourite({required String serviceId}) async {
     favouriteListId.add(serviceId);
+
     emit(AddToFavouriteLoading());
     final String? residentId = await getUserId();
     final response = await favouriteRepo.addToFavorite(
@@ -72,6 +73,7 @@ class FavouriteCubit extends Cubit<FavouriteState> {
         emit(AddToFavouriteFailure(message: error));
       },
       (success) {
+        getFavouritesByType(serviceType: 1);
         emit(AddToFavouriteSuccess());
       },
     );
@@ -82,6 +84,10 @@ class FavouriteCubit extends Cubit<FavouriteState> {
     required String serviceProviderId,
   }) async {
     favouriteListId.remove(serviceProviderId);
+
+    print("*********************favId***************");
+    print("*********************${favouriteId}***************");
+    print("*********************favId***************");
     emit(RemoveFromFavouriteLoading());
     final response = await favouriteRepo.removeFromFavorite(
       favouriteId: favouriteId,
@@ -89,9 +95,15 @@ class FavouriteCubit extends Cubit<FavouriteState> {
     response.fold(
       (error) {
         favouriteListId.add(serviceProviderId);
+        print("*********************ddddddddddddddddddddd***************");
+        print("************************************");
+        print("************************************");
         emit(RemoveFromFavouriteFailure(message: error));
       },
       (success) {
+        favouritesByTypeList.removeWhere(
+          (element) => element.serviceProviderId == serviceProviderId,
+        );
         emit(RemoveFromFavouriteSuccess());
       },
     );
