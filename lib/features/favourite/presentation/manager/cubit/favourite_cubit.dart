@@ -73,7 +73,7 @@ class FavouriteCubit extends Cubit<FavouriteState> {
         emit(AddToFavouriteFailure(message: error));
       },
       (success) {
-        getFavouritesByType(serviceType: 1);
+        favouritesByTypeList.add(success);
         emit(AddToFavouriteSuccess());
       },
     );
@@ -85,9 +85,6 @@ class FavouriteCubit extends Cubit<FavouriteState> {
   }) async {
     favouriteListId.remove(serviceProviderId);
 
-    print("*********************favId***************");
-    print("*********************${favouriteId}***************");
-    print("*********************favId***************");
     emit(RemoveFromFavouriteLoading());
     final response = await favouriteRepo.removeFromFavorite(
       favouriteId: favouriteId,
@@ -95,9 +92,7 @@ class FavouriteCubit extends Cubit<FavouriteState> {
     response.fold(
       (error) {
         favouriteListId.add(serviceProviderId);
-        print("*********************ddddddddddddddddddddd***************");
-        print("************************************");
-        print("************************************");
+
         emit(RemoveFromFavouriteFailure(message: error));
       },
       (success) {

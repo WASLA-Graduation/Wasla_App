@@ -12,19 +12,19 @@ class FavouriteRepoImpl extends FavouriteRepo {
   FavouriteRepoImpl({required this.api});
 
   @override
-  Future<Either<String, Null>> addToFavorite({
+  Future<Either<String, ServiceProviderModel>> addToFavorite({
     required String residentId,
     required String serviceId,
   }) async {
     try {
-      await api.post(
+      final response = await api.post(
         ApiEndPoints.addToFavourite,
         queryParameters: {
           ApiKeys.residentId: residentId,
           ApiKeys.serviceProviderId: serviceId,
         },
       );
-      return Right(null);
+      return Right(ServiceProviderModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
