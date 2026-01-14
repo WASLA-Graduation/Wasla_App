@@ -4,6 +4,7 @@ import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/get_file_from_device.dart';
+import 'package:wasla/core/functions/luanch_to_link.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/utils/app_colors.dart';
@@ -96,6 +97,19 @@ class DocEditProfileForm extends StatelessWidget {
                     );
                   },
                 ),
+                // const SizedBox(),
+                // GestureDetector(
+                //   onTap: () {
+                //     // openCvLink(doc.cv);
+                //   },
+                //   child: Text(
+                //     "showCV".tr(context),
+                //     style: TextStyle(
+                //       color: Colors.blue,
+                //       decoration: TextDecoration.underline,
+                //     ),
+                //   ),
+                // ),
 
                 Align(
                   alignment: Alignment.topLeft,
