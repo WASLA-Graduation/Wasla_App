@@ -4,14 +4,12 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_router.dart';
 import 'package:wasla/core/config/themes/app_theme.dart';
-import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
 import 'package:wasla/core/functions/buid_appCubits.dart';
 import 'package:wasla/core/functions/change_status_bar_theme.dart';
 import 'package:wasla/core/functions/handle_initial_route.dart';
 import 'package:wasla/core/manager/global/global_cubit.dart';
 import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/utils/app_strings.dart';
-import 'package:wasla/features/auth/presentation/views/doctor_complete_info_view.dart';
 
 class WaslaApp extends StatelessWidget {
   const WaslaApp({super.key});
@@ -37,7 +35,7 @@ class WaslaApp extends StatelessWidget {
             darkTheme: AppThemes.darkTheme(context),
             themeMode: globalCubit.themeMode,
             initialRoute: handleInitialRoute(),
-            // home: DoctorCompleteInfoView(),
+            // home: ResidentPersonalInfoView(),
             onGenerateRoute: AppRouter.onGenerateRoute,
           );
         },

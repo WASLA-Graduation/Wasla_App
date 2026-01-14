@@ -28,4 +28,5 @@ abstract class AppRoutes {
   static const String doctorEditBookingScreen = '/doctorEditBookingScreen';
   static const String doctorEditProfileScreen = '/doctorEditProfileScreen';
   static const String allFavouritesScreen = '/allFavouritesScreen';
+  static const String residentPersonalInfoScreen = '/residentPersonalInfoScreen';
 }

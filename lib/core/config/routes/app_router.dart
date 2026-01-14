@@ -136,6 +136,7 @@ abstract class AppRouter {
         );
       case AppRoutes.allFavouritesScreen:
         return MaterialPageRoute(builder: (_) => AllFavouritesViews());
+      
 
       default:
         return MaterialPageRoute(builder: (_) => Container());

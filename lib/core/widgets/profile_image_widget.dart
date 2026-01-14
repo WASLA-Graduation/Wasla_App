@@ -30,14 +30,23 @@ class ProfileImageWidget extends StatelessWidget {
                 Stack(
                   alignment: Alignment.center,
                   children: [
-                    ClipOval(
-                      child: CustomCachedNetworkImage(
-                        imageUrl: cubit.user!.imageUrlBase,
-                        width: 95,
-                        height: 95,
-                        fit: BoxFit.cover,
-                        errorWidget: _buildErrorWidget(),
-                        loadingWidget: _buildLoadingWidget(),
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: AppColors.primaryColor,
+                          width: 2,
+                        ),
+                      ),
+                      child: ClipOval(
+                        child: CustomCachedNetworkImage(
+                          imageUrl: cubit.user!.imageUrlBase,
+                          width: 95,
+                          height: 95,
+                          fit: BoxFit.cover,
+                          errorWidget: _buildErrorWidget(),
+                          loadingWidget: _buildLoadingWidget(),
+                        ),
                       ),
                     ),
 
