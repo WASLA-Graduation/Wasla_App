@@ -18,18 +18,12 @@ class ResidentBookingList extends StatelessWidget {
     return BlocBuilder<ResidentBookingCubit, ResidentBookingState>(
       builder: (context, state) {
         if (state is ResidentGetBookingFailure) {
-          return SliverFillRemaining(
-            hasScrollBody: false,
-            child: CustomErrGetData(),
-          );
+          return CustomErrGetData();
         } else if (state is ResidentGetBookingLoading) {
-          return SliverFillRemaining(
-            hasScrollBody: false,
-            child: Center(
-              child: SpinKitFadingCircle(
-                color: AppColors.primaryColor,
-                size: 50.0,
-              ),
+          return Center(
+            child: SpinKitFadingCircle(
+              color: AppColors.primaryColor,
+              size: 50.0,
             ),
           );
         } else {
@@ -38,19 +32,17 @@ class ResidentBookingList extends StatelessWidget {
           }
 
           return bookigns.isEmpty
-              ? SliverFillRemaining(
-                  hasScrollBody: false,
-                  child: Center(
-                    child: Text(
-                      "noBookings".tr(context),
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
+              ? Center(
+                  child: Text(
+                    "noBookings".tr(context),
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 )
-              : SliverList.builder(
+              : ListView.builder(
+                padding: const EdgeInsets.only(top: 20),
                   itemCount: bookigns.length,
                   itemBuilder: (_, index) =>
-                      ResidentBookItem(model: bookigns[index],index: index,),
+                      ResidentBookItem(model: bookigns[index], index: index),
                 );
         }
       },

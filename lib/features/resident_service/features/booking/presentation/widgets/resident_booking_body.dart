@@ -7,11 +7,10 @@ class ResidentBookingBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(child: CustomResidentBookingTaps()),
-        SliverToBoxAdapter(child: const SizedBox(height: 15)),
-        ResidentBookingList(),
+    return Column(
+      children: [
+        CustomResidentBookingTaps(),
+        Expanded(child: ResidentBookingList()),
       ],
     );
   }
