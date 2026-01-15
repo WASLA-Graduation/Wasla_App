@@ -54,7 +54,7 @@ class TimeSlotModel {
   final int id;
   final String start;
   final String end;
-  final bool isBooking;
+  bool isBooking;
 
   TimeSlotModel({
     required this.id,

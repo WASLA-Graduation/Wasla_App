@@ -22,9 +22,8 @@ class VerificationCodeBody extends StatelessWidget {
         if (state is AuthVerifyEmailFailure) {
           toastAlert(color: AppColors.error, msg: state.errMsg);
         } else if (state is AuthVerifyEmailSuccess) {
-          context.pushReplacementScreen(
-            nextRoute
-          );
+          cubit.timer?.cancel();
+          context.pushReplacementScreen(nextRoute);
         }
       },
       builder: (context, state) {

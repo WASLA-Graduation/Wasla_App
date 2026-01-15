@@ -82,7 +82,9 @@ class AuthCubit extends Cubit<AuthState> {
         remainingSeconds--;
         emit(AuthTimer());
       } else {
-        timer.cancel();
+        remainingSeconds = 60;
+        enableButton = false;
+        forgotPassCheckEmail();
       }
     });
   }
@@ -184,6 +186,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> verifyEmail() async {
     emit(AuthVerifyEmailLoading());
+
     final response = await authRepo.verifyEmail(
       email: email,
       verificationCode: otpCode,

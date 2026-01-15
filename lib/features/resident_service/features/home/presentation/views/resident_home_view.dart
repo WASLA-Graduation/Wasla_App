@@ -11,6 +11,7 @@ class ResidentHomeView extends StatefulWidget {
 }
 
 class _ResidentHomeViewState extends State<ResidentHomeView> {
+
   @override
   void initState() {
     getResidentProfile();
@@ -24,5 +25,6 @@ class _ResidentHomeViewState extends State<ResidentHomeView> {
 
   void getResidentProfile() async {
     await context.read<HomeResidentCubit>().getResidentProfile();
+  
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/service/signalR/doctor_booking_hub.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/all_services/doctor_booking_view_body.dart';
@@ -14,6 +15,8 @@ class DoctorBookingView extends StatefulWidget {
 }
 
 class _DoctorBookingViewState extends State<DoctorBookingView> {
+  final signalR = BookingSignalRService();
+
   @override
   void initState() {
     callFristDay();
@@ -35,6 +38,9 @@ class _DoctorBookingViewState extends State<DoctorBookingView> {
   }
 
   void callFristDay() {
+    signalR.connect(context).then((_) {
+      signalR.listen(context);
+    });
     context.read<DoctorCubit>().resetState();
     context.read<DoctorCubit>().dayOfWeek =
         widget.doctorServiceModel.serviceDays[0].dayOfWeek;

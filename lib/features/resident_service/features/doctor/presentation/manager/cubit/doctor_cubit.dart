@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:wasla/core/functions/get_time_between_now_and_any_time.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
+import 'package:wasla/core/service/signalR/booking_hub_model.dart';
 import 'package:wasla/features/reviews/data/models/review_model.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
@@ -180,6 +181,46 @@ class DoctorCubit extends Cubit<DoctorState> {
       );
     }
   }
+
+  void whenSlotOfServiceBooked({required BookingHubModel bookingHubModel}) {
+    timeSlotIds.remove(bookingHubModel.serviceId);
+
+    for (var servicesDay in services) {
+      for (var serviceDay in servicesDay.serviceDays) {
+        for (var time in serviceDay.timeSlots) {
+          if (time.id == bookingHubModel.serviceId) {
+            dayListTimeSlots.remove(time.start);
+            time.isBooking = true;
+          }
+        }
+      }
+    }
+
+    emit(DoctorUpdateState());
+  }
+
+  void whenSlotOfServiceCancelBook({required BookingHubModel bookingHubModel}) {
+    timeSlotIds.add(bookingHubModel.serviceId);
+
+    for (var servicesDay in services) {
+      for (var serviceDay in servicesDay.serviceDays) {
+        for (var time in serviceDay.timeSlots) {
+          if (time.id == bookingHubModel.serviceId) {
+            dayListTimeSlots.add(time.start);
+            time.isBooking = false;
+          }
+        }
+      }
+    }
+
+
+
+
+    emit(DoctorUpdateState());
+  }
+
+
+
 
   void resetState() {
     dayListTimeSlots = [];
