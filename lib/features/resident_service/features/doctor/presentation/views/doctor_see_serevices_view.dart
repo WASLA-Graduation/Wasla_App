@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/all_services/see_all_services_body.dart';
 
@@ -18,6 +19,13 @@ class _DoctorSeeSerevicesViewState extends State<DoctorSeeSerevicesView> {
   void initState() {
     super.initState();
     getDoctorSevices();
+    enableSignalR();
+  }
+
+  @override
+  void dispose() {
+    // context.read()<DoctorCubit>().signalRSevice.disconnect();
+    super.dispose();
   }
 
   @override
@@ -34,5 +42,13 @@ class _DoctorSeeSerevicesViewState extends State<DoctorSeeSerevicesView> {
 
   void getDoctorSevices() async {
     context.read<DoctorCubit>().getDoctorServices(doctorId: widget.docId);
+  }
+
+  void enableSignalR() async {
+    context.read<DoctorCubit>().signalRSevice.connect().then((_) {
+      context.read<DoctorCubit>().signalRSevice.listen(context);
+      context.read<DoctorCubit>().signalRSevice.currentRoute =
+          AppRoutes.doctorSeeSevicesScreen;
+    });
   }
 }

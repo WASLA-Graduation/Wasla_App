@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signalr_netcore/signalr_client.dart';
-import 'package:wasla/core/service/signalR/booking_hub_model.dart';
+import 'package:wasla/core/service/signalR/models/booking_hub_model.dart';
+import 'package:wasla/features/doctor_service/features/home/presentation/manager/cubit/doctor_home_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
 
 class BookingSignalRService {
@@ -25,6 +26,9 @@ class BookingSignalRService {
       context.read<DoctorCubit>().whenSlotOfServiceCancelBook(
         bookingHubModel: bookingHubModel,
       );
+        context.read<DoctorHomeCubit>().whenServiceBookedOrCanceled(
+        booking: bookingHubModel,
+      );
     });
 
     _connection.on("BookingUpdated", (args) {
@@ -37,6 +41,9 @@ class BookingSignalRService {
       BookingHubModel bookingHubModel = BookingHubModel.fromJson(data);
       context.read<DoctorCubit>().whenSlotOfServiceBooked(
         bookingHubModel: bookingHubModel,
+      );
+      context.read<DoctorHomeCubit>().whenServiceBookedOrCanceled(
+        booking: bookingHubModel,
       );
     });
   }

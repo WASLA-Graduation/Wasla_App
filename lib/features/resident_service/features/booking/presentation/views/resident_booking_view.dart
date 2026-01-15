@@ -26,6 +26,7 @@ class _ResidentBookingViewState extends State<ResidentBookingView> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        forceMaterialTransparency: true,
         actions: [CustomMoreAppBarWidget(image: Assets.assetsImagesSearch)],
         title: Text(
           "myBookings".tr(context),

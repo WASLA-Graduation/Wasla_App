@@ -10,6 +10,7 @@ import 'package:wasla/core/functions/change_status_bar_theme.dart';
 import 'package:wasla/core/functions/handle_initial_route.dart';
 import 'package:wasla/core/manager/global/global_cubit.dart';
 import 'package:wasla/core/responsive/size_config.dart';
+import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/features/auth/presentation/views/verification_code_view.dart';
 
@@ -28,6 +29,7 @@ class WaslaApp extends StatelessWidget {
           // SharedPreferencesHelper.remove(key: AppStrings.onboardingVisited);
 
           return MaterialApp(
+            navigatorKey: navigatorKey,
             supportedLocales: const [Locale('ar'), Locale('en')],
             localizationsDelegates: _getDelegates,
             locale: globalCubit.locale,

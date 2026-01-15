@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/service/signalR/doctor_booking_hub.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
@@ -24,6 +25,12 @@ class _DoctorBookingViewState extends State<DoctorBookingView> {
   }
 
   @override
+  void dispose() {
+    signalR.disconnect();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("bookingService".tr(context))),
@@ -38,14 +45,16 @@ class _DoctorBookingViewState extends State<DoctorBookingView> {
   }
 
   void callFristDay() {
+    final cubit = context.read<DoctorCubit>();
     signalR.connect(context).then((_) {
       signalR.listen(context);
     });
-    context.read<DoctorCubit>().resetState();
-    context.read<DoctorCubit>().dayOfWeek =
-        widget.doctorServiceModel.serviceDays[0].dayOfWeek;
-    context.read<DoctorCubit>().addDayTimeSlotToList(
+    cubit.resetState();
+    cubit.dayOfWeek = widget.doctorServiceModel.serviceDays[0].dayOfWeek;
+    cubit.addDayTimeSlotToList(
       serviceDay: widget.doctorServiceModel.serviceDays[0],
     );
+    cubit.signalRSevice.currentRoute = AppRoutes.doctorBookingScreen;
+    cubit.currentServiceId=widget.doctorServiceModel.id;
   }
 }

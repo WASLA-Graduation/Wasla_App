@@ -3,10 +3,17 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/get_time_between_now_and_any_time.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
+import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
-import 'package:wasla/core/service/signalR/booking_hub_model.dart';
+import 'package:wasla/core/service/service_locator.dart';
+import 'package:wasla/core/service/signalR/models/booking_hub_model.dart';
+import 'package:wasla/core/service/signalR/models/service_hub_model.dart';
+import 'package:wasla/core/service/signalR/service_hub.dart';
+import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/reviews/data/models/review_model.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
@@ -21,6 +28,7 @@ class DoctorCubit extends Cubit<DoctorState> {
   List<ReviewModel> reviewList = [];
   final reviewValueController = TextEditingController();
   final reviewEditValueController = TextEditingController();
+  final ServiceSignalRService signalRSevice = ServiceSignalRService();
 
   int specializationIndex = 0;
   List<bool> favouriteDocs = List.filled(10, false);
@@ -30,6 +38,8 @@ class DoctorCubit extends Cubit<DoctorState> {
   List<DoctorServiceModel> services = [];
   int dayCurrentIndex = 0;
   int timeCurrentIndex = -1;
+
+  int currentServiceId = -1;
 
   List<String> dayListTimeSlots = [];
 
@@ -213,14 +223,34 @@ class DoctorCubit extends Cubit<DoctorState> {
       }
     }
 
-
-
-
     emit(DoctorUpdateState());
   }
 
+  void whenAddService({required ServiceHubData serviceHubModel}) {
+    getDoctorServices(doctorId: serviceHubModel.serviceProviderId);
+  }
 
-
+  void whenDeleteUpdateService({
+    required ServiceHubData serviceHubModel,
+    required String currentRoute,
+    required bool isUpdate,
+  }) {
+    if (serviceHubModel.serviceId != currentServiceId) {
+      return;
+    }
+    final context = navigatorKey.currentContext;
+    if (currentRoute == AppRoutes.doctorBookingScreen) {
+      toastAlert(
+        color: isUpdate ? AppColors.primaryColor : AppColors.error,
+        msg: isUpdate ? "Service Updated" : "Service Deleted",
+      );
+      context?.popScreen();
+      signalRSevice.currentRoute = AppRoutes.doctorSeeSevicesScreen;
+      getDoctorServices(doctorId: serviceHubModel.serviceProviderId);
+    } else {
+      getDoctorServices(doctorId: serviceHubModel.serviceProviderId);
+    }
+  }
 
   void resetState() {
     dayListTimeSlots = [];
@@ -229,5 +259,6 @@ class DoctorCubit extends Cubit<DoctorState> {
     images = [];
     doctorBookingTypeGroupValue = "Examination";
     gruoupValueIndex = 1;
+    currentServiceId = -1;
   }
 }
