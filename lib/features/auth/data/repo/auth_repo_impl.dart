@@ -220,4 +220,14 @@ class AuthRepoImpl extends AuthRepo {
       return Left(e.errorModel.errorMessage);
     }
   }
+
+  @override
+  Future<Either<String, Null>> logOut() async {
+    try {
+      await api.post(ApiEndPoints.logout);
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
 }

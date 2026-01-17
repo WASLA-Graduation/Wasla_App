@@ -65,6 +65,7 @@ final class AuthResetPassFailure extends AuthState {
 
   AuthResetPassFailure({required this.errMsg});
 }
+
 final class AuthResidentCompleteInfoLoading extends AuthState {}
 
 final class AuthResidentCompleteInfoSuccess extends AuthState {}
@@ -74,6 +75,7 @@ final class ResidentCompleteInfoFailure extends AuthState {
 
   ResidentCompleteInfoFailure({required this.errMsg});
 }
+
 final class AuthDoctorCompleteInfoLoading extends AuthState {}
 
 final class AuthDoctorCompleteInfoSuccess extends AuthState {}
@@ -91,10 +93,19 @@ final class AuthGetRolesFailure extends AuthState {
 
   AuthGetRolesFailure({required this.errMsg});
 }
+
 final class AuthGetSepcializationSuccess extends AuthState {}
 
 final class AuthGetSepcializationFailure extends AuthState {
   final String errMsg;
 
   AuthGetSepcializationFailure({required this.errMsg});
+}
+
+final class AuthLogOutSuccess extends AuthState {}
+
+final class AuthLogOutFailure extends AuthState {
+  final String errMsg;
+
+  AuthLogOutFailure({required this.errMsg});
 }

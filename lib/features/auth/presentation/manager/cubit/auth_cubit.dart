@@ -279,6 +279,18 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
+  Future<void> logOut() async {
+    final reponse = await authRepo.logOut();
+    reponse.fold(
+      (e) {
+        emit(AuthLogOutFailure(errMsg: e));
+      },
+      (success) {
+        emit(AuthLogOutSuccess());
+      },
+    );
+  }
+
   void saveSignInData() async {
     SecureStorageHelper.set(key: ApiKeys.token, value: dataModel!.token);
     // SecureStorageHelper.set(

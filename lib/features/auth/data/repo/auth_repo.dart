@@ -53,6 +53,7 @@ abstract class AuthRepo {
     required int spacializationID,
     required int experienceYears,
     required PlatformFile cv,
-
   });
+
+  Future<Either<String, Null>> logOut();
 }
