@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
+import 'package:wasla/core/database/cache/secure_storage_helper.dart';
 import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/get_right_route.dart';
@@ -77,12 +78,13 @@ class BottomSheetLogoutWidget extends StatelessWidget {
               SharedPreferencesHelper.removeKeys(
                 keys: [
                   ApiKeys.role,
-                  ApiKeys.token,
-                  ApiKeys.refreshToken,
-                  ApiKeys.userId,
+                  // ApiKeys.token,
+                  // ApiKeys.refreshToken,
+                  // ApiKeys.userId,
                   AppStrings.isSingedIn,
                 ],
               ).then((val) {
+                SecureStorageHelper.clear();
                 context.pushAndRemoveAllScreens(AppRoutes.signInScreen);
               });
             },

@@ -62,6 +62,11 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> changePassword() async {
     emit(ProfileChangePassLoading());
 
+    if (currentPassword == newPassword) {
+      emit(ProfileChangePassFailure(errMsg: "You can't use the same password"));
+      return;
+    }
+
     final response = await profileRepo.changePassword(
       email: user!.emailBase,
       currentPassword: currentPassword,

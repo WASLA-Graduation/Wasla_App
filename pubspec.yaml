@@ -10,10 +10,12 @@ environment:
 
 dependencies:
   cached_network_image: ^3.4.1
+  cookie_jar: ^4.0.8
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   date_picker_timeline: ^1.2.7
   dio: ^5.9.0
+  dio_cookie_manager: ^3.3.0
   file_picker: ^10.3.3
   flutter:
     sdk: flutter

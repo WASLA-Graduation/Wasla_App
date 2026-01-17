@@ -54,8 +54,11 @@ class AllFavouritesViewBody extends StatelessWidget {
                   physics: BouncingScrollPhysics(),
                   itemBuilder: (_, index) => Padding(
                     padding: const EdgeInsets.only(top: 10),
-                    child: FavItem(
-                      serviceProviderModel: cubit.allFavouriteList[index],
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: FavItem(
+                        serviceProviderModel: cubit.allFavouriteList[index],
+                      ),
                     ),
                   ),
                 );

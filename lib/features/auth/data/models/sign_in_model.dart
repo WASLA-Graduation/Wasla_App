@@ -6,7 +6,7 @@ class SignInDataModel {
   final String token;
   final String userId;
   final ServiceRole role;
-  final String refreshToken;
+  // final String refreshToken;
   final bool isVerified;
   final bool isCompleteRegister;
   final int statue;
@@ -18,7 +18,7 @@ class SignInDataModel {
     required this.token,
     required this.userId,
     required this.role,
-    required this.refreshToken,
+    // required this.refreshToken,
   });
 
   factory SignInDataModel.fromJson(Map<String, dynamic> json) {
@@ -28,7 +28,7 @@ class SignInDataModel {
       role: ServiceRoleExtension.fromString(
         json[ApiKeys.data][ApiKeys.role] ?? 'resident',
       ),
-      refreshToken: json[ApiKeys.data][ApiKeys.refreshToken] ?? '',
+      // refreshToken: json[ApiKeys.data][ApiKeys.refreshToken] ?? '',
       isCompleteRegister: json[ApiKeys.data][ApiKeys.isCompletedRegister],
       isVerified: json[ApiKeys.data][ApiKeys.isVerfied],
       statue: json[ApiKeys.data][ApiKeys.statue],

@@ -19,21 +19,17 @@ class DoctorListWidget extends StatelessWidget {
       builder: (context, state) {
         if (state is DoctorGetBySpecialityListFailure ||
             state is DoctorGetSpecialityListFailure) {
-          return Center(
-            child: Column(
-              children: [
-                Image.asset(Assets.assetsImagesError, height: 200),
-                const SizedBox(height: 20),
-                FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    "errorFetchData".tr(context),
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                ),
-              ],
-            ),
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(Assets.assetsImagesError, height: 150),
+              const SizedBox(height: 20),
+              Text(
+                "errorFetchData".tr(context),
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ],
           );
         } else if (state is DoctorGetBySpecialityListLoading ||
             state is DoctorGetSpecialityListLoading) {

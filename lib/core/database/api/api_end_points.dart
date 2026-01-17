@@ -42,4 +42,6 @@ abstract class ApiEndPoints {
   static const String removeFromFavourite = 'api/Favourite/RemoveFavourite';
   static const String getAllFavourites = 'api/Favourite/GetAllFavourites';
   static const String getFavouritesByType = 'api/Favourite/GetFavouritesByType';
+  static const String refreshToken = 'api/Account/refresh-token';
+  static const String logout = 'api/Account/logout';
 }

@@ -170,6 +170,7 @@ class DoctorCubit extends Cubit<DoctorState> {
       emit(DoctorBookServiceLoading());
       final String? userId = await getUserId();
       final response = await doctorRepo.bookService(
+        serviceId: currentServiceId,
         userId: userId!,
         doctorId: doctorId!,
         serviceDayId: serviceSelectedDayAndTimeId!,

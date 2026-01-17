@@ -15,6 +15,7 @@ abstract class DoctorRepo {
     required String userId,
   });
   Future<Either<String, Null>> bookService({
+    required int serviceId,
     required String userId,
     required String doctorId,
     required int serviceDayId,

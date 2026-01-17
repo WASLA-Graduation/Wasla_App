@@ -68,6 +68,7 @@ class DoctorRepoImpl extends DoctorRepo {
 
   @override
   Future<Either<String, Null>> bookService({
+    required int serviceId,
     required String userId,
     required String doctorId,
     required int serviceDayId,
@@ -82,6 +83,7 @@ class DoctorRepoImpl extends DoctorRepo {
         ApiEndPoints.doctorBookService,
         body: FormData.fromMap({
           ApiKeys.userId: userId,
+          ApiKeys.serviceId: serviceId,
           ApiKeys.serviceProviderId: doctorId,
           ApiKeys.serviceDayId: serviceDayId,
           ApiKeys.price: price,
@@ -111,6 +113,4 @@ class DoctorRepoImpl extends DoctorRepo {
       ),
     );
   }
-
-  
 }
