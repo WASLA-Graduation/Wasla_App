@@ -7,7 +7,7 @@ import 'package:wasla/features/resident_service/features/booking/presentation/ma
 import 'package:wasla/features/resident_service/features/booking/presentation/widgets/resident_booking_body.dart';
 
 class ResidentBookingView extends StatefulWidget {
-  const ResidentBookingView({super.key});
+const ResidentBookingView({super.key});
 
   @override
   State<ResidentBookingView> createState() => _ResidentBookingViewState();

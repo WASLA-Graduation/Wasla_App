@@ -164,11 +164,13 @@ class DoctorCubit extends Cubit<DoctorState> {
   Future<void> bookService({
     required DoctorServiceModel doctorServiceModel,
   }) async {
-    if (serviceSelectedDayAndTimeId == null) {
+    if (serviceSelectedDayAndTimeId == null ||
+        serviceSelectedDayAndTimeId == -1) {
       emit(DoctorBookServiceFailure(errMsg: "Please select Time Slot"));
     } else {
       emit(DoctorBookServiceLoading());
       final String? userId = await getUserId();
+
       final response = await doctorRepo.bookService(
         serviceId: currentServiceId,
         userId: userId!,
@@ -202,6 +204,8 @@ class DoctorCubit extends Cubit<DoctorState> {
           if (time.id == bookingHubModel.serviceId) {
             dayListTimeSlots.remove(time.start);
             time.isBooking = true;
+            timeCurrentIndex = -1;
+            serviceSelectedDayAndTimeId = -1;
           }
         }
       }
@@ -219,6 +223,7 @@ class DoctorCubit extends Cubit<DoctorState> {
           if (time.id == bookingHubModel.serviceId) {
             dayListTimeSlots.add(time.start);
             time.isBooking = false;
+            timeCurrentIndex = -1;
           }
         }
       }

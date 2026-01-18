@@ -29,10 +29,6 @@ class ServiceSignalRService {
     });
 
     _connection.on("ServiceUpdated", (args) {
-      print("***************************************");
-      print("***************************************");
-      print("***************** Service updated**********************");
-      print("***************************************");
       final data = args?[0] as Map<String, dynamic>;
       ServiceHubData serviceHubModel = ServiceHubData.fromJson(data);
 
@@ -44,10 +40,6 @@ class ServiceSignalRService {
     });
 
     _connection.on("ServiceDeleted", (args) {
-      print("***************************************");
-      print("***************************************");
-      print("***************** Service Deleted**********************");
-      print("***************************************");
       final data = args?[0] as Map<String, dynamic>;
       ServiceHubData serviceHubModel = ServiceHubData.fromJson(data);
 

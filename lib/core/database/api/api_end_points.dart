@@ -44,4 +44,5 @@ abstract class ApiEndPoints {
   static const String getFavouritesByType = 'api/Favourite/GetFavouritesByType';
   static const String refreshToken = 'api/Account/refresh-token';
   static const String logout = 'api/Account/logout';
+  static const String getDoctorById = '/api/Doctor/GetDoctorData/';
 }

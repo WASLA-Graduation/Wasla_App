@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/extensions/custom_navigator_extension.dart';
+import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/features/favourite/presentation/manager/cubit/favourite_cubit.dart';
@@ -54,8 +57,24 @@ class AllFavouritesViewBody extends StatelessWidget {
                   physics: BouncingScrollPhysics(),
                   itemBuilder: (_, index) => Padding(
                     padding: const EdgeInsets.only(top: 10),
-                    child: GestureDetector(
-                      onTap: () {},
+                    child: InkWell(
+                      onTap: () async {
+                        await cubit.getDoctorData(
+                          doctorId:
+                              cubit.allFavouriteList[index].serviceProviderId,
+                        );
+                        if (cubit.doctorDataModel != null) {
+                          context.pushScreen(
+                            AppRoutes.doctorDetailsScreen,
+                            arguments: cubit.doctorDataModel,
+                          );
+                        } else {
+                          toastAlert(
+                            color: AppColors.error,
+                            msg: "Something went wrong",
+                          );
+                        }
+                      },
                       child: FavItem(
                         serviceProviderModel: cubit.allFavouriteList[index],
                       ),

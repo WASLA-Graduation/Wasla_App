@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
@@ -58,9 +57,12 @@ class FavItem extends StatelessWidget {
             Positioned(
               width: 112,
               height: 112,
-              child: CustomCachedNetworkImage(
-                imageUrl: serviceProviderModel.serviceProviderProfilePhoto,
-                fit: BoxFit.cover,
+              child: Hero(
+                tag: serviceProviderModel.serviceProviderProfilePhoto,
+                child: CustomCachedNetworkImage(
+                  imageUrl: serviceProviderModel.serviceProviderProfilePhoto,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ],

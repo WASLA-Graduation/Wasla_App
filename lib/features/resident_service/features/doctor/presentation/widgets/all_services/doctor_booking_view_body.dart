@@ -10,6 +10,7 @@ import 'package:wasla/features/resident_service/features/doctor/presentation/man
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/all_services/choose_doctor_booking_day.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/all_services/doc_choose_book_type.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/all_services/doctor_choose_booking_time_list.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
 
 class DoctorBookingViewBody extends StatelessWidget {
   const DoctorBookingViewBody({super.key, required this.doctorServiceModel});
@@ -54,12 +55,16 @@ class DoctorBookingViewBody extends StatelessWidget {
                       if (state is DoctorBookServiceFailure) {
                         toastAlert(color: AppColors.error, msg: state.errMsg);
                       } else if (state is DoctorBookServiceSuccess) {
-                        context.popScreen();
-                        context.popScreen();
                         toastAlert(
                           color: AppColors.primaryColor,
                           msg: "bookingDone".tr(context),
                         );
+                        context.popScreen();
+                        context.popScreen();
+                        context.popScreen();
+                        context.read<HomeResidentCubit>().navBarcurrentIndex =
+                            1;
+                        context.popScreen();
                       }
                     },
                     builder: (context, state) {

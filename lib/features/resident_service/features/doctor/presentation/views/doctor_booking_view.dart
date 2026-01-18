@@ -37,8 +37,14 @@ class _DoctorBookingViewState extends State<DoctorBookingView> {
 
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-        child: DoctorBookingViewBody(
-          doctorServiceModel: widget.doctorServiceModel,
+        child: PopScope(
+          canPop: true,
+          onPopInvokedWithResult: (didPop, result) {
+            context.read<DoctorCubit>().currentServiceId = -1;
+          },
+          child: DoctorBookingViewBody(
+            doctorServiceModel: widget.doctorServiceModel,
+          ),
         ),
       ),
     );
@@ -56,5 +62,10 @@ class _DoctorBookingViewState extends State<DoctorBookingView> {
     );
     cubit.currentServiceId = widget.doctorServiceModel.id;
     cubit.signalRSevice.currentRoute = AppRoutes.doctorBookingScreen;
+  }
+
+  void resetData() {
+    final cubit = context.read<DoctorCubit>();
+    cubit.resetState();
   }
 }

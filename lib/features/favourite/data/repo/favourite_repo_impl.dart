@@ -5,6 +5,7 @@ import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
 import 'package:wasla/features/favourite/data/models/service_provider_fav_model.dart';
 import 'package:wasla/features/favourite/data/repo/favourite_repo.dart';
+import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 
 class FavouriteRepoImpl extends FavouriteRepo {
   final ApiConsumer api;
@@ -84,6 +85,18 @@ class FavouriteRepoImpl extends FavouriteRepo {
               .toList();
 
       return Right(providers);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, DoctorDataModel>> getDoctorById({
+    required String docId,
+  }) async {
+    try {
+      final response = await api.get(ApiEndPoints.getDoctorById + docId);
+      return Right(DoctorDataModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

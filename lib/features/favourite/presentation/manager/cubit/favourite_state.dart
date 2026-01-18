@@ -30,3 +30,13 @@ final class GetFavouriteFailure extends FavouriteState {
   final String message;
   GetFavouriteFailure({required this.message});
 }
+
+
+final class GetFavServiceProviderLoading extends FavouriteState {}
+
+final class GetFavServiceProviderSuccess extends FavouriteState {}
+
+final class GetFavServiceProviderFailure extends FavouriteState {
+  final String message;
+  GetFavServiceProviderFailure({required this.message});
+}

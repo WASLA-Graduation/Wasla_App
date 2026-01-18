@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/features/favourite/data/models/service_provider_fav_model.dart';
 import 'package:wasla/features/favourite/data/repo/favourite_repo.dart';
+import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 
 part 'favourite_state.dart';
 
@@ -12,6 +13,7 @@ class FavouriteCubit extends Cubit<FavouriteState> {
   List<ServiceProviderModel> allFavouriteList = [];
   List<ServiceProviderModel> favouritesByTypeList = [];
   List<String> favouriteListId = [];
+  DoctorDataModel? doctorDataModel;
 
   Future<void> getAllFavourites() async {
     emit(GetFavouriteLoading());
@@ -115,6 +117,21 @@ class FavouriteCubit extends Cubit<FavouriteState> {
       }
     }
     return 0;
+  }
+
+  Future<void> getDoctorData({required String doctorId}) async {
+    emit(GetFavServiceProviderLoading());
+    doctorDataModel = null;
+    final response = await favouriteRepo.getDoctorById(docId: doctorId);
+    response.fold(
+      (error) {
+        emit(GetFavServiceProviderFailure(message: error));
+      },
+      (success) {
+        doctorDataModel = success;
+        emit(GetFavServiceProviderSuccess());
+      },
+    );
   }
 
   void reset() {

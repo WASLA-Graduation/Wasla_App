@@ -8,6 +8,7 @@ import 'package:wasla/features/doctor_service/features/service/data/models/docto
 import 'package:wasla/features/doctor_service/features/service/presentation/views/doctor_add_service_view.dart';
 import 'package:wasla/features/favourite/presentation/views/all_favourites_views.dart';
 import 'package:wasla/features/profile/presentation/views/doctor_edit_profile_view.dart';
+import 'package:wasla/features/resident_service/features/booking/presentation/views/resident_booking_view.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_booking_view.dart';
 import 'package:wasla/features/reviews/presentation/views/reviews_view.dart';
@@ -136,7 +137,8 @@ abstract class AppRouter {
         );
       case AppRoutes.allFavouritesScreen:
         return MaterialPageRoute(builder: (_) => AllFavouritesViews());
-      
+      case AppRoutes.residentBookingScreen:
+        return MaterialPageRoute(builder: (_) => ResidentBookingView());
 
       default:
         return MaterialPageRoute(builder: (_) => Container());
