@@ -80,7 +80,28 @@ class BottomSheetLogoutWidget extends StatelessWidget {
               if (state is AuthLogOutFailure) {
                 toastAlert(color: AppColors.red, msg: state.errMsg);
               } else if (state is AuthLogOutSuccess) {
-                context.popScreen();
+                // context.popScreen();
+                // resetDataInSpecificRole(context);
+                // SharedPreferencesHelper.removeKeys(
+                //   keys: [
+                //     ApiKeys.role,
+                //     // ApiKeys.token,
+                //     // ApiKeys.refreshToken,
+                //     // ApiKeys.userId,
+                //     AppStrings.isSingedIn,
+                //   ],
+                // ).then((val) {
+                //   SecureStorageHelper.clear();
+                //   context.pushAndRemoveAllScreens(AppRoutes.signInScreen);
+                // });
+              }
+            },
+            builder: (context, state) {
+              return GeneralButton(
+                onPressed: () async {
+                  // context.read<AuthCubit>().logOut();
+
+                  context.popScreen();
                 resetDataInSpecificRole(context);
                 SharedPreferencesHelper.removeKeys(
                   keys: [
@@ -94,12 +115,6 @@ class BottomSheetLogoutWidget extends StatelessWidget {
                   SecureStorageHelper.clear();
                   context.pushAndRemoveAllScreens(AppRoutes.signInScreen);
                 });
-              }
-            },
-            builder: (context, state) {
-              return GeneralButton(
-                onPressed: () async {
-                  context.read<AuthCubit>().logOut();
                 },
                 text: "yes_logout".tr(context),
                 height: 45,

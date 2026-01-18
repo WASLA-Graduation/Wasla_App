@@ -66,7 +66,7 @@ class DoctorCubit extends Cubit<DoctorState> {
     required ServiceDayModel serviceDay,
   }) {
     dayCurrentIndex = index;
-    dayOfWeek = null;
+    // dayOfWeek = null;
     dayOfWeek = serviceDay.dayOfWeek;
     addDayTimeSlotToList(serviceDay: serviceDay);
     doctorBookingTypeGroupValue = "Examination";
@@ -92,7 +92,7 @@ class DoctorCubit extends Cubit<DoctorState> {
     required ServiceDayModel serviceDay,
   }) {
     timeCurrentIndex = index;
-    serviceSelectedDayAndTimeId = serviceDay.timeSlots[index].id;
+    serviceSelectedDayAndTimeId = timeSlotIds.toList()[index];
 
     emit(DoctorUpdateState());
   }
@@ -164,8 +164,7 @@ class DoctorCubit extends Cubit<DoctorState> {
   Future<void> bookService({
     required DoctorServiceModel doctorServiceModel,
   }) async {
-    if (serviceSelectedDayAndTimeId == null ||
-        serviceSelectedDayAndTimeId == -1) {
+    if (serviceSelectedDayAndTimeId == null) {
       emit(DoctorBookServiceFailure(errMsg: "Please select Time Slot"));
     } else {
       emit(DoctorBookServiceLoading());
@@ -203,9 +202,10 @@ class DoctorCubit extends Cubit<DoctorState> {
         for (var time in serviceDay.timeSlots) {
           if (time.id == bookingHubModel.serviceId) {
             dayListTimeSlots.remove(time.start);
+            timeSlotIds.remove(time.id);
             time.isBooking = true;
             timeCurrentIndex = -1;
-            serviceSelectedDayAndTimeId = -1;
+            serviceSelectedDayAndTimeId = null;
           }
         }
       }
@@ -224,6 +224,8 @@ class DoctorCubit extends Cubit<DoctorState> {
             dayListTimeSlots.add(time.start);
             time.isBooking = false;
             timeCurrentIndex = -1;
+            serviceSelectedDayAndTimeId = null;
+            timeSlotIds.add(time.id);
           }
         }
       }

@@ -41,6 +41,7 @@ class _DoctorBookingViewState extends State<DoctorBookingView> {
           canPop: true,
           onPopInvokedWithResult: (didPop, result) {
             context.read<DoctorCubit>().currentServiceId = -1;
+            context.read<DoctorCubit>().serviceSelectedDayAndTimeId = null;
           },
           child: DoctorBookingViewBody(
             doctorServiceModel: widget.doctorServiceModel,
@@ -56,10 +57,11 @@ class _DoctorBookingViewState extends State<DoctorBookingView> {
       signalR.listen(context);
     });
     cubit.resetState();
-    cubit.dayOfWeek = widget.doctorServiceModel.serviceDays[0].dayOfWeek;
-    cubit.addDayTimeSlotToList(
-      serviceDay: widget.doctorServiceModel.serviceDays[0],
-    );
+    // cubit.dayOfWeek = widget.doctorServiceModel.serviceDays[0].dayOfWeek;
+    // cubit.addDayTimeSlotToList(
+    //   serviceDay: widget.doctorServiceModel.serviceDays[0],
+    // );
+    cubit.changeDayCurrentIndexAndUpadatTimeSlote(0, serviceDay: widget.doctorServiceModel.serviceDays[0]);
     cubit.currentServiceId = widget.doctorServiceModel.id;
     cubit.signalRSevice.currentRoute = AppRoutes.doctorBookingScreen;
   }
