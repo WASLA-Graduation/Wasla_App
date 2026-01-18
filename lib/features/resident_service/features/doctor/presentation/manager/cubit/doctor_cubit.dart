@@ -201,9 +201,11 @@ class DoctorCubit extends Cubit<DoctorState> {
       for (var serviceDay in servicesDay.serviceDays) {
         for (var time in serviceDay.timeSlots) {
           if (time.id == bookingHubModel.serviceId) {
-            dayListTimeSlots.remove(time.start);
-            timeSlotIds.remove(time.id);
             time.isBooking = true;
+            if (timeSlotIds.contains(time.id)) {
+              timeSlotIds.remove(time.id);
+              dayListTimeSlots.remove(time.start);
+            }
             timeCurrentIndex = -1;
             serviceSelectedDayAndTimeId = null;
           }
@@ -221,11 +223,13 @@ class DoctorCubit extends Cubit<DoctorState> {
       for (var serviceDay in servicesDay.serviceDays) {
         for (var time in serviceDay.timeSlots) {
           if (time.id == bookingHubModel.serviceId) {
-            dayListTimeSlots.add(time.start);
             time.isBooking = false;
+            if (dayOfWeek == serviceDay.dayOfWeek) {
+              dayListTimeSlots.add(time.start);
+              timeSlotIds.add(time.id);
+            }
             timeCurrentIndex = -1;
             serviceSelectedDayAndTimeId = null;
-            timeSlotIds.add(time.id);
           }
         }
       }
