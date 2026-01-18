@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
@@ -6,9 +7,12 @@ import 'package:wasla/core/database/cache/secure_storage_helper.dart';
 import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/get_right_route.dart';
+import 'package:wasla/core/functions/toast_alert.dart';
+import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/core/widgets/under_line_widget.dart';
+import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
 
 class BottomSheetLogoutWidget extends StatelessWidget {
   const BottomSheetLogoutWidget({super.key});
@@ -71,26 +75,37 @@ class BottomSheetLogoutWidget extends StatelessWidget {
         ),
         const SizedBox(width: 20),
         Expanded(
-          child: GeneralButton(
-            onPressed: () async {
-              context.popScreen();
-              resetDataInSpecificRole(context);
-              SharedPreferencesHelper.removeKeys(
-                keys: [
-                  ApiKeys.role,
-                  // ApiKeys.token,
-                  // ApiKeys.refreshToken,
-                  // ApiKeys.userId,
-                  AppStrings.isSingedIn,
-                ],
-              ).then((val) {
-                SecureStorageHelper.clear();
-                context.pushAndRemoveAllScreens(AppRoutes.signInScreen);
-              });
+          child: BlocConsumer<AuthCubit, AuthState>(
+            listener: (context, state) {
+              if (state is AuthLogOutFailure) {
+                toastAlert(color: AppColors.red, msg: state.errMsg);
+              } else if (state is AuthLogOutSuccess) {
+                context.popScreen();
+                resetDataInSpecificRole(context);
+                SharedPreferencesHelper.removeKeys(
+                  keys: [
+                    ApiKeys.role,
+                    // ApiKeys.token,
+                    // ApiKeys.refreshToken,
+                    // ApiKeys.userId,
+                    AppStrings.isSingedIn,
+                  ],
+                ).then((val) {
+                  SecureStorageHelper.clear();
+                  context.pushAndRemoveAllScreens(AppRoutes.signInScreen);
+                });
+              }
             },
-            text: "yes_logout".tr(context),
-            height: 45,
-            fontSize: 15,
+            builder: (context, state) {
+              return GeneralButton(
+                onPressed: () async {
+                  context.read<AuthCubit>().logOut();
+                },
+                text: "yes_logout".tr(context),
+                height: 45,
+                fontSize: 15,
+              );
+            },
           ),
         ),
       ],

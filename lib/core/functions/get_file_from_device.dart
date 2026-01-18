@@ -3,7 +3,7 @@ import 'package:file_picker/file_picker.dart';
 Future<PlatformFile?> getFileFromDevice() async {
   final FilePickerResult? result = await FilePicker.platform.pickFiles(
     type: FileType.custom,
-    allowedExtensions: ['pdf', 'png', 'jpg', 'jpeg'],
+    allowedExtensions: ['pdf', 'docx'],
     withData: true,
   );
 

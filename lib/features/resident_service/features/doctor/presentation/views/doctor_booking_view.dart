@@ -54,7 +54,7 @@ class _DoctorBookingViewState extends State<DoctorBookingView> {
     cubit.addDayTimeSlotToList(
       serviceDay: widget.doctorServiceModel.serviceDays[0],
     );
+    cubit.currentServiceId = widget.doctorServiceModel.id;
     cubit.signalRSevice.currentRoute = AppRoutes.doctorBookingScreen;
-    cubit.currentServiceId=widget.doctorServiceModel.id;
   }
 }

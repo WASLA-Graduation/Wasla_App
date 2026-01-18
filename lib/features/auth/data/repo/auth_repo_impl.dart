@@ -218,6 +218,7 @@ class AuthRepoImpl extends AuthRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+      
     }
   }
 

@@ -23,7 +23,7 @@ class DioFactory {
     //important for cookies
     dio.interceptors.add(CookieManager(cookieJar));
 
-    dio.interceptors.add(ApiInterceptors());
+    dio.interceptors.add(ApiInterceptors(dio));
 
     // dio.interceptors.add(
     //   LogInterceptor(

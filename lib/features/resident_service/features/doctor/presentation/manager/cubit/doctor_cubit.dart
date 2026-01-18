@@ -236,19 +236,18 @@ class DoctorCubit extends Cubit<DoctorState> {
     required String currentRoute,
     required bool isUpdate,
   }) {
-    if (serviceHubModel.serviceId != currentServiceId) {
-      return;
-    }
     final context = navigatorKey.currentContext;
-    if (currentRoute == AppRoutes.doctorBookingScreen) {
+    if (currentServiceId == -1) {
+      getDoctorServices(doctorId: serviceHubModel.serviceProviderId);
+    } else if (serviceHubModel.serviceId != currentServiceId) {
+      getDoctorServices(doctorId: serviceHubModel.serviceProviderId);
+    } else if (currentRoute == AppRoutes.doctorBookingScreen) {
       toastAlert(
         color: isUpdate ? AppColors.primaryColor : AppColors.error,
         msg: isUpdate ? "Service Updated" : "Service Deleted",
       );
       context?.popScreen();
       signalRSevice.currentRoute = AppRoutes.doctorSeeSevicesScreen;
-      getDoctorServices(doctorId: serviceHubModel.serviceProviderId);
-    } else {
       getDoctorServices(doctorId: serviceHubModel.serviceProviderId);
     }
   }
