@@ -59,11 +59,11 @@ class DoctorBookingViewBody extends StatelessWidget {
                           color: AppColors.primaryColor,
                           msg: "bookingDone".tr(context),
                         );
-                        context.popScreen();
-                        context.popScreen();
-                        context.popScreen();
                         context.read<HomeResidentCubit>().navBarcurrentIndex =
                             1;
+                        context.popScreen();
+                        context.popScreen();
+                        context.popScreen();
                         context.popScreen();
                       }
                     },
