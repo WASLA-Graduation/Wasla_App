@@ -30,4 +30,7 @@ abstract class AppRoutes {
   static const String allFavouritesScreen = '/allFavouritesScreen';
   static const String residentPersonalInfoScreen = '/residentPersonalInfoScreen';
   static const String residentBookingScreen = '/residentBookingScreen';
+  static const String gymCompleteInfoScreen = '/gymCompleteInfoScreen';
+  static const String gymDashbaordScreen = '/gymDashbaordScreen';
+  static const String gymBottomNavBarScreen = '/gymBottomNavBarScreen';
 }

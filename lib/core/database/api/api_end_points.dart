@@ -18,21 +18,22 @@ abstract class ApiEndPoints {
   static const String fileBaseUrl = '${baseUrl}assets/cv/doctor/';
   static const String residentEditProfile = 'api/Resident/edit-Profile';
   static const String doctorGetProfile = 'api/Doctor/GetDoctorProfile/';
-  static const String doctorGetServices = 'api/Service/GetServices/';
-  static const String doctorUpdateService = 'api/Service/UpdateService';
-  static const String doctorAddService = 'api/Service/AddService';
-  static const String doctorDeleteService = 'api/Service/DeleteService/';
+  static const String doctorGetServices = 'api/DoctorService/GetServices/';
+  static const String doctorUpdateService = 'api/DoctorService/UpdateService';
+  static const String doctorAddService = 'api/DoctorService/AddService';
+  static const String doctorDeleteService = 'api/DoctorService/DeleteService/';
   static const String getDoctorBySpecialist =
       'api/Doctor/GetDoctorBySpecialist/';
-  static const String doctorBookService = 'api/Book/BookService';
+  static const String doctorBookService = 'api/DoctorBook/BookService';
   static const String doctorUpdateProfile = 'api/Doctor/UpdateDoctorProfile';
   static const String doctorGetChart = 'api/Doctor/GetDoctorChart/';
   static const String doctorGetAllBooking =
       'api/Doctor/GetAllBookingsOfDoctor/';
-  static const String updateBooking = 'api/Book/UpdateBooking';
-  static const String updateBookingStatus = 'api/Book/UpdateBookingStatus';
+  static const String updateBooking = 'api/DoctorBook/UpdateBooking';
+  static const String updateBookingStatus =
+      'api/DoctorBook/UpdateBookingStatus';
   static const String getBookingDetailsForUser =
-      'api/Book/GetBookingDetailsForUser';
+      'api/DoctorBook/GetBookingDetailsForUser';
   static const String getReviews = 'api/Review/service-provider/';
   static const String getReviewsByRating = 'api/Review/ratings/';
   static const String addReview = 'api/Review/AddReview';
@@ -44,5 +45,8 @@ abstract class ApiEndPoints {
   static const String getFavouritesByType = 'api/Favourite/GetFavouritesByType';
   static const String refreshToken = 'api/Account/refresh-token';
   static const String logout = 'api/Account/logout';
-  static const String getDoctorById = '/api/Doctor/GetDoctorData/';
+  static const String getDoctorById = 'api/Doctor/GetDoctorData/';
+  static const String gymCompleteRegister = 'api/Gym/CompleteRegister';
+  static const String getAllGyms = 'api/Gym/AllGyms';
+  static const String getGymProfile = '/api/Gym/GymProfile';
 }

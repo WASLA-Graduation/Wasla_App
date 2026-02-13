@@ -228,7 +228,17 @@
     "myFavourites": "My Favourites",
     "noFavourites": "No Favourites yet.",
     "personalInformation": "Personal Information",
-    "showCV": "Show CV"
+    "showCV": "Show CV",
+    "gymName": "Gym Name",
+    "gymOwnerName": "Gym Owner Name",
+    "gmail": "Gmail",
+    "phones": "phones",
+    "separateByComma": "phone numbers sparated by commas",
+    "gymPhotos": "Gym Photos",
+    "description": "description",
+    "packages": "Packages",
+    "addNewPackage": "Add new Package",
+    "addNewOffer": "Add new Offer"
 
   
 

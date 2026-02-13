@@ -90,6 +90,14 @@ class Assets {
   /// assets/images/driver.png
   static const String assetsImagesDriver = "assets/images/driver.png";
 
+  /// Assets for assetsImagesDumbbellFilled
+  /// assets/images/dumbbell_filled.png
+  static const String assetsImagesDumbbellFilled = "assets/images/dumbbell_filled.png";
+
+  /// Assets for assetsImagesDumbbleOutlined
+  /// assets/images/dumbble_outlined.png
+  static const String assetsImagesDumbbleOutlined = "assets/images/dumbble_outlined.png";
+
   /// Assets for assetsImagesDumble
   /// assets/images/dumble.png
   static const String assetsImagesDumble = "assets/images/dumble.png";

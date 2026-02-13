@@ -228,7 +228,23 @@
               "myFavourites": "المفضلة",
               "noFavourites": "لا يوجد عناصر مفضلة",
                   "personalInformation": "معلومات شخصية",
-                  "showCV": "اظهار السيرة الذاتية"
+                  "showCV": "اظهار السيرة الذاتية",
+                    "gymName": "اسم الجيم",
+    "gymOwnerName": "اسم صاحب الجيم",
+    "gmail": "البريد الالكتروني",
+    "phones": "ارقام الهاتف",
+    "separateByComma": "ارقام الجيم مفصولة بالفاصلة",
+    "gymPhotos": "صور الجيم",
+    "description": "وصف الجيم",
+        "packages": "الباقات",
+    "addPackage": "اضافة باقة",
+    "editPackage": "تعديل الباقة",
+    "packageName": "اسم الباقة",
+    "packagePrice": "سعر الباقة",
+        "addNewPackage": "إضافة باقة جديدة",
+    "addNewOffer": "إضافة عرض جديد"
+
+
 
 
 

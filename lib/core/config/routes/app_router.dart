@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/features/auth/presentation/views/gym_complete_info_view.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_booking_model.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/views/doctor_edit_booking_view.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/views/doctor_add_service_view.dart';
 import 'package:wasla/features/favourite/presentation/views/all_favourites_views.dart';
+import 'package:wasla/features/gym/features/dashboard/presentation/views/gym_bottom_nav_bar.dart';
 import 'package:wasla/features/profile/presentation/views/doctor_edit_profile_view.dart';
 import 'package:wasla/features/resident_service/features/booking/presentation/views/resident_booking_view.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
@@ -139,6 +141,10 @@ abstract class AppRouter {
         return MaterialPageRoute(builder: (_) => AllFavouritesViews());
       case AppRoutes.residentBookingScreen:
         return MaterialPageRoute(builder: (_) => ResidentBookingView());
+      case AppRoutes.gymCompleteInfoScreen:
+        return MaterialPageRoute(builder: (_) => GymCompleteInfoView());
+      case AppRoutes.gymBottomNavBarScreen:
+        return MaterialPageRoute(builder: (_) => GymBottomNavBar());
 
       default:
         return MaterialPageRoute(builder: (_) => Container());

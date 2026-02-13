@@ -85,6 +85,15 @@ final class AuthDoctorCompleteInfoFailure extends AuthState {
 
   AuthDoctorCompleteInfoFailure({required this.errMsg});
 }
+final class AuthGymCompleteInfoLoading extends AuthState {}
+
+final class AuthGymCompleteInfoSuccess extends AuthState {}
+
+final class AuthGymCompleteInfoFailure extends AuthState {
+  final String errMsg;
+
+  AuthGymCompleteInfoFailure({required this.errMsg});
+}
 
 final class AuthGetRolesSuccess extends AuthState {}
 

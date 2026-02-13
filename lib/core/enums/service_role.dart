@@ -5,4 +5,5 @@ enum ServiceRole {
   technician,
   restaurantOwner,
   gymOwner,
+  
 }

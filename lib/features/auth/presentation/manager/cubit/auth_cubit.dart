@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/cache/secure_storage_helper.dart';
 import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
+import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
 import 'package:wasla/features/auth/data/models/roles_model.dart';
@@ -28,6 +29,8 @@ class AuthCubit extends Cubit<AuthState> {
   final doctortInfoformKey = GlobalKey<FormState>();
   final doctorCompletetInfoformKey = GlobalKey<FormState>();
   final resturentInfoformKey = GlobalKey<FormState>();
+  final gymInfoformKey = GlobalKey<FormState>();
+  List<File> gymImages = [];
 
   bool isPasswordVisible = false, enableButton = false;
   String email = '', password = '', confirmPassword = '', otpCode = '';
@@ -41,7 +44,12 @@ class AuthCubit extends Cubit<AuthState> {
       description = '',
       nationalId = '',
       universtiyName = '',
+      gymName = '',
+      gymOwnerName = '',
+      gymGmail = '',
+      gymPhones = '',
       owner = '',
+      ownerPhone = '',
       resturentName = '',
       hosptialName = '';
   PlatformFile? file;
@@ -58,6 +66,11 @@ class AuthCubit extends Cubit<AuthState> {
   void enableVerifyButton() {
     enableButton = true;
     emit(AuthEnableVerifyButton());
+  }
+
+  void uploadIImages(List<File> image) {
+    gymImages = image;
+    emit(AuthSuccessChooseFile());
   }
 
   void updateFile(PlatformFile f) {
@@ -287,6 +300,36 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (success) {
         emit(AuthLogOutSuccess());
+      },
+    );
+  }
+
+  Future<void> gymCompleteInfo() async {
+    if (gymImages.isEmpty) {
+      emit(
+        AuthGymCompleteInfoFailure(errMsg: "Please Choose At Least One Image"),
+      );
+      return;
+    }
+    emit(AuthGymCompleteInfoLoading());
+    final response = await authRepo.gymCompleteInfo(
+      gmail: email,
+      businessName: gymName,
+      ownerName: gymName,
+      description: description,
+      phones: extractEgyptPhones(gymPhones)!,
+      latitude: lat,
+      longitude: lan,
+      photos: gymImages,
+    );
+
+    response.fold(
+      (error) {
+        emit(AuthGymCompleteInfoFailure(errMsg: error));
+      },
+      (success) {
+        gymImages.clear();
+        emit(AuthGymCompleteInfoSuccess());
       },
     );
   }

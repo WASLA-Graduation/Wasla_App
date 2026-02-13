@@ -14,7 +14,13 @@ abstract class ApiKeys {
   static const serviceProviderProfilePhoto = 'serviceProviderProfilePhoto';
   static const roleName = 'roleName';
   static const images = 'images';
+  static const photo = 'photo';
+  static const photos = 'photos';
   static const value = 'value';
+  static const gmail = 'gmail';
+  static const businessName = 'businessName';
+  static const ownerName = 'ownerName';
+  static const phones = 'phones';
   static const serviceDayId = 'serviceDayId';
   static const serviceProviderType = 'serviceProviderType';
   static const id = 'id';

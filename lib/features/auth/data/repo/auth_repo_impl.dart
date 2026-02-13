@@ -98,6 +98,9 @@ class AuthRepoImpl extends AuthRepo {
         ApiEndPoints.login,
         body: {ApiKeys.email: email, ApiKeys.password: password},
       );
+      if (response[ApiKeys.data][ApiKeys.role] == 'Gym') {
+        response[ApiKeys.data][ApiKeys.role] = 'gymOwner';
+      }
       return Right(SignInDataModel.fromJson(response));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
@@ -110,6 +113,11 @@ class AuthRepoImpl extends AuthRepo {
       final response = await api.get(ApiEndPoints.getRols);
       final List<RolesModel> roles = [];
       for (var role in response[ApiKeys.data]) {
+        if (role[ApiKeys.roleName] == 'admin') continue;
+
+        if (role[ApiKeys.roleName] == 'Gym') {
+          role[ApiKeys.value] = 'gymOwner';
+        }
         roles.add(RolesModel.fromJson(role));
       }
       return Right(roles);
@@ -218,7 +226,6 @@ class AuthRepoImpl extends AuthRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
-      
     }
   }
 
@@ -230,5 +237,56 @@ class AuthRepoImpl extends AuthRepo {
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
+  }
+
+  @override
+  Future<Either<String, Null>> gymCompleteInfo({
+    required String gmail,
+    required String businessName,
+    required String ownerName,
+    required String description,
+    required List<String> phones,
+    required double latitude,
+    required double longitude,
+    required List<File> photos,
+  }) async {
+    try {
+      final formData = FormData.fromMap({
+        ApiKeys.photo: await MultipartFile.fromFile(
+          photos.first.path,
+          filename: photos.first.path.split('/').last,
+        ),
+        ApiKeys.photos: await _convertFilesToMultipart(photos),
+      });
+      await api.post(
+        ApiEndPoints.gymCompleteRegister,
+        queryParameters: {
+          ApiKeys.gmail: gmail,
+          ApiKeys.businessName: businessName,
+          ApiKeys.ownerName: ownerName,
+          ApiKeys.description: description,
+          ApiKeys.phones: phones,
+          ApiKeys.latitudeSmall: latitude,
+          ApiKeys.longitudeSmall: longitude,
+        },
+        body: formData,
+        headers: {"Content-Type": "multipart/form-data"},
+      );
+
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  Future<List<MultipartFile>> _convertFilesToMultipart(List<File> files) async {
+    return Future.wait(
+      files.map(
+        (file) async => await MultipartFile.fromFile(
+          file.path,
+          filename: file.path.split('/').last,
+        ),
+      ),
+    );
   }
 }

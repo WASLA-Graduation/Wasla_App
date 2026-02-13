@@ -38,6 +38,16 @@ abstract class AuthRepo {
     required double lat,
     required double lng,
   });
+  Future<Either<String, Null>> gymCompleteInfo({
+    required String gmail,
+    required String businessName,
+    required String ownerName,
+    required String description,
+    required List<String> phones,
+    required double latitude,
+    required double longitude,
+    required List<File> photos,
+  });
   Future<Either<String, Null>> doctorCompleteInfo({
     required String email,
     required String fullName,

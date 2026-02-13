@@ -202,10 +202,12 @@ class DoctorCubit extends Cubit<DoctorState> {
         for (var time in serviceDay.timeSlots) {
           if (time.id == bookingHubModel.serviceId) {
             time.isBooking = true;
-            if (timeSlotIds.contains(time.id)) {
-              timeSlotIds.remove(time.id);
+            // if (timeSlotIds.contains(time.id)) {
+            //   timeSlotIds.remove(time.id);
+            //   dayListTimeSlots.remove(time.start);
+            // }
+             timeSlotIds.remove(time.id);
               dayListTimeSlots.remove(time.start);
-            }
             timeCurrentIndex = -1;
             serviceSelectedDayAndTimeId = null;
           }

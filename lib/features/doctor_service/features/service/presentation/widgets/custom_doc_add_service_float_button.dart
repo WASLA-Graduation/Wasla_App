@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wasla/core/config/routes/app_routes.dart';
-import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 
-class CustomAddDoctorServiceButton extends StatelessWidget {
-  const CustomAddDoctorServiceButton({super.key});
-  
+class CustomFloatingAddButton extends StatelessWidget {
+  const CustomFloatingAddButton({super.key, required this.onPressed});
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +19,7 @@ class CustomAddDoctorServiceButton extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       child: IconButton(
-        onPressed: () {
-          context.pushScreen(AppRoutes.doctorAddServiceScreen);
-        },
+        onPressed: onPressed,
         icon: Icon(Icons.add, color: AppColors.whiteColor),
       ),
     );

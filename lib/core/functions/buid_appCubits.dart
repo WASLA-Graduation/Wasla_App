@@ -11,6 +11,10 @@ import 'package:wasla/features/doctor_service/features/home/data/repo/doctor_das
 import 'package:wasla/features/doctor_service/features/home/presentation/manager/cubit/doctor_home_cubit.dart';
 import 'package:wasla/features/doctor_service/features/service/data/repo/doctor_service_mangement_repo_impl.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/manager/cubit/doctor_service_mangement_cubit.dart';
+import 'package:wasla/features/gym/features/dashboard/data/repo/gym_dashboard_repo_imp.dart';
+import 'package:wasla/features/gym/features/dashboard/presentation/manager/cubit/gym_dashboard_cubit.dart';
+import 'package:wasla/features/gym/features/packages/data/repo/gym_packages_repo_impl.dart';
+import 'package:wasla/features/gym/features/packages/presentation/manager/cubit/gym_packages_cubit.dart';
 import 'package:wasla/features/profile/data/repo/profile_repo_impl.dart';
 import 'package:wasla/features/profile/presentation/manager/cubit/profile_cubit.dart';
 import 'package:wasla/features/resident_service/features/booking/data/repo/resident_booking_repo_impl.dart';
@@ -67,6 +71,16 @@ List<SingleChildWidget> get buildAppCubits {
     BlocProvider(
       create: (context) =>
           FavouriteCubit(FavouriteRepoImpl(api: sl<ApiConsumer>())),
+      lazy: true,
+    ),
+    BlocProvider(
+      create: (context) =>
+          GymDashboardCubit(GymDashboardRepoImp(api: sl<ApiConsumer>())),
+      lazy: true,
+    ),
+    BlocProvider(
+      create: (context) =>
+          GymPackagesCubit(GymPackagesRepoImpl(api: sl<ApiConsumer>())),
       lazy: true,
     ),
   ];

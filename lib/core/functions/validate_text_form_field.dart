@@ -95,3 +95,28 @@ String? validateNationalGraduation(String? value, BuildContext context) {
 
   return null;
 }
+
+bool isValidEgyptPhones(String input) {
+  final cleaned = input.replaceAll(' ', '');
+  final regex = RegExp(r'^(01[0125]\d{8})(,01[0125]\d{8})*$');
+  return regex.hasMatch(cleaned);
+}
+
+String? validatePhone2(String? value, BuildContext context) {
+  if (value == null || value.trim().isEmpty) {
+    return "phoneRequired".tr(context);
+  } else if (!isValidEgyptPhones(value)) {
+    return "invalidPhone".tr(context);
+  }
+  return null;
+}
+List<String>? extractEgyptPhones(String input) {
+  final cleaned = input.replaceAll(' ', '');
+  final regex = RegExp(r'^(01[0125]\d{8})(,01[0125]\d{8})*$');
+
+  if (!regex.hasMatch(cleaned)) {
+    return null;
+  }
+
+  return cleaned.split(',');
+}

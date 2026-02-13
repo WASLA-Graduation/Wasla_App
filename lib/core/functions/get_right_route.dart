@@ -25,7 +25,7 @@ String getRightRoute({required ServiceRole role}) {
       return AppRoutes.residentInfoScreen;
 
     case ServiceRole.gymOwner:
-      return AppRoutes.residentInfoScreen;
+      return AppRoutes.gymBottomNavBarScreen;
   }
 }
 
@@ -46,7 +46,7 @@ String getRightCompleteServiceRoute({required ServiceRole role}) {
       return AppRoutes.residentInfoScreen;
 
     case ServiceRole.gymOwner:
-      return AppRoutes.residentInfoScreen;
+      return AppRoutes.gymCompleteInfoScreen;
   }
 }
 
