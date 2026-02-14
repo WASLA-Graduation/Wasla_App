@@ -242,7 +242,14 @@
     "packageName": "اسم الباقة",
     "packagePrice": "سعر الباقة",
         "addNewPackage": "إضافة باقة جديدة",
-    "addNewOffer": "إضافة عرض جديد"
+    "addNewOffer": "إضافة عرض جديد",
+        "offers": "العروض",
+    "noOffers": "لا يوجد عروض",
+        "noPackages": "لا توجد باقات",
+            "months": "شهور"
+
+
+
 
 
 

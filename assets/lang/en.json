@@ -237,8 +237,12 @@
     "gymPhotos": "Gym Photos",
     "description": "description",
     "packages": "Packages",
+    "noPackages": "No Packages",
     "addNewPackage": "Add new Package",
-    "addNewOffer": "Add new Offer"
+    "addNewOffer": "Add new Offer",
+    "offers": "Offers",
+    "noOffers": "No Offers",
+    "months": "months"
 
   
 

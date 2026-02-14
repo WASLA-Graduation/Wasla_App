@@ -3,12 +3,18 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
+import 'package:wasla/features/profile/data/models/gym_model.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
 
 abstract class ProfileRepo {
   Future<Either<String, UserModel>> getResidentProfile({
     required String userId,
   });
+  Future<Either<String, GymModel>> geGymProfile({
+    required String gymId,
+  });
+
+
   Future<Either<String, Null>> changePassword({
     required String email,
     required String currentPassword,

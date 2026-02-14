@@ -48,5 +48,7 @@ abstract class ApiEndPoints {
   static const String getDoctorById = 'api/Doctor/GetDoctorData/';
   static const String gymCompleteRegister = 'api/Gym/CompleteRegister';
   static const String getAllGyms = 'api/Gym/AllGyms';
-  static const String getGymProfile = '/api/Gym/GymProfile';
+  static const String getGymProfile = 'api/Gym/GymProfile';
+  static const String getGymUpdateProfile = 'api/Gym/UpdateProfile';
+  static const String gymPackage = 'api/Package';
 }

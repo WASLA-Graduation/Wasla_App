@@ -4,11 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/bottom_nav_bar/custom_bottom_nav_bar.dart';
-import 'package:wasla/features/doctor_service/features/service/presentation/widgets/custom_doc_add_service_float_button.dart';
 import 'package:wasla/features/gym/features/dashboard/presentation/manager/cubit/gym_dashboard_cubit.dart';
 import 'package:wasla/features/gym/features/dashboard/presentation/views/gym_dashboard_view.dart';
 import 'package:wasla/features/gym/features/packages/presentation/views/gym_packages_view.dart';
-import 'package:wasla/features/gym/features/packages/presentation/widgets/custom_choose_gym_page_bottom_sheet.dart';
 
 class GymBottomNavBar extends StatelessWidget {
   const GymBottomNavBar({super.key});
@@ -20,17 +18,17 @@ class GymBottomNavBar extends StatelessWidget {
         final cubit = context.read<GymDashboardCubit>();
 
         return Scaffold(
-          floatingActionButton: cubit.bottomNavBarcurrentIndex == 1
-              ? CustomFloatingAddButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (context) =>
-                          const CustomChooseGymPageBottomSheet(),
-                    );
-                  },
-                )
-              : null,
+          // floatingActionButton: cubit.bottomNavBarcurrentIndex == 1
+          //     ? CustomFloatingAddButton(
+          //         onPressed: () {
+          //           showModalBottomSheet(
+          //             context: context,
+          //             builder: (context) =>
+          //                 const CustomChooseGymPageBottomSheet(),
+          //           );
+          //         },
+          //       )
+          //     : null,
           body: screens[cubit.bottomNavBarcurrentIndex],
           bottomNavigationBar: CustomBottomNavBar(
             selectedIndex: cubit.bottomNavBarcurrentIndex,

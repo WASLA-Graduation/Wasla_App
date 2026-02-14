@@ -86,6 +86,10 @@ class Assets {
   /// assets/images/done.png
   static const String assetsImagesDone = "assets/images/done.png";
 
+  /// Assets for assetsImagesDownload
+  /// assets/images/download.png
+  static const String assetsImagesDownload = "assets/images/download.png";
+
   /// Assets for assetsImagesDriver
   /// assets/images/driver.png
   static const String assetsImagesDriver = "assets/images/driver.png";
@@ -141,6 +145,10 @@ class Assets {
   /// Assets for assetsImagesGroup
   /// assets/images/group.png
   static const String assetsImagesGroup = "assets/images/group.png";
+
+  /// Assets for assetsImagesGymTest
+  /// assets/images/gym_test.jpg
+  static const String assetsImagesGymTest = "assets/images/gym_test.jpg";
 
   /// Assets for assetsImagesHalfStar
   /// assets/images/half_star.png
@@ -201,6 +209,14 @@ class Assets {
   /// Assets for assetsImagesNotification
   /// assets/images/notification.png
   static const String assetsImagesNotification = "assets/images/notification.png";
+
+  /// Assets for assetsImagesOffersFilled
+  /// assets/images/offers_filled.png
+  static const String assetsImagesOffersFilled = "assets/images/offers_filled.png";
+
+  /// Assets for assetsImagesOffersOutlined
+  /// assets/images/offers_outlined.png
+  static const String assetsImagesOffersOutlined = "assets/images/offers_outlined.png";
 
   /// Assets for assetsImagesOnboadingThree
   /// assets/images/onboadingThree.png
