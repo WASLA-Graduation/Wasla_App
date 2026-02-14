@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/custom_err_get_data.dart';
 import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
@@ -21,7 +22,8 @@ class PackagesOffersList extends StatelessWidget {
       builder: (context, state) {
         if (state is GymGetPackagesAndOffersError) {
           return CustomErrGetData();
-        } else if (state is GymGetPackagesAndOffersLoading || state is GymDeletePackagesAndOffersLoading) {
+        } else if (state is GymGetPackagesAndOffersLoading ||
+            state is GymDeletePackagesAndOffersLoading) {
           return Center(
             child: SpinKitFadingCircle(
               color: AppColors.primaryColor,
@@ -29,7 +31,7 @@ class PackagesOffersList extends StatelessWidget {
             ),
           );
         } else {
-          if (state is GymGetPackagesAndOffersSuccess  ) {
+          if (state is GymGetPackagesAndOffersSuccess) {
             data = state.data;
           }
 
@@ -51,19 +53,39 @@ class PackagesOffersList extends StatelessWidget {
                   ),
                   itemCount: data.length,
                   // itemCount: 5,
-                  itemBuilder: (context, index) => GestureDetector(
-                    onLongPress: () => showModalBottomSheet(
-                      context: context,
-                      builder: (context) =>
-                          GymDeleteUpdateModelSheet(packageId: data[index].id),
-                    ),
-                    child: GymPackageItem(model: data[index]),
-                  ),
+                  itemBuilder: (context, index) =>
+                      BlocConsumer<GymPackagesCubit, GymPackagesState>(
+                        listener: (context, state) {
+                          if (state is GymDeletePackagesAndOffersSuccess) {
+                            toastAlert(
+                              color: AppColors.primaryColor,
+                              msg: cubit.tapsCurrentIndex == 0
+                                  ? "packageDeleted".tr(context)
+                                  : "offerDeleted ".tr(context),
+                            );
+                          }
+                          if (state is GymDeletePackagesAndOffersError) {
+                            toastAlert(
+                              color: Colors.red,
+                              msg: state.errorMessage,
+                            );
+                          }
+                        },
+                        builder: (context, state) {
+                          return GestureDetector(
+                            onLongPress: () => showModalBottomSheet(
+                              context: context,
+                              builder: (context) => GymDeleteUpdateModelSheet(
+                                packageId: data[index].id,
+                              ),
+                            ),
+                            child: GymPackageItem(model: data[index]),
+                          );
+                        },
+                      ),
                 );
         }
       },
     );
   }
 }
-
-

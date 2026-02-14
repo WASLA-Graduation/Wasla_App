@@ -78,7 +78,7 @@ class GymPackageItem extends StatelessWidget {
               ? const SizedBox()
               :
           Container(
-            width: 35,
+            width: 40,
             height: 35,
             decoration: BoxDecoration(
               color: AppColors.primaryColor,
@@ -88,7 +88,7 @@ class GymPackageItem extends StatelessWidget {
             child: Center(
               child: Text(
                 "${model.precentage}%",
-                style: TextStyle(fontSize: 12, color: AppColors.whiteColor),
+                style: TextStyle(fontSize: 10, color: AppColors.whiteColor),
               ),
             ),
           ),

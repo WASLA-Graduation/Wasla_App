@@ -242,7 +242,9 @@
     "addNewOffer": "Add new Offer",
     "offers": "Offers",
     "noOffers": "No Offers",
-    "months": "months"
+    "months": "months",
+    "packageDeleted": "Package Deleted Successfully",
+    "offerDeleted": "Offer Deleted Successfully"
 
   
 
