@@ -132,8 +132,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         // TODO: Handle this case.
         throw UnimplementedError();
       case ServiceRole.gymOwner:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        return await profileRepo.geGymProfile(gymId: userId);
     }
   }
 

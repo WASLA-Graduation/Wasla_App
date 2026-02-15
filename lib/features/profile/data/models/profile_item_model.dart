@@ -14,40 +14,45 @@ class ProfileItemModel {
   });
 
   static List<ProfileItemModel> get items => [
-        ProfileItemModel(
-          image: Assets.assetsImagesPersonOutlined,
-          title: "editProfile",
-          route: getRightEditProfileRoute(),
-        ),
-        const ProfileItemModel(
-          image: Assets.assetsImagesNotification,
-          title: "notification",
-          route: "",
-        ),
-        const ProfileItemModel(
-          image: Assets.assetsImagesPayment,
-          title: "payment",
-          route: "",
-        ),
-        const ProfileItemModel(
-          image: Assets.assetsImagesLanguage,
-          title: "language",
-          route: AppRoutes.chnageLangScreen,
-        ),
-        const ProfileItemModel(
-          image: Assets.assetsImagesVision,
-          title: "darkMode",
-          route: "",
-        ),
-        const ProfileItemModel(
-          image: Assets.assetsImagesLock,
-          title: "privacyPolicy",
-          route: "",
-        ),
-        const ProfileItemModel(
-          image: Assets.assetsImagesHelp,
-          title: "helpCenter",
-          route: "",
-        ),
-      ];
+    ProfileItemModel(
+      image: Assets.assetsImagesEditProfile,
+      title: "editProfile",
+      route: getRightEditProfileRoute(),
+    ),
+    ProfileItemModel(
+      image: Assets.assetsImagesPersonOutlined,
+      title: "profileInformation",
+      route: getRightPersonalInfoRoute(),
+    ),
+    const ProfileItemModel(
+      image: Assets.assetsImagesNotification,
+      title: "notification",
+      route: "",
+    ),
+    const ProfileItemModel(
+      image: Assets.assetsImagesPayment,
+      title: "payment",
+      route: "",
+    ),
+    const ProfileItemModel(
+      image: Assets.assetsImagesLanguage,
+      title: "language",
+      route: AppRoutes.chnageLangScreen,
+    ),
+    const ProfileItemModel(
+      image: Assets.assetsImagesVision,
+      title: "darkMode",
+      route: "",
+    ),
+    const ProfileItemModel(
+      image: Assets.assetsImagesLock,
+      title: "privacyPolicy",
+      route: "",
+    ),
+    const ProfileItemModel(
+      image: Assets.assetsImagesHelp,
+      title: "helpCenter",
+      route: "",
+    ),
+  ];
 }

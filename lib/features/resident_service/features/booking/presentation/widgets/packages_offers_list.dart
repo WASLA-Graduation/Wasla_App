@@ -49,7 +49,7 @@ class PackagesOffersList extends StatelessWidget {
                     crossAxisCount: 2,
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
-                    childAspectRatio: .66,
+                    childAspectRatio: .71,
                   ),
                   itemCount: data.length,
                   // itemCount: 5,

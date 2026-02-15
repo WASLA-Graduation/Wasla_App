@@ -1,4 +1,3 @@
-
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 
@@ -43,9 +42,8 @@ class GymPackageModel {
       price: (json[ApiKeys.price] as num).toDouble(),
       newPrice: (json[ApiKeys.newPrice] as num).toDouble(),
       durationInMonths: json[ApiKeys.durationInMonths],
-      photoUrl: ApiEndPoints.imageBaseUrl + json[ApiKeys.photoUrl],
+      photoUrl: ApiEndPoints.gymBaseUrl + json[ApiKeys.photoUrl],
       type: json[ApiKeys.type],
     );
   }
 }
-

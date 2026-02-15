@@ -253,7 +253,12 @@
     "discount": "Discount",
     "packageImage": "Package Image",
     "packageAddedSuccessfully": "Package Added Successfully",
-    "packageUpdatedSuccessfully": "Package Updated Successfully"
+    "packageUpdatedSuccessfully": "Package Updated Successfully",
+    "profileInformation": "Profile Information",
+    "gymProfileInfo": "Gym Profile Info",
+    "owener": "Owner",
+    "contacts": "Contact Numbers",
+    "galary": "Galary"
 
 
   

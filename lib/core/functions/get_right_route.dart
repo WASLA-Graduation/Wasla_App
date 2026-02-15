@@ -72,6 +72,28 @@ String getRightEditProfileRoute() {
   }
 }
 
+String getRightPersonalInfoRoute() {
+  final String? role = SharedPreferencesHelper.get(key: ApiKeys.role);
+  switch (ServiceRoleExtension.fromString(role!)) {
+    case ServiceRole.resident:
+      return AppRoutes.residentPersonalInfoScreen;
+    case ServiceRole.driver:
+      return AppRoutes.residentPersonalInfoScreen;
+
+    case ServiceRole.doctor:
+      return AppRoutes.doctorProfileInfoScreen;
+
+    case ServiceRole.technician:
+      return AppRoutes.residentPersonalInfoScreen;
+
+    case ServiceRole.restaurantOwner:
+      return AppRoutes.residentPersonalInfoScreen;
+
+    case ServiceRole.gymOwner:
+      return AppRoutes.gymProfileInfoScreen;
+  }
+}
+
 void resetDataInSpecificRole(BuildContext context) {
   final String? role = SharedPreferencesHelper.get(key: ApiKeys.role);
   switch (ServiceRoleExtension.fromString(role!)) {

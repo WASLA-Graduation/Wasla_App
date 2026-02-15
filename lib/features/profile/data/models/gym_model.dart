@@ -1,7 +1,8 @@
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
+import 'package:wasla/core/models/user_base_model.dart';
 
-class GymModel {
+class GymModel extends UserBaseModel {
   final String id;
   final String businessName;
   final String ownerName;
@@ -24,7 +25,14 @@ class GymModel {
     required this.photos,
     required this.reviewsCount,
     required this.rating,
-  });
+  }) : super(
+         fullNameBase: ownerName,
+         emailBase: email,
+         phoneNumberBase: profilePhoto,
+         imageUrlBase: profilePhoto,
+         latBase: 0.0,
+         lngBase: 0.0,
+       );
 
   factory GymModel.fromJson(Map<String, dynamic> json) {
     return GymModel(
@@ -32,13 +40,13 @@ class GymModel {
       businessName: json[ApiKeys.businessName],
       ownerName: json[ApiKeys.ownerName],
       email: json[ApiKeys.email],
-      description: json[ApiKeys.description],
+      description: json[ApiKeys.descriptionSmall],
       phones: List<String>.from(json[ApiKeys.phones] ?? []),
-      profilePhoto: json[ApiKeys.profilePhoto],
+      profilePhoto: ApiEndPoints.gymBaseUrl + json[ApiKeys.profilePhoto],
       photos: List<String>.from(
         json[ApiKeys.photos] != null
             ? json[ApiKeys.photos].map(
-                (photo) => ApiEndPoints.imageBaseUrl + photo,
+                (photo) => ApiEndPoints.gymBaseUrl + photo,
               )
             : [],
       ),

@@ -110,6 +110,10 @@ class Assets {
   /// assets/images/edit.png
   static const String assetsImagesEdit = "assets/images/edit.png";
 
+  /// Assets for assetsImagesEditProfile
+  /// assets/images/edit_profile.png
+  static const String assetsImagesEditProfile = "assets/images/edit_profile.png";
+
   /// Assets for assetsImagesError
   /// assets/images/error.png
   static const String assetsImagesError = "assets/images/error.png";

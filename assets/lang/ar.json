@@ -256,7 +256,17 @@
             "discount": " قيمةالخصم",
             "packageImage": "صورة الباقة",
                 "packageAddedSuccessfully": " تم اضافة الباقة بنجاح",
-    "packageUpdatedSuccessfully": "تم تحديث الباقة بنجاح"
+    "packageUpdatedSuccessfully": "تم تحديث الباقة بنجاح",
+        "profileInformation": "معلومات الملف الشخصي",
+            "gymProfileInfo": "معلومات الملف الشخصي للجيم",
+                "owener": "المالك",
+    "contacts": "جهات الاتصال",
+        "galary": "معرض الصور"
+
+
+
+
+
 
 
 

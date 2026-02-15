@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/core/utils/assets.dart';
+import 'package:wasla/core/widgets/cached_network_image_widget.dart';
 import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
 import 'package:wasla/features/resident_service/features/booking/presentation/widgets/gym_package_item_content.dart';
 
@@ -19,7 +19,6 @@ class GymPackageItem extends StatelessWidget {
       child: Stack(
         children: [
           Column(
-            spacing: 7,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Center(child: CustomCachedNetworkImage(imageUrl: model.photoUrl)),
@@ -29,8 +28,8 @@ class GymPackageItem extends StatelessWidget {
                   offset: Offset(0, -10),
                   child: SizedBox(
                     width: double.infinity,
-                    child: Image.asset(
-                      Assets.assetsImagesGymTest,
+                    child: CustomCachedNetworkImage(
+                      imageUrl: model.photoUrl,
                       fit: BoxFit.fill,
                     ),
                   ),

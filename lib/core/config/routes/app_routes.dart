@@ -28,10 +28,14 @@ abstract class AppRoutes {
   static const String doctorEditBookingScreen = '/doctorEditBookingScreen';
   static const String doctorEditProfileScreen = '/doctorEditProfileScreen';
   static const String allFavouritesScreen = '/allFavouritesScreen';
-  static const String residentPersonalInfoScreen = '/residentPersonalInfoScreen';
+  static const String residentPersonalInfoScreen =
+      '/residentPersonalInfoScreen';
   static const String residentBookingScreen = '/residentBookingScreen';
   static const String gymCompleteInfoScreen = '/gymCompleteInfoScreen';
   static const String gymDashbaordScreen = '/gymDashbaordScreen';
   static const String gymBottomNavBarScreen = '/gymBottomNavBarScreen';
   static const String gymAddUpdatePackageScreen = '/gymAddUpdatePackageScreen';
+  static const String residentProfileInfoScreen = '/residentProfileInfoScreen';
+  static const String doctorProfileInfoScreen = '/doctorProfileInfoScreen';
+  static const String gymProfileInfoScreen = '/gymProfileInfoScreen';
 }

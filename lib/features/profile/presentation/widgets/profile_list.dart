@@ -13,16 +13,17 @@ class ProfileList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<ProfileCubit>();
     return SliverList.builder(
       itemCount: ProfileItemModel.items.length,
 
       itemBuilder: (context, index) => InkWell(
         onTap: () {
-          if (index == 4) return;
-          if (index == 0) {
+          if (index == 5) return;
+          if (index == 0 || index == 1 && cubit.user != null) {
             context.pushScreen(
               ProfileItemModel.items[index].route,
-              arguments: context.read<ProfileCubit>().user,
+              arguments: cubit.user,
             );
           } else {
             context.pushScreen(ProfileItemModel.items[index].route);
@@ -30,7 +31,7 @@ class ProfileList extends StatelessWidget {
         },
         child: ProfileItem(
           profileItemModel: ProfileItemModel.items[index],
-          trailing: index == 4
+          trailing: index == 5
               ? CustomSwitchButton(
                   onChanged: (value) {
                     context.read<GlobalCubit>().changeTheme(

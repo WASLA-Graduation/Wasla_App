@@ -11,7 +11,11 @@ import 'package:wasla/features/favourite/presentation/views/all_favourites_views
 import 'package:wasla/features/gym/features/dashboard/presentation/views/gym_bottom_nav_bar.dart';
 import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
 import 'package:wasla/features/gym/features/packages/presentation/views/gym_add_update_package_view.dart';
+import 'package:wasla/features/profile/data/models/gym_model.dart';
 import 'package:wasla/features/profile/presentation/views/doctor_edit_profile_view.dart';
+import 'package:wasla/features/profile/presentation/views/doctor_profile_info.dart';
+import 'package:wasla/features/profile/presentation/views/gym_profile_info_viwe.dart';
+import 'package:wasla/features/profile/presentation/views/resident_profile_info.dart';
 import 'package:wasla/features/resident_service/features/booking/presentation/views/resident_booking_view.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_booking_view.dart';
@@ -151,6 +155,19 @@ abstract class AppRouter {
         final GymPackageModel? package = settigns.arguments as GymPackageModel?;
         return MaterialPageRoute(
           builder: (_) => GymAddUpdatePackageView(package: package),
+        );
+      case AppRoutes.gymProfileInfoScreen:
+        final GymModel gym = settigns.arguments as GymModel;
+        return MaterialPageRoute(builder: (_) => GymProfileInfoViwe(gym: gym));
+      case AppRoutes.doctorProfileInfoScreen:
+        final DoctorModel doc = settigns.arguments as DoctorModel;
+        return MaterialPageRoute(
+          builder: (_) => DoctorProfileInfo(doctorModel: doc),
+        );
+      case AppRoutes.residentProfileInfoScreen:
+        final UserModel resident = settigns.arguments as UserModel;
+        return MaterialPageRoute(
+          builder: (_) => ResidentProfileInfo(resident: resident),
         );
 
       default:

@@ -10,6 +10,7 @@ import 'package:wasla/features/doctor_service/features/service/presentation/widg
 import 'package:wasla/features/gym/features/dashboard/presentation/manager/cubit/gym_dashboard_cubit.dart';
 import 'package:wasla/features/gym/features/dashboard/presentation/views/gym_dashboard_view.dart';
 import 'package:wasla/features/gym/features/packages/presentation/views/gym_packages_view.dart';
+import 'package:wasla/features/profile/presentation/views/profile_view.dart';
 
 class GymBottomNavBar extends StatelessWidget {
   const GymBottomNavBar({super.key});
@@ -54,8 +55,7 @@ class GymBottomNavBar extends StatelessWidget {
     GymDashboardView(),
     GymPackagesView(),
     Container(),
-    Container(),
-    // const ProfileView(),
+    const ProfileView(),
   ];
 
   List<String> getTitles(BuildContext context) => [
