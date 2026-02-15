@@ -23,8 +23,7 @@ class ChooseSingleImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        File? pickedImage =
-            await getImageFromMobile(fromGallary: true);
+        File? pickedImage = await getImageFromMobile(fromGallary: true);
 
         if (pickedImage != null) {
           onImageSelected(pickedImage);
@@ -39,37 +38,26 @@ class ChooseSingleImageWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                Icon(Icons.image,
-                    color: AppColors.primaryColor, size: 26),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    image != null
-                        ? image!.path.split('/').last
-                        : hintText ?? "Upload Image",
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelMedium!
-                        .copyWith(
-                          color: context.isDarkMode
-                              ? AppColors.whiteColor70
-                              : Colors.black54,
-                        ),
-                  ),
+            Icon(Icons.image, color: AppColors.primaryColor, size: 26),
+            const SizedBox(width: 10),
+
+            Expanded(
+              child: Text(
+                image != null
+                    ? image!.path.split('/').last
+                    : hintText ?? "Upload Image",
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                  color: context.isDarkMode
+                      ? AppColors.whiteColor70
+                      : Colors.black54,
                 ),
-              ],
+              ),
             ),
+
             image != null
-                ? Image.asset(
-                    Assets.assetsImagesAccept,
-                    width: 20,
-                    height: 20,
-                  )
+                ? Image.asset(Assets.assetsImagesAccept, width: 20, height: 20)
                 : const Icon(
                     Icons.arrow_forward_ios_rounded,
                     size: 18,

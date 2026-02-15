@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wasla/core/config/localization/app_localizations.dart';
-import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
+import 'package:wasla/features/resident_service/features/booking/presentation/widgets/gym_package_item_content.dart';
 
 class GymPackageItem extends StatelessWidget {
   const GymPackageItem({super.key, required this.model});
@@ -25,77 +24,23 @@ class GymPackageItem extends StatelessWidget {
             children: [
               // Center(child: CustomCachedNetworkImage(imageUrl: model.photoUrl)),
               Expanded(
+                flex: 2,
                 child: Transform.translate(
-                  offset: Offset(0, -2),
-                  child: Image.asset(Assets.assetsImagesGymTest),
+                  offset: Offset(0, -10),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Image.asset(
+                      Assets.assetsImagesGymTest,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                 ),
               ),
               Expanded(
+                flex: 3,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    spacing: 4,
-
-                    crossAxisAlignment: CrossAxisAlignment.start,
-
-                    children: [
-                      Text(
-                        context.isArabic ? model.nameAr : model.nameEn,
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                      Text(
-                        context.isArabic
-                            ? model.descriptionAr
-                            : model.descriptionEn,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "${model.price} ${"egb".tr(context)}",
-                            style: Theme.of(context).textTheme.headlineSmall!
-                                .copyWith(color: AppColors.primaryColor),
-                          ),
-                          const Spacer(),
-
-                          model.precentage == 0
-                              ? Text(
-                                  "${model.durationInMonths} ${"months".tr(context)}",
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                )
-                              : Text.rich(
-                                  TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text:
-                                            "${model.price} ${"egb".tr(context)} ",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineSmall!
-                                            .copyWith(
-                                              color: AppColors.primaryColor,
-                                              decoration:
-                                                  TextDecoration.lineThrough,
-                                            ),
-                                      ),
-                                      TextSpan(
-                                        text: "(${calculateFinalSalay()} ",
-
-                                        style: Theme.of(
-                                          context,
-                                        ).textTheme.bodyMedium,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  child: PackageItemContent(model: model),
                 ),
               ),
             ],
@@ -126,10 +71,5 @@ class GymPackageItem extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String calculateFinalSalay() {
-    double finalSalary = model.price - (model.price * (model.precentage / 100));
-    return finalSalary.toString();
   }
 }

@@ -1,6 +1,4 @@
-import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 
@@ -45,56 +43,9 @@ class GymPackageModel {
       price: (json[ApiKeys.price] as num).toDouble(),
       newPrice: (json[ApiKeys.newPrice] as num).toDouble(),
       durationInMonths: json[ApiKeys.durationInMonths],
-      photoUrl: ApiEndPoints.imageBaseUrl  + json[ApiKeys.photoUrl],
+      photoUrl: ApiEndPoints.imageBaseUrl + json[ApiKeys.photoUrl],
       type: json[ApiKeys.type],
     );
   }
 }
 
-class GymPackageRequestModel {
-  final String serviceProviderId;
-
-  final String nameEnglish;
-  final String nameArabic;
-
-  final String descriptionEnglish;
-  final String descriptionArabic;
-
-  final double price;
-  final int durationInMonths;
-  final double precentage;
-  final int type;
-
-  final File photo;
-
-  GymPackageRequestModel({
-    required this.photo,
-    required this.serviceProviderId,
-    required this.nameEnglish,
-    required this.nameArabic,
-    required this.descriptionEnglish,
-    required this.descriptionArabic,
-    required this.price,
-    required this.durationInMonths,
-    required this.precentage,
-    required this.type,
-  });
-
-  Future<Map<String, dynamic>> toJson() async {
-    return {
-      ApiKeys.serviceProviderId: serviceProviderId,
-      ApiKeys.nameEnglish: nameEnglish,
-      ApiKeys.nameArabic: nameArabic,
-      ApiKeys.descriptionEnglishDot: descriptionEnglish,
-      ApiKeys.descriptionArabicDot: descriptionArabic,
-      ApiKeys.price: price,
-      ApiKeys.durationInMonths: durationInMonths,
-      ApiKeys.precentage: precentage,
-      ApiKeys.type: type,
-      ApiKeys.photo: await MultipartFile.fromFile(
-        photo.path,
-        filename: photo.path.split('/').last,
-      ),
-    };
-  }
-}

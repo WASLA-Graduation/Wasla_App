@@ -11,29 +11,26 @@ class GymPackeWithDiscoutnField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<GymPackagesCubit>();
-    return BlocBuilder<GymPackagesCubit, GymPackagesState>(
-      builder: (context, state) {
-        return Visibility(
-          visible: cubit.gymPackagTypeValue == 1,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 15),
-            child: CustomTextFormField(
-              // initealValue: model?.price.toString(),
-              keyboardTyp: TextInputType.number,
-              onChanged: (value) {
-                cubit.packagePercentage = value.isEmpty
-                    ? 0
-                    : double.parse(value);
-              },
-              validator: (value) => validateSimpleData(value, context),
-              withBorder: true,
-              fillColor: Colors.transparent,
-              withTitle: true,
-              title: "discount".tr(context),
-            ),
-          ),
-        );
-      },
+
+    return Visibility(
+      visible: cubit.gymPackagTypeValue == 1,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 15),
+        child: CustomTextFormField(
+          initealValue: cubit.packagePercentage == 0
+              ? ""
+              : "${cubit.packagePercentage}%",
+          keyboardTyp: TextInputType.number,
+          onChanged: (value) {
+            cubit.packagePercentage = value.isEmpty ? 0 : double.parse(value);
+          },
+          validator: (value) => validateSimpleData(value, context),
+          withBorder: true,
+          fillColor: Colors.transparent,
+          withTitle: true,
+          title: "discount".tr(context),
+        ),
+      ),
     );
   }
 }

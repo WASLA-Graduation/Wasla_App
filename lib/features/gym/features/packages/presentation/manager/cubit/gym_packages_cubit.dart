@@ -14,14 +14,14 @@ class GymPackagesCubit extends Cubit<GymPackagesState> {
   List<GymPackageModel> packages = [];
   List<GymPackageModel> offers = [];
 
-  GlobalKey<FormState> gymAddUpdateFormKey = GlobalKey();
+  final gymAddUpdateFormKey = GlobalKey<FormState>();
 
   String descriptionArabic = "",
       descriptionEnglish = "",
       nameArabic = "",
       nameEnglish = "";
 
-  double price = 0.0,packagePercentage=0.0;
+  double price = 0.0, packagePercentage = 0.0;
   int gymPackagTypeValue = 0;
 
   int durationPackage = 0;
@@ -34,12 +34,11 @@ class GymPackagesCubit extends Cubit<GymPackagesState> {
     emit(GymPackageUpdate());
   }
 
-
-
-void updatePackageImage({required File image}) {
+  void updatePackageImage({required File image}) {
     packageImage = image;
     emit(GymPackageUpdate());
   }
+
   void updateGymPackageTypeValue({required int value}) {
     gymPackagTypeValue = value;
     emit(GymPackageUpdate());
@@ -78,8 +77,11 @@ void updatePackageImage({required File image}) {
     });
   }
 
-  Future<void> addOrUpdatePackageOrOffer({required bool isAdding}) async {
-    if (packageImage == null) {
+  Future<void> addOrUpdatePackageOrOffer({
+    required bool isAdding,
+    int? packageId,
+  }) async {
+    if (packageImage == null && isAdding) {
       emit(
         GymAddOrUpdatePackagesAndOffersError(
           "Please select an image for the package or offer",
@@ -89,25 +91,36 @@ void updatePackageImage({required File image}) {
     }
 
     emit(GymAddOrUpdatePackagesAndOffersLoading());
-    final result = await gymPackagesRepo.addOrUpdatePackageOrOffer(
-      model: GymPackageRequestModel(
-        descriptionArabic: descriptionArabic,
-        descriptionEnglish: descriptionEnglish,
-        nameArabic: nameArabic,
-        nameEnglish: nameEnglish,
-        price: price,
-        photo: packageImage!,
-        durationInMonths: durationPackage,
-        precentage: isAdding ? 0.0 :packagePercentage,
-        type: isAdding ? 1 : 2,
-        serviceProviderId: getUserId() as String,
-      ),
-      isAdding: isAdding,
-    );
+    final result = isAdding
+        ? await gymPackagesRepo.addPackageOrOffer(
+            serviceProviderId: await getUserId() ?? "",
+            nameArabic: nameArabic,
+            nameEnglish: nameEnglish,
+            descriptionArabic: descriptionArabic,
+            descriptionEnglish: descriptionEnglish,
+            price: price,
+            durationInMonths: durationPackage,
+            precentage: packagePercentage,
+            type: gymPackagTypeValue + 1,
+            image: packageImage!,
+          )
+        : await gymPackagesRepo.updatePackageOrOffer(
+            id: packageId!,
+            nameArabic: nameArabic,
+            nameEnglish: nameEnglish,
+            descriptionArabic: descriptionArabic,
+            descriptionEnglish: descriptionEnglish,
+            price: price,
+            precentage: packagePercentage,
+            type: gymPackagTypeValue + 1,
+            image: packageImage,
+          );
+
     result.fold((error) => emit(GymAddOrUpdatePackagesAndOffersError(error)), (
       success,
     ) {
-      packageImage = null;
+      resetData();
+      getGymPackagesAndOffers();
       emit(GymAddOrUpdatePackagesAndOffersSuccess());
     });
   }
@@ -127,5 +140,17 @@ void updatePackageImage({required File image}) {
         emit(GymDeletePackagesAndOffersSuccess());
       },
     );
+  }
+
+  void resetData() {
+    descriptionArabic = "";
+    descriptionEnglish = "";
+    nameArabic = "";
+    nameEnglish = "";
+    price = 0.0;
+    durationPackage = 0;
+    packagePercentage = 0.0;
+    packageImage = null;
+    gymPackagTypeValue = 0;
   }
 }

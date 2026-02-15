@@ -251,7 +251,9 @@
     "packageNameEnglish": "Package Name English",
     "packageDuration": "Duration(months)",
     "discount": "Discount",
-    "packageImage": "Package Image"
+    "packageImage": "Package Image",
+    "packageAddedSuccessfully": "Package Added Successfully",
+    "packageUpdatedSuccessfully": "Package Updated Successfully"
 
 
   

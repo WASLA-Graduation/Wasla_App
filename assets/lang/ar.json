@@ -254,7 +254,9 @@
         "packageDeleted": "تم حذف الباقة بنجاح",
         "offerDeleted": "تم حذف العرض بنجاح",
             "discount": " قيمةالخصم",
-            "packageImage": "صورة الباقة"
+            "packageImage": "صورة الباقة",
+                "packageAddedSuccessfully": " تم اضافة الباقة بنجاح",
+    "packageUpdatedSuccessfully": "تم تحديث الباقة بنجاح"
 
 
 

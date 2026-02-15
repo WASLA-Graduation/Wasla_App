@@ -49,7 +49,7 @@ class PackagesOffersList extends StatelessWidget {
                     crossAxisCount: 2,
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
-                    childAspectRatio: .7,
+                    childAspectRatio: .66,
                   ),
                   itemCount: data.length,
                   // itemCount: 5,
@@ -75,9 +75,8 @@ class PackagesOffersList extends StatelessWidget {
                           return GestureDetector(
                             onLongPress: () => showModalBottomSheet(
                               context: context,
-                              builder: (context) => GymDeleteUpdateModelSheet(
-                                packageId: data[index].id,
-                              ),
+                              builder: (context) =>
+                                  GymDeleteUpdateModelSheet(model: data[index]),
                             ),
                             child: GymPackageItem(model: data[index]),
                           );

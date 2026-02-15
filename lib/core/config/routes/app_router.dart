@@ -9,6 +9,7 @@ import 'package:wasla/features/doctor_service/features/service/data/models/docto
 import 'package:wasla/features/doctor_service/features/service/presentation/views/doctor_add_service_view.dart';
 import 'package:wasla/features/favourite/presentation/views/all_favourites_views.dart';
 import 'package:wasla/features/gym/features/dashboard/presentation/views/gym_bottom_nav_bar.dart';
+import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
 import 'package:wasla/features/gym/features/packages/presentation/views/gym_add_update_package_view.dart';
 import 'package:wasla/features/profile/presentation/views/doctor_edit_profile_view.dart';
 import 'package:wasla/features/resident_service/features/booking/presentation/views/resident_booking_view.dart';
@@ -147,7 +148,10 @@ abstract class AppRouter {
       case AppRoutes.gymBottomNavBarScreen:
         return MaterialPageRoute(builder: (_) => GymBottomNavBar());
       case AppRoutes.gymAddUpdatePackageScreen:
-        return MaterialPageRoute(builder: (_) => GymAddUpdatePackageView());
+        final GymPackageModel? package = settigns.arguments as GymPackageModel?;
+        return MaterialPageRoute(
+          builder: (_) => GymAddUpdatePackageView(package: package),
+        );
 
       default:
         return MaterialPageRoute(builder: (_) => Container());
