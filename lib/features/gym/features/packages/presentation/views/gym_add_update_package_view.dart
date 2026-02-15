@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/features/gym/features/packages/presentation/widgets/gym_add_update_package_body.dart';
 
 class GymAddUpdatePackageView extends StatelessWidget {
@@ -7,9 +8,12 @@ class GymAddUpdatePackageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Add/Update Offer')),
+      appBar: AppBar(
+        title: Text("addPackage".tr(context)),
+        forceMaterialTransparency: true,
+      ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+        padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
         child: const GymAddUpdatePackageViewBody(),
       ),
     );

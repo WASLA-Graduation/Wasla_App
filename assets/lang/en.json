@@ -244,7 +244,15 @@
     "noOffers": "No Offers",
     "months": "months",
     "packageDeleted": "Package Deleted Successfully",
-    "offerDeleted": "Offer Deleted Successfully"
+    "offerDeleted": "Offer Deleted Successfully",
+    "addPackage": "Add Package",
+    "updatePackage": "Update Package",
+    "packageNameArabic": "Package Name Arabic",
+    "packageNameEnglish": "Package Name English",
+    "packageDuration": "Duration(months)",
+    "discount": "Discount",
+    "packageImage": "Package Image"
+
 
   
 

@@ -59,12 +59,39 @@ class GymPackageItem extends StatelessWidget {
                                 .copyWith(color: AppColors.primaryColor),
                           ),
                           const Spacer(),
-                          Text(
-                            "${model.durationInMonths} ${"months".tr(context)}",
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+
+                          model.precentage == 0
+                              ? Text(
+                                  "${model.durationInMonths} ${"months".tr(context)}",
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                )
+                              : Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            "${model.price} ${"egb".tr(context)} ",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall!
+                                            .copyWith(
+                                              color: AppColors.primaryColor,
+                                              decoration:
+                                                  TextDecoration.lineThrough,
+                                            ),
+                                      ),
+                                      TextSpan(
+                                        text: "(${calculateFinalSalay()} ",
+
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.bodyMedium,
+                                      ),
+                                    ],
+                                  ),
+                                ),
                         ],
                       ),
                     ],
@@ -76,24 +103,33 @@ class GymPackageItem extends StatelessWidget {
 
           model.precentage == 0
               ? const SizedBox()
-              :
-          Container(
-            width: 40,
-            height: 35,
-            decoration: BoxDecoration(
-              color: AppColors.primaryColor,
-              borderRadius: BorderRadius.only(bottomRight: Radius.circular(20)),
-            ),
+              : Container(
+                  width: 40,
+                  height: 35,
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor,
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(20),
+                    ),
+                  ),
 
-            child: Center(
-              child: Text(
-                "${model.precentage}%",
-                style: TextStyle(fontSize: 10, color: AppColors.whiteColor),
-              ),
-            ),
-          ),
+                  child: Center(
+                    child: Text(
+                      "${model.precentage}%",
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: AppColors.whiteColor,
+                      ),
+                    ),
+                  ),
+                ),
         ],
       ),
     );
+  }
+
+  String calculateFinalSalay() {
+    double finalSalary = model.price - (model.price * (model.precentage / 100));
+    return finalSalary.toString();
   }
 }

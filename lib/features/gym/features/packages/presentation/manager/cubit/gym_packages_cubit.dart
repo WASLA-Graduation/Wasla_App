@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
@@ -13,20 +14,34 @@ class GymPackagesCubit extends Cubit<GymPackagesState> {
   List<GymPackageModel> packages = [];
   List<GymPackageModel> offers = [];
 
+  GlobalKey<FormState> gymAddUpdateFormKey = GlobalKey();
+
   String descriptionArabic = "",
       descriptionEnglish = "",
       nameArabic = "",
-      nameEnglish = "",
-      packageDuration = "",
-      offerPercentage = "";
+      nameEnglish = "";
 
-  double price = 0.0;
+  double price = 0.0,packagePercentage=0.0;
+  int gymPackagTypeValue = 0;
+
+  int durationPackage = 0;
 
   File? packageImage;
   int tapsCurrentIndex = 0;
 
   void updateCurrentTap({required int index}) {
     tapsCurrentIndex = index;
+    emit(GymPackageUpdate());
+  }
+
+
+
+void updatePackageImage({required File image}) {
+    packageImage = image;
+    emit(GymPackageUpdate());
+  }
+  void updateGymPackageTypeValue({required int value}) {
+    gymPackagTypeValue = value;
     emit(GymPackageUpdate());
   }
 
@@ -82,8 +97,8 @@ class GymPackagesCubit extends Cubit<GymPackagesState> {
         nameEnglish: nameEnglish,
         price: price,
         photo: packageImage!,
-        durationInMonths: int.parse(packageDuration),
-        precentage: isAdding ? 0.0 : double.parse(offerPercentage),
+        durationInMonths: durationPackage,
+        precentage: isAdding ? 0.0 :packagePercentage,
         type: isAdding ? 1 : 2,
         serviceProviderId: getUserId() as String,
       ),
@@ -108,7 +123,6 @@ class GymPackagesCubit extends Cubit<GymPackagesState> {
         emit(GymDeletePackagesAndOffersError(error));
       },
       (success) {
-        
         getGymPackagesAndOffers();
         emit(GymDeletePackagesAndOffersSuccess());
       },

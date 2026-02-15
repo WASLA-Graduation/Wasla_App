@@ -246,8 +246,19 @@
         "offers": "العروض",
     "noOffers": "لا يوجد عروض",
         "noPackages": "لا توجد باقات",
-            "months": "شهور"
+            "months": "شهور",
+            "updatePackage": "تحديث الباقة",
+                "packageNameArabic": "اسم الباقة بالعربية",
+    "packageNameEnglish": "اسم الباقة بالانجليزية",
+      "packageDuration": "مدة الباقة (بالشهور)",
+        "packageDeleted": "تم حذف الباقة بنجاح",
+        "offerDeleted": "تم حذف العرض بنجاح",
+            "discount": " قيمةالخصم",
+            "packageImage": "صورة الباقة"
 
+
+
+              
 
 
 
