@@ -18,3 +18,21 @@ Future<MultipartFile?> convertImageToMultipart(File? image) async {
     filename: image.path.split('/').last,
   );
 }
+
+Future<List<MultipartFile>?> convertFilesToMultipart(List<File>? files) async {
+  if (files == null || files.isEmpty) return null;
+
+  List<MultipartFile> multipartFiles = [];
+
+  for (var file in files) {
+    final multipartFile = await MultipartFile.fromFile(
+      file.path,
+      filename: file.path.split('/').last,
+    );
+
+    multipartFiles.add(multipartFile);
+  }
+
+  return multipartFiles;
+}
+

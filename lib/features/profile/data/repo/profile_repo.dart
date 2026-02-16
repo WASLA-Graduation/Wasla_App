@@ -10,10 +10,7 @@ abstract class ProfileRepo {
   Future<Either<String, UserModel>> getResidentProfile({
     required String userId,
   });
-  Future<Either<String, GymModel>> geGymProfile({
-    required String gymId,
-  });
-
+  Future<Either<String, GymModel>> geGymProfile({required String gymId});
 
   Future<Either<String, Null>> changePassword({
     required String email,
@@ -47,5 +44,17 @@ abstract class ProfileRepo {
     int? specializationId,
     File? profilePhoto,
     PlatformFile? cv,
+  });
+
+  Future<Either<String, Null>> updateGymInfo({
+    required String gmail,
+    required String businessName,
+    required String ownerName,
+    required String description,
+    required List<String> phones,
+    required double lat,
+    required double lng,
+    File? photo,
+    List<File>? gymGalary,
   });
 }

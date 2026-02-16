@@ -68,7 +68,7 @@ String getRightEditProfileRoute() {
       return AppRoutes.residentEditProfileScreen;
 
     case ServiceRole.gymOwner:
-      return AppRoutes.residentEditProfileScreen;
+      return AppRoutes.gymEditProfileScreen;
   }
 }
 

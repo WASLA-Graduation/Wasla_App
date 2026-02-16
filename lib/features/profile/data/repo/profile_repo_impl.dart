@@ -7,6 +7,7 @@ import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/functions/convert_image_to_json.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
 import 'package:wasla/features/profile/data/models/gym_model.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
@@ -161,6 +162,48 @@ class ProfileRepoImpl extends ProfileRepo {
         queryParameters: {ApiKeys.id: gymId},
       );
       return Right(GymModel.fromJson(response[ApiKeys.data]));
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> updateGymInfo({
+    required String gmail,
+    required String businessName,
+    required String ownerName,
+    required String description,
+    required List<String> phones,
+    required double lat,
+    required double lng,
+    File? photo,
+    List<File>? gymGalary,
+  }) async {
+    try {
+      final formData = FormData.fromMap({
+        ApiKeys.photo: await convertFileToMultipart(photo),
+        ApiKeys.photos: await convertFilesToMultipart(gymGalary),
+      });
+      await api.put(
+        ApiEndPoints.getGymUpdateProfile,
+        queryParameters: {
+          ApiKeys.gmail: gmail,
+          ApiKeys.businessName: businessName,
+          ApiKeys.ownerName: ownerName,
+          ApiKeys.descriptionSmall: description,
+          ApiKeys.phones: phones,
+          ApiKeys.latitudeSmall: lat,
+          ApiKeys.longitudeSmall: lng,
+        },
+        body: formData,
+        headers: {"Content-Type": "multipart/form-data"},
+      );
+
+      print('*****************************');
+      print('**************  Success Ya Disha  ***************');
+      print('**************   ***************');
+      print('*****************************');
+      return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

@@ -6,8 +6,10 @@ import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/cache/secure_storage_helper.dart';
 import 'package:wasla/core/enums/service_role.dart';
 import 'package:wasla/core/functions/get_service_role.dart';
+import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/models/user_base_model.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
+import 'package:wasla/features/profile/data/models/gym_model.dart';
 import 'package:wasla/features/profile/data/repo/profile_repo.dart';
 part 'profile_state.dart';
 
@@ -22,7 +24,12 @@ class ProfileCubit extends Cubit<ProfileState> {
       newPassword = '',
       currentPassword = '',
       hospitalName = '',
-      universityName = '';
+      universityName = '',
+      ownerName = '',
+      businessName = '',
+      description = '',
+      gymPhones = '',
+      email = '';
 
   int experienceYears = 0, specializationId = 0;
   double lat = 0, lng = 0;
@@ -31,7 +38,9 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   final residentFormKey = GlobalKey<FormState>();
   final changePassFormKey = GlobalKey<FormState>();
+  final gymFormKey = GlobalKey<FormState>();
   File? image;
+  List<File> images = [];
 
   void toggglePassIcon() {
     isPasswordVisible = !isPasswordVisible;
@@ -40,6 +49,11 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   void updateFile(PlatformFile f) {
     file = f;
+    emit(ProfileUpdate());
+  }
+
+  void uploadIImages(List<File> f) {
+    images = f;
     emit(ProfileUpdate());
   }
 
@@ -114,6 +128,12 @@ class ProfileCubit extends Cubit<ProfileState> {
     experienceYears = 0;
     specializationId = 0;
     file = null;
+    images = [];
+    gymPhones = '';
+    email = '';
+    ownerName = '';
+    businessName = '';
+    description = '';
   }
 
   _getRightProfileAccordingToRole({required String userId}) async {
@@ -179,8 +199,21 @@ class ProfileCubit extends Cubit<ProfileState> {
         // TODO: Handle this case.
         throw UnimplementedError();
       case ServiceRole.gymOwner:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        final gym = user as GymModel;
+        return await profileRepo.updateGymInfo(
+          businessName: businessName.isEmpty ? gym.businessName : businessName,
+          description: description.isEmpty ? gym.description : description,
+          gmail: email.isEmpty ? gym.email : email,
+          lat: lat == 0 ? gym.latBase : lat,
+          lng: lng == 0 ? gym.lngBase : lng,
+          ownerName: ownerName.isEmpty ? gym.ownerName : ownerName,
+          // ownerName:'Disha',
+          phones: gymPhones.isEmpty
+              ? gym.phones
+              : extractEgyptPhones(gymPhones)!,
+          gymGalary: images.isEmpty ? null : images,
+          photo: image,
+        );
     }
   }
 }

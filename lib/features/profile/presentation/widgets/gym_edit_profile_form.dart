@@ -3,24 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
-import 'package:wasla/core/functions/get_file_from_device.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
-import 'package:wasla/features/auth/presentation/widgets/certificate_uploade_button.dart';
+import 'package:wasla/core/widgets/choose_many_images.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_text_form_field.dart';
-import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
+import 'package:wasla/features/profile/data/models/gym_model.dart';
 import 'package:wasla/features/profile/presentation/manager/cubit/profile_cubit.dart';
 
-class DocEditProfileForm extends StatelessWidget {
-  const DocEditProfileForm({super.key, required this.doc});
-  final DoctorModel doc;
-
+class GymEditProfileForm extends StatelessWidget {
+  const GymEditProfileForm({super.key, required this.gym});
+  final GymModel gym;
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
-
     return BlocConsumer<ProfileCubit, ProfileState>(
       listener: (context, state) {
         if (state is ProfileUpdateInfoFailure) {
@@ -34,68 +31,45 @@ class DocEditProfileForm extends StatelessWidget {
       },
       builder: (context, state) {
         return Form(
-          key: cubit.residentFormKey,
+          key: cubit.gymFormKey,
           child: SingleChildScrollView(
             child: Column(
               spacing: 8,
               children: [
                 CustomTextFormField(
                   withTitle: true,
-                  title: "full_name".tr(context),
-                  initealValue: doc.fullName,
+                  title: "gymOwnerName".tr(context),
+                  initealValue: gym.ownerName,
                   onChanged: (name) {
-                    cubit.fullName = name;
-                  },
-                  validator: (value) => validateName(value, context),
-                ),
-                CustomTextFormField(
-                  initealValue: doc.phoneNumberBase,
-                  keyboardTyp: TextInputType.phone,
-                  withTitle: true,
-                  title: "phone".tr(context),
-                  onChanged: (phone) {
-                    cubit.phoneNumber = phone;
-                  },
-                  validator: (value) => validatePhone(value, context),
-                ),
-
-                CustomTextFormField(
-                  withTitle: true,
-                  title: "hostpitalName".tr(context),
-                  initealValue: doc.hospitalname,
-                  onChanged: (hospital) {
-                    cubit.hospitalName = hospital;
+                    cubit.ownerName = name;
                   },
                   validator: (value) => validateName(value, context),
                 ),
                 CustomTextFormField(
                   withTitle: true,
-                  title: "experience".tr(context),
-                  keyboardTyp: TextInputType.number,
-                  initealValue: doc.experienceYears.toString(),
-                  onChanged: (years) {
-                    cubit.experienceYears = years.isEmpty
-                        ? doc.experienceYears
-                        : int.parse(years);
+                  title: "gymName".tr(context),
+                  initealValue: gym.businessName,
+                  onChanged: (name) {
+                    cubit.businessName = name;
+                  },
+                  validator: (value) => validateName(value, context),
+                ),
+                CustomTextFormField(
+                  initealValue: gym.description,
+                  withTitle: true,
+                  title: "description".tr(context),
+                  onChanged: (description) {
+                    cubit.description = description;
                   },
                   validator: (value) => validateSimpleData(value, context),
                 ),
-                const SizedBox(),
-                BlocBuilder<ProfileCubit, ProfileState>(
-                  builder: (context, state) {
-                    return UploadFileButton(
-                      title: "uplodCv".tr(context),
-                      fileName: cubit.file?.name,
-                      isUploaded: cubit.file != null,
-                      onTap: () async {
-                        final file = await getFileFromDevice();
-                        if (file != null) {
-                          cubit.updateFile(file);
-                        }
-                      },
-                    );
-                  },
+                CustomTextFormField(
+                  hint: "separateByComma".tr(context),
+                  initealValue: gym.phones.join(','),
+                  onChanged: (gymPhones) => cubit.gymPhones = gymPhones,
+                  validator: (value) => validatePhone2(value, context),
                 ),
+
                 // const SizedBox(),
                 // GestureDetector(
                 //   onTap: () {
@@ -109,7 +83,6 @@ class DocEditProfileForm extends StatelessWidget {
                 //     ),
                 //   ),
                 // ),
-
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
@@ -127,6 +100,18 @@ class DocEditProfileForm extends StatelessWidget {
                     Assets.assetsImagesLocation,
                     fit: BoxFit.cover,
                   ),
+                ),
+
+                BlocBuilder<ProfileCubit, ProfileState>(
+                  builder: (context, state) {
+                    return ChooseManyImageWidget(
+                      images: cubit.images,
+                      hintText: "gymPhotos".tr(context),
+                      onImagesSelected: (images) {
+                        cubit.uploadIImages(images);
+                      },
+                    );
+                  },
                 ),
               ],
             ),
