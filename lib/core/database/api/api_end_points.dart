@@ -52,4 +52,6 @@ abstract class ApiEndPoints {
   static const String getGymProfile = 'api/Gym/GymProfile';
   static const String getGymUpdateProfile = 'api/Gym/UpdateProfile';
   static const String gymPackage = 'api/Package';
+  static const String getGymCharts = 'api/GymBooking/Charts/';
+  static const String getGymAllBookings = 'api/GymBooking/gym/';
 }

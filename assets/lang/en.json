@@ -258,7 +258,12 @@
     "gymProfileInfo": "Gym Profile Info",
     "owener": "Owner",
     "contacts": "Contact Numbers",
-    "galary": "Galary"
+    "galary": "Galary",
+    "noOfTrainnee": "Number of trainnees",
+    "bookings": "Bookings",
+    "trainnees": "Trainnees",
+    "revenue": "Revenue"
+    
 
 
   

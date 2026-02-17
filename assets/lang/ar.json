@@ -261,7 +261,12 @@
             "gymProfileInfo": "معلومات الملف الشخصي للجيم",
                 "owener": "المالك",
     "contacts": "جهات الاتصال",
-        "galary": "معرض الصور"
+        "galary": "معرض الصور",
+            "noOfTrainnee": "عدد المتدربين",
+                "bookings": "الحجوزات",
+    "trainnees": "المتدربين",
+    "revenue": "الدخل"
+
 
 
 

@@ -199,10 +199,7 @@ class ProfileRepoImpl extends ProfileRepo {
         headers: {"Content-Type": "multipart/form-data"},
       );
 
-      print('*****************************');
-      print('**************  Success Ya Disha  ***************');
-      print('**************   ***************');
-      print('*****************************');
+      
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);

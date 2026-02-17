@@ -127,8 +127,8 @@ abstract class ApiKeys {
   static const nameArabic = "name.Arabic";
   static const descriptionEnglishDot = "description.English";
   static const descriptionArabicDot = "description.Arabic";
-
-
-
-
+  static const numberOfBookings = "numberOfBookings";
+  static const numberOfTrainees = "numberOfTrainees";
+  static const bookingTime = "bookingTime";
+  static const bookingStatus = "bookingStatus";
 }
