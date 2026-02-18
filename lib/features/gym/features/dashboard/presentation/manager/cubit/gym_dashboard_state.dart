@@ -35,3 +35,14 @@ final class GymDashboardProfileGetBookingsListFailure
   final String errMsg;
   GymDashboardProfileGetBookingsListFailure({required this.errMsg});
 }
+final class GymDashboardCancelBookingLoading
+    extends GymDashboardState {}
+
+final class GymDashboardCancelBookingSuccess
+    extends GymDashboardState {}
+
+final class GymDashboardCancelBookingFailure
+    extends GymDashboardState {
+  final String errMsg;
+  GymDashboardCancelBookingFailure({required this.errMsg});
+}

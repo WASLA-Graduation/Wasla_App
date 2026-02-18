@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/enums/booking_status.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_chart_model.dart';
+import 'package:wasla/features/gym/features/dashboard/data/models/gym_booking_model.dart';
 import 'package:wasla/features/gym/features/dashboard/data/models/gym_statistics_model.dart';
 import 'package:wasla/features/gym/features/dashboard/data/repo/gym_dashboard_repo.dart';
 import 'package:wasla/features/profile/data/models/gym_model.dart';
@@ -18,9 +20,17 @@ class GymDashboardCubit extends Cubit<GymDashboardState> {
   String initalSelectedYear = '';
   YearDataModel? yearDataModel;
 
+  List<GymBookingModel> gymBookings = [];
+  BookingStatus gymBookingsStatus = BookingStatus.active;
+
   void updateNavBarCurrentIndex(int index) {
     bottomNavBarcurrentIndex = index;
     emit(GymDashboardUpdateState());
+  }
+
+  void whenBookingStatusChanged({required BookingStatus status}) async {
+    gymBookingsStatus = status;
+    getGymBookingsByStatus();
   }
 
   Future<void> getGymProfile() async {
@@ -67,5 +77,50 @@ class GymDashboardCubit extends Cubit<GymDashboardState> {
         emit(GymDashboardProfileGetChartSuccess());
       }
     }
+  }
+
+  Future<void> getGymBookingsByStatus() async {
+    final String? gymId = await getUserId();
+    gymBookings.clear();
+    emit(GymDashboardProfileGetBookingsListLoading());
+    final res = await gymDashboardRepo.getGymBookings(
+      status: gymBookingsStatus,
+      gymId: gymId!,
+    );
+    res.fold(
+      (error) => emit(GymDashboardProfileGetBookingsListFailure(errMsg: error)),
+      (success) {
+        gymBookings = success;
+        emit(GymDashboardProfileGetBookingsListSuccess());
+      },
+    );
+  }
+
+  Future<void> gymCancelBooking({
+    required GymBookingModel bookingModel,
+    required int bookingIndex,
+  }) async {
+    emit(GymDashboardCancelBookingLoading());
+    final GymBookingModel booking = bookingModel;
+
+    gymBookings.removeAt(bookingIndex);
+
+    final res = await gymDashboardRepo.gymCancelBooking(
+      bookingId: bookingModel.bookingId,
+    );
+    res.fold(
+      (error) {
+        gymBookings.insert(bookingIndex, booking);
+        emit(GymDashboardCancelBookingFailure(errMsg: error));
+      },
+      (success) {
+        getGymBookingsByStatus();
+        emit(GymDashboardCancelBookingSuccess());
+      },
+    );
+  }
+
+  void reset() {
+    gymBookingsStatus = BookingStatus.active;
   }
 }

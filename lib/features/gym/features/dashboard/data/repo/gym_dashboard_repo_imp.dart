@@ -3,6 +3,7 @@ import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/enums/booking_status.dart';
 import 'package:wasla/features/gym/features/dashboard/data/models/gym_booking_model.dart';
 import 'package:wasla/features/gym/features/dashboard/data/models/gym_statistics_model.dart';
 import 'package:wasla/features/gym/features/dashboard/data/repo/gym_dashboard_repo.dart';
@@ -18,6 +19,7 @@ class GymDashboardRepoImp extends GymDashboardRepo {
     try {
       final response = await api.get(
         ApiEndPoints.getGymProfile,
+
         queryParameters: {ApiKeys.id: gymId},
       );
       return Right(GymModel.fromJson(response[ApiKeys.data]));
@@ -41,14 +43,29 @@ class GymDashboardRepoImp extends GymDashboardRepo {
   @override
   Future<Either<String, List<GymBookingModel>>> getGymBookings({
     required String gymId,
+    required BookingStatus status,
   }) async {
     try {
-      final response = await api.get(ApiEndPoints.getGymAllBookings + gymId);
+      final response = await api.get(
+        '${ApiEndPoints.getGymAllBookings}$gymId/status/${status.toInt()}',
+      );
       List<GymBookingModel> bookings = [];
       for (var booking in response[ApiKeys.data]) {
         bookings.add(GymBookingModel.fromJson(booking));
       }
       return Right(bookings);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> gymCancelBooking({
+    required int bookingId,
+  }) async {
+    try {
+      await api.put('${ApiEndPoints.gymCancelBooking}$bookingId');
+      return const Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

@@ -8,6 +8,7 @@ import 'package:wasla/core/widgets/custom_home_app_bar.dart';
 import 'package:wasla/core/widgets/dashbord%20and%20charts/custom_general_dashbord_drop_down.dart';
 import 'package:wasla/features/gym/features/dashboard/presentation/manager/cubit/gym_dashboard_cubit.dart';
 import 'package:wasla/features/gym/features/dashboard/presentation/widgets/gym_data_card.dart';
+import 'package:wasla/features/gym/features/dashboard/presentation/widgets/gym_booking_list.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_text_identfier_widget.dart';
 import 'package:wasla/features/reviews/presentation/manager/cubit/reviews_cubit.dart';
 
@@ -52,6 +53,7 @@ class GymDashBoardContent extends StatelessWidget {
             cubit.selectedUserId = userId;
           },
         ),
+        GymBookingList(),
       ],
     );
   }

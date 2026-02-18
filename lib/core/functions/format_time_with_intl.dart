@@ -9,6 +9,10 @@ String formatTimeWithIntl(TimeOfDay time) {
   return DateFormat('hh:mm a').format(date);
 }
 
+String formatDateTimeWithIntl(DateTime dateTime) {
+  return DateFormat('hh:mm a').format(dateTime);
+}
+
 String convertBackendTimeToAmPm(String apiTime) {
   try {
     final parsedTime = DateFormat("HH:mm:ss").parse(apiTime);

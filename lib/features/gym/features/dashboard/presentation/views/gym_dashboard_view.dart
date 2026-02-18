@@ -27,7 +27,9 @@ class _GymDashboardViewState extends State<GymDashboardView> {
 
   void callApi() async {
     final cubit = context.read<GymDashboardCubit>();
+    cubit.reset();
     cubit.getGymProfile();
     cubit.getGymStatistics();
+    cubit.getGymBookingsByStatus();
   }
 }

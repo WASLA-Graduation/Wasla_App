@@ -265,7 +265,13 @@
             "noOfTrainnee": "عدد المتدربين",
                 "bookings": "الحجوزات",
     "trainnees": "المتدربين",
-    "revenue": "الدخل"
+    "revenue": "الدخل",
+        "active": "نشط",
+            "name": "الاسم",
+            "duration": "المدة",
+                "package": "الباقة"
+
+
 
 
 

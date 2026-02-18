@@ -262,7 +262,12 @@
     "noOfTrainnee": "Number of trainnees",
     "bookings": "Bookings",
     "trainnees": "Trainnees",
-    "revenue": "Revenue"
+    "revenue": "Revenue",
+    "active": "Active",
+    "name": "Name",
+    "duration": "Duration",
+    "package": "Package"
+
     
 
 
