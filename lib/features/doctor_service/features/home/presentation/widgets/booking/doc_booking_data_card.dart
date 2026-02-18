@@ -38,10 +38,14 @@ class DocBookingDataCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 10,
         children: [
-          ClipOval(
+          ClipRRect(
+            borderRadius: BorderRadius.circular(100),
+
             child: CustomCachedNetworkImage(
               imageUrl: model.userImage,
               width: 70,
+              height: 70,
+              fit: BoxFit.fill,
             ),
           ),
           _buildTextWidget(

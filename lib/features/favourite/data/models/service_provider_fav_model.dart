@@ -25,10 +25,10 @@ class ServiceProviderModel {
       id: json[ApiKeys.id],
       residentId: json[ApiKeys.residentId],
       serviceProviderId: json[ApiKeys.serviceProviderId],
-      serviceProviderName: json[ApiKeys.serviceProviderName],
+      serviceProviderName: json[ApiKeys.serviceProviderName] ?? '',
       serviceProviderProfilePhoto:
           ApiEndPoints.imageBaseUrl + json[ApiKeys.serviceProviderProfilePhoto],
-      serviceProviderPhone: json[ApiKeys.serviceProviderPhone],
+      serviceProviderPhone: json[ApiKeys.serviceProviderPhone] ?? '',
       serviceProviderType: json[ApiKeys.serviceProviderType],
     );
   }

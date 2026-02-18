@@ -131,4 +131,7 @@ abstract class ApiKeys {
   static const numberOfTrainees = "numberOfTrainees";
   static const bookingTime = "bookingTime";
   static const bookingStatus = "bookingStatus";
+  static const pageNumber = "pageNumber";
+  static const pageSize = "pageSize";
+  static const totalCount = "totalCount";
 }

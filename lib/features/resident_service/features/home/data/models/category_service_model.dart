@@ -18,7 +18,7 @@ class CategoryServiceModel {
 
   static List<CategoryServiceModel> get categories => [
     CategoryServiceModel(
-      route: '',
+      route: AppRoutes.gymResidentScreen,
       img: Assets.assetsImagesDumble,
       name: "gym",
       color: AppColors.purple,

@@ -5,19 +5,19 @@ import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/custom_image_with_stack.dart';
 import 'package:wasla/features/favourite/presentation/manager/cubit/favourite_cubit.dart';
 import 'package:wasla/features/favourite/presentation/widgets/custom_bottom_sheet_romove_fav.dart';
-import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/custom_doc_list_item_desc.dart';
+import 'package:wasla/features/resident_service/features/gym/data/models/gym_data_model.dart';
 
-class DoctorListItem extends StatelessWidget {
-  const DoctorListItem({
+class ResidentGymItem extends StatelessWidget {
+  const ResidentGymItem({
     super.key,
     required this.index,
     this.withoutFav,
-    required this.doctor,
+    required this.gym,
   });
   final int index;
   final bool? withoutFav;
-  final DoctorDataModel doctor;
+  final GymDataModel gym;
 
   @override
   Widget build(BuildContext context) {
@@ -34,47 +34,43 @@ class DoctorListItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Hero(
-              tag: doctor.imageUrl,
-              child: BuildImageWithStackWidget(imageUrl: doctor.imageUrl),
-            ),
+            BuildImageWithStackWidget(imageUrl: gym.imageUrl),
             const SizedBox(width: 18),
             Expanded(
               child: BlocBuilder<FavouriteCubit, FavouriteState>(
                 builder: (context, state) {
                   final cubit = context.read<FavouriteCubit>();
-                  final isFav = cubit.checkFavourite(doctor.id);
+                  final isFav = cubit.checkFavourite(gym.id);
 
                   return ServiceItemDescription(
-                    title: doctor.fullName,
-                    subtitle:
-                        "${doctor.specialtyName} | ${doctor.hospitalname}",
-                    rating: doctor.rating,
+                    title: gym.name,
+                    subtitle: gym.description,
+                    rating: gym.rating.toDouble(),
                     isFavourite: isFav,
                     onFavouritePressed: () {
                       if (isFav) {
                         showModalBottomSheet(
                           context: context,
                           builder: (_) => CustomConfirmBottomSheetRemoveFromFav(
-                            content: DoctorListItem(
+                            content: ResidentGymItem(
                               index: index,
                               withoutFav: true,
-                              doctor: doctor,
+                              gym: gym,
                             ),
                             title: "Remove from favourite?",
                             confirmText: "Yes, Remove",
                             onConfirm: () {
                               cubit.removeFromFavorite(
                                 favouriteId: cubit.getFavIdForSpecificService(
-                                  doctor.id,
+                                  gym.id,
                                 ),
-                                serviceProviderId: doctor.id,
+                                serviceProviderId: gym.id,
                               );
                             },
                           ),
                         );
                       } else {
-                        cubit.addToFavourite(serviceId: doctor.id);
+                        cubit.addToFavourite(serviceId: gym.id);
                       }
                     },
                   );

@@ -20,6 +20,8 @@ import 'package:wasla/features/profile/presentation/views/resident_profile_info.
 import 'package:wasla/features/resident_service/features/booking/presentation/views/resident_booking_view.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_booking_view.dart';
+import 'package:wasla/features/resident_service/features/gym/presentation/views/gym_resident_view.dart';
+import 'package:wasla/features/resident_service/features/gym/presentation/views/resident_gym_details_view.dart';
 import 'package:wasla/features/reviews/presentation/views/reviews_view.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_see_serevices_view.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
@@ -174,6 +176,14 @@ abstract class AppRouter {
         final GymModel resident = settigns.arguments as GymModel;
         return MaterialPageRoute(
           builder: (_) => GymEditProfileView(gym: resident),
+        );
+      case AppRoutes.gymResidentScreen:
+        return MaterialPageRoute(
+          builder: (_) => GymResidentView(),
+        );
+      case AppRoutes.gymResidentDetailsScreen:
+        return MaterialPageRoute(
+          builder: (_) => ResidentGymDetailsView(),
         );
 
       default:

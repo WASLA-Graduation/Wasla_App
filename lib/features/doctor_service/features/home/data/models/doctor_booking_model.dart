@@ -47,7 +47,7 @@ class DoctorBookingModel {
       price: (json[ApiKeys.price] ?? 0).toDouble(),
       status: json[ApiKeys.status] ?? 0,
       bookingImages: (json[ApiKeys.bookingImages] as List<dynamic>?)
-              ?.map((e) => ApiEndPoints.imageBaseUrl + e.toString())
+              ?.map((e) => ApiEndPoints.doctorBaseUrl + e.toString())
               .toList() ??
           [],
     );

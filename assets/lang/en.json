@@ -266,7 +266,10 @@
     "active": "Active",
     "name": "Name",
     "duration": "Duration",
-    "package": "Package"
+    "package": "Package",
+    "gyms": "Gyms",
+    "noGyms": "No Gyms Found"
+
 
     
 

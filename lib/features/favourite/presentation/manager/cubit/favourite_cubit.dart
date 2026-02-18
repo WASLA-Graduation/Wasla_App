@@ -116,6 +116,7 @@ class FavouriteCubit extends Cubit<FavouriteState> {
         return element.id;
       }
     }
+
     return 0;
   }
 
