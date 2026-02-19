@@ -5,7 +5,7 @@ class GymDataModel {
   final String id;
   final String name;
   final String description;
-  final int rating;
+  final double rating;
   final String imageUrl;
 
   static const String defaultImage =
@@ -24,13 +24,14 @@ class GymDataModel {
       id: json[ApiKeys.id] ?? '',
       name: json[ApiKeys.name] ?? 'Unknown Gym',
       description: json[ApiKeys.descriptionSmall] ?? 'No description available',
-      rating: json[ApiKeys.rating] ?? 0,
+      rating: (json[ApiKeys.rating] ?? 0).toDouble(),
       imageUrl: (json[ApiKeys.imageUrl] == null || json[ApiKeys.imageUrl] == '')
           ? defaultImage
           : ApiEndPoints.gymBaseUrl + json[ApiKeys.imageUrl],
     );
   }
 }
+
 
 class GymPaginationModel {
   final int pageNumber;

@@ -5,8 +5,9 @@ import 'package:wasla/features/gym/features/packages/data/models/gym_package_mod
 import 'package:wasla/features/resident_service/features/booking/presentation/widgets/gym_package_item_content.dart';
 
 class GymPackageItem extends StatelessWidget {
-  const GymPackageItem({super.key, required this.model});
+  const GymPackageItem({super.key, required this.model, this.withBookingButton});
   final GymPackageModel model;
+  final bool ?withBookingButton;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,9 @@ class GymPackageItem extends StatelessWidget {
                 flex: 3,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: PackageItemContent(model: model),
+                  child: PackageItemContent(
+                    withBookingButton: withBookingButton,
+                    model: model),
                 ),
               ),
             ],

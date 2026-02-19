@@ -22,6 +22,7 @@ import 'package:wasla/features/resident_service/features/doctor/data/models/doct
 import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_booking_view.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/views/gym_resident_view.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/views/resident_gym_details_view.dart';
+import 'package:wasla/features/resident_service/features/gym/presentation/views/resident_gym_see_pakcages_views.dart';
 import 'package:wasla/features/reviews/presentation/views/reviews_view.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_see_serevices_view.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
@@ -184,6 +185,11 @@ abstract class AppRouter {
             settigns.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
           builder: (_) => ResidentGymDetailsView(details: details),
+        );
+      case AppRoutes.gymResidentSeePackagesScreen:
+        final String gymId = settigns.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => ResidentGymSeePakcagesView(gymId: gymId),
         );
 
       default:

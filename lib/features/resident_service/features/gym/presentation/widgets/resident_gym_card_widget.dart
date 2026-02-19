@@ -32,7 +32,12 @@ class ResidentGymCardWidget extends StatelessWidget {
         TextDetailsIdentfierWidget(
           leading: "aboutGym".tr(context),
           trailing: "seePackages".tr(context),
-          onTap: () {},
+          onTap: () {
+            context.pushScreen(
+              AppRoutes.gymResidentSeePackagesScreen,
+              arguments: gym.id,
+            );
+          },
         ),
 
         const SizedBox(height: 10),

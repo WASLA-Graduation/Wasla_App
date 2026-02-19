@@ -127,7 +127,7 @@ class CustomHomeAppBar extends StatelessWidget {
             const SizedBox(width: 12),
             _buildIcon(
               context,
-              asset: Assets.assetsImagesBookmark,
+              asset: Assets.assetsImagesHeartOutline,
               onTap: onBookmarkTap,
             ),
           ],
@@ -145,7 +145,7 @@ class CustomHomeAppBar extends StatelessWidget {
       onTap: onTap,
       child: Image.asset(
         asset,
-        width: 23,
+        width: 19,
         color: context.isDarkMode ? Colors.white : Colors.black,
       ),
     );

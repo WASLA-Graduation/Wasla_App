@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
+import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/utils/app_colors.dart';
+import 'package:wasla/core/widgets/custom_qr_dialog.dart';
+import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
+import 'package:wasla/features/resident_service/features/gym/presentation/manager/cubit/gym_resident_cubit.dart';
 
 class PackageItemContent extends StatelessWidget {
-  const PackageItemContent({super.key, required this.model});
+  const PackageItemContent({
+    super.key,
+    required this.model,
+    this.withBookingButton,
+  });
   final GymPackageModel model;
+  final bool? withBookingButton;
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +61,9 @@ class PackageItemContent extends StatelessWidget {
                           ),
                     ),
                     TextSpan(
-                      text: "${calculateFinalSalay()} ",
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: AppColors.primaryColor,
-                      ),
+                      text: " ${calculateFinalSalay()} ${"egb".tr(context)} ",
+                      style: Theme.of(context).textTheme.headlineSmall!
+                          .copyWith(color: AppColors.primaryColor),
                     ),
                   ],
                 ),
@@ -68,6 +77,10 @@ class PackageItemContent extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ),
+
+        withBookingButton == true
+            ? GymBookingButton(bookingId: model.id)
+            : const SizedBox(),
       ],
     );
   }
@@ -75,5 +88,46 @@ class PackageItemContent extends StatelessWidget {
   String calculateFinalSalay() {
     double finalSalary = model.price - (model.price * (model.precentage / 100));
     return finalSalary.toString();
+  }
+}
+
+class GymBookingButton extends StatelessWidget {
+  const GymBookingButton({super.key, required this.bookingId});
+  final int bookingId;
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<GymResidentCubit>();
+    return BlocConsumer<GymResidentCubit, GymResidentState>(
+      buildWhen: (previous, current) => bookingId == cubit.serviceIdFlag,
+      listener: (context, state) {
+        if (state is GymResidentBookingFailure) {
+          toastAlert(color: AppColors.error, msg: state.errMsg);
+        } else if (state is GymResidentBookingSuccess &&
+            cubit.serviceIdFlag == bookingId) {
+          cubit.serviceIdFlag = -1;
+          showDialog(
+            context: context,
+            builder: (context) {
+              return QrCodeDialog(qrCode: state.qrCodeUrl);
+            },
+          );
+        }
+      },
+      builder: (context, state) {
+        return GeneralButton(
+          onPressed: () async {
+            await cubit.bookAtGym(
+              bookingId: bookingId,
+              gymId: cubit.selecedGymId,
+            );
+          },
+          fontSize: 12,
+          height: 25,
+          text: bookingId == cubit.serviceIdFlag
+              ? 'loading'.tr(context)
+              : 'bookNow'.tr(context),
+        );
+      },
+    );
   }
 }

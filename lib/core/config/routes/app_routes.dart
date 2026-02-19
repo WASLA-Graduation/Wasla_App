@@ -41,4 +41,5 @@ abstract class AppRoutes {
   static const String gymEditProfileScreen = '/gymEditProfileScreen';
   static const String gymResidentScreen = '/gymResidentScreen';
   static const String gymResidentDetailsScreen = '/gymResidentDetailsScreen';
+  static const String gymResidentSeePackagesScreen = '/gymResidentSeePackagesScreen';
 }

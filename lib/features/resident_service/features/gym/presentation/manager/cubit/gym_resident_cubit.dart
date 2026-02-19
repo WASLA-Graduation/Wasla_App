@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/database/api/api_end_points.dart';
+import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/repo/global_repo.dart';
 import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
 import 'package:wasla/features/profile/data/models/gym_model.dart';
@@ -68,6 +70,29 @@ class GymResidentCubit extends Cubit<GymResidentState> {
       (success) {
         gymPackages = success;
         emit(GymResidentGetGymPackagesSuccess());
+      },
+    );
+  }
+
+  Future<void> bookAtGym({
+    required String gymId,
+    required int bookingId,
+  }) async {
+    serviceIdFlag = bookingId;
+    emit(GymResidentBookingLoading());
+    final String? residentId = await getUserId();
+    final result = await gymResidentRepo.bookAtGym(
+      gymId: gymId,
+      serviceId: bookingId,
+      residentId: residentId!,
+    );
+    result.fold(
+      (error) {
+        serviceIdFlag = -1;
+        emit(GymResidentBookingFailure(errMsg: error));
+      },
+      (success) {
+        emit(GymResidentBookingSuccess(qrCodeUrl:ApiEndPoints.qrBaseUrl + success));
       },
     );
   }
