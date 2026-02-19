@@ -178,12 +178,12 @@ abstract class AppRouter {
           builder: (_) => GymEditProfileView(gym: resident),
         );
       case AppRoutes.gymResidentScreen:
-        return MaterialPageRoute(
-          builder: (_) => GymResidentView(),
-        );
+        return MaterialPageRoute(builder: (_) => GymResidentView());
       case AppRoutes.gymResidentDetailsScreen:
+        final Map<String, dynamic> details =
+            settigns.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
-          builder: (_) => ResidentGymDetailsView(),
+          builder: (_) => ResidentGymDetailsView(details: details),
         );
 
       default:

@@ -30,4 +30,25 @@ class GymResidentRepoImpl extends GymResidentRepo {
       return Left(e.errorModel.errorMessage);
     }
   }
+
+  @override
+  Future<Either<String, String>> bookAtGym({
+    required String residentId,
+    required String gymId,
+    required int serviceId,
+  }) async {
+    try {
+      final response = await api.post(
+        ApiEndPoints.bookAtGym,
+        body: {
+          ApiKeys.residentId: residentId,
+          ApiKeys.gymId: gymId,
+          ApiKeys.serviceId: serviceId,
+        },
+      );
+      return Right(response[ApiKeys.data]);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
 }

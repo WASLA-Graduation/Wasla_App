@@ -134,4 +134,5 @@ abstract class ApiKeys {
   static const pageNumber = "pageNumber";
   static const pageSize = "pageSize";
   static const totalCount = "totalCount";
+  static const gymId = "gymId";
 }

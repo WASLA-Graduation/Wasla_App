@@ -268,7 +268,15 @@
     "duration": "Duration",
     "package": "Package",
     "gyms": "Gyms",
-    "noGyms": "No Gyms Found"
+    "noGyms": "No Gyms Found",
+    "bookingConfirmed": "Booking Confirmed!",
+    "showQr": "Please show this QR code at the gym reception to activate your subscription. You can download it for later use.",
+    "downloadQr": "Download QR Code",
+    "close": "Close",
+    "aboutGym": "About Gym",
+    "seePackages": "See Packages"
+
+
 
 
     

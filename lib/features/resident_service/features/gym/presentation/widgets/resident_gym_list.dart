@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
+import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/manager/cubit/gym_resident_cubit.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/widgets/resident_gym_item.dart';
 
@@ -35,7 +35,13 @@ class ResidentGymList extends StatelessWidget {
               itemCount: cubit.allGyms.length,
               itemBuilder: (context, index) => InkWell(
                 onTap: () {
-                  context.pushScreen(AppRoutes.gymResidentDetailsScreen);
+                  context.pushScreen(
+                    AppRoutes.gymResidentDetailsScreen,
+                    arguments: {
+                      AppStrings.gymId: cubit.allGyms[index].id,
+                      AppStrings.gymName: cubit.allGyms[index].name,
+                    },
+                  );
                 },
                 child: ResidentGymItem(
                   index: index,

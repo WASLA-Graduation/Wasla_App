@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
+import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/readmore_text.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
+import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_doc_text_details.dart';
 import 'package:wasla/features/reviews/presentation/widgets/custom_reviws_list.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_circle_with_data_list.dart';
-import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_details_card_widget.dart';
+import 'package:wasla/core/widgets/custom_circle_with_data_list.dart';
+import 'package:wasla/core/widgets/custom_details_card_widget.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_text_identfier_widget.dart';
 import 'package:wasla/features/reviews/presentation/widgets/add_review_widget.dart';
 
@@ -21,9 +23,15 @@ class DoctorDetailsBody extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.only(top: 10, right: 20, left: 20),
       children: [
-        CustomDoctorDatailsCardWeiget(doctor: doctor),
+        CustomDoctorDatailsCardWeiget(
+          withHero: true,
+          imageUrl: doctor.imageUrl,
+          child: CustomDoctorDetailsText(doctor: doctor),
+        ),
         const SizedBox(height: 18),
-        CustomCircleWithDataList(doctor: doctor),
+        CustomCircleWithDataList(
+          items: _getItemList(context),
+        ),
         const SizedBox(height: 20),
 
         // Text(
@@ -53,12 +61,35 @@ class DoctorDetailsBody extends StatelessWidget {
           },
         ),
         const SizedBox(height: 15),
-        CustomAddReviweWidget(
-          serviceProviderId: doctor.id,
-        ),
+        CustomAddReviweWidget(serviceProviderId: doctor.id),
         const SizedBox(height: 15),
         ReviewsList(length: 7, shrinkWrap: true),
       ],
     );
+  }
+
+  List<CircleStatModel> _getItemList(BuildContext context) {
+    return [
+          CircleStatModel(
+            icon: Assets.assetsImagesGroup,
+            title: "patients".tr(context).toLowerCase(),
+            value: "${doctor.numberOfpatients}+",
+          ),
+          CircleStatModel(
+            icon: Assets.assetsImagesMessanger,
+            title: "experience".tr(context).toLowerCase(),
+            value: "${doctor.experienceYears}+",
+          ),
+          CircleStatModel(
+            icon: Assets.assetsImagesHalfStar,
+            title: "rating".tr(context).toLowerCase(),
+            value: doctor.rating.toStringAsPrecision(2),
+          ),
+          CircleStatModel(
+            icon: Assets.assetsImagesChatFilled,
+            title: "reviews".tr(context).toLowerCase(),
+            value: "100+",
+          ),
+        ];
   }
 }

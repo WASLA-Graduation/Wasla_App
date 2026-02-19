@@ -36,13 +36,15 @@ class GymModel extends UserBaseModel {
 
   factory GymModel.fromJson(Map<String, dynamic> json) {
     return GymModel(
-      id: json[ApiKeys.id],
-      businessName: json[ApiKeys.businessName],
-      ownerName: json[ApiKeys.ownerName],
-      email: json[ApiKeys.email],
-      description: json[ApiKeys.descriptionSmall],
+      id: json[ApiKeys.id] ?? '',
+      businessName: json[ApiKeys.businessName] ?? '',
+      ownerName: json[ApiKeys.ownerName] ?? '',
+      email: json[ApiKeys.email] ?? "",
+      description: json[ApiKeys.descriptionSmall] ?? '',
       phones: List<String>.from(json[ApiKeys.phones] ?? []),
-      profilePhoto: ApiEndPoints.gymBaseUrl + json[ApiKeys.profilePhoto],
+      profilePhoto: json[ApiKeys.profilePhoto] == null
+          ? ''
+          : ApiEndPoints.gymBaseUrl + json[ApiKeys.profilePhoto],
       photos: List<String>.from(
         json[ApiKeys.photos] != null
             ? json[ApiKeys.photos].map(

@@ -6,4 +6,9 @@ abstract class GymResidentRepo {
     required int pageNumber,
     required int pageSize,
   });
+  Future<Either<String, String>> bookAtGym({
+    required String residentId,
+    required String gymId,
+    required int serviceId,
+  });
 }

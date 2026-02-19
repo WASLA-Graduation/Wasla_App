@@ -14,23 +14,21 @@ class CustomDoctorDetailsText extends StatelessWidget {
       children: [
         _buildDoctorName(context),
         Divider(height: 15, color: AppColors.primaryColor, thickness: .1),
-        _buildDoctorData(context,doctor.hospitalname, "hospital".tr(context)),
+        CustomTextWithColonWidget(
+          date: doctor.hospitalname,
+          title: "hospital".tr(context),
+        ),
         const SizedBox(height: 3),
-        _buildDoctorData(context, doctor.specialtyName, "specialty".tr(context)),
+        CustomTextWithColonWidget(
+          date: doctor.specialtyName,
+          title: "specialty".tr(context),
+        ),
         const SizedBox(height: 3),
-        _buildDoctorData(context, doctor.phone, "phone".tr(context)),
+        CustomTextWithColonWidget(
+          date: doctor.phone,
+          title: "phone".tr(context),
+        ),
       ],
-    );
-  }
-
-  Text _buildDoctorData(BuildContext context, String date, String title) {
-    return Text(
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-      "$title : $date",
-      style: Theme.of(
-        context,
-      ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
     );
   }
 
@@ -42,12 +40,27 @@ class CustomDoctorDetailsText extends StatelessWidget {
       style: Theme.of(context).textTheme.headlineMedium,
     );
   }
+}
 
-  String checkHospital(String word) {
-    if (word.toLowerCase().contains("hospital")) {
-      return word;
-    } else {
-      return "$word hospital";
-    }
+class CustomTextWithColonWidget extends StatelessWidget {
+  const CustomTextWithColonWidget({
+    super.key,
+    required this.date,
+    required this.title,
+  });
+
+  final String date;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      "$title : $date",
+      style: Theme.of(
+        context,
+      ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
+    );
   }
 }
