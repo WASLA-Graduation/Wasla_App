@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/helpers/loadings/speciality_loading_list.dart';
-import 'package:wasla/core/models/doctor_specializationa_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_speciality_item.dart';
 
@@ -34,14 +33,17 @@ class CustomDoctorSpecialityList extends StatelessWidget {
                         );
                       }
                     },
-                    child: DoctorSpecialityitem(
+                    child: CategoryFilteritema(
+                      title: index == 0
+                          ? "all".tr(context)
+                          : cubit.specialityList[index].specialization,
                       isSelected: cubit.specializationIndex == index,
-                      doctorSpecializationaModel: index == 0
-                          ? DoctorSpecializationaModel(
-                              id: 0,
-                              specialization: "all".tr(context),
-                            )
-                          : cubit.specialityList[index],
+                      // doctorSpecializationaModel: index == 0
+                      //     ? DoctorSpecializationaModel(
+                      //         id: 0,
+                      //         specialization: "all".tr(context),
+                      //       )
+                      //     : cubit.specialityList[index],
                     ),
                   ),
                 ),

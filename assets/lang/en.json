@@ -275,7 +275,12 @@
     "close": "Close",
     "aboutGym": "About Gym",
     "seePackages": "See Packages",
-    "bookNow": "Book Now"
+    "bookNow": "Book Now",
+    "all_doctor_bookings": "All Doctor Bookings",
+  "all_gym_bookings": "All Gym Bookings",
+  "all_return_bookings": "All Return Bookings",
+  "all_driver_bookings": "All Driver Bookings",
+  "all_technician_bookings": "All Technician Bookings"
 
 
 

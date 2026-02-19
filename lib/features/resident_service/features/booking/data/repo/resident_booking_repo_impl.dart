@@ -4,6 +4,7 @@ import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
 import 'package:wasla/features/resident_service/features/booking/data/models/resident_booking_model.dart';
+import 'package:wasla/features/resident_service/features/booking/data/models/resident_gym_booking_model.dart';
 import 'package:wasla/features/resident_service/features/booking/data/repo/resident_booking_repo.dart';
 
 class ResidentBookingRepoImpl extends ResidentBookingRepo {
@@ -30,7 +31,7 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
     }
   }
 
-    @override
+  @override
   Future<Either<String, Null>> removeBooking({
     required int bookingId,
     required int status,
@@ -42,6 +43,23 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
       );
 
       return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, List<GymResidentBookingModel>>>
+  getResidentBookingsWithGym({required String residentId}) async {
+    try {
+      final response = await api.get(
+        ApiEndPoints.getResidentBookingsWithGym + residentId,
+      );
+      final List<GymResidentBookingModel> bookings = [];
+      for (var booking in response[ApiKeys.data]) {
+        bookings.add(GymResidentBookingModel.fromJson(booking));
+      }
+      return Right(bookings);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

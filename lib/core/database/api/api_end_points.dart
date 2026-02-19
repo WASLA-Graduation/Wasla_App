@@ -58,5 +58,7 @@ abstract class ApiEndPoints {
   static const String getGymAllBookings = 'api/GymBooking/gym/';
   static const String gymCancelBooking = 'api/GymBooking/cancel/';
   static const String bookAtGym = 'api/GymBooking/book';
-
+  static const String getResidentBookingsWithGymByStatus =
+      'api/GymBooking/resident/';
+  static const String getResidentBookingsWithGym = 'api/GymBooking/resident/';
 }

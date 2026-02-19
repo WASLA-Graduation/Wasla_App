@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/enums/booking_filter.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
+import 'package:wasla/features/resident_service/features/booking/data/models/general_resident_bookings_model.dart';
 import 'package:wasla/features/resident_service/features/booking/data/models/resident_booking_model.dart';
 import 'package:wasla/features/resident_service/features/booking/data/repo/resident_booking_repo.dart';
 
@@ -13,7 +15,15 @@ class ResidentBookingCubit extends Cubit<ResidentBookingState> {
   List<ResidentBookingModel> cancelledbookings = [];
   List<ResidentBookingModel> completedbookings = [];
 
+  List<GeneralResidentBookingsModel> allBookings = [];
+
   int currentTap = 0;
+  BookingFilter bookingFilter = BookingFilter.doctorBookings;
+
+  void updateBookingTaps({required BookingFilter bookingFilter}) {
+    this.bookingFilter = bookingFilter;
+    emit(ResidentBookingUpdate());
+  }
 
   void updateCurrentTap({required int index}) {
     currentTap = index;
@@ -82,5 +92,47 @@ class ResidentBookingCubit extends Cubit<ResidentBookingState> {
         emit(ResidentCancelBookingSuccess());
       },
     );
+  }
+
+  Future<void> getAllBookingsByStatus() async {
+    emit(ResidentGetBookingLoading());
+    String? userId = await getUserId();
+
+    final result = await _getRightBookings(userId);
+    result.fold(
+      (error) {
+        emit(ResidentGetBookingFailure(errMsg: error));
+      },
+      (success) {
+        allBookings = success;
+        emit(ResidentAllGetBookingSuccess());
+      },
+    );
+  }
+
+  _getRightBookings(String? userId) async {
+    switch (bookingFilter) {
+      case BookingFilter.doctorBookings:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case BookingFilter.gymBookings:
+        return await bookingRepo.getResidentBookingsWithGym(
+          residentId: userId!,
+        );
+
+      case BookingFilter.returnBookings:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case BookingFilter.driverBookings:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case BookingFilter.technicianBookings:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+    }
+  }
+
+  void resetState() {
+    bookingFilter = BookingFilter.doctorBookings;
   }
 }

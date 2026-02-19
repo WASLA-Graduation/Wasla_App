@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:wasla/core/models/doctor_specializationa_model.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 
-class DoctorSpecialityitem extends StatelessWidget {
-  final DoctorSpecializationaModel doctorSpecializationaModel;
+class CategoryFilteritema extends StatelessWidget {
+  // final DoctorSpecializationaModel doctorSpecializationaModel;
   final bool isSelected;
-  const DoctorSpecialityitem({
+  const CategoryFilteritema({
     super.key,
-    required this.doctorSpecializationaModel,
+    // required this.doctorSpecializationaModel,
     required this.isSelected,
+    required this.title,
   });
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,8 @@ class DoctorSpecialityitem extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          doctorSpecializationaModel.specialization,
+          title,
+          // doctorSpecializationaModel.specialization,
           style: isSelected
               ? Theme.of(
                   context,

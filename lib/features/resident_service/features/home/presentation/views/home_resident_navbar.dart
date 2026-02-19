@@ -5,7 +5,7 @@ import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/bottom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:wasla/features/profile/presentation/views/profile_view.dart';
-import 'package:wasla/features/resident_service/features/booking/presentation/views/resident_booking_view.dart';
+import 'package:wasla/features/resident_service/features/booking/presentation/views/resident_all_bookings_view.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/views/resident_home_view.dart';
 
@@ -43,7 +43,8 @@ class HomeResidentNavbar extends StatelessWidget {
 
   static List<Widget> screens = [
     const ResidentHomeView(),
-    const ResidentBookingView(),
+    // const ResidentBookingView(),
+    ResidentAllBookingsView(),
     Container(),
     const ProfileView(),
   ];

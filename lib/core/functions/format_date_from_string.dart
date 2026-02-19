@@ -33,3 +33,14 @@ String formatDateToCustomString(DateTime date) {
     return DateFormat('dd MMM').format(date); // 10 May
   }
 }
+
+
+
+
+String formatDateBooking(DateTime date) {
+  final day = DateFormat('dd').format(date);
+  final month = DateFormat('MMM').format(date);
+  final weekDay = DateFormat('EEE').format(date);
+
+  return '$day $month | $weekDay';
+}

@@ -31,13 +31,13 @@ class BottomSheetLogoutWidget extends StatelessWidget {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        spacing: 13,
+        spacing: 8,
         children: [
           UnderLineWidget(),
           _buildTextWidget(context),
           const Divider(thickness: 0.3),
           _buildTextDescWidget(context),
-          const SizedBox(height: 10),
+          const SizedBox(),
           _buildButtons(context),
         ],
       ),

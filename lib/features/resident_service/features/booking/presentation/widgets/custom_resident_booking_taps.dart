@@ -35,6 +35,8 @@ class CustomResidentBookingTaps extends StatelessWidget {
   final List<String> titles = ['upComing', 'completed', 'cancelled'];
 }
 
+
+
 class CustomTapWidget extends StatelessWidget {
   const CustomTapWidget({
     super.key,
@@ -51,27 +53,32 @@ class CustomTapWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Column(
-        spacing: 7,
-        children: [
-          Text(
-            title,
-            style: Theme.of(
-              context,
-            ).textTheme.labelMedium!.copyWith(color: AppColors.gray),
-          ),
-          Opacity(
-            opacity: isSelected ? 1 : 0,
-            child: Container(
-              width: double.infinity,
-              height: 3,
-              decoration: BoxDecoration(
-                color: AppColors.primaryColor,
-                borderRadius: BorderRadius.circular(2),
+      child: IntrinsicWidth(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              title,
+              style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                color: isSelected ? AppColors.primaryColor : AppColors.gray,
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: 7),
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 400),
+              opacity: isSelected ? 1 : 0,
+              child: Container(
+                height: 3,
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ),
+        
+          
+          ],
+        ),
       ),
     );
   }

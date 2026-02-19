@@ -12,6 +12,10 @@ final class ResidentGetBookingSuccess extends ResidentBookingState {
   ResidentGetBookingSuccess({required this.bookings});
 }
 
+final class ResidentAllGetBookingSuccess extends ResidentBookingState {
+
+}
+
 final class ResidentGetBookingLoading extends ResidentBookingState {}
 
 final class ResidentGetBookingFailure extends ResidentBookingState {
