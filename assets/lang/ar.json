@@ -283,7 +283,9 @@
   "all_gym_bookings": "كل حجوزات الجيم",
   "all_return_bookings": "كل حجوزات الإرجاع",
   "all_driver_bookings": "كل حجوزات السائقين",
-  "all_technician_bookings": "كل حجوزات الفنيين"
+  "all_technician_bookings": "كل حجوزات الفنيين",
+    "canceled": "ملغى"
+
 
 
 

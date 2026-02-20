@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/features/resident_service/features/booking/presentation/manager/cubit/resident_booking_cubit.dart';
 import 'package:wasla/features/resident_service/features/booking/presentation/widgets/resident_all_bookings_body.dart';
 
 class ResidentAllBookingsView extends StatefulWidget {
@@ -32,5 +34,8 @@ class _ResidentAllBookingsViewState extends State<ResidentAllBookingsView> {
     );
   }
 
-  void getResidentBookings() async {}
+  void getResidentBookings() async {
+    context.read<ResidentBookingCubit>().resetState();
+    context.read<ResidentBookingCubit>().getAllBookingsByStatus();
+  }
 }

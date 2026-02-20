@@ -20,10 +20,11 @@ class CustomResidentBookingTaps extends StatelessWidget {
               child: CustomTapWidget(
                 title: titles[index].tr(context),
                 onTap: () {
-                  cubit.updateCurrentTap(index: index);
-                  cubit.getBookingByCurrentTap();
+                  // cubit.updateCurrentTap(index: index);
+                  // cubit.getBookingByCurrentTap();
                 },
-                isSelected: cubit.currentTap == index,
+                isSelected: false,
+                //  cubit.currentTap == index,
               ),
             ),
           ),
@@ -34,8 +35,6 @@ class CustomResidentBookingTaps extends StatelessWidget {
 
   final List<String> titles = ['upComing', 'completed', 'cancelled'];
 }
-
-
 
 class CustomTapWidget extends StatelessWidget {
   const CustomTapWidget({
@@ -75,8 +74,6 @@ class CustomTapWidget extends StatelessWidget {
                 ),
               ),
             ),
-        
-          
           ],
         ),
       ),

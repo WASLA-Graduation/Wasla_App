@@ -20,7 +20,7 @@ class ResidentAllBookingsCategoryFilter extends StatelessWidget {
             itemCount: 2,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 25),
               child: CustomTapWidget(
                 isSelected: cubit.bookingFilter == BookingFilter.values[index],
                 title: BookingFilter.titleFromIndex(index).tr(context),

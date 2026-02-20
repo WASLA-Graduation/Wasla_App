@@ -17,7 +17,7 @@ class _ResidentBookingViewState extends State<ResidentBookingView> {
   @override
   void initState() {
     resetState();
-    getResidentBookings();
+    // getResidentBookings();
     super.initState();
   }
 
@@ -41,10 +41,10 @@ class _ResidentBookingViewState extends State<ResidentBookingView> {
   }
 
   void resetState() {
-    context.read<ResidentBookingCubit>().currentTap = 0;
+    // context.read<ResidentBookingCubit>().currentTap = 0;
   }
 
-  void getResidentBookings() async {
-    context.read<ResidentBookingCubit>().getResidentBookings();
-  }
+  // void getResidentBookings() async {
+  //   context.read<ResidentBookingCubit>().getResidentBookings();
+  // }
 }

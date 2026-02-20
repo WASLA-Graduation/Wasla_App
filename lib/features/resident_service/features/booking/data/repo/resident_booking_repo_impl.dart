@@ -3,7 +3,7 @@ import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
-import 'package:wasla/features/resident_service/features/booking/data/models/resident_booking_model.dart';
+import 'package:wasla/features/resident_service/features/booking/data/models/resident_doctor_booking_model.dart';
 import 'package:wasla/features/resident_service/features/booking/data/models/resident_gym_booking_model.dart';
 import 'package:wasla/features/resident_service/features/booking/data/repo/resident_booking_repo.dart';
 
@@ -13,7 +13,7 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
   ResidentBookingRepoImpl({required this.api});
 
   @override
-  Future<Either<String, List<ResidentBookingModel>>> getResidentBookings({
+  Future<Either<String, List<DoctorResidentBookingModel>>> getResidentBookingsWithDoctor({
     required String userId,
   }) async {
     try {
@@ -21,9 +21,9 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
         ApiEndPoints.getBookingDetailsForUser,
         queryParameters: {ApiKeys.userId: userId},
       );
-      final List<ResidentBookingModel> bookings = [];
+      final List<DoctorResidentBookingModel> bookings = [];
       for (var booking in response[ApiKeys.data]) {
-        bookings.add(ResidentBookingModel.fromJson(booking));
+        bookings.add(DoctorResidentBookingModel.fromJson(booking));
       }
       return Right(bookings);
     } on ServerException catch (e) {
@@ -32,7 +32,7 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
   }
 
   @override
-  Future<Either<String, Null>> removeBooking({
+  Future<Either<String, Null>> doctorCancelBooking({
     required int bookingId,
     required int status,
   }) async {
@@ -60,6 +60,18 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
         bookings.add(GymResidentBookingModel.fromJson(booking));
       }
       return Right(bookings);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> gymCancelBooking({
+    required int bookingId,
+  }) async {
+    try {
+      await api.put('${ApiEndPoints.gymCancelBooking}$bookingId');
+      return const Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

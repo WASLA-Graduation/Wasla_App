@@ -1,7 +1,12 @@
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
+import 'package:wasla/core/enums/booking_status.dart';
+import 'package:wasla/core/functions/format_date_from_string.dart';
+import 'package:wasla/core/functions/format_time_with_intl.dart';
+import 'package:wasla/core/functions/localizedDays.dart';
+import 'package:wasla/features/resident_service/features/booking/data/models/general_resident_bookings_model.dart';
 
-class ResidentBookingModel {
+class DoctorResidentBookingModel extends GeneralResidentBookingsModel {
   final int id;
   final String start;
   final String end;
@@ -13,7 +18,7 @@ class ResidentBookingModel {
   final String serviceName;
   final int price;
 
-  ResidentBookingModel({
+  DoctorResidentBookingModel({
     required this.id,
     required this.start,
     required this.end,
@@ -24,10 +29,19 @@ class ResidentBookingModel {
     required this.serviceProviderProfilePhoto,
     required this.serviceName,
     required this.price,
-  });
+  }) : super(
+         baseBookingId: id,
+         baseName: serviceProviderName,
+         baseServiceName: serviceName,
+         baseStatus: DoctorBookingStatus.values[status-1].name,
+         baseImage: serviceProviderProfilePhoto,
+         baseDate: formatStringDate(date) + localizedDays(index: day),
+         baseDuration:
+             "${convertBackendTimeToAmPm(start)} : ${convertBackendTimeToAmPm(end)}",
+       );
 
-  factory ResidentBookingModel.fromJson(Map<String, dynamic> json) {
-    return ResidentBookingModel(
+  factory DoctorResidentBookingModel.fromJson(Map<String, dynamic> json) {
+    return DoctorResidentBookingModel(
       id: json[ApiKeys.id] ?? 0,
       start: json[ApiKeys.start] ?? "",
       end: json[ApiKeys.end] ?? "",

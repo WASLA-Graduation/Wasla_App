@@ -6,11 +6,7 @@ final class ResidentBookingInitial extends ResidentBookingState {}
 
 final class ResidentBookingUpdate extends ResidentBookingState {}
 
-final class ResidentGetBookingSuccess extends ResidentBookingState {
-  final List<ResidentBookingModel> bookings;
 
-  ResidentGetBookingSuccess({required this.bookings});
-}
 
 final class ResidentAllGetBookingSuccess extends ResidentBookingState {
 

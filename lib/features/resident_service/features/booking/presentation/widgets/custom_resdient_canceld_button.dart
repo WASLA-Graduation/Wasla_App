@@ -20,13 +20,17 @@ class CustomResidentCancelButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<ResidentBookingCubit>();
     return BlocConsumer<ResidentBookingCubit, ResidentBookingState>(
+      buildWhen: (previous, current) => cubit.selectedBookingFlag == bookingId,
       listener: (context, state) {
-        if (state is ResidentCancelBookingSuccess) {
+        if (state is ResidentCancelBookingSuccess &&
+            cubit.selectedBookingFlag == bookingId) {
           toastAlert(
             color: AppColors.primaryColor,
             msg: 'bookingCaceledSuccess'.tr(context),
           );
+          cubit.selectedBookingFlag = -1;
         } else if (state is ResidentCacelBookingFailure) {
           toastAlert(color: AppColors.error, msg: state.errMsg);
         }
@@ -43,7 +47,7 @@ class CustomResidentCancelButton extends StatelessWidget {
                   confirmText: 'confirm'.tr(context),
                   onConfirm: () {
                     Navigator.pop(context);
-                    context.read<ResidentBookingCubit>().cancelBooking(
+                    context.read<ResidentBookingCubit>().cancelResidentBooking(
                       bookingId: bookingId,
                       index: index,
                     );

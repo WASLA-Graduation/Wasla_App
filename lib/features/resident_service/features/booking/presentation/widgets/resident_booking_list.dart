@@ -4,14 +4,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/custom_err_get_data.dart';
-import 'package:wasla/features/resident_service/features/booking/data/models/resident_booking_model.dart';
+import 'package:wasla/features/resident_service/features/booking/data/models/resident_doctor_booking_model.dart';
 import 'package:wasla/features/resident_service/features/booking/presentation/manager/cubit/resident_booking_cubit.dart';
 import 'package:wasla/features/resident_service/features/booking/presentation/widgets/resident_book_item.dart';
 
 // ignore: must_be_immutable
 class ResidentBookingList extends StatelessWidget {
   ResidentBookingList({super.key});
-  List<ResidentBookingModel> bookigns = [];
+  // List<ResidentBookingModel> bookigns = [];
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +27,12 @@ class ResidentBookingList extends StatelessWidget {
             ),
           );
         } else {
-          if (state is ResidentGetBookingSuccess) {
-            bookigns = state.bookings;
-          }
+          // if (state is ResidentGetBookingSuccess) {
+          //   bookigns = state.bookings;
+          // }
 
-          return bookigns.isEmpty
+          return 1 == 10
+              // bookigns.isEmpty
               ? Center(
                   child: Text(
                     "noBookings".tr(context),
@@ -39,10 +40,12 @@ class ResidentBookingList extends StatelessWidget {
                   ),
                 )
               : ListView.builder(
-                padding: const EdgeInsets.only(top: 20),
-                  itemCount: bookigns.length,
+                  padding: const EdgeInsets.only(top: 20),
+                  // itemCount: bookigns.length,
+                  itemCount: 3,
                   itemBuilder: (_, index) =>
-                      ResidentBookItem(model: bookigns[index], index: index),
+                      // ResidentBookItem(model: bookigns[index], index: index),
+                      SizedBox(),
                 );
         }
       },

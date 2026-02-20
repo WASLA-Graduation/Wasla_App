@@ -26,4 +26,25 @@ enum BookingStatus {
         return 2;
     }
   }
+
+  
+}
+
+enum DoctorBookingStatus {
+  upComing,
+  completed,
+  cancelled;
+
+  int toInt() {
+    switch (this) {
+      case DoctorBookingStatus.upComing:
+        return 0;
+      case DoctorBookingStatus.completed:
+        return 1;
+      case DoctorBookingStatus.cancelled:
+        return 2;
+    }
+
+    
+  }
 }
