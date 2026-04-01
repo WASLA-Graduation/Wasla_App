@@ -30,7 +30,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-/coverage/
+ /coverage/
 
 # Obfuscation / Symbolication
 app.*.symbols
@@ -49,6 +49,7 @@ ios/Pods/
 /ios/Flutter/Flutter.podspec
 ios/Flutter/Generated.xcconfig
 
-# Secrets (Important)
-*.json
+# Secrets (Important!)
+# Firebase JSON + any local env
+lib/wasla-39f17-61f689b8f7b8.json
 .env
