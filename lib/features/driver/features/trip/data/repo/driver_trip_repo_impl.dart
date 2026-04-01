@@ -1,0 +1,119 @@
+import 'package:dartz/dartz.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:wasla/core/database/api/api_consumer.dart';
+import 'package:wasla/core/database/api/api_end_points.dart';
+import 'package:wasla/core/database/api/api_keys.dart';
+import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/enums/driver_status.dart';
+import 'package:wasla/features/driver/features/trip/data/models/driver_trip_and_resident_info_model.dart';
+import 'package:wasla/features/driver/features/trip/data/repo/driver_trip_repo.dart';
+
+class DriverTripRepoImpl extends DriverTripRepo {
+  final ApiConsumer api;
+
+  DriverTripRepoImpl({required this.api});
+  @override
+  Future<Either<String, Null>> cancelRide({
+    required int tripId,
+    required bool isResident,
+  }) async {
+    try {
+      await api.put(
+        ApiEndPoints.cancelRide + tripId.toString(),
+        queryParameters: {ApiKeys.isResident: isResident},
+      );
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> completeRide({required int id}) async {
+    try {
+      await api.put(ApiEndPoints.completeTrip + id.toString());
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> startRide({required int id}) async {
+    try {
+      await api.put(ApiEndPoints.startTrip + id.toString());
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> acceptRide({
+    required int id,
+    required String driverId,
+  }) async {
+    try {
+      await api.put(
+        ApiEndPoints.acceptTrip + id.toString(),
+        queryParameters: {ApiKeys.driverId: driverId},
+      );
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> updateDriverLocation({
+    required LatLng location,
+    required String driverId,
+  }) async {
+    try {
+      await api.post(
+        ApiEndPoints.updateDriverLocation,
+        body: {
+          ApiKeys.driverId: driverId,
+          ApiKeys.latitudeSmall: location.latitude,
+          ApiKeys.longitudeSmall: location.longitude,
+        },
+      );
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> updateDriverStatus({
+    required DriverStatus status,
+    required String driverId,
+  }) async {
+    try {
+      await api.put(
+        ApiEndPoints.updateDriverStatus,
+        queryParameters: {
+          ApiKeys.driverId: driverId,
+          ApiKeys.newStatus: status.index,
+        },
+      );
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, TripModel>> getTripDetails({
+    required int tripId,
+  }) async {
+    try {
+      final response = await api.get(
+        ApiEndPoints.getTripDetailsForDriver + tripId.toString(),
+      );
+      return Right(TripModel.fromJson(response[ApiKeys.data]));
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+}

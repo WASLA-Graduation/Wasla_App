@@ -1,0 +1,35 @@
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:wasla/core/utils/app_colors.dart';
+import 'package:wasla/core/responsive/size_config.dart';
+
+class CustomProfilePicture extends StatelessWidget {
+  const CustomProfilePicture({super.key, this.image, this.onPressed});
+  final File? image;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        CircleAvatar(
+          radius: SizeConfig.screenWidth * 0.15,
+          backgroundColor: AppColors.gray.withOpacity(0.3),
+          backgroundImage: image == null ? null : FileImage(image!),
+        ),
+        Positioned(
+          bottom: 0,
+          right: 0,
+          child: CircleAvatar(
+            radius: SizeConfig.blockWidth * 5,
+            backgroundColor: AppColors.primaryColor,
+            child: IconButton(
+              onPressed: onPressed,
+              icon: Icon(Icons.edit, color: AppColors.whiteColor, size: 25),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

@@ -1,0 +1,105 @@
+import 'package:dartz/dartz.dart';
+import 'package:wasla/core/database/api/api_consumer.dart';
+import 'package:wasla/core/database/api/api_end_points.dart';
+import 'package:wasla/core/database/api/api_keys.dart';
+import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/features/doctor_service/features/home/data/models/doctor_booking_model.dart';
+import 'package:wasla/features/doctor_service/features/home/data/models/doctor_chart_model.dart';
+import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
+import 'package:wasla/features/doctor_service/features/home/data/repo/doctor_dashboard_repo.dart';
+
+class DoctorDashboardRepoImpl extends DoctorDashboardRepo {
+  final ApiConsumer api;
+
+  DoctorDashboardRepoImpl({required this.api});
+  @override
+  Future<Either<String, DoctorChartModel>> getDoctorChart({
+    required String doctorId,
+  }) async {
+    try {
+      final response = await api.get(ApiEndPoints.doctorGetChart + doctorId);
+      final DoctorChartModel chart = DoctorChartModel.fromJson(
+        response[ApiKeys.data],
+      );
+
+      return Right(chart);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, List<DoctorBookingModel>>> getDoctorBookings({
+    required String doctorId,
+    required int status,
+  }) async {
+    try {
+      final response = await api.get(
+        '${ApiEndPoints.doctorGetAllBooking}$doctorId/$status',
+      );
+      final List<DoctorBookingModel> allBookings = [];
+      for (var booking in response[ApiKeys.data]) {
+        allBookings.add(DoctorBookingModel.fromJson(booking));
+      }
+
+      return Right(allBookings);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> removeBooking({
+    required int bookingId,
+    required int status,
+  }) async {
+    try {
+      await api.put(
+        ApiEndPoints.updateBookingStatus,
+        queryParameters: {ApiKeys.bookingId: bookingId, ApiKeys.status: status},
+      );
+
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> updateDoctorBooking({
+    required int bookingId,
+    required int dayofWeek,
+    required String startTime,
+    required String endTime,
+    required String bookingDate,
+  }) async {
+    try {
+      await api.put(
+        ApiEndPoints.updateBooking,
+        body: {
+          ApiKeys.bookingId: bookingId,
+          ApiKeys.newDayOfWeek: dayofWeek,
+          ApiKeys.newStart: startTime,
+          ApiKeys.newEnd: endTime,
+          ApiKeys.bookingDate: bookingDate,
+        },
+      );
+
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, DoctorModel>> getDoctorProfile({
+    required String userId,
+  }) async {
+    try {
+      final response = await api.get(ApiEndPoints.doctorGetProfile + userId);
+      return Right(DoctorModel.fromJson(response[ApiKeys.data]));
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+}

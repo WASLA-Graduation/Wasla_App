@@ -1,0 +1,72 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/utils/assets.dart';
+import 'package:wasla/core/widgets/bottom_nav_bar/custom_bottom_nav_bar.dart';
+import 'package:wasla/features/chat/presentation/views/last_users_viwe.dart';
+import 'package:wasla/features/profile/presentation/views/profile_view.dart';
+import 'package:wasla/features/resident_service/features/booking/presentation/views/resident_all_bookings_view.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/views/resident_home_view.dart';
+
+class HomeResidentNavbar extends StatelessWidget {
+  const HomeResidentNavbar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HomeResidentCubit, HomeResidentState>(
+      builder: (context, state) {
+        final cubit = context.read<HomeResidentCubit>();
+
+        return Scaffold(
+          body: screens[cubit.navBarcurrentIndex],
+          bottomNavigationBar: CustomBottomNavBar(
+            selectedIndex: cubit.navBarcurrentIndex,
+            titles: getTitles(context),
+            selectedIcons: selectedIcons,
+            unSelectedIcons: unSelectedIcons,
+            onIndexChange: (value) {
+              cubit.updateNavBarCurrentIndex(value);
+            },
+            onPop: () {
+              if (cubit.navBarcurrentIndex != 0) {
+                cubit.updateNavBarCurrentIndex(0);
+              } else {
+                SystemNavigator.pop();
+              }
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  static List<Widget> screens = [
+    const ResidentHomeView(),
+    ResidentAllBookingsView(),
+    LastUsersViwe(),
+    const ProfileView(),
+  ];
+
+  List<String> getTitles(BuildContext context) => [
+    'home'.tr(context),
+    'booking'.tr(context),
+    'chat'.tr(context),
+    'profile'.tr(context),
+  ];
+
+  List<String> get unSelectedIcons => [
+    Assets.assetsImagesHomeOutlined,
+    Assets.assetsImagesBookingOutlined,
+    Assets.assetsImagesChatOutlined,
+    Assets.assetsImagesPersonOutlined,
+  ];
+
+  List<String> get selectedIcons => [
+    Assets.assetsImagesHomeFilled,
+    Assets.assetsImagesBookingFilled,
+    Assets.assetsImagesChatFilled,
+    Assets.assetsImagesPeronFilled,
+  ];
+}

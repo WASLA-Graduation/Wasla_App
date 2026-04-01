@@ -1,0 +1,16 @@
+flutter_native_splash:
+  color: "#ffffff" # the color of the splash screen
+  image: assets/images/waslaLogo.png # your logo put in assets/images
+
+  android_12:
+    image: assets/images/waslaLogo.png
+    icon_background_color: "#ffffff"
+
+  android: true
+  ios: true
+  web: true
+
+  # To put you image in the center of the screen
+  android_gravity: center
+  ios_content_mode: center
+  web_image_mode: center
