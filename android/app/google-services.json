@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1011982844478",
+    "project_id": "wasla-39f17",
+    "storage_bucket": "wasla-39f17.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011982844478:android:90abfc607a9c1a32d6476f",
+        "android_client_info": {
+          "package_name": "com.example.wasla"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0II7HXhgWjx0bHdvTinJyvluTvo-6Sss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

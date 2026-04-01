@@ -1,0 +1,500 @@
+{
+      "next": "التالي",
+      "getStarted": "ابدء",
+      "onboardingOneDesc": "توصيل سريع وموثوق حتى باب بيتك",
+      "onboardingTwoDesc": "رعاية طبية موثوقة مع أطباء خبراء في أي وقت",
+      "onboardingThreeDesc": "صيانة ماهرة دائماً عند خدمتك",
+      "appName": "وصلة",
+      "resident": "ساكن",
+      "driver": "سائق",
+      "doctor": "طبيب",
+      "technician": "فني",
+      "restaurantOwner": "صاحب مطعم",
+      "gymOwner": "صاحب جيم",
+      "chooseYourService": "اختر خدمتك : ",
+      "continue": "متابعة",
+      "letsYouIn": "هيا بنا نسجل الدخول",
+      "continueWithGoogle": "تابع باستخدام جوجل",
+      "continueWithFacebook": "تابع باستخدام فيسبوك",
+      "signInWithPassword": "تسجيل الدخول باستخدام كلمة المرور",
+      "or": "أو",
+      "dontHaveAccount": "ليس لديك حساب؟",
+      "createAccount": "أنشئ حسابك",
+      "orContinueWith": "أو تابع باستخدام",
+      "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+      "signIn": "تسجيل الدخول",
+      "signUp": "إنشاء حساب",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "email_invalid": "أدخل بريدًا إلكترونيًا صحيحًا",
+      "password_required": "كلمة المرور مطلوبة",
+      "password_short": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+      "email_required": "البريد الإلكتروني مطلوب",
+      "login": "تسجيل الدخول",
+      "forgotPassword": "هل نسيت كلمة المرور؟",
+      "forgotPasswordTitle": "هل نسيت كلمة المرور؟",
+      "forgotPasswordSubTitle": "أدخل بريدك الإلكتروني للتحقق وإعادة تعيين كلمة المرور الخاصة بك",
+      "emailAddress": "البريد الإلكتروني",
+      "sendVerificationCode": "إرسال رمز التحقق",
+      "createNewPassword": "أنشئ كلمة مرور جديدة",
+      "changePassword": "تغيير كلمة المرور",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "newPassword": "كلمة المرور الجديدة",
+      "currentPassword": "كلمة المرور الحالية",
+      "savePassword": "حفظ كلمة المرور",
+      "verificationCode": "رمز التحقق",
+      "codeSentToEmail": "تم إرسال رمز التحقق إلى بريدك الإلكتروني",
+      "resendCodeIn": "إعادة إرسال الرمز خلال",
+      "verify": "تحقق",
+      "congratulations": "تهانينا!",
+      "accountReady": "تم إعداد حسابك بنجاح. سيتم تحويلك إلى صفحة تسجيل الدخول.",
+      "skip":"تخطي",
+      "loading":"جاري التحميل...",
+      "sending":"جاري الارسال...",
+      "uplodCv":"رفع السيرة الذاتية",
+      "selectYourSpecialty":"اختر التخصص الخاص بك",
+      "experience":" الخبرة",
+      "descriptionAboutYou":"وصف عنك",
+      "save":"حفظ",
+      "completYourProfile":"اكمل ملفك الشخصي",
+      "fillYourProfile":"املأ ملفك الشخصي",
+      "chooseImage":"اختر صورة",
+      "fullName":"الاسم الكامل",
+      "nakeName":"الاسم المستعار",
+      "phoneNumber": "رقم الهاتف",
+      "dateOfBirth": "تاريخ الميلاد",
+      "address": "العنوان",
+      "nameRequired": "يجب إدخال الاسم",
+      "nameTooShort": "يجب أن لا يقل الاسم عن 3 أحرف",
+      "nameLettersOnly": "يُسمح فقط بالأحرف في الاسم",
+      "phoneRequired": "يجب إدخال رقم الهاتف",
+      "invalidPhone": "رقم الهاتف غير صالح",
+      "addressRequired": "يجب إدخال العنوان",
+      "addressTooShort": "يجب أن لا يقل العنوان عن 5 أحرف",
+      "dateRequired": "يجب إدخال التاريخ",
+      "invalidDateFormat": "صيغة التاريخ غير صحيحة",
+      "selectRole": "اختر الوظيفة",
+      "nationalId": "الرقم القومي",
+      "invalidNationalId": "الرقم القومي غي  صحيح",
+      "invalidGraduationYear": "سنة التخرج غير صحيحة",
+      "graduationYear": " سنة التخرج",
+      "universityName": "اسم الجامعة",
+      "resturentName": "اسم المطعم",
+      "ownerName": "اسم المالك",
+      "descriptionAboutResturent": "وصف عن المطعم",
+      "resturentImage": "صورة للمطعم",
+      "fillResturentData": "اكمل بيانات المطعم",
+      "english":"الانجليزية",
+      "arabic":"العربية",
+      "language":"اللغة",
+      "suggested":"مقترح :",
+      "editProfile": "تعديل الملف الشخصي",
+      "notification": "الإشعارات",
+      "payment": "المدفوعات",
+      "security": "الأمان",
+      "darkMode": "الوضع الداكن",
+      "helpCenter": "مركز المساعدة",
+      "privacyPolicy": "سياسة الخصوصية",
+      "logout":"تسجيل الخروج",
+      "home": "الرئيسية",
+      "chat": "الدردشة",
+      "profile": "الملف الشخصي",
+      "booking": "الحجوزات",
+      "pending_title": "الحساب قيد المراجعة",
+      "pending_desc": "جاري مراجعة حسابك، برجاء الانتظار حتى يتم الموافقة من قبل الإدارة.",
+      "suspended_title": "الحساب موقوف",
+      "disabled_title": "الحساب معطّل",
+      "suspended_desc": "تم إيقاف حسابك، برجاء التواصل مع الدعم إذا كنت تعتقد أن هذا خطأ.",
+      "disabled_desc": "هذا الحساب لم يعد نشطًا.",
+      "cancel": "إلغاء",
+      "logout_desc": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+      "yes_logout": "نعم، تسجيل الخروج",
+        "edit_profile": "تعديل الحساب",
+        "full_name": "الاسم الكامل",
+        "profile_updated_success": "تم تحديث البيانات بنجاح",
+        "change_password": "تغيير كلمة المرور",
+        "phone_number": "رقم الهاتف",
+        "update": "تحديث",
+        "service": "الخدمات",
+        "egb": "جنيه",
+        "sat": "السبت",
+        "mon": "الإثنين",
+        "tue": "الثلاثاء",
+        "wed": "الأربعاء",
+        "thu": "الخميس",
+        "fri": "الجمعة",
+        "sun": "الأحد",
+        "edit": "تعديل",
+        "delete": "حذف",
+        "to": "الى",
+        "from": "من",
+        "areYouSure": "هل انت متاكد ؟",
+        "douYouWantRelly": "هل تريد حقًا حذف  ",
+        "add": "اضافة",
+        "selectDate": "اختر التاريخ",
+        "selectAtLeastOneDay": "اختر يومًا واحدًا على الأقل",
+        "selectDays": "اختر الأيام",
+        "selectDay": "اختر اليوم",
+        "serviceNameAr": "اسم الخدمة (AR)",
+        "descriptionEn": "الوصف (EN)",
+        "descriptionAr": "الوصف (AR)",
+        "price": "السعر",
+        "serviceNameEn": "اسم الخدمة (EN)",
+          "addNewService": "إضافة خدمة جديدة",
+          "editService": "تعديل الخدمة",
+          "welcomeBack": "مرحبا بعودتك",
+          "spacialOffers": "عروض خاصة",
+        "seeAll": "اظهار الكل",
+        "services": "الخدمات",
+        "hostpitalName": "اسم المستشفى",
+        "errorFetchData": "حدث خطأ أثناء جلب البيانات. يرجى المحاولة لاحقًا.",
+        "noServices": "لا يوجد خدمات",
+        "noDoctors": "لا يوجد طبيبين",
+        "doctors": "الطبيبين",
+        "dr": "دكتور",
+        "aboutMe": "حولي",
+        "workingSchedule": "جدول العمل",
+        "seeServices": "اظهار الخدمات",
+        "reviwes": "التقييمات",
+        "patients": "المرضى",
+        "rating": "التقييم",
+        "all": "الكل",
+        "book": "حجز",
+        "gym": "جيم",
+        "restaurant": "مطعم",
+        "search": "بحث",
+          "viewMore": "اظهار المزيد",
+    "showLess": "اظهار اقل",
+    "selectHour": "اختر الساعة",
+    "bookingType": "نوع الحجز",
+      "examination": "كشف",
+    "consultation": "استشارة",
+    "uploadImages": "تحميل الصور",
+    "bookingService": " حجز الخدمة",
+        "addTime": "اضافة وقت",
+    "addMoreSlots": "اضافة مواعيد اخري",
+        "noOfBookings": "عدد الحجوزات",
+    "completedBookings": "الحجوزات المكتملة",
+    "totalRevenue": "اجمالي الدخل",
+        "dashboardOverview": "نظرة على لوحة التحكم",
+        "monthlyRevenue": "الدخل الشهري",
+            "bookingList": "قائمة الحجوزات",
+              "patientName": "اسم المريض",
+    "serviceName": "اسم الخدمة",
+    "phone": "رقم الهاتف",
+    "date": "التاريخ",
+    "day": "اليوم",
+    "time": "الوقت",
+        "cancelBooking": "الغاء الحجز",
+    "editBooking": "تعديل الحجز",
+      "confirm": "تاكيد",
+          "areYouSureCancel": "هل تريد حقًا الغاء هذا الحجز؟",
+          "bookingSuccess": "تم تحديث الحجز بنجاح",
+              "noBookings": "لا يوجد حجوزات",
+                  "upComing": "القادمة",
+    "completed": "مكتملة",
+    "cancelled": "ملغية",
+        "bookingStatus": "حالة الحجز",
+            "myBookings": "حجوزاتي",
+                "bookingCaceledSuccess": "تم الغاء الحجز بنجاح",
+                "specialty": "التخصص",
+    "hospital": "المستشفى",
+        "bookingDone": "تم الحجز بنجاح",
+            "allTimesBooked": "جميع التوقيتات محجوزة",
+                "serviceAddedSuccess": "تم اضافة الخدمة بنجاح",
+                "showImages":"اظهار الصور",
+                    "patientImages":"صور المريض",
+                        "hideImages":"اخفاء الصور",
+                        "month_1": "يناير",
+  "month_2": "فبراير",
+  "month_3": "مارس",
+  "month_4": "أبريل",
+  "month_5": "مايو",
+  "month_6": "يونيو",
+  "month_7": "يوليو",
+  "month_8": "أغسطس",
+  "month_9": "سبتمبر",
+  "month_10": "أكتوبر",
+  "month_11": "نوفمبر",
+  "month_12": "ديسمبر",
+    "writeReview": "كتابة التقييم",
+    "copy":"نسخ",
+      "textCopied":"تم نسخ النص ",
+        "reviewDeleted":"تم حذف التقييم بنجاح",
+        "reviewUpdated":"تم تحديث التقييم بنجاح",
+          "somethingWentWrong":" حدث خطأ ما",
+              "editReview": "تعديل التقييم",
+              "noReviews": "لا يوجد تقييمات",
+              "myFavourites": "المفضلة",
+              "noFavourites": "لا يوجد عناصر مفضلة",
+                  "personalInformation": "معلومات شخصية",
+                  "showCV": "اظهار السيرة الذاتية",
+                    "gymName": "اسم الجيم",
+    "gymOwnerName": "اسم صاحب الجيم",
+    "gmail": "البريد الالكتروني",
+    "phones": "ارقام الهاتف",
+    "separateByComma": "ارقام الجيم مفصولة بالفاصلة",
+    "gymPhotos": "صور الجيم",
+    "description": "وصف الجيم",
+        "packages": "الباقات",
+    "addPackage": "اضافة باقة",
+    "editPackage": "تعديل الباقة",
+    "packageName": "اسم الباقة",
+    "packagePrice": "سعر الباقة",
+        "addNewPackage": "إضافة باقة جديدة",
+    "addNewOffer": "إضافة عرض جديد",
+        "offers": "العروض",
+    "noOffers": "لا يوجد عروض",
+        "noPackages": "لا توجد باقات",
+            "months": "شهور",
+            "updatePackage": "تحديث الباقة",
+                "packageNameArabic": "اسم الباقة بالعربية",
+    "packageNameEnglish": "اسم الباقة بالانجليزية",
+      "packageDuration": "مدة الباقة (بالشهور)",
+        "packageDeleted": "تم حذف الباقة بنجاح",
+        "offerDeleted": "تم حذف العرض بنجاح",
+            "discount": " قيمةالخصم",
+            "packageImage": "صورة الباقة",
+                "packageAddedSuccessfully": " تم اضافة الباقة بنجاح",
+    "packageUpdatedSuccessfully": "تم تحديث الباقة بنجاح",
+        "profileInformation": "معلومات الملف الشخصي",
+            "gymProfileInfo": "معلومات الملف الشخصي للجيم",
+                "owener": "المالك",
+    "contacts": "جهات الاتصال",
+        "galary": "معرض الصور",
+            "noOfTrainnee": "عدد المتدربين",
+                "bookings": "الحجوزات",
+    "trainnees": "المتدربين",
+    "revenue": "الدخل",
+        "active": "نشط",
+            "name": "الاسم",
+            "duration": "المدة",
+                "package": "الباقة",
+                    "gyms": "صالات الالعاب الرياضية",
+                        "noGyms": "لا يوجد صلات العاب رياضية",
+                            "bookingConfirmed": "تم تأكيد الحجز",
+    "showQr": "يرجى عرض هذا الكود QR في قاعة الاستقبال لتفعيل الاشتراك الخاص بك. يمكنك تنزيله لاستخدامه لاحقا.",
+    "downloadQr": "تنزيل الكود QR",
+    "close": "اغلاق",
+        "aboutGym": "معلومات عن الجيم",
+    "seePackages": "اظهار الباقات",
+        "bookNow": "حجز الان",
+        "all_doctor_bookings": "كل حجوزات الأطباء",
+  "all_gym_bookings": "كل حجوزات الجيم",
+  "all_return_bookings": "كل حجوزات المطعم",
+  "all_driver_bookings": "كل حجوزات السائقين",
+  "all_technician_bookings": "كل حجوزات الفنيين",
+    "canceled": "ملغى",
+      "notifications": "الإشعارات",
+        "noNotifications": "لا يوجد اشعارات",
+          "noNotificationsDeleted": "تم حذف الاشعار",
+            "notificationNotDeleted": "حدث خطأ أثناء حذف الاشعار",
+              "whatsInYourMind": "ماذا تريد؟",
+                "socialMedia": "وسائل التواصل الاجتماعي",
+                "comments": "التعليقات",
+                "reactions": "التفاعلات",
+                  "likes": "الاعجابات",
+  "posts": "المنشورات",
+  "saves": "الحفظات",
+    "noPosts": "لا يوجد منشورات",
+      "noComments": "لا يوجد تعليقات",
+  "writeComment": "كتابة التعليق الاول",
+    "community": "المجتمع",
+      "addComment": "اضافة تعليق",
+        "saySomething": "قل شيء عن هذا المنشور...",
+          "postAdded": "تم اضافة المنشور بنجاح",
+  "postUpdated": "تم تحديث المنشور بنجاح",
+    "editComment": "تعديل التعليق",
+      "editPost": "تعديل المنشور",
+        "vechileType": "نوع السيارة",
+  "vechileImages": "صور السيارة",
+  "vechileModel": "موديل السيارة",
+  "vechileNumber": "رقم السيارة",
+  "driverFiles": "ملفات السائق",
+    "invalidVechileNumber": "رقم السيارة غير صحيح",
+      "car": "سيارة",
+  "scooter": "سكوتر",
+    "drivers": "السائقين",
+    "paymentFailed": "فشل الدفع!",
+"paymentFailedMessage": "حدث خطأ في عملية الدفع.\nيرجى المحاولة مرة أخرى.",
+"tryAgain": "حاول مرة أخرى",
+"backToHome": "العودة للرئيسية",
+"status": "الحالة",
+"failed": "فشل",
+"declined": "مرفوض",
+"paymentSuccess": "تمت عملية الدفع بنجاح!",
+"paymentSuccessMessage": "تمت معالجة عملية الدفع\nبنجاح.",
+"confirmed": "مؤكد",
+"letsTravel": "بدء الرحلة!",
+"source": "البداية",
+"distination": "الوجهة",
+"fromCap": "من",
+"toCap": "إلى",
+"findDriver": "ابحث عن سائق",
+"myLocation": "موقعي",
+"searchYourLocation": "...جاري البحث عن موقعك",
+"enterLocation": "ادخل الموقع",
+"searchDrivers": "جاري البحث عن سائقين",
+"cancelTrip": "الغاء الرحلة",
+"searchNearbyDriver": "نبحث لك عن أقرب سائق متاح في منطقتك",
+"startPoint": "نقطة الانطلاق",
+"cancelRequest": "الغاء الطلب",
+"tripDetails": "تفاصيل الرحلة",
+"showDriverLocation": "اظهار موقع السائق على الخريطة",
+"rateDriver": "تقييم السائق",
+"howWasDriver": "كيف كان السائق؟",
+"rateTrip": "قم بتقييم هذه الرحلة",
+"giveRate": "اعطاء التقييم",
+"driverArrived": "السائق وصل !",
+"driverWaiting": "السائق ينتظر",
+"gotIt": "حسنا",
+"allUsers": "جميع المستخدمين",
+"message": "رسالة",
+"inbox": "صندوق الوارد",
+"lastSeenAt": "اخر ظهور في",
+"acceptTrip": "قبول الرحلة",
+"distance": "المسافة",
+"showPassenLocation": "اظهار موقع الراكب علي الخريطة",
+"completeTrip": "اكتمل الرحلة",
+"youHaveArrived": "لقد وصلت!",
+"reachedPassenger": "لقد وصلت لموقع الراكب",
+"passengerLocation": "موقع الراكب",
+"passengerWaiting": "الراكب في انتظارك",
+"red": "أحمر",
+  "blue": "أزرق",
+  "green": "أخضر",
+  "black": "أسود",
+  "white": "أبيض",
+  "silver": "فضي",
+  "gray": "رمادي",
+  "yellow": "أصفر",
+  "orange": "برتقالي",
+  "brown": "بني",
+  "purple": "بنفسجي",
+  "selectColor": "اختر لون",
+  "tripCancelledMessage": "الراكب قام بالغاء\nالرحلة",
+  "driverCancelled": "السائق قام بالغاء\nالرحلة",
+    "tripCancelled": "تم الغاء الرحلة",
+      "passenger": "راكب",
+      "startTrip": "بدء الرحلة",
+        "tripLoading": "جاري بدء الرحلة",
+          "reviews": "التقييمات",
+  "yearaExperience": " سنة تجربة",
+    "model": "الموديل",
+    "numberOfRides": "رحلات",
+  "numberOfDeliveredResident": "رحلات تم توصيلها",
+  "amount": "المبلغ",
+    "vehicle": "السيارة",
+          "stats":"الاحصائيات",
+              "totalTrips": "الرحلات الكلية",
+              "about": "حول",
+                  "Online": "متصل",
+                      "noUsers": "لا يوجد مستخدمين",
+                          "noChats": "لا يوجد رسائل",
+                              "sayHello": "قل سلام",
+                                  "voiceMessage": "رسالة صوتية",
+                                      "online": "متصل",
+                                          "images": "صور",
+                                              "searchForChat": "ابحث عن محادثة",
+                                              "searchForUser": "ابحث عن مستخدم",
+                                              "bio": "السيرة الذاتية",
+                                              "noBio": "لا يوجد سيرة ذاتية",
+                                                  "Offline": "غير متصل"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              
+
+
+
+
+
+
+
+        
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+
+
+
+
