@@ -411,7 +411,10 @@
   "glassTechnician": "فني زجاج",
   "flooringTechnician": "فني أرضيات",
     "documents": "وثائق",
-      "requests": "طلبات"
+      "requests": "طلبات",
+        "noInternet": "لا يوجد اتصال بالانترنت",
+  "noInternetMessage": "تحقق من الخدمة أو قم بالتحديث للمحاولة مرة أخرى.",
+  "retry": "إعادة المحاولة"
 
 
 

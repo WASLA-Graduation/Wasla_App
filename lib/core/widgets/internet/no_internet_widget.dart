@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 
 class NoInternetWidget extends StatelessWidget {
   final VoidCallback onRetry;
@@ -12,14 +13,14 @@ class NoInternetWidget extends StatelessWidget {
         children: [
           const Icon(Icons.wifi_off, size: 80, color: Colors.blue),
           const SizedBox(height: 16),
-          const Text(
-            'No Internet Connection',
+          Text(
+            'noInternet'.tr(context),
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
-          const Text('Check your service or refresh to try again.'),
+          Text('noInternetMessage'.tr(context)),
           const SizedBox(height: 24),
-          ElevatedButton(onPressed: onRetry, child: const Text('Retry')),
+          ElevatedButton(onPressed: onRetry, child: Text('retry'.tr(context))),
         ],
       ),
     );

@@ -110,5 +110,7 @@ abstract class ApiEndPoints {
   static const String getDriverProfile = 'api/Driver/GetDriverProfileById';
   static const String getDriverChart = 'api/Ride/GetDriverChart/';
   static const String driverUpdateProfile = 'api/Driver/UpdateDriverProfile';
-  static const String technicantCompleteInfo = 'api/Technician/CompleteRegister';
+  static const String technicantCompleteInfo =
+      'api/Technician/CompleteRegister';
+  static const String technicantGetProfile = 'api/Technician/GetProfile';
 }

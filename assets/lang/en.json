@@ -411,7 +411,10 @@
   "glassTechnician": "Glass Technician",
   "flooringTechnician": "Flooring Technician",
   "documents": "Documents",
-  "requests": "Requests"
+  "requests": "Requests",
+  "noInternet": "No Internet Connection",
+  "noInternetMessage": "Check your service or refresh to try again.",
+  "retry": "Retry"
 
 
 
