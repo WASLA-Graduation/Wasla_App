@@ -84,4 +84,17 @@ abstract class AuthRepo {
     required List<File> vehicleImages,
     required List<PlatformFile> driverFiles,
   });
+  Future<Either<String, Null>> technicantCompleteInfo({
+    required String email,
+    required String fullName,
+    required String phone,
+    required String bDate,
+    required int experienceYears,
+    required int specialty,
+    required double lng,
+    required double lat,
+    required String description,
+    required File photo,
+    required List<PlatformFile> technicantDocuments,
+  });
 }

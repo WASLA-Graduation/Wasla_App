@@ -399,7 +399,20 @@
   "model": "Model",
   "numberOfRides": "Rides",
   "numberOfDeliveredResident": "Delivered Resident",
-  "amount": "Amount"
+  "amount": "Amount",
+   "plumber": "Plumber",
+  "electrician": "Electrician",
+  "carpenter": "Carpenter",
+  "acTechnician": "AC Technician",
+  "applianceRepair": "Appliance Repair",
+  "painter": "Painter",
+  "satelliteTechnician": "Satellite Technician",
+  "locksmith": "Locksmith",
+  "glassTechnician": "Glass Technician",
+  "flooringTechnician": "Flooring Technician",
+  "documents": "Documents",
+  "requests": "Requests"
+
 
 
 

@@ -21,7 +21,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   final AuthRepo authRepo;
 
-  String role = '';
   final singInformKey = GlobalKey<FormState>();
   final singUpformKey = GlobalKey<FormState>();
   final forgotPassformKey = GlobalKey<FormState>();
@@ -32,6 +31,8 @@ class AuthCubit extends Cubit<AuthState> {
   final resturentInfoformKey = GlobalKey<FormState>();
   final driverInfoformKey = GlobalKey<FormState>();
   final gymInfoformKey = GlobalKey<FormState>();
+  final technicantInfoformKey = GlobalKey<FormState>();
+  String role = '';
   List<File> gymImages = [];
   int selectedColor = -1;
 
@@ -57,6 +58,8 @@ class AuthCubit extends Cubit<AuthState> {
       hosptialName = '',
       vehicleModel = '',
       vehicleNumber = '';
+
+  int technicantSpeciality = -1;
   PlatformFile? file;
   int? spacializationID;
 
@@ -69,11 +72,22 @@ class AuthCubit extends Cubit<AuthState> {
   SignInDataModel? dataModel;
 
   List<PlatformFile> driverFiles = [];
+  List<PlatformFile> technicantDocuments = [];
   VehicleType vehicleType = VehicleType.car;
 
   void updateVehicleType({required VehicleType type}) {
     vehicleType = type;
     emit(AuthUpdate());
+  }
+
+  void updateTechnicantDocuments(List<PlatformFile> files) {
+    technicantDocuments = files;
+    emit(AuthUpdateTechnicantDocuments());
+  }
+
+  void updateTechnicantSpeciality({required int speciality}) {
+    technicantSpeciality = speciality;
+    emit(AuthUpdateTechnicantSpecialization());
   }
 
   void updateVehicleColor({required int color}) {
@@ -408,6 +422,51 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
+  Future<void> technicantCompleteInfo() async {
+    if (technicantSpeciality == -1) {
+      emit(
+        TechnicantCompleteInfoFailure(errMsg: "Please Choose Specialization"),
+      );
+      return;
+    }
+
+    if (residentImage == null) {
+      emit(TechnicantCompleteInfoFailure(errMsg: "Please Choose Image"));
+      return;
+    }
+    if (technicantDocuments.isEmpty) {
+      emit(
+        TechnicantCompleteInfoFailure(
+          errMsg: "Please Choose At Least One Document",
+        ),
+      );
+      return;
+    }
+    emit(AuthTechnicantCompleteInfoLoading());
+    final response = await authRepo.technicantCompleteInfo(
+      email: email,
+      fullName: name,
+      phone: phone,
+      bDate: dateController.text,
+      description: description,
+      lat: lat,
+      lng: lan,
+      experienceYears: int.parse(experienceYears),
+      specialty: technicantSpeciality,
+      technicantDocuments: technicantDocuments,
+      photo: residentImage!,
+    );
+    response.fold(
+      (error) {
+        emit(TechnicantCompleteInfoFailure(errMsg: error));
+      },
+      (success) {
+        resetData();
+        emit(AuthTechnicantCompleteInfoSuccess());
+      },
+    );
+  }
+
   void saveSignInData() async {
     SecureStorageHelper.set(key: ApiKeys.token, value: dataModel!.token);
     // SecureStorageHelper.set(
@@ -424,5 +483,68 @@ class AuthCubit extends Cubit<AuthState> {
     );
 
     await SharedPreferencesHelper.set(key: AppStrings.isSingedIn, value: true);
+  }
+
+  void resetData() {
+    role = '';
+    roleId = '';
+    email = '';
+    password = '';
+    confirmPassword = '';
+    otpCode = '';
+    name = '';
+    phone = '';
+    experienceYears = '';
+    description = '';
+    nationalId = '';
+    universtiyName = '';
+    gymName = '';
+    gymOwnerName = '';
+    gymGmail = '';
+    gymPhones = '';
+    owner = '';
+    ownerPhone = '';
+    resturentName = '';
+    hosptialName = '';
+    vehicleModel = '';
+    vehicleNumber = '';
+
+    selectedColor = -1;
+    technicantSpeciality = -1;
+    lat = 0.0;
+    lan = 0.0;
+    graduationYear = 0.0;
+    spacializationID = null;
+
+    isPasswordVisible = false;
+    enableButton = false;
+
+    dateController.clear();
+    addressController.clear();
+
+    file = null;
+    residentImage = null;
+    resturentImage = null;
+
+    gymImages.clear();
+    roles.clear();
+    doctorSpecialization.clear();
+    driverFiles.clear();
+    technicantDocuments.clear();
+
+    timer?.cancel();
+    timer = null;
+    remainingSeconds = 60;
+
+    dataModel = null;
+
+    vehicleType = VehicleType.car;
+  }
+
+  @override
+  Future<void> close() {
+    dateController.dispose();
+    addressController.dispose();
+    return super.close();
   }
 }

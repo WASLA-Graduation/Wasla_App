@@ -34,6 +34,10 @@ class Assets {
   /// assets/images/camera.png
   static const String assetsImagesCamera = "assets/images/camera.png";
 
+  /// Assets for assetsImagesCameraPhoto
+  /// assets/images/camera_photo.png
+  static const String assetsImagesCameraPhoto = "assets/images/camera_photo.png";
+
   /// Assets for assetsImagesCar
   /// assets/images/car.png
   static const String assetsImagesCar = "assets/images/car.png";
@@ -253,6 +257,14 @@ class Assets {
   /// Assets for assetsImagesPending
   /// assets/images/pending.png
   static const String assetsImagesPending = "assets/images/pending.png";
+
+  /// Assets for assetsImagesPeopleFilled
+  /// assets/images/people_filled.png
+  static const String assetsImagesPeopleFilled = "assets/images/people_filled.png";
+
+  /// Assets for assetsImagesPeopleOutlined
+  /// assets/images/people_outlined.png
+  static const String assetsImagesPeopleOutlined = "assets/images/people_outlined.png";
 
   /// Assets for assetsImagesPeronFilled
   /// assets/images/peronFilled.png

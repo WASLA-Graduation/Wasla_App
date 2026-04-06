@@ -399,7 +399,21 @@
                                               "searchForUser": "ابحث عن مستخدم",
                                               "bio": "السيرة الذاتية",
                                               "noBio": "لا يوجد سيرة ذاتية",
-                                                  "Offline": "غير متصل"
+                                                  "Offline": "غير متصل",
+                                                    "plumber": "سباك",
+  "electrician": "كهربائي",
+  "carpenter": "نجار",
+  "acTechnician": "فني تكييف",
+  "applianceRepair": "تصليح أجهزة",
+  "painter": "نقاش",
+  "satelliteTechnician": "فني دش",
+  "locksmith": "حداد أقفال",
+  "glassTechnician": "فني زجاج",
+  "flooringTechnician": "فني أرضيات",
+    "documents": "وثائق",
+      "requests": "طلبات"
+
+
 
 
 

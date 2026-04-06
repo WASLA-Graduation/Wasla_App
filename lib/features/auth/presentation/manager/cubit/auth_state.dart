@@ -3,7 +3,12 @@ part of 'auth_cubit.dart';
 sealed class AuthState {}
 
 final class AuthInitial extends AuthState {}
+
 final class AuthUpdate extends AuthState {}
+
+final class AuthUpdateTechnicantSpecialization extends AuthState {}
+
+final class AuthUpdateTechnicantDocuments extends AuthState {}
 
 final class AuthSuccessChooseFile extends AuthState {}
 
@@ -75,6 +80,16 @@ final class ResidentCompleteInfoFailure extends AuthState {
   final String errMsg;
 
   ResidentCompleteInfoFailure({required this.errMsg});
+}
+
+final class AuthTechnicantCompleteInfoLoading extends AuthState {}
+
+final class AuthTechnicantCompleteInfoSuccess extends AuthState {}
+
+final class TechnicantCompleteInfoFailure extends AuthState {
+  final String errMsg;
+
+  TechnicantCompleteInfoFailure({required this.errMsg});
 }
 
 final class AuthDoctorCompleteInfoLoading extends AuthState {}

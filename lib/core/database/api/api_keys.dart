@@ -9,6 +9,7 @@ abstract class ApiKeys {
   static const data = 'data';
   static const bio = 'bio';
   static const lan = 'lan';
+  static const documents = 'Documents';
   static const tripId = 'tripId';
   static const driverId = 'driverId';
   static const bookingDate = 'bookingDate';
@@ -22,6 +23,7 @@ abstract class ApiKeys {
   static const images = 'images';
   static const photo = 'photo';
   static const photos = 'photos';
+  static const photoCap = 'Photo';
   static const value = 'value';
   static const gmail = 'gmail';
   static const businessName = 'businessName';
@@ -38,6 +40,7 @@ abstract class ApiKeys {
   static const nationalId = 'NationalId';
   static const body = 'body';
   static const image = 'Image';
+  static const specialty = 'Specialty';
   static const imageSmall = 'image';
   static const birthDay = 'BirthDay';
   static const serviceProviderName = 'serviceProviderName';

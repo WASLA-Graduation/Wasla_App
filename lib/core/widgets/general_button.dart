@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 
 class GeneralButton extends StatelessWidget {
@@ -21,7 +22,8 @@ class GeneralButton extends StatelessWidget {
     return MaterialButton(
       onPressed: onPressed,
       color: color ?? AppColors.primaryColor,
-      minWidth: double.infinity,
+      minWidth: SizeConfig.isMobile? double.infinity : SizeConfig.mobileBreakpoint,
+
       height: height ?? 60,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusGeometry.circular(20),

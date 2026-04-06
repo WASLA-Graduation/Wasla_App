@@ -340,4 +340,51 @@ class AuthRepoImpl extends AuthRepo {
       return Left(e.toString());
     }
   }
+
+  @override
+  Future<Either<String, Null>> technicantCompleteInfo({
+    required String email,
+    required String fullName,
+    required String phone,
+    required String bDate,
+    required int experienceYears,
+    required int specialty,
+    required double lng,
+    required double lat,
+    required String description,
+    required File photo,
+    required List<PlatformFile> technicantDocuments,
+  }) async {
+    try {
+      final formData = FormData.fromMap({
+        ApiKeys.photoCap: await convertImageToMultipart(photo),
+        ApiKeys.documents: await convertPlatformFilesToMultipart(
+          technicantDocuments,
+        ),
+      });
+
+      await api.post(
+        ApiEndPoints.technicantCompleteInfo,
+        queryParameters: {
+          
+          ApiKeys.emailCapital: email,
+          ApiKeys.fullName: fullName,
+          ApiKeys.phone: phone,
+          ApiKeys.birthDay: bDate,
+          ApiKeys.experienceYears: experienceYears,
+          ApiKeys.description: description,
+          ApiKeys.latitude: lat,
+          ApiKeys.longitude: lng,
+          ApiKeys.specialty: specialty + 1,
+        },
+        body: formData,
+        headers: {"Content-Type": "multipart/form-data"},
+      );
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }

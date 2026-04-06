@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
+import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/responsive/size_config.dart';
@@ -54,7 +55,7 @@ class SignUpBody extends StatelessWidget {
                 for (var selectedRole in cubit.roles) {
                   if (selectedRole.id == role) {
                     cubit.role = selectedRole.serviceRole.name;
-
+                    showToast(cubit.roleId);
                     break;
                   }
                 }

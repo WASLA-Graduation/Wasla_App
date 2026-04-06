@@ -20,7 +20,7 @@ String getRightRoute({required ServiceRole role}) {
       return AppRoutes.doctorNavbarScreen;
 
     case ServiceRole.technician:
-      return AppRoutes.residentInfoScreen;
+      return AppRoutes.technicantBottomNavBarScreen;
 
     case ServiceRole.restaurantOwner:
       return AppRoutes.residentInfoScreen;
@@ -41,7 +41,7 @@ String getRightCompleteServiceRoute({required ServiceRole role}) {
       return AppRoutes.doctorInfoScreen;
 
     case ServiceRole.technician:
-      return AppRoutes.residentInfoScreen;
+      return AppRoutes.technicantCompleteInfoScreen;
 
     case ServiceRole.restaurantOwner:
       return AppRoutes.residentInfoScreen;

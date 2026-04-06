@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/connection/network_info.dart';
+import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
+import 'package:wasla/core/utils/app_strings.dart';
 part 'network_state.dart';
 
 class NetworkCubit extends Cubit<NetworkState> {
@@ -15,13 +17,18 @@ class NetworkCubit extends Cubit<NetworkState> {
 
   void listenToNetwork() {
     _subscription = networkInfo.onConnectivityChanged.listen((isConnected) {
-      if (isFirstCheck) {
-        isFirstCheck = false;
-        if (!isConnected) {
-          emit(NetworkDisconnected());
+      final bool isSignIn =
+          SharedPreferencesHelper.get(key: AppStrings.isSingedIn) as bool? ??
+          false;
+      if (isSignIn) {
+        if (isFirstCheck) {
+          isFirstCheck = false;
+          if (!isConnected) {
+            emit(NetworkDisconnected());
+          }
+        } else {
+          isConnected ? emit(NetworkConnected()) : emit(NetworkDisconnected());
         }
-      } else {
-        isConnected ? emit(NetworkConnected()) : emit(NetworkDisconnected());
       }
     });
   }

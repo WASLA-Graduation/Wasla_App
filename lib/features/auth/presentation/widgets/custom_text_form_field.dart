@@ -61,6 +61,7 @@ class CustomTextFormField extends StatelessWidget {
           keyboardType: keyboardTyp,
           cursorColor: AppColors.primaryColor,
           onTap: onTap,
+          onTapOutside: (event) => FocusScope.of(context).unfocus(),
           onChanged: onChanged,
           validator: validator,
           obscureText: isSecure ?? false,

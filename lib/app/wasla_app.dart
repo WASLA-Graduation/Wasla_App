@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/go_router.dart';
 import 'package:wasla/core/config/themes/app_theme.dart';
@@ -26,24 +27,29 @@ class WaslaApp extends StatelessWidget {
           changeThemeStatusBar(globalCubit.themeMode);
           // SharedPreferencesHelper.remove(key: AppStrings.onboardingVisited);
 
-          return MaterialApp.router(
-            scaffoldMessengerKey: scaffoldMessangerKey,
-            routerConfig: appRouter,
-            // navigatorKey: navigatorKey,
-            supportedLocales: const [Locale('ar'), Locale('en')],
-            localizationsDelegates: _getDelegates,
-            locale: globalCubit.locale,
-            title: AppStrings.appName,
-            debugShowCheckedModeBanner: false,
-            theme: AppThemes.lightTheme(context),
-            darkTheme: AppThemes.darkTheme(context),
-            themeMode: globalCubit.themeMode,
-            builder: (context, child) =>
-                NetworkAwareWrapper(child: child ?? const SizedBox()),
+          return ScreenUtilInit(
+            designSize: const Size(375, 812),
+            builder: (context, child) {
+              return MaterialApp.router(
+                scaffoldMessengerKey: scaffoldMessangerKey,
+                routerConfig: appRouter,
+                // navigatorKey: navigatorKey,
+                supportedLocales: const [Locale('ar'), Locale('en')],
+                localizationsDelegates: _getDelegates,
+                locale: globalCubit.locale,
+                title: AppStrings.appName,
+                debugShowCheckedModeBanner: false,
+                theme: AppThemes.lightTheme(context),
+                darkTheme: AppThemes.darkTheme(context),
+                themeMode: globalCubit.themeMode,
+                builder: (context, child) =>
+                    NetworkAwareWrapper(child: child ?? const SizedBox()),
 
-            // initialRoute: handleInitialRoute(),
-            // home: Disha(),
-            // onGenerateRoute: AppRouter.onGenerateRoute,
+                // initialRoute: handleInitialRoute(),
+                // home: Disha(),
+                // onGenerateRoute: AppRouter.onGenerateRoute,
+              );
+            },
           );
         },
       ),

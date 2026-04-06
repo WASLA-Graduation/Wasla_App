@@ -1,5 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/features/auth/presentation/views/technicant_complete_info_view.dart';
+import 'package:wasla/features/technicant/features/home/presentation/views/technicant_bottom_nav_bar_view.dart';
 import 'package:wasla/randoms/animation_test.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/functions/handle_initial_route.dart';
@@ -86,7 +88,7 @@ final GoRouter appRouter = GoRouter(
   navigatorKey: navigatorKey,
 
   initialLocation: handleInitialRoute(),
-  // initialLocation: AppRoutes.downloadTestScreen,
+  // initialLocation: AppRoutes.technicantCompleteInfoScreen,
   redirect: (context, state) {
     if (state.uri.toString().contains('wasla://payment/success')) {
       return AppRoutes.paymentSuccessScreen;
@@ -457,6 +459,18 @@ final GoRouter appRouter = GoRouter(
         final DriverProfileModel driverProfileModel =
             state.extra as DriverProfileModel;
         return DriverProfileInfoPage(driver: driverProfileModel);
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.technicantCompleteInfoScreen,
+      builder: (context, state) {
+        return TechnicantCompleteInfoView();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.technicantBottomNavBarScreen,
+      builder: (context, state) {
+        return TechnicantBottomNavBarView();
       },
     ),
   ],

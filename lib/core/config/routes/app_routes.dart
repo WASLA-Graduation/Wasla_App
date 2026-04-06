@@ -70,4 +70,6 @@ abstract class AppRoutes {
   static const String chatUserProfileScreen = '/chatUserProfileScreen';
   static const String animationTestScreen = '/animationTestScreen';
   static const String downloadTestScreen = '/downloadTestScreen';
+  static const String technicantCompleteInfoScreen = '/technicantCompleteInfoScreen';
+  static const String technicantBottomNavBarScreen = '/technicantBottomNavBarScreen';
 }
