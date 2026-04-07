@@ -9,6 +9,7 @@ import 'package:wasla/core/enums/service_role.dart';
 import 'package:wasla/core/functions/get_service_role.dart';
 import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/models/user_base_model.dart';
+import 'package:wasla/core/repo/global_repo.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
 import 'package:wasla/features/driver/features/home/data/models/driver_profile_model.dart';
 import 'package:wasla/features/profile/data/models/gym_model.dart';
@@ -174,8 +175,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       case ServiceRole.doctor:
         return await profileRepo.getDoctorProfile(userId: userId);
       case ServiceRole.technician:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        return await GlobalRepo.getTechnicianProfile(technicianId: userId);
       case ServiceRole.restaurantOwner:
         // TODO: Handle this case.
         throw UnimplementedError();

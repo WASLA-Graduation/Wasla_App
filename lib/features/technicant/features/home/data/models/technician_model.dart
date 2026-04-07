@@ -1,4 +1,6 @@
-class TechnicianModel {
+import 'package:wasla/core/models/user_base_model.dart';
+
+class TechnicianModel extends UserBaseModel {
   final String email;
   final String fullName;
   final String phone;
@@ -27,7 +29,14 @@ class TechnicianModel {
     required this.documentsUrls,
     required this.rate,
     required this.isAvailable,
-  });
+  }) : super(
+         fullNameBase: fullName,
+         emailBase: email,
+         phoneNumberBase: phone,
+         imageUrlBase: profilePhotoUrl,
+         latBase: latitude,
+         lngBase: longitude,
+       );
 
   factory TechnicianModel.fromJson(Map<String, dynamic> json) {
     return TechnicianModel(

@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/database/api/api_consumer.dart';
+import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/bottom_nav_bar/custom_bottom_nav_bar.dart';
+import 'package:wasla/features/chat/presentation/views/last_users_viwe.dart';
+import 'package:wasla/features/profile/presentation/views/profile_view.dart';
+import 'package:wasla/features/technicant/features/booking/data/repo/technician_bookings_repo_impl.dart';
+import 'package:wasla/features/technicant/features/booking/presentation/manager/cubit/technician_booking_cubit.dart';
+import 'package:wasla/features/technicant/features/booking/presentation/views/technician_bookings_view.dart';
 import 'package:wasla/features/technicant/features/home/presentation/manager/cubit/technicant_dashboard_cubit.dart';
 import 'package:wasla/features/technicant/features/home/presentation/views/technician_dashboard_view.dart';
 
@@ -13,9 +20,9 @@ class TechnicantBottomNavBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TechnicantDashboardCubit, TechnicantDashboardState>(
+      buildWhen: (previous, current) => current is ChangeBottomNavBarIndexState,
       builder: (context, state) {
         final cubit = context.read<TechnicantDashboardCubit>();
-
         return Scaffold(
           body: screens[cubit.bottomNabBarIndex],
           bottomNavigationBar: CustomBottomNavBar(
@@ -41,9 +48,15 @@ class TechnicantBottomNavBarView extends StatelessWidget {
 
   static List<Widget> screens = [
     TechnicianDashboardView(),
-    Container(),
-    Container(),
-    Container(),
+    BlocProvider(
+      lazy: true,
+      create: (context) => TechnicianBookingCubit(
+        TechnicianBookingsRepoImpl(api: sl<ApiConsumer>()),
+      ),
+      child: TechnicianBookingsView(),
+    ),
+    LastUsersViwe(),
+    ProfileView(),
   ];
 
   List<String> getTitles(BuildContext context) => [
