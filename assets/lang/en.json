@@ -194,6 +194,8 @@
     "bookingCaceledSuccess": "Booking Canceled Successfully",
     "bookingAcceptedSuccess": "Booking Accepted Successfully",
     "noBookings": "You don't have bookings yet.",
+    "birthday": "Birth Day",
+    "years": "years",
     "upComing": "Upcoming",
     "completed": "Completed",
     "cancelled": "Cancelled",
