@@ -416,7 +416,9 @@
   "noInternetMessage": "تحقق من الخدمة أو قم بالتحديث للمحاولة مرة أخرى.",
   "retry": "إعادة المحاولة",
     "location": "الموقع",
-  "changeLocation": "تغيير الموقع"
+  "changeLocation": "تغيير الموقع",
+    "pageNotFound": "الصفحة غير موجودة",
+  "technicalProblem": "يوجد شمكلة تقنية قم بالتحديث"
 
 
 

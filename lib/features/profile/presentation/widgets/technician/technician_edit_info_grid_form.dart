@@ -41,6 +41,7 @@ class TechnicianEditInfoGridForm extends StatelessWidget {
               children: [
                 Expanded(
                   child: CustomTextFormField(
+                    initealValue: technicianModel.fullName,
                     withTitle: true,
                     title: 'fullName'.tr(context),
                     hint: "fullName".tr(context),
@@ -50,6 +51,7 @@ class TechnicianEditInfoGridForm extends StatelessWidget {
                 ),
                 Expanded(
                   child: CustomTextFormField(
+                    initealValue: technicianModel.phone,
                     keyboardTyp: TextInputType.phone,
                     withTitle: true,
                     title: 'phoneNumber'.tr(context),
@@ -65,6 +67,7 @@ class TechnicianEditInfoGridForm extends StatelessWidget {
               children: [
                 Expanded(
                   child: CustomTextFormField(
+                    initealValue: technicianModel.experienceYears.toString(),
                     withTitle: true,
                     title: 'experience'.tr(context),
                     keyboardTyp: TextInputType.number,
@@ -76,6 +79,7 @@ class TechnicianEditInfoGridForm extends StatelessWidget {
                 ),
                 Expanded(
                   child: CustomTextFormField(
+                    initealValue: technicianModel.description,
                     withTitle: true,
                     title: 'description'.tr(context),
                     hint: "description".tr(context),

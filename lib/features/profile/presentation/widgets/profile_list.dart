@@ -20,11 +20,13 @@ class ProfileList extends StatelessWidget {
       itemBuilder: (context, index) => InkWell(
         onTap: () {
           if (index == 5) return;
-          if ((index == 0 || index == 1) && cubit.user != null) {
-            context.pushScreen(
-              ProfileItemModel.items[index].route,
-              arguments: cubit.user,
-            );
+          if ((index == 0 || index == 1)) {
+            if (cubit.user != null) {
+              context.pushScreen(
+                ProfileItemModel.items[index].route,
+                arguments: cubit.user,
+              );
+            }
           } else {
             context.pushScreen(ProfileItemModel.items[index].route);
           }

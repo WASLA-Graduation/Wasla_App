@@ -148,7 +148,6 @@ class ProfileCubit extends Cubit<ProfileState> {
       (success) async {
         await getUserProfile();
         _resetsVariables();
-
         emit(ProfileUpdateInfoSuccess());
       },
     );

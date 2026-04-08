@@ -44,12 +44,13 @@ abstract class GlobalRepo {
     }
   }
 
-static  Future<Either<Failure, TechnicianModel>> getTechnicianProfile({
+  static Future<Either<Failure, TechnicianModel>> getTechnicianProfile({
     required String technicianId,
   }) async {
     try {
       if (!await sl<NetworkInfo>().isConnected) {
-        return Left(NoInternetFailure());
+        // return Left(NoInternetFailure());
+        return Left(ServerFailure('err'));
       }
 
       final response = await sl<ApiConsumer>().get(

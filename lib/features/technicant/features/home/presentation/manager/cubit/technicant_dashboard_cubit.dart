@@ -29,6 +29,8 @@ class TechnicantDashboardCubit extends Cubit<TechnicantDashboardState> {
     result.fold((failure) {
       if (failure is NoInternetFailure) {
         emit(TechnicianNetworkState());
+      } else {
+        emit(TechnicianErrorState());
       }
     }, (profile) => emit(TechnicianGetProfile(technician: profile)));
   }
