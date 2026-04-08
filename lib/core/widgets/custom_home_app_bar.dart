@@ -5,6 +5,7 @@ import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/cached_network_image_widget.dart';
 import 'package:wasla/features/notifications/presentation/cubit/notification_cubit.dart';
@@ -39,7 +40,9 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    final cubit=context.read<NotificationCubit>();
+    final bool isTablet = SizeConfig.isTablet;
+    final double imageSize = isTablet?70:44;
+    final cubit = context.read<NotificationCubit>();
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: widget.isLoading
@@ -47,8 +50,8 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
           : ClipOval(
               child: CustomCachedNetworkImage(
                 imageUrl: widget.imageUrl ?? '',
-                height: 44,
-                width: 44,
+                height: imageSize,
+                width: imageSize,
                 fit: BoxFit.cover,
               ),
             ),
@@ -86,7 +89,9 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
                     Positioned(
                       right: 0,
                       child: Container(
-                        padding:  EdgeInsets.all(cubit.totoalLastSeenNotifications<10?4:2),
+                        padding: EdgeInsets.all(
+                          cubit.totoalLastSeenNotifications < 10 ? 4 : 2,
+                        ),
                         decoration: const BoxDecoration(
                           color: Colors.red,
                           shape: BoxShape.circle,
@@ -96,9 +101,11 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
                               .read<NotificationCubit>()
                               .totoalLastSeenNotifications
                               .toString(),
-                          style:  TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
-                            fontSize:cubit.totoalLastSeenNotifications<10?12: 10,
+                            fontSize: cubit.totoalLastSeenNotifications < 10
+                                ? 12
+                                : 10,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -149,8 +156,9 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
   }
 
   CircleAvatar _buildCircleAvatarLoading() {
-    return const CircleAvatar(
-      radius: 22,
+    
+    return  CircleAvatar(
+      radius:SizeConfig.isMobile?35:22 ,
       backgroundImage: AssetImage(Assets.assetsImagesMale),
     );
   }
