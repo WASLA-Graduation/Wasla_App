@@ -18,7 +18,7 @@ class TechnicianEditInfoListForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
-    return BlocConsumer<ProfileCubit, ProfileState>(
+    return BlocListener<ProfileCubit, ProfileState>(
       listener: (context, state) {
         if (state is ProfileUpdateInfoFailure) {
           toastAlert(color: AppColors.error, msg: state.errMsg);
@@ -29,68 +29,66 @@ class TechnicianEditInfoListForm extends StatelessWidget {
           );
         }
       },
-      builder: (context, state) {
-        return Form(
-          key: cubit.technicainFormKey,
-          child: Column(
-            spacing: 10.h,
-            children: [
-              CustomTextFormField(
-                initealValue: technicianModel.fullName,
-                withTitle: true,
-                title: "fullName".tr(context),
-                hint: "fullName".tr(context),
-                onChanged: (name) => cubit.fullName = name,
-                validator: (value) => validateSimpleData(value, context),
+      child: Form(
+        key: cubit.technicainFormKey,
+        child: Column(
+          spacing: 10.h,
+          children: [
+            CustomTextFormField(
+              initealValue: technicianModel.fullName,
+              withTitle: true,
+              title: "fullName".tr(context),
+              hint: "fullName".tr(context),
+              onChanged: (name) => cubit.fullName = name,
+              validator: (value) => validateSimpleData(value, context),
+            ),
+            CustomTextFormField(
+              initealValue: technicianModel.phone,
+              withTitle: true,
+              title: "phoneNumber".tr(context),
+              keyboardTyp: TextInputType.phone,
+              hint: "phoneNumber".tr(context),
+              onChanged: (phone) => cubit.phoneNumber = phone,
+              validator: (value) => validatePhone2(value, context),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "address".tr(context),
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
-              CustomTextFormField(
-                initealValue: technicianModel.phone,
-                withTitle: true,
-                title: "phoneNumber".tr(context),
-                keyboardTyp: TextInputType.phone,
-                hint: "phoneNumber".tr(context),
-                onChanged: (phone) => cubit.phoneNumber = phone,
-                validator: (value) => validatePhone2(value, context),
+            ),
+            const SizedBox(height: 10),
+            InkWell(
+              onTap: () {
+                context.pushScreen(AppRoutes.authMapScreen);
+              },
+              child: Image.asset(
+                Assets.assetsImagesLocation,
+                fit: BoxFit.cover,
               ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "address".tr(context),
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ),
-              const SizedBox(height: 10),
-              InkWell(
-                onTap: () {
-                  context.pushScreen(AppRoutes.authMapScreen);
-                },
-                child: Image.asset(
-                  Assets.assetsImagesLocation,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              CustomTextFormField(
-                initealValue: technicianModel.experienceYears.toString(),
-                withTitle: true,
-                title: "experience".tr(context),
-                keyboardTyp: TextInputType.number,
-                hint: "experience".tr(context),
-                onChanged: (years) => cubit.experienceYears = int.parse(years),
-                validator: (value) => validateSimpleData(value, context),
-              ),
-              CustomTextFormField(
-                initealValue: technicianModel.description,
-                withTitle: true,
-                title: "description".tr(context),
-                onChanged: (description) => cubit.description = description,
-                validator: (value) => validateSimpleData(value, context),
-                minLines: 1,
-                maxLines: 5,
-              ),
-            ],
-          ),
-        );
-      },
+            ),
+            CustomTextFormField(
+              initealValue: technicianModel.experienceYears.toString(),
+              withTitle: true,
+              title: "experience".tr(context),
+              keyboardTyp: TextInputType.number,
+              hint: "experience".tr(context),
+              onChanged: (years) => cubit.experienceYears = int.parse(years),
+              validator: (value) => validateSimpleData(value, context),
+            ),
+            CustomTextFormField(
+              initealValue: technicianModel.description,
+              withTitle: true,
+              title: "description".tr(context),
+              onChanged: (description) => cubit.description = description,
+              validator: (value) => validateSimpleData(value, context),
+              minLines: 1,
+              maxLines: 5,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

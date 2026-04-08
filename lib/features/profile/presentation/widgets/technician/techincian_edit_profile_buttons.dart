@@ -15,34 +15,47 @@ class TechnicainEditProfileButttons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return isTablet
-        ? Row(children: _buildButtons(context))
-        : Column(children: _buildButtons(context));
+        ? Row(
+            children: [
+              Expanded(child: _buildUpdateButton()),
+              SizedBox(width: 20.w),
+              Expanded(child: _buildChangePassButton(context)),
+            ],
+          )
+        : Column(
+            children: [
+              _buildChangePassButton(context),
+
+              SizedBox(height: 20.h),
+              _buildUpdateButton(),
+            ],
+          );
   }
 
-  List<Widget> _buildButtons(BuildContext context) {
-    return [
-      GeneralButton(
-        onPressed: () {
-          context.pushScreen(AppRoutes.accountChangePassScreen);
-        },
-        text: "change_password".tr(context),
-      ),
-      isTablet ? SizedBox(width: 20.w) : SizedBox(height: 20.h),
-      BlocBuilder<ProfileCubit, ProfileState>(
-        builder: (context, state) {
-          final cubit = context.read<ProfileCubit>();
-          return GeneralButton(
-            onPressed: () {
-              if (cubit.technicainFormKey.currentState!.validate()) {
-                cubit.updateUsertInfo();
-              }
-            },
-            text: state is ProfileUpdateInfoLoading
-                ? "loading".tr(context)
-                : "update".tr(context),
-          );
-        },
-      ),
-    ];
+  BlocBuilder<ProfileCubit, ProfileState> _buildUpdateButton() {
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      builder: (context, state) {
+        final cubit = context.read<ProfileCubit>();
+        return GeneralButton(
+          onPressed: () {
+            if (cubit.technicainFormKey.currentState!.validate()) {
+              cubit.updateUsertInfo();
+            }
+          },
+          text: state is ProfileUpdateInfoLoading
+              ? "loading".tr(context)
+              : "update".tr(context),
+        );
+      },
+    );
+  }
+
+  GeneralButton _buildChangePassButton(BuildContext context) {
+    return GeneralButton(
+      onPressed: () {
+        context.pushScreen(AppRoutes.accountChangePassScreen);
+      },
+      text: "change_password".tr(context),
+    );
   }
 }
