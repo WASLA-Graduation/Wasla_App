@@ -9,29 +9,35 @@ class TechnicianBookingCancelOrAcceptButton extends StatelessWidget {
     required this.onTap,
     required this.color,
     required this.text,
+    required this.isCancel,
   });
 
   final VoidCallback onTap;
   final Color color;
   final String text;
+  final bool isCancel;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        showModalBottomSheet(
-          context: context,
-          builder: (_) => CustomBottomSheetConfirmWidget(
-            cancelText: 'cancel'.tr(context),
-            confirmText: 'confirm'.tr(context),
-            onConfirm: () {
-              Navigator.pop(context);
-              onTap();
-            },
-            title: 'cancelBooking'.tr(context),
-            description: 'areYouSureCancel'.tr(context),
-          ),
-        );
+        if (isCancel) {
+          showModalBottomSheet(
+            context: context,
+            builder: (_) => CustomBottomSheetConfirmWidget(
+              cancelText: 'cancel'.tr(context),
+              confirmText: 'confirm'.tr(context),
+              onConfirm: () {
+                Navigator.pop(context);
+                onTap();
+              },
+              title: 'cancelBooking'.tr(context),
+              description: 'areYouSureCancel'.tr(context),
+            ),
+          );
+        } else {
+          onTap();
+        }
       },
       child: Container(
         width: 60,

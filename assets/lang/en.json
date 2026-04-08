@@ -192,6 +192,7 @@
     "areYouSureCancel": "Are you sure you want to cancel this booking?",
     "bookingSuccess": "Booking Update Successfully",
     "bookingCaceledSuccess": "Booking Canceled Successfully",
+    "bookingAcceptedSuccess": "Booking Accepted Successfully",
     "noBookings": "You don't have bookings yet.",
     "upComing": "Upcoming",
     "completed": "Completed",
@@ -423,7 +424,9 @@
   "pending": "Pending",
   "accepted": "Accepted",
   "accept": "Accept",
-  "rejected": "Rejected"
+  "rejected": "Rejected",
+  "noBookingsMsg": "You have no bookings at the moment,\n new ones will appear here"
+
 
 
 

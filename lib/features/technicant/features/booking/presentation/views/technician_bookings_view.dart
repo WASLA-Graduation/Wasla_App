@@ -59,5 +59,8 @@ class _TechnicianBookingsViewState extends State<TechnicianBookingsView> {
     );
   }
 
-  void getMyBookings() {}
+  void getMyBookings() {
+    final cubit = context.read<TechnicianBookingCubit>();
+    cubit.getBookings();
+  }
 }
