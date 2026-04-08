@@ -78,4 +78,17 @@ abstract class ProfileRepo {
     List<PlatformFile>? files,
     List<File>? carImages,
   });
+  Future<Either<String, Null>> technicianUpdateProfile({
+    required String id,
+    required String fullName,
+    required String phone,
+    required String bDate,
+    required int experienceYears,
+    required int specialty,
+    required double lng,
+    required double lat,
+    required String description,
+    File? photo,
+    List<PlatformFile>? technicantDocuments,
+  });
 }

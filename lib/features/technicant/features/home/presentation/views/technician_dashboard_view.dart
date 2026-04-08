@@ -24,10 +24,17 @@ class _TechnicianDashboardViewState extends State<TechnicianDashboardView> {
     return Scaffold(
       body: SafeArea(
         child: BlocBuilder<TechnicantDashboardCubit, TechnicantDashboardState>(
-          buildWhen: (previous, current) => current is TechnicianNetworkState,
+          buildWhen: (previous, current) =>
+              current is TechnicianNetworkState ||
+              current is TechnicianOnRetryState,
           builder: (context, state) {
             return state is TechnicianNetworkState
-                ? NoInternetWidget(onRetry: getDataOfScreen)
+                ? NoInternetWidget(
+                    onRetry: () {
+                      context.read<TechnicantDashboardCubit>().whenRetry();
+                      getDataOfScreen();
+                    },
+                  )
                 : TechincianDashboardBody();
           },
         ),

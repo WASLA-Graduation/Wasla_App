@@ -13,3 +13,4 @@ final class TechnicianGetProfile extends TechnicantDashboardState {
 }
 
 final class TechnicianNetworkState extends TechnicantDashboardState {}
+final class TechnicianOnRetryState extends TechnicantDashboardState {}

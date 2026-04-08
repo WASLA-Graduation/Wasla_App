@@ -16,7 +16,7 @@ class _TechincianDashboardBodyState extends State<TechincianDashboardBody> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
       children: [TechnicianDahsboardAppBar()],
     );
   }

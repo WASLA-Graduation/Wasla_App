@@ -14,6 +14,7 @@ import 'package:wasla/features/doctor_service/features/home/data/models/doctor_m
 import 'package:wasla/features/driver/features/home/data/models/driver_profile_model.dart';
 import 'package:wasla/features/profile/data/models/gym_model.dart';
 import 'package:wasla/features/profile/data/repo/profile_repo.dart';
+import 'package:wasla/features/technicant/features/home/data/models/technician_model.dart';
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
@@ -40,16 +41,29 @@ class ProfileCubit extends Cubit<ProfileState> {
   double lat = 0, lng = 0;
   bool isPasswordVisible = false;
   UserBaseModel? user;
+  List<PlatformFile> technicantDocuments = [];
 
   final residentFormKey = GlobalKey<FormState>();
   final changePassFormKey = GlobalKey<FormState>();
   final gymFormKey = GlobalKey<FormState>();
   final driverFormKey = GlobalKey<FormState>();
+  final technicainFormKey = GlobalKey<FormState>();
   File? image;
   List<File> images = [];
   List<PlatformFile> files = [];
   VehicleType vehicleType = VehicleType.car;
   int vehicleColor = -1;
+  int technicainSpecialityId = -1;
+
+  void updateTechnicantDocuments(List<PlatformFile> documents) {
+    technicantDocuments = documents;
+    emit(ProfileUpdateTechnicantDocuments());
+  }
+
+  void updateTechnicianSpeciality({required int specialityId}) {
+    technicainSpecialityId = specialityId;
+    emit(ProfileUpdateTechnicantSpecialization());
+  }
 
   void updateVehicleColor(int color) {
     vehicleColor = color;
@@ -163,7 +177,9 @@ class ProfileCubit extends Cubit<ProfileState> {
     vehicleNumber = '';
     vehicleType = VehicleType.car;
     vehicleColor = -1;
+    technicainSpecialityId = -1;
     files = [];
+    technicantDocuments = [];
   }
 
   _getRightProfileAccordingToRole({required String userId}) async {
@@ -241,8 +257,26 @@ class ProfileCubit extends Cubit<ProfileState> {
         );
 
       case ServiceRole.technician:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        final technician = user as TechnicianModel;
+        return await profileRepo.technicianUpdateProfile(
+          fullName: fullName.isEmpty ? technician.fullNameBase : fullName,
+          phone: phoneNumber.isEmpty ? technician.phoneNumberBase : phoneNumber,
+          lat: lat == 0 ? technician.latitude : lat,
+          lng: lng == 0 ? technician.longitude : lng,
+          photo: image,
+          id: userId,
+          experienceYears: experienceYears == 0
+              ? technician.experienceYears
+              : experienceYears,
+          specialty: technicainSpecialityId == -1
+              ? technician.specialty
+              : technicainSpecialityId,
+          technicantDocuments: technicantDocuments,
+          bDate: technician.birthDay,
+          description: description.isEmpty
+              ? technician.description
+              : description,
+        );
       case ServiceRole.restaurantOwner:
         // TODO: Handle this case.
         throw UnimplementedError();

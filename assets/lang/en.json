@@ -414,7 +414,9 @@
   "requests": "Requests",
   "noInternet": "No Internet Connection",
   "noInternetMessage": "Check your service or refresh to try again.",
-  "retry": "Retry"
+  "retry": "Retry",
+  "location": "Location",
+  "changeLocation": "Change Location"
 
 
 

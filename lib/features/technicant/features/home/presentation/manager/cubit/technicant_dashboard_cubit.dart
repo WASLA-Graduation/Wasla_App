@@ -14,6 +14,10 @@ class TechnicantDashboardCubit extends Cubit<TechnicantDashboardState> {
 
   int bottomNabBarIndex = 0;
 
+  void whenRetry() {
+    emit(TechnicianOnRetryState());
+  }
+
   void changeBottomNavBarIndex(int index) {
     bottomNabBarIndex = index;
     emit(ChangeBottomNavBarIndexState());

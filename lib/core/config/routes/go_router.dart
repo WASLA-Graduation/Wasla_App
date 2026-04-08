@@ -1,6 +1,9 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/features/auth/presentation/views/technicant_complete_info_view.dart';
+import 'package:wasla/features/profile/presentation/views/technician_edit_profile.dart';
+import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
+import 'package:wasla/features/technicant/features/home/data/models/technician_model.dart';
 import 'package:wasla/features/technicant/features/home/presentation/views/technicant_bottom_nav_bar_view.dart';
 import 'package:wasla/randoms/animation_test.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
@@ -471,6 +474,20 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.technicantBottomNavBarScreen,
       builder: (context, state) {
         return TechnicantBottomNavBarView();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.technicantInfoScreen,
+      builder: (context, state) {
+        final TechnicianModel technician = state.extra as TechnicianModel;
+        return TechnicianProfileInfo(technician: technician);
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.technicantEditProfileScreen,
+      builder: (context, state) {
+        final TechnicianModel technician = state.extra as TechnicianModel;
+        return TechnicianEditProfile(technician: technician);
       },
     ),
   ],

@@ -42,7 +42,6 @@ class TechnicantCompleteInfoBody extends StatelessWidget {
             );
           },
         ),
-
         SizedBox(height: 20.h),
       ],
     );

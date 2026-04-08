@@ -3,15 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/widgets/choose_many_files_widget.dart';
-import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import 'package:wasla/features/auth/presentation/widgets/technicant/technicant_speciallity_widget.dart';
+import 'package:wasla/features/profile/presentation/manager/cubit/profile_cubit.dart';
 
-class TechnicantInfoSelectSpecialization extends StatelessWidget {
-  const TechnicantInfoSelectSpecialization({super.key, required this.isTablet});
+class TechnicianEditSpecializationSelect extends StatelessWidget {
+  const TechnicianEditSpecializationSelect({
+    super.key,
+    required this.isTablet,
+    required this.selectedSpecialization,
+  });
+
   final bool isTablet;
+  final int selectedSpecialization;
+
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<AuthCubit>();
+    final cubit = context.read<ProfileCubit>();
     return isTablet
         ? Row(
             spacing: 20.h,
@@ -25,15 +32,16 @@ class TechnicantInfoSelectSpecialization extends StatelessWidget {
                       "specialty".tr(context),
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
-                    BlocBuilder<AuthCubit, AuthState>(
+                    BlocBuilder<ProfileCubit, ProfileState>(
                       buildWhen: (previous, current) =>
-                          current is AuthUpdateTechnicantSpecialization,
+                          current is ProfileUpdateTechnicantSpecialization,
                       builder: (context, state) {
-                        final cubit = context.read<AuthCubit>();
+                        final cubit = context.read<ProfileCubit>();
                         return TechnicantSpecialityWidget(
+                          initialValue: (selectedSpecialization - 1).toString(),
                           onSelect: (specialty) {
-                            cubit.updateTechnicantSpeciality(
-                              speciality: int.parse(specialty),
+                            cubit.updateTechnicianSpeciality(
+                              specialityId: int.parse(specialty),
                             );
                           },
                         );
@@ -42,9 +50,9 @@ class TechnicantInfoSelectSpecialization extends StatelessWidget {
                   ],
                 ),
               ),
-              BlocBuilder<AuthCubit, AuthState>(
+              BlocBuilder<ProfileCubit, ProfileState>(
                 buildWhen: (prev, current) =>
-                    current is AuthUpdateTechnicantDocuments,
+                    current is ProfileUpdateTechnicantDocuments,
                 builder: (context, state) {
                   return Expanded(
                     child: Column(
@@ -56,7 +64,7 @@ class TechnicantInfoSelectSpecialization extends StatelessWidget {
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         ChooseManyFilesWidget(
-                          files: cubit.driverFiles,
+                          files: cubit.technicantDocuments,
                           hintText: "documents".tr(context),
                           onFilesSelected: (files) {
                             cubit.updateTechnicantDocuments(files);
@@ -72,23 +80,24 @@ class TechnicantInfoSelectSpecialization extends StatelessWidget {
         : Column(
             spacing: 20.h,
             children: [
-              BlocBuilder<AuthCubit, AuthState>(
+              BlocBuilder<ProfileCubit, ProfileState>(
                 buildWhen: (previous, current) =>
-                    current is AuthUpdateTechnicantSpecialization,
+                    current is ProfileUpdateTechnicantSpecialization,
                 builder: (context, state) {
-                  final cubit = context.read<AuthCubit>();
+                  final cubit = context.read<ProfileCubit>();
                   return TechnicantSpecialityWidget(
+                    initialValue: (selectedSpecialization - 1).toString(),
                     onSelect: (specialty) {
-                      cubit.updateTechnicantSpeciality(
-                        speciality: int.parse(specialty),
+                      cubit.updateTechnicianSpeciality(
+                        specialityId: int.parse(specialty),
                       );
                     },
                   );
                 },
               ),
-              BlocBuilder<AuthCubit, AuthState>(
+              BlocBuilder<ProfileCubit, ProfileState>(
                 buildWhen: (prev, current) =>
-                    current is AuthUpdateTechnicantDocuments,
+                    current is ProfileUpdateTechnicantDocuments,
                 builder: (context, state) {
                   return ChooseManyFilesWidget(
                     files: cubit.technicantDocuments,

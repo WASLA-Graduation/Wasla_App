@@ -91,6 +91,7 @@ abstract class ApiKeys {
   static const english = 'english';
   static const arabic = 'arabic';
   static const profilePhoto = 'profilePhoto';
+  static const profilePhotoCap = 'ProfilePhoto';
   static const serviceId = 'serviceId';
   static const serviceIdCapital = 'ServiceID';
   static const hospitalName = 'hospitalName';

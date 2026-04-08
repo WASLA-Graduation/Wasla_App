@@ -270,4 +270,50 @@ class ProfileRepoImpl extends ProfileRepo {
       return Left(e.errorModel.errorMessage);
     }
   }
+
+  @override
+  Future<Either<String, Null>> technicianUpdateProfile({
+    required String id,
+    required String fullName,
+    required String phone,
+    required String bDate,
+    required int experienceYears,
+    required int specialty,
+    required double lng,
+    required double lat,
+    required String description,
+    File? photo,
+    List<PlatformFile>? technicantDocuments,
+  }) async {
+    try {
+      final formData = FormData.fromMap({
+        ApiKeys.profilePhotoCap: await convertImageToMultipart(photo),
+        ApiKeys.documents: technicantDocuments == null
+            ? null
+            : await convertPlatformFilesToMultipart(technicantDocuments),
+      });
+
+      await api.put(
+        ApiEndPoints.technicantUpdateProfile,
+        queryParameters: {
+          ApiKeys.id: id,
+          ApiKeys.fullName: fullName,
+          ApiKeys.phone: phone,
+          ApiKeys.birthDay: bDate,
+          ApiKeys.experienceYears: experienceYears,
+          ApiKeys.description: description,
+          ApiKeys.latitude: lat,
+          ApiKeys.longitude: lng,
+          ApiKeys.specialty: specialty,
+        },
+        body: formData,
+        headers: {"Content-Type": "multipart/form-data"},
+      );
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }

@@ -63,7 +63,7 @@ String getRightEditProfileRoute() {
       return AppRoutes.doctorEditProfileScreen;
 
     case ServiceRole.technician:
-      return AppRoutes.residentEditProfileScreen;
+      return AppRoutes.technicantEditProfileScreen;
 
     case ServiceRole.restaurantOwner:
       return AppRoutes.residentEditProfileScreen;
@@ -85,7 +85,7 @@ String getRightPersonalInfoRoute() {
       return AppRoutes.doctorProfileInfoScreen;
 
     case ServiceRole.technician:
-      return AppRoutes.residentPersonalInfoScreen;
+      return AppRoutes.technicantInfoScreen;
 
     case ServiceRole.restaurantOwner:
       return AppRoutes.residentPersonalInfoScreen;

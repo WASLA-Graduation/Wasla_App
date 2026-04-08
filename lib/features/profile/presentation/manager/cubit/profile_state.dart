@@ -3,6 +3,8 @@ part of 'profile_cubit.dart';
 sealed class ProfileState {}
 
 final class ProfileInitial extends ProfileState {}
+final class ProfileUpdateTechnicantDocuments extends ProfileState {}
+final class ProfileUpdateTechnicantSpecialization extends ProfileState {}
 
 final class ProfileUpdate extends ProfileState {}
 
