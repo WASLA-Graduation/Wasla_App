@@ -13,5 +13,16 @@ final class TechnicianGetProfile extends TechnicantDashboardState {
 }
 
 final class TechnicianNetworkState extends TechnicantDashboardState {}
+
 final class TechnicianErrorState extends TechnicantDashboardState {}
+
 final class TechnicianOnRetryState extends TechnicantDashboardState {}
+
+final class TechnicainGetDashboardDataLoading
+    extends TechnicantDashboardState {}
+
+final class TechnicainGetDashboardDataSuccess
+    extends TechnicantDashboardState {}
+
+final class TechnicainGetDashboardDataFromDropDown
+    extends TechnicantDashboardState {}

@@ -49,8 +49,7 @@ abstract class GlobalRepo {
   }) async {
     try {
       if (!await sl<NetworkInfo>().isConnected) {
-        // return Left(NoInternetFailure());
-        return Left(ServerFailure('err'));
+        return Left(NoInternetFailure());
       }
 
       final response = await sl<ApiConsumer>().get(

@@ -114,4 +114,5 @@ abstract class ApiEndPoints {
       'api/Technician/CompleteRegister';
   static const String technicantGetProfile = 'api/Technician/GetProfile';
   static const String technicantUpdateProfile = 'api/Technician/UpdateProfile';
+  static const String technicianGetChart = 'api/Technician/GetChart';
 }

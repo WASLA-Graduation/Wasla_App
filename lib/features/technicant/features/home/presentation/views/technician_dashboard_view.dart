@@ -56,5 +56,6 @@ class _TechnicianDashboardViewState extends State<TechnicianDashboardView> {
   void getDataOfScreen() {
     final cubit = context.read<TechnicantDashboardCubit>();
     cubit.getTechnicianProfile();
+    cubit.getTechnicianStatistics();
   }
 }

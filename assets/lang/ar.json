@@ -418,7 +418,9 @@
     "location": "الموقع",
   "changeLocation": "تغيير الموقع",
     "pageNotFound": "الصفحة غير موجودة",
-  "technicalProblem": "يوجد شمكلة تقنية قم بالتحديث"
+  "technicalProblem": "يوجد شمكلة تقنية قم بالتحديث",
+    "numberOfResidents": "عدد السكان"
+
 
 
 
