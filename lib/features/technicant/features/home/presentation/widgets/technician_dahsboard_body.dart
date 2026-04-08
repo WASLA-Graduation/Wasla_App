@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/features/technicant/features/home/data/models/technician_model.dart';
 import 'package:wasla/features/technicant/features/home/presentation/widgets/techincian_dashboard_appbar.dart';
 import 'package:wasla/features/technicant/features/home/presentation/widgets/technician_statistics.dart';
@@ -16,12 +17,13 @@ class _TechincianDashboardBodyState extends State<TechincianDashboardBody> {
   TechnicianModel? technician;
   @override
   Widget build(BuildContext context) {
+    final double spacing = SizeConfig.isTablet ? 30.0 : 16.0;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(child: TechnicianDahsboardAppBar()),
-          SliverToBoxAdapter(child: SizedBox(height: 20.h)),
+          SliverToBoxAdapter(child: SizedBox(height: spacing)),
           TechnicianStatistics(),
         ],
       ),

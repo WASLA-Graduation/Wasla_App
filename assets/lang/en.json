@@ -419,7 +419,9 @@
   "changeLocation": "Change Location",
   "pageNotFound": "Page Not Found",
   "technicalProblem": "There may be a technical problem.\n retry to try again.",
-  "numberOfResidents": "Number Of Residents"
+  "numberOfResidents": "Number Of Residents",
+  "pending": "Pending",
+  "accepted": "Accepted"
 
 
 

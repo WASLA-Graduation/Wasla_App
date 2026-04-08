@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
+import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/dashbord%20and%20charts/custom_general_dashbord_drop_down.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_text_identfier_widget.dart';
@@ -47,8 +47,10 @@ class TechnicianStatisticsContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<TechnicantDashboardCubit>();
+    final double spacing = SizeConfig.isTablet ? 30.0 : 16.0;
+
     return Column(
-      spacing: 23.h,
+      spacing: spacing,
       children: [
         TechnicianStatisticsCards(),
         TextDetailsIdentfierWidget(

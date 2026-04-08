@@ -419,7 +419,9 @@
   "changeLocation": "تغيير الموقع",
     "pageNotFound": "الصفحة غير موجودة",
   "technicalProblem": "يوجد شمكلة تقنية قم بالتحديث",
-    "numberOfResidents": "عدد السكان"
+    "numberOfResidents": "عدد السكان",
+      "pending": "معلقة",
+  "accepted": "مكتملة"
 
 
 

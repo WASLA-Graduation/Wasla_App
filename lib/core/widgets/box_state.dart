@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-enum RequestState { initial, loading, success, error, networkError }
+enum RequestState { initial, loading, success, error }
 
 class BoxState<T> extends Equatable {
   final String? errMsg;
@@ -15,7 +15,6 @@ class BoxState<T> extends Equatable {
   bool get isLoading => requestState == RequestState.loading;
   bool get isSuccess => requestState == RequestState.success;
   bool get isError => requestState == RequestState.error;
-  bool get isNetworkError => requestState == RequestState.networkError;
   bool get isInitial => requestState == RequestState.initial;
 
   const BoxState.initial() : this(requestState: RequestState.initial);
@@ -26,7 +25,6 @@ class BoxState<T> extends Equatable {
     : this(requestState: RequestState.success);
   const BoxState.error({required String errMsg})
     : this(requestState: RequestState.error, errMsg: errMsg);
-  const BoxState.networkError() : this(requestState: RequestState.networkError);
 
   @override
   List<Object?> get props => [errMsg, data, requestState];

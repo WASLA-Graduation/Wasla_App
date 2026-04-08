@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/widgets/error_widget.dart';
+import 'package:wasla/core/widgets/internet/no_internet_widget.dart';
+import 'package:wasla/features/technicant/features/booking/presentation/manager/cubit/technician_booking_cubit.dart';
 import 'package:wasla/features/technicant/features/booking/presentation/widgets/technician_bookings_body.dart';
 
 class TechnicianBookingsView extends StatefulWidget {
@@ -27,7 +31,31 @@ class _TechnicianBookingsViewState extends State<TechnicianBookingsView> {
           style: Theme.of(context).textTheme.headlineMedium,
         ),
       ),
-      body: const TechnicianBookingBody(),
+      body: BlocBuilder<TechnicianBookingCubit, TechnicianBookingState>(
+        buildWhen: (previous, current) =>
+            current is TechincainBookingNetworkState ||
+            current is TechincainBookingOnRetryState ||
+            current is TechincainBookingFailureState,
+        builder: (context, state) {
+          if (state is TechincainBookingNetworkState) {
+            return NoInternetWidget(
+              onRetry: () {
+                context.read<TechnicianBookingCubit>().whenRetry();
+                getMyBookings();
+              },
+            );
+          } else if (state is TechincainBookingFailureState) {
+            return MyErrorWidget(
+              onRetry: () {
+                context.read<TechnicianBookingCubit>().whenRetry();
+                getMyBookings();
+              },
+            );
+          } else {
+            return TechnicianBookingBody();
+          }
+        },
+      ),
     );
   }
 

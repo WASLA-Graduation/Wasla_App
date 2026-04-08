@@ -61,21 +61,21 @@ class TechnicantBottomNavBarView extends StatelessWidget {
 
   List<String> getTitles(BuildContext context) => [
     'home'.tr(context),
-    'requests'.tr(context),
+    'booking'.tr(context),
     'chat'.tr(context),
     'profile'.tr(context),
   ];
 
   List<String> get unSelectedIcons => [
     Assets.assetsImagesHomeOutlined,
-    Assets.assetsImagesPeopleOutlined,
+    Assets.assetsImagesBookingOutlined,
     Assets.assetsImagesChatOutlined,
     Assets.assetsImagesPersonOutlined,
   ];
 
   List<String> get selectedIcons => [
     Assets.assetsImagesHomeFilled,
-    Assets.assetsImagesPeopleFilled,
+    Assets.assetsImagesBookingFilled,
     Assets.assetsImagesChatFilled,
     Assets.assetsImagesPeronFilled,
   ];
