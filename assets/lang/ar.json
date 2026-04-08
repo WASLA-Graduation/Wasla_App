@@ -421,7 +421,10 @@
   "technicalProblem": "يوجد شمكلة تقنية قم بالتحديث",
     "numberOfResidents": "عدد السكان",
       "pending": "معلقة",
-  "accepted": "مكتملة"
+  "accepted": "مكتملة",
+  "rejected": "مرفوضة",
+    "accept": "قبول"
+
 
 
 

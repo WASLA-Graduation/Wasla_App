@@ -421,7 +421,9 @@
   "technicalProblem": "There may be a technical problem.\n retry to try again.",
   "numberOfResidents": "Number Of Residents",
   "pending": "Pending",
-  "accepted": "Accepted"
+  "accepted": "Accepted",
+  "accept": "Accept",
+  "rejected": "Rejected"
 
 
 

@@ -105,15 +105,3 @@ class BookingItemData extends StatelessWidget {
 
 
 
-// Container(
-//           width: 60,
-//           height: 25,
-//           decoration: ShapeDecoration(shape: StadiumBorder()),
-
-//           child: Center(
-//             child: Text(
-//               model.baseStatus.tr(context),
-//               style: TextStyle(fontSize: 12, color: AppColors.gray),
-//             ),
-//           ),
-//         ),

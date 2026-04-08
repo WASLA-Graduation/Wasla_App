@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/responsive/size_config.dart';
+import 'package:wasla/features/technicant/features/booking/presentation/widgets/technician_booking_list.dart';
 import 'package:wasla/features/technicant/features/booking/presentation/widgets/technician_booking_taps.dart';
 
 class TechnicianBookingBody extends StatelessWidget {
@@ -11,7 +12,13 @@ class TechnicianBookingBody extends StatelessWidget {
     final double paddingVert = SizeConfig.isDesktop ? 15 : 7;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: space, vertical: paddingVert),
-      child: Column(spacing: space, children: [TechnicianBookingsTaps()]),
+      child: Column(
+        spacing: space,
+        children: [
+          TechnicianBookingsTaps(),
+          Expanded(child: TechnicianBookingsList()),
+        ],
+      ),
     );
   }
 }

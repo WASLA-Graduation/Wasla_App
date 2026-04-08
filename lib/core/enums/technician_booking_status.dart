@@ -1,6 +1,7 @@
 enum TechnicianBookingStatus {
   pending,
   accepted,
+  rejected,
   cancelled,
   completed;
 
