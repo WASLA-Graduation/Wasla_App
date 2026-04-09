@@ -14,31 +14,27 @@ class TechnicianBookingsTaps extends StatelessWidget {
       buildWhen: (previous, current) =>
           current is TechincainBookingUpdateCurrentTapState,
       builder: (context, state) {
-        return SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: List.generate(TechnicianBookingStatus.values.length, (
-              index,
-            ) {
-              return Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: InkWell(
-                  onTap: () {
-                    context.read<TechnicianBookingCubit>().updateCurrentTap(
-                      index: index,
-                    );
-                  },
-                  child: CustomTapWidget(
-                    title: TechnicianBookingStatus.getTitle(
-                      index: index,
-                    ).tr(context),
-                    isSelected:
-                        context.read<TechnicianBookingCubit>().currentTap ==
-                        index,
-                  ),
-                ),
-              );
-            }),
+        return SizedBox(
+          height: 40,
+          child: ListView.separated(
+            physics: BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            separatorBuilder: (context, index) => const SizedBox(width: 20),
+            itemCount: TechnicianBookingStatus.values.length,
+            itemBuilder: (context, index) => InkWell(
+              onTap: () {
+                context.read<TechnicianBookingCubit>().updateCurrentTap(
+                  index: index,
+                );
+              },
+              child: CustomTapWidget(
+                title: TechnicianBookingStatus.getTitle(
+                  index: index,
+                ).tr(context),
+                isSelected:
+                    context.read<TechnicianBookingCubit>().currentTap == index,
+              ),
+            ),
           ),
         );
       },

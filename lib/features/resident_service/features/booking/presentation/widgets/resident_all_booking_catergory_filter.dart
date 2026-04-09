@@ -18,8 +18,8 @@ class ResidentAllBookingsCategoryFilter extends StatelessWidget {
         builder: (context, state) {
           return ListView.builder(
             physics: BouncingScrollPhysics(),
-            itemCount: 4,
             scrollDirection: Axis.horizontal,
+            itemCount: 4,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               child: CustomTapWidget(
