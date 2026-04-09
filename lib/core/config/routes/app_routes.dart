@@ -42,7 +42,8 @@ abstract class AppRoutes {
   static const String gymEditProfileScreen = '/gymEditProfileScreen';
   static const String gymResidentScreen = '/gymResidentScreen';
   static const String gymResidentDetailsScreen = '/gymResidentDetailsScreen';
-  static const String gymResidentSeePackagesScreen = '/gymResidentSeePackagesScreen';
+  static const String gymResidentSeePackagesScreen =
+      '/gymResidentSeePackagesScreen';
   static const String gymScanQrScreen = '/gymScanQrScreen';
   static const String notificationsScreen = '/notificationsScreen';
   static const String allPostsScreen = '/allPostsScreen';
@@ -57,7 +58,8 @@ abstract class AppRoutes {
   static const String enterYourLocationScreen = '/enterYourLocationScreen';
   static const String loadUntillTripScreen = '/loadUntillTripScreen';
   static const String driverTripDetailsScreen = '/driverTripDetailsScreen';
-  static const String residentDriverTrakcingScreen = '/residentDriverTrakcingScreen';
+  static const String residentDriverTrakcingScreen =
+      '/residentDriverTrakcingScreen';
   static const String driverReviewScreen = '/driverReviewScreen';
   static const String allUsersChatssScreen = '/allUsersChatssScreen';
   static const String chatScreen = '/chatScreen';
@@ -70,9 +72,14 @@ abstract class AppRoutes {
   static const String chatUserProfileScreen = '/chatUserProfileScreen';
   static const String animationTestScreen = '/animationTestScreen';
   static const String downloadTestScreen = '/downloadTestScreen';
-  static const String technicantCompleteInfoScreen = '/technicantCompleteInfoScreen';
-  static const String technicantBottomNavBarScreen = '/technicantBottomNavBarScreen';
-  static const String technicantEditProfileScreen = '/technicantEditProfileScreen';
+  static const String technicantCompleteInfoScreen =
+      '/technicantCompleteInfoScreen';
+  static const String technicantBottomNavBarScreen =
+      '/technicantBottomNavBarScreen';
+  static const String technicantEditProfileScreen =
+      '/technicantEditProfileScreen';
   static const String technicantInfoScreen = '/technicantInfoScreen';
   static const String stackTestScreen = '/stackTestScreen';
+  static const String technicianBookingDetailsScreen =
+      '/technicianBookingDetailsScreen';
 }

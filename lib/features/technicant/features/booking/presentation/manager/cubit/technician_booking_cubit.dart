@@ -57,6 +57,7 @@ class TechnicianBookingCubit extends Cubit<TechnicianBookingState> {
   }
 
   Future<void> acceptBooking({required int bookingId}) async {
+    emit(TechincainAcceptBookingLoadingState());
     final result = await technicianBookingsRepo.acceptBooking(
       bookingId: bookingId,
     );
@@ -74,6 +75,24 @@ class TechnicianBookingCubit extends Cubit<TechnicianBookingState> {
             TechnicianBookingStatus.accepted;
         emit(TechincainAcceptBookingSuccessState(bookingId: bookingId));
         filterBookingsByStatus();
+      },
+    );
+  }
+
+  Future<void> acceptBookingFromDetailsScreen({required int bookingId}) async {
+    emit(TechincainAcceptBookingLoadingState());
+    final result = await technicianBookingsRepo.acceptBooking(
+      bookingId: bookingId,
+    );
+    result.fold(
+      (failure) => emit(
+        TechincainAcceptBookingFailureState(
+          errorMessage: failure,
+          bookingId: bookingId,
+        ),
+      ),
+      (_) {
+        emit(TechincainAcceptBookingSuccessState(bookingId: bookingId));
       },
     );
   }
@@ -96,6 +115,26 @@ class TechnicianBookingCubit extends Cubit<TechnicianBookingState> {
             TechnicianBookingStatus.cancelled;
         emit(TechincainCancelBookingSuccessState(bookingId: bookingId));
         filterBookingsByStatus();
+      },
+    );
+  }
+
+  Future<void> getBookingDatails({required int bookingId}) async {
+    emit(TechincainGetBookingDetailsLoadingState());
+    final result = await technicianBookingsRepo.getBookingDetails(
+      bookingId: bookingId,
+    );
+
+    result.fold(
+      (failure) {
+        if (failure is NoInternetFailure) {
+          emit(TechincainBookingNetworkState());
+        } else {
+          emit(TechincainBookingFailureState());
+        }
+      },
+      (booking) {
+        emit(TechincainGetBookingDetailsLoadedState(booking: booking));
       },
     );
   }

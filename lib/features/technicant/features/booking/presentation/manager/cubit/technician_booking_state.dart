@@ -20,6 +20,14 @@ class TechincainGetBookingsLoadedState extends TechnicianBookingState {
   TechincainGetBookingsLoadedState({required this.bookings});
 }
 
+/////GetBookingDetails
+class TechincainGetBookingDetailsLoadingState extends TechnicianBookingState {}
+
+class TechincainGetBookingDetailsLoadedState extends TechnicianBookingState {
+  final TechnicainBookingModel booking;
+  TechincainGetBookingDetailsLoadedState({required this.booking});
+}
+
 ////AcceptBooking
 
 class TechincainAcceptBookingSuccessState extends TechnicianBookingState {
@@ -38,6 +46,8 @@ class TechincainAcceptBookingFailureState extends TechnicianBookingState {
   });
 }
 
+class TechincainAcceptBookingLoadingState extends TechnicianBookingState {}
+
 ////CancelBooking
 
 class TechincainCancelBookingSuccessState extends TechnicianBookingState {
@@ -55,5 +65,3 @@ class TechincainCancelBookingFailureState extends TechnicianBookingState {
     required this.errorMessage,
   });
 }
-
-

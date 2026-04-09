@@ -427,7 +427,12 @@
       "noBookingsMsg": "مفيش حجوزات متاحة في الوقت الحالي，الحجوزات الجديدة ستظهر هنا",
           "bookingAcceptedSuccess": " تم قبول الحجز بنجاح",
               "birthday": " تاريخ الميلاد",
-    "years": " سنوات"
+    "years": " سنوات",
+        "acceptBooking": "قبول الجز",
+        "coordinates": "الاحداثيات",
+            "bookingDetails": "تفاصيل الحجز"
+
+
 
 
 

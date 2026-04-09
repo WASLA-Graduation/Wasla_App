@@ -60,7 +60,8 @@ enum NotificatonsRoutes {
   newRideRequest, // 46
   rideAccepted, // 47
   rideCancelled, // 48
-  rideCompleted; // 49
+  rideCompleted, // 49
+  technicainNewBookingRequest; // 50
 
   static NotificatonsRoutes fromInt(int index) {
     return NotificatonsRoutes.values[index];
@@ -259,6 +260,12 @@ void navigateToRightRoute({
         extra: refereceId,
       );
       break;
+    case NotificatonsRoutes.technicainNewBookingRequest:
+      final int bookingId = int.parse(refereceId);
+      navigatorKey.currentContext!.push(
+        AppRoutes.technicianBookingDetailsScreen,
+        extra: bookingId,
+      );
   }
 }
 

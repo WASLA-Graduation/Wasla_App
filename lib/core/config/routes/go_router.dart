@@ -1,8 +1,12 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/features/auth/presentation/views/technicant_complete_info_view.dart';
 import 'package:wasla/features/profile/presentation/views/technician_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
+import 'package:wasla/features/technicant/features/booking/data/repo/technician_bookings_repo_impl.dart';
+import 'package:wasla/features/technicant/features/booking/presentation/manager/cubit/technician_booking_cubit.dart';
+import 'package:wasla/features/technicant/features/booking/presentation/views/technician_booking_details_view.dart';
 import 'package:wasla/features/technicant/features/home/data/models/technician_model.dart';
 import 'package:wasla/features/technicant/features/home/presentation/views/technicant_bottom_nav_bar_view.dart';
 import 'package:wasla/randoms/animation_test.dart';
@@ -489,6 +493,18 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) {
         final TechnicianModel technician = state.extra as TechnicianModel;
         return TechnicianEditProfile(technician: technician);
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.technicianBookingDetailsScreen,
+      builder: (context, state) {
+        final int bookingId = state.extra as int;
+        return BlocProvider(
+          create: (context) => TechnicianBookingCubit(
+            TechnicianBookingsRepoImpl(api: sl<ApiConsumer>()),
+          ),
+          child: TechnicianBookingDetailsView(bookingId: bookingId),
+        );
       },
     ),
   ],
