@@ -14,10 +14,11 @@ class ResidentAllBookingsCategoryFilter extends StatelessWidget {
     return SizedBox(
       height: 40,
       child: BlocBuilder<ResidentBookingCubit, ResidentBookingState>(
+        buildWhen: (previous, current) => current is ResidentChangeBookingTaps,
         builder: (context, state) {
           return ListView.builder(
             physics: BouncingScrollPhysics(),
-            itemCount: 3,
+            itemCount: 4,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),

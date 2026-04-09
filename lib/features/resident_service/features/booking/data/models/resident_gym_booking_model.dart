@@ -14,7 +14,6 @@ class GymResidentBookingModel extends GeneralResidentBookingsModel {
   final ServiceNameModel serviceName;
   final int bookingStatus;
 
-  static const String baseImageUrl = "PUT_YOUR_BASE_URL/";
 
   GymResidentBookingModel({
     required this.bookingId,

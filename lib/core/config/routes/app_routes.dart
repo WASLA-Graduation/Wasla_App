@@ -74,4 +74,5 @@ abstract class AppRoutes {
   static const String technicantBottomNavBarScreen = '/technicantBottomNavBarScreen';
   static const String technicantEditProfileScreen = '/technicantEditProfileScreen';
   static const String technicantInfoScreen = '/technicantInfoScreen';
+  static const String stackTestScreen = '/stackTestScreen';
 }

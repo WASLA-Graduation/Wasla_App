@@ -9,7 +9,7 @@ class ResidentAllBookingsViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 6,),
+        const SizedBox(height: 6),
         ResidentAllBookingsCategoryFilter(),
         Expanded(child: ResidentAllBookingsList()),
       ],

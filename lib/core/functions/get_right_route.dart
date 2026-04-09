@@ -7,7 +7,9 @@ import 'package:wasla/core/enums/service_role.dart';
 import 'package:wasla/core/extensions/service_role_extension.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/manager/cubit/doctor_home_cubit.dart';
 import 'package:wasla/features/driver/features/home/presentation/manager/cubit/driver_cubit.dart';
+import 'package:wasla/features/gym/features/dashboard/presentation/manager/cubit/gym_dashboard_cubit.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
+import 'package:wasla/features/technicant/features/home/presentation/manager/cubit/technicant_dashboard_cubit.dart';
 
 String getRightRoute({required ServiceRole role}) {
   switch (role) {
@@ -110,12 +112,14 @@ void resetDataInSpecificRole(BuildContext context) {
       break;
 
     case ServiceRole.technician:
-      AppRoutes.residentEditProfileScreen;
+      context.read<TechnicantDashboardCubit>().bottomNabBarIndex = 0;
+      break;
 
     case ServiceRole.restaurantOwner:
       AppRoutes.residentEditProfileScreen;
 
     case ServiceRole.gymOwner:
-      AppRoutes.residentEditProfileScreen;
+      context.read<GymDashboardCubit>().bottomNavBarcurrentIndex = 0;
+      break;
   }
 }

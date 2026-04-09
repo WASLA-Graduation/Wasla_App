@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/enums/booking_status.dart';
+import 'package:wasla/core/enums/technician_booking_status.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/core/widgets/cached_network_image_widget.dart';
+import 'package:wasla/core/widgets/custom_image_with_stack.dart';
 import 'package:wasla/features/resident_service/features/booking/data/models/general_resident_bookings_model.dart';
 import 'package:wasla/features/resident_service/features/booking/presentation/widgets/booking_item_data.dart';
 
+// ignore: must_be_immutable
 class ResidentBookItem extends StatelessWidget {
-  const ResidentBookItem({super.key, required this.model, required this.index});
+  ResidentBookItem({super.key, required this.model, required this.index});
   final GeneralResidentBookingsModel model;
   final int index;
 
@@ -27,15 +30,13 @@ class ResidentBookItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildDocImage(),
+            BuildImageWithStackWidget(imageUrl: model.baseImage),
             const SizedBox(width: 18),
             Expanded(
               child: BookingItemData(
                 index: index,
                 model: model,
-                isUpcoming:
-                    model.baseStatus == "upComing" ||
-                    model.baseStatus == "active",
+                isUpcoming: cancelWords.contains(model.baseStatus),
               ),
             ),
           ],
@@ -44,33 +45,10 @@ class ResidentBookItem extends StatelessWidget {
     );
   }
 
-  AspectRatio _buildDocImage() {
-    
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Container(
-        // width: 90,
-        // height: 90,
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          color: AppColors.gray.withOpacity(0.3),
-          borderRadius: BorderRadius.circular(15),
-        ),
-      
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Positioned(
-              width: 112,
-              height: 112,
-              child: CustomCachedNetworkImage(
-                imageUrl: model.baseImage,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  List<String> cancelWords = [
+    TechnicianBookingStatus.pending.name,
+    TechnicianBookingStatus.accepted.name,
+    BookingStatus.active.name,
+    DoctorBookingStatus.upComing.name,
+  ];
 }

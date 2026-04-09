@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/enums/booking_filter.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/features/resident_service/features/booking/data/models/general_resident_bookings_model.dart';
 import 'package:wasla/features/resident_service/features/booking/data/repo/resident_booking_repo.dart';
@@ -14,11 +15,15 @@ class ResidentBookingCubit extends Cubit<ResidentBookingState> {
 
   BookingFilter bookingFilter = BookingFilter.doctorBookings;
 
-  int selectedBookingFlag = -1;
   void updateBookingTaps({required BookingFilter bookingFilter}) {
     if (bookingFilter == this.bookingFilter) return;
     this.bookingFilter = bookingFilter;
+    emit(ResidentChangeBookingTaps());
     getAllBookingsByStatus();
+  }
+
+  void whenRetry() {
+    emit(ResidentBookingOnRetry());
   }
 
   Future<void> getAllBookingsByStatus() async {
@@ -28,7 +33,11 @@ class ResidentBookingCubit extends Cubit<ResidentBookingState> {
     final result = await _getRightBookings(userId);
     result.fold(
       (error) {
-        emit(ResidentGetBookingFailure(errMsg: error));
+        if (error is NoInternetFailure) {
+          emit(ResidentBookingNetwrok());
+        } else {
+          emit(ResidentGetBookingsFailure());
+        }
       },
       (success) {
         allBookings = success;
@@ -41,17 +50,14 @@ class ResidentBookingCubit extends Cubit<ResidentBookingState> {
     required int bookingId,
     required int index,
   }) async {
-    selectedBookingFlag = bookingId;
-    emit(ResidentCancelBookingLoading());
     final result = await _getRightCancelBooking(bookingId: bookingId);
     result.fold(
       (error) {
-        emit(ResidentCacelBookingFailure(errMsg: error));
-        selectedBookingFlag = -1;
+        emit(ResidentCancelBookingFailure(errMsg: error, bookingId: bookingId));
       },
       (success) {
         allBookings.removeAt(index);
-        emit(ResidentCancelBookingSuccess());
+        emit(ResidentCancelBookingSuccess(bookingId: bookingId));
       },
     );
   }
@@ -66,8 +72,7 @@ class ResidentBookingCubit extends Cubit<ResidentBookingState> {
       case BookingFilter.gymBookings:
         return await bookingRepo.gymCancelBooking(bookingId: bookingId);
       case BookingFilter.restaurantBookings:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        return await bookingRepo.technicainCancelBooking(bookingId: bookingId);
       case BookingFilter.driverBookings:
         // TODO: Handle this case.
         throw UnimplementedError();
@@ -92,13 +97,11 @@ class ResidentBookingCubit extends Cubit<ResidentBookingState> {
       case BookingFilter.driverBookings:
         return await bookingRepo.getBookingWithDriver(residentId: userId!);
       case BookingFilter.technicianBookings:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        return await bookingRepo.getBookingWithTechnician(residentId: userId!);
     }
   }
 
   void resetState() {
     bookingFilter = BookingFilter.doctorBookings;
-    selectedBookingFlag = -1;
   }
 }

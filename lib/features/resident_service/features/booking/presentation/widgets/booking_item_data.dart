@@ -82,7 +82,6 @@ class BookingItemData extends StatelessWidget {
         Text(
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          // "${formatStringDate(model.date)} ${localizedDays(index: model.day)} ",
           model.baseDate!,
           style: Theme.of(
             context,
@@ -92,7 +91,6 @@ class BookingItemData extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
 
-          // "${convertBackendTimeToAmPm(model.start)} : ${convertBackendTimeToAmPm(model.end)}",
           model.baseDuration!,
           style: Theme.of(
             context,

@@ -20,61 +20,59 @@ class CustomResidentCancelButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<ResidentBookingCubit>();
-    return BlocConsumer<ResidentBookingCubit, ResidentBookingState>(
-      buildWhen: (previous, current) => cubit.selectedBookingFlag == bookingId,
+    return BlocListener<ResidentBookingCubit, ResidentBookingState>(
+      listenWhen: (previous, current) =>
+          current is ResidentCancelBookingFailure ||
+          current is ResidentCancelBookingSuccess &&
+              current.bookingId == bookingId,
       listener: (context, state) {
-        if (state is ResidentCancelBookingSuccess &&
-            cubit.selectedBookingFlag == bookingId) {
+        if (state is ResidentCancelBookingSuccess) {
           toastAlert(
             color: AppColors.primaryColor,
             msg: 'bookingCaceledSuccess'.tr(context),
           );
-          cubit.selectedBookingFlag = -1;
-        } else if (state is ResidentCacelBookingFailure) {
+        } else if (state is ResidentCancelBookingFailure) {
           toastAlert(color: AppColors.error, msg: state.errMsg);
         }
       },
-      builder: (context, state) {
-        return Visibility(
-          visible: isUpcoming,
-          child: InkWell(
-            onTap: () async {
-              showModalBottomSheet(
-                context: context,
-                builder: (_) => CustomBottomSheetConfirmWidget(
-                  cancelText: 'cancel'.tr(context),
-                  confirmText: 'confirm'.tr(context),
-                  onConfirm: () {
-                    Navigator.pop(context);
-                    context.read<ResidentBookingCubit>().cancelResidentBooking(
-                      bookingId: bookingId,
-                      index: index,
-                    );
-                  },
-                  title: 'cancelBooking'.tr(context),
-                  description: 'areYouSureCancel'.tr(context),
-                ),
-              );
-            },
-            child: Container(
-              width: 60,
-              height: 25,
-              decoration: ShapeDecoration(
-                color: AppColors.primaryColor,
-                shape: StadiumBorder(),
+      child: Visibility(
+        visible: isUpcoming,
+        child: InkWell(
+          onTap: () async {
+            showModalBottomSheet(
+              context: context,
+              builder: (_) => CustomBottomSheetConfirmWidget(
+                cancelText: 'cancel'.tr(context),
+                confirmText: 'confirm'.tr(context),
+                onConfirm: () {
+                  Navigator.pop(context);
+                  context.read<ResidentBookingCubit>().cancelResidentBooking(
+                    bookingId: bookingId,
+                    index: index,
+                  );
+                },
+                title: 'cancelBooking'.tr(context),
+                description: 'areYouSureCancel'.tr(context),
               ),
+            );
+          },
+          child: Container(
+            width: 60,
+            height: 25,
+            decoration: ShapeDecoration(
+              color: AppColors.primaryColor,
+              shape: StadiumBorder(),
+            ),
 
-              child: Center(
-                child: Text(
-                  "cancel".tr(context),
-                  style: TextStyle(fontSize: 12, color: AppColors.whiteColor),
-                ),
+            child: Center(
+              child: Text(
+                "cancel".tr(context),
+                style: TextStyle(fontSize: 12, color: AppColors.whiteColor),
               ),
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

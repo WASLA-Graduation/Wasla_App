@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/core/widgets/custom_err_get_data.dart';
+import 'package:wasla/core/widgets/empty_data_widget.dart';
 import 'package:wasla/features/resident_service/features/booking/presentation/manager/cubit/resident_booking_cubit.dart';
 import 'package:wasla/features/resident_service/features/booking/presentation/widgets/resident_book_item.dart';
 
@@ -14,10 +14,13 @@ class ResidentAllBookingsList extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<ResidentBookingCubit>();
     return BlocBuilder<ResidentBookingCubit, ResidentBookingState>(
+      buildWhen: (previous, current) =>
+          current is ResidentAllGetBookingSuccess ||
+          current is ResidentCancelBookingSuccess ||
+          current is ResidentGetBookingLoading,
       builder: (context, state) {
-        if (state is ResidentGetBookingFailure) {
-          return Center(child: CustomErrGetData());
-        } else if (state is ResidentGetBookingLoading) {
+        if (state is ResidentGetBookingLoading ||
+            state is ResidentBookingInitial) {
           return Center(
             child: SpinKitFadingCircle(
               color: AppColors.primaryColor,
@@ -26,11 +29,9 @@ class ResidentAllBookingsList extends StatelessWidget {
           );
         } else {
           return cubit.allBookings.isEmpty
-              ? Center(
-                  child: Text(
-                    "noBookings".tr(context),
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
+              ? EmptyStateWidget(
+                  title: 'noBookings'.tr(context),
+                  message: 'noBookingsMsg'.tr(context),
                 )
               : ListView.builder(
                   padding: const EdgeInsets.symmetric(

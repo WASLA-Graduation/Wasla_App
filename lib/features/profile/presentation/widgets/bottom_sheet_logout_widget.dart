@@ -84,22 +84,7 @@ class BottomSheetLogoutWidget extends StatelessWidget {
             listener: (context, state) {
               if (state is AuthLogOutFailure) {
                 toastAlert(color: AppColors.red, msg: state.errMsg);
-              } else if (state is AuthLogOutSuccess) {
-                // context.popScreen();
-                // resetDataInSpecificRole(context);
-                // SharedPreferencesHelper.removeKeys(
-                //   keys: [
-                //     ApiKeys.role,
-                //     // ApiKeys.token,
-                //     // ApiKeys.refreshToken,
-                //     // ApiKeys.userId,
-                //     AppStrings.isSingedIn,
-                //   ],
-                // ).then((val) {
-                //   SecureStorageHelper.clear();
-                //   context.pushAndRemoveAllScreens(AppRoutes.signInScreen);
-                // });
-              }
+              } else if (state is AuthLogOutSuccess) {}
             },
             builder: (context, state) {
               return GeneralButton(

@@ -2,8 +2,8 @@ enum BookingFilter {
   doctorBookings,
   gymBookings,
   driverBookings,
-  restaurantBookings,
-  technicianBookings;
+  technicianBookings,
+  restaurantBookings;
 
   int toInt() {
     return index;
@@ -13,7 +13,7 @@ enum BookingFilter {
     if (value >= 0 && value < BookingFilter.values.length) {
       return BookingFilter.values[value];
     }
-    return BookingFilter.doctorBookings; 
+    return BookingFilter.doctorBookings;
   }
 
   String toTitle() {

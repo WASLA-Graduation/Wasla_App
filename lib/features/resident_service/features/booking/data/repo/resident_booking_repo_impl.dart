@@ -1,11 +1,15 @@
 import 'package:dartz/dartz.dart';
+import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/error/failure.dart';
+import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/resident_service/features/booking/data/models/resident_doctor_booking_model.dart';
 import 'package:wasla/features/resident_service/features/booking/data/models/resident_driver_booking_model.dart';
 import 'package:wasla/features/resident_service/features/booking/data/models/resident_gym_booking_model.dart';
+import 'package:wasla/features/resident_service/features/booking/data/models/resident_techician_booking_model.dart';
 import 'package:wasla/features/resident_service/features/booking/data/repo/resident_booking_repo.dart';
 
 class ResidentBookingRepoImpl extends ResidentBookingRepo {
@@ -14,9 +18,12 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
   ResidentBookingRepoImpl({required this.api});
 
   @override
-  Future<Either<String, List<DoctorResidentBookingModel>>>
+  Future<Either<Failure, List<DoctorResidentBookingModel>>>
   getResidentBookingsWithDoctor({required String userId}) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final response = await api.get(
         ApiEndPoints.getBookingDetailsForUser,
         queryParameters: {ApiKeys.userId: userId},
@@ -27,7 +34,7 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
       }
       return Right(bookings);
     } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(ServerFailure(e.errorModel.errorMessage));
     }
   }
 
@@ -49,9 +56,12 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
   }
 
   @override
-  Future<Either<String, List<GymResidentBookingModel>>>
+  Future<Either<Failure, List<GymResidentBookingModel>>>
   getResidentBookingsWithGym({required String residentId}) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final response = await api.get(
         ApiEndPoints.getResidentBookingsWithGym + residentId,
       );
@@ -63,7 +73,7 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
       }
       return Right(bookings);
     } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(ServerFailure(e.errorModel.errorMessage));
     }
   }
 
@@ -80,9 +90,12 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
   }
 
   @override
-  Future<Either<String, List<ResidentDriverBookingModel>>>
+  Future<Either<Failure, List<ResidentDriverBookingModel>>>
   getBookingWithDriver({required String residentId}) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final response = await api.get(
         ApiEndPoints.getResidentAllBookingsWithDriver + residentId,
       );
@@ -93,6 +106,43 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
         }
       }
       return Right(bookings);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ResidentTechicianBookingModel>>>
+  getBookingWithTechnician({required String residentId}) async {
+    try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
+      final response = await api.get(
+        ApiEndPoints.getBookingResidentWithTechnician + residentId,
+      );
+
+      final List<ResidentTechicianBookingModel> bookings = [];
+      for (var booking in response[ApiKeys.data]) {
+        bookings.add(ResidentTechicianBookingModel.fromJson(booking));
+      }
+
+      return Right(bookings);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> technicainCancelBooking({
+    required int bookingId,
+  }) async {
+    try {
+      await api.put(
+        ApiEndPoints.technicianCancelBooking + bookingId.toString(),
+      );
+
+      return const Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

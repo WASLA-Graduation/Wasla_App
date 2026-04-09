@@ -44,7 +44,6 @@ import 'package:wasla/features/profile/presentation/views/doctor_profile_info.da
 import 'package:wasla/features/profile/presentation/views/gym_edit_profile_view.dart';
 import 'package:wasla/features/profile/presentation/views/gym_profile_info_viwe.dart';
 import 'package:wasla/features/profile/presentation/views/resident_profile_info.dart';
-import 'package:wasla/features/resident_service/features/booking/presentation/views/resident_booking_view.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/views/doctor_booking_view.dart';
 import 'package:wasla/features/resident_service/features/driver/presentation/views/load_untill_trip_view.dart';
@@ -86,12 +85,13 @@ import 'package:wasla/features/social_media/presentation/views/reactions_view.da
 import 'package:wasla/features/social_media/presentation/views/social_profile_view.dart';
 import 'package:wasla/features/splash/presentation/views/splash_view.dart';
 import 'package:wasla/randoms/download_file.dart';
+import 'package:wasla/randoms/stack_test.dart';
 
 final GoRouter appRouter = GoRouter(
   navigatorKey: navigatorKey,
 
   initialLocation: handleInitialRoute(),
-  // initialLocation: AppRoutes.technicantCompleteInfoScreen,
+  // initialLocation: AppRoutes.stackTestScreen,
   redirect: (context, state) {
     if (state.uri.toString().contains('wasla://payment/success')) {
       return AppRoutes.paymentSuccessScreen;
@@ -105,6 +105,10 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.testAudioScreen,
       builder: (context, state) => AudioTest(),
+    ),
+    GoRoute(
+      path: AppRoutes.stackTestScreen,
+      builder: (context, state) => StackTest(),
     ),
     GoRoute(
       path: AppRoutes.downloadTestScreen,
@@ -269,10 +273,7 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.allFavouritesScreen,
       builder: (context, state) => AllFavouritesViews(),
     ),
-    GoRoute(
-      path: AppRoutes.residentBookingScreen,
-      builder: (context, state) => ResidentBookingView(),
-    ),
+
     GoRoute(
       path: AppRoutes.gymCompleteInfoScreen,
       builder: (context, state) => GymCompleteInfoView(),

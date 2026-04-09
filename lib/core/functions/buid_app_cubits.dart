@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:wasla/core/connection/network_info.dart';
-import 'package:wasla/core/connection/network_info_impl.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/manager/network/network_cubit.dart';
 import 'package:wasla/features/chat/data/repo/chat_repo_impl.dart';
