@@ -20,7 +20,7 @@ class CustomDoctorSpecialityList extends StatelessWidget {
               ? const SpecialityLoadingList()
               : ListView.builder(
                   physics: BouncingScrollPhysics(),
-                  itemCount: cubit.specialityList.length,
+                  itemCount: cubit.specialityList.length + 1,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => GestureDetector(
                     onTap: () {
@@ -38,12 +38,6 @@ class CustomDoctorSpecialityList extends StatelessWidget {
                           ? "all".tr(context)
                           : cubit.specialityList[index].specialization,
                       isSelected: cubit.specializationIndex == index,
-                      // doctorSpecializationaModel: index == 0
-                      //     ? DoctorSpecializationaModel(
-                      //         id: 0,
-                      //         specialization: "all".tr(context),
-                      //       )
-                      //     : cubit.specialityList[index],
                     ),
                   ),
                 ),

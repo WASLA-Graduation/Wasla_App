@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/widgets/error_widget.dart';
 import 'package:wasla/core/widgets/internet/no_internet_widget.dart';
+import 'package:wasla/features/favourite/presentation/manager/cubit/favourite_cubit.dart';
 import 'package:wasla/features/resident_service/features/technicain/presentation/manager/cubit/resident_technician_cubit.dart';
 import 'package:wasla/features/resident_service/features/technicain/presentation/widgets/resident_technician_body.dart';
 
@@ -57,5 +58,10 @@ class _ResidentTechnicianViewState extends State<ResidentTechnicianView> {
     );
   }
 
-  void getScreenData() {}
+  void getScreenData() {
+    final cubit = context.read<ResidentTechnicianCubit>();
+    cubit.getTechnicianSpecializations();
+    context.read<FavouriteCubit>().getFavouritesByType(serviceType: 4);
+    cubit.getTechniciansBySpeciality(fromPagination: false);
+  }
 }
