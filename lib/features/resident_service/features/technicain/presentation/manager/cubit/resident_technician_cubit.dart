@@ -1,6 +1,7 @@
-import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/error/failure.dart';
+import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/repo/global_repo.dart';
 import 'package:wasla/features/resident_service/features/technicain/data/models/resident_technician_model.dart';
 import 'package:wasla/features/resident_service/features/technicain/data/models/technician_specialization_model.dart';
@@ -14,8 +15,20 @@ class ResidentTechnicianCubit extends Cubit<ResidentTechnicianState> {
   final ResidentTechnicianRepo repo;
   int pageSize = 10;
   int pageNumber = 1;
+  double price = 0;
   bool endOfTechnicianPagination = false;
   int currentSpeciality = 1;
+  DateTime selectedDate = DateTime.now();
+  TimeOfDay selectedTimeSlot = TimeOfDay.now();
+
+  void updateSelectedDate({required DateTime date}) {
+    selectedDate = date;
+  }
+
+  void updateSelectedTimeSlot({required TimeOfDay time}) {
+    selectedTimeSlot = time;
+    emit(ResidentTechnicianSelectTimeSlot());
+  }
 
   void whenRetry() {
     emit(ResidentTechnicianOnRetry());
@@ -106,5 +119,36 @@ class ResidentTechnicianCubit extends Cubit<ResidentTechnicianState> {
       (profile) =>
           emit(ResidentGetTechnicianDetailsLoaded(technician: profile)),
     );
+  }
+
+  Future<void> bookWithTechnician({required String technicianId}) async {
+    if (price == 0) {
+      emit(ResidentBookWithTechnicianFailure(errMsg: 'Please Enter Price'));
+      return;
+    }
+    final String? residentId = await getUserId();
+    final date = DateTime(
+      selectedDate.year,
+      selectedDate.month,
+      selectedDate.day,
+      selectedTimeSlot.hour,
+      selectedTimeSlot.minute,
+    );
+    emit(ResidentBookWithTechnicianLoading());
+    final result = await repo.bookWithTechnician(
+      technicianId: technicianId,
+      date: date.toIso8601String(),
+      residentId: residentId!,
+      price: price,
+    );
+    result.fold((failure) {
+      emit(ResidentBookWithTechnicianFailure(errMsg: failure));
+    }, (profile) => emit(ResidentBookWithTechnicianSuccess()));
+  }
+
+  void reset() {
+    price = 0;
+    selectedDate = DateTime.now();
+    selectedTimeSlot = TimeOfDay.now();
   }
 }

@@ -124,4 +124,5 @@ abstract class ApiEndPoints {
   static const String getBookingResidentWithTechnician= 'api/TechnicianBooking/GetResidentBookings/';
   static const String getSpecializationsOfTechnician= 'api/Technician/Specializations';
   static const String getTechniciansBySpeciality= 'api/Technician/GetBySpecialty';
+  static const String bookWithTechnician= 'api/TechnicianBooking/CreateBooking';
 }

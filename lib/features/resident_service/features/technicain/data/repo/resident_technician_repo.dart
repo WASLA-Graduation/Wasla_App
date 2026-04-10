@@ -12,4 +12,10 @@ abstract class ResidentTechnicianRepo {
     required int pageNumber,
     required int pageSize,
   });
+  Future<Either<String, Null>> bookWithTechnician({
+    required double price,
+    required String technicianId,
+    required String residentId,
+    required String date,
+  });
 }

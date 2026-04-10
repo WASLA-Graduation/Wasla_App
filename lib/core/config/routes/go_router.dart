@@ -1,11 +1,13 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
+import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/features/auth/presentation/views/technicant_complete_info_view.dart';
 import 'package:wasla/features/profile/presentation/views/technician_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
 import 'package:wasla/features/resident_service/features/technicain/data/repo/resident_technician_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/technicain/presentation/manager/cubit/resident_technician_cubit.dart';
+import 'package:wasla/features/resident_service/features/technicain/presentation/views/resident_technical_book_view.dart';
 import 'package:wasla/features/resident_service/features/technicain/presentation/views/resident_technician_details_view.dart';
 import 'package:wasla/features/resident_service/features/technicain/presentation/views/resident_technician_view.dart';
 import 'package:wasla/features/technicant/features/booking/data/repo/technician_bookings_repo_impl.dart';
@@ -531,6 +533,18 @@ final GoRouter appRouter = GoRouter(
             ResidentTechnicianRepoImpl(api: sl<ApiConsumer>()),
           ),
           child: ResidentTechnicianDetailsView(data: data),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.residentTechnicianBookingScreen,
+      builder: (context, state) {
+        final Map<String, dynamic> data = state.extra as Map<String, dynamic>;
+        return BlocProvider(
+          create: (context) => ResidentTechnicianCubit(
+            ResidentTechnicianRepoImpl(api: sl<ApiConsumer>()),
+          ),
+          child: ResidentTechnicalBookView(technicianId: data[AppStrings.id]),
         );
       },
     ),

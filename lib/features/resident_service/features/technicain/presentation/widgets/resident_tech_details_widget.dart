@@ -1,12 +1,15 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
+import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/custom_circle_with_data_list.dart';
 import 'package:wasla/core/widgets/custom_details_card_widget.dart';
 import 'package:wasla/core/widgets/readmore_text.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_text_identfier_widget.dart';
+import 'package:wasla/features/resident_service/features/technicain/presentation/manager/cubit/resident_technician_cubit.dart';
 import 'package:wasla/features/resident_service/features/technicain/presentation/widgets/resident_tech_details_card_text.dart';
 import 'package:wasla/features/reviews/presentation/widgets/add_review_widget.dart';
 import 'package:wasla/features/reviews/presentation/widgets/custom_reviws_list.dart';
@@ -37,7 +40,15 @@ class ResidentTechnacalDetailsWidget extends StatelessWidget {
         TextDetailsIdentfierWidget(
           leading: "aboutMe".tr(context),
           trailing: "bookNow".tr(context),
-          onTap: () {},
+          onTap: () {
+            context.pushScreen(
+              AppRoutes.residentTechnicianBookingScreen,
+              arguments: {
+                AppStrings.id: techId,
+                AppStrings.cubit: context.read<ResidentTechnicianCubit>(),
+              },
+            );
+          },
         ),
 
         const SizedBox(height: 10),

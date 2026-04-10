@@ -1,10 +1,7 @@
 part of 'resident_technician_cubit.dart';
 
-sealed class ResidentTechnicianState extends Equatable {
+sealed class ResidentTechnicianState {
   const ResidentTechnicianState();
-
-  @override
-  List<Object> get props => [];
 }
 
 final class ResidentTechnicianInitial extends ResidentTechnicianState {}
@@ -18,6 +15,8 @@ final class ResidentTechnicianOnRetry extends ResidentTechnicianState {}
 
 final class ResidentTechnicianSelectSpecialization
     extends ResidentTechnicianState {}
+
+final class ResidentTechnicianSelectTimeSlot extends ResidentTechnicianState {}
 
 /// Get Specialization States
 final class ResidentTechnicianGetSpecializationsLoading
@@ -56,4 +55,15 @@ final class ResidentGetTechnicianDetailsLoaded extends ResidentTechnicianState {
   final TechnicianModel technician;
 
   const ResidentGetTechnicianDetailsLoaded({required this.technician});
+}
+
+////Book With Technician
+final class ResidentBookWithTechnicianLoading extends ResidentTechnicianState {}
+
+final class ResidentBookWithTechnicianSuccess extends ResidentTechnicianState {}
+
+final class ResidentBookWithTechnicianFailure extends ResidentTechnicianState {
+  final String errMsg;
+
+  ResidentBookWithTechnicianFailure({required this.errMsg});
 }

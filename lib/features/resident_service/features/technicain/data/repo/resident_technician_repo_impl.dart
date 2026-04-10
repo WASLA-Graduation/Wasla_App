@@ -67,4 +67,27 @@ class ResidentTechnicianRepoImpl extends ResidentTechnicianRepo {
       return Left(ServerFailure(e.errorModel.errorMessage));
     }
   }
+
+  @override
+  Future<Either<String, Null>> bookWithTechnician({
+    required double price,
+    required String technicianId,
+    required String residentId,
+    required String date,
+  }) async {
+    try {
+      await api.post(
+        ApiEndPoints.bookWithTechnician,
+        body: {
+          "residentId": residentId,
+          "technicianId": technicianId,
+          "price": price,
+          "bookingDate": date,
+        },
+      );
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.errorMessage).toString());
+    }
+  }
 }
