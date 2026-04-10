@@ -431,7 +431,11 @@
         "acceptBooking": "قبول الجز",
         "coordinates": "الاحداثيات",
             "bookingDetails": "تفاصيل الحجز",
-                "allTechnicains": "جميع التقنيين"
+                "allTechnicains": "جميع التقنيين",
+                    "noTechnicals": "لا يوجد تقنيين",
+    "noTechnicalsInSystem": "لا يوجد تقنين في الان",
+        "remFromFav": "ازالة من المفضلة؟",
+    "rem": "نعم ازالة"
 
 
 

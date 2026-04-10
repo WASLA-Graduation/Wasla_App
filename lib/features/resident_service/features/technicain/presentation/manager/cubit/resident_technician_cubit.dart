@@ -15,7 +15,7 @@ class ResidentTechnicianCubit extends Cubit<ResidentTechnicianState> {
   int pageSize = 10;
   int pageNumber = 1;
   bool endOfTechnicianPagination = false;
-  int currentSpeciality = 0;
+  int currentSpeciality = 1;
 
   void whenRetry() {
     emit(ResidentTechnicianOnRetry());
@@ -26,6 +26,7 @@ class ResidentTechnicianCubit extends Cubit<ResidentTechnicianState> {
       currentSpeciality = index;
       emit(ResidentTechnicianSelectSpecialization());
       pageNumber = 1;
+      endOfTechnicianPagination = false;
       getTechniciansBySpeciality(fromPagination: false);
     }
   }

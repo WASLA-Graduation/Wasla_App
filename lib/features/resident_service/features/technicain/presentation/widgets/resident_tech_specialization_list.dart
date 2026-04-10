@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/helpers/loadings/speciality_loading_list.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_speciality_item.dart';
 import 'package:wasla/features/resident_service/features/technicain/data/models/technician_specialization_model.dart';
@@ -33,17 +32,21 @@ class _ResidentTechSpacializationListState
         if (state is ResidentTechnicianGetSpecializationsLoaded) {
           specialiations = state.specialiations;
         }
+        if (specialiations.isEmpty) {
+          return const SpecialityLoadingList();
+        }
         return SizedBox(
           height: 40,
           child: ListView.separated(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             separatorBuilder: (context, index) => const SizedBox(width: 7),
-            itemCount: specialiations.length + 1,
-            itemBuilder: (context, index) => ResidentTechSpacializationListItem(
-              index: index,
-              speciality: specialiations[index],
-            ),
+            itemCount: specialiations.length,
+            itemBuilder: (context, index) {
+              return ResidentTechSpacializationListItem(
+                speciality: specialiations[index],
+              );
+            },
           ),
         );
       },
@@ -55,21 +58,19 @@ class ResidentTechSpacializationListItem extends StatelessWidget {
   const ResidentTechSpacializationListItem({
     super.key,
     required this.speciality,
-    required this.index,
   });
   final TechnicianSpecializationModel speciality;
-  final int index;
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ResidentTechnicianCubit>();
     return InkWell(
       onTap: () {
-        cubit.chooseSpecialization(index: index);
+        cubit.chooseSpecialization(index: speciality.id);
       },
       child: CategoryFilteritema(
-        title: index == 0 ? "all".tr(context) : speciality.name,
-        isSelected: cubit.currentSpeciality == index,
+        title: speciality.name,
+        isSelected: cubit.currentSpeciality == speciality.id,
       ),
     );
   }

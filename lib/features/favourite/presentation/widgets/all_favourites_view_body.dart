@@ -98,6 +98,9 @@ class AllFavouritesViewBody extends StatelessWidget {
                                     .serviceProviderId,
                               },
                             );
+                          case ServiceProviderTypeEnum.technician:
+                            // TODO: Handle this case.
+                            throw UnimplementedError();
                         }
                       },
                       child: FavItem(

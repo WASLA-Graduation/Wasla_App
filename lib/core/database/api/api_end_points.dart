@@ -18,6 +18,7 @@ abstract class ApiEndPoints {
   static const String residentGetProfile = 'api/Resident/get-Profile';
   static const String imageBaseUrl = '${baseUrl}assets/images/user/';
   static const String gymBaseUrl = '${baseUrl}assets/images/gym/';
+  static const String technicalBaseUrl = '${baseUrl}assets/images/technician/';
   static const String doctorBaseUrl = '${baseUrl}assets/images/doctor/';
   static const String qrBaseUrl = '${baseUrl}assets/qrcodes/';
   static const String fileBaseUrl = '${baseUrl}assets/cv/doctor/';

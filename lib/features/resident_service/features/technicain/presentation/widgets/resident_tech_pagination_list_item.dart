@@ -7,18 +7,18 @@ import 'package:wasla/core/widgets/custom_image_with_stack.dart';
 import 'package:wasla/features/favourite/presentation/manager/cubit/favourite_cubit.dart';
 import 'package:wasla/features/favourite/presentation/widgets/custom_bottom_sheet_romove_fav.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/custom_doc_list_item_desc.dart';
-import 'package:wasla/features/resident_service/features/gym/data/models/gym_data_model.dart';
+import 'package:wasla/features/resident_service/features/technicain/data/models/resident_technician_model.dart';
 
-class ResidentGymItem extends StatelessWidget {
-  const ResidentGymItem({
+class ResidentTechPaginationListItem extends StatelessWidget {
+  const ResidentTechPaginationListItem({
     super.key,
     required this.index,
-    this.withoutFav,
-    required this.gym,
+    required this.technical,
+    required this.withFav,
   });
   final int index;
-  final bool? withoutFav;
-  final GymDataModel gym;
+  final bool withFav;
+  final ResidentTechnicianModel technical;
 
   @override
   Widget build(BuildContext context) {
@@ -35,43 +35,43 @@ class ResidentGymItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BuildImageWithStackWidget(imageUrl: gym.imageUrl),
+            BuildImageWithStackWidget(imageUrl: technical.imageUrl),
             const SizedBox(width: 18),
             Expanded(
               child: BlocBuilder<FavouriteCubit, FavouriteState>(
                 builder: (context, state) {
                   final cubit = context.read<FavouriteCubit>();
-                  final isFav = cubit.checkFavourite(gym.id);
+                  final isFav = cubit.checkFavourite(technical.id);
 
                   return ServiceItemDescription(
-                    title: gym.name,
-                    subtitle: gym.description,
-                    rating: gym.rating.toDouble(),
+                    title: technical.name,
+                    subtitle: technical.description,
+                    rating: technical.rating.toDouble(),
                     isFavourite: isFav,
                     onFavouritePressed: () {
                       if (isFav) {
                         showModalBottomSheet(
                           context: context,
                           builder: (_) => CustomConfirmBottomSheetRemoveFromFav(
-                            content: ResidentGymItem(
+                            content: ResidentTechPaginationListItem(
                               index: index,
-                              withoutFav: true,
-                              gym: gym,
+                              withFav: false,
+                              technical: technical,
                             ),
                             title: "remFromFav".tr(context),
                             confirmText: "rem".tr(context),
                             onConfirm: () {
                               cubit.removeFromFavorite(
                                 favouriteId: cubit.getFavIdForSpecificService(
-                                  gym.id,
+                                  technical.id,
                                 ),
-                                serviceProviderId: gym.id,
+                                serviceProviderId: technical.id,
                               );
                             },
                           ),
                         );
                       } else {
-                        cubit.addToFavourite(serviceId: gym.id);
+                        cubit.addToFavourite(serviceId: technical.id);
                       }
                     },
                   );

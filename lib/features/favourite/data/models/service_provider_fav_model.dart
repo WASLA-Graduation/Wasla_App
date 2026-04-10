@@ -1,6 +1,5 @@
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
-import 'package:wasla/core/enums/service_provider_type.dart';
 
 class ServiceProviderModel {
   final int id;
@@ -30,9 +29,7 @@ class ServiceProviderModel {
       serviceProviderProfilePhoto:
           json[ApiKeys.serviceProviderProfilePhoto] == null
           ? ''
-          : serviceProviderImage(
-                  serviceProviderType: json[ApiKeys.serviceProviderType],
-                ) +
+          : ApiEndPoints.imageBaseUrl +
                 json[ApiKeys.serviceProviderProfilePhoto],
       serviceProviderPhone: json[ApiKeys.serviceProviderPhone] ?? '',
       serviceProviderType: json[ApiKeys.serviceProviderType],
@@ -49,22 +46,5 @@ class ServiceProviderModel {
       ApiKeys.serviceProviderPhone: serviceProviderPhone,
       ApiKeys.serviceProviderType: serviceProviderType,
     };
-  }
-}
-
-String serviceProviderImage({required String serviceProviderType}) {
-  switch (ServiceProviderTypeEnum.fromStringToServiceProviderType(
-    serviceProviderType,
-  )) {
-    case ServiceProviderTypeEnum.doctor:
-      return ApiEndPoints.imageBaseUrl;
-    case ServiceProviderTypeEnum.restaurant:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case ServiceProviderTypeEnum.driver:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case ServiceProviderTypeEnum.gym:
-      return ApiEndPoints.gymBaseUrl;
   }
 }

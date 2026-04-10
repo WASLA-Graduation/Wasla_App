@@ -6,6 +6,7 @@ import 'package:wasla/features/profile/presentation/views/technician_edit_profil
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
 import 'package:wasla/features/resident_service/features/technicain/data/repo/resident_technician_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/technicain/presentation/manager/cubit/resident_technician_cubit.dart';
+import 'package:wasla/features/resident_service/features/technicain/presentation/views/resident_technician_details_view.dart';
 import 'package:wasla/features/resident_service/features/technicain/presentation/views/resident_technician_view.dart';
 import 'package:wasla/features/technicant/features/booking/data/repo/technician_bookings_repo_impl.dart';
 import 'package:wasla/features/technicant/features/booking/presentation/manager/cubit/technician_booking_cubit.dart';
@@ -518,6 +519,18 @@ final GoRouter appRouter = GoRouter(
             ResidentTechnicianRepoImpl(api: sl<ApiConsumer>()),
           ),
           child: ResidentTechnicianView(),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.residentTechnicianDetailsScreen,
+      builder: (context, state) {
+        final Map<String, dynamic> data = state.extra as Map<String, dynamic>;
+        return BlocProvider(
+          create: (context) => ResidentTechnicianCubit(
+            ResidentTechnicianRepoImpl(api: sl<ApiConsumer>()),
+          ),
+          child: ResidentTechnicianDetailsView(data: data),
         );
       },
     ),

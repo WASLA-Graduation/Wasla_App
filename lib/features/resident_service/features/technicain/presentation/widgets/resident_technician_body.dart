@@ -9,7 +9,7 @@ class ResidentTechnicianBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double hSpace = SizeConfig.isTablet ? 24 : 18;
-    final double vSpace = SizeConfig.isTablet ? 15 : 8;
+    final double vSpace = SizeConfig.isTablet ? 25 : 15;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: hSpace),
       child: Column(
