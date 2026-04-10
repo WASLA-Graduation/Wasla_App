@@ -540,10 +540,8 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.residentTechnicianBookingScreen,
       builder: (context, state) {
         final Map<String, dynamic> data = state.extra as Map<String, dynamic>;
-        return BlocProvider(
-          create: (context) => ResidentTechnicianCubit(
-            ResidentTechnicianRepoImpl(api: sl<ApiConsumer>()),
-          ),
+        return BlocProvider.value(
+          value: data[AppStrings.cubit] as ResidentTechnicianCubit,
           child: ResidentTechnicalBookView(technicianId: data[AppStrings.id]),
         );
       },

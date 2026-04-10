@@ -77,8 +77,7 @@ class ResidentBookingCubit extends Cubit<ResidentBookingState> {
         // TODO: Handle this case.
         throw UnimplementedError();
       case BookingFilter.technicianBookings:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        return await bookingRepo.technicainCancelBooking(bookingId: bookingId);
     }
   }
 

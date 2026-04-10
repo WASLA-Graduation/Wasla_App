@@ -99,8 +99,17 @@ class AllFavouritesViewBody extends StatelessWidget {
                               },
                             );
                           case ServiceProviderTypeEnum.technician:
-                            // TODO: Handle this case.
-                            throw UnimplementedError();
+                            context.pushScreen(
+                              AppRoutes.residentTechnicianDetailsScreen,
+                              arguments: {
+                                AppStrings.name: cubit
+                                    .allFavouriteList[index]
+                                    .serviceProviderName,
+                                AppStrings.id: cubit
+                                    .allFavouriteList[index]
+                                    .serviceProviderId,
+                              },
+                            );
                         }
                       },
                       child: FavItem(
