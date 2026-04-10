@@ -37,8 +37,7 @@ class CategoryServiceModel {
       color: AppColors.blue,
     ),
     CategoryServiceModel(
-      route: '',
-
+      route: AppRoutes.residentTechnicianScreen,
       img: Assets.assetsImagesCustomerSupport,
       name: "technician",
       color: AppColors.green,

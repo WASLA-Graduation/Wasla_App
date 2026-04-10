@@ -41,6 +41,7 @@ abstract class ApiKeys {
   static const body = 'body';
   static const image = 'Image';
   static const specialty = 'Specialty';
+  static const specialtySmall = 'specialty';
   static const imageSmall = 'image';
   static const birthDay = 'BirthDay';
   static const serviceProviderName = 'serviceProviderName';

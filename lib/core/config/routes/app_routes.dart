@@ -82,4 +82,6 @@ abstract class AppRoutes {
   static const String stackTestScreen = '/stackTestScreen';
   static const String technicianBookingDetailsScreen =
       '/technicianBookingDetailsScreen';
+  static const String residentTechnicianScreen =
+      '/residentTechnicianScreen';
 }

@@ -47,12 +47,14 @@ class _TechnicianBookingDetailsViewState
             return NoInternetWidget(
               onRetry: () {
                 getBookingDetails();
+                context.read<TechnicianBookingCubit>().whenRetry();
               },
             );
           } else if (state is TechincainBookingFailureState) {
             return MyErrorWidget(
               onRetry: () {
                 getBookingDetails();
+                context.read<TechnicianBookingCubit>().whenRetry();
               },
             );
           } else if (state is TechincainGetBookingDetailsLoadingState ||
