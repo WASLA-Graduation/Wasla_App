@@ -344,6 +344,7 @@ class AuthCubit extends Cubit<AuthState> {
     response.fold(
       (error) {
         emit(AuthSignInFailure(errMsg: error));
+      
       },
       (success) {
         dataModel = success;

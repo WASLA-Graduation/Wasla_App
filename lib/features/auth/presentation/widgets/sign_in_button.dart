@@ -21,7 +21,7 @@ class SignInButton extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSignInFailure) {
-          toastAlert(color: AppColors.error, msg: state.errMsg);
+          toastAlert(color: AppColors.red, msg: state.errMsg);
         } else if (state is AuthSignInSuccess) {
           if (!cubit.dataModel!.isVerified) {
             cubit.forgotPassCheckEmail().then((value) {
@@ -74,7 +74,9 @@ class SignInButton extends StatelessWidget {
               ),
             );
           } else {
-            FcmNotifications.subscribeToTopic('User_${cubit.dataModel!.userId}');
+            FcmNotifications.subscribeToTopic(
+              'User_${cubit.dataModel!.userId}',
+            );
             FcmNotifications.subscribeToTopic('All');
             cubit.saveSignInData();
             context.pushReplacementScreen(

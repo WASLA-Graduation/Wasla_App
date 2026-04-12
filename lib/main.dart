@@ -23,11 +23,12 @@ void main() async {
   );
 
   runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) {
-        return WaslaApp();
-      },
-    ),
+    // DevicePreview(
+    //   enabled: !kReleaseMode,
+    //   builder: (context) {
+    //     return WaslaApp();
+    //   },
+    // ),
+    WaslaApp(),
   );
 }

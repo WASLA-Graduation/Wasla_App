@@ -16,12 +16,12 @@ class ResidentTechnicalBookViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double space = SizeConfig.isTablet ? 20.0 : 14.0;
+    final double vSpace = SizeConfig.isTablet ? 25.0 : 15.0;
     context.read<ResidentTechnicianCubit>().reset();
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: space),
       child: Column(
-        spacing: SizeConfig.isTablet ? 25.0 : 15.0,
         children: [
           CustomDatePickerWidget(
             currentDate: DateTime.now(),
@@ -29,6 +29,7 @@ class ResidentTechnicalBookViewBody extends StatelessWidget {
                 .read<ResidentTechnicianCubit>()
                 .updateSelectedDate(date: date),
           ),
+          SizedBox(height: vSpace),
           BlocBuilder<ResidentTechnicianCubit, ResidentTechnicianState>(
             buildWhen: (previous, current) =>
                 current is ResidentTechnicianSelectTimeSlot,
@@ -46,6 +47,7 @@ class ResidentTechnicalBookViewBody extends StatelessWidget {
               );
             },
           ),
+          SizedBox(height: vSpace),
 
           CustomTextFormField(
             keyboardTyp: TextInputType.number,
@@ -82,6 +84,7 @@ class ResidentTechnicalBookViewBody extends StatelessWidget {
               );
             },
           ),
+          SizedBox(height: MediaQuery.of(context).padding.bottom>0?0:vSpace),
         ],
       ),
     );

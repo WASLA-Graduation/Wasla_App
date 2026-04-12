@@ -44,10 +44,6 @@ class WaslaApp extends StatelessWidget {
                 themeMode: globalCubit.themeMode,
                 builder: (context, child) =>
                     NetworkAwareWrapper(child: child ?? const SizedBox()),
-
-                // initialRoute: handleInitialRoute(),
-                // home: Disha(),
-                // onGenerateRoute: AppRouter.onGenerateRoute,
               );
             },
           );
