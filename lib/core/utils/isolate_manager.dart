@@ -32,6 +32,7 @@ class IsolateManager {
       IsolatesMessage(sendPort: _receivePort!.sendPort, data: data),
       onError: _errorPort?.sendPort,
       onExit: _exitPort?.sendPort,
+      
     );
   }
 
