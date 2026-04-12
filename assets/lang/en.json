@@ -216,6 +216,7 @@
     "specialty": "Specialty",
     "hospital": "Hospital",
     "bookingDone": "Booking Done Successfully",
+    "passwordChanged": "Passowd Changed Successfully",
     "serviceAddedSuccess": "Service Added Successfully",
     "allTimesBooked": "All Times are Booked",
     "showImages":"Show Images",

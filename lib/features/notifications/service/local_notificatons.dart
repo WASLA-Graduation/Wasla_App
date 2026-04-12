@@ -45,10 +45,10 @@ abstract class LocalNotifications {
     if (response.payload == null) return;
 
     final data = jsonDecode(response.payload!);
-    NotificatonsRoutes route = NotificatonsRoutes.fromInt(
+    NotificationRoute route = NotificationRoute.fromInt(
       int.parse(data['type']),
     );
 
-    navigateToRightRoute(route: route, refereceId: data['refrenceId']);
+    navigateToRightRoute(route: route, referenceId: data['refrenceId']);
   }
 }

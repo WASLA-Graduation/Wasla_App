@@ -134,12 +134,12 @@ class FcmNotifications {
 
   static Future<void> whenTappedOnBackgroundNotificaton() async {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      NotificatonsRoutes route = NotificatonsRoutes.fromInt(
+      NotificationRoute route = NotificationRoute.fromInt(
         int.parse(message.data['type']),
       );
       navigateToRightRoute(
         route: route,
-        refereceId: message.data['refrenceId'],
+        referenceId: message.data['refrenceId'],
       );
     });
   }
@@ -149,12 +149,12 @@ class FcmNotifications {
         .getInitialMessage();
 
     if (message != null) {
-      NotificatonsRoutes route = NotificatonsRoutes.fromInt(
+      NotificationRoute route = NotificationRoute.fromInt(
         int.parse(message.data['type']),
       );
       navigateToRightRoute(
         route: route,
-        refereceId: message.data['refrenceId'],
+        referenceId: message.data['refrenceId'],
       );
     }
   }

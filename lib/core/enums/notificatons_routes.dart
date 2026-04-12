@@ -10,140 +10,46 @@ import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/reviews/presentation/manager/cubit/reviews_cubit.dart';
 
-enum NotificatonsRoutes {
-  splashScreen, // 0
-  onboardingScreen, // 1
-  signInScreen, // 2
-  signUpScreen, // 3
-  resetPassScreen, // 4
-  verifyScreen, // 5
-  forgotScreen, // 6
-  residentInfoScreen, // 7
-  doctorInfoScreen, // 8
-  doctorCompleteInfoScreen, // 9
-  resturentInfoScreen, // 10
-  authMapScreen, // 11
-  residentHomeScreen, // 12
-  residenBottomNavBar, // 13
-  allServicesScreen, // 14
-  residentSearchScreen, // 15
-  doctorScreen, // 16
-  doctorDetailsScreen, // 17
-  chnageLangScreen, // 18
-  residentEditProfileScreen, // 19
-  accountChangePassScreen, // 20
-  doctorNavbarScreen, // 21
-  doctorAddServiceScreen, // 22
-  reviewScreen, // 23
-  doctorSeeSevicesScreen, // 24
-  doctorBookingScreen, // 25
-  doctorEditBookingScreen, // 26
-  doctorEditProfileScreen, // 27
-  allFavouritesScreen, // 28
-  residentPersonalInfoScreen, // 29
-  residentBookingScreen, // 30
-  gymCompleteInfoScreen, // 31
-  gymDashbaordScreen, // 32
-  gymBottomNavBarScreen, // 33
-  gymAddUpdatePackageScreen, // 34
-  residentProfileInfoScreen, // 35
-  doctorProfileInfoScreen, // 36
-  gymProfileInfoScreen, // 37
-  gymEditProfileScreen, // 38
-  gymResidentScreen, // 39
-  gymResidentDetailsScreen, // 40
-  gymResidentSeePackagesScreen, // 41
-  gymScanQrScreen, // 42
-  notificationsScreen, // 43;
-  paymentSuccessScreen, // 44;
-  paymentFailureScreen, // 45;
-  newRideRequest, // 46
-  rideAccepted, // 47
-  rideCancelled, // 48
-  rideCompleted, // 49
-  technicainNewBookingRequest; // 50
+enum NotificationRoute {
+  reviewScreen, // 0
+  gymPaymentSuccess, // 1
+  gymPaymentFailed, // 2
+  newRideRequest, // 3
+  rideAccepted, // 4
+  rideCancelled, // 5
+  rideCompleted, // 6
+  technicianNewBookingRequest, // 7
+  doctorCompleteInfoScreen, // 8
+  doctorBookingScreen, // 9
+  doctorEditBookingScreen, // 10
+  doctorCancelBookingScreen, // 11
+  messageReceived, // 12
+  driverCompleteInfoScreen, // 13
+  gymCompleteInfoScreen, // 14
+  gymPackageBooked, // 15
+  gymPackageExpired, // 16
+  gymBookingCancelled, // 17
+  residentCompleteInfoScreen, // 18
+  technicianCompleteInfoScreen, // 19
+  technicianAcceptBooking, // 20
+  technicianRejectBooking, // 21
+  userTechnicianBookingCancelled, // 22
+  technicianCancelBooking, // 23
+  postCommented, // 24
+  postReacted; // 25
 
-  static NotificatonsRoutes fromInt(int index) {
-    return NotificatonsRoutes.values[index];
+  static NotificationRoute fromInt(int index) {
+    return NotificationRoute.values[index];
   }
 }
 
 void navigateToRightRoute({
-  required NotificatonsRoutes route,
-  required String refereceId,
+  required NotificationRoute route,
+  required String referenceId,
 }) async {
   switch (route) {
-    case NotificatonsRoutes.splashScreen: //0
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.onboardingScreen: //1
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.signInScreen: //2
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.signUpScreen: //3
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.resetPassScreen: //4
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.verifyScreen: //5
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.forgotScreen: //6
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.residentInfoScreen: //7
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.doctorInfoScreen: //8
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.doctorCompleteInfoScreen: //9
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.resturentInfoScreen: //10
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.authMapScreen: //11
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.residentHomeScreen: //12
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.residenBottomNavBar: //13
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.allServicesScreen: //14
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.residentSearchScreen: //15
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.doctorScreen: //16
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.doctorDetailsScreen: //17
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.chnageLangScreen: //18
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.residentEditProfileScreen: //19
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.accountChangePassScreen: //20
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.doctorNavbarScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.doctorAddServiceScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.reviewScreen:
-      final reviewId = int.parse(refereceId);
+    case NotificationRoute.reviewScreen:
+      final reviewId = int.parse(referenceId);
       final String? userId = await getUserId();
       final cubit = navigatorKey.currentContext?.read<ReviewsCubit>();
       cubit?.resetState();
@@ -155,98 +61,35 @@ void navigateToRightRoute({
       );
       break;
 
-    case NotificatonsRoutes.doctorSeeSevicesScreen:
-      navigatorKey.currentContext!.push(
-        AppRoutes.doctorSeeSevicesScreen,
-        extra: refereceId,
-      );
-      break;
-    case NotificatonsRoutes.doctorBookingScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.doctorEditBookingScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.doctorEditProfileScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.allFavouritesScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.residentPersonalInfoScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.residentBookingScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.gymCompleteInfoScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.gymDashbaordScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.gymBottomNavBarScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.gymAddUpdatePackageScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.residentProfileInfoScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.doctorProfileInfoScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.gymProfileInfoScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.gymEditProfileScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.gymResidentScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.gymResidentDetailsScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.gymResidentSeePackagesScreen:
-      navigatorKey.currentContext!.push(
-        AppRoutes.gymResidentSeePackagesScreen,
-        extra: refereceId,
-      );
-      break;
-    case NotificatonsRoutes.gymScanQrScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.notificationsScreen:
-      // TODO: Handle this case.
-      throw UnimplementedError();
-    case NotificatonsRoutes.paymentSuccessScreen:
+    case NotificationRoute.gymPaymentSuccess:
       navigatorKey.currentContext!.push(
         AppRoutes.paymentSuccessScreen,
-        extra: refereceId,
+        extra: referenceId,
       );
       break;
 
-    case NotificatonsRoutes.paymentFailureScreen:
+    case NotificationRoute.gymPaymentFailed:
       navigatorKey.currentContext!.push(
         AppRoutes.paymentFailureScreen,
-        extra: refereceId,
+        extra: referenceId,
       );
-    case NotificatonsRoutes.newRideRequest:
-      final tripId = int.parse(refereceId);
+      break;
+
+    case NotificationRoute.newRideRequest:
+      final tripId = int.parse(referenceId);
       navigatorKey.currentContext!.push(
         AppRoutes.suggestedTripScreen,
         extra: tripId,
       );
       break;
-    case NotificatonsRoutes.rideAccepted:
+
+    case NotificationRoute.rideAccepted:
       return;
-    case NotificatonsRoutes.rideCancelled:
+
+    case NotificationRoute.rideCancelled:
       final String? currentRole = await SharedPreferencesHelper.get(
         key: ApiKeys.role,
       );
-
       final bool isDriver = currentRole == ServiceRole.driver.name;
       navigatorKey.currentContext!.push(
         AppRoutes.tripCanceldScreen,
@@ -254,42 +97,123 @@ void navigateToRightRoute({
       );
       break;
 
-    case NotificatonsRoutes.rideCompleted:
+    case NotificationRoute.rideCompleted:
       navigatorKey.currentContext!.push(
         AppRoutes.driverReviewScreen,
-        extra: refereceId,
+        extra: referenceId,
       );
       break;
-    case NotificatonsRoutes.technicainNewBookingRequest:
-      final int bookingId = int.parse(refereceId);
+
+    case NotificationRoute.technicianNewBookingRequest:
+      final int bookingId = int.parse(referenceId);
       navigatorKey.currentContext!.push(
         AppRoutes.technicianBookingDetailsScreen,
         extra: bookingId,
       );
+      break;
+
+    case NotificationRoute.doctorCompleteInfoScreen:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.doctorBookingScreen:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.doctorEditBookingScreen:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.doctorCancelBookingScreen:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.messageReceived:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.driverCompleteInfoScreen:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.gymCompleteInfoScreen:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.gymPackageBooked:
+      navigatorKey.currentContext!.push(
+        AppRoutes.gymResidentSeePackagesScreen,
+        extra: referenceId,
+      );
+      break;
+
+    case NotificationRoute.gymPackageExpired:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.gymBookingCancelled:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.residentCompleteInfoScreen:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.technicianCompleteInfoScreen:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.technicianAcceptBooking:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.technicianRejectBooking:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.userTechnicianBookingCancelled:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.technicianCancelBooking:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.postCommented:
+      // TODO: implement
+      break;
+
+    case NotificationRoute.postReacted:
+      // TODO: implement
+      break;
   }
 }
 
 void navigateToRouteRealTime({required RemoteMessage message}) async {
-  final int route = int.parse(message.data['type']);
-  // final String refrenceId = message.data['refrenceId'];
+  final int routeIndex = int.parse(message.data['type']);
+  final route = NotificationRoute.fromInt(routeIndex);
+
   switch (route) {
-    case 48:
+    case NotificationRoute.rideCancelled:
       final String? currentRole = await SharedPreferencesHelper.get(
         key: ApiKeys.role,
       );
-
       final bool isDriver = currentRole == ServiceRole.driver.name;
       navigatorKey.currentContext!.pushAndRemoveAllScreens(
         AppRoutes.tripCanceldScreen,
         arguments: isDriver,
       );
       break;
-    case 47:
+
+    case NotificationRoute.rideAccepted:
       final tripId = int.parse(message.data['refrenceId']);
       navigatorKey.currentContext!.pushReplacement(
         AppRoutes.driverTripDetailsScreen,
         extra: tripId,
       );
+      break;
+
+    default:
       break;
   }
 }

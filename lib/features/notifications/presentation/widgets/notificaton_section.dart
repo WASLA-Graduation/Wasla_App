@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -87,12 +88,13 @@ class NotificationListSection extends StatelessWidget {
                 context.read<NotificationCubit>().readNotification(
                   notification,
                 );
-                NotificatonsRoutes route = NotificatonsRoutes.fromInt(
+                NotificationRoute route = NotificationRoute.fromInt(
                   notification.routeIndex,
                 );
+
                 navigateToRightRoute(
                   route: route,
-                  refereceId: notification.serviceProviderId,
+                  referenceId: notification.serviceProviderId,
                 );
               },
 

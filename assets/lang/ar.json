@@ -435,7 +435,9 @@
                     "noTechnicals": "لا يوجد تقنيين",
     "noTechnicalsInSystem": "لا يوجد تقنين في الان",
         "remFromFav": "ازالة من المفضلة؟",
-    "rem": "نعم ازالة"
+    "rem": "نعم ازالة",
+        "passwordChanged": "تغيير كلمة المرور بنجاح"
+
 
 
 
