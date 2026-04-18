@@ -88,4 +88,6 @@ abstract class AppRoutes {
       '/residentTechnicianDetailsScreen';
   static const String residentTechnicianBookingScreen =
       '/residentTechnicianBookingScreen';
+  static const String restuarantCompleteInfo =
+      '/restuarantCompleteInfoScreen';
 }

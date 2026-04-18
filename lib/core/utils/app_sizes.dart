@@ -15,10 +15,13 @@ abstract class AppSizes {
   static const double paddingSizeTwelve = 12.0;
 
   /// padding size 15
-  static const double paddingSizeDefault = 15.0;
+  static const double paddingSizeFifteen = 15.0;
 
   /// padding size 17
   static const double paddingSizeSeventeen = 17.0;
+
+  /// default padding
+  static const double paddingSizeDefault = 18.0;
 
   /// padding size 20
   static const double paddingSizeLarge = 20.0;

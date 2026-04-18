@@ -101,6 +101,8 @@ class AuthRepoImpl extends AuthRepo {
       );
       if (response[ApiKeys.data][ApiKeys.role] == 'gym') {
         response[ApiKeys.data][ApiKeys.role] = 'gymOwner';
+      } else if (response[ApiKeys.data][ApiKeys.role] == 'restaurant') {
+        response[ApiKeys.data][ApiKeys.role] = 'restaurantOwner';
       }
       return Right(SignInDataModel.fromJson(response));
     } on ServerException catch (e) {
@@ -118,6 +120,8 @@ class AuthRepoImpl extends AuthRepo {
 
         if (role[ApiKeys.roleName] == 'gym') {
           role[ApiKeys.value] = 'gymOwner';
+        } else if (response[ApiKeys.data][ApiKeys.role] == 'restaurant') {
+          response[ApiKeys.data][ApiKeys.role] = 'restaurantOwner';
         }
         roles.add(RolesModel.fromJson(role));
       }
@@ -366,7 +370,6 @@ class AuthRepoImpl extends AuthRepo {
       await api.post(
         ApiEndPoints.technicantCompleteInfo,
         queryParameters: {
-          
           ApiKeys.emailCapital: email,
           ApiKeys.fullName: fullName,
           ApiKeys.phone: phone,

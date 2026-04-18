@@ -46,7 +46,7 @@ String getRightCompleteServiceRoute({required ServiceRole role}) {
       return AppRoutes.technicantCompleteInfoScreen;
 
     case ServiceRole.restaurantOwner:
-      return AppRoutes.residentInfoScreen;
+      return AppRoutes.restuarantCompleteInfo;
 
     case ServiceRole.gymOwner:
       return AppRoutes.gymCompleteInfoScreen;

@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/utils/app_strings.dart';
+import 'package:wasla/features/auth/presentation/views/restaurant_complete_info_view.dart';
 import 'package:wasla/features/auth/presentation/views/technicant_complete_info_view.dart';
 import 'package:wasla/features/profile/presentation/views/technician_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
@@ -544,6 +545,12 @@ final GoRouter appRouter = GoRouter(
           value: data[AppStrings.cubit] as ResidentTechnicianCubit,
           child: ResidentTechnicalBookView(technicianId: data[AppStrings.id]),
         );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.restuarantCompleteInfo,
+      builder: (context, state) {
+        return RestaurantCompleteInfoView();
       },
     ),
   ],
