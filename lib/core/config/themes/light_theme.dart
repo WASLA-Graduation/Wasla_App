@@ -6,6 +6,7 @@ import 'package:wasla/core/responsive/size_config.dart';
 ThemeData buildLightTheme(BuildContext context, {required bool isArabic}) {
   return ThemeData(
     appBarTheme: AppBarTheme(
+      scrolledUnderElevation: 0,
       backgroundColor: AppColors.lightbackgroundColor,
       elevation: 0,
       iconTheme: IconThemeData(color: AppColors.blackColor),
