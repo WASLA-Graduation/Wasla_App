@@ -82,12 +82,12 @@ abstract class AppRoutes {
   static const String stackTestScreen = '/stackTestScreen';
   static const String technicianBookingDetailsScreen =
       '/technicianBookingDetailsScreen';
-  static const String residentTechnicianScreen =
-      '/residentTechnicianScreen';
+  static const String residentTechnicianScreen = '/residentTechnicianScreen';
   static const String residentTechnicianDetailsScreen =
       '/residentTechnicianDetailsScreen';
   static const String residentTechnicianBookingScreen =
       '/residentTechnicianBookingScreen';
-  static const String restuarantCompleteInfo =
-      '/restuarantCompleteInfoScreen';
+  static const String restuarantCompleteInfo = '/restuarantCompleteInfoScreen';
+  static const String restuarantBottomNavBar = '/restuarantBottomNavBarScreen';
+  static const String restuarantEditProfile = '/restuarantEditProfileScreen';
 }

@@ -15,6 +15,8 @@ abstract class ApiKeys {
   static const gallery = 'gallery';
   static const profile = 'profile';
   static const driverId = 'driverId';
+  static const filesExsiting = 'files.existingFiles';
+  static const filesNew = 'files.newFiles';
   static const bookingDate = 'bookingDate';
   static const userId = 'userId';
   static const refreshToken = 'refreshToken';

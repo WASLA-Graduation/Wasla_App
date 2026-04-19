@@ -39,6 +39,9 @@ import 'package:wasla/features/resident_service/features/gym/data/repo/gym_resid
 import 'package:wasla/features/resident_service/features/gym/presentation/manager/cubit/gym_resident_cubit.dart';
 import 'package:wasla/features/resident_service/features/home/data/repo/home_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
+import 'package:wasla/features/restaurant/home/data/repo/restaurant_dashboard_repo.dart';
+import 'package:wasla/features/restaurant/home/data/repo/restaurant_dashboard_repo_impl.dart';
+import 'package:wasla/features/restaurant/home/presentation/manager/cubit/restaurant_dashboard_cubit.dart';
 import 'package:wasla/features/reviews/data/repo/reviews_repo_imp.dart';
 import 'package:wasla/features/reviews/presentation/manager/cubit/reviews_cubit.dart';
 import 'package:wasla/features/social_media/data/repo/social_media_repo_impl.dart';
@@ -149,6 +152,12 @@ List<SingleChildWidget> get buildAppCubits {
     BlocProvider(
       create: (context) => TechnicantDashboardCubit(
         TechnicantDashboardRepoImpl(api: sl<ApiConsumer>()),
+      ),
+      lazy: true,
+    ),
+    BlocProvider(
+      create: (context) => RestaurantDashboardCubit(
+        RestaurantDashboardRepoImpl(api: sl<ApiConsumer>()),
       ),
       lazy: true,
     ),

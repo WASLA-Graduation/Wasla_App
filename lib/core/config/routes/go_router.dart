@@ -4,6 +4,7 @@ import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/features/auth/presentation/views/restaurant_complete_info_view.dart';
 import 'package:wasla/features/auth/presentation/views/technicant_complete_info_view.dart';
+import 'package:wasla/features/profile/presentation/views/restaurant_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
 import 'package:wasla/features/resident_service/features/technicain/data/repo/resident_technician_repo_impl.dart';
@@ -11,6 +12,8 @@ import 'package:wasla/features/resident_service/features/technicain/presentation
 import 'package:wasla/features/resident_service/features/technicain/presentation/views/resident_technical_book_view.dart';
 import 'package:wasla/features/resident_service/features/technicain/presentation/views/resident_technician_details_view.dart';
 import 'package:wasla/features/resident_service/features/technicain/presentation/views/resident_technician_view.dart';
+import 'package:wasla/features/restaurant/home/data/models/restaurant_model.dart';
+import 'package:wasla/features/restaurant/home/presentation/views/restaurant_bottom_nav_bar_view.dart';
 import 'package:wasla/features/technicant/features/booking/data/repo/technician_bookings_repo_impl.dart';
 import 'package:wasla/features/technicant/features/booking/presentation/manager/cubit/technician_booking_cubit.dart';
 import 'package:wasla/features/technicant/features/booking/presentation/views/technician_booking_details_view.dart';
@@ -551,6 +554,19 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.restuarantCompleteInfo,
       builder: (context, state) {
         return RestaurantCompleteInfoView();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.restuarantBottomNavBar,
+      builder: (context, state) {
+        return RestaurantBottomNavBarView();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.restuarantEditProfile,
+      builder: (context, state) {
+        final RestaurantModel restaurantModel = state.extra as RestaurantModel;
+        return RestaurantEditProfile(restaurant: restaurantModel);
       },
     ),
   ],

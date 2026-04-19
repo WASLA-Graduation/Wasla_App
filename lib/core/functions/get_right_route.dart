@@ -25,7 +25,7 @@ String getRightRoute({required ServiceRole role}) {
       return AppRoutes.technicantBottomNavBarScreen;
 
     case ServiceRole.restaurantOwner:
-      return AppRoutes.residentInfoScreen;
+      return AppRoutes.restuarantBottomNavBar;
 
     case ServiceRole.gymOwner:
       return AppRoutes.gymBottomNavBarScreen;
@@ -68,7 +68,7 @@ String getRightEditProfileRoute() {
       return AppRoutes.technicantEditProfileScreen;
 
     case ServiceRole.restaurantOwner:
-      return AppRoutes.residentEditProfileScreen;
+      return AppRoutes.restuarantEditProfile;
 
     case ServiceRole.gymOwner:
       return AppRoutes.gymEditProfileScreen;

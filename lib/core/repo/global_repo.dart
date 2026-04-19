@@ -8,6 +8,7 @@ import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
 import 'package:wasla/features/profile/data/models/gym_model.dart';
+import 'package:wasla/features/restaurant/home/data/models/restaurant_model.dart';
 import 'package:wasla/features/technicant/features/home/data/models/technician_model.dart';
 
 abstract class GlobalRepo {
@@ -23,6 +24,8 @@ abstract class GlobalRepo {
       return Right(GymModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -41,6 +44,8 @@ abstract class GlobalRepo {
       return Right(packages);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -59,6 +64,28 @@ abstract class GlobalRepo {
       return Right(TechnicianModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
       return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  static Future<Either<Failure, RestaurantModel>> getRestaurantProfile({
+    required String resturantId,
+  }) async {
+    try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
+
+      final response = await sl<ApiConsumer>().get(
+        ApiEndPoints.getRestaurntProfile,
+        queryParameters: {ApiKeys.id: resturantId},
+      );
+      return Right(RestaurantModel.fromJson(response[ApiKeys.data]));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 }

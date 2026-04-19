@@ -116,16 +116,23 @@ abstract class ApiEndPoints {
   static const String technicantGetProfile = 'api/Technician/GetProfile';
   static const String technicantUpdateProfile = 'api/Technician/UpdateProfile';
   static const String technicianGetChart = 'api/Technician/GetChart';
-  static const String technicianGetBookings = 'api/TechnicianBooking/GetTechnicianBookings/';
+  static const String technicianGetBookings =
+      'api/TechnicianBooking/GetTechnicianBookings/';
   static const String technicianAcceptBooking = 'api/TechnicianBooking/accept/';
   static const String technicianCancelBooking = 'api/TechnicianBooking/cancel/';
   static const String technicianRejectBooking = 'api/TechnicianBooking/reject/';
-  static const String technicianGetBookingDetails= 'api/TechnicianBooking/GetBookingDetailsForTechnician/';
-  static const String getBookingResidentWithTechnician= 'api/TechnicianBooking/GetResidentBookings/';
-  static const String getSpecializationsOfTechnician= 'api/Technician/Specializations';
-  static const String getTechniciansBySpeciality= 'api/Technician/GetBySpecialty';
-  static const String bookWithTechnician= 'api/TechnicianBooking/CreateBooking';
-  static const String getRestaurantCategories= 'api/RestaurantCategory/GetAll';
-  static const String restaurantCompleteInfo= 'api/Restaurant/CompleteProfile';
-
+  static const String technicianGetBookingDetails =
+      'api/TechnicianBooking/GetBookingDetailsForTechnician/';
+  static const String getBookingResidentWithTechnician =
+      'api/TechnicianBooking/GetResidentBookings/';
+  static const String getSpecializationsOfTechnician =
+      'api/Technician/Specializations';
+  static const String getTechniciansBySpeciality =
+      'api/Technician/GetBySpecialty';
+  static const String bookWithTechnician =
+      'api/TechnicianBooking/CreateBooking';
+  static const String getRestaurantCategories = 'api/RestaurantCategory/GetAll';
+  static const String restaurantCompleteInfo = 'api/Restaurant/CompleteProfile';
+  static const String getRestaurntProfile = 'api/Restaurant';
+  static const String updateRestaurntProfile = 'api/Restaurant/UpdateRestaurant';
 }

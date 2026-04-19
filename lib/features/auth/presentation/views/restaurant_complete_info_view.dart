@@ -9,7 +9,7 @@ class RestaurantCompleteInfoView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('completYourProfile'.tr(context))),
-      body: SafeArea(child: const RestaurantCompleteInfoBody()),
+      body: const RestaurantCompleteInfoBody(),
     );
   }
 }

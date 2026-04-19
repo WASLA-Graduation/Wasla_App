@@ -91,4 +91,15 @@ abstract class ProfileRepo {
     File? photo,
     List<PlatformFile>? technicantDocuments,
   });
+  Future<Either<String, Null>> restaurantUpdateProfile({
+    required String id,
+    required String restaurantName,
+    required String phone,
+    required String description,
+    required String owenerName,
+    required int restaurantCategoryId,
+    required List<String> existingFiles,
+    File? profile,
+    List<File>? newFiles,
+  });
 }

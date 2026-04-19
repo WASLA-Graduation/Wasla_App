@@ -14,6 +14,7 @@ import 'package:wasla/features/doctor_service/features/home/data/models/doctor_m
 import 'package:wasla/features/driver/features/home/data/models/driver_profile_model.dart';
 import 'package:wasla/features/profile/data/models/gym_model.dart';
 import 'package:wasla/features/profile/data/repo/profile_repo.dart';
+import 'package:wasla/features/restaurant/home/data/models/restaurant_model.dart';
 import 'package:wasla/features/technicant/features/home/data/models/technician_model.dart';
 part 'profile_state.dart';
 
@@ -35,7 +36,8 @@ class ProfileCubit extends Cubit<ProfileState> {
       gymPhones = '',
       email = '',
       vehicleModel = '',
-      vehicleNumber = '';
+      vehicleNumber = '',
+      serviceName = '';
 
   int experienceYears = 0, specializationId = 0;
   double lat = 0, lng = 0;
@@ -48,9 +50,11 @@ class ProfileCubit extends Cubit<ProfileState> {
   final gymFormKey = GlobalKey<FormState>();
   final driverFormKey = GlobalKey<FormState>();
   final technicainFormKey = GlobalKey<FormState>();
+  final restaurantFormKey = GlobalKey<FormState>();
   File? image;
   List<File> images = [];
   List<PlatformFile> files = [];
+  List<File> restaurantGalary = [];
   VehicleType vehicleType = VehicleType.car;
   int vehicleColor = -1;
   int technicainSpecialityId = -1;
@@ -63,6 +67,11 @@ class ProfileCubit extends Cubit<ProfileState> {
   void updateTechnicianSpeciality({required int specialityId}) {
     technicainSpecialityId = specialityId;
     emit(ProfileUpdateTechnicantSpecialization());
+  }
+
+  void updateRestaurantGalary(List<File> galary) {
+    restaurantGalary = galary;
+    emit(ProfileUpdate());
   }
 
   void updateVehicleColor(int color) {
@@ -168,6 +177,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     file = null;
     images = [];
     gymPhones = '';
+    serviceName = '';
     email = '';
     ownerName = '';
     businessName = '';
@@ -192,8 +202,8 @@ class ProfileCubit extends Cubit<ProfileState> {
       case ServiceRole.technician:
         return await GlobalRepo.getTechnicianProfile(technicianId: userId);
       case ServiceRole.restaurantOwner:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        return await GlobalRepo.getRestaurantProfile(resturantId: userId);
+
       case ServiceRole.gymOwner:
         return await profileRepo.geGymProfile(gymId: userId);
     }
@@ -277,8 +287,22 @@ class ProfileCubit extends Cubit<ProfileState> {
               : description,
         );
       case ServiceRole.restaurantOwner:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        final restaurant = user as RestaurantModel;
+
+        return await profileRepo.restaurantUpdateProfile(
+          id: restaurant.id,
+          description: description.isEmpty
+              ? restaurant.description
+              : description,
+          existingFiles: restaurant.gallery.map((p) => p).toList(),
+          owenerName: ownerName.isEmpty ? restaurant.ownerName : ownerName,
+          restaurantName: serviceName.isEmpty ? restaurant.name : serviceName,
+          profile: image,
+          phone: phoneNumber.isEmpty ? restaurant.phoneNumber : phoneNumber,
+          restaurantCategoryId: restaurant.restaurantCategoryId,
+          newFiles: null,
+        );
+
       case ServiceRole.gymOwner:
         final gym = user as GymModel;
         return await profileRepo.updateGymInfo(
