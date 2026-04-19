@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
+import 'package:wasla/features/auth/data/models/restaurant_catergories_model.dart';
 import 'package:wasla/features/auth/data/models/roles_model.dart';
 import 'package:wasla/features/auth/data/models/sign_in_model.dart';
 
@@ -96,5 +97,20 @@ abstract class AuthRepo {
     required String description,
     required File photo,
     required List<PlatformFile> technicantDocuments,
+  });
+
+  Future<Either<String, List<RestaurantCatergoriesModel>>>
+  getRestaurantCategories();
+
+  Future<Either<String, Null>> restaurantCompleteInfo({
+    required String email,
+    required String restaurantName,
+    required String ownerName,
+    required String description,
+    required String phone,
+
+    required int categoryId,
+    required File photo,
+    required List<File> restaurantImages,
   });
 }

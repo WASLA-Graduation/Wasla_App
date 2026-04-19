@@ -8,6 +8,7 @@ import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
 import 'package:wasla/core/functions/convert_image_to_json.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
+import 'package:wasla/features/auth/data/models/restaurant_catergories_model.dart';
 import 'package:wasla/features/auth/data/models/roles_model.dart';
 import 'package:wasla/features/auth/data/models/sign_in_model.dart';
 import 'package:wasla/features/auth/data/repo/auth_repo.dart';
@@ -120,8 +121,8 @@ class AuthRepoImpl extends AuthRepo {
 
         if (role[ApiKeys.roleName] == 'gym') {
           role[ApiKeys.value] = 'gymOwner';
-        } else if (response[ApiKeys.data][ApiKeys.role] == 'restaurant') {
-          response[ApiKeys.data][ApiKeys.role] = 'restaurantOwner';
+        } else if (role[ApiKeys.roleName] == 'restaurant') {
+          role[ApiKeys.value] = 'restaurantOwner';
         }
         roles.add(RolesModel.fromJson(role));
       }
@@ -380,6 +381,59 @@ class AuthRepoImpl extends AuthRepo {
           ApiKeys.longitude: lng,
           ApiKeys.specialty: specialty + 1,
         },
+        body: formData,
+        headers: {"Content-Type": "multipart/form-data"},
+      );
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, List<RestaurantCatergoriesModel>>>
+  getRestaurantCategories() async {
+    try {
+      final response = await api.get(ApiEndPoints.getRestaurantCategories);
+      final List<RestaurantCatergoriesModel> catergories = [];
+      for (var catergory in response[ApiKeys.data]) {
+        catergories.add(RestaurantCatergoriesModel.fromJson(catergory));
+      }
+      return Right(catergories);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> restaurantCompleteInfo({
+    required String email,
+    required String restaurantName,
+    required String ownerName,
+    required String description,
+    required String phone,
+    required int categoryId,
+    required File photo,
+    required List<File> restaurantImages,
+  }) async {
+    try {
+      final formData = FormData.fromMap({
+        ApiKeys.email: email,
+        ApiKeys.name: restaurantName,
+        ApiKeys.descriptionSmall: description,
+        ApiKeys.phoneNumber: phone,
+        ApiKeys.profile: await convertImageToMultipart(photo),
+        ApiKeys.gallery: await convertFilesToMultipart(restaurantImages),
+        ApiKeys.ownerName: ownerName,
+        ApiKeys.restaurantCategoryId: categoryId,
+      });
+
+      await api.post(
+        ApiEndPoints.restaurantCompleteInfo,
         body: formData,
         headers: {"Content-Type": "multipart/form-data"},
       );

@@ -9,6 +9,19 @@ final class AuthUpdate extends AuthState {}
 final class AuthUpdateTechnicantSpecialization extends AuthState {}
 
 final class AuthUpdateTechnicantDocuments extends AuthState {}
+final class AuthUpdateRestaurantCategory extends AuthState {}
+
+final class GetRestaurantCatergoriesSuccessState extends AuthState {
+  final List<RestaurantCatergoriesModel> catergories;
+
+  GetRestaurantCatergoriesSuccessState({required this.catergories});
+}
+
+final class GetRestaurantCatergoriesErrorState extends AuthState {
+  final String error;
+
+  GetRestaurantCatergoriesErrorState({required this.error});
+}
 
 final class AuthSuccessChooseFile extends AuthState {}
 
@@ -90,6 +103,16 @@ final class TechnicantCompleteInfoFailure extends AuthState {
   final String errMsg;
 
   TechnicantCompleteInfoFailure({required this.errMsg});
+}
+
+final class AuthRestaurantCompleteInfoLoading extends AuthState {}
+
+final class AuthRestaurantCompleteInfoSuccess extends AuthState {}
+
+final class RestaurantCompleteInfoFailure extends AuthState {
+  final String errMsg;
+
+  RestaurantCompleteInfoFailure({required this.errMsg});
 }
 
 final class AuthDoctorCompleteInfoLoading extends AuthState {}

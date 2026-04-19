@@ -40,14 +40,15 @@ class CustomProfilePicture extends StatelessWidget {
           bottom: 0,
           right: SizeConfig.isTablet ? 25 : 0,
           child: CircleAvatar(
-            radius: SizeConfig.isTablet ? 25 : 20,
+            radius: SizeConfig.isTablet ? 25 : 17,
             backgroundColor: AppColors.primaryColor,
             child: IconButton(
+              padding: EdgeInsets.only(right: 0),
               onPressed: onPressed,
               icon: Icon(
                 Icons.edit,
                 color: AppColors.whiteColor,
-                size: SizeConfig.isTablet ? 30 : 25,
+                size: SizeConfig.isTablet ? 30 : 19,
               ),
             ),
           ),

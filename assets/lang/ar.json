@@ -436,7 +436,15 @@
     "noTechnicalsInSystem": "لا يوجد تقنين في الان",
         "remFromFav": "ازالة من المفضلة؟",
     "rem": "نعم ازالة",
-        "passwordChanged": "تغيير كلمة المرور بنجاح"
+        "passwordChanged": "تغيير كلمة المرور بنجاح",
+            "restaurantOwnerName": "اسم صاحب المطعم",
+    "category": "التصنيف",
+        "restaurantName": " اسم المطعم",
+            "selectCategory": "اختر التصنيف",
+                "restaurantGalary": "صور المطعم"
+
+
+
 
 
 

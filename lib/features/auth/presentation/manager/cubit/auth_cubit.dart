@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:wasla/core/enums/driver_enums.dart';
 import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
+import 'package:wasla/features/auth/data/models/restaurant_catergories_model.dart';
 import 'package:wasla/features/auth/data/models/roles_model.dart';
 import 'package:wasla/features/auth/data/models/sign_in_model.dart';
 import 'package:wasla/features/auth/data/repo/auth_repo.dart';
@@ -32,8 +34,10 @@ class AuthCubit extends Cubit<AuthState> {
   final driverInfoformKey = GlobalKey<FormState>();
   final gymInfoformKey = GlobalKey<FormState>();
   final technicantInfoformKey = GlobalKey<FormState>();
+  final restaurantInfoFormKey = GlobalKey<FormState>();
   String role = '';
   List<File> gymImages = [];
+  List<File> restaurantImages = [];
   int selectedColor = -1;
 
   bool isPasswordVisible = false, enableButton = false;
@@ -57,9 +61,11 @@ class AuthCubit extends Cubit<AuthState> {
       resturentName = '',
       hosptialName = '',
       vehicleModel = '',
-      vehicleNumber = '';
+      vehicleNumber = '',
+      restaurantName = '';
 
   int technicantSpeciality = -1;
+  int restaurantCategory = -1;
   PlatformFile? file;
   int? spacializationID;
 
@@ -78,6 +84,15 @@ class AuthCubit extends Cubit<AuthState> {
   void updateVehicleType({required VehicleType type}) {
     vehicleType = type;
     emit(AuthUpdate());
+  }
+
+  void updateRestaurantGalary(List<File> image) {
+    restaurantImages = image;
+    emit(AuthSuccessChooseFile());
+  }
+
+  void updateRestaurantCategory({required int category}) {
+    restaurantCategory = category;
   }
 
   void updateTechnicantDocuments(List<PlatformFile> files) {
@@ -344,7 +359,6 @@ class AuthCubit extends Cubit<AuthState> {
     response.fold(
       (error) {
         emit(AuthSignInFailure(errMsg: error));
-      
       },
       (success) {
         dataModel = success;
@@ -468,12 +482,62 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
+  Future<void> getRestaurantCategories() async {
+    final response = await authRepo.getRestaurantCategories();
+    response.fold(
+      (error) {
+        emit(GetRestaurantCatergoriesErrorState(error: error));
+      },
+      (success) {
+        emit(GetRestaurantCatergoriesSuccessState(catergories: success));
+      },
+    );
+  }
+
+  Future<void> restaurantCompleteInfo() async {
+    if (restaurantCategory == -1) {
+      emit(RestaurantCompleteInfoFailure(errMsg: "Please Choose Category"));
+      return;
+    }
+
+    if (residentImage == null) {
+      emit(RestaurantCompleteInfoFailure(errMsg: "Please Choose Image"));
+      return;
+    }
+    if (restaurantImages.isEmpty) {
+      emit(
+        RestaurantCompleteInfoFailure(
+          errMsg: "Please Choose At Least One Image",
+        ),
+      );
+      return;
+    }
+    emit(AuthRestaurantCompleteInfoLoading());
+    final response = await authRepo.restaurantCompleteInfo(
+      email: email,
+      ownerName: name,
+      phone: phone,
+      description: description,
+      photo: residentImage!,
+      categoryId: restaurantCategory,
+      restaurantImages: restaurantImages,
+      restaurantName: restaurantName,
+    );
+    response.fold(
+      (error) {
+        log(error);
+        emit(RestaurantCompleteInfoFailure(errMsg: error));
+      },
+      (success) {
+        resetData();
+        emit(AuthRestaurantCompleteInfoSuccess());
+      },
+    );
+  }
+
   void saveSignInData() async {
     SecureStorageHelper.set(key: ApiKeys.token, value: dataModel!.token);
-    // SecureStorageHelper.set(
-    //   key: ApiKeys.refreshToken,
-    //   value: dataModel!.refreshToken,
-    // );
+
     await SecureStorageHelper.set(
       key: ApiKeys.userId,
       value: dataModel!.userId,
@@ -540,6 +604,9 @@ class AuthCubit extends Cubit<AuthState> {
     dataModel = null;
 
     vehicleType = VehicleType.car;
+    restaurantCategory = -1;
+    restaurantName = '';
+    restaurantImages.clear();
   }
 
   @override

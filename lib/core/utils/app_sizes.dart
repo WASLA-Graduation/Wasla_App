@@ -1,67 +1,53 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 abstract class AppSizes {
   /// padding size 2
-  static const double paddingSizeExtraExtraSmall = 2.0;
+  static double paddingSizeExtraExtraSmall = 2.h;
 
   /// padding size 5
-  static const double paddingSizeExtraSmall = 5.0;
+  static double paddingSizeExtraSmall = 5.h;
 
   /// padding size 8
-  static const double paddingSizeEight = 8.0;
+  static double paddingSizeEight = 8.h;
 
   /// padding size 10
-  static const double paddingSizeSmall = 10.0;
+  static double paddingSizeSmall = 10.h;
 
   /// padding size 12
-  static const double paddingSizeTwelve = 12.0;
+  static double paddingSizeThelve = 12.h;
 
   /// padding size 15
-  static const double paddingSizeFifteen = 15.0;
+  static double paddingSizeFifteen = 15.h;
 
   /// padding size 17
-  static const double paddingSizeSeventeen = 17.0;
+  static double paddingSizeSeventeen = 17.h;
 
   /// default padding
-  static const double paddingSizeDefault = 18.0;
+  static double paddingSizeDefault = 18.h;
 
   /// padding size 20
-  static const double paddingSizeLarge = 20.0;
+  static double paddingSizeLarge = 20.h;
 
   /// padding size 25
-  static const double paddingSizeExtraLarge = 25.0;
+  static double paddingSizeExtraLarge = 25.h;
 
   /// padding size 35
-  static const double paddingSizeThirtyFive = 35.0;
+  static double paddingSizeThirtyFive = 35.h;
 
   /// padding size 50
-  static const double paddingSizeOverLarge = 50.0;
+  static double paddingSizeOverLarge = 50.h;
 
-  /// margin size 5
-  static const double marginSizeExtraSmall = 5.0;
+  /// margin for width
+  static double marginSizeExtraSmall = 5.w;
+  static double marginSizeSmall = 10.w;
+  static double marginSizeDefault = 15.w;
+  static double marginSizeLarge = 20.w;
+  static double marginSizeExtraLarge = 25.w;
 
-  /// margin size 10
-  static const double marginSizeSmall = 10.0;
-
-  /// margin size 15
-  static const double marginSizeDefault = 15.0;
-
-  /// margin size 20
-  static const double marginSizeLarge = 20.0;
-
-  /// margin size 25
-  static const double marginSizeExtraLarge = 25.0;
-
-  /// icon size 12
-  static const double iconSizeExtraSmall = 12.0;
-
-  /// icon size 18
-  static const double iconSizeSmall = 18.0;
-
-  /// icon size 24
-  static const double iconSizeDefault = 24.0;
-
-  /// icon size 32
-  static const double iconSizeLarge = 32.0;
-
-  /// icon size 40
-  static const double iconSizeExtraLarge = 40.0;
+  /// icon
+  static double iconSizeExtraSmall = 12.sp;
+  static double iconSizeSmall = 18.sp;
+  static double iconSizeDefault = 24.sp;
+  static double iconSizeLarge = 32.sp;
+  static double iconSizeExtraLarge = 40.sp;
 }
