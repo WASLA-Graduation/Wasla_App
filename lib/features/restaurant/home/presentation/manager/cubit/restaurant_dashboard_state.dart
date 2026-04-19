@@ -18,8 +18,10 @@ final class RestaurantDashboardUpdateBottomNavBarIndex
     extends RestaurantDashboardState {}
 
 ///get restaurant data states
-final class RestaurantDashboardGetDataLoadingState
-    extends RestaurantDashboardState {}
 
 final class RestaurantDashboardGetDataSuccessState
-    extends RestaurantDashboardState {}
+    extends RestaurantDashboardState {
+  final RestaurantModel restaurant;
+
+  RestaurantDashboardGetDataSuccessState({required this.restaurant});
+}

@@ -7,6 +7,7 @@ import 'package:wasla/core/widgets/bottom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:wasla/features/chat/presentation/views/last_users_viwe.dart';
 import 'package:wasla/features/profile/presentation/views/profile_view.dart';
 import 'package:wasla/features/restaurant/home/presentation/manager/cubit/restaurant_dashboard_cubit.dart';
+import 'package:wasla/features/restaurant/home/presentation/views/restaurant_dashboard_view.dart';
 
 class RestaurantBottomNavBarView extends StatelessWidget {
   const RestaurantBottomNavBarView({super.key});
@@ -42,7 +43,7 @@ class RestaurantBottomNavBarView extends StatelessWidget {
   }
 
   static List<Widget> screens = [
-    Container(),
+    RestaurantDashboardView(),
     Container(),
     LastUsersViwe(),
     ProfileView(),

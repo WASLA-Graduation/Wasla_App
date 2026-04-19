@@ -6,7 +6,6 @@ import 'package:wasla/core/widgets/internet/no_internet_widget.dart';
 class BlocStatusHandler<C extends Cubit<S>, S> extends StatelessWidget {
   final Widget body;
   final VoidCallback onRetry;
-
   final bool Function(S state) isNetwork;
   final bool Function(S state) isError;
   final bool Function(S previous, S current)? buildWhen;

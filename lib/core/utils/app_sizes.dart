@@ -41,7 +41,7 @@ abstract class AppSizes {
   static double marginSizeExtraSmall = 5.w;
   static double marginSizeSmall = 10.w;
   static double marginSizeDefault = 15.w;
-  static double marginSizeLarge = 20.w;
+  static double marginDefault = 20.w;
   static double marginSizeExtraLarge = 25.w;
 
   /// icon

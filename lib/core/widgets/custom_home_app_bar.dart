@@ -41,7 +41,7 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
   @override
   Widget build(BuildContext context) {
     final bool isTablet = SizeConfig.isTablet;
-    final double imageSize = isTablet?70:44;
+    final double imageSize = isTablet ? 70 : 44;
     final cubit = context.read<NotificationCubit>();
     return ListTile(
       contentPadding: EdgeInsets.zero,
@@ -156,9 +156,8 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
   }
 
   CircleAvatar _buildCircleAvatarLoading() {
-    
-    return  CircleAvatar(
-      radius:SizeConfig.isMobile?35:22 ,
+    return CircleAvatar(
+      radius: SizeConfig.isMobile ? 22 : 35,
       backgroundImage: AssetImage(Assets.assetsImagesMale),
     );
   }

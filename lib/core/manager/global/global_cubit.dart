@@ -6,7 +6,7 @@ import 'package:wasla/core/utils/app_strings.dart';
 part 'global_state.dart';
 
 class GlobalCubit extends Cubit<GlobalState> {
-  ThemeMode themeMode = ThemeMode.system;
+  ThemeMode themeMode = ThemeMode.light;
   Locale locale = const Locale('en');
 
   GlobalCubit() : super(GlobalInitial()) {
@@ -45,6 +45,4 @@ class GlobalCubit extends Cubit<GlobalState> {
     locale = Locale(localeCode ?? 'en');
     emit(GlobalChangeLanguage(locale: locale));
   }
-
-  
 }
