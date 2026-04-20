@@ -5,11 +5,13 @@ import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/empty_data_widget.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
-import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/menu/resident_menu_cubit.dart';
+import 'package:wasla/features/restaurant/menu/presentation/manager/cubit/resident_menu_cubit.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/menu/restuaratn_menu_card.dart';
 
 class RestaurantMenuCatgoryList extends StatefulWidget {
-  const RestaurantMenuCatgoryList({super.key});
+  const RestaurantMenuCatgoryList({super.key, required this.showOrderButton});
+
+  final bool showOrderButton;
 
   @override
   State<RestaurantMenuCatgoryList> createState() =>
@@ -48,15 +50,17 @@ class _RestaurantMenuCatgoryListState extends State<RestaurantMenuCatgoryList> {
         return GridView.builder(
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.all(5),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 14,
             mainAxisSpacing: 14,
-            childAspectRatio: 0.70,
+            childAspectRatio: widget.showOrderButton ? 0.70 : 0.78,
           ),
           itemCount: items.length,
-          itemBuilder: (context, index) =>
-              RestaurantMenuItemCard(item: items.elementAt(index),showOrderButton: true,),
+          itemBuilder: (context, index) => RestaurantMenuItemCard(
+            item: items.elementAt(index),
+            showOrderButton: widget.showOrderButton,
+          ),
         );
       },
     );

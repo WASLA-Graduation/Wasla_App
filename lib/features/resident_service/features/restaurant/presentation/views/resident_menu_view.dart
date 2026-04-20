@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/widgets/bloc_status_handler.dart';
-import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/menu/resident_menu_cubit.dart';
+import 'package:wasla/features/restaurant/menu/presentation/manager/cubit/resident_menu_cubit.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/menu/resident_menu_body.dart';
 
 class ResidentMenuView extends StatefulWidget {

@@ -8,7 +8,7 @@ import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restaurant_menu_category_model.dart';
-import 'package:wasla/features/resident_service/features/restaurant/data/repo/menu/resident_menu_repo.dart';
+import 'package:wasla/features/restaurant/menu/data/repo/resident_menu_repo.dart';
 
 class ResidentMenuRepoImpl extends ResidentMenuRepo {
   final ApiConsumer api;

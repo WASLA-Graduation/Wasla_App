@@ -10,8 +10,8 @@ import 'package:wasla/features/chat/presentation/views/last_users_viwe.dart';
 import 'package:wasla/features/profile/presentation/views/profile_view.dart';
 import 'package:wasla/features/restaurant/home/presentation/manager/cubit/restaurant_dashboard_cubit.dart';
 import 'package:wasla/features/restaurant/home/presentation/views/restaurant_dashboard_view.dart';
-import 'package:wasla/features/restaurant/menu/data/repo/menu_repo_impl.dart';
-import 'package:wasla/features/restaurant/menu/presentation/manager/cubit/menu_cubit.dart';
+import 'package:wasla/features/restaurant/menu/data/repo/resident_menu_repo_impl.dart';
+import 'package:wasla/features/restaurant/menu/presentation/manager/cubit/resident_menu_cubit.dart';
 import 'package:wasla/features/restaurant/menu/presentation/views/menu_view.dart';
 import 'package:wasla/features/restaurant/orders/data/presentation/manager/cubit/orders_cubit.dart';
 import 'package:wasla/features/restaurant/orders/data/presentation/views/orders_view.dart';
@@ -53,7 +53,8 @@ class RestaurantBottomNavBarView extends StatelessWidget {
   static List<Widget> screens = [
     RestaurantDashboardView(),
     BlocProvider(
-      create: (context) => MenuCubit(MenuRepoImpl(api: sl<ApiConsumer>())),
+      create: (context) =>
+          ResidentMenuCubit(ResidentMenuRepoImpl(api: sl<ApiConsumer>())),
       child: MenuView(),
     ),
     BlocProvider(

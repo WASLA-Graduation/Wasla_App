@@ -8,9 +8,9 @@ import 'package:wasla/features/profile/presentation/views/restaurant_edit_profil
 import 'package:wasla/features/profile/presentation/views/technician_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/details/resident_restaurant_repo_impl.dart';
-import 'package:wasla/features/resident_service/features/restaurant/data/repo/menu/resident_menu_repo_impl.dart';
+import 'package:wasla/features/restaurant/menu/data/repo/resident_menu_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/details/resident_restaurant_cubit.dart';
-import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/menu/resident_menu_cubit.dart';
+import 'package:wasla/features/restaurant/menu/presentation/manager/cubit/resident_menu_cubit.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/views/resident_menu_view.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/views/resident_restaurant_details_view.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/views/resident_restaurant_reservation_view.dart';
