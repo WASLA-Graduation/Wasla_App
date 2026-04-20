@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/empty_data_widget.dart';
-import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/resident_restaurant_cubit.dart';
+import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/details/resident_restaurant_cubit.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/all%20Restaurants/resident_all_restaurants_pagination_list.dart';
 import 'package:wasla/features/restaurant/home/data/models/restaurant_model.dart';
 

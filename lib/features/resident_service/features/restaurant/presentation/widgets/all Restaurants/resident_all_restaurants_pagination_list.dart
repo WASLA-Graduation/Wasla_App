@@ -5,7 +5,7 @@ import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/widgets/pagination_widget.dart';
-import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/resident_restaurant_cubit.dart';
+import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/details/resident_restaurant_cubit.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/all%20Restaurants/resident_restaruant_pag_item.dart';
 import 'package:wasla/features/restaurant/home/data/models/restaurant_model.dart';
 

@@ -7,7 +7,7 @@ import 'package:wasla/core/database/api/errors/api_exceptions.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/auth/data/models/restaurant_catergories_model.dart';
-import 'package:wasla/features/resident_service/features/restaurant/data/repo/resident_restaurant_repo.dart';
+import 'package:wasla/features/resident_service/features/restaurant/data/repo/details/resident_restaurant_repo.dart';
 import 'package:wasla/features/restaurant/home/data/models/restaurant_model.dart';
 
 class ResidentRestaurantRepoImpl extends ResidentRestaurantRepo {
@@ -77,6 +77,7 @@ class ResidentRestaurantRepoImpl extends ResidentRestaurantRepo {
     required String time,
   }) async {
     try {
+    
       await api.post(
         ApiEndPoints.restaurantReservatioin,
         body: {

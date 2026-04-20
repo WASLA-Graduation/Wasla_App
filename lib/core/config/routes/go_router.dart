@@ -7,8 +7,11 @@ import 'package:wasla/features/auth/presentation/views/technicant_complete_info_
 import 'package:wasla/features/profile/presentation/views/restaurant_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
-import 'package:wasla/features/resident_service/features/restaurant/data/repo/resident_restaurant_repo_impl.dart';
-import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/resident_restaurant_cubit.dart';
+import 'package:wasla/features/resident_service/features/restaurant/data/repo/details/resident_restaurant_repo_impl.dart';
+import 'package:wasla/features/resident_service/features/restaurant/data/repo/menu/resident_menu_repo_impl.dart';
+import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/details/resident_restaurant_cubit.dart';
+import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/menu/resident_menu_cubit.dart';
+import 'package:wasla/features/resident_service/features/restaurant/presentation/views/resident_menu_view.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/views/resident_restaurant_details_view.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/views/resident_restaurant_reservation_view.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/views/resident_restaurant_view.dart';
@@ -606,6 +609,17 @@ final GoRouter appRouter = GoRouter(
           child: ResidentRestaurantReservationView(
             restaurantId: data[AppStrings.id],
           ),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.residentRestaurantMenuScreen,
+      builder: (context, state) {
+        final String restaurantId = state.extra as String;
+        return BlocProvider(
+          create: (context) =>
+              ResidentMenuCubit(ResidentMenuRepoImpl(api: sl<ApiConsumer>())),
+          child: ResidentMenuView(restaurantId: restaurantId),
         );
       },
     ),

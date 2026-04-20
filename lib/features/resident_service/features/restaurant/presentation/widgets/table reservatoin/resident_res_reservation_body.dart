@@ -8,7 +8,7 @@ import 'package:wasla/core/widgets/custom_date_picker_widget.dart';
 import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_text_form_field.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/custom_choose_time_widget.dart';
-import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/resident_restaurant_cubit.dart';
+import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/details/resident_restaurant_cubit.dart';
 
 class ResidentRestaurantReservationViewBody extends StatelessWidget {
   const ResidentRestaurantReservationViewBody({

@@ -9,7 +9,7 @@ import 'package:wasla/core/widgets/custom_circle_with_data_list.dart';
 import 'package:wasla/core/widgets/custom_details_card_widget.dart';
 import 'package:wasla/core/widgets/readmore_text.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_text_identfier_widget.dart';
-import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/resident_restaurant_cubit.dart';
+import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/details/resident_restaurant_cubit.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/restuarant%20details/residetn_rest_details_card_widget.dart';
 import 'package:wasla/features/restaurant/home/data/models/restaurant_model.dart';
 import 'package:wasla/features/reviews/presentation/widgets/add_review_widget.dart';
@@ -40,7 +40,12 @@ class ResidentRestaurantDetailsWidget extends StatelessWidget {
         TextDetailsIdentfierWidget(
           leading: "aboutMe".tr(context),
           trailing: "menu".tr(context),
-          onTap: () {},
+          onTap: () {
+            context.pushScreen(
+              AppRoutes.residentRestaurantMenuScreen,
+              arguments: restaurantId,
+            );
+          },
         ),
 
         const SizedBox(height: 10),

@@ -4,7 +4,7 @@ import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/helpers/loadings/speciality_loading_list.dart';
 import 'package:wasla/features/auth/data/models/restaurant_catergories_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_speciality_item.dart';
-import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/resident_restaurant_cubit.dart';
+import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/details/resident_restaurant_cubit.dart';
 
 class ResidnetRestaurantCategory extends StatefulWidget {
   const ResidnetRestaurantCategory({super.key});

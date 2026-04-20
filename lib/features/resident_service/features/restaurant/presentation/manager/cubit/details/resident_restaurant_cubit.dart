@@ -6,7 +6,7 @@ import 'package:wasla/core/functions/format_time_with_intl.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/repo/global_repo.dart';
 import 'package:wasla/features/auth/data/models/restaurant_catergories_model.dart';
-import 'package:wasla/features/resident_service/features/restaurant/data/repo/resident_restaurant_repo.dart';
+import 'package:wasla/features/resident_service/features/restaurant/data/repo/details/resident_restaurant_repo.dart';
 import 'package:wasla/features/restaurant/home/data/models/restaurant_model.dart';
 
 part 'resident_restaurant_state.dart';
