@@ -1,3 +1,4 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
@@ -9,6 +10,7 @@ import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/resident_service/features/booking/data/models/resident_doctor_booking_model.dart';
 import 'package:wasla/features/resident_service/features/booking/data/models/resident_driver_booking_model.dart';
 import 'package:wasla/features/resident_service/features/booking/data/models/resident_gym_booking_model.dart';
+import 'package:wasla/features/resident_service/features/booking/data/models/resident_restaurant_reservation_model.dart';
 import 'package:wasla/features/resident_service/features/booking/data/models/resident_techician_booking_model.dart';
 import 'package:wasla/features/resident_service/features/booking/data/repo/resident_booking_repo.dart';
 
@@ -35,6 +37,8 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
       return Right(bookings);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
@@ -52,6 +56,8 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -74,6 +80,8 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
       return Right(bookings);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
@@ -86,6 +94,8 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
       return const Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -108,6 +118,8 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
       return Right(bookings);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
@@ -130,6 +142,8 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
       return Right(bookings);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
@@ -145,6 +159,57 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
       return const Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ReservationModel>>> getBookingWithRestaurant({
+    required String residentId,
+  }) async {
+    try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
+      final response = await api.get(
+        ApiEndPoints.getAllResevationOfResidentWithRestauant,
+        queryParameters: {
+          ApiKeys.id: residentId,
+          ApiKeys.pageNumberCap: 1,
+          ApiKeys.pageSizeCap: 10000000,
+        },
+      );
+
+      final List<ReservationModel> bookings = [];
+
+      for (var booking in response[ApiKeys.data][ApiKeys.data]) {
+        bookings.add(ReservationModel.fromJson(booking));
+      }
+
+      return Right(bookings);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> restaurantCancelBooking({
+    required int bookingId,
+  }) async {
+    try {
+      await api.put(
+        ApiEndPoints.restaurantChangeStatusOfBooking,
+        queryParameters: {ApiKeys.reservationId: bookingId, ApiKeys.status: 2},
+      );
+
+      return const Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 }

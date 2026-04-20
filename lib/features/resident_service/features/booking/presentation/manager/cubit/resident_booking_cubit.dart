@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/enums/booking_filter.dart';
+import 'package:wasla/core/enums/restauant_reservation_status.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/features/resident_service/features/booking/data/models/general_resident_bookings_model.dart';
@@ -56,7 +57,8 @@ class ResidentBookingCubit extends Cubit<ResidentBookingState> {
         emit(ResidentCancelBookingFailure(errMsg: error, bookingId: bookingId));
       },
       (success) {
-        allBookings.removeAt(index);
+        // allBookings.removeAt(index);
+        allBookings[index].baseStatus = ReservationStatus.canceled.name;
         emit(ResidentCancelBookingSuccess(bookingId: bookingId));
       },
     );
@@ -72,10 +74,9 @@ class ResidentBookingCubit extends Cubit<ResidentBookingState> {
       case BookingFilter.gymBookings:
         return await bookingRepo.gymCancelBooking(bookingId: bookingId);
       case BookingFilter.restaurantBookings:
-        return await bookingRepo.technicainCancelBooking(bookingId: bookingId);
+        return await bookingRepo.restaurantCancelBooking(bookingId: bookingId);
       case BookingFilter.driverBookings:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        return;
       case BookingFilter.technicianBookings:
         return await bookingRepo.technicainCancelBooking(bookingId: bookingId);
     }
@@ -91,8 +92,7 @@ class ResidentBookingCubit extends Cubit<ResidentBookingState> {
         );
 
       case BookingFilter.restaurantBookings:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        return await bookingRepo.getBookingWithRestaurant(residentId: userId!);
       case BookingFilter.driverBookings:
         return await bookingRepo.getBookingWithDriver(residentId: userId!);
       case BookingFilter.technicianBookings:

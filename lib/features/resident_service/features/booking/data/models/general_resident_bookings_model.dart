@@ -2,7 +2,7 @@ class GeneralResidentBookingsModel {
   final int baseBookingId;
   final String baseName;
   final String baseServiceName;
-  final String baseStatus;
+  String baseStatus;
   final String baseImage;
   final String? baseDate;
   final String? baseDuration;

@@ -137,4 +137,5 @@ abstract class ApiEndPoints {
   static const String updateRestaurntProfile = 'api/Restaurant/UpdateRestaurant';
   static const String getAllRestaurants = 'api/Restaurant/Restaurants';
   static const String getAllResevationOfResidentWithRestauant = 'api/Reservation/ResidentReservations';
+  static const String restaurantChangeStatusOfBooking = 'api/Reservation/ChangeStatus';
 }
