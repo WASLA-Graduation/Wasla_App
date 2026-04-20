@@ -41,5 +41,9 @@ class _ResidentMenuViewState extends State<ResidentMenuView> {
     );
   }
 
-  void getMenu() {}
+  void getMenu() {
+    final cubit = context.read<ResidentMenuCubit>();
+    cubit.getMenuCategories(restaurantId: widget.restaurantId);
+    cubit.getMenuItems(restaurantId: widget.restaurantId);
+  }
 }

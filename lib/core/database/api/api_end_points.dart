@@ -134,9 +134,15 @@ abstract class ApiEndPoints {
   static const String getRestaurantCategories = 'api/RestaurantCategory/GetAll';
   static const String restaurantCompleteInfo = 'api/Restaurant/CompleteProfile';
   static const String getRestaurntProfile = 'api/Restaurant';
-  static const String updateRestaurntProfile = 'api/Restaurant/UpdateRestaurant';
+  static const String updateRestaurntProfile =
+      'api/Restaurant/UpdateRestaurant';
   static const String getAllRestaurants = 'api/Restaurant/Restaurants';
-  static const String getAllResevationOfResidentWithRestauant = 'api/Reservation/ResidentReservations';
-  static const String restaurantChangeStatusOfBooking = 'api/Reservation/ChangeStatus';
-  static const String restaurantReservatioin = '/api/Reservation/Reservation';
+  static const String getAllResevationOfResidentWithRestauant =
+      'api/Reservation/ResidentReservations';
+  static const String restaurantChangeStatusOfBooking =
+      'api/Reservation/ChangeStatus';
+  static const String restaurantReservatioin = 'api/Reservation/Reservation';
+  static const String getMenuCategory = 'api/RestaurantMenu/Categories';
+  static const String getMenuCategoryItemByCategories =
+      'api/RestaurantMenu/ItemsByCategory';
 }
