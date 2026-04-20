@@ -446,7 +446,11 @@
                         "orders": "الطلبات",
                             "allRestaurants": " جميع المطاعم",
                                 "noRestaurants": "لا يوجد مطاعم",
-    "noRestaurantsInSystem": "لا يوجد مطاعم في الان"
+    "noRestaurantsInSystem": "لا يوجد مطاعم في الان",
+        "reservation": "الحجز",
+            "numberOfPersons": "عدد الاشخاص"
+
+
 
 
 

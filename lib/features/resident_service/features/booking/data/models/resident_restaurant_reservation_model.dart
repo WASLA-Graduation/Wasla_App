@@ -30,9 +30,8 @@ class ReservationModel extends GeneralResidentBookingsModel {
          baseServiceName: '$numberOfPersons Persons ',
          baseStatus: status.name,
          baseImage: restaurantProfile,
-         baseDate: formatDateBooking(DateTime.parse(reservationDate)),
-         baseDuration:
-             '${convertBackendTimeToAmPm(reservationTime)} | $restaurantPhone',
+         baseDate: '${formatDateBooking(DateTime.parse(reservationDate))} | ${convertBackendTimeToAmPm(reservationTime)}',
+         baseDuration: restaurantPhone,
        );
 
   factory ReservationModel.fromJson(Map<String, dynamic> json) {

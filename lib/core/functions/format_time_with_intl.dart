@@ -67,3 +67,18 @@ String formateDateToMatchWithPosts(DateTime date) {
     return DateFormat('d MMM yyyy').format(date);
   }
 }
+
+String convertTimeToGoodFormat(TimeOfDay time) {
+  final now = DateTime.now();
+
+  final dateTime = DateTime(
+    now.year,
+    now.month,
+    now.day,
+    time.hour,
+    time.minute,
+    now.second,
+  );
+
+  return DateFormat('hh:mm:ss').format(dateTime);
+}

@@ -30,9 +30,9 @@ class ResidentTechicianBookingModel extends GeneralResidentBookingsModel {
              TechnicantSpeciality.values[technicianSpeciality].name,
          baseStatus: TechnicianBookingStatus.getTitle(index: status - 1),
          baseImage: technicianImage,
-         baseDate: formatDateBooking(bookingDate),
+         baseDate: '${formatDateBooking(bookingDate)} | ${formatDateTimeWithIntl(bookingDate)}',
          baseDuration:
-             "${formatDateTimeWithIntl(bookingDate)} | $technicianPhone",
+             technicianPhone,
        );
 
   factory ResidentTechicianBookingModel.fromJson(Map<String, dynamic> json) {

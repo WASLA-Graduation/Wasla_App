@@ -52,3 +52,20 @@ final class ResidentRestaurantDashboardGetDataSuccessState
 
   ResidentRestaurantDashboardGetDataSuccessState({required this.restaurant});
 }
+
+////update slot
+final class ResidentRestaurantSelectTimeSlot extends ResidentRestaurantState {}
+
+////reservation states
+final class ResidentRestaurantReservationLoadingState
+    extends ResidentRestaurantState {}
+
+final class ResidentRestaurantReservationSuccessState
+    extends ResidentRestaurantState {}
+
+final class ResidentRestaurantReservationFailureState
+    extends ResidentRestaurantState {
+  final String message;
+
+  ResidentRestaurantReservationFailureState({required this.message});
+}

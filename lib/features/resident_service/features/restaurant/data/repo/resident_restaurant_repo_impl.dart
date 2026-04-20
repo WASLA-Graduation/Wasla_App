@@ -67,4 +67,31 @@ class ResidentRestaurantRepoImpl extends ResidentRestaurantRepo {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<String, Null>> reservationWithRestaurant({
+    required int numberOfPersons,
+    required String userId,
+    required String restaurantId,
+    required String date,
+    required String time,
+  }) async {
+    try {
+      await api.post(
+        ApiEndPoints.restaurantReservatioin,
+        body: {
+          ApiKeys.userId: userId,
+          ApiKeys.restaurantId: restaurantId,
+          ApiKeys.numberOfPersons: numberOfPersons,
+          ApiKeys.reservationDate: date,
+          ApiKeys.reservationTime: time,
+        },
+      );
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }

@@ -12,4 +12,11 @@ abstract class ResidentRestaurantRepo {
 
   Future<Either<Failure, List<RestaurantCatergoriesModel>>>
   getRestaurantCategories();
+  Future<Either<String, Null>> reservationWithRestaurant({
+    required int numberOfPersons,
+    required String userId,
+    required String restaurantId,
+    required String date,
+    required String time,
+  });
 }

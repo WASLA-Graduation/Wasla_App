@@ -258,6 +258,8 @@
     "noRestaurants": "No Restaurants Found",
     "noRestaurantsInSystem": "No Restaurants In System Yet !",
     "orders": "Orders",
+    "reservation": "Reservation",
+    "numberOfPersons": "Number of persons",
     "gmail": "Gmail",
     "phones": "phones",
     "noUsers": "No Users yet.",
