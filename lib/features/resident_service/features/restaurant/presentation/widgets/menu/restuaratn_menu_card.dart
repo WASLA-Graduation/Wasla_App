@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
+import 'package:wasla/core/widgets/cached_network_image_widget.dart';
 import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
 
@@ -41,24 +42,18 @@ class RestaurantMenuItemCard extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.network(
-                  item.imageUrl,
+                CustomCachedNetworkImage(
+                  imageUrl: item.imageUrl,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(
-                    color: Colors.orange.shade50,
-                    child: const Icon(
-                      Icons.fastfood,
-                      size: 48,
-                      color: Colors.orange,
-                    ),
-                  ),
                 ),
                 // Availability badge
                 Positioned(
                   top: 8,
                   left: 8,
                   child: _Badge(
-                    label: item.isAvailable ? 'available'.tr(context) : 'unAvailable'.tr(context),
+                    label: item.isAvailable
+                        ? 'available'.tr(context)
+                        : 'unAvailable'.tr(context),
                     color: item.isAvailable
                         ? const Color(0xFF1D9E75)
                         : const Color(0xFFD85A30),
