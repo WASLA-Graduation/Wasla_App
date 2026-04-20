@@ -94,4 +94,5 @@ abstract class AppRoutes {
   static const String residentRestaurantDetailsScreen = '/residentRestaurantDetailsScreen';
   static const String residentRestaurantReservationScreen = '/residentRestaurantReservationScreen';
   static const String residentRestaurantMenuScreen = '/residentRestaurantMenuScreen';
+  static const String addMenuItemScreen = '/addMenuItemScreen';
 }

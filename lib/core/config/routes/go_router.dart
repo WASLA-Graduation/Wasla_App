@@ -22,6 +22,7 @@ import 'package:wasla/features/resident_service/features/technicain/presentation
 import 'package:wasla/features/resident_service/features/technicain/presentation/views/resident_technician_view.dart';
 import 'package:wasla/features/restaurant/home/data/models/restaurant_model.dart';
 import 'package:wasla/features/restaurant/home/presentation/views/restaurant_bottom_nav_bar_view.dart';
+import 'package:wasla/features/restaurant/menu/presentation/views/add_menu_item_view.dart';
 import 'package:wasla/features/technicant/features/booking/data/repo/technician_bookings_repo_impl.dart';
 import 'package:wasla/features/technicant/features/booking/presentation/manager/cubit/technician_booking_cubit.dart';
 import 'package:wasla/features/technicant/features/booking/presentation/views/technician_booking_details_view.dart';
@@ -621,6 +622,14 @@ final GoRouter appRouter = GoRouter(
               ResidentMenuCubit(ResidentMenuRepoImpl(api: sl<ApiConsumer>())),
           child: ResidentMenuView(restaurantId: restaurantId),
         );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.addMenuItemScreen,
+      builder: (context, state) {
+        final Cubit<ResidentMenuCubit> cubit =
+            state.extra as Cubit<ResidentMenuCubit>;
+        return BlocProvider.value(value: cubit, child: AddMenuItemView());
       },
     ),
   ],

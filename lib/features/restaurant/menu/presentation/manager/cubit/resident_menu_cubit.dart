@@ -1,4 +1,5 @@
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
@@ -15,6 +16,9 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
   List<RestauarantMenuItemModel> allCategoriesItems = [];
 
   int currentCategoryId = 0;
+  int addMenuCategoryId = 0;
+
+  final addMenuFormKey=GlobalKey<FormState>();
 
   void onRetry() {
     emit(ResidentMenuOnRetryState());

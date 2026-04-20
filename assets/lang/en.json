@@ -321,6 +321,7 @@
   "unAvailable": " Un Available",
   "min": "min",
   "orderNow": "Order Now",
+  "addMenu": "Add Menu",
   "all_return_bookings": "All Restaurant Bookings",
   "all_driver_bookings": "All Driver Bookings",
   "all_technician_bookings": "All Technician Bookings",
@@ -454,7 +455,10 @@
   "accepted": "Accepted",
   "accept": "Accept",
   "rejected": "Rejected",
-  "noBookingsMsg": "You have no bookings at the moment,\n new ones will appear here"
+  "noBookingsMsg": "You have no bookings at the moment,\n new ones will appear here",
+  "menuNameAr": "Menu Name Arabic ",
+  "menuNameEn": "Menu Name English ",
+  "preparationTime": "Preparation Time"
 
 
 

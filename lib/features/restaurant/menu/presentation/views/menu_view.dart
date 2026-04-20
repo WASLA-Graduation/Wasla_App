@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/custom_doc_add_service_float_button.dart';
@@ -24,7 +26,14 @@ class _MenuViewState extends State<MenuView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: CustomFloatingAddButton(onPressed: () {}),
+      floatingActionButton: CustomFloatingAddButton(
+        onPressed: () {
+          context.pushScreen(
+            AppRoutes.addMenuItemScreen,
+            arguments: context.read<ResidentMenuCubit>(),
+          );
+        },
+      ),
       appBar: AppBar(title: Text('menu'.tr(context))),
       body: BlocStatusHandler<ResidentMenuCubit, ResidentMenuState>(
         body: const MenuBody(),

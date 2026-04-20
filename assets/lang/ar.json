@@ -454,7 +454,13 @@
       "available": "متاحة",
   "unAvailable": "غير متاحة",
   "min": "دقيقة",
-  "orderNow": "اطلب الآن"
+  "orderNow": "اطلب الآن",
+    "addMenu": "اضافة وجبة",
+      "menuNameAr": "اسم الوجبة بالعربية",
+  "menuNameEn": "اسم الوجبة بالانجليزية",
+  "preparationTime": " وقت التحضير"
+
+
 
 
 

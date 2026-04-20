@@ -68,7 +68,7 @@ class RestaurantBottomNavBarView extends StatelessWidget {
   List<String> getTitles(BuildContext context) => [
     'home'.tr(context),
     'menu'.tr(context),
-    'orders'.tr(context),
+    'reservation'.tr(context),
     'chat'.tr(context),
     'profile'.tr(context),
   ];

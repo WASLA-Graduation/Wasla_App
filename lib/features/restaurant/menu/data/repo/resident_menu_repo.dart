@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
@@ -10,4 +12,26 @@ abstract class ResidentMenuRepo {
   Future<Either<Failure, List<RestauarantMenuItemModel>>> getMenuItems({
     required String restaurantId,
   });
+  Future<Either<String, Null>> addMenu({
+    required String restaurantId,
+    required String nameAr,
+    required String nameEn,
+    required double price,
+    required double discount,
+    required int preparationTime,
+    required int categoryId,
+    required File image,
+  });
+  Future<Either<String, Null>> updateMenu({
+    required int id,
+    required String nameAr,
+    required String nameEn,
+    required double price,
+    required double discount,
+    required int preparationTime,
+    required int categoryId,
+    File? image,
+  });
+
+  Future<Either<String, Null>> deleteMenu({required int id});
 }
