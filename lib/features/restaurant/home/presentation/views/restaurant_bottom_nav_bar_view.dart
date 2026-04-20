@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/database/api/api_consumer.dart';
+import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/bottom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:wasla/features/chat/presentation/views/last_users_viwe.dart';
 import 'package:wasla/features/profile/presentation/views/profile_view.dart';
 import 'package:wasla/features/restaurant/home/presentation/manager/cubit/restaurant_dashboard_cubit.dart';
 import 'package:wasla/features/restaurant/home/presentation/views/restaurant_dashboard_view.dart';
+import 'package:wasla/features/restaurant/menu/data/repo/menu_repo_impl.dart';
+import 'package:wasla/features/restaurant/menu/presentation/manager/cubit/menu_cubit.dart';
+import 'package:wasla/features/restaurant/menu/presentation/views/menu_view.dart';
+import 'package:wasla/features/restaurant/orders/data/presentation/manager/cubit/orders_cubit.dart';
+import 'package:wasla/features/restaurant/orders/data/presentation/views/orders_view.dart';
+import 'package:wasla/features/restaurant/orders/data/repo/orders_repo_impl.dart';
 
 class RestaurantBottomNavBarView extends StatelessWidget {
   const RestaurantBottomNavBarView({super.key});
@@ -44,28 +52,39 @@ class RestaurantBottomNavBarView extends StatelessWidget {
 
   static List<Widget> screens = [
     RestaurantDashboardView(),
-    Container(),
+    BlocProvider(
+      create: (context) => MenuCubit(MenuRepoImpl(api: sl<ApiConsumer>())),
+      child: MenuView(),
+    ),
+    BlocProvider(
+      create: (context) => OrdersCubit(OrdersRepoImpl(api: sl<ApiConsumer>())),
+      child: OrdersView(),
+    ),
     LastUsersViwe(),
     ProfileView(),
   ];
 
   List<String> getTitles(BuildContext context) => [
     'home'.tr(context),
-    'booking'.tr(context),
+    'menu'.tr(context),
+    'orders'.tr(context),
     'chat'.tr(context),
     'profile'.tr(context),
   ];
 
   List<String> get unSelectedIcons => [
     Assets.assetsImagesHomeOutlined,
-    Assets.assetsImagesBookingOutlined,
+    Assets.assetsImagesMenuOutLined,
+    Assets.assetsImagesTableOutlined,
     Assets.assetsImagesChatOutlined,
     Assets.assetsImagesPersonOutlined,
   ];
 
   List<String> get selectedIcons => [
     Assets.assetsImagesHomeFilled,
-    Assets.assetsImagesBookingFilled,
+    Assets.assetsImagesMenuFilled,
+    Assets.assetsImagesTableFilled,
+
     Assets.assetsImagesChatFilled,
     Assets.assetsImagesPeronFilled,
   ];

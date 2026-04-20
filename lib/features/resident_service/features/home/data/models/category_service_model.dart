@@ -24,7 +24,7 @@ class CategoryServiceModel {
       color: AppColors.purple,
     ),
     CategoryServiceModel(
-      route: '',
+      route: AppRoutes.residentRestaurant,
 
       img: Assets.assetsImagesCutlery,
       name: "restaurant",

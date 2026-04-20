@@ -441,7 +441,13 @@
     "category": "التصنيف",
         "restaurantName": " اسم المطعم",
             "selectCategory": "اختر التصنيف",
-                "restaurantGalary": "صور المطعم"
+                "restaurantGalary": "صور المطعم",
+                    "menu": "القائمة",
+                        "orders": "الطلبات",
+                            "allRestaurants": " جميع المطاعم"
+
+
+
 
 
 

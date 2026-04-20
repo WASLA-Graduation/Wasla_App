@@ -7,6 +7,9 @@ import 'package:wasla/features/auth/presentation/views/technicant_complete_info_
 import 'package:wasla/features/profile/presentation/views/restaurant_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
+import 'package:wasla/features/resident_service/features/restaurant/data/repo/resident_restaurant_repo_impl.dart';
+import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/resident_restaurant_cubit.dart';
+import 'package:wasla/features/resident_service/features/restaurant/presentation/views/resident_restaurant_view.dart';
 import 'package:wasla/features/resident_service/features/technicain/data/repo/resident_technician_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/technicain/presentation/manager/cubit/resident_technician_cubit.dart';
 import 'package:wasla/features/resident_service/features/technicain/presentation/views/resident_technical_book_view.dart';
@@ -567,6 +570,17 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) {
         final RestaurantModel restaurantModel = state.extra as RestaurantModel;
         return RestaurantEditProfile(restaurant: restaurantModel);
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.residentRestaurant,
+      builder: (context, state) {
+        return BlocProvider(
+          create: (context) => ResidentRestaurantCubit(
+            ResidentRestaurantRepoImpl(api: sl<ApiConsumer>()),
+          ),
+          child: ResidentRestaurantView(),
+        );
       },
     ),
   ],

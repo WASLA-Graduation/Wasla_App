@@ -28,21 +28,18 @@ class _ResidentTechnicianViewState extends State<ResidentTechnicianView> {
         title: Text('allTechnicains'.tr(context)),
       ),
 
-      body: SafeArea(
-        child:
-            BlocStatusHandler<ResidentTechnicianCubit, ResidentTechnicianState>(
-              body: ResidentTechnicianBody(),
-              onRetry: () {
-                getScreenData();
-                context.read<ResidentTechnicianCubit>().whenRetry();
-              },
-              isNetwork: (state) => state is ResidentTechnicianNetwork,
-              isError: (state) => state is ResidentTechnicianFailure,
-              buildWhen: (previous, current) =>
-                  current is ResidentTechnicianNetwork ||
-                  current is ResidentTechnicianFailure ||
-                  current is ResidentTechnicianOnRetry,
-            ),
+      body: BlocStatusHandler<ResidentTechnicianCubit, ResidentTechnicianState>(
+        body: ResidentTechnicianBody(),
+        onRetry: () {
+          getScreenData();
+          context.read<ResidentTechnicianCubit>().whenRetry();
+        },
+        isNetwork: (state) => state is ResidentTechnicianNetwork,
+        isError: (state) => state is ResidentTechnicianFailure,
+        buildWhen: (previous, current) =>
+            current is ResidentTechnicianNetwork ||
+            current is ResidentTechnicianFailure ||
+            current is ResidentTechnicianOnRetry,
       ),
     );
   }

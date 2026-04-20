@@ -135,4 +135,5 @@ abstract class ApiEndPoints {
   static const String restaurantCompleteInfo = 'api/Restaurant/CompleteProfile';
   static const String getRestaurntProfile = 'api/Restaurant';
   static const String updateRestaurntProfile = 'api/Restaurant/UpdateRestaurant';
+  static const String getAllRestaurants = 'api/Restaurant/Restaurants';
 }
