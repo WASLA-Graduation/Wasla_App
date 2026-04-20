@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/error/failure.dart';
+import 'package:wasla/core/repo/global_repo.dart';
 import 'package:wasla/features/auth/data/models/restaurant_catergories_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/resident_restaurant_repo.dart';
 import 'package:wasla/features/restaurant/home/data/models/restaurant_model.dart';
@@ -81,6 +82,25 @@ class ResidentRestaurantCubit extends Cubit<ResidentRestaurantState> {
       },
       (categories) =>
           emit(GetRestaurantCategoriesLoadedState(categories: categories)),
+    );
+  }
+
+  Future<void> getRestaurantDetails({required String restaurantId}) async {
+    emit(ResidentRestaurantDashboardGetDataLoadingState());
+    final result = await GlobalRepo.getRestaurantProfile(
+      resturantId: restaurantId,
+    );
+    result.fold(
+      (failure) {
+        if (failure is NoInternetFailure) {
+          emit(ResidentRestaurantNetworkState());
+        } else {
+          emit(ResidentRestaurantFailureState());
+        }
+      },
+      (restaurant) => emit(
+        ResidentRestaurantDashboardGetDataSuccessState(restaurant: restaurant),
+      ),
     );
   }
 }

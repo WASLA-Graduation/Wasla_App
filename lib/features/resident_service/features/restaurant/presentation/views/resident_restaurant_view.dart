@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/widgets/bloc_status_handler.dart';
+import 'package:wasla/features/favourite/presentation/manager/cubit/favourite_cubit.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/resident_restaurant_cubit.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/all%20Restaurants/resident_restaurant_body.dart';
 
@@ -43,5 +44,6 @@ class _ResidentRestaurantViewState extends State<ResidentRestaurantView> {
     final cubit = context.read<ResidentRestaurantCubit>();
     cubit.getRestaurantCategories();
     cubit.getRestaurantsByCategory(fromPagination: false);
+    context.read<FavouriteCubit>().getFavouritesByType(serviceType: 2);
   }
 }

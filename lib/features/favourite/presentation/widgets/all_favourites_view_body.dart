@@ -51,7 +51,7 @@ class AllFavouritesViewBody extends StatelessWidget {
                   ),
                 )
               : ListView.separated(
-                  padding: const EdgeInsets.only(top: 0),
+                  padding: const EdgeInsets.only(top: 0, bottom: 100),
                   separatorBuilder: (_, index) => const SizedBox(height: 5),
                   itemCount: cubit.allFavouriteList.length,
                   physics: BouncingScrollPhysics(),

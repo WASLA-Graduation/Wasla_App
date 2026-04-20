@@ -444,7 +444,9 @@
                 "restaurantGalary": "صور المطعم",
                     "menu": "القائمة",
                         "orders": "الطلبات",
-                            "allRestaurants": " جميع المطاعم"
+                            "allRestaurants": " جميع المطاعم",
+                                "noRestaurants": "لا يوجد مطاعم",
+    "noRestaurantsInSystem": "لا يوجد مطاعم في الان"
 
 
 

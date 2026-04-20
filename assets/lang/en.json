@@ -255,6 +255,8 @@
     "restaurantGalary": "Restaurant Galary",
     "menu": "Menu",
     "allRestaurants": "All Restaurants",
+    "noRestaurants": "No Restaurants Found",
+    "noRestaurantsInSystem": "No Restaurants In System Yet !",
     "orders": "Orders",
     "gmail": "Gmail",
     "phones": "phones",

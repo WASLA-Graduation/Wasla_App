@@ -38,6 +38,17 @@ final class GetRestaurantsByCategoryLoadedState
 }
 
 ///select category
-final class ResidentRestaurantSelectCategoryState extends ResidentRestaurantState {}
+final class ResidentRestaurantSelectCategoryState
+    extends ResidentRestaurantState {}
 
+///get restaurant data states
 
+final class ResidentRestaurantDashboardGetDataLoadingState
+    extends ResidentRestaurantState {}
+
+final class ResidentRestaurantDashboardGetDataSuccessState
+    extends ResidentRestaurantState {
+  final RestaurantModel restaurant;
+
+  ResidentRestaurantDashboardGetDataSuccessState({required this.restaurant});
+}
