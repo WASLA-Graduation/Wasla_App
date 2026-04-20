@@ -448,7 +448,13 @@
                                 "noRestaurants": "لا يوجد مطاعم",
     "noRestaurantsInSystem": "لا يوجد مطاعم في الان",
         "reservation": "الحجز",
-            "numberOfPersons": "عدد الاشخاص"
+            "numberOfPersons": "عدد الاشخاص",
+                "noItems": "لا يوجد منتجات",
+    "noItemsInSystem": "لا يوجد منتجات في الان",
+      "available": "متاحة",
+  "unAvailable": "غير متاحة",
+  "min": "دقيقة",
+  "orderNow": "اطلب الآن"
 
 
 

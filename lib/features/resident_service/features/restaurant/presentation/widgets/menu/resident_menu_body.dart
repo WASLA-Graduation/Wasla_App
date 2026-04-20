@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/utils/app_sizes.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/menu/menu_category.dart';
+import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/menu/restaurant_menu_category_list.dart';
 
 class ResidentMenuBody extends StatelessWidget {
   const ResidentMenuBody({super.key});
@@ -14,7 +15,7 @@ class ResidentMenuBody extends StatelessWidget {
           SizedBox(height: AppSizes.paddingSizeSmall),
           const ResidnetRestaurantMenuCategory(),
           SizedBox(height: AppSizes.paddingSizeDefault),
-          // Expanded(child: const ResidentAllRestaurantsList()),
+          Expanded(child: const RestaurantMenuCatgoryList()),
           SizedBox(height: AppSizes.paddingSizeDefault),
         ],
       ),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
@@ -51,19 +53,31 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
         }
       },
       (items) {
-        emit(ResidentGetMenuCategoryItemsLoadedState(items));
+        log(items.length.toString());
+        allCategoriesItems = items;
+
+        filterItemsByCategory(categoryId: 0);
       },
     );
   }
 
   void filterItemsByCategory({required int categoryId}) {
     if (categoryId == 0) {
-      emit(ResidentGetMenuCategoryItemsLoadedState(allCategoriesItems));
+      List<MenuItem> allItems = [];
+      for (var element in allCategoriesItems) {
+        allItems.addAll(element.items);
+      }
+
+      emit(ResidentGetMenuCategoryItemsLoadedState(allItems));
       return;
     }
-    List<RestauarantMenuItemModel> filteredItems = allCategoriesItems
-        .where((element) => element.categoryId == categoryId)
-        .toList();
+
+    List<MenuItem> filteredItems = [];
+    for (var element in allCategoriesItems) {
+      if (element.categoryId == categoryId) {
+        filteredItems.addAll(element.items);
+      }
+    }
     emit(ResidentGetMenuCategoryItemsLoadedState(filteredItems));
   }
 }

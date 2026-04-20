@@ -33,7 +33,7 @@ final class ResidentGetMenuCategoryItemsLoadingState
     extends ResidentMenuState {}
 
 final class ResidentGetMenuCategoryItemsLoadedState extends ResidentMenuState {
-  final List<RestauarantMenuItemModel> items;
+  final List<MenuItem> items;
 
   const ResidentGetMenuCategoryItemsLoadedState(this.items);
 }

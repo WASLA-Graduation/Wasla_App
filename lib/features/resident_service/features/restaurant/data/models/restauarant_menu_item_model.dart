@@ -1,7 +1,7 @@
 class RestauarantMenuItemModel {
   final int categoryId;
   final String categoryName;
-  final List<ItemModel> items;
+  final List<MenuItem> items;
 
   RestauarantMenuItemModel({
     required this.categoryId,
@@ -13,14 +13,14 @@ class RestauarantMenuItemModel {
     return RestauarantMenuItemModel(
       categoryId: json['categoryId'],
       categoryName: json['categoryName'],
-      items: List<ItemModel>.from(
-        json['items'].map((e) => ItemModel.fromJson(e)),
+      items: List<MenuItem>.from(
+        json['items'].map((e) => MenuItem.fromJson(e)),
       ),
     );
   }
 }
 
-class ItemModel {
+class MenuItem {
   final int id;
   final String name;
   final double price;
@@ -29,7 +29,7 @@ class ItemModel {
   final int preparationTime;
   final bool isAvailable;
 
-  ItemModel({
+  MenuItem({
     required this.id,
     required this.name,
     required this.price,
@@ -39,8 +39,8 @@ class ItemModel {
     required this.isAvailable,
   });
 
-  factory ItemModel.fromJson(Map<String, dynamic> json) {
-    return ItemModel(
+  factory MenuItem.fromJson(Map<String, dynamic> json) {
+    return MenuItem(
       id: json['id'],
       name: json['name'],
       price: (json['price']).toDouble(),
