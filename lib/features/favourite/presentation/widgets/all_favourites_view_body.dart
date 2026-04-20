@@ -79,13 +79,23 @@ class AllFavouritesViewBody extends StatelessWidget {
                                 msg: "Something went wrong",
                               );
                             }
-                            throw UnimplementedError();
+                            break;
+
                           case ServiceProviderTypeEnum.restaurant:
-                            // TODO: Handle this case.
-                            throw UnimplementedError();
+                            context.pushScreen(
+                              AppRoutes.residentRestaurantDetailsScreen,
+                              arguments: {
+                                AppStrings.name: cubit
+                                    .allFavouriteList[index]
+                                    .serviceProviderName,
+                                AppStrings.id: cubit
+                                    .allFavouriteList[index]
+                                    .serviceProviderId,
+                              },
+                            );
+                            break;
                           case ServiceProviderTypeEnum.driver:
-                            // TODO: Handle this case.
-                            throw UnimplementedError();
+                            return;
                           case ServiceProviderTypeEnum.gym:
                             context.pushScreen(
                               AppRoutes.gymResidentDetailsScreen,
@@ -98,6 +108,8 @@ class AllFavouritesViewBody extends StatelessWidget {
                                     .serviceProviderId,
                               },
                             );
+                            break;
+
                           case ServiceProviderTypeEnum.technician:
                             context.pushScreen(
                               AppRoutes.residentTechnicianDetailsScreen,
@@ -110,6 +122,7 @@ class AllFavouritesViewBody extends StatelessWidget {
                                     .serviceProviderId,
                               },
                             );
+                            break;
                         }
                       },
                       child: FavItem(

@@ -28,7 +28,9 @@ class _ResidentRestaurantDetailsViewState
     return Scaffold(
       appBar: AppBar(title: Text(widget.data[AppStrings.name])),
       body: BlocStatusHandler<ResidentRestaurantCubit, ResidentRestaurantState>(
-        body: const ResidentRestaurantDetailsBody(),
+        body: ResidentRestaurantDetailsBody(
+          restaurantId: widget.data[AppStrings.id],
+        ),
         onRetry: () {
           getScreenData();
           context.read<ResidentRestaurantCubit>().onRetry();
