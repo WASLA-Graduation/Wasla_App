@@ -1,7 +1,9 @@
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/error/failure.dart';
+import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restaurant_menu_category_model.dart';
 import 'package:wasla/features/restaurant/menu/data/repo/resident_menu_repo.dart';
@@ -17,11 +19,21 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
 
   int currentCategoryId = 0;
   int addMenuCategoryId = 0;
+  File? menuImage;
 
-  final addMenuFormKey=GlobalKey<FormState>();
+  String menuNameAr = '', menuNameEn = '';
+  double discount = 0, price = 0;
+  int preparationTime = 0;
+
+  final addMenuFormKey = GlobalKey<FormState>();
 
   void onRetry() {
     emit(ResidentMenuOnRetryState());
+  }
+
+  void updateMenuImage({required File image}) {
+    menuImage = image;
+    emit(ResidentMenuUpdateMenuImage());
   }
 
   void selectMenuCategory({required int categoryId}) {
@@ -81,5 +93,84 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
       }
     }
     emit(ResidentGetMenuCategoryItemsLoadedState(filteredItems));
+  }
+
+  Future<void> addMenuItem() async {
+    final String? restaurantId = await getUserId();
+    emit(ResidentAddOrUpdateMenuItemLoadingState());
+    final result = await menu.addMenu(
+      restaurantId: restaurantId!,
+      nameAr: menuNameAr,
+      nameEn: menuNameEn,
+      price: price,
+      categoryId: addMenuCategoryId,
+      image: menuImage!,
+      discount: discount,
+      preparationTime: preparationTime,
+    );
+    result.fold(
+      (failure) {
+        emit(ResidentAddOrUpdateMenuItemFailureState(errMsg: failure));
+      },
+      (success) async {
+        final String? restaurantId = await getUserId();
+        await getMenuItems(restaurantId: restaurantId!);
+        emit(ResidentAddOrUpdateMenuItemSuccessState());
+        reset();
+      },
+    );
+  }
+
+  Future<void> updateMenu({required MenuItem menuItem}) async {
+    emit(ResidentAddOrUpdateMenuItemLoadingState());
+    final result = await menu.updateMenu(
+      id: menuItem.id,
+      nameAr: menuNameAr.isEmpty ? menuItem.name : menuNameAr,
+      nameEn: menuNameEn.isEmpty ? menuItem.name : menuNameEn,
+      price: price == 0 ? menuItem.price : price,
+      categoryId: addMenuCategoryId,
+      image: menuImage,
+      discount: discount == 0 ? menuItem.discountPrice : discount,
+      preparationTime: preparationTime == 0
+          ? menuItem.preparationTime
+          : preparationTime,
+    );
+    result.fold(
+      (failure) {
+        emit(ResidentAddOrUpdateMenuItemFailureState(errMsg: failure));
+      },
+      (success) async {
+        final String? restaurantId = await getUserId();
+        await getMenuItems(restaurantId: restaurantId!);
+        emit(ResidentAddOrUpdateMenuItemSuccessState());
+        reset();
+      },
+    );
+  }
+
+  Future<void> deleteMenu({required int menuId}) async {
+    emit(ResidentDeleteMenuItemLoadingState());
+    final result = await menu.deleteMenu(id: menuId);
+    result.fold(
+      (failure) {
+        emit(ResidentDeleteMenuItemFailureState(errMsg: failure));
+      },
+      (success) async {
+        final String? restaurantId = await getUserId();
+        await getMenuItems(restaurantId: restaurantId!);
+        emit(ResidentAddOrUpdateMenuItemSuccessState());
+        reset();
+      },
+    );
+  }
+
+  void reset() {
+    menuImage = null;
+    menuNameAr = '';
+    menuNameEn = '';
+    discount = 0;
+    price = 0;
+    preparationTime = 0;
+    addMenuCategoryId = 0;
   }
 }

@@ -29,9 +29,11 @@ class _AddMenuCategoryState extends State<AddMenuCategory> {
           current is ResidentGetMenuCateroriesLoadedState,
       builder: (context, state) {
         if (state is ResidentGetMenuCateroriesLoadedState) {
+          cubit.addMenuCategoryId = state.categories.first.id;
           categories = state.categories;
         }
         return CustomDropDownMenu(
+          initialSelection: categories.first.id.toString(),
           items: categories
               .map(
                 (category) => DropDownItem(

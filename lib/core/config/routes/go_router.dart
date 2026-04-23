@@ -627,8 +627,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.addMenuItemScreen,
       builder: (context, state) {
-        final Cubit<ResidentMenuCubit> cubit =
-            state.extra as Cubit<ResidentMenuCubit>;
+        final ResidentMenuCubit cubit = state.extra as ResidentMenuCubit;
         return BlocProvider.value(value: cubit, child: AddMenuItemView());
       },
     ),

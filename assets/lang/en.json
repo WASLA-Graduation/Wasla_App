@@ -458,7 +458,11 @@
   "noBookingsMsg": "You have no bookings at the moment,\n new ones will appear here",
   "menuNameAr": "Menu Name Arabic ",
   "menuNameEn": "Menu Name English ",
-  "preparationTime": "Preparation Time"
+  "preparationTime": "Preparation Time",
+  "menuImage": "Menu Image",
+  "menuAdded": "Menu Added Successfully",
+  "menuUpdated": "Menu Updated Successfully",
+  "menuDeleted": "Menu Deleted Successfully"
 
 
 

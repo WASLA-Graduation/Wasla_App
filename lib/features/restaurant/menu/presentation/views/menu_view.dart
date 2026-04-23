@@ -26,13 +26,17 @@ class _MenuViewState extends State<MenuView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: CustomFloatingAddButton(
-        onPressed: () {
-          context.pushScreen(
-            AppRoutes.addMenuItemScreen,
-            arguments: context.read<ResidentMenuCubit>(),
+      floatingActionButton: Builder(
+        builder: (context) {
+          return CustomFloatingAddButton(
+            onPressed: () {
+              context.pushScreen(
+                AppRoutes.addMenuItemScreen,
+                arguments: context.read<ResidentMenuCubit>(),
+              );
+            },
           );
-        },
+        }
       ),
       appBar: AppBar(title: Text('menu'.tr(context))),
       body: BlocStatusHandler<ResidentMenuCubit, ResidentMenuState>(

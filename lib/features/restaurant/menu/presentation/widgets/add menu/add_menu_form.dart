@@ -18,7 +18,9 @@ class AddMenuForm extends StatelessWidget {
         spacing: AppSizes.paddingSizeSmall,
         children: [
           CustomTextFormField(
-            onChanged: (value) {},
+            onChanged: (value) {
+              cubit.menuNameAr = value;
+            },
             // initealValue: model?.serviceNameEnglish,
             validator: (value) => validateSimpleData(value, context),
             withBorder: true,
@@ -27,7 +29,9 @@ class AddMenuForm extends StatelessWidget {
             title: "menuNameAr".tr(context),
           ),
           CustomTextFormField(
-            onChanged: (value) {},
+            onChanged: (value) {
+              cubit.menuNameEn = value;
+            },
             // initealValue: model?.serviceNameEnglish,
             validator: (value) => validateSimpleData(value, context),
             withBorder: true,
@@ -38,7 +42,9 @@ class AddMenuForm extends StatelessWidget {
           CustomTextFormField(
             // initealValue: model?.price.toString(),
             keyboardTyp: TextInputType.number,
-            onChanged: (value) {},
+            onChanged: (value) {
+              cubit.price = double.parse(value);
+            },
             validator: (value) => validateSimpleData(value, context),
             withBorder: true,
             fillColor: Colors.transparent,
@@ -48,7 +54,9 @@ class AddMenuForm extends StatelessWidget {
           CustomTextFormField(
             // initealValue: model?.price.toString(),
             keyboardTyp: TextInputType.number,
-            onChanged: (value) {},
+            onChanged: (value) {
+              cubit.discount = double.parse(value);
+            },
             validator: (value) => validateSimpleData(value, context),
             withBorder: true,
             fillColor: Colors.transparent,
@@ -58,7 +66,9 @@ class AddMenuForm extends StatelessWidget {
           CustomTextFormField(
             // initealValue: model?.price.toString(),
             keyboardTyp: TextInputType.number,
-            onChanged: (value) {},
+            onChanged: (value) {
+              cubit.preparationTime = int.parse(value);
+            },
             validator: (value) => validateSimpleData(value, context),
             withBorder: true,
             fillColor: Colors.transparent,

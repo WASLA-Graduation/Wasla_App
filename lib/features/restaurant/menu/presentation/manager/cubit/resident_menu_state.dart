@@ -6,9 +6,10 @@ sealed class ResidentMenuState {
 
 final class ResidentMenuInitial extends ResidentMenuState {}
 
-
 ////Update States
 final class ResidentMenuSelectCategory extends ResidentMenuState {}
+
+final class ResidentMenuUpdateMenuImage extends ResidentMenuState {}
 
 ///Basics State
 final class ResidentMenuNetworkState extends ResidentMenuState {}
@@ -37,3 +38,26 @@ final class ResidentGetMenuCategoryItemsLoadedState extends ResidentMenuState {
 
   const ResidentGetMenuCategoryItemsLoadedState(this.items);
 }
+
+///add or update menu item
+
+final class ResidentAddOrUpdateMenuItemLoadingState extends ResidentMenuState {}
+
+final class ResidentAddOrUpdateMenuItemFailureState extends ResidentMenuState {
+  final String errMsg;
+
+  ResidentAddOrUpdateMenuItemFailureState({required this.errMsg});
+}
+
+final class ResidentAddOrUpdateMenuItemSuccessState extends ResidentMenuState {}
+
+/// delete menu item
+
+final class ResidentDeleteMenuItemLoadingState extends ResidentMenuState {}
+
+final class ResidentDeleteMenuItemFailureState extends ResidentMenuState {
+  final String errMsg;
+  ResidentDeleteMenuItemFailureState({required this.errMsg});
+}
+
+final class ResidentDeleteMenuItemSuccessState extends ResidentMenuState {}

@@ -458,7 +458,12 @@
     "addMenu": "اضافة وجبة",
       "menuNameAr": "اسم الوجبة بالعربية",
   "menuNameEn": "اسم الوجبة بالانجليزية",
-  "preparationTime": " وقت التحضير"
+  "preparationTime": " وقت التحضير",
+  "menuImage": "صورة الوجبة",
+    "menuAdded": "تم اضافة الوجبة بنجاح",
+  "menuUpdated": "تم تحديث الوجبة بنجاح",
+    "menuDeleted": "تم حذف الوجبة بنجاح"
+
 
 
 
