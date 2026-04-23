@@ -463,7 +463,15 @@
     "menuAdded": "تم اضافة الوجبة بنجاح",
   "menuUpdated": "تم تحديث الوجبة بنجاح",
     "menuDeleted": "تم حذف الوجبة بنجاح",
-      "updateMenu": "تعديل الوجبة"
+      "updateMenu": "تعديل الوجبة",
+        "noReservationsAtTheMoment": "لا يوجد حجوزات في الوقت الحالي",
+  "noReservations": "لا يوجد حجوزات",
+    "reservationAccepted": "تم قبول الحجز بنجاح",
+      "reservationCancelled": "تم الغاء الحجز بنجاح",
+        "persons": "الاشخاص"
+
+
+
 
 
 

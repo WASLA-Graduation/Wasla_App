@@ -162,4 +162,5 @@ class TechnicianBookingListItemData extends StatelessWidget {
       ],
     );
   }
+
 }

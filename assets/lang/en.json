@@ -463,7 +463,13 @@
   "menuAdded": "Menu Added Successfully",
   "menuUpdated": "Menu Updated Successfully",
   "menuDeleted": "Menu Deleted Successfully",
-  "updateMenu": "Update Menu"
+  "updateMenu": "Update Menu",
+  "noReservationsAtTheMoment": "No Reservations At The Moment",
+  "noReservations": "No Reservations Yet !",
+  "reservationAccepted": "Reservation Accepted Successfully",
+  "reservationCancelled": "Reservation Cancelled Successfully",
+  "persons": "Persons"
+
 
 
 

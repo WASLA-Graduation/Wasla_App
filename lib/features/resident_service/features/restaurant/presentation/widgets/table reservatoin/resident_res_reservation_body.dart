@@ -60,7 +60,7 @@ class ResidentRestaurantReservationViewBody extends StatelessWidget {
             withBorder: true,
             onChanged: (value) {
               context.read<ResidentRestaurantCubit>().numberOfPersons =
-                  int.parse(value);
+                  int.tryParse(value) ?? 0;
             },
           ),
 

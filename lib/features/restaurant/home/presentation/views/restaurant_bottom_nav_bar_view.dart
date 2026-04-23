@@ -13,8 +13,8 @@ import 'package:wasla/features/restaurant/home/presentation/views/restaurant_das
 import 'package:wasla/features/restaurant/menu/data/repo/resident_menu_repo_impl.dart';
 import 'package:wasla/features/restaurant/menu/presentation/manager/cubit/resident_menu_cubit.dart';
 import 'package:wasla/features/restaurant/menu/presentation/views/menu_view.dart';
-import 'package:wasla/features/restaurant/orders/data/presentation/manager/cubit/orders_cubit.dart';
-import 'package:wasla/features/restaurant/orders/data/presentation/views/orders_view.dart';
+import 'package:wasla/features/restaurant/orders/presentation/manager/cubit/orders_cubit.dart';
+import 'package:wasla/features/restaurant/orders/presentation/views/orders_view.dart';
 import 'package:wasla/features/restaurant/orders/data/repo/orders_repo_impl.dart';
 
 class RestaurantBottomNavBarView extends StatelessWidget {
