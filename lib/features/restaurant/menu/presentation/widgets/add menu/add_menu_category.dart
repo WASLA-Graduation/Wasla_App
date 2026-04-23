@@ -7,8 +7,9 @@ import 'package:wasla/features/resident_service/features/restaurant/data/models/
 import 'package:wasla/features/restaurant/menu/presentation/manager/cubit/resident_menu_cubit.dart';
 
 class AddMenuCategory extends StatefulWidget {
-  const AddMenuCategory({super.key});
-
+  const AddMenuCategory({super.key, this.categoryId, this.menuId});
+  final int? categoryId;
+  final int ? menuId;
   @override
   State<AddMenuCategory> createState() => _AddMenuCategoryState();
 }
@@ -29,11 +30,26 @@ class _AddMenuCategoryState extends State<AddMenuCategory> {
           current is ResidentGetMenuCateroriesLoadedState,
       builder: (context, state) {
         if (state is ResidentGetMenuCateroriesLoadedState) {
-          cubit.addMenuCategoryId = state.categories.first.id;
           categories = state.categories;
+          if (categories.isNotEmpty) {
+            cubit.addMenuCategoryId = state.categories.first.id;
+          }
+          if (widget.categoryId != null) {
+            if (widget.categoryId == 0) {
+              cubit.addMenuCategoryId = cubit.getCategoryIdByItem(
+                menuId: widget.menuId!,
+              );
+            } else {
+              cubit.addMenuCategoryId = widget.categoryId!;
+            }
+          }
         }
         return CustomDropDownMenu(
-          initialSelection: categories.first.id.toString(),
+          initialSelection: widget.categoryId != null
+              ? cubit.addMenuCategoryId.toString()
+              : categories.isNotEmpty
+              ? categories.first.id.toString()
+              : null,
           items: categories
               .map(
                 (category) => DropDownItem(

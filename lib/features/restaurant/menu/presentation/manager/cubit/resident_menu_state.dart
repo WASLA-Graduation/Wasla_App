@@ -53,8 +53,6 @@ final class ResidentAddOrUpdateMenuItemSuccessState extends ResidentMenuState {}
 
 /// delete menu item
 
-final class ResidentDeleteMenuItemLoadingState extends ResidentMenuState {}
-
 final class ResidentDeleteMenuItemFailureState extends ResidentMenuState {
   final String errMsg;
   ResidentDeleteMenuItemFailureState({required this.errMsg});

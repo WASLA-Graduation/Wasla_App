@@ -96,6 +96,7 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
   }
 
   Future<void> addMenuItem() async {
+    if (menuImage == null) return;
     final String? restaurantId = await getUserId();
     emit(ResidentAddOrUpdateMenuItemLoadingState());
     final result = await menu.addMenu(
@@ -149,19 +150,32 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
   }
 
   Future<void> deleteMenu({required int menuId}) async {
-    emit(ResidentDeleteMenuItemLoadingState());
     final result = await menu.deleteMenu(id: menuId);
     result.fold(
       (failure) {
         emit(ResidentDeleteMenuItemFailureState(errMsg: failure));
       },
       (success) async {
-        final String? restaurantId = await getUserId();
-        await getMenuItems(restaurantId: restaurantId!);
-        emit(ResidentAddOrUpdateMenuItemSuccessState());
-        reset();
+        for (var category in allCategoriesItems) {
+          category.items.removeWhere((menu) {
+            return menu.id == menuId;
+          });
+        }
+        emit(ResidentDeleteMenuItemSuccessState());
+        filterItemsByCategory(categoryId: currentCategoryId);
       },
     );
+  }
+
+  int getCategoryIdByItem({required int menuId}) {
+    for (var category in allCategoriesItems) {
+      for (var item in category.items) {
+        if (item.id == menuId) {
+          return category.categoryId;
+        }
+      }
+    }
+    return 0;
   }
 
   void reset() {

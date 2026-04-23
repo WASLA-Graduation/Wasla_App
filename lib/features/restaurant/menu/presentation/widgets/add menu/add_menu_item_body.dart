@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
+import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_sizes.dart';
 import 'package:wasla/core/widgets/general_button.dart';
+import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
 import 'package:wasla/features/restaurant/menu/presentation/manager/cubit/resident_menu_cubit.dart';
 import 'package:wasla/features/restaurant/menu/presentation/widgets/add%20menu/add_menu_category.dart';
 import 'package:wasla/features/restaurant/menu/presentation/widgets/add%20menu/add_menu_form.dart';
 import 'package:wasla/features/restaurant/menu/presentation/widgets/add%20menu/add_menu_image.dart';
 
 class AddMenuItemBody extends StatelessWidget {
-  const AddMenuItemBody({super.key});
+  const AddMenuItemBody({super.key, this.menu});
+  final MenuItem? menu;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +27,14 @@ class AddMenuItemBody extends StatelessWidget {
           Expanded(
             child: ListView(
               children: [
-                const AddMenuForm(),
+                AddMenuForm(menu: menu),
                 SizedBox(height: AppSizes.paddingSizeDefault),
-                const AddMenuCategory(),
+                AddMenuCategory(
+                  categoryId: isEdit
+                      ? context.read<ResidentMenuCubit>().currentCategoryId
+                      : null,
+                  menuId: menu?.id,
+                ),
                 SizedBox(height: AppSizes.paddingSizeDefault),
                 const AddMenuImage(),
               ],
@@ -36,8 +44,12 @@ class AddMenuItemBody extends StatelessWidget {
           BlocConsumer<ResidentMenuCubit, ResidentMenuState>(
             listener: (context, state) {
               if (state is ResidentAddOrUpdateMenuItemSuccessState) {
-                showToast('menuAdded'.tr(context));
-                Navigator.pop(context);
+                if (isEdit) {
+                  showToast('menuUpdated'.tr(context), color: AppColors.green);
+                } else {
+                  showToast('menuAdded'.tr(context), color: AppColors.green);
+                  Navigator.pop(context);
+                }
               } else if (state is ResidentAddOrUpdateMenuItemFailureState) {
                 showToast(state.errMsg, color: Colors.red);
               }
@@ -47,13 +59,18 @@ class AddMenuItemBody extends StatelessWidget {
               return GeneralButton(
                 onPressed: () {
                   if (cubit.addMenuFormKey.currentState!.validate() &&
-                      cubit.menuImage != null &&
                       state is! ResidentAddOrUpdateMenuItemLoadingState) {
-                    cubit.addMenuItem();
+                    if (isEdit) {
+                      cubit.updateMenu(menuItem: menu!);
+                    } else {
+                      cubit.addMenuItem();
+                    }
                   }
                 },
                 text: state is ResidentAddOrUpdateMenuItemLoadingState
                     ? 'loading'.tr(context)
+                    : isEdit
+                    ? 'updateMenu'
                     : 'addMenu'.tr(context),
               );
             },
@@ -63,4 +80,6 @@ class AddMenuItemBody extends StatelessWidget {
       ),
     );
   }
+
+  bool get isEdit => menu != null;
 }

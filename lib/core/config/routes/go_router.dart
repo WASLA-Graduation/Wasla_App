@@ -7,6 +7,7 @@ import 'package:wasla/features/auth/presentation/views/technicant_complete_info_
 import 'package:wasla/features/profile/presentation/views/restaurant_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
+import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/details/resident_restaurant_repo_impl.dart';
 import 'package:wasla/features/restaurant/menu/data/repo/resident_menu_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/details/resident_restaurant_cubit.dart';
@@ -23,6 +24,7 @@ import 'package:wasla/features/resident_service/features/technicain/presentation
 import 'package:wasla/features/restaurant/home/data/models/restaurant_model.dart';
 import 'package:wasla/features/restaurant/home/presentation/views/restaurant_bottom_nav_bar_view.dart';
 import 'package:wasla/features/restaurant/menu/presentation/views/add_menu_item_view.dart';
+import 'package:wasla/features/restaurant/menu/presentation/views/update_menu_item_view.dart';
 import 'package:wasla/features/technicant/features/booking/data/repo/technician_bookings_repo_impl.dart';
 import 'package:wasla/features/technicant/features/booking/presentation/manager/cubit/technician_booking_cubit.dart';
 import 'package:wasla/features/technicant/features/booking/presentation/views/technician_booking_details_view.dart';
@@ -629,6 +631,18 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) {
         final ResidentMenuCubit cubit = state.extra as ResidentMenuCubit;
         return BlocProvider.value(value: cubit, child: AddMenuItemView());
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.updateMenuItemScreen,
+      builder: (context, state) {
+        final Map<String, dynamic> data = state.extra as Map<String, dynamic>;
+        return BlocProvider.value(
+          value: data[AppStrings.cubit] as ResidentMenuCubit,
+          child: UpdateMenuItemView(
+            menu: data[AppStrings.item] as MenuItem,
+          ),
+        );
       },
     ),
   ],

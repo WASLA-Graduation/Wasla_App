@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/empty_data_widget.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
@@ -23,7 +24,14 @@ class _RestaurantMenuCatgoryListState extends State<RestaurantMenuCatgoryList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ResidentMenuCubit, ResidentMenuState>(
+    return BlocConsumer<ResidentMenuCubit, ResidentMenuState>(
+      listener: (context, state) {
+        if (state is ResidentDeleteMenuItemFailureState) {
+          showToast(state.errMsg, color: Colors.red);
+        } else if (state is ResidentDeleteMenuItemSuccessState) {
+          showToast('menuDeleted'.tr(context));
+        }
+      },
       buildWhen: (previous, current) =>
           current is ResidentGetMenuCategoryItemsLoadingState ||
           current is ResidentGetMenuCategoryItemsLoadedState,

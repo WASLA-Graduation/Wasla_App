@@ -13,4 +13,5 @@ abstract class AppStrings {
   static const String userSaved= 'userSaved';
   static const String photo= 'photo';
   static const String cubit= 'cubit';
+  static const String item= 'item';
 }

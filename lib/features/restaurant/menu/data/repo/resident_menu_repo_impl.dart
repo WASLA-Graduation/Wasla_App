@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:wasla/core/connection/network_info.dart';
@@ -84,13 +82,6 @@ class ResidentMenuRepoImpl extends ResidentMenuRepo {
     required File image,
   }) async {
     try {
-      log(nameAr);
-      log(nameEn);
-      log(price.toString());
-      log(discount.toString());
-      log(preparationTime.toString());
-      log(categoryId.toString());
-      log(image.path.split('/').last);
       FormData formData = FormData.fromMap({
         'imageUrl': await convertImageToMultipart(image),
       });
