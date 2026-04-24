@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/utils/app_colors.dart';
+import 'package:wasla/core/utils/app_sizes.dart';
 import 'package:wasla/core/widgets/pagination_widget.dart';
 import 'package:wasla/features/restaurant/orders/data/model/restaurant_reservation_model.dart';
 import 'package:wasla/features/restaurant/orders/presentation/manager/cubit/orders_cubit.dart';
-import 'package:wasla/features/restaurant/orders/presentation/widgets/restaurant_reservation_item.dart';
+import 'package:wasla/features/restaurant/orders/presentation/widgets/reservations/restaurant_reservation_item.dart';
 
-class ResturantPaginationOrders extends StatelessWidget {
-  const ResturantPaginationOrders({super.key, required this.reservations});
+class ReservationPaginationList extends StatelessWidget {
+  const ReservationPaginationList({super.key, required this.reservations});
 
   final List<RestaurantReservationModel> reservations;
 
@@ -21,12 +22,13 @@ class ResturantPaginationOrders extends StatelessWidget {
       },
       child: Column(
         children: [
+          SizedBox(height: AppSizes.paddingSizeEight),
           Expanded(
             child: ListView.separated(
               separatorBuilder: (context, index) => const SizedBox(height: 5),
               physics: const BouncingScrollPhysics(),
               itemCount: reservations.length,
-              itemBuilder: (context, index) => RestaurantResevationItem(
+              itemBuilder: (context, index) => RestaurantReservationItem(
                 reservation: reservations.elementAt(index),
               ),
             ),

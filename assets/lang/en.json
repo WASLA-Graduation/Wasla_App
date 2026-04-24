@@ -468,7 +468,25 @@
   "noReservations": "No Reservations Yet !",
   "reservationAccepted": "Reservation Accepted Successfully",
   "reservationCancelled": "Reservation Cancelled Successfully",
-  "persons": "Persons"
+  "persons": "Persons",
+  "noOrdersAtTheMoment": "No Orders At The Moment",
+  "order": "Order",
+  "customer": "Customer",
+  "items": "Items",
+  "delivery": "Delivery",
+  "subtotal": "Subtotal",
+  "deliveryFee": "Delivery fee",
+  "total": "Total",
+  "cash": "Cash",
+  "card": "Card",
+  "preparing": "Preparing",
+  "ready": "Ready",
+  "delivered": "Delivered",
+  "cancelOrder": "Cancel Order",
+  "markAsReady": "Mark as Ready",
+  "confirmOrder": "Confirm Order",
+  "notes": "Notes",
+  "currency": "EGP"
 
 
 

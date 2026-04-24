@@ -254,6 +254,10 @@ class Assets {
   /// assets/images/onboardingTwo.png
   static const String assetsImagesOnboardingTwo = "assets/images/onboardingTwo.png";
 
+  /// Assets for assetsImagesOrder
+  /// assets/images/order.png
+  static const String assetsImagesOrder = "assets/images/order.png";
+
   /// Assets for assetsImagesPannd
   /// assets/images/pannd.png
   static const String assetsImagesPannd = "assets/images/pannd.png";
@@ -349,6 +353,10 @@ class Assets {
   /// Assets for assetsImagesTableOutlined
   /// assets/images/table_outlined.png
   static const String assetsImagesTableOutlined = "assets/images/table_outlined.png";
+
+  /// Assets for assetsImagesTakeAway
+  /// assets/images/take_away.png
+  static const String assetsImagesTakeAway = "assets/images/take_away.png";
 
   /// Assets for assetsImagesTest
   /// assets/images/test.png

@@ -25,6 +25,9 @@ import 'package:wasla/features/restaurant/home/data/models/restaurant_model.dart
 import 'package:wasla/features/restaurant/home/presentation/views/restaurant_bottom_nav_bar_view.dart';
 import 'package:wasla/features/restaurant/menu/presentation/views/add_menu_item_view.dart';
 import 'package:wasla/features/restaurant/menu/presentation/views/update_menu_item_view.dart';
+import 'package:wasla/features/restaurant/orders/data/repo/orders_repo_impl.dart';
+import 'package:wasla/features/restaurant/orders/presentation/manager/cubit/orders_cubit.dart';
+import 'package:wasla/features/restaurant/orders/presentation/views/order_view.dart';
 import 'package:wasla/features/technicant/features/booking/data/repo/technician_bookings_repo_impl.dart';
 import 'package:wasla/features/technicant/features/booking/presentation/manager/cubit/technician_booking_cubit.dart';
 import 'package:wasla/features/technicant/features/booking/presentation/views/technician_booking_details_view.dart';
@@ -639,9 +642,17 @@ final GoRouter appRouter = GoRouter(
         final Map<String, dynamic> data = state.extra as Map<String, dynamic>;
         return BlocProvider.value(
           value: data[AppStrings.cubit] as ResidentMenuCubit,
-          child: UpdateMenuItemView(
-            menu: data[AppStrings.item] as MenuItem,
-          ),
+          child: UpdateMenuItemView(menu: data[AppStrings.item] as MenuItem),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.orderScreen,
+      builder: (context, state) {
+        return BlocProvider(
+          create: (context) =>
+              OrdersCubit(OrdersRepoImpl(api: sl<ApiConsumer>())),
+          child: OrderView(),
         );
       },
     ),

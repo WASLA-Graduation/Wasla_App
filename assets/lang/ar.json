@@ -468,7 +468,26 @@
   "noReservations": "لا يوجد حجوزات",
     "reservationAccepted": "تم قبول الحجز بنجاح",
       "reservationCancelled": "تم الغاء الحجز بنجاح",
-        "persons": "الاشخاص"
+        "persons": "الاشخاص",
+          "noOrdersAtTheMoment": "لا يوجد طلبات في الوقت الحالي",
+  "noOrders": "لا يوجد طلبات",
+  "order": "طلب",
+  "customer": "العميل",
+  "items": "العناصر",
+  "delivery": "التوصيل",
+  "subtotal": "المجموع الفرعي",
+  "deliveryFee": "رسوم التوصيل",
+  "total": "الإجمالي",
+  "cash": "نقدًا",
+  "card": "بطاقة",
+  "preparing": "قيد التحضير",
+  "ready": "جاهز",
+  "delivered": "تم التوصيل",
+  "cancelOrder": "إلغاء الطلب",
+  "markAsReady": "تحديد كجاهز",
+  "confirmOrder": "تأكيد الطلب",
+  "notes": "ملاحظات",
+  "currency": "جنيه"
 
 
 

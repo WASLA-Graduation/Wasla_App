@@ -3,10 +3,10 @@ import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/custom_image_with_stack.dart';
 import 'package:wasla/features/restaurant/orders/data/model/restaurant_reservation_model.dart';
-import 'package:wasla/features/restaurant/orders/presentation/widgets/order_reservation_item_data.dart';
+import 'package:wasla/features/restaurant/orders/presentation/widgets/reservations/reservation_item_data.dart';
 
-class RestaurantResevationItem extends StatelessWidget {
-  const RestaurantResevationItem({super.key, required this.reservation});
+class RestaurantReservationItem extends StatelessWidget {
+  const RestaurantReservationItem({super.key, required this.reservation});
 
   final RestaurantReservationModel reservation;
 

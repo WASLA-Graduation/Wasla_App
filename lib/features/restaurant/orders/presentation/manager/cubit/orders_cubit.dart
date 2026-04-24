@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/enums/restauant_reservation_status.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
+import 'package:wasla/features/restaurant/orders/data/model/order_model.dart';
 import 'package:wasla/features/restaurant/orders/data/model/restaurant_reservation_model.dart';
 import 'package:wasla/features/restaurant/orders/data/repo/orders_repo.dart';
 
@@ -10,18 +11,34 @@ part 'orders_state.dart';
 class OrdersCubit extends Cubit<OrdersState> {
   OrdersCubit(this.orders) : super(OrdersInitial());
   final OrdersRepo orders;
-  final int pageSize = 10;
-  int pageNumber = 1;
-  bool endOfPagination = false;
+  final int reservationPageSize = 5;
+  int reservationPageNumber = 1;
+  bool reservationEndOfPagination = false;
+  final int orderPageSize = 5;
+  int orderPageNumber = 1;
+  bool orderEndOfPagination = false;
+  Set oredersIds = {};
 
   void onRetry() {
     emit(OrdersOnRetryState());
   }
 
+  void toggleOrderDetails({required int orderId}) {
+    if (oredersIds.contains(orderId)) {
+      oredersIds.remove(orderId);
+    } else {
+      oredersIds.add(orderId);
+    }
+    emit(ShowOrderDetails(orderId: orderId));
+  }
+
+  bool isOrderDetailsVisible({required int orderId}) =>
+      oredersIds.contains(orderId);
+
   Future<void> getRestaurantsReservations({
     required bool fromPagination,
   }) async {
-    if (endOfPagination ||
+    if (reservationEndOfPagination ||
         state is GetRestaurantReservationsFromPaginationLoadingState) {
       return;
     }
@@ -34,8 +51,8 @@ class OrdersCubit extends Cubit<OrdersState> {
     final String? restaurantId = await getUserId();
 
     final result = await orders.getRestaurantReservations(
-      pageNumber: pageNumber,
-      pageSize: pageSize,
+      pageNumber: reservationPageNumber,
+      pageSize: reservationPageSize,
       restaurantId: restaurantId!,
     );
 
@@ -49,9 +66,9 @@ class OrdersCubit extends Cubit<OrdersState> {
       },
       (success) {
         if (success.isEmpty) {
-          endOfPagination = true;
+          reservationEndOfPagination = true;
         } else {
-          pageNumber++;
+          reservationPageNumber++;
         }
 
         emit(GetRestaurantReservationsLoadedState(reservations: success));
@@ -91,6 +108,44 @@ class OrdersCubit extends Cubit<OrdersState> {
         } else {
           emit(AcceptReservationStatusSuccessState(id: reservationId));
         }
+      },
+    );
+  }
+
+  Future<void> getRestaurantsOrders({required bool fromPagination}) async {
+    if (orderEndOfPagination ||
+        state is GetRestaurantOrdersFromPaginationLoadingState) {
+      return;
+    }
+    if (fromPagination) {
+      emit(GetRestaurantOrdersFromPaginationLoadingState());
+    } else {
+      emit(GetRestaurantOrdersLoadingState());
+    }
+
+    final String? restaurantId = await getUserId();
+
+    final result = await orders.getOrdersForRestaurant(
+      pageNumber: reservationPageNumber,
+      pageSize: reservationPageSize,
+      restaurantId: restaurantId!,
+    );
+
+    result.fold(
+      (failure) {
+        if (failure is NoInternetFailure) {
+          emit(OrdersNetworkState());
+        } else {
+          emit(OrdersFailureState());
+        }
+      },
+      (success) {
+        if (success.isEmpty) {
+          orderEndOfPagination = true;
+        } else {
+          orderPageNumber++;
+        }
+        emit(GetRestaurantOrdersLoadedState(orders: success));
       },
     );
   }

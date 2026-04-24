@@ -6,6 +6,7 @@ import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/service/service_locator.dart';
+import 'package:wasla/features/restaurant/orders/data/model/order_model.dart';
 import 'package:wasla/features/restaurant/orders/data/model/restaurant_reservation_model.dart';
 import 'package:wasla/features/restaurant/orders/data/repo/orders_repo.dart';
 
@@ -15,7 +16,8 @@ class OrdersRepoImpl extends OrdersRepo {
   OrdersRepoImpl({required this.api});
 
   @override
-  Future<Either<Failure, List<RestaurantReservationModel>>> getRestaurantReservations({
+  Future<Either<Failure, List<RestaurantReservationModel>>>
+  getRestaurantReservations({
     required int pageSize,
     required int pageNumber,
     required String restaurantId,
@@ -66,6 +68,39 @@ class OrdersRepoImpl extends OrdersRepo {
       return Left(e.errorModel.errorMessage);
     } catch (e) {
       return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<OrderModel>>> getOrdersForRestaurant({
+    required String restaurantId,
+    required int pageNumber,
+    required int pageSize,
+  }) async {
+    try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
+      final response = await api.get(
+        ApiEndPoints.getOrdersForRestaruant,
+        queryParameters: {
+          ApiKeys.id: restaurantId,
+          ApiKeys.pageNumberCap: pageNumber,
+          ApiKeys.pageSizeCap: pageSize,
+        },
+      );
+
+      final List<OrderModel> orders = [];
+
+      for (var order in response[ApiKeys.data][ApiKeys.data]) {
+        orders.add(OrderModel.fromJson(order));
+      }
+
+      return Right(orders);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 }

@@ -7,21 +7,23 @@ import 'package:wasla/core/utils/app_sizes.dart';
 import 'package:wasla/core/widgets/empty_data_widget.dart';
 import 'package:wasla/features/restaurant/orders/data/model/restaurant_reservation_model.dart';
 import 'package:wasla/features/restaurant/orders/presentation/manager/cubit/orders_cubit.dart';
-import 'package:wasla/features/restaurant/orders/presentation/widgets/orders_pagination_list.dart';
+import 'package:wasla/features/restaurant/orders/presentation/widgets/reservations/reservation_pagination_list.dart';
 
-class OrdersBody extends StatefulWidget {
-  const OrdersBody({super.key});
+class ReservationBody extends StatefulWidget {
+  const ReservationBody({super.key});
 
   @override
-  State<OrdersBody> createState() => _OrdersBodyState();
+  State<ReservationBody> createState() => _OrdersBodyState();
 }
 
-class _OrdersBodyState extends State<OrdersBody> {
+class _OrdersBodyState extends State<ReservationBody> {
   List<RestaurantReservationModel> reservations = [];
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.marginDefault),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSizes.marginDefault,
+      ),
       child: BlocBuilder<OrdersCubit, OrdersState>(
         buildWhen: (previous, current) =>
             current is GetRestaurantReservationsLoadingState ||
@@ -44,7 +46,7 @@ class _OrdersBodyState extends State<OrdersBody> {
                   message: 'noReservationsAtTheMoment'.tr(context),
                   title: 'noReservations'.tr(context),
                 )
-              : ResturantPaginationOrders(reservations: reservations);
+              : ReservationPaginationList(reservations: reservations);
         },
       ),
     );

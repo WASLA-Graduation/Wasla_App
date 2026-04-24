@@ -6,6 +6,14 @@ sealed class OrdersState {
 
 final class OrdersInitial extends OrdersState {}
 
+////update states
+
+final class ShowOrderDetails extends OrdersState {
+  final int orderId;
+
+  ShowOrderDetails({required this.orderId});
+}
+
 ////Basics States
 final class OrdersFailureState extends OrdersState {}
 
@@ -67,4 +75,15 @@ final class CancelReservationStatusFailureState
 
     required this.id,
   }) : super(id);
+}
+
+////order states states
+final class GetRestaurantOrdersLoadingState extends OrdersState {}
+
+final class GetRestaurantOrdersFromPaginationLoadingState extends OrdersState {}
+
+final class GetRestaurantOrdersLoadedState extends OrdersState {
+  final List<OrderModel> orders;
+
+  GetRestaurantOrdersLoadedState({required this.orders});
 }
