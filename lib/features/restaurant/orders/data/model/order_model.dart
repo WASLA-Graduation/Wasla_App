@@ -1,7 +1,10 @@
+import 'package:wasla/core/enums/restauant_reservation_status.dart';
+
 class OrderModel {
   final int id;
   final String residentId;
   final String residentName;
+  final String residentPhone;
   final double totalPrice;
   final String address;
   final String notes;
@@ -9,13 +12,14 @@ class OrderModel {
   final String? paymobOrderId;
   final String? paymentKey;
   final String? transactionId;
-  final int status;
+  final OrderStatus status;
   final int paymentStatus;
   final int paymentMethod;
   final DateTime createdAt;
   final List<OrderItemModel> items;
 
   OrderModel({
+    required this.residentPhone,
     required this.id,
     required this.residentId,
     required this.residentName,
@@ -35,6 +39,7 @@ class OrderModel {
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
+      residentPhone: json['residentPhone'],
       id: json['id'],
       residentId: json['residentId'],
       residentName: json['residentName'],
@@ -45,7 +50,7 @@ class OrderModel {
       paymobOrderId: json['paymobOrderId'],
       paymentKey: json['paymentKey'],
       transactionId: json['transactionId'],
-      status: json['status'],
+      status: OrderStatus.fromInt(json['status']),
       paymentStatus: json['paymentStatus'],
       paymentMethod: json['paymentMethod'],
       createdAt: DateTime.parse(json['createdAt']),
@@ -55,7 +60,6 @@ class OrderModel {
     );
   }
 }
-
 
 class OrderItemModel {
   final int menuItemId;

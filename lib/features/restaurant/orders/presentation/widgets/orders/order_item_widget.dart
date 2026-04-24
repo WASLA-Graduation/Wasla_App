@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/enums/restauant_reservation_status.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/functions/format_time_with_intl.dart';
 import 'package:wasla/core/utils/app_colors.dart';
@@ -75,11 +76,16 @@ class OrderItem extends StatelessWidget {
 
                     const Divider(height: 0, thickness: 0.5),
 
-                    Padding(
-                      padding: const EdgeInsets.all(14),
-                      child: OrderActions(
-                        onCancel: onCancel,
-                        onConfirm: onConfirm,
+                    Visibility(
+                      visible:
+                          order.status == OrderStatus.pending ||
+                          order.status == OrderStatus.preparing,
+                      child: Padding(
+                        padding: const EdgeInsets.all(14),
+                        child: OrderActions(
+                          onCancel: onCancel,
+                          onConfirm: onConfirm,
+                        ),
                       ),
                     ),
                   ],
@@ -137,7 +143,7 @@ class _OrderHeader extends StatelessWidget {
                   ],
                 ),
               ),
-              OrderStatusBadge(status: order.status),
+              OrderStatusBadge(status: order.status.index),
               InkWell(
                 onTap: () {
                   context.read<OrdersCubit>().toggleOrderDetails(
@@ -158,16 +164,31 @@ class _OrderHeader extends StatelessWidget {
           const SizedBox(height: 12),
           Row(
             children: [
-              _MetaItem(
-                label: 'customer'.tr(context),
-                value: order.residentName,
+              Expanded(
+                child: _MetaItem(
+                  label: 'customer'.tr(context),
+                  value: order.residentName,
+                ),
               ),
-              const SizedBox(width: 20),
-              _MetaItem(label: 'date'.tr(context), value: formatedDate),
-              const SizedBox(width: 20),
-              _MetaItem(
-                label: 'payment'.tr(context),
-                value: paymentLabel.tr(context),
+
+              Expanded(
+                child: _MetaItem(
+                  label: 'date'.tr(context),
+                  value: formatedDate,
+                ),
+              ),
+              Expanded(
+                child: _MetaItem(
+                  label: 'payment'.tr(context),
+                  value: paymentLabel.tr(context),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: _MetaItem(
+                  label: 'phone'.tr(context),
+                  value: order.residentPhone,
+                ),
               ),
             ],
           ),
@@ -188,9 +209,16 @@ class _MetaItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 11, color: Colors.grey)),
+        Text(
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          label,
+          style: const TextStyle(fontSize: 11, color: Colors.grey),
+        ),
         const SizedBox(height: 2),
         Text(
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           value,
           style: Theme.of(
             context,

@@ -93,6 +93,9 @@ class OrdersRepoImpl extends OrdersRepo {
       final List<OrderModel> orders = [];
 
       for (var order in response[ApiKeys.data][ApiKeys.data]) {
+        // if (order['paymentStatus'] == 1) {
+        //   orders.add(OrderModel.fromJson(order));
+        // }
         orders.add(OrderModel.fromJson(order));
       }
 

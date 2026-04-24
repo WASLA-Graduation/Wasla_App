@@ -8,3 +8,16 @@ enum ReservationStatus {
     return ReservationStatus.values[value];
   }
 }
+
+enum OrderStatus {
+  pending,
+  paid,
+  preparing,
+  onTheWay,
+  delivered,
+  canceled;
+
+  static OrderStatus fromInt(int value) {
+    return OrderStatus.values[value];
+  }
+}
