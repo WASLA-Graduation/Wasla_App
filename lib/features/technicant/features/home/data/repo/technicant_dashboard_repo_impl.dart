@@ -30,6 +30,8 @@ class TechnicantDashboardRepoImpl extends TechnicantDashboardRepo {
       return Right(TechnicianStatisticsModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
       return left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 }

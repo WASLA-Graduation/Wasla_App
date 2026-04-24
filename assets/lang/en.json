@@ -486,8 +486,10 @@
   "markAsReady": "Mark as Ready",
   "confirmOrder": "Confirm Order",
   "notes": "Notes",
-  "currency": "EGP"
-
+  "currency": "EGP",
+  "numberOfReservations": "Number Of Reservations",
+  "numOfOrders": "Number Of Orders",
+  "numOfCompletedOrders": "Number Of Completed Orders"
 
 
 

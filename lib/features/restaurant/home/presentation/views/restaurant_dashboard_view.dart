@@ -47,5 +47,6 @@ class _RestaurantDashboardViewState extends State<RestaurantDashboardView> {
   void getDashboardData() {
     final cubit = context.read<RestaurantDashboardCubit>();
     cubit.getRestaurantData();
+    cubit.getRestaurantStatistics();
   }
 }

@@ -487,7 +487,11 @@
   "markAsReady": "تحديد كجاهز",
   "confirmOrder": "تأكيد الطلب",
   "notes": "ملاحظات",
-  "currency": "جنيه"
+  "currency": "جنيه",
+    "numberOfReservations": "عدد الحجوزات",
+  "numOfOrders": "عدد الطلبات",
+  "numOfCompletedOrders": "عدد الطلبات المكتملة"
+
 
 
 

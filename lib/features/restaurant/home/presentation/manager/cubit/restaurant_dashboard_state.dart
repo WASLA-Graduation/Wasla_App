@@ -25,3 +25,14 @@ final class RestaurantDashboardGetDataSuccessState
 
   RestaurantDashboardGetDataSuccessState({required this.restaurant});
 }
+
+///get restaurant chart states
+
+final class RestaurantDashboardGetChartLoading
+    extends RestaurantDashboardState {}
+
+final class RestaurantDashboardGetChartSuccess
+    extends RestaurantDashboardState {}
+
+final class RestaurantDashboardGetChartFromDropDown
+    extends RestaurantDashboardState {}

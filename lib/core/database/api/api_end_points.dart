@@ -150,4 +150,5 @@ abstract class ApiEndPoints {
       'api/Reservation/RestaurantReservations';
   static const String getOrdersForRestaruant =
       'api/RestaurantOrder/orders-restaurant';
+  static const String getRestaurantChart = 'api/Restaurant/Charts';
 }
