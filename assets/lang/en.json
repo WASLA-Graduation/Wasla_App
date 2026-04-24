@@ -489,7 +489,11 @@
   "currency": "EGP",
   "numberOfReservations": "Number Of Reservations",
   "numOfOrders": "Number Of Orders",
-  "numOfCompletedOrders": "Number Of Completed Orders"
+  "numOfCompletedOrders": "Number Of Completed Orders",
+  "menuAddedToCart": "Menu Added To Cart Successfully",
+  "myCart": "My Cart",
+  "noMenusInCart": "No Menus In Cart",
+  "addMenusToCart": "Add Menus To Cart"
 
 
 

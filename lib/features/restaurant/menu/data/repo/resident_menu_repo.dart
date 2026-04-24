@@ -34,4 +34,9 @@ abstract class ResidentMenuRepo {
   });
 
   Future<Either<String, Null>> deleteMenu({required int id});
+  Future<Either<String, Null>> addMenuToCart({
+    required String restaurantId,
+    required String residentId,
+    required int menuId,
+  });
 }

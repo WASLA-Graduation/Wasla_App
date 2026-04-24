@@ -11,8 +11,10 @@ abstract class ApiKeys {
   static const lan = 'lan';
   static const documents = 'Documents';
   static const restaurantId = 'restaurantId';
+  static const cartItemId = 'cartItemId';
   static const numberOfPersons = 'numberOfPersons';
   static const reservationDate = 'reservationDate';
+  static const quantity = 'quantity';
   static const reservationTime = 'reservationTime';
   static const restaurantCategoryId = 'restaurantCategoryId';
   static const tripId = 'tripId';

@@ -4,7 +4,8 @@ import 'package:wasla/features/resident_service/features/restaurant/presentation
 import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/menu/restaurant_menu_category_list.dart';
 
 class ResidentMenuBody extends StatelessWidget {
-  const ResidentMenuBody({super.key});
+  const ResidentMenuBody({super.key, this.restaurantId});
+  final String? restaurantId;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class ResidentMenuBody extends StatelessWidget {
           SizedBox(height: AppSizes.paddingSizeSmall),
           const ResidnetRestaurantMenuCategory(),
           SizedBox(height: AppSizes.paddingSizeDefault),
-          Expanded(child: RestaurantMenuCatgoryList(showOrderButton: true)),
+          Expanded(child: RestaurantMenuCatgoryList(showOrderButton: true,restaurantId: restaurantId,)),
           SizedBox(height: AppSizes.paddingSizeDefault),
         ],
       ),

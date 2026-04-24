@@ -158,4 +158,29 @@ class ResidentMenuRepoImpl extends ResidentMenuRepo {
       return Left(e.toString());
     }
   }
+
+  @override
+  Future<Either<String, Null>> addMenuToCart({
+    required String restaurantId,
+    required String residentId,
+    required int menuId,
+  }) async {
+    try {
+      await api.post(
+        ApiEndPoints.addMenuToCart,
+        body: {
+          "menuItemId": menuId,
+          "residentId": residentId,
+          "restaurantId": restaurantId,
+          "quantity": 1,
+        },
+      );
+
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }

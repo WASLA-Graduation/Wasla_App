@@ -178,6 +178,26 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
     return 0;
   }
 
+  Future<void> addMenuItemToCart({
+    required int menuId,
+    required String restaurantId,
+  }) async {
+    final String? residentId = await getUserId();
+    final result = await menu.addMenuToCart(
+      menuId: menuId,
+      residentId: residentId!,
+      restaurantId: restaurantId,
+    );
+    result.fold(
+      (failure) {
+        emit(AddMenuToCartFailureState(errMsg: failure, id: menuId));
+      },
+      (success) {
+        emit(AddMenuToCartSuccessState(id: menuId));
+      },
+    );
+  }
+
   void reset() {
     menuImage = null;
     menuNameAr = '';

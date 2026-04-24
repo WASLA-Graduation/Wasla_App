@@ -59,3 +59,22 @@ final class ResidentDeleteMenuItemFailureState extends ResidentMenuState {
 }
 
 final class ResidentDeleteMenuItemSuccessState extends ResidentMenuState {}
+
+////add To Menu To Cart
+
+abstract final class MenuCart extends ResidentMenuState {
+  final int menuId;
+  MenuCart({required this.menuId});
+}
+
+final class AddMenuToCartFailureState extends MenuCart {
+  final int id;
+  final String errMsg;
+  AddMenuToCartFailureState({required this.errMsg, required this.id})
+    : super(menuId: id);
+}
+
+final class AddMenuToCartSuccessState extends MenuCart {
+  final int id;
+  AddMenuToCartSuccessState({required this.id}) : super(menuId: id);
+}

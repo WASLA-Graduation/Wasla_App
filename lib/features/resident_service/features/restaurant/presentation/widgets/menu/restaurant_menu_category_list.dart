@@ -10,9 +10,14 @@ import 'package:wasla/features/restaurant/menu/presentation/manager/cubit/reside
 import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/menu/restuaratn_menu_card.dart';
 
 class RestaurantMenuCatgoryList extends StatefulWidget {
-  const RestaurantMenuCatgoryList({super.key, required this.showOrderButton});
+  const RestaurantMenuCatgoryList({
+    super.key,
+    required this.showOrderButton,
+    this.restaurantId,
+  });
 
   final bool showOrderButton;
+  final String? restaurantId;
 
   @override
   State<RestaurantMenuCatgoryList> createState() =>
@@ -66,6 +71,7 @@ class _RestaurantMenuCatgoryListState extends State<RestaurantMenuCatgoryList> {
           ),
           itemCount: items.length,
           itemBuilder: (context, index) => RestaurantMenuItemCard(
+            restaurantId: widget.restaurantId,
             item: items.elementAt(index),
             showOrderButton: widget.showOrderButton,
           ),

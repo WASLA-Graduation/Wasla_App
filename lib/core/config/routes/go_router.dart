@@ -8,7 +8,10 @@ import 'package:wasla/features/profile/presentation/views/restaurant_edit_profil
 import 'package:wasla/features/profile/presentation/views/technician_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
+import 'package:wasla/features/resident_service/features/restaurant/data/repo/cart/restaurant_cart_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/details/resident_restaurant_repo_impl.dart';
+import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/cart/restaurant_cart_cubit.dart';
+import 'package:wasla/features/resident_service/features/restaurant/presentation/views/restaurant_cart_view.dart';
 import 'package:wasla/features/restaurant/menu/data/repo/resident_menu_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/details/resident_restaurant_cubit.dart';
 import 'package:wasla/features/restaurant/menu/presentation/manager/cubit/resident_menu_cubit.dart';
@@ -653,6 +656,18 @@ final GoRouter appRouter = GoRouter(
           create: (context) =>
               OrdersCubit(OrdersRepoImpl(api: sl<ApiConsumer>())),
           child: OrderView(),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.restaurantCartScreen,
+      builder: (context, state) {
+        final String restaurantId = state.extra as String;
+        return BlocProvider(
+          create: (context) => RestaurantCartCubit(
+            RestaurantCartRepoImpl(api: sl<ApiConsumer>()),
+          ),
+          child: RestaurantCartView( restaurantId: restaurantId,),
         );
       },
     ),

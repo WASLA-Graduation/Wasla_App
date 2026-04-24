@@ -97,4 +97,5 @@ abstract class AppRoutes {
   static const String addMenuItemScreen = '/addMenuItemScreen';
   static const String updateMenuItemScreen = '/updateMenuItemScreen';
   static const String orderScreen = '/orderScreen';
+  static const String restaurantCartScreen = '/restaurantCartScreen';
 }

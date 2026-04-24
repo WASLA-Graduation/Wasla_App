@@ -490,7 +490,12 @@
   "currency": "جنيه",
     "numberOfReservations": "عدد الحجوزات",
   "numOfOrders": "عدد الطلبات",
-  "numOfCompletedOrders": "عدد الطلبات المكتملة"
+  "numOfCompletedOrders": "عدد الطلبات المكتملة",
+  "menuAddedToCart": "تم اضافة الوجبة الى السلة",
+  "myCart": "سلة المشتريات",
+  "noMenusInCart": "لا يوجد وجبات في السلة",
+  "addMenusToCart": "اضف وجبات الى السلة"
+
 
 
 

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
+import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/widgets/cached_network_image_widget.dart';
@@ -14,11 +15,13 @@ import 'package:wasla/features/restaurant/menu/presentation/manager/cubit/reside
 class RestaurantMenuItemCard extends StatelessWidget {
   final MenuItem item;
   final bool showOrderButton;
+  final String? restaurantId;
 
   const RestaurantMenuItemCard({
     super.key,
     required this.item,
     this.showOrderButton = false,
+    this.restaurantId,
   });
 
   @override
@@ -34,7 +37,7 @@ class RestaurantMenuItemCard extends StatelessWidget {
             builder: (_) => DeleteUpdateBottomSheet(
               onEdit: () => context.pushScreen(
                 AppRoutes.updateMenuItemScreen,
-                arguments: {AppStrings.item: item, AppStrings.cubit: cubit,},
+                arguments: {AppStrings.item: item, AppStrings.cubit: cubit},
               ),
               onDelete: () => cubit.deleteMenu(menuId: item.id),
             ),
@@ -179,15 +182,34 @@ class RestaurantMenuItemCard extends StatelessWidget {
             ),
 
             if (showOrderButton)
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 4, 10, 10),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: GeneralButton(
-                    fontSize: 13,
-                    height: 25,
-                    text: 'orderNow'.tr(context),
-                    onPressed: () {},
+              BlocListener<ResidentMenuCubit, ResidentMenuState>(
+                listenWhen: (previous, current) =>
+                    current is MenuCart && current.menuId == item.id,
+                listener: (context, state) {
+                  if (state is AddMenuToCartFailureState) {
+                    showToast(state.errMsg, color: Colors.red);
+                  } else if (state is AddMenuToCartSuccessState) {
+                    showToast(
+                      'menuAddedToCart'.tr(context),
+                      color: AppColors.green,
+                    );
+                  }
+                },
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 4, 10, 10),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: GeneralButton(
+                      fontSize: 13,
+                      height: 25,
+                      text: 'orderNow'.tr(context),
+                      onPressed: () {
+                        context.read<ResidentMenuCubit>().addMenuItemToCart(
+                          menuId: item.id,
+                          restaurantId: restaurantId!,
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
