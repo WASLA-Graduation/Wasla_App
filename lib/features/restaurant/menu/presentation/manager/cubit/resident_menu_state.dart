@@ -74,6 +74,11 @@ final class AddMenuToCartFailureState extends MenuCart {
     : super(menuId: id);
 }
 
+final class AddMenuToCartLaodingState extends MenuCart {
+  final int id;
+  AddMenuToCartLaodingState({required this.id}) : super(menuId: id);
+}
+
 final class AddMenuToCartSuccessState extends MenuCart {
   final int id;
   AddMenuToCartSuccessState({required this.id}) : super(menuId: id);

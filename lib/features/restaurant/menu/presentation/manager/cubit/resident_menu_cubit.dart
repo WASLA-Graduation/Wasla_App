@@ -182,6 +182,7 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
     required int menuId,
     required String restaurantId,
   }) async {
+    emit(AddMenuToCartLaodingState(id: menuId));
     final String? residentId = await getUserId();
     final result = await menu.addMenuToCart(
       menuId: menuId,

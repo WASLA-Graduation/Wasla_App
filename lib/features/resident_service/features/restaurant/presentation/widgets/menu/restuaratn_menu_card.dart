@@ -182,8 +182,8 @@ class RestaurantMenuItemCard extends StatelessWidget {
             ),
 
             if (showOrderButton)
-              BlocListener<ResidentMenuCubit, ResidentMenuState>(
-                listenWhen: (previous, current) =>
+              BlocConsumer<ResidentMenuCubit, ResidentMenuState>(
+                buildWhen: (previous, current) =>
                     current is MenuCart && current.menuId == item.id,
                 listener: (context, state) {
                   if (state is AddMenuToCartFailureState) {
@@ -195,19 +195,23 @@ class RestaurantMenuItemCard extends StatelessWidget {
                     );
                   }
                 },
-                child: Padding(
+                builder: (context, state) => Padding(
                   padding: const EdgeInsets.fromLTRB(10, 4, 10, 10),
                   child: SizedBox(
                     width: double.infinity,
                     child: GeneralButton(
                       fontSize: 13,
                       height: 25,
-                      text: 'orderNow'.tr(context),
+                      text: state is AddMenuToCartLaodingState
+                          ? 'loading'.tr(context)
+                          : 'orderNow'.tr(context),
                       onPressed: () {
-                        context.read<ResidentMenuCubit>().addMenuItemToCart(
-                          menuId: item.id,
-                          restaurantId: restaurantId!,
-                        );
+                        if (state is! AddMenuToCartLaodingState) {
+                          context.read<ResidentMenuCubit>().addMenuItemToCart(
+                            menuId: item.id,
+                            restaurantId: restaurantId!,
+                          );
+                        }
                       },
                     ),
                   ),
