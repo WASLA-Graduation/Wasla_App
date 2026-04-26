@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
-import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/service/payment/payment_service.dart';
-import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/checkout/restaurant_checkout_body.dart';
 
 class RestaurantCheckoutView extends StatefulWidget {
@@ -30,13 +28,12 @@ class _RestaurantCheckoutViewState extends State<RestaurantCheckoutView> {
   void checkPaymentStatus(int orderId) async {
     if (orderId != -1) {
       final result = await PaymentService.checkPaymentStatus(entityId: orderId);
-      orderId = -1;
+      this.orderId = -1;
       result.fold((err) {}, (isPaid) {
         if (isPaid) {
-          showToast('orderWillPrep', color: AppColors.green);
-          context.pop();
-        } else {
-          showToast('paymentFailed', color: AppColors.red);
+          for (int i = 0; i < 2; i++) {
+            context.pop();
+          }
         }
       });
     }

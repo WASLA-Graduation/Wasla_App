@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
+import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/helpers/url_helper.dart';
 import 'package:wasla/core/utils/app_sizes.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/cart/restaurant_cart_cubit.dart';
@@ -9,13 +10,14 @@ import 'package:wasla/features/resident_service/features/restaurant/presentation
 import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/checkout/restaurant_checkout_field.dart';
 
 class RestaurantCheckoutBody extends StatelessWidget {
-  const RestaurantCheckoutBody({
+  RestaurantCheckoutBody({
     super.key,
     required this.restaurantId,
     required this.orederIdCallBack,
   });
   final String restaurantId;
   final ValueChanged<int> orederIdCallBack;
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +30,15 @@ class RestaurantCheckoutBody extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: AppSizes.marginDefault),
             child: ListView(
               children: [
-                RestaurantCheckoutField(
-                  title: 'address'.tr(context),
-                  callback: (add) {
-                    adress = add;
-                  },
+                Form(
+                  key: formKey,
+                  child: RestaurantCheckoutField(
+                    validator: (value) => validateSimpleData(value, context),
+                    title: 'address'.tr(context),
+                    callback: (add) {
+                      adress = add;
+                    },
+                  ),
                 ),
                 SizedBox(height: AppSizes.paddingSizeFifteen),
                 RestaurantCheckoutField(
@@ -65,7 +71,8 @@ class RestaurantCheckoutBody extends StatelessWidget {
               restaurantId: restaurantId,
               onTap: () {
                 final cubit = context.read<RestaurantCartCubit>();
-                if (cubit.state is! RestaurantCartCheckoutLoadingState) {
+                if (cubit.state is! RestaurantCartCheckoutLoadingState &&
+                    formKey.currentState!.validate()) {
                   context.read<RestaurantCartCubit>().checkOut(
                     address: adress,
                     notes: notes,

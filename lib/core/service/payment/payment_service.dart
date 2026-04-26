@@ -39,7 +39,7 @@ abstract class PaymentService {
     required int entityId,
   }) async {
     try {
-      final response = await sl<ApiConsumer>().post(
+      final response = await sl<ApiConsumer>().get(
         ApiEndPoints.checkPaymentStatus,
         queryParameters: {ApiKeys.entityId: entityId, ApiKeys.entityType: 1},
       );

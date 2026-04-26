@@ -185,6 +185,9 @@ class RestaurantMenuItemCard extends StatelessWidget {
               BlocConsumer<ResidentMenuCubit, ResidentMenuState>(
                 buildWhen: (previous, current) =>
                     current is MenuCart && current.menuId == item.id,
+                listenWhen: (previous, current) =>
+                    current is MenuCart && current.menuId == item.id,
+
                 listener: (context, state) {
                   if (state is AddMenuToCartFailureState) {
                     showToast(state.errMsg, color: Colors.red);
