@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
+import 'package:wasla/core/models/payment_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restaurant_cart_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/cart/restaurant_cart_repo.dart';
 
@@ -93,13 +94,35 @@ class RestaurantCartCubit extends Cubit<RestaurantCartState> {
     );
   }
 
+  Future<void> checkOut({
+    required String address,
+    required String notes,
+    required String restaurantId,
+  }) async {
+    emit(RestaurantCartCheckoutLoadingState());
+    final String? residentId = await getUserId();
+    final result = await cart.restaurantCheckout(
+      residentId: residentId!,
+      address: address,
+      notes: notes,
+      paymentMethod: 1,
+      restaurantId: restaurantId,
+    );
+    result.fold(
+      (failure) {
+        emit(RestaurantCartCheckoutFailureState(errMsg: failure));
+      },
+      (success) {
+        emit(RestaurantCartCheckoutSuccessState(paymentModel: success));
+      },
+    );
+  }
 
-   double get calcTotalCost {
+  double get calcTotalCost {
     double totalCost = 0;
     for (int i = 0; i < cartList.length; i++) {
       totalCost += cartList[i].totalPrice;
     }
     return totalCost;
   }
-
 }

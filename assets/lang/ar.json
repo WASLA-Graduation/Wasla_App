@@ -500,7 +500,9 @@
   "emptyCartSub": "أضف عناصر من القائمة للبدء",
   "remove": "إزالة",
     "totalCost": "التكلفة الكلية",
-      "checkout": "الدفع"
+      "checkout": "الدفع",
+        "orderWillPrep": "تم طلب الاورد بنجاح"
+
 
 
 

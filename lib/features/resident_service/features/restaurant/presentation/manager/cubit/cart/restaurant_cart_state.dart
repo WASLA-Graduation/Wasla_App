@@ -28,3 +28,23 @@ final class RestaurantCartUpadteQuantityState extends RestaurantCartState {
 
   RestaurantCartUpadteQuantityState({required this.itemId});
 }
+
+///checkout states
+final class RestaurantCartCheckoutState extends RestaurantCartState {}
+
+final class RestaurantCartCheckoutLoadingState
+    extends RestaurantCartCheckoutState {}
+
+final class RestaurantCartCheckoutSuccessState
+    extends RestaurantCartCheckoutState {
+  final PaymentModel paymentModel;
+
+  RestaurantCartCheckoutSuccessState({required this.paymentModel});
+}
+
+final class RestaurantCartCheckoutFailureState
+    extends RestaurantCartCheckoutState {
+  final String errMsg;
+
+  RestaurantCartCheckoutFailureState({required this.errMsg});
+}

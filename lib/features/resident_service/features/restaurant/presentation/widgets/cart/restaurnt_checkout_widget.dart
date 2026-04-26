@@ -7,7 +7,14 @@ import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/cart/restaurant_cart_cubit.dart';
 
 class RestaurantCheckoutWiget extends StatelessWidget {
-  const RestaurantCheckoutWiget({super.key});
+  const RestaurantCheckoutWiget({
+    super.key,
+    required this.restaurantId,
+    required this.onTap,
+  });
+  final String restaurantId;
+
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +56,22 @@ class RestaurantCheckoutWiget extends StatelessWidget {
               ),
             ],
           ),
-          GeneralButton(
-            onPressed: () {
-              ///to do check before checkout the cart has items or no
+          BlocBuilder<RestaurantCartCubit, RestaurantCartState>(
+            buildWhen: (previous, current) =>
+                context.read<RestaurantCartCubit>().cartList.isEmpty ||
+                current is RestaurantCartCheckoutState ||
+                current is RestaurantGetCartLoadedState,
+            builder: (context, state) {
+              return GeneralButton(
+                color: context.read<RestaurantCartCubit>().cartList.isEmpty
+                    ? AppColors.grayDark
+                    : AppColors.primaryColor,
+                onPressed: onTap,
+                text: state is RestaurantCartCheckoutLoadingState
+                    ? 'loading'.tr(context)
+                    : 'checkout'.tr(context),
+              );
             },
-            text: 'checkout'.tr(context),
           ),
         ],
       ),

@@ -5,6 +5,7 @@ import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
 import 'package:wasla/core/error/failure.dart';
+import 'package:wasla/core/models/payment_model.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restaurant_cart_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/cart/restaurant_cart_repo.dart';
@@ -81,6 +82,33 @@ class RestaurantCartRepoImpl extends RestaurantCartRepo {
         },
       );
       return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, PaymentModel>> restaurantCheckout({
+    required String restaurantId,
+    required String residentId,
+    required String address,
+    required String notes,
+    required int paymentMethod,
+  }) async {
+    try {
+      final response = await api.post(
+        'api/RestaurantOrder/checkout',
+        body: {
+          ApiKeys.residentId: residentId,
+          ApiKeys.restaurantId: restaurantId,
+          ApiKeys.address: address,
+          ApiKeys.notes: notes,
+          ApiKeys.paymentMethod: 1,
+        },
+      );
+      return Right(PaymentModel.fromJson(json: response[ApiKeys.data]));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     } catch (e) {

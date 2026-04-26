@@ -34,4 +34,20 @@ abstract class PaymentService {
       return Left(e.errorModel.errorMessage);
     }
   }
+
+  static Future<Either<String, bool>> checkPaymentStatus({
+    required int entityId,
+  }) async {
+    try {
+      final response = await sl<ApiConsumer>().post(
+        ApiEndPoints.checkPaymentStatus,
+        queryParameters: {ApiKeys.entityId: entityId, ApiKeys.entityType: 1},
+      );
+      return Right(response[ApiKeys.data][ApiKeys.isPaid]);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }

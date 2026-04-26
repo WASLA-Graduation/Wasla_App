@@ -25,7 +25,7 @@ class _RestaurantCartViewState extends State<RestaurantCartView> {
     return Scaffold(
       appBar: AppBar(title: Text('myCart'.tr(context))),
       body: BlocStatusHandler<RestaurantCartCubit, RestaurantCartState>(
-        body: const RestaurantCartBody(),
+        body: RestaurantCartBody(restaurantId: widget.restaurantId),
         onRetry: () {
           getMyCart();
           context.read<RestaurantCartCubit>().onRetry();
