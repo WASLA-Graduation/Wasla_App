@@ -20,27 +20,12 @@ class OrderActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Visibility(
-          visible: status == OrderStatus.pending,
-          child: Expanded(
-            child: Row(
-              children: [
-                Expanded(child: _PrepardlButton(onTap: onPrepard)),
-                const SizedBox(width: 10),
-              ],
-            ),
-          ),
-        ),
-        Expanded(
-          child: _ConfirmButton(
-            label: confirmLabel ?? 'markAsReady'.tr(context),
+    return status == OrderStatus.pending
+        ? _PrepardlButton(onTap: onPrepard)
+        : _ConfirmButton(
+            label: confirmLabel ?? 'confirm'.tr(context),
             onTap: onConfirm,
-          ),
-        ),
-      ],
-    );
+          );
   }
 }
 
@@ -51,16 +36,21 @@ class _PrepardlButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: onTap,
-      style: OutlinedButton.styleFrom(
-        foregroundColor: AppColors.orange,
-        side: BorderSide(color: AppColors.orange, width: 0.5),
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        textStyle: Theme.of(context).textTheme.displaySmall,
+    return SizedBox(
+      width: double.infinity,
+      child: OutlinedButton(
+        onPressed: onTap,
+        style: OutlinedButton.styleFrom(
+          foregroundColor: AppColors.orange,
+          side: BorderSide(color: AppColors.orange, width: 0.5),
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          textStyle: Theme.of(context).textTheme.displaySmall,
+        ),
+        child: Text('markAsPrepared'.tr(context)),
       ),
-      child: Text('markAsPrepared'.tr(context)),
     );
   }
 }
@@ -73,17 +63,22 @@ class _ConfirmButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onTap,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF1D9E75),
-        foregroundColor: const Color(0xFFE1F5EE),
-        elevation: 0,
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        textStyle: Theme.of(context).textTheme.displaySmall,
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF1D9E75),
+          foregroundColor: const Color(0xFFE1F5EE),
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          textStyle: Theme.of(context).textTheme.displaySmall,
+        ),
+        child: Text(label),
       ),
-      child: Text(label),
     );
   }
 }
