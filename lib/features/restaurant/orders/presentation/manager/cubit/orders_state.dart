@@ -33,6 +33,18 @@ final class GetRestaurantReservationsLoadedState extends OrdersState {
   GetRestaurantReservationsLoadedState({required this.reservations});
 }
 
+//////  orders of resident
+final class GetOrdersForResidetntLoadingState extends OrdersState {}
+
+final class GetOrdersForResidetntFromPaginationLoadingState
+    extends OrdersState {}
+
+final class GetOrdersForResidetntLoadedState extends OrdersState {
+  final List<ResidentOrderModel> orders;
+
+  GetOrdersForResidetntLoadedState({required this.orders});
+}
+
 ////change reservation status states
 abstract class ChangeReservationStatusState extends OrdersState {
   final int reservationId;
@@ -77,7 +89,7 @@ final class CancelReservationStatusFailureState
   }) : super(id);
 }
 
-////order states states
+////order for restauarant states
 final class GetRestaurantOrdersLoadingState extends OrdersState {}
 
 final class GetRestaurantOrdersFromPaginationLoadingState extends OrdersState {}
@@ -86,4 +98,41 @@ final class GetRestaurantOrdersLoadedState extends OrdersState {
   final List<OrderModel> orders;
 
   GetRestaurantOrdersLoadedState({required this.orders});
+}
+
+////change Order status states
+abstract class ChangeOrderStatusState extends OrdersState {
+  final int orderId;
+
+  ChangeOrderStatusState(this.orderId);
+}
+
+final class MarkOrderAsDoneSuccessState extends ChangeOrderStatusState {
+  final int id;
+
+  MarkOrderAsDoneSuccessState({required this.id}) : super(id);
+}
+
+final class MarkOrderAsDoneFailureState extends ChangeOrderStatusState {
+  final int id;
+  final String errorMessage;
+
+  MarkOrderAsDoneFailureState({required this.errorMessage, required this.id})
+    : super(id);
+}
+
+final class MarkOrderAsPreparedSuccessState extends ChangeOrderStatusState {
+  final int id;
+
+  MarkOrderAsPreparedSuccessState({required this.id}) : super(id);
+}
+
+final class MarkOrderAsPreparedFailureState extends ChangeOrderStatusState {
+  final int id;
+  final String errorMessage;
+
+  MarkOrderAsPreparedFailureState({
+    required this.errorMessage,
+    required this.id,
+  }) : super(id);
 }

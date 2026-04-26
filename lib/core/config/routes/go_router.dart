@@ -11,6 +11,7 @@ import 'package:wasla/features/resident_service/features/restaurant/data/models/
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/cart/restaurant_cart_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/details/resident_restaurant_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/cart/restaurant_cart_cubit.dart';
+import 'package:wasla/features/restaurant/orders/presentation/views/resident_restaurant_orders_view.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/views/restaurant_cart_view.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/views/restaurant_checkout_view.dart';
 import 'package:wasla/features/restaurant/menu/data/repo/resident_menu_repo_impl.dart';
@@ -681,6 +682,16 @@ final GoRouter appRouter = GoRouter(
           child: RestaurantCheckoutView(
             restaurantId: data[AppStrings.id] as String,
           ),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.residentRestaurantOrdersScreen,
+      builder: (context, state) {
+        return BlocProvider(
+          create: (context) =>
+              OrdersCubit(OrdersRepoImpl(api: sl<ApiConsumer>())),
+          child: ResidentRestaurantOrdersView(),
         );
       },
     ),

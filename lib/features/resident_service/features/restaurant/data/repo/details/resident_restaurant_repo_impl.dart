@@ -77,7 +77,6 @@ class ResidentRestaurantRepoImpl extends ResidentRestaurantRepo {
     required String time,
   }) async {
     try {
-    
       await api.post(
         ApiEndPoints.restaurantReservatioin,
         body: {
@@ -95,4 +94,5 @@ class ResidentRestaurantRepoImpl extends ResidentRestaurantRepo {
       return Left(e.toString());
     }
   }
+
 }

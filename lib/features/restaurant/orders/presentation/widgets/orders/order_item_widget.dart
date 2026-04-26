@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
-import 'package:wasla/core/enums/restauant_reservation_status.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/functions/format_time_with_intl.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/features/restaurant/orders/data/model/order_model.dart';
+import 'package:wasla/features/restaurant/orders/data/model/base_order_model.dart';
+import 'package:wasla/features/restaurant/orders/data/model/resident_order_model.dart';
+import 'package:wasla/features/restaurant/orders/data/model/restaurant_order_model.dart';
 import 'package:wasla/features/restaurant/orders/presentation/manager/cubit/orders_cubit.dart';
-import 'package:wasla/features/restaurant/orders/presentation/widgets/orders/order_actions.dart';
+import 'package:wasla/features/restaurant/orders/presentation/widgets/orders/order_buttons_wiget.dart';
 import 'package:wasla/features/restaurant/orders/presentation/widgets/orders/order_items_section.dart';
 import 'package:wasla/features/restaurant/orders/presentation/widgets/orders/order_status_badge.dart';
 import 'package:wasla/features/restaurant/orders/presentation/widgets/orders/order_totals_section.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem({
-    super.key,
-    required this.order,
-    required this.onCancel,
-    required this.onConfirm,
-  });
+  const OrderItem({super.key, required this.order, this.withButtons});
 
-  final OrderModel order;
-  final VoidCallback onCancel;
-  final VoidCallback onConfirm;
+  final BaseOrderModel order;
+  final bool? withButtons;
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +33,8 @@ class OrderItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _OrderHeader(
+          OrderHeader(
             order: order,
-            paymentLabel: 'card',
             formatedDate: formateDateToMatchWithPosts(order.createdAt),
           ),
 
@@ -76,18 +70,7 @@ class OrderItem extends StatelessWidget {
 
                     const Divider(height: 0, thickness: 0.5),
 
-                    Visibility(
-                      visible:
-                          order.status == OrderStatus.pending ||
-                          order.status == OrderStatus.preparing,
-                      child: Padding(
-                        padding: const EdgeInsets.all(14),
-                        child: OrderActions(
-                          onCancel: onCancel,
-                          onConfirm: onConfirm,
-                        ),
-                      ),
-                    ),
+                    OrderButtons(order: order, withButtons: withButtons),
                   ],
                 ),
               );
@@ -99,15 +82,14 @@ class OrderItem extends StatelessWidget {
   }
 }
 
-class _OrderHeader extends StatelessWidget {
-  const _OrderHeader({
+class OrderHeader extends StatelessWidget {
+  const OrderHeader({
+    super.key,
     required this.order,
-    required this.paymentLabel,
     required this.formatedDate,
   });
 
-  final OrderModel order;
-  final String paymentLabel;
+  final BaseOrderModel order;
   final String formatedDate;
 
   @override
@@ -166,36 +148,40 @@ class _OrderHeader extends StatelessWidget {
             children: [
               Expanded(
                 child: _MetaItem(
-                  label: 'customer'.tr(context),
-                  value: order.residentName,
+                  label: isRestaurantOrder
+                      ? 'customer'.tr(context)
+                      : 'restaurant'.tr(context),
+                  value: isRestaurantOrder
+                      ? (order as OrderModel).residentName
+                      : (order as ResidentOrderModel).restaurantName,
                 ),
               ),
 
               Expanded(
-                child: _MetaItem(
-                  label: 'date'.tr(context),
-                  value: formatedDate,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: _MetaItem(
+                    label: 'date'.tr(context),
+                    value: formatedDate,
+                  ),
                 ),
               ),
-              Expanded(
-                child: _MetaItem(
-                  label: 'payment'.tr(context),
-                  value: paymentLabel.tr(context),
+              if (isRestaurantOrder)
+                Expanded(
+                  flex: 1,
+                  child: _MetaItem(
+                    label: 'phone'.tr(context),
+                    value: (order as OrderModel).residentPhone,
+                  ),
                 ),
-              ),
-              Expanded(
-                flex: 2,
-                child: _MetaItem(
-                  label: 'phone'.tr(context),
-                  value: order.residentPhone,
-                ),
-              ),
             ],
           ),
         ],
       ),
     );
   }
+
+  bool get isRestaurantOrder => order is OrderModel;
 }
 
 class _MetaItem extends StatelessWidget {
@@ -232,7 +218,7 @@ class _MetaItem extends StatelessWidget {
 class _DeliverySection extends StatelessWidget {
   const _DeliverySection({required this.order});
 
-  final OrderModel order;
+  final BaseOrderModel order;
 
   @override
   Widget build(BuildContext context) {

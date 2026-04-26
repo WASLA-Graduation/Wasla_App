@@ -30,8 +30,9 @@ abstract class ResidentBookingRepo {
     required String residentId,
   });
 
-
   Future<Either<String, Null>> restaurantCancelBooking({
     required int bookingId,
   });
+
+
 }

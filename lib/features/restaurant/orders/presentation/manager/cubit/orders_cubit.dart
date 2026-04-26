@@ -2,7 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/enums/restauant_reservation_status.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
-import 'package:wasla/features/restaurant/orders/data/model/order_model.dart';
+import 'package:wasla/features/restaurant/orders/data/model/base_order_model.dart';
+import 'package:wasla/features/restaurant/orders/data/model/resident_order_model.dart';
+import 'package:wasla/features/restaurant/orders/data/model/restaurant_order_model.dart';
 import 'package:wasla/features/restaurant/orders/data/model/restaurant_reservation_model.dart';
 import 'package:wasla/features/restaurant/orders/data/repo/orders_repo.dart';
 
@@ -126,8 +128,8 @@ class OrdersCubit extends Cubit<OrdersState> {
     final String? restaurantId = await getUserId();
 
     final result = await orders.getOrdersForRestaurant(
-      pageNumber: reservationPageNumber,
-      pageSize: reservationPageSize,
+      pageNumber: orderPageNumber,
+      pageSize: orderPageSize,
       restaurantId: restaurantId!,
     );
 
@@ -146,6 +148,70 @@ class OrdersCubit extends Cubit<OrdersState> {
           orderPageNumber++;
         }
         emit(GetRestaurantOrdersLoadedState(orders: success));
+      },
+    );
+  }
+
+  Future<void> getResidentOrders({required bool fromPagination}) async {
+    if (orderEndOfPagination ||
+        state is GetOrdersForResidetntFromPaginationLoadingState) {
+      return;
+    }
+    if (fromPagination) {
+      emit(GetOrdersForResidetntFromPaginationLoadingState());
+    } else {
+      emit(GetOrdersForResidetntLoadingState());
+    }
+    final String? userId = await getUserId();
+    final result = await orders.getOrdersForResidnt(
+      pageNumber: orderPageNumber,
+      pageSize: orderPageSize,
+      residentId: userId!,
+    );
+
+    result.fold(
+      (failure) {
+        if (failure is NoInternetFailure) {
+          emit(OrdersNetworkState());
+        } else {
+          emit(OrdersFailureState());
+        }
+      },
+      (success) {
+        if (success.isEmpty) {
+          orderEndOfPagination = true;
+        } else {
+          orderPageNumber++;
+        }
+        emit(GetOrdersForResidetntLoadedState(orders: success));
+      },
+    );
+  }
+
+  Future<void> markOrderAsDone({required BaseOrderModel order}) async {
+    final result = await orders.markOrderAsDelivered(id: order.id);
+    result.fold(
+      (failure) {
+        emit(MarkOrderAsDoneFailureState(errorMessage: failure, id: order.id));
+      },
+      (success) {
+        order.status = OrderStatus.delivered;
+        emit(MarkOrderAsDoneSuccessState(id: order.id));
+      },
+    );
+  }
+
+  Future<void> markOrderAsReady({required BaseOrderModel order}) async {
+    final result = await orders.markOrderAsPrepared(id: order.id);
+    result.fold(
+      (failure) {
+        emit(
+          MarkOrderAsPreparedFailureState(errorMessage: failure, id: order.id),
+        );
+      },
+      (success) {
+        order.status = OrderStatus.preparing;
+        emit(MarkOrderAsPreparedSuccessState(id: order.id));
       },
     );
   }

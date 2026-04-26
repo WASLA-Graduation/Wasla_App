@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
-import 'package:wasla/features/restaurant/orders/data/model/order_model.dart';
+import 'package:wasla/features/restaurant/orders/data/model/base_order_model.dart';
 
 class OrderItemsSection extends StatelessWidget {
   const OrderItemsSection({super.key, required this.items});

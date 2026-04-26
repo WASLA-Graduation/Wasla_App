@@ -19,4 +19,6 @@ abstract class ResidentRestaurantRepo {
     required String date,
     required String time,
   });
+
+
 }

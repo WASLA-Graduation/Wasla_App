@@ -501,7 +501,12 @@
   "remove": "إزالة",
     "totalCost": "التكلفة الكلية",
       "checkout": "الدفع",
-        "orderWillPrep": "تم طلب الاورد بنجاح"
+        "orderWillPrep": "تم طلب الاورد بنجاح",
+          "all_restaurant_orders": "جميع الطلبات",
+          "all_orders": "جميع الطلبات",
+            "markAsPrepared": "تحديد كمقبول"
+
+
 
 
 

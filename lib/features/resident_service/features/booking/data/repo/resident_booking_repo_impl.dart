@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
@@ -212,4 +211,6 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
       return Left(e.toString());
     }
   }
+
+
 }

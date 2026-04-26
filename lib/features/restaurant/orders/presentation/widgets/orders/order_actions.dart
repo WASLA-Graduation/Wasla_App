@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/enums/restauant_reservation_status.dart';
+import 'package:wasla/core/utils/app_colors.dart';
 
 class OrderActions extends StatelessWidget {
   const OrderActions({
     super.key,
-    required this.onCancel,
+    required this.onPrepard,
     required this.onConfirm,
     this.confirmLabel,
+    required this.status,
   });
 
-  final VoidCallback onCancel;
+  final VoidCallback onPrepard;
   final VoidCallback onConfirm;
+  final OrderStatus status;
 
   final String? confirmLabel;
 
@@ -18,8 +22,17 @@ class OrderActions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(child: _CancelButton(onTap: onCancel)),
-        const SizedBox(width: 10),
+        Visibility(
+          visible: status == OrderStatus.pending,
+          child: Expanded(
+            child: Row(
+              children: [
+                Expanded(child: _PrepardlButton(onTap: onPrepard)),
+                const SizedBox(width: 10),
+              ],
+            ),
+          ),
+        ),
         Expanded(
           child: _ConfirmButton(
             label: confirmLabel ?? 'markAsReady'.tr(context),
@@ -31,8 +44,8 @@ class OrderActions extends StatelessWidget {
   }
 }
 
-class _CancelButton extends StatelessWidget {
-  const _CancelButton({required this.onTap});
+class _PrepardlButton extends StatelessWidget {
+  const _PrepardlButton({required this.onTap});
 
   final VoidCallback onTap;
 
@@ -41,13 +54,13 @@ class _CancelButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: onTap,
       style: OutlinedButton.styleFrom(
-        foregroundColor: const Color(0xFFE24B4A),
-        side: const BorderSide(color: Color(0xFFE24B4A), width: 0.5),
+        foregroundColor: AppColors.orange,
+        side: BorderSide(color: AppColors.orange, width: 0.5),
         padding: const EdgeInsets.symmetric(vertical: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         textStyle: Theme.of(context).textTheme.displaySmall,
       ),
-      child: Text('cancelOrder'.tr(context)),
+      child: Text('markAsPrepared'.tr(context)),
     );
   }
 }

@@ -99,4 +99,5 @@ abstract class AppRoutes {
   static const String orderScreen = '/orderScreen';
   static const String restaurantCartScreen = '/restaurantCartScreen';
   static const String restaurantCheckoutScreen = '/restaurantCheckoutScreen';
+  static const String residentRestaurantOrdersScreen = '/residentRestaurantOrdersScreen';
 }

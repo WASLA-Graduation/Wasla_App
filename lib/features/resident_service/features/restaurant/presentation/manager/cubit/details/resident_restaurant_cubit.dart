@@ -20,6 +20,7 @@ class ResidentRestaurantCubit extends Cubit<ResidentRestaurantState> {
   bool endOfPagination = false;
   int categoryId = 0;
   int numberOfPersons = 1;
+
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTimeSlot = TimeOfDay.now();
 

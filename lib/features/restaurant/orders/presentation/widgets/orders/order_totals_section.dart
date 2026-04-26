@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
-import 'package:wasla/features/restaurant/orders/data/model/order_model.dart';
+import 'package:wasla/features/restaurant/orders/data/model/base_order_model.dart';
 
 class OrderTotalsSection extends StatelessWidget {
   const OrderTotalsSection({super.key, required this.order});
 
-  final OrderModel order;
+  final BaseOrderModel order;
 
   double get _subtotal =>
       order.items.fold(0, (sum, i) => sum + (i.price * i.quantity));

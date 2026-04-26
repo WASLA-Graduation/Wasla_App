@@ -5,29 +5,31 @@ import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_sizes.dart';
 import 'package:wasla/core/widgets/empty_data_widget.dart';
-import 'package:wasla/features/restaurant/orders/data/model/restaurant_order_model.dart';
+import 'package:wasla/features/restaurant/orders/data/model/resident_order_model.dart';
+import 'package:wasla/features/restaurant/orders/presentation/widgets/orders/resident_restaurant_orders_list.dart';
 import 'package:wasla/features/restaurant/orders/presentation/manager/cubit/orders_cubit.dart';
-import 'package:wasla/features/restaurant/orders/presentation/widgets/orders/restaurant_orders_list.dart';
 
-class OrderBody extends StatefulWidget {
-  const OrderBody({super.key});
+class ResidentRestaurantOrdersBody extends StatefulWidget {
+  const ResidentRestaurantOrdersBody({super.key});
 
   @override
-  State<OrderBody> createState() => _OrderBodyState();
+  State<ResidentRestaurantOrdersBody> createState() =>
+      _ResidentRestaurantOrdersBodyState();
 }
 
-class _OrderBodyState extends State<OrderBody> {
-  List<OrderModel> orders = [];
+class _ResidentRestaurantOrdersBodyState
+    extends State<ResidentRestaurantOrdersBody> {
+  List<ResidentOrderModel> orders = [];
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSizes.marginDefault),
       child: BlocBuilder<OrdersCubit, OrdersState>(
         buildWhen: (previous, current) =>
-            current is GetRestaurantOrdersLoadingState ||
-            current is GetRestaurantOrdersLoadedState,
+            current is GetOrdersForResidetntLoadingState ||
+            current is GetOrdersForResidetntLoadedState,
         builder: (context, state) {
-          if (state is GetRestaurantOrdersLoadingState ||
+          if (state is GetOrdersForResidetntLoadingState ||
               state is OrdersInitial) {
             return Center(
               child: SpinKitFadingCircle(
@@ -35,7 +37,7 @@ class _OrderBodyState extends State<OrderBody> {
                 size: 50.0,
               ),
             );
-          } else if (state is GetRestaurantOrdersLoadedState) {
+          } else if (state is GetOrdersForResidetntLoadedState) {
             orders.addAll(state.orders);
           }
 
@@ -44,7 +46,7 @@ class _OrderBodyState extends State<OrderBody> {
                   title: 'noOrders'.tr(context),
                   message: 'noOrdersAtTheMoment'.tr(context),
                 )
-              : RestaurantPaginationOrdersList(orders: orders);
+              : ResidentOrdersPaginationList(orders: orders);
         },
       ),
     );
