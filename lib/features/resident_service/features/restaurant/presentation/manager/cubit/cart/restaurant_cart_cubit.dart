@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
@@ -44,17 +46,10 @@ class RestaurantCartCubit extends Cubit<RestaurantCartState> {
       cartItemId: item.cartItemId,
       residentId: residentId!,
     );
-    result.fold(
-      (failure) {
-        emit(
-          RestaurantRemoveFromCartFailureState(failure, id: item.cartItemId),
-        );
-      },
-      (success) {
-        cartList.remove(item);
-        emit(RestaurantRemoveFromCartSuccessState(id: item.cartItemId));
-      },
-    );
+    result.fold((failure) {}, (success) {
+      cartList.remove(item);
+      emit(RestaurantGetCartLoadedState(cart: cartList));
+    });
   }
 
   Future<void> updatItemQuantity(
@@ -64,13 +59,17 @@ class RestaurantCartCubit extends Cubit<RestaurantCartState> {
     double itemPrice = item.totalPrice / item.quantity;
     if (isIncrement) {
       item.quantity++;
+      log(item.quantity.toString());
       item.totalPrice = itemPrice * item.quantity;
     } else {
       if (item.quantity > 1) {
         item.quantity--;
         item.totalPrice = itemPrice * item.quantity;
+      } else {
+        return;
       }
     }
+    emit(RestaurantCartUpadteQuantityState(itemId: item.cartItemId));
     final String? residentId = await getUserId();
     final result = await cart.updateQuantity(
       cartItemId: item.cartItemId,
@@ -86,11 +85,21 @@ class RestaurantCartCubit extends Cubit<RestaurantCartState> {
           item.quantity++;
           item.totalPrice = itemPrice * item.quantity;
         }
-        emit(RestaurantCartUpateQuantityState(itemId: item.cartItemId));
+        emit(RestaurantCartUpadteQuantityState(itemId: item.cartItemId));
       },
       (success) {
-        emit(RestaurantCartUpateQuantityState(itemId: item.cartItemId));
+        emit(RestaurantCartUpadteQuantityState(itemId: item.cartItemId));
       },
     );
   }
+
+
+   double get calcTotalCost {
+    double totalCost = 0;
+    for (int i = 0; i < cartList.length; i++) {
+      totalCost += cartList[i].totalPrice;
+    }
+    return totalCost;
+  }
+
 }

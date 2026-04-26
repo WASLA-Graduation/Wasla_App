@@ -336,6 +336,8 @@
   "comments": "Comments",
   "reactions": "Reactions",
   "likes": "Likes",
+  "totalCost": "Total Cost",
+  "checkout": "Checkout",
   "posts": "Posts",
   "saves": "Saved",
   "noPosts": "No Posts Found",
@@ -493,7 +495,11 @@
   "menuAddedToCart": "Menu Added To Cart Successfully",
   "myCart": "My Cart",
   "noMenusInCart": "No Menus In Cart",
-  "addMenusToCart": "Add Menus To Cart"
+  "addMenusToCart": "Add Menus To Cart",
+  "cart": "Cart",
+  "emptyCart": "Your cart is empty",
+  "emptyCartSub": "Add items from the menu to get started",
+  "remove": "Remove"
 
 
 

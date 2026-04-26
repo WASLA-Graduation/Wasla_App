@@ -8,15 +8,17 @@ class RestaurantCartBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.marginDefault),
-      child: Column(
-        children: [
-          Expanded(child: const RestauantCartList()),
-          const SizedBox(height: 10),
-          const RestaurantCheckoutWiget(),
-        ],
-      ),
+    return Column(
+      children: [
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppSizes.marginDefault),
+            child: const RestauantCartList(),
+          ),
+        ),
+        const SizedBox(height: 10),
+        const RestaurantCheckoutWiget(),
+      ],
     );
   }
 }

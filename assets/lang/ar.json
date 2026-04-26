@@ -494,7 +494,15 @@
   "menuAddedToCart": "تم اضافة الوجبة الى السلة",
   "myCart": "سلة المشتريات",
   "noMenusInCart": "لا يوجد وجبات في السلة",
-  "addMenusToCart": "اضف وجبات الى السلة"
+  "addMenusToCart": "اضف وجبات الى السلة",
+  "cart": "السلة",
+  "emptyCart": "السلة فارغة",
+  "emptyCartSub": "أضف عناصر من القائمة للبدء",
+  "remove": "إزالة",
+    "totalCost": "التكلفة الكلية",
+      "checkout": "الدفع"
+
+
 
 
 

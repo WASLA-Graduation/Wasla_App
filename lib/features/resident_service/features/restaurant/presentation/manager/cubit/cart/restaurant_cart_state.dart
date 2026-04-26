@@ -23,32 +23,8 @@ final class RestaurantGetCartLoadedState extends RestaurantCartState {
 }
 
 ///update quantity
-final class RestaurantCartUpateQuantityState extends RestaurantCartState {
+final class RestaurantCartUpadteQuantityState extends RestaurantCartState {
   final int itemId;
 
-  RestaurantCartUpateQuantityState({required this.itemId});
-}
-
-////remove cart States
-abstract final class RestaurantRemoveActionState extends RestaurantCartState {
-  final int cartItemId;
-
-  RestaurantRemoveActionState({required this.cartItemId});
-}
-
-final class RestaurantRemoveFromCartSuccessState
-    extends RestaurantRemoveActionState {
-  final int id;
-
-  RestaurantRemoveFromCartSuccessState({required this.id})
-    : super(cartItemId: id);
-}
-
-final class RestaurantRemoveFromCartFailureState
-    extends RestaurantRemoveActionState {
-  final int id;
-  final String errMsg;
-
-  RestaurantRemoveFromCartFailureState(this.errMsg, {required this.id})
-    : super(cartItemId: id);
+  RestaurantCartUpadteQuantityState({required this.itemId});
 }
