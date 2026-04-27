@@ -6,6 +6,8 @@ sealed class RestaurantCartState {
 
 final class RestaurantCartInitial extends RestaurantCartState {}
 
+final class RestaurantUpdatePaymentStauts extends RestaurantCartState {}
+
 ////Basics States
 final class RestaurantCartNetworkState extends RestaurantCartState {}
 
@@ -41,6 +43,9 @@ final class RestaurantCartCheckoutSuccessState
 
   RestaurantCartCheckoutSuccessState({required this.paymentModel});
 }
+
+final class RestaurantCartCheckoutWithCashSuccessState
+    extends RestaurantCartCheckoutState {}
 
 final class RestaurantCartCheckoutFailureState
     extends RestaurantCartCheckoutState {

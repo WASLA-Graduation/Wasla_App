@@ -4,8 +4,10 @@ import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/enums/payment_method.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/models/payment_model.dart';
+import 'package:wasla/core/models/payment_result_mode.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restaurant_cart_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/cart/restaurant_cart_repo.dart';
@@ -90,12 +92,12 @@ class RestaurantCartRepoImpl extends RestaurantCartRepo {
   }
 
   @override
-  Future<Either<String, PaymentModel>> restaurantCheckout({
+  Future<Either<String, PaymentResultModel>> restaurantCheckout({
     required String restaurantId,
     required String residentId,
     required String address,
     required String notes,
-    required int paymentMethod,
+    required PaymentMethod paymentMethod,
   }) async {
     try {
       final response = await api.post(
@@ -105,10 +107,15 @@ class RestaurantCartRepoImpl extends RestaurantCartRepo {
           ApiKeys.restaurantId: restaurantId,
           ApiKeys.address: address,
           ApiKeys.notes: notes,
-          ApiKeys.paymentMethod: 1,
+          ApiKeys.paymentMethod: paymentMethod == PaymentMethod.cash ? 3 : 1,
         },
       );
-      return Right(PaymentModel.fromJson(json: response[ApiKeys.data]));
+
+      if (paymentMethod == PaymentMethod.creditCard) {
+        return Right(PaymentModel.fromJson(json: response[ApiKeys.data]));
+      } else {
+        return Right(PaymentCashModel());
+      }
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     } catch (e) {

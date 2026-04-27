@@ -1,4 +1,6 @@
-class PaymentModel {
+import 'package:wasla/core/models/payment_result_mode.dart';
+
+class PaymentModel extends PaymentResultModel {
   final String paymentKey;
   final int orderId;
 

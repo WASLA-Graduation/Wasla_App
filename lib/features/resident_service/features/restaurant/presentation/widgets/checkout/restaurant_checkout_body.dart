@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/helpers/url_helper.dart';
+import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_sizes.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/cart/restaurant_cart_cubit.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/cart/restaurnt_checkout_widget.dart';
+import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/checkout/checkout_payment_method.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/checkout/restaurant_checkout_field.dart';
 
 class RestaurantCheckoutBody extends StatelessWidget {
@@ -47,6 +50,14 @@ class RestaurantCheckoutBody extends StatelessWidget {
                     notes = note;
                   },
                 ),
+
+                SizedBox(height: AppSizes.paddingSizeFifteen),
+                Text(
+                  'paymentMethod'.tr(context),
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                SizedBox(height: AppSizes.paddingSizeFifteen),
+                CheckoutPaymentMethodWidget(),
               ],
             ),
           ),
@@ -64,6 +75,14 @@ class RestaurantCheckoutBody extends StatelessWidget {
               orederIdCallBack(state.paymentModel.orderId);
             } else if (state is RestaurantCartCheckoutFailureState) {
               showToast(state.errMsg, color: Colors.red);
+            } else if (state is RestaurantCartCheckoutWithCashSuccessState) {
+              showToast(
+                'orderWillPrep'.tr(context),
+                color: AppColors.acceptGreen,
+              );
+              for (int i = 0; i < 2; i++) {
+                context.pop();
+              }
             }
           },
           builder: (context, state) {

@@ -1,9 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/enums/payment_method.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/models/payment_model.dart';
+import 'package:wasla/core/models/payment_result_mode.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restaurant_cart_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/cart/restaurant_cart_repo.dart';
 
@@ -14,9 +16,14 @@ class RestaurantCartCubit extends Cubit<RestaurantCartState> {
 
   final RestaurantCartRepo cart;
   List<RestaurantCartModel> cartList = [];
-
+  PaymentMethod paymentMethod = PaymentMethod.cash;
   void onRetry() {
     emit(RestaurantCartOnRetryState());
+  }
+
+  void changePaymentMethod(PaymentMethod paymentMethod) {
+    this.paymentMethod = paymentMethod;
+    emit(RestaurantUpdatePaymentStauts());
   }
 
   Future<void> getMyCart({required String restaurantId}) async {
@@ -105,7 +112,7 @@ class RestaurantCartCubit extends Cubit<RestaurantCartState> {
       residentId: residentId!,
       address: address,
       notes: notes,
-      paymentMethod: 1,
+      paymentMethod: paymentMethod,
       restaurantId: restaurantId,
     );
     result.fold(
@@ -113,7 +120,11 @@ class RestaurantCartCubit extends Cubit<RestaurantCartState> {
         emit(RestaurantCartCheckoutFailureState(errMsg: failure));
       },
       (success) {
-        emit(RestaurantCartCheckoutSuccessState(paymentModel: success));
+        if (success is PaymentCashModel) {
+          emit(RestaurantCartCheckoutWithCashSuccessState());
+        } else if (success is PaymentModel) {
+          emit(RestaurantCartCheckoutSuccessState(paymentModel: success));
+        }
       },
     );
   }

@@ -504,7 +504,11 @@
         "orderWillPrep": "تم طلب الاورد بنجاح",
           "all_restaurant_orders": "جميع الطلبات",
           "all_orders": "جميع الطلبات",
-            "markAsPrepared": "تحديد كمقبول"
+            "markAsPrepared": "تحديد كمقبول",
+              "paymentMethod": "طريقة الدفع",
+                "cashPayment": "نقدًا",
+  "creditCard": "بطاقة ائتمان"
+
 
 
 
