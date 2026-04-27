@@ -13,7 +13,6 @@ class OrderTotalsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textSecondary = Theme.of(context).textTheme.titleSmall;
-    final textPrimary = Theme.of(context).textTheme.labelSmall;
 
     return Column(
       children: [
@@ -29,13 +28,20 @@ class OrderTotalsSection extends StatelessWidget {
           style: textSecondary,
         ),
         const SizedBox(height: 10),
-        const Divider(height: 0, thickness: 0.5),
-        const SizedBox(height: 10),
+
         _TotalRow(
           label: 'total'.tr(context),
           value: 'EGP ${order.totalPrice.toStringAsFixed(0)}',
-          style: textPrimary?.copyWith(fontWeight: FontWeight.w600),
-          isGrand: true,
+          style: textSecondary,
+          isGrand: false,
+        ),
+        const SizedBox(height: 10),
+        _TotalRow(
+          label: 'paymentMethod'.tr(context),
+          value: order.paymentMethod == 1
+              ? 'creditCard'.tr(context)
+              : 'cash'.tr(context),
+          style: textSecondary,
         ),
       ],
     );
