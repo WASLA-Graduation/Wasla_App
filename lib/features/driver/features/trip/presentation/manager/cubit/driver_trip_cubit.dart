@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:wasla/core/enums/driver_status.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/service/maps/map_services.dart';
@@ -33,6 +34,10 @@ class DriverTripCubit extends Cubit<DriverTripState> {
   final Distance distance = const Distance();
   Timer? driverLocationTimer;
   TripModel? tripDetails;
+
+  void onRetry() {
+    emit(DriverTripOnRetryState());
+  }
 
   Future<void> fetchDriverLocation() async {
     final result = await MapServices.getCurrentLocation();
@@ -250,7 +255,13 @@ class DriverTripCubit extends Cubit<DriverTripState> {
     emit(DriverGetRideDeatialsLoading());
     final result = await driverTripRepo.getTripDetails(tripId: tripId);
     result.fold(
-      (error) => emit(DriverGetRideDeatialsFailure(errorMessage: error)),
+      (error) {
+        if (error is NoInternetFailure) {
+          emit(DriverTripNetworkState());
+        } else {
+          emit(DriverTripFailureState());
+        }
+      },
       (success) {
         tripDetails = success;
         emit(DriverGetRideDeatialsSuccess());

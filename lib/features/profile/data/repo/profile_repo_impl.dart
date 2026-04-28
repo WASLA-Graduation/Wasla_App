@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
@@ -253,8 +252,7 @@ class ProfileRepoImpl extends ProfileRepo {
         ApiKeys.vehicleColor: vehicleColor,
         ApiKeys.latitude: lat,
         ApiKeys.longitude: lng,
-        if (profilePhoto != null)
-          ApiKeys.profilePhoto: await convertImageToMultipart(profilePhoto),
+        ApiKeys.photoCap: await convertImageToMultipart(profilePhoto),
         if (files != null)
           ApiKeys.files: await convertPlatformFilesToMultipart(files),
         if (carImages != null)
@@ -265,6 +263,7 @@ class ProfileRepoImpl extends ProfileRepo {
         body: formData,
         headers: {"Content-Type": "multipart/form-data"},
       );
+
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);

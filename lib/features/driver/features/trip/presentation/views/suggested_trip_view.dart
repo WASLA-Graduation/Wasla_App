@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/driver/features/trip/presentation/manager/cubit/driver_trip_cubit.dart';
 import 'package:wasla/features/driver/features/trip/presentation/widgets/suggested_trip_body.dart';
 
@@ -23,17 +24,24 @@ class _SuggestedTripViewState extends State<SuggestedTripView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
-          child: SuggestedTripBody(tripId: widget.tripId),
+        child: BlocStatusHandler<DriverTripCubit, DriverTripState>(
+          body: SuggestedTripBody(tripId: widget.tripId),
+          onRetry: () {
+            getTripDetails();
+            context.read<DriverTripCubit>().onRetry();
+          },
+          isNetwork: (state) => state is DriverTripNetworkState,
+          isError: (state) => state is DriverTripFailureState,
+          buildWhen: (previous, current) =>
+              current is DriverTripNetworkState ||
+              current is DriverTripFailureState ||
+              current is DriverTripOnRetryState,
         ),
       ),
     );
   }
 
   void getTripDetails() {
-    //TODO in future
-
     final cubit = context.read<DriverTripCubit>();
     cubit.tripId = widget.tripId;
     cubit.tripIdStored = widget.tripId;

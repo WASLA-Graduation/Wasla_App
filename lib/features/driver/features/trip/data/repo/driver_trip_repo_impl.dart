@@ -1,10 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
 import 'package:wasla/core/enums/driver_status.dart';
+import 'package:wasla/core/error/failure.dart';
+import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/driver/features/trip/data/models/driver_trip_and_resident_info_model.dart';
 import 'package:wasla/features/driver/features/trip/data/repo/driver_trip_repo.dart';
 
@@ -26,6 +29,9 @@ class DriverTripRepoImpl extends DriverTripRepo {
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
+    catch (e) {
+      return Left(e.toString());
+    }
   }
 
   @override
@@ -35,6 +41,8 @@ class DriverTripRepoImpl extends DriverTripRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    }catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -45,6 +53,9 @@ class DriverTripRepoImpl extends DriverTripRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    }
+    catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -61,6 +72,9 @@ class DriverTripRepoImpl extends DriverTripRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    }
+    catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -81,6 +95,8 @@ class DriverTripRepoImpl extends DriverTripRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    }catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -100,20 +116,27 @@ class DriverTripRepoImpl extends DriverTripRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
   @override
-  Future<Either<String, TripModel>> getTripDetails({
+  Future<Either<Failure, TripModel>> getTripDetails({
     required int tripId,
   }) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final response = await api.get(
         ApiEndPoints.getTripDetailsForDriver + tripId.toString(),
       );
       return Right(TripModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 }

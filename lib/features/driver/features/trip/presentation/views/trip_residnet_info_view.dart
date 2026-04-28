@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/driver/features/trip/presentation/manager/cubit/driver_trip_cubit.dart';
 import 'package:wasla/features/driver/features/trip/presentation/widgets/trip_resident_info_body.dart';
 
@@ -22,9 +23,18 @@ class _TripResidnetInfoState extends State<TripResidnetInfoView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
-          child: TripResidentInfoBody(),
+        child: BlocStatusHandler<DriverTripCubit, DriverTripState>(
+          body: TripResidentInfoBody(),
+          onRetry: () {
+            getDriverLocation();
+            context.read<DriverTripCubit>().onRetry();
+          },
+          isNetwork: (state) => state is DriverTripNetworkState,
+          isError: (state) => state is DriverTripFailureState,
+          buildWhen: (previous, current) =>
+              current is DriverTripNetworkState ||
+              current is DriverTripFailureState ||
+              current is DriverTripOnRetryState,
         ),
       ),
     );
@@ -35,6 +45,5 @@ class _TripResidnetInfoState extends State<TripResidnetInfoView> {
     cubit.fetchDriverLocation();
     cubit.isDriverArrived = false;
     cubit.isStartedTrip = false;
-    
   }
 }

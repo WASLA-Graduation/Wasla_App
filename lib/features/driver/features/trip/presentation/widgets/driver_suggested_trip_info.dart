@@ -21,24 +21,17 @@ class DriverSuggetedTripInfo extends StatelessWidget {
     final cubit = context.read<DriverTripCubit>();
     return BlocBuilder<DriverTripCubit, DriverTripState>(
       buildWhen: (previous, current) =>
-          current is DriverGetRideDeatialsFailure ||
           current is DriverGetRideDeatialsSuccess ||
           current is DriverGetRideDeatialsLoading,
 
       builder: (context, state) {
         if (state is DriverGetRideDeatialsLoading ||
+            state is DriverTripInitial ||
             cubit.tripDetails == null) {
           return Center(
             child: SpinKitFadingCircle(
               color: AppColors.acceptGreen,
               size: 50.0,
-            ),
-          );
-        } else if (state is DriverGetRideDeatialsFailure) {
-          return Center(
-            child: Text(
-              state.errorMessage,
-              style: Theme.of(context).textTheme.headlineMedium,
             ),
           );
         } else {

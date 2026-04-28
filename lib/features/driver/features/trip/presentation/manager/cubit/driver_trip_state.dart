@@ -4,6 +4,14 @@ sealed class DriverTripState {}
 
 final class DriverTripInitial extends DriverTripState {}
 
+/// 3 Basic States
+
+final class DriverTripNetworkState extends DriverTripState {}
+
+final class DriverTripFailureState extends DriverTripState {}
+
+final class DriverTripOnRetryState extends DriverTripState {}
+
 final class DriverChangeMyLocation extends DriverTripState {}
 
 final class DriverBackToMyLocation extends DriverTripState {}
@@ -46,11 +54,7 @@ class DriverAcceptRideFailure extends DriverTripState {
   DriverAcceptRideFailure({required this.errorMessage});
 }
 
+//// Driver Get Ride Deatials
 class DriverGetRideDeatialsSuccess extends DriverTripState {}
 
 class DriverGetRideDeatialsLoading extends DriverTripState {}
-
-class DriverGetRideDeatialsFailure extends DriverTripState {
-  final String errorMessage;
-  DriverGetRideDeatialsFailure({required this.errorMessage});
-}

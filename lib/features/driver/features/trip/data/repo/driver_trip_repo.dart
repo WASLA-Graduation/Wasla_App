@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:wasla/core/enums/driver_status.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/features/driver/features/trip/data/models/driver_trip_and_resident_info_model.dart';
 
 abstract class DriverTripRepo {
@@ -22,5 +23,5 @@ abstract class DriverTripRepo {
     required DriverStatus status,
     required String driverId,
   });
-  Future<Either<String, TripModel>> getTripDetails({required int tripId});
+  Future<Either<Failure, TripModel>> getTripDetails({required int tripId});
 }
