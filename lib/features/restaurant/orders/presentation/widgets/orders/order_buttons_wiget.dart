@@ -15,7 +15,7 @@ class OrderButtons extends StatelessWidget {
   });
 
   final BaseOrderModel order;
-  final bool? withButtons;
+  final bool withButtons;
 
   @override
   Widget build(BuildContext context) {
@@ -28,29 +28,24 @@ class OrderButtons extends StatelessWidget {
         }
       },
       buildWhen: (previous, current) =>
-          current is ChangeOrderStatusState &&
-          current.orderId == order.id,
+          current is ChangeOrderStatusState && current.orderId == order.id,
       listenWhen: (previous, current) =>
-          current is ChangeOrderStatusState &&
-          current.orderId == order.id,
+          current is ChangeOrderStatusState && current.orderId == order.id,
       builder: (context, state) {
         return Visibility(
           visible:
-              withButtons ??
-              order.status == OrderStatus.pending ||
-                  order.status == OrderStatus.preparing,
+              withButtons &&
+              (order.status == OrderStatus.paid ||
+                  order.status == OrderStatus.preparing ||
+                  order.status == OrderStatus.onTheWay),
           child: Padding(
             padding: const EdgeInsets.all(14),
             child: OrderActions(
               onPrepard: () {
-                context.read<OrdersCubit>().markOrderAsReady(
-                  order: order,
-                );
+                context.read<OrdersCubit>().markOrderAsReady(order: order);
               },
               onConfirm: () {
-                context.read<OrdersCubit>().markOrderAsDone(
-                  order: order,
-                );
+                context.read<OrdersCubit>().markOrderAsDone(order: order);
               },
               status: order.status,
             ),

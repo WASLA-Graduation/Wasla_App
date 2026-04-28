@@ -36,7 +36,7 @@ class _OrderBodyState extends State<OrderBody> {
               ),
             );
           } else if (state is GetRestaurantOrdersLoadedState) {
-            orders.addAll(state.orders);
+            orders=state.orders;
           }
 
           return orders.isEmpty

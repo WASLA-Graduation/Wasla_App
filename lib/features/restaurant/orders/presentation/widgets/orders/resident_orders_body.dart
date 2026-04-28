@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/service/signalR/restaurant_hub.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_sizes.dart';
 import 'package:wasla/core/widgets/empty_data_widget.dart';
@@ -20,6 +21,28 @@ class ResidentRestaurantOrdersBody extends StatefulWidget {
 class _ResidentRestaurantOrdersBodyState
     extends State<ResidentRestaurantOrdersBody> {
   List<ResidentOrderModel> orders = [];
+
+  late final RestaurantHub restaurantHub;
+  @override
+  void initState() {
+    super.initState();
+    restaurantHub = RestaurantHub(
+      onOrderStatusChanged: (orderId, status) {
+        context.read<OrdersCubit>().markOrderAsOnTheWay(
+          orderId: orderId,
+          status: status,
+        );
+      },
+    );
+    restaurantHub.init();
+  }
+
+  @override
+  void dispose() {
+    restaurantHub.disconnect();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,7 +61,7 @@ class _ResidentRestaurantOrdersBodyState
               ),
             );
           } else if (state is GetOrdersForResidetntLoadedState) {
-            orders.addAll(state.orders);
+            orders = state.orders;
           }
 
           return orders.isEmpty

@@ -13,10 +13,10 @@ import 'package:wasla/features/restaurant/orders/presentation/widgets/orders/ord
 import 'package:wasla/features/restaurant/orders/presentation/widgets/orders/order_totals_section.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem({super.key, required this.order, this.withButtons});
+  const OrderItem({super.key, required this.order,required this.withButtons});
 
   final BaseOrderModel order;
-  final bool? withButtons;
+  final bool withButtons;
 
   @override
   Widget build(BuildContext context) {

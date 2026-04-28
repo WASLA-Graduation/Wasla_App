@@ -136,3 +136,9 @@ final class MarkOrderAsPreparedFailureState extends ChangeOrderStatusState {
     required this.id,
   }) : super(id);
 }
+
+final class MarkOrderAsOnTheWayState extends ChangeOrderStatusState {
+  final int id;
+
+  MarkOrderAsOnTheWayState({required this.id}) : super(id);
+}

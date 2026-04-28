@@ -57,7 +57,7 @@ class OrderHeader extends StatelessWidget {
                     current is ChangeOrderStatusState &&
                     current.orderId == order.id,
                 builder: (context, state) {
-                  return OrderStatusBadge(status: order.status.index);
+                  return OrderStatusBadge(status: order.status);
                 },
               ),
               InkWell(
@@ -117,9 +117,6 @@ class OrderHeader extends StatelessWidget {
 
   bool get isRestaurantOrder => order is OrderModel;
 }
-
-
-
 
 class _MetaItem extends StatelessWidget {
   const _MetaItem({required this.label, required this.value});

@@ -481,6 +481,7 @@
   "delivery": "Delivery",
   "subtotal": "Subtotal",
   "markAsPrepared": "Mark as Prepared",
+  "markAsDelevared": "Mark as Delevared",
   "paymentMethod": "Payment Method",
   "cashPayment": "Cash",
   "creditCard": "Credit Card",

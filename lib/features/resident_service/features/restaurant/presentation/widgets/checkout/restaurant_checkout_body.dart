@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/helpers/url_helper.dart';
@@ -83,6 +85,7 @@ class RestaurantCheckoutBody extends StatelessWidget {
               for (int i = 0; i < 2; i++) {
                 context.pop();
               }
+              context.pushScreen(AppRoutes.residentRestaurantOrdersScreen);
             }
           },
           builder: (context, state) {

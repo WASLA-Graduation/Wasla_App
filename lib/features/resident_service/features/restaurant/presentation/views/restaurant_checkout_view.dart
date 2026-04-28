@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/service/payment/payment_service.dart';
+import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/checkout/restaurant_checkout_body.dart';
 
 class RestaurantCheckoutView extends StatefulWidget {
@@ -31,9 +34,9 @@ class _RestaurantCheckoutViewState extends State<RestaurantCheckoutView> {
       this.orderId = -1;
       result.fold((err) {}, (isPaid) {
         if (isPaid) {
-          for (int i = 0; i < 2; i++) {
-            context.pop();
-          }
+          showToast('orderWillPrep'.tr(context), color: AppColors.acceptGreen);
+          context.pop();
+          context.pushReplacement(AppRoutes.residentRestaurantOrdersScreen);
         }
       });
     }

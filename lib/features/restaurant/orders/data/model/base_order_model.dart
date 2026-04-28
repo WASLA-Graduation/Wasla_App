@@ -1,3 +1,4 @@
+import 'package:wasla/core/enums/payment_method.dart';
 import 'package:wasla/core/enums/restauant_reservation_status.dart';
 
 abstract class BaseOrderModel {
@@ -8,7 +9,7 @@ abstract class BaseOrderModel {
   final double deliveryFee;
   final String? paymentKey;
   final String? transactionId;
-  final int paymentStatus;
+  final PaymentStatus paymentStatus;
   final int paymentMethod;
   final DateTime createdAt;
   final List<OrderItemModel> items;

@@ -20,10 +20,10 @@ class OrderActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return status == OrderStatus.pending
+    return status == OrderStatus.paid
         ? _PrepardlButton(onTap: onPrepard)
         : _ConfirmButton(
-            label: confirmLabel ?? 'confirm'.tr(context),
+            label: confirmLabel ?? 'markAsDelevared'.tr(context),
             onTap: onConfirm,
           );
   }

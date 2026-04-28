@@ -94,10 +94,9 @@ class OrdersRepoImpl extends OrdersRepo {
       final List<OrderModel> orders = [];
 
       for (var order in response[ApiKeys.data][ApiKeys.data]) {
-        // if (order['paymentStatus'] == 1) {
-        //   orders.add(OrderModel.fromJson(order));
-        // }
-        orders.add(OrderModel.fromJson(order));
+        if (order['paymentStatus'] == 1) {
+          orders.add(OrderModel.fromJson(order));
+        }
       }
 
       return Right(orders);
@@ -131,9 +130,9 @@ class OrdersRepoImpl extends OrdersRepo {
       final List<ResidentOrderModel> orders = [];
 
       for (var order in response[ApiKeys.data][ApiKeys.data]) {
-        // if (order['paymentStatus'] == 1) {
-        // }
-        orders.add(ResidentOrderModel.fromJson(order));
+        if (order['paymentStatus'] == 1) {
+          orders.add(ResidentOrderModel.fromJson(order));
+        }
       }
 
       return Right(orders);

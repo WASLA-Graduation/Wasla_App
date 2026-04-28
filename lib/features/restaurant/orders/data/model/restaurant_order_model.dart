@@ -1,3 +1,4 @@
+import 'package:wasla/core/enums/payment_method.dart';
 import 'package:wasla/core/enums/restauant_reservation_status.dart';
 import 'package:wasla/features/restaurant/orders/data/model/base_order_model.dart';
 
@@ -37,7 +38,7 @@ class OrderModel extends BaseOrderModel {
       deliveryFee: (json['deliveryFee'] as num).toDouble(),
       paymentKey: json['paymentKey'],
       transactionId: json['transactionId'],
-      paymentStatus: json['paymentStatus'],
+      paymentStatus: PaymentStatus.values[json['paymentStatus']],
       paymentMethod: json['paymentMethod'],
       createdAt: DateTime.parse(json['createdAt']),
       items: (json['items'] as List)

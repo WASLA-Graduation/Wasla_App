@@ -5,7 +5,7 @@ import 'package:wasla/core/utils/app_colors.dart';
 class OrderStatusBadge extends StatelessWidget {
   const OrderStatusBadge({super.key, required this.status});
 
-  final int status;
+  final OrderStatus status;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class OrderStatusBadge extends StatelessWidget {
           ),
           const SizedBox(width: 5),
           Text(
-            ReservationStatus.values[status].name,
+            status.name,
             style: Theme.of(
               context,
             ).textTheme.labelSmall!.copyWith(color: AppColors.orange),

@@ -21,6 +21,9 @@ class OrdersCubit extends Cubit<OrdersState> {
   bool orderEndOfPagination = false;
   Set oredersIds = {};
 
+  List<OrderModel> restaurantOrders = [];
+  List<ResidentOrderModel> residentOrders = [];
+
   void onRetry() {
     emit(OrdersOnRetryState());
   }
@@ -147,7 +150,8 @@ class OrdersCubit extends Cubit<OrdersState> {
         } else {
           orderPageNumber++;
         }
-        emit(GetRestaurantOrdersLoadedState(orders: success));
+        restaurantOrders.addAll(success);
+        emit(GetRestaurantOrdersLoadedState(orders: restaurantOrders));
       },
     );
   }
@@ -183,7 +187,8 @@ class OrdersCubit extends Cubit<OrdersState> {
         } else {
           orderPageNumber++;
         }
-        emit(GetOrdersForResidetntLoadedState(orders: success));
+        residentOrders.addAll(success);
+        emit(GetOrdersForResidetntLoadedState(orders: residentOrders));
       },
     );
   }
@@ -214,5 +219,19 @@ class OrdersCubit extends Cubit<OrdersState> {
         emit(MarkOrderAsPreparedSuccessState(id: order.id));
       },
     );
+  }
+
+  void markOrderAsOnTheWay({required int status, required int orderId}) async {
+    final OrderStatus orderStatus = OrderStatus.values[status];
+    if (orderStatus == OrderStatus.onTheWay) {
+      for (var order in residentOrders) {
+        if (order.id == orderId) {
+          order.status = OrderStatus.onTheWay;
+          break;
+        }
+      }
+
+      emit(MarkOrderAsOnTheWayState(id: orderId));
+    }
   }
 }
