@@ -10,7 +10,6 @@ import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/get_right_route.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
-import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/widgets/general_button.dart';
@@ -86,40 +85,30 @@ class BottomSheetLogoutWidget extends StatelessWidget {
                 toastAlert(color: AppColors.red, msg: state.errMsg);
               } else if (state is AuthLogOutSuccess) {}
             },
-            builder: (context, state) {
+            builder: (acceptContext, state) {
               return GeneralButton(
                 onPressed: () async {
                   // context.read<AuthCubit>().logOut();
-
-                  context.popScreen();
+                  acceptContext.popScreen();
                   final String? userId = await getUserId();
                   final String? role =
                       SharedPreferencesHelper.get(key: ApiKeys.role) as String?;
 
                   if (role == ServiceRole.driver.name) {
-                    // showToast("Logged out successfully");
-                    navigatorKey.currentContext!
-                        .read<DriverTripCubit>()
-                        .stopDriverLocationTimer(driverId: userId!);
+                    context.read<DriverTripCubit>().stopDriverLocationTimer(
+                      driverId: userId!,
+                    );
                   }
 
                   FcmNotifications.unsubscribeFromTopic('User_$userId');
                   FcmNotifications.unsubscribeFromTopic('All');
 
-                  resetDataInSpecificRole(navigatorKey.currentContext!);
+                  resetDataInSpecificRole(context);
                   SharedPreferencesHelper.removeKeys(
-                    keys: [
-                      ApiKeys.role,
-                      // ApiKeys.token,
-                      // ApiKeys.refreshToken,
-                      // ApiKeys.userId,
-                      AppStrings.isSingedIn,
-                    ],
+                    keys: [ApiKeys.role, AppStrings.isSingedIn],
                   ).then((val) {
                     SecureStorageHelper.clear();
-                    navigatorKey.currentContext!.pushAndRemoveAllScreens(
-                      AppRoutes.signInScreen,
-                    );
+                    context.pushAndRemoveAllScreens(AppRoutes.signInScreen);
                   });
                 },
                 text: "yes_logout".tr(context),

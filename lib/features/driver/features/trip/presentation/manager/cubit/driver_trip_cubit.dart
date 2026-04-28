@@ -224,11 +224,11 @@ class DriverTripCubit extends Cubit<DriverTripState> {
     }
   }
 
-  void stopDriverLocationTimer({required String driverId}) {
+  void stopDriverLocationTimer({required String driverId}) async {
     driverLocationTimer?.cancel();
     driverLocationTimer = null;
 
-    driverTripRepo.updateDriverStatus(
+    await driverTripRepo.updateDriverStatus(
       driverId: driverId,
       status: DriverStatus.offline,
     );

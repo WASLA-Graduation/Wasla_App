@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/driver/features/home/presentation/manager/cubit/driver_cubit.dart';
 import 'package:wasla/features/driver/features/home/presentation/widgets/dirver_dahsboard_body.dart';
 
@@ -20,9 +21,18 @@ class _DriverDashboardViewState extends State<DriverDashboardView> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-        child: DirverDahsboardBody(),
+      child: BlocStatusHandler<DriverCubit, DriverState>(
+        body: const DirverDahsboardBody(),
+        onRetry: () {
+          getData();
+          context.read<DriverCubit>().onRetry();
+        },
+        isNetwork: (state) => state is DriverNetworkState,
+        isError: (state) => state is DriverFailureState,
+        buildWhen: (previous, current) =>
+            current is DriverNetworkState ||
+            current is DriverFailureState ||
+            current is DriverOnRetryState,
       ),
     );
   }

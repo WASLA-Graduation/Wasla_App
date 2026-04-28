@@ -20,7 +20,6 @@ class _OrderViewState extends State<OrderView> {
   }
 
   @override
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('orders'.tr(context))),

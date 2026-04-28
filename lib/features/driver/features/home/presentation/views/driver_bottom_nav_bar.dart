@@ -26,28 +26,23 @@ class DriverBottomNavBar extends StatefulWidget {
   ];
 }
 
-class _DriverBottomNavBarState extends State<DriverBottomNavBar>
-    with WidgetsBindingObserver {
+class _DriverBottomNavBarState extends State<DriverBottomNavBar> {
+  late final AppLifecycleListener listener;
   @override
   void initState() {
-    WidgetsBinding.instance.addObserver(this);
-    updateMyLocation();
-    changeMyStatus(DriverStatus.online);
+    call(driverStatus: DriverStatus.online);
+    listener = AppLifecycleListener(
+      onDetach: () {
+        changeMyStatus(DriverStatus.offline);
+      },
+    );
     super.initState();
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
+    listener.dispose();
     super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.detached) {
-      changeMyStatus(DriverStatus.offline);
-    }
-    super.didChangeAppLifecycleState(state);
   }
 
   @override
@@ -110,5 +105,10 @@ class _DriverBottomNavBarState extends State<DriverBottomNavBar>
     context.read<DriverTripCubit>().updateDriverStatus(
       driverStatus: driverStatus,
     );
+  }
+
+  void call({required DriverStatus driverStatus}) {
+    changeMyStatus(driverStatus);
+    updateMyLocation();
   }
 }
