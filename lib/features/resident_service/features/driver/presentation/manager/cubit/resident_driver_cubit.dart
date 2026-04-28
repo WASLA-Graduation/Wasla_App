@@ -9,6 +9,7 @@ import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/service/maps/map_services.dart';
 import 'package:wasla/core/service/maps/models/places_model.dart';
+import 'package:wasla/features/driver/features/home/data/models/driver_profile_model.dart';
 import 'package:wasla/features/resident_service/features/driver/data/models/resident_trip_model.dart';
 import 'package:wasla/features/resident_service/features/driver/data/repo/residnet_driver_repo.dart';
 
@@ -259,6 +260,23 @@ class ResidentDriverCubit extends Cubit<ResidentDriverState> {
       (success) {
         tripModel = success;
         emit(ResidentDriverGetRideDetailsSuccess());
+      },
+    );
+  }
+
+  Future<void> getDriverProfile({required String driverId}) async {
+    emit(ResidentDriverProfileLoading());
+    final result = await residnetDriverRepo.getDriverProfile(id: driverId);
+    result.fold(
+      (error) {
+        if (error is NoInternetFailure) {
+          emit(ResidentDriverNetworkState());
+        } else {
+          emit(ResidentDriverFailureState());
+        }
+      },
+      (success) {
+        emit(ResidentDriverProfileSuccess(driver: success));
       },
     );
   }

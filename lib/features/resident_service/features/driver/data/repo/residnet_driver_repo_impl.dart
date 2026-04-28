@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:wasla/core/connection/network_info.dart';
@@ -9,6 +8,7 @@ import 'package:wasla/core/database/api/errors/api_exceptions.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/service/service_locator.dart';
+import 'package:wasla/features/driver/features/home/data/models/driver_profile_model.dart';
 import 'package:wasla/features/resident_service/features/driver/data/models/resident_trip_model.dart';
 import 'package:wasla/features/resident_service/features/driver/data/repo/residnet_driver_repo.dart';
 
@@ -45,6 +45,26 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
   //   fakeRouteIndex++;
   //   return Right(fakeDriverLocation);
   // }
+  @override
+  Future<Either<Failure, DriverProfileModel>> getDriverProfile({
+    required String id,
+  }) async {
+    try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
+      final response = await api.get(
+        ApiEndPoints.getDriverProfile,
+        queryParameters: {ApiKeys.id: id},
+      );
+      return Right(DriverProfileModel.fromJson(response[ApiKeys.data]));
+    } on ServerException catch (error) {
+      return Left(ServerFailure(error.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
   @override
   Future<Either<String, int>> searchToRide({
     required String passengerId,

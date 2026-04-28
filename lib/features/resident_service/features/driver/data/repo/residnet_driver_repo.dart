@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:wasla/core/error/failure.dart';
+import 'package:wasla/features/driver/features/home/data/models/driver_profile_model.dart';
 import 'package:wasla/features/resident_service/features/driver/data/models/resident_trip_model.dart';
 
 abstract class ResidnetDriverRepo {
@@ -27,5 +28,10 @@ abstract class ResidnetDriverRepo {
   Future<Either<String, Null>> rateDriver({
     required String driverId,
     required int starts,
+  });
+
+
+  Future<Either<Failure, DriverProfileModel>> getDriverProfile({
+    required String id,
   });
 }

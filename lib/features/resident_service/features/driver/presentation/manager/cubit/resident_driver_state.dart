@@ -64,3 +64,13 @@ class ResidentAddRatingFailure extends ResidentDriverState {
   final String errorMessage;
   ResidentAddRatingFailure({required this.errorMessage});
 }
+
+////get driver profile
+
+class ResidentDriverProfileLoading extends ResidentDriverState {}
+
+class ResidentDriverProfileSuccess extends ResidentDriverState {
+  final DriverProfileModel driver;
+
+  ResidentDriverProfileSuccess({required this.driver});
+}

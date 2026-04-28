@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
+import 'package:wasla/core/widgets/bloc_status_handler.dart';
+import 'package:wasla/features/resident_service/features/driver/presentation/manager/cubit/resident_driver_cubit.dart';
 import 'package:wasla/features/resident_service/features/driver/presentation/widgets/rate_driver_body.dart';
 
 class DriverReviewScreen extends StatefulWidget {
@@ -12,6 +15,12 @@ class DriverReviewScreen extends StatefulWidget {
 }
 
 class _DriverReviewScreenState extends State<DriverReviewScreen> {
+  @override
+  void initState() {
+    getDriverProfile();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,11 +37,26 @@ class _DriverReviewScreenState extends State<DriverReviewScreen> {
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: RateDriverBody(driverId:widget.driverId,),
+        child: BlocStatusHandler<ResidentDriverCubit, ResidentDriverState>(
+          body: RateDriverBody(driverId: widget.driverId),
+          onRetry: () {
+            getDriverProfile();
+            context.read<ResidentDriverCubit>().onRetry();
+          },
+          isNetwork: (state) => state is ResidentDriverNetworkState,
+          isError: (state) => state is ResidentDriverFailureState,
+          buildWhen: (previous, current) =>
+              current is ResidentDriverNetworkState ||
+              current is ResidentDriverFailureState ||
+              current is ResidentDriverOnRetryState,
         ),
       ),
+    );
+  }
+
+  void getDriverProfile() {
+    context.read<ResidentDriverCubit>().getDriverProfile(
+      driverId: widget.driverId,
     );
   }
 }
