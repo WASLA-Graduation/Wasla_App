@@ -512,7 +512,9 @@
       "cancelRideDesc": "هل تريد الغاء الرحلة؟",
   "yesCancel": "نعم, الغاء",
   "no": "لا",
-    "cancelRide": "الغاء الرحلة"
+    "cancelRide": "الغاء الرحلة",
+      "cancelSearchingDsc": "هل تريد الغاء البحث؟",
+  "cancelSearching": "الغاء البحث"
 
 
 

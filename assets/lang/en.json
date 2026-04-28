@@ -484,6 +484,8 @@
   "markAsDelevared": "Mark as Delevared",
   "paymentMethod": "Payment Method",
   "cancelRideDesc": "Are you sure you want to Cancel Ride?",
+  "cancelSearchingDsc": "Are you sure you want to Cancel Searching?",
+  "cancelSearching": "Cancel Searching",
   "yesCancel": "Yes, Cancel",
   "cancelRide": "Cancel Ride",
   "no": "No",

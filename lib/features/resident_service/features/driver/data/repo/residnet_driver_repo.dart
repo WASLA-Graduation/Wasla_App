@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/features/resident_service/features/driver/data/models/resident_trip_model.dart';
 
 abstract class ResidnetDriverRepo {
@@ -20,7 +21,7 @@ abstract class ResidnetDriverRepo {
     required int tripId,
     required bool isResident,
   });
-  Future<Either<String, ResidentTripModel>> getTripForResident({
+  Future<Either<Failure, ResidentTripModel>> getTripForResident({
     required int tripId,
   });
   Future<Either<String, Null>> rateDriver({

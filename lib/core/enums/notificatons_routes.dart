@@ -8,6 +8,7 @@ import 'package:wasla/core/enums/service_role.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/service/service_locator.dart';
+import 'package:wasla/features/resident_service/features/driver/presentation/manager/cubit/resident_driver_cubit.dart';
 import 'package:wasla/features/reviews/presentation/manager/cubit/reviews_cubit.dart';
 
 enum NotificationRoute {
@@ -207,6 +208,10 @@ void navigateToRouteRealTime({required RemoteMessage message}) async {
 
     case NotificationRoute.rideAccepted:
       final tripId = int.parse(message.data['refrenceId']);
+      navigatorKey.currentContext!
+          .read<ResidentDriverCubit>()
+          .cancelTripTimer
+          ?.cancel();
       navigatorKey.currentContext!.pushReplacement(
         AppRoutes.driverTripDetailsScreen,
         extra: tripId,

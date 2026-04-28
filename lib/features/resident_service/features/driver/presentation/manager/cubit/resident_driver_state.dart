@@ -4,6 +4,14 @@ sealed class ResidentDriverState {}
 
 final class ResidentDriverInitial extends ResidentDriverState {}
 
+///3 basic states
+
+final class ResidentDriverNetworkState extends ResidentDriverState {}
+
+final class ResidentDriverFailureState extends ResidentDriverState {}
+
+final class ResidentDriverOnRetryState extends ResidentDriverState {}
+
 final class ResidentDriverUpdateButtonState extends ResidentDriverState {}
 
 final class ResidentDriverSearchToPlaceState extends ResidentDriverState {}
@@ -34,6 +42,7 @@ class ResidentDriverCancelRideFailure extends ResidentDriverState {
   final String errorMessage;
   ResidentDriverCancelRideFailure({required this.errorMessage});
 }
+
 class ResidentDriverRequestRideLoading extends ResidentDriverState {}
 
 class ResidentDriverRequestRideSuccess extends ResidentDriverState {}
@@ -47,10 +56,6 @@ class ResidentDriverGetRideDetailsLoading extends ResidentDriverState {}
 
 class ResidentDriverGetRideDetailsSuccess extends ResidentDriverState {}
 
-class ResidentDriverGetRideDetailsFailure extends ResidentDriverState {
-  final String errorMessage;
-  ResidentDriverGetRideDetailsFailure({required this.errorMessage});
-}
 class ResidentAddRatingLoading extends ResidentDriverState {}
 
 class ResidentAddRatingSuccess extends ResidentDriverState {}
@@ -59,4 +64,3 @@ class ResidentAddRatingFailure extends ResidentDriverState {
   final String errorMessage;
   ResidentAddRatingFailure({required this.errorMessage});
 }
-

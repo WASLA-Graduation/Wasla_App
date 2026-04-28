@@ -40,7 +40,9 @@ class FcmNotifications {
 
   //handle notifications when app is forground
   static void handleForgroundNotifications(RemoteMessage message) {
-    if (message.data['type'] != '47') {
+    final int routeIndex = int.parse(message.data['type']);
+    final route = NotificationRoute.fromInt(routeIndex);
+    if (route != NotificationRoute.rideAccepted) {
       LocalNotifications.showNormalNotificaton(message: message);
       //for accept trip
     }

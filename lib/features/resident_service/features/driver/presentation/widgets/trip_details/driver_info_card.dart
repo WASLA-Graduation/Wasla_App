@@ -20,7 +20,6 @@ class DriverInfoCard extends StatelessWidget {
     final cubit = context.read<ResidentDriverCubit>();
     return BlocBuilder<ResidentDriverCubit, ResidentDriverState>(
       buildWhen: (previous, current) =>
-          current is ResidentDriverGetRideDetailsFailure ||
           current is ResidentDriverGetRideDetailsSuccess ||
           current is ResidentDriverGetRideDetailsLoading,
 
@@ -31,13 +30,6 @@ class DriverInfoCard extends StatelessWidget {
             child: SpinKitFadingCircle(
               color: AppColors.acceptGreen,
               size: 50.0,
-            ),
-          );
-        } else if (state is ResidentDriverGetRideDetailsFailure) {
-          return Center(
-            child: Text(
-              state.errorMessage,
-              style: Theme.of(context).textTheme.headlineMedium,
             ),
           );
         } else {

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
-import 'package:wasla/core/service/signalR/driver_hub.dart';
 import 'package:wasla/core/utils/app_colors.dart';
+import 'package:wasla/core/widgets/custom_bottom_sheet_confirm_widget.dart';
 import 'package:wasla/features/resident_service/features/driver/presentation/manager/cubit/resident_driver_cubit.dart';
 import 'package:wasla/features/resident_service/features/driver/presentation/widgets/laod_accept_untill_driver/cancel_request_button.dart';
 import 'package:wasla/features/resident_service/features/driver/presentation/widgets/laod_accept_untill_driver/search_header_card.dart';
@@ -18,36 +18,60 @@ class LoadUntillTripView extends StatefulWidget {
 }
 
 class _LoadUntillTripViewState extends State<LoadUntillTripView> {
-  final DriverHub driverHub = DriverHub();
   @override
   void initState() {
     super.initState();
-    connectToHub();
+    initData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF7F8FA),
-      body: Column(
-        children: [
-          const SearchHeaderCard(),
-          const SizedBox(height: 25),
-          const TripInfoCard(),
-          const Spacer(),
-          CancelDriverButton(
-            title: "cancelRequest".tr(context),
-            isSearchingRouete: true,
-          ),
-          const SizedBox(height: 20),
-        ],
+      body: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) {
+          if (didPop) {
+            return;
+          } else {
+            showModalBottomSheet(
+              context: context,
+              builder: (bottomSheetContext) {
+                return CustomBottomSheetConfirmWidget(
+                  cancelText: 'no'.tr(context),
+                  confirmText: 'yesCancel'.tr(context),
+                  onConfirm: () {
+                    Navigator.pop(bottomSheetContext);
+                    context.read<ResidentDriverCubit>().cancelRide();
+                  },
+                  title: 'cancelSearching'.tr(context),
+                  description: 'cancelSearchingDsc'.tr(context),
+                );
+              },
+            );
+          }
+        },
+        child: Column(
+          children: [
+            const SearchHeaderCard(),
+            const SizedBox(height: 25),
+            const TripInfoCard(),
+            const Spacer(),
+            CancelDriverButton(
+              title: "cancelRequest".tr(context),
+              isSearchingRoute: true,
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }
 
-  void connectToHub() {
-    driverHub.init();
-    context.read<ResidentDriverCubit>().isDriverArrived = false;
+  void initData() {
+    final cubit = context.read<ResidentDriverCubit>();
+    cubit.isDriverArrived = false;
+    cubit.startLoadingTimer();
   }
 }
 
@@ -55,10 +79,10 @@ class CancelDriverButton extends StatelessWidget {
   const CancelDriverButton({
     super.key,
     required this.title,
-    required this.isSearchingRouete,
+    required this.isSearchingRoute,
   });
   final String title;
-  final bool isSearchingRouete;
+  final bool isSearchingRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -74,9 +98,10 @@ class CancelDriverButton extends StatelessWidget {
             msg: 'tripCancelled'.tr(context),
           );
 
-          if (isSearchingRouete) {
+          if (isSearchingRoute) {
             context.pop();
           } else {
+            context.pop();
             context.pop();
             context.pop();
           }
@@ -91,11 +116,6 @@ class CancelDriverButton extends StatelessWidget {
               ? 'loading'.tr(context)
               : title,
           onTap: () {
-            // context.pushScreen(
-            //   AppRoutes.driverTripDetailsScreen,
-            //   arguments: 10,
-            // );
-
             context.read<ResidentDriverCubit>().cancelRide();
           },
         );

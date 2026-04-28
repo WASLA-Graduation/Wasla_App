@@ -1,10 +1,14 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
+import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/resident_service/features/driver/data/models/resident_trip_model.dart';
 import 'package:wasla/features/resident_service/features/driver/data/repo/residnet_driver_repo.dart';
 
@@ -66,10 +70,12 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
           ApiKeys.vehicleType: vehicleType,
         },
       );
-
+      // log("Current Trip Id : ${response[ApiKeys.data]}");
       return Right(response[ApiKeys.data]);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -86,6 +92,8 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -98,6 +106,10 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
         ApiEndPoints.getDriverLocation,
         queryParameters: {ApiKeys.driverId: driverId},
       );
+      // log(
+      //   "Current Driver Location : ${response[ApiKeys.data][ApiKeys.latitudeSmall]} , ${response[ApiKeys.data][ApiKeys.longitudeSmall]}",
+      // );
+
       return Right(
         LatLng(
           response[ApiKeys.data][ApiKeys.latitudeSmall],
@@ -106,20 +118,28 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
       );
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
   @override
-  Future<Either<String, ResidentTripModel>> getTripForResident({
+  Future<Either<Failure, ResidentTripModel>> getTripForResident({
     required int tripId,
   }) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
+
       final response = await api.get(
         ApiEndPoints.getRideDetaislForResident + tripId.toString(),
       );
       return Right(ResidentTripModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
@@ -142,6 +162,8 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 }

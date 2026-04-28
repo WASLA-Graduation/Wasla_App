@@ -5,6 +5,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:wasla/core/enums/driver_enums.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/service/maps/map_services.dart';
 import 'package:wasla/core/service/maps/models/places_model.dart';
@@ -37,8 +38,22 @@ class ResidentDriverCubit extends Cubit<ResidentDriverState> {
   int tripId = -1;
   bool isPopFromButton = false;
 
+  Timer? cancelTripTimer;
+
   VehicleType vehicleType = VehicleType.car;
   ResidentTripModel? tripModel;
+
+  void onRetry() {
+    emit(ResidentDriverOnRetryState());
+  }
+
+  void startLoadingTimer() {
+    cancelTripTimer?.cancel();
+    cancelTripTimer = Timer(const Duration(minutes: 1), () {
+      cancelRide();
+      cancelTripTimer = null;
+    });
+  }
 
   void changeVehicleType({required VehicleType type}) {
     vehicleType = type;
@@ -189,6 +204,9 @@ class ResidentDriverCubit extends Cubit<ResidentDriverState> {
   Future<void> cancelRide() async {
     emit(ResidentDriverCancelRideLoading());
 
+    cancelTripTimer?.cancel();
+    cancelTripTimer = null;
+
     final result = await residnetDriverRepo.cancelRide(
       tripId: tripId,
       isResident: true,
@@ -232,7 +250,11 @@ class ResidentDriverCubit extends Cubit<ResidentDriverState> {
     final result = await residnetDriverRepo.getTripForResident(tripId: tripId);
     result.fold(
       (error) {
-        emit(ResidentDriverGetRideDetailsFailure(errorMessage: error));
+        if (error is NoInternetFailure) {
+          emit(ResidentDriverNetworkState());
+        } else {
+          emit(ResidentDriverFailureState());
+        }
       },
       (success) {
         tripModel = success;
