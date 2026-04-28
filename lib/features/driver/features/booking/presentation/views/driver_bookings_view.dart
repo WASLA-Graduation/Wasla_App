@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/driver/features/booking/presentation/manager/cubit/driver_booking_cubit.dart';
 import 'package:wasla/features/driver/features/booking/presentation/widgets/driver_bookigs_body.dart';
 
@@ -23,14 +24,25 @@ class _DriverBookingsViewState extends State<DriverBookingsView> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        forceMaterialTransparency: true,
         title: Text(
           "myBookings".tr(context),
           style: Theme.of(context).textTheme.headlineMedium,
         ),
       ),
 
-      body: const DriverBookigsBody(),
+      body: BlocStatusHandler<DriverBookingCubit, DriverBookingState>(
+        body: const DriverBookigsBody(),
+        onRetry: () {
+          getMyBookings();
+          context.read<DriverBookingCubit>().onRetry();
+        },
+        isNetwork: (state) => state is DriverBookingNetworkState,
+        isError: (state) => state is DriverBookingFailureState,
+        buildWhen: (previous, current) =>
+            current is DriverBookingNetworkState ||
+            current is DriverBookingFailureState ||
+            current is DriverBookingOnRetryState,
+      ),
     );
   }
 

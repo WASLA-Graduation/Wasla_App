@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/core/widgets/custom_err_get_data.dart';
+import 'package:wasla/core/widgets/empty_data_widget.dart';
 import 'package:wasla/features/driver/features/booking/presentation/manager/cubit/driver_booking_cubit.dart';
 import 'package:wasla/features/resident_service/features/booking/data/models/general_resident_bookings_model.dart';
 import 'package:wasla/features/resident_service/features/booking/presentation/widgets/resident_book_item.dart';
@@ -21,10 +21,11 @@ class _DriverBookigsBodyState extends State<DriverBookigsBody> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DriverBookingCubit, DriverBookingState>(
+      buildWhen: (previous, current) =>
+          current is DriverGetBookingsLoading ||
+          current is DriverGetBookingsSuccess,
       builder: (context, state) {
-        if (state is DriverGetBookingsFailure) {
-          return Center(child: CustomErrGetData());
-        } else if (state is DriverGetBookingsLoading ||
+        if (state is DriverGetBookingsLoading ||
             state is DriverBookingInitial) {
           return Center(
             child: SpinKitFadingCircle(
@@ -35,11 +36,9 @@ class _DriverBookigsBodyState extends State<DriverBookigsBody> {
         } else if (state is DriverGetBookingsSuccess) {
           bookings = state.allBookings;
           return bookings.isEmpty
-              ? Center(
-                  child: Text(
-                    "noBookings".tr(context),
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
+              ? EmptyStateWidget(
+                  title: 'noBookings'.tr(context),
+                  message: 'noBookingsMsg'.tr(context),
                 )
               : ListView.builder(
                   padding: const EdgeInsets.symmetric(
