@@ -117,9 +117,9 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
           ApiKeys.pageSize: pageSize,
           ApiKeys.pageNumber: pageNumber,
           ApiKeys.currentUserId: currentUserId,
+          ApiKeys.flag: true,
         },
       );
-
 
       List<SocialPostModel> posts = [];
       for (var post in reponse[ApiKeys.data][ApiKeys.data]) {
@@ -254,6 +254,7 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
           ApiKeys.pageNumber: pageNumber,
           ApiKeys.currentUserId: currentUserId,
           ApiKeys.postId: postId,
+          ApiKeys.flag: true,
         },
       );
 

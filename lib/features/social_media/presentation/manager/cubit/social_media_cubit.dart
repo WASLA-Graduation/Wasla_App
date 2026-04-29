@@ -519,7 +519,22 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
     );
     result.fold(
       (failure) => emit(SocialReportFailureState(errorMessage: failure)),
-      (_) => emit(SocialReportSucessState()),
+      (_) {
+        switch (targetType) {
+          case TargetType.post:
+            allPosts.removeWhere((post) => post.postId == targetId);
+            emit(GetAllPostsSuccess());
+
+            break;
+          case TargetType.comment:
+            postComments.removeWhere(
+              (comment) => comment.commentId == targetId,
+            );
+            emit(GetCommentsSuccess());
+            break;
+        }
+        emit(SocialReportSucessState());
+      },
     );
   }
 
