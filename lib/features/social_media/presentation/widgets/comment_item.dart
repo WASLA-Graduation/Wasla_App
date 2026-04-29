@@ -13,6 +13,7 @@ import 'package:wasla/core/widgets/readmore_text.dart';
 import 'package:wasla/features/social_media/data/models/social_comment_model.dart';
 import 'package:wasla/features/social_media/presentation/manager/cubit/social_media_cubit.dart';
 import 'package:wasla/features/social_media/presentation/widgets/comment_long_press_sheet.dart';
+import 'package:wasla/features/social_media/presentation/widgets/report_bottom_sheet.dart';
 
 class CommentItem extends StatelessWidget {
   const CommentItem({super.key, required this.comment, required this.postId});
@@ -32,6 +33,15 @@ class CommentItem extends StatelessWidget {
                 context: context,
                 builder: (_) =>
                     CommentLongPressSheet(comment: comment, postId: postId),
+              );
+            } else {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => ReportBottomSheet(
+                  content: comment.content,
+                  targetType: TargetType.comment,
+                  targetId: comment.commentId,
+                ),
               );
             }
           },

@@ -56,7 +56,7 @@ String? validateAddress(String? value, BuildContext context) {
 
 String? validateDate(String? value, BuildContext context) {
   if (value == null || value.trim().isEmpty) {
-    return "dateRequired".tr(context);
+    return "dataRequired".tr(context);
   }
 
   try {
@@ -70,7 +70,7 @@ String? validateDate(String? value, BuildContext context) {
 
 String? validateSimpleData(String? value, BuildContext context) {
   if (value == null || value.trim().isEmpty) {
-    return "dateRequired".tr(context);
+    return "dataRequired".tr(context);
   }
 
   return null;
@@ -78,7 +78,7 @@ String? validateSimpleData(String? value, BuildContext context) {
 
 String? validateNationalId(String? value, BuildContext context) {
   if (value == null || value.trim().isEmpty) {
-    return "dateRequired".tr(context);
+    return "dataRequired".tr(context);
   } else if (value.length != 14) {
     return "invalidNationalId".tr(context);
   }
@@ -88,7 +88,7 @@ String? validateNationalId(String? value, BuildContext context) {
 
 String? validateNationalGraduation(String? value, BuildContext context) {
   if (value == null || value.trim().isEmpty) {
-    return "dateRequired".tr(context);
+    return "dataRequired".tr(context);
   } else if (value.length != 4) {
     return "invalidGraduationYear".tr(context);
   }
@@ -124,7 +124,7 @@ List<String>? extractEgyptPhones(String input) {
 
 String? validateCarNum(String? value, BuildContext context) {
   if (value == null || value.trim().isEmpty) {
-    return "dateRequired".tr(context);
+    return "dataRequired".tr(context);
   } else if (value.length<3) {
     return "invalidVechileNumber".tr(context);
   }

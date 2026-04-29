@@ -30,6 +30,7 @@ abstract class ApiKeys {
   static const filesNew = 'files.newFiles';
   static const bookingDate = 'bookingDate';
   static const userId = 'userId';
+  static const reason = 'reason';
   static const refreshToken = 'refreshToken';
   static const verificationCode = 'verificationCode';
   static const serviceProviderProfilePhoto = 'serviceProviderProfilePhoto';

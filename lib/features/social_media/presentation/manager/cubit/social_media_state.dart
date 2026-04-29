@@ -4,13 +4,13 @@ sealed class SocialMediaState {}
 
 final class SocialMediaInitial extends SocialMediaState {}
 
-
 ////basic  3 states
 
 final class SocialMediaNetworkState extends SocialMediaState {}
-final class SocialMediaFailureState extends SocialMediaState {}
-final class SocialMediaOnRetryState extends SocialMediaState {}
 
+final class SocialMediaFailureState extends SocialMediaState {}
+
+final class SocialMediaOnRetryState extends SocialMediaState {}
 
 final class UpdateCurrentTapState extends SocialMediaState {}
 
@@ -26,15 +26,11 @@ final class GetAllPostsPaginationLoading extends SocialMediaState {}
 
 final class GetAllPostsSuccess extends SocialMediaState {}
 
-
-
 final class GetCommentsLoading extends SocialMediaState {}
 
 final class GetCommentsPaginationLoading extends SocialMediaState {}
 
 final class GetCommentsSuccess extends SocialMediaState {}
-
-
 
 final class AddPostLoading extends SocialMediaState {}
 
@@ -46,8 +42,8 @@ final class AddPostFailure extends SocialMediaState {
   AddPostFailure({required this.errorMessage});
 }
 
-
 final class UpdatePostLoading extends SocialMediaState {}
+
 final class UpdatePostSuccess extends SocialMediaState {}
 
 final class UpdatePostFailure extends SocialMediaState {
@@ -84,13 +80,11 @@ final class GetUserPostsPaginationLoading extends SocialMediaState {}
 
 final class GetUserPostsSuccess extends SocialMediaState {}
 
-
-
 final class GetUserProfileSuccess extends SocialMediaState {}
 
 final class GetUserProfileLoading extends SocialMediaState {}
-final class UpdateCommentSuccess extends SocialMediaState {}
 
+final class UpdateCommentSuccess extends SocialMediaState {}
 
 final class UpdateCommentFailure extends SocialMediaState {
   final String errorMessage;
@@ -98,4 +92,13 @@ final class UpdateCommentFailure extends SocialMediaState {
   UpdateCommentFailure({required this.errorMessage});
 }
 
+/// state for report
+final class SocialReportLoadingState extends SocialMediaState {}
 
+final class SocialReportSucessState extends SocialMediaState {}
+
+final class SocialReportFailureState extends SocialMediaState {
+  final String errorMessage;
+
+  SocialReportFailureState({required this.errorMessage});
+}

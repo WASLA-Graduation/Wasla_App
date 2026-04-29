@@ -6,6 +6,7 @@ import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/enums/social_enums.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/convert_image_to_json.dart';
 import 'package:wasla/core/service/service_locator.dart';
@@ -109,6 +110,7 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
       if (!await sl<NetworkInfo>().isConnected) {
         return Left(NoInternetFailure());
       }
+
       final reponse = await api.get(
         ApiEndPoints.socialGetAllPosts,
         queryParameters: {
@@ -117,6 +119,7 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
           ApiKeys.currentUserId: currentUserId,
         },
       );
+
 
       List<SocialPostModel> posts = [];
       for (var post in reponse[ApiKeys.data][ApiKeys.data]) {
@@ -343,6 +346,32 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
       return Left(ServerFailure(error.errorModel.errorMessage));
     } catch (e) {
       return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> reportForSomething({
+    required String userId,
+    required String reason,
+    required int targetId,
+    required TargetType targetType,
+  }) async {
+    try {
+      await api.post(
+        ApiEndPoints.reportForSomething,
+        body: {
+          ApiKeys.userId: userId,
+          ApiKeys.reason: reason,
+          ApiKeys.targetId: targetId,
+          ApiKeys.targetType: targetType.index + 1,
+        },
+      );
+
+      return Right(null);
+    } on ServerException catch (error) {
+      return Left(error.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 }

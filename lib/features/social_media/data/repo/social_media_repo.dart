@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:wasla/core/enums/social_enums.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/features/social_media/data/models/social_comment_model.dart';
 import 'package:wasla/features/social_media/data/models/social_post_model.dart';
@@ -63,5 +64,14 @@ abstract class SocialMediaRepo {
   });
   Future<Either<Failure, SocialProfileModel>> getUserProfile({
     required String userId,
+  });
+
+
+
+  Future<Either<String, Null>> reportForSomething({
+    required String userId,
+    required String reason,
+    required int targetId,
+    required TargetType targetType,
   });
 }

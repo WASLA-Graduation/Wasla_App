@@ -504,6 +504,25 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
     });
   }
 
+  Future<void> reportForSomething({
+    required int targetId,
+    required TargetType targetType,
+    required String reason,
+  }) async {
+    emit(SocialReportLoadingState());
+    final String? currentUserId = await getUserId();
+    final result = await socialMediaRepo.reportForSomething(
+      userId: currentUserId!,
+      targetId: targetId,
+      targetType: targetType,
+      reason: reason,
+    );
+    result.fold(
+      (failure) => emit(SocialReportFailureState(errorMessage: failure)),
+      (_) => emit(SocialReportSucessState()),
+    );
+  }
+
   void reset() {
     postsImages = [];
     allPosts = [];

@@ -33,6 +33,7 @@ import 'package:wasla/features/restaurant/menu/presentation/views/update_menu_it
 import 'package:wasla/features/restaurant/orders/data/repo/orders_repo_impl.dart';
 import 'package:wasla/features/restaurant/orders/presentation/manager/cubit/orders_cubit.dart';
 import 'package:wasla/features/restaurant/orders/presentation/views/order_view.dart';
+import 'package:wasla/features/social_media/presentation/views/social_report_view.dart';
 import 'package:wasla/features/technicant/features/booking/data/repo/technician_bookings_repo_impl.dart';
 import 'package:wasla/features/technicant/features/booking/presentation/manager/cubit/technician_booking_cubit.dart';
 import 'package:wasla/features/technicant/features/booking/presentation/views/technician_booking_details_view.dart';
@@ -693,6 +694,13 @@ final GoRouter appRouter = GoRouter(
               OrdersCubit(OrdersRepoImpl(api: sl<ApiConsumer>())),
           child: ResidentRestaurantOrdersView(),
         );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.socialReportScreen,
+      builder: (context, state) {
+        final Map<String, dynamic> data = state.extra as Map<String, dynamic>;
+        return SocialReportView(data: data);
       },
     ),
   ],
