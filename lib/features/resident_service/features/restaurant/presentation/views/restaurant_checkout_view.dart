@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/enums/service_provider_type.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/service/payment/payment_service.dart';
 import 'package:wasla/core/utils/app_colors.dart';
@@ -30,7 +31,10 @@ class _RestaurantCheckoutViewState extends State<RestaurantCheckoutView> {
 
   void checkPaymentStatus(int orderId) async {
     if (orderId != -1) {
-      final result = await PaymentService.checkPaymentStatus(entityId: orderId);
+      final result = await PaymentService.checkPaymentStatus(
+        entityId: orderId,
+        entityType: EntityType.order,
+      );
       this.orderId = -1;
       result.fold((err) {}, (isPaid) {
         if (isPaid) {

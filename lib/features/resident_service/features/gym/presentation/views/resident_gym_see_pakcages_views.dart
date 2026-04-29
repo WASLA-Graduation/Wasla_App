@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/enums/service_provider_type.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/service/payment/payment_service.dart';
 import 'package:wasla/core/utils/app_colors.dart';
@@ -39,11 +38,11 @@ class _ResidentGymSeePakcagesViewState
     final int bookingId = cubit.bookingReturnedDataModel?.bookingId ?? -1;
     if (bookingId != -1) {
       final result = await PaymentService.checkPaymentStatus(
+        entityType: EntityType.booking,
         entityId: bookingId,
       );
       cubit.bookingReturnedDataModel!.bookingId = -1;
       result.fold((err) {}, (isPaid) {
-        log(isPaid.toString());
         if (isPaid) {
           showToast('bookingWithGym'.tr(context), color: AppColors.acceptGreen);
           context.pop();

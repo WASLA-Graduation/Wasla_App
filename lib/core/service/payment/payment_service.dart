@@ -3,6 +3,7 @@ import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/enums/service_provider_type.dart';
 import 'package:wasla/core/service/service_locator.dart';
 
 abstract class PaymentService {
@@ -37,11 +38,15 @@ abstract class PaymentService {
 
   static Future<Either<String, bool>> checkPaymentStatus({
     required int entityId,
+    required EntityType entityType,
   }) async {
     try {
       final response = await sl<ApiConsumer>().get(
         ApiEndPoints.checkPaymentStatus,
-        queryParameters: {ApiKeys.entityId: entityId, ApiKeys.entityType: 1},
+        queryParameters: {
+          ApiKeys.entityId: entityId,
+          ApiKeys.entityType: entityType.index,
+        },
       );
       return Right(response[ApiKeys.data][ApiKeys.isPaid]);
     } on ServerException catch (e) {
