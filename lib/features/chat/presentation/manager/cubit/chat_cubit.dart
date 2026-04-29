@@ -517,6 +517,7 @@ class ChatCubit extends Cubit<ChatState> {
         return;
       }
     }
+    // new chat
     allChatsOfUser.insert(0, UsersChatMsgModel.fromMap(user, 1));
 
     emit(ChatGetChatsOfUserSuccess(allChats: allChatsOfUser));
