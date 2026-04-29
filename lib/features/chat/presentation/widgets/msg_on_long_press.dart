@@ -42,6 +42,8 @@ class MsgOnLongPress extends StatelessWidget {
                 Navigator.pop(context);
                 switch (options[index].action) {
                   case ReviewAction.edit:
+                
+                    cubit.whenUserUpdate(message: message);
                   case ReviewAction.delete:
                     cubit.deleteMsg(msg: message);
                   case ReviewAction.copy:

@@ -8,18 +8,26 @@ import 'package:wasla/core/functions/get_image_from_device.dart';
 import 'package:wasla/features/chat/presentation/manager/cubit/chat_cubit.dart';
 
 class CustomChatTextField extends StatelessWidget {
-  const CustomChatTextField({super.key, required this.controller});
+  const CustomChatTextField({
+    super.key,
+    required this.controller,
+    required this.focusNode,
+  });
   final TextEditingController controller;
+  final FocusNode focusNode;
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<ChatCubit>();
+
     return TextField(
-      onTapOutside: (_)=>FocusScope.of(context).unfocus(),
+      focusNode: focusNode,
+      onTapOutside: (_) => FocusScope.of(context).unfocus(),
       onChanged: (value) {
         context.read<ChatCubit>().whenUserTyping();
       },
       controller: controller,
-      cursorColor:context.isDarkMode ? Colors.white : Colors.black,
+      cursorColor: context.isDarkMode ? Colors.white : Colors.black,
       maxLines: null,
       keyboardType: TextInputType.multiline,
       decoration: InputDecoration(
@@ -33,20 +41,26 @@ class CustomChatTextField extends StatelessWidget {
         ),
         hintText: "message".tr(context),
         hintStyle: TextStyle(color: Colors.grey.shade400),
-        suffixIcon: IconButton(
-          onPressed: () async {
-            final cubit = context.read<ChatCubit>();
-            List<File> pickedImages = await pickMultipleImages();
-            if (pickedImages.isNotEmpty) {
-              cubit.pickImages(files: pickedImages);
-            }
-          },
-          icon: Icon(
-            Icons.image_outlined,
-            color: Colors.grey.shade400,
-            size: 21,
-          ),
-        ),
+        suffixIcon: cubit.isEdit
+            ? IconButton(
+                onPressed: () {
+                  cubit.whenUserCloseUpating();
+                },
+                icon: Icon(Icons.close, color: Colors.grey.shade400, size: 21),
+              )
+            : IconButton(
+                onPressed: () async {
+                  List<File> pickedImages = await pickMultipleImages();
+                  if (pickedImages.isNotEmpty) {
+                    cubit.pickImages(files: pickedImages);
+                  }
+                },
+                icon: Icon(
+                  Icons.image_outlined,
+                  color: Colors.grey.shade400,
+                  size: 21,
+                ),
+              ),
       ),
     );
   }

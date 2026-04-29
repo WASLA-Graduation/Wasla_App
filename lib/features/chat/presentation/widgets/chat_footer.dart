@@ -32,7 +32,7 @@ class _ChatFooterState extends State<ChatFooter> {
       children: [
         BlocBuilder<ChatCubit, ChatState>(
           buildWhen: (previous, current) =>
-              current is ChatPickImages || current is ChatRecorded,
+              current is ChatPickImages || current is ChatRecorded || current is ChatWhenUserTyping,
           builder: (context, state) {
             return Expanded(child: _buildChatInput(cubit));
           },
@@ -76,7 +76,9 @@ class _ChatFooterState extends State<ChatFooter> {
     } else if (cubit.isRecording) {
       return ChatRecordItem();
     } else {
-      return CustomChatTextField(controller: cubit.messageController);
+      return CustomChatTextField(
+        focusNode: cubit.msgFocusNode,
+        controller: cubit.messageController);
     }
   }
 }

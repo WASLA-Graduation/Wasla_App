@@ -45,6 +45,8 @@ class _ChatViewState extends State<ChatView> {
     cubit.userInfo = null;
     cubit.chatPageNumber = 1;
     cubit.chatPageSize = 10;
+    cubit.isEdit = false;
+    cubit.editedMsg = null;
     cubit.chatEndOfPagination = false;
     cubit.getUserInfo(id: widget.data[AppStrings.id]);
     cubit.getChat(

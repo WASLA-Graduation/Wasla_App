@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +44,9 @@ class ChatCubit extends Cubit<ChatState> {
   bool isRecording = false;
   double targetOffsetDx = 0.0;
   Timer? _searchTimer;
-
+  bool isEdit = false;
+  final FocusNode msgFocusNode = FocusNode();
+  MessageModel? editedMsg;
   void onRetry() {
     emit(ChatOnRetryState());
   }
@@ -93,6 +94,24 @@ class ChatCubit extends Cubit<ChatState> {
       isSend = true;
       emit(ChatWhenUserTyping());
     }
+  }
+
+  void whenUserUpdate({required MessageModel message}) {
+    messageController.text = message.messageText ?? '';
+    msgFocusNode.requestFocus();
+    isEdit = true;
+    editedMsg = message;
+    emit(ChatWhenUserTyping());
+    isSend = true;
+  }
+
+  void whenUserCloseUpating() {
+    isSend = false;
+    isEdit = false;
+    editedMsg = null;
+    messageController.text = '';
+    msgFocusNode.unfocus();
+    emit(ChatWhenUserTyping());
   }
 
   //Done
@@ -240,7 +259,6 @@ class ChatCubit extends Cubit<ChatState> {
 
   //Done
   Future<void> updateMsg({required MessageModel msg}) async {
-    selectedMsgId = msg.messageId;
     MessageModel message = msg;
     final String oldText = message.messageText ?? '';
     message.messageText = messageController.text;
@@ -250,14 +268,21 @@ class ChatCubit extends Cubit<ChatState> {
       messageId: message.messageId,
       senderId: message.senderId,
       existFiles: message.files,
-      messageText: messageUpdateController.text,
+      messageText: messageController.text,
       type: 1,
     );
 
-    result.fold((err) {
-      message.messageText = oldText;
-      emit(ChatUpdateMsg(msgId: message.messageId));
-    }, (success) {});
+    result.fold(
+      (err) {
+        message.messageText = oldText;
+        emit(ChatUpdateMsg(msgId: message.messageId));
+      },
+      (success) {
+        isEdit = false;
+        resetMsg();
+        emit(ChatWhenUserTyping());
+      },
+    );
   }
 
   //Done
@@ -507,9 +532,6 @@ class ChatCubit extends Cubit<ChatState> {
     if (chatId == currentChatId.toString()) {
       for (var message in messages) {
         if (message.messageId == msgId && message.senderId != currentUser) {
-          log('in if of loop');
-          log('Msg: $msg');
-
           message.messageText = msg;
           emit(ChatUpdateMsg(msgId: msgId));
         }

@@ -42,10 +42,14 @@ class SendMsgWidget extends StatelessWidget {
           final audioService = context.read<AudioService>();
           final cubit = context.read<ChatCubit>();
           FocusScope.of(context).unfocus();
-          cubit.sendMsg(type: type);
-          audioService
-              .loadAsset(assetPath: 'assets/audio/send.mp3')
-              .then((_) => audioService.play());
+          if (cubit.isEdit) {
+            cubit.updateMsg(msg: cubit.editedMsg!);
+          } else {
+            cubit.sendMsg(type: type);
+            audioService
+                .loadAsset(assetPath: 'assets/audio/send.mp3')
+                .then((_) => audioService.play());
+          }
         },
         icon: Icon(Icons.send, color: AppColors.whiteColor),
       ),
