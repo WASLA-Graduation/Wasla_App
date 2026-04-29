@@ -1,11 +1,14 @@
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/convert_image_to_json.dart';
+import 'package:wasla/core/service/service_locator.dart';
 
 import 'package:wasla/features/social_media/data/models/social_comment_model.dart';
 import 'package:wasla/features/social_media/data/models/social_post_model.dart';
@@ -43,6 +46,8 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
       return Right(null);
     } on ServerException catch (error) {
       return Left(error.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -56,10 +61,10 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
       final formData = FormData.fromMap({
         ApiKeys.content: content,
         ApiKeys.id: id,
-        ApiKeys.existingFiles: updatePostImages.oldImages.isEmpty
+        ApiKeys.existingFilesPost: updatePostImages.oldImages.isEmpty
             ? null
             : updatePostImages.oldImages,
-        ApiKeys.newFiles: updatePostImages.newImages.isEmpty
+        ApiKeys.newFilesPost: updatePostImages.newImages.isEmpty
             ? null
             : await convertFilesToMultipart(updatePostImages.newImages),
       });
@@ -73,6 +78,8 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
       return Right(null);
     } on ServerException catch (error) {
       return Left(error.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -87,16 +94,21 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
       return Right(null);
     } on ServerException catch (error) {
       return Left(error.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
   @override
-  Future<Either<String, List<SocialPostModel>>> getAllPosts({
+  Future<Either<Failure, List<SocialPostModel>>> getAllPosts({
     required String currentUserId,
     required int pageNumber,
     required int pageSize,
   }) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final reponse = await api.get(
         ApiEndPoints.socialGetAllPosts,
         queryParameters: {
@@ -112,18 +124,23 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
       }
       return Right(posts);
     } on ServerException catch (error) {
-      return Left(error.errorModel.errorMessage);
+      return Left(ServerFailure(error.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
   @override
-  Future<Either<String, List<SocialPostModel>>> getPostsOfUser({
+  Future<Either<Failure, List<SocialPostModel>>> getPostsOfUser({
     required String currentUserId,
     required String userId,
     required int pageNumber,
     required int pageSize,
   }) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final reponse = await api.get(
         '${ApiEndPoints.socialGetAllPosts}/$userId',
         queryParameters: {
@@ -145,7 +162,9 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
       }
       return Right(posts);
     } on ServerException catch (error) {
-      return Left(error.errorModel.errorMessage);
+      return Left(ServerFailure(error.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
@@ -168,6 +187,8 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
       return Right(null);
     } on ServerException catch (error) {
       return Left(error.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -182,6 +203,8 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
       return Right(null);
     } on ServerException catch (error) {
       return Left(error.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -205,17 +228,22 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
       return Right(null);
     } on ServerException catch (error) {
       return Left(error.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
   @override
-  Future<Either<String, List<CommentModel>>> getAllPostComments({
+  Future<Either<Failure, List<CommentModel>>> getAllPostComments({
     required String currentUserId,
     required int postId,
     required int pageNumber,
     required int pageSize,
   }) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final reponse = await api.get(
         ApiEndPoints.getAllComments,
         queryParameters: {
@@ -232,7 +260,9 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
       }
       return Right(comments);
     } on ServerException catch (error) {
-      return Left(error.errorModel.errorMessage);
+      return Left(ServerFailure(error.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
@@ -257,17 +287,22 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
       return Right(null);
     } on ServerException catch (error) {
       return Left(error.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
   @override
-  Future<Either<String, List<SocialPostModel>>> getPostsOfUserByReactionType({
+  Future<Either<Failure, List<SocialPostModel>>> getPostsOfUserByReactionType({
     required String userId,
     required int reactionType,
     required int pageNumber,
     required int pageSize,
   }) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final reponse = await api.get(
         ApiEndPoints.socialGetPostsByReaction,
         queryParameters: {
@@ -284,22 +319,30 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
       }
       return Right(posts);
     } on ServerException catch (error) {
-      return Left(error.errorModel.errorMessage);
+      return Left(ServerFailure(error.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
   @override
-  Future<Either<String, SocialProfileModel>> getUSerProfile({
+  Future<Either<Failure, SocialProfileModel>> getUserProfile({
     required String userId,
   }) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
+
       final reponse = await api.get(
         ApiEndPoints.socialGetUserInfo,
         queryParameters: {ApiKeys.userId: userId},
       );
       return Right(SocialProfileModel.fromJson(reponse[ApiKeys.data]));
     } on ServerException catch (error) {
-      return Left(error.errorModel.errorMessage);
+      return Left(ServerFailure(error.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 }

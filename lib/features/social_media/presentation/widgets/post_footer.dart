@@ -79,7 +79,7 @@ class PostFooter extends StatelessWidget {
                     ? Assets.assetsImagesSaveFilled
                     : Assets.assetsImagesSaveOutlined,
                 height: 20,
-                color: post.isLoved ? AppColors.primaryColor : null,
+                color: post.isSaved ? AppColors.primaryColor : null,
               ),
             ),
             const SizedBox(width: 8),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/features/social_media/data/models/social_comment_model.dart';
 import 'package:wasla/features/social_media/data/models/social_post_model.dart';
 import 'package:wasla/features/social_media/data/models/social_profile_model.dart';
@@ -18,12 +19,12 @@ abstract class SocialMediaRepo {
     required UpdatePostModel updatePostImages,
   });
   Future<Either<String, Null>> deletePost({required int postId});
-  Future<Either<String, List<SocialPostModel>>> getAllPosts({
+  Future<Either<Failure, List<SocialPostModel>>> getAllPosts({
     required String currentUserId,
     required int pageNumber,
     required int pageSize,
   });
-  Future<Either<String, List<SocialPostModel>>> getPostsOfUser({
+  Future<Either<Failure, List<SocialPostModel>>> getPostsOfUser({
     required String currentUserId,
     required String userId,
     required int pageNumber,
@@ -41,7 +42,7 @@ abstract class SocialMediaRepo {
   });
   Future<Either<String, Null>> deleteComment({required int commentId});
 
-  Future<Either<String, List<CommentModel>>> getAllPostComments({
+  Future<Either<Failure, List<CommentModel>>> getAllPostComments({
     required String currentUserId,
     required int postId,
     required int pageNumber,
@@ -54,13 +55,13 @@ abstract class SocialMediaRepo {
     required int reactionType,
   });
 
-  Future<Either<String, List<SocialPostModel>>> getPostsOfUserByReactionType({
+  Future<Either<Failure, List<SocialPostModel>>> getPostsOfUserByReactionType({
     required String userId,
     required int reactionType,
     required int pageNumber,
     required int pageSize,
   });
-  Future<Either<String, SocialProfileModel>> getUSerProfile({
+  Future<Either<Failure, SocialProfileModel>> getUserProfile({
     required String userId,
   });
 }

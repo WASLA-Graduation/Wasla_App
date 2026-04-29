@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/enums/social_enums.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 
 import 'package:wasla/features/social_media/data/models/social_comment_model.dart';
@@ -42,6 +43,10 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
   String commentContent = '';
 
   Map<int, int> postDotIndex = {};
+
+  void onRetry() {
+    emit(SocialMediaOnRetryState());
+  }
 
   void updatePostImages({List<File>? newImages, List<String>? oldImages}) {
     if (newImages != null) {
@@ -119,18 +124,25 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
       pageNumber: pageNumber,
       pageSize: pageSize,
     );
-    result.fold((failure) => emit(GetAllPostsFailure(errorMessage: failure)), (
-      posts,
-    ) {
-      if (posts.isEmpty) {
-        endOfPosts = true;
-        emit(GetAllPostsSuccess());
-      } else {
-        pageNumber++;
-        allPosts.addAll(posts);
-        emit(GetAllPostsSuccess());
-      }
-    });
+    result.fold(
+      (failure) {
+        if (failure is NoInternetFailure) {
+          emit(SocialMediaNetworkState());
+        } else {
+          emit(SocialMediaFailureState());
+        }
+      },
+      (posts) {
+        if (posts.isEmpty) {
+          endOfPosts = true;
+          emit(GetAllPostsSuccess());
+        } else {
+          pageNumber++;
+          allPosts.addAll(posts);
+          emit(GetAllPostsSuccess());
+        }
+      },
+    );
   }
 
   Future<void> toggleReaction({
@@ -199,18 +211,25 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
       pageNumber: commentPageNumber,
       pageSize: commentPageSize,
     );
-    result.fold((failure) => emit(GetCommentsFailure(errorMessage: failure)), (
-      comments,
-    ) {
-      if (comments.isEmpty) {
-        endOfComments = true;
-        emit(GetCommentsSuccess());
-      } else {
-        commentPageNumber++;
-        postComments.addAll(comments);
-        emit(GetCommentsSuccess());
-      }
-    });
+    result.fold(
+      (failure) {
+        if (failure is NoInternetFailure) {
+          emit(SocialMediaNetworkState());
+        } else {
+          emit(SocialMediaFailureState());
+        }
+      },
+      (comments) {
+        if (comments.isEmpty) {
+          endOfComments = true;
+          emit(GetCommentsSuccess());
+        } else {
+          commentPageNumber++;
+          postComments.addAll(comments);
+          emit(GetCommentsSuccess());
+        }
+      },
+    );
   }
 
   Future<void> addPost() async {
@@ -356,18 +375,25 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
       pageSize: userPageSize,
       userId: userId,
     );
-    result.fold((failure) => emit(GetUserPostsFailure(errorMessage: failure)), (
-      posts,
-    ) {
-      if (posts.isEmpty) {
-        userEndOfPosts = true;
-        emit(GetUserPostsSuccess());
-      } else {
-        userPageNumber++;
-        userPosts.addAll(posts);
-        emit(GetUserPostsSuccess());
-      }
-    });
+    result.fold(
+      (failure) {
+        if (failure is NoInternetFailure) {
+          emit(SocialMediaNetworkState());
+        } else {
+          emit(SocialMediaFailureState());
+        }
+      },
+      (posts) {
+        if (posts.isEmpty) {
+          userEndOfPosts = true;
+          emit(GetUserPostsSuccess());
+        } else {
+          userPageNumber++;
+          userPosts.addAll(posts);
+          emit(GetUserPostsSuccess());
+        }
+      },
+    );
   }
 
   Future<void> getUserPostsByReaction({
@@ -392,27 +418,43 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
       userId: userId,
       reactionType: reactionType.index + 1,
     );
-    result.fold((failure) => emit(GetUserPostsFailure(errorMessage: failure)), (
-      posts,
-    ) {
-      if (posts.isEmpty) {
-        userEndOfPosts = true;
-        emit(GetUserPostsSuccess());
-      } else {
-        userPageNumber++;
-        userPosts.addAll(posts);
-        emit(GetUserPostsSuccess());
-      }
-    });
+    result.fold(
+      (failure) {
+        if (failure is NoInternetFailure) {
+          emit(SocialMediaNetworkState());
+        } else {
+          emit(SocialMediaFailureState());
+        }
+      },
+      (posts) {
+        if (posts.isEmpty) {
+          userEndOfPosts = true;
+          emit(GetUserPostsSuccess());
+        } else {
+          userPageNumber++;
+          userPosts.addAll(posts);
+          emit(GetUserPostsSuccess());
+        }
+      },
+    );
   }
 
   Future<void> getUserProfile({required String userId}) async {
     emit(GetUserProfileLoading());
-    final result = await socialMediaRepo.getUSerProfile(userId: userId);
-    result.fold((failure) => null, (userProfile) {
-      this.userProfile = userProfile;
-      emit(GetUserProfileSuccess());
-    });
+    final result = await socialMediaRepo.getUserProfile(userId: userId);
+    result.fold(
+      (failure) {
+        if (failure is NoInternetFailure) {
+          emit(SocialMediaNetworkState());
+        } else {
+          emit(SocialMediaFailureState());
+        }
+      },
+      (userProfile) {
+        this.userProfile = userProfile;
+        emit(GetUserProfileSuccess());
+      },
+    );
   }
 
   Future<void> updateComment({required CommentModel comment}) async {
@@ -434,6 +476,7 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
   }
 
   Future<void> updatePost({required int postId}) async {
+    emit(UpdatePostLoading());
     selectedPostId = postId;
     final result = await socialMediaRepo.updatePost(
       id: postId,

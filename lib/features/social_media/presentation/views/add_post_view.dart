@@ -23,6 +23,7 @@ class _AddPostViewState extends State<AddPostView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('addPost'.tr(context)),
         actions: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
+import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/social_media/presentation/manager/cubit/social_media_cubit.dart';
 import 'package:wasla/features/social_media/presentation/widgets/all_posts_body.dart';
 
@@ -22,9 +23,18 @@ class _AllPostsViewState extends State<AllPostsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-          child: const AllPostsBody(),
+        child: BlocStatusHandler<SocialMediaCubit, SocialMediaState>(
+          body: const AllPostsBody(),
+          onRetry: () {
+            getAllPosts();
+            context.read<SocialMediaCubit>().onRetry();
+          },
+          isNetwork: (state) => state is SocialMediaNetworkState,
+          isError: (state) => state is SocialMediaFailureState,
+          buildWhen: (previous, current) =>
+              current is SocialMediaNetworkState ||
+              current is SocialMediaFailureState ||
+              current is SocialMediaOnRetryState,
         ),
       ),
     );

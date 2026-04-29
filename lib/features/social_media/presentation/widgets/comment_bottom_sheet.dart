@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/core/widgets/custom_err_get_data.dart';
 import 'package:wasla/core/widgets/under_line_widget.dart';
 import 'package:wasla/features/social_media/presentation/manager/cubit/social_media_cubit.dart';
 import 'package:wasla/features/social_media/presentation/widgets/comment_text_field.dart';
@@ -55,16 +54,11 @@ class _CommentBottomSheetState extends State<CommentBottomSheet> {
               Expanded(
                 child: BlocBuilder<SocialMediaCubit, SocialMediaState>(
                   buildWhen: (previous, current) =>
-                      current is GetCommentsFailure ||
                       current is GetCommentsLoading ||
                       current is GetCommentsSuccess ||
                       current is DeleteCommentFailure ||
                       current is DeleteCommentLoading,
                   builder: (context, state) {
-                    if (state is GetCommentsFailure) {
-                      return const CustomErrGetData();
-                    }
-
                     if (state is GetCommentsLoading) {
                       return Center(
                         child: SpinKitFadingCircle(

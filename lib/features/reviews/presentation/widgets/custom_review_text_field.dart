@@ -21,6 +21,7 @@ class ReviewInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTapOutside: (_)=>FocusManager.instance.primaryFocus?.unfocus(),
       maxLines: maxLines,
       minLines: 1,
       controller: controller,

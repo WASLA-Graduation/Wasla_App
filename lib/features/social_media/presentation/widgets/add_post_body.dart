@@ -17,6 +17,7 @@ class AddPostBody extends StatelessWidget {
     return Column(
       children: [
         TextField(
+          onTapOutside: (event) => FocusScope.of(context).unfocus(),
           onChanged: (value) => cubit.postContent = value,
           maxLines: 10,
           minLines: 1,

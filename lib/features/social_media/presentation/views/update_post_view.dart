@@ -27,6 +27,7 @@ class _UpdatePostViewState extends State<UpdatePostView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('editPost'.tr(context)),
         leading: IconButton(
@@ -64,10 +65,17 @@ class _UpdatePostViewState extends State<UpdatePostView> {
                       postId: widget.post.postId,
                     );
                   },
-                  child: Icon(
-                    Icons.done,
-                    color: context.isDarkMode ? Colors.white : Colors.black,
-                  ),
+                  child: state is UpdatePostLoading
+                      ? Text(
+                          'loading'.tr(context),
+                          style: Theme.of(context).appBarTheme.titleTextStyle,
+                        )
+                      : Icon(
+                          Icons.done,
+                          color: context.isDarkMode
+                              ? Colors.white
+                              : Colors.black,
+                        ),
                 );
               },
             ),

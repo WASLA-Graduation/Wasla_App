@@ -4,6 +4,14 @@ sealed class SocialMediaState {}
 
 final class SocialMediaInitial extends SocialMediaState {}
 
+
+////basic  3 states
+
+final class SocialMediaNetworkState extends SocialMediaState {}
+final class SocialMediaFailureState extends SocialMediaState {}
+final class SocialMediaOnRetryState extends SocialMediaState {}
+
+
 final class UpdateCurrentTapState extends SocialMediaState {}
 
 final class UpdateCurrentPostDotIndex extends SocialMediaState {}
@@ -18,11 +26,7 @@ final class GetAllPostsPaginationLoading extends SocialMediaState {}
 
 final class GetAllPostsSuccess extends SocialMediaState {}
 
-final class GetAllPostsFailure extends SocialMediaState {
-  final String errorMessage;
 
-  GetAllPostsFailure({required this.errorMessage});
-}
 
 final class GetCommentsLoading extends SocialMediaState {}
 
@@ -30,11 +34,7 @@ final class GetCommentsPaginationLoading extends SocialMediaState {}
 
 final class GetCommentsSuccess extends SocialMediaState {}
 
-final class GetCommentsFailure extends SocialMediaState {
-  final String errorMessage;
 
-  GetCommentsFailure({required this.errorMessage});
-}
 
 final class AddPostLoading extends SocialMediaState {}
 
@@ -47,6 +47,7 @@ final class AddPostFailure extends SocialMediaState {
 }
 
 
+final class UpdatePostLoading extends SocialMediaState {}
 final class UpdatePostSuccess extends SocialMediaState {}
 
 final class UpdatePostFailure extends SocialMediaState {
@@ -83,11 +84,7 @@ final class GetUserPostsPaginationLoading extends SocialMediaState {}
 
 final class GetUserPostsSuccess extends SocialMediaState {}
 
-final class GetUserPostsFailure extends SocialMediaState {
-  final String errorMessage;
 
-  GetUserPostsFailure({required this.errorMessage});
-}
 
 final class GetUserProfileSuccess extends SocialMediaState {}
 

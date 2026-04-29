@@ -199,8 +199,10 @@ abstract class ApiKeys {
   static const String reactionsCount = "reactionsCount";
   static const String savesCount = "savesCount";
   static const String existingFiles = "existingFiles";
+  static const String existingFilesPost = "files.existingFiles";
   static const String existFiles = "existFiles";
   static const String newFiles = "newFiles";
+  static const String newFilesPost = "files.newFiles";
   static const String vehicleType = "VehicleType";
   static const String dropOffPlace = "dropOffPlace";
   static const String passengerId = "passengerId";

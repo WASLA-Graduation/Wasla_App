@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/widgets/empty_data_widget.dart';
 import 'package:wasla/core/widgets/pagination_widget.dart';
 import 'package:wasla/features/social_media/data/models/social_post_model.dart';
 import 'package:wasla/features/social_media/presentation/widgets/post_item.dart';
@@ -14,11 +15,9 @@ class PostList extends StatelessWidget {
     return PaginationListener(
       onLoadMore: onRefresh,
       child: posts.isEmpty
-          ? Center(
-              child: Text(
-                "noPosts".tr(context),
-                style: TextStyle(fontSize: 18),
-              ),
+          ? EmptyStateWidget(
+              title: "noPosts".tr(context),
+              message: 'noPostsDesc'.tr(context),
             )
           : ListView.separated(
               padding: const EdgeInsets.only(bottom: 20),

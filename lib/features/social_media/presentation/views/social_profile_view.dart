@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/utils/app_strings.dart';
+import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/social_media/presentation/manager/cubit/social_media_cubit.dart';
 import 'package:wasla/features/social_media/presentation/widgets/social_profile_body.dart';
 
@@ -27,8 +28,21 @@ class _SocialProfileViewState extends State<SocialProfileView> {
 
         title: Text(widget.userData[AppStrings.name]),
       ),
-
-      body: SocialProfileBody(userId: widget.userData[AppStrings.id]),
+      body: SafeArea(
+        child: BlocStatusHandler<SocialMediaCubit, SocialMediaState>(
+          body: SocialProfileBody(userId: widget.userData[AppStrings.id]),
+          onRetry: () {
+            getProfile();
+            context.read<SocialMediaCubit>().onRetry();
+          },
+          isNetwork: (state) => state is SocialMediaNetworkState,
+          isError: (state) => state is SocialMediaFailureState,
+          buildWhen: (previous, current) =>
+              current is SocialMediaNetworkState ||
+              current is SocialMediaFailureState ||
+              current is SocialMediaOnRetryState,
+        ),
+      ),
     );
   }
 

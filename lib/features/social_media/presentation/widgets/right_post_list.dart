@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wasla/core/enums/social_enums.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/core/widgets/custom_err_get_data.dart';
 import 'package:wasla/features/social_media/presentation/manager/cubit/social_media_cubit.dart';
 import 'package:wasla/features/social_media/presentation/widgets/user_post_list.dart';
 
@@ -27,16 +26,11 @@ class _RightPostListState extends State<RightPostList> {
   Widget build(BuildContext context) {
     return BlocBuilder<SocialMediaCubit, SocialMediaState>(
       buildWhen: (previous, current) =>
-          current is GetUserPostsFailure ||
           current is GetUserPostsLoading ||
           current is GetUserPostsSuccess ||
           current is DeletePostFailure ||
           current is DeletePostLoading,
       builder: (context, state) {
-        if (state is GetUserPostsFailure) {
-          return const SliverFillRemaining(child: CustomErrGetData());
-        }
-
         if (state is GetUserPostsLoading) {
           return SliverFillRemaining(
             child: Center(

@@ -55,7 +55,8 @@ class SocialProfileBody extends StatelessWidget {
                       const VerticalDivider(thickness: 1),
                       ProfileStaticsWidget(
                         title: "saves".tr(context),
-                        value: cubit.userProfile?.savesCount.toString() ?? '...',
+                        value:
+                            cubit.userProfile?.savesCount.toString() ?? '...',
                       ),
                     ],
                   );
