@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
 
 abstract class GymPackagesRepo {
-  Future<Either<String, List<GymPackageModel>>> getGymPackagesAndOffers({
+  Future<Either<Failure, List<GymPackageModel>>> getGymPackagesAndOffers({
     required String gymId,
   });
   Future<Either<String, Null>> addPackageOrOffer({

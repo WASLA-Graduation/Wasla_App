@@ -2,7 +2,15 @@ part of 'gym_packages_cubit.dart';
 
 sealed class GymPackagesState {}
 
+
+
+
 final class GymPackagesInitial extends GymPackagesState {}
+
+/// 3 basic states
+final class GymPackagesNetworkState extends GymPackagesState {}
+final class GymPackagesFailureState extends GymPackagesState {}
+final class GymPackagesOnRetryState extends GymPackagesState {}
 
 final class GymPackageUpdate extends GymPackagesState {}
 
@@ -13,11 +21,7 @@ final class GymGetPackagesAndOffersSuccess extends GymPackagesState {
   GymGetPackagesAndOffersSuccess(this.data);
 }
 
-final class GymGetPackagesAndOffersError extends GymPackagesState {
-  final String errorMessage;
 
-  GymGetPackagesAndOffersError(this.errorMessage);
-}
 
 final class GymAddOrUpdatePackagesAndOffersLoading extends GymPackagesState {}
 

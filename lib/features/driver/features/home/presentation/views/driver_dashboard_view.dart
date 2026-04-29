@@ -24,8 +24,8 @@ class _DriverDashboardViewState extends State<DriverDashboardView> {
       child: BlocStatusHandler<DriverCubit, DriverState>(
         body: const DirverDahsboardBody(),
         onRetry: () {
-          getData();
           context.read<DriverCubit>().onRetry();
+          getData();
         },
         isNetwork: (state) => state is DriverNetworkState,
         isError: (state) => state is DriverFailureState,

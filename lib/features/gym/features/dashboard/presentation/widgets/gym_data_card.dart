@@ -10,32 +10,42 @@ class GymDashboardDataCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<GymDashboardCubit>();
-    return Row(
-      spacing: 10,
+    return Column(
+      spacing: 20,
+
       children: [
-        Expanded(
-          child: CustomDocDashboardCard(
-            title: "bookings".tr(context),
-            value:
-                cubit.gymStatisticsModel?.numberOfBookings.toString() ??
-                0.toString(),
-          ),
+        Row(
+          spacing: 10,
+          children: [
+            Expanded(
+              child: CustomDocDashboardCard(
+                title: "bookings".tr(context),
+                value:
+                    cubit.gymStatisticsModel?.numberOfBookings.toString() ??
+                    0.toString(),
+              ),
+            ),
+            Expanded(
+              child: CustomDocDashboardCard(
+                title: "trainnees".tr(context),
+                value:
+                    cubit.gymStatisticsModel?.numberOfTrainees.toString() ??
+                    0.toString(),
+              ),
+            ),
+          ],
         ),
-        Expanded(
-          child: CustomDocDashboardCard(
-            title: "trainnees".tr(context),
-            value:
-                cubit.gymStatisticsModel?.numberOfTrainees.toString() ??
-                0.toString(),
-          ),
-        ),
-        Expanded(
-          child: CustomDocDashboardCard(
-            title: "revenue".tr(context),
-            value:
-                cubit.gymStatisticsModel?.totalAmount.toString() ??
-                0.toString(),
-          ),
+        Row(
+          children: [
+            Expanded(
+              child: CustomDocDashboardCard(
+                title: "revenue".tr(context),
+                value:
+                    cubit.gymStatisticsModel?.totalAmount.toString() ??
+                    0.toString(),
+              ),
+            ),
+          ],
         ),
       ],
     );

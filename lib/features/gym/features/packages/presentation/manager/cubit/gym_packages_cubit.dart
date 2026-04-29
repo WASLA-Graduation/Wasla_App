@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
 import 'package:wasla/features/gym/features/packages/data/repo/gym_packages_repo.dart';
@@ -28,6 +29,10 @@ class GymPackagesCubit extends Cubit<GymPackagesState> {
 
   File? packageImage;
   int tapsCurrentIndex = 0;
+
+  void onRetry() {
+    emit(GymPackagesOnRetryState());
+  }
 
   void updateCurrentTap({required int index}) {
     tapsCurrentIndex = index;
@@ -58,23 +63,30 @@ class GymPackagesCubit extends Cubit<GymPackagesState> {
     final String? gymId = await getUserId();
     emit(GymGetPackagesAndOffersLoading());
     final result = await gymPackagesRepo.getGymPackagesAndOffers(gymId: gymId!);
-    result.fold((error) => emit(GymGetPackagesAndOffersError(error)), (
-      success,
-    ) {
-      for (var package in success) {
-        if (package.type == 1) {
-          packages.add(package);
+    result.fold(
+      (error) {
+        if (error is NoInternetFailure) {
+          emit(GymPackagesNetworkState());
+        } else {
+          emit(GymPackagesFailureState());
         }
-        if (package.type == 2) {
-          offers.add(package);
+      },
+      (success) {
+        for (var package in success) {
+          if (package.type == 1) {
+            packages.add(package);
+          }
+          if (package.type == 2) {
+            offers.add(package);
+          }
         }
-      }
-      emit(
-        GymGetPackagesAndOffersSuccess(
-          tapsCurrentIndex == 0 ? packages : offers,
-        ),
-      );
-    });
+        emit(
+          GymGetPackagesAndOffersSuccess(
+            tapsCurrentIndex == 0 ? packages : offers,
+          ),
+        );
+      },
+    );
   }
 
   Future<void> addOrUpdatePackageOrOffer({

@@ -33,8 +33,8 @@ class _DriverBookingsViewState extends State<DriverBookingsView> {
       body: BlocStatusHandler<DriverBookingCubit, DriverBookingState>(
         body: const DriverBookigsBody(),
         onRetry: () {
-          getMyBookings();
           context.read<DriverBookingCubit>().onRetry();
+          getMyBookings();
         },
         isNetwork: (state) => state is DriverBookingNetworkState,
         isError: (state) => state is DriverBookingFailureState,

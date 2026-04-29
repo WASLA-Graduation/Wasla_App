@@ -26,8 +26,8 @@ class _OrderViewState extends State<OrderView> {
       body: BlocStatusHandler<OrdersCubit, OrdersState>(
         body: const OrderBody(),
         onRetry: () {
-          getOrders();
           context.read<OrdersCubit>().onRetry();
+          getOrders();
         },
         isNetwork: (state) => state is OrdersNetworkState,
         isError: (state) => state is OrdersFailureState,

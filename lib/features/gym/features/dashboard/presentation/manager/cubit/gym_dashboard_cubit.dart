@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/enums/booking_status.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_chart_model.dart';
 import 'package:wasla/features/gym/features/dashboard/data/models/gym_booking_model.dart';
@@ -23,6 +24,10 @@ class GymDashboardCubit extends Cubit<GymDashboardState> {
   List<GymBookingModel> gymBookings = [];
   BookingStatus gymBookingsStatus = BookingStatus.active;
 
+  void onRetry() {
+    emit(GymDashboardOnRetryState());
+  }
+
   void updateNavBarCurrentIndex(int index) {
     bottomNavBarcurrentIndex = index;
     emit(GymDashboardUpdateState());
@@ -38,7 +43,13 @@ class GymDashboardCubit extends Cubit<GymDashboardState> {
     emit(GymDashboardProfileGetProfileLoading());
     final res = await gymDashboardRepo.geGymProfile(gymId: gymId!);
     res.fold(
-      (error) => emit(GymDashboardProfileGetProfileFailure(errMsg: error)),
+      (error) {
+        if (error is NoInternetFailure) {
+          emit(GymDashboardNetwrorkState());
+        } else {
+          emit(GymDashboardFailureState());
+        }
+      },
       (success) {
         gym = success;
         emit(GymDashboardProfileGetProfileSuccess());
@@ -51,7 +62,13 @@ class GymDashboardCubit extends Cubit<GymDashboardState> {
     emit(GymDashboardProfileGetChartLoading());
     final res = await gymDashboardRepo.getGymCharts(gymId: gymId!);
     res.fold(
-      (error) => emit(GymDashboardProfileGetChartFailure(errMsg: error)),
+      (error) {
+        if (error is NoInternetFailure) {
+          emit(GymDashboardNetwrorkState());
+        } else {
+          emit(GymDashboardFailureState());
+        }
+      },
       (success) {
         gymStatisticsModel = success;
 
@@ -88,7 +105,13 @@ class GymDashboardCubit extends Cubit<GymDashboardState> {
       gymId: gymId!,
     );
     res.fold(
-      (error) => emit(GymDashboardProfileGetBookingsListFailure(errMsg: error)),
+      (error) {
+        if (error is NoInternetFailure) {
+          emit(GymDashboardNetwrorkState());
+        } else {
+          emit(GymDashboardFailureState());
+        }
+      },
       (success) {
         gymBookings = success;
         emit(GymDashboardProfileGetBookingsListSuccess());

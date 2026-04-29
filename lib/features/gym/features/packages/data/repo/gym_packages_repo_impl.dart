@@ -2,11 +2,14 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/convert_image_to_json.dart';
+import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
 import 'package:wasla/features/gym/features/packages/data/repo/gym_packages_repo.dart';
 
@@ -16,10 +19,13 @@ class GymPackagesRepoImpl extends GymPackagesRepo {
   GymPackagesRepoImpl({required this.api});
 
   @override
-  Future<Either<String, List<GymPackageModel>>> getGymPackagesAndOffers({
+  Future<Either<Failure, List<GymPackageModel>>> getGymPackagesAndOffers({
     required String gymId,
   }) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final response = await api.get(
         ApiEndPoints.gymPackage,
         queryParameters: {ApiKeys.serviceProviderId: gymId},
@@ -30,11 +36,12 @@ class GymPackagesRepoImpl extends GymPackagesRepo {
 
       return Right(packages);
     } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
-  @override
   @override
   Future<Either<String, Null>> deletePackageOrOffer({
     required int serviceId,
@@ -47,6 +54,8 @@ class GymPackagesRepoImpl extends GymPackagesRepo {
       return const Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    }catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -84,6 +93,8 @@ class GymPackagesRepoImpl extends GymPackagesRepo {
       return const Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    }catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -100,7 +111,6 @@ class GymPackagesRepoImpl extends GymPackagesRepo {
     File? image,
   }) async {
     try {
-    
       final formData = FormData.fromMap({
         ApiKeys.id: id,
         ApiKeys.nameArabic: nameArabic,
@@ -120,6 +130,8 @@ class GymPackagesRepoImpl extends GymPackagesRepo {
       return const Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    }catch (e) {
+      return Left(e.toString());
     }
   }
 }
