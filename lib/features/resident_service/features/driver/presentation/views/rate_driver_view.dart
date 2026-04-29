@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
+import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/resident_service/features/driver/presentation/manager/cubit/resident_driver_cubit.dart';
 import 'package:wasla/features/resident_service/features/driver/presentation/widgets/rate_driver_body.dart';
@@ -28,7 +31,13 @@ class _DriverReviewScreenState extends State<DriverReviewScreen> {
         forceMaterialTransparency: true,
         title: Text("rateDriver".tr(context)),
         leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
+          onTap: () {
+            if (context.canPop()) {
+              context.popScreen();
+            } else {
+              context.pushAndRemoveAllScreens(AppRoutes.residenBottomNavBar);
+            }
+          },
           child: Icon(
             Icons.close,
             size: 24,

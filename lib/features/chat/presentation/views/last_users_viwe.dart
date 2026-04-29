@@ -6,6 +6,7 @@ import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/service/signalR/chat_hub.dart';
 import 'package:wasla/core/utils/assets.dart';
+import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/chat/presentation/manager/cubit/chat_cubit.dart';
 import 'package:wasla/features/chat/presentation/widgets/last_users_body.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/custom_doc_add_service_float_button.dart';
@@ -43,9 +44,19 @@ class _LastUsersViweState extends State<LastUsersViwe> {
           context.pushScreen(AppRoutes.allUsersChatssScreen);
         },
       ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-        child: const LastUsersBody(),
+
+      body: BlocStatusHandler<ChatCubit, ChatState>(
+        body: const LastUsersBody(),
+        onRetry: () {
+          getAllChats();
+          context.read<ChatCubit>().onRetry();
+        },
+        isNetwork: (state) => state is ChatNetworkState,
+        isError: (state) => state is ChatFailureState,
+        buildWhen: (previous, current) =>
+            current is ChatNetworkState ||
+            current is ChatFailureState ||
+            current is ChatOnRetryState,
       ),
     );
   }

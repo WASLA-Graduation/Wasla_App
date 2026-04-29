@@ -50,8 +50,8 @@ class LastUsersChatItem extends StatelessWidget {
       ),
       child: BlocBuilder<ChatCubit, ChatState>(
         buildWhen: (previous, current) =>
+            (current is ChatUpdateMsg && current.msgId == userChat.messageId) ||
             current is ChatReadMsgs ||
-            current is ChatUpdateMsg ||
             current is ChatDeleteMsg &&
                 cubit.selectedMsgId == userChat.messageId,
         builder: (context, state) {

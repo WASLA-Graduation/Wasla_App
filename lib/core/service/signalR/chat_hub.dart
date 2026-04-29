@@ -1,3 +1,4 @@
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signalr_netcore/signalr_client.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
@@ -75,7 +76,7 @@ class ChatHub {
     //Done
     hubConnection.on("ReceiveMessage", (data) {
       final message = data![0] as Map<String, dynamic>;
-  
+
       chat.handleWhenNewMsg(user: RealTimeMsgModel.fromJson(message));
     });
 

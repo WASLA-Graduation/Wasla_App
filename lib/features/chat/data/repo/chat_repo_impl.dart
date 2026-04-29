@@ -1,14 +1,16 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/convert_image_to_json.dart';
-import 'package:wasla/core/functions/toast_alert.dart';
+import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/chat/data/models/all_users_chat_model.dart';
 import 'package:wasla/features/chat/data/models/chat_user_info.dart';
 import 'package:wasla/features/chat/data/models/chats_msg_model.dart';
@@ -62,7 +64,6 @@ class ChatRepoImpl extends ChatRepo {
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     } catch (e) {
-      showToast("   لم يتم الارسال", color: Colors.red);
       return Left(e.toString());
     }
   }
@@ -83,6 +84,8 @@ class ChatRepoImpl extends ChatRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -111,6 +114,8 @@ class ChatRepoImpl extends ChatRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -127,6 +132,8 @@ class ChatRepoImpl extends ChatRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -143,6 +150,8 @@ class ChatRepoImpl extends ChatRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -170,11 +179,14 @@ class ChatRepoImpl extends ChatRepo {
   }
 
   @override
-  Future<Either<String, List<AllUsersChatModel>>> getAllUsers({
+  Future<Either<Failure, List<AllUsersChatModel>>> getAllUsers({
     required int pageNumber,
     required int pageSize,
   }) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final response = await api.get(
         ApiEndPoints.getAllUserChats,
         queryParameters: {
@@ -189,18 +201,23 @@ class ChatRepoImpl extends ChatRepo {
       }
       return Right(users);
     } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
   @override
-  Future<Either<String, List<UsersChatMsgModel>>>
+  Future<Either<Failure, List<UsersChatMsgModel>>>
   getUsersThatHaveChatWithTheme({
     required int pageNumber,
     required int pageSize,
     required String userId,
   }) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final response = await api.get(
         ApiEndPoints.getMyChats,
         queryParameters: {
@@ -215,7 +232,9 @@ class ChatRepoImpl extends ChatRepo {
       }
       return Right(users);
     } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
@@ -228,6 +247,7 @@ class ChatRepoImpl extends ChatRepo {
         ApiEndPoints.getProfileForSpecificChat,
         queryParameters: {ApiKeys.id: userId},
       );
+
       return Right(ChatUserInfo.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
@@ -241,6 +261,8 @@ class ChatRepoImpl extends ChatRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
@@ -257,6 +279,8 @@ class ChatRepoImpl extends ChatRepo {
         queryParameters: {ApiKeys.search: word},
       );
 
+      log('Response ${response[ApiKeys.data]}');
+
       List<AllUsersChatModel> users = [];
       for (var user in response[ApiKeys.data][ApiKeys.data]) {
         users.add(AllUsersChatModel.fromJson(user));
@@ -269,15 +293,19 @@ class ChatRepoImpl extends ChatRepo {
 
   @override
   Future<Either<String, List<UsersChatMsgModel>>>
-  searchForUsersThatHaveChatWithTheme({required String word}) async {
+  searchForUsersThatHaveChatWithTheme({
+    required String word,
+    required String id,
+  }) async {
     try {
       if (word.isEmpty) {
         return Right([]);
       }
       final response = await api.get(
         ApiEndPoints.getMyChats,
-        queryParameters: {ApiKeys.search: word},
+        queryParameters: {ApiKeys.search: word, ApiKeys.id: id},
       );
+
       List<UsersChatMsgModel> users = [];
       for (var user in response[ApiKeys.data][ApiKeys.data]) {
         users.add(UsersChatMsgModel.fromJson(user));

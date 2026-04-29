@@ -514,7 +514,11 @@
   "no": "لا",
     "cancelRide": "الغاء الرحلة",
       "cancelSearchingDsc": "هل تريد الغاء البحث؟",
-  "cancelSearching": "الغاء البحث"
+  "cancelSearching": "الغاء البحث",
+    "noChatsDesc": "لا يوجد محادثات في الوقت الحالي",
+      "noUsersDesc": "لا يوجد مستخدمين في الوقت الحالي"
+
+
 
 
 

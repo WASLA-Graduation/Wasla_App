@@ -29,6 +29,12 @@ class AllUsersChatList extends StatelessWidget {
               itemCount: users.length,
               itemBuilder: (context, index) => InkWell(
                 onTap: () {
+                  ///to do put current chart id here
+                  if (users.elementAt(index).chatId != 0) {
+                    context.read<ChatCubit>().currentChatId = users[index]
+                        .chatId
+                        .toString();
+                  }
                   context.pushScreen(
                     AppRoutes.chatScreen,
                     arguments: {

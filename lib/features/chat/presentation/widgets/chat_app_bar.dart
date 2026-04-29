@@ -23,10 +23,14 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
         return InkWell(
           onTap: () {
             if (cubit.userInfo != null) {
-              context.pushScreen(AppRoutes.chatUserProfileScreen,arguments: cubit.userInfo!);
+              context.pushScreen(
+                AppRoutes.chatUserProfileScreen,
+                arguments: cubit.userInfo!,
+              );
             }
           },
           child: AppBar(
+            toolbarHeight: 75,
             titleSpacing: 0,
             backgroundColor: !context.isDarkMode ? Colors.white : Colors.black,
             scrolledUnderElevation: 0,

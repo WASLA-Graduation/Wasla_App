@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/enums/msg_type_enum.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/features/chat/data/models/all_users_chat_model.dart';
 import 'package:wasla/features/chat/data/models/chat_user_info.dart';
@@ -43,6 +45,10 @@ class ChatCubit extends Cubit<ChatState> {
   bool isRecording = false;
   double targetOffsetDx = 0.0;
   Timer? _searchTimer;
+
+  void onRetry() {
+    emit(ChatOnRetryState());
+  }
 
   void updateTargetOffest({required double dx}) {
     targetOffsetDx = dx.abs().clamp(0, 100);
@@ -106,18 +112,25 @@ class ChatCubit extends Cubit<ChatState> {
       pageNumber: allUsersPageNumber,
       pageSize: allUsersPageSize,
     );
-    result.fold((error) => emit(ChatGetAllUsersFailure(errorMessage: error)), (
-      users,
-    ) {
-      if (users.isEmpty) {
-        allUserEndOfPagination = true;
-        emit(ChatGetAllUsersSuccess(allUsers: allUsers));
-      } else {
-        allUsersPageNumber++;
-        allUsers.addAll(users);
-        emit(ChatGetAllUsersSuccess(allUsers: allUsers));
-      }
-    });
+    result.fold(
+      (error) {
+        if (error is NoInternetFailure) {
+          emit(ChatNetworkState());
+        } else {
+          emit(ChatFailureState());
+        }
+      },
+      (users) {
+        if (users.isEmpty) {
+          allUserEndOfPagination = true;
+          emit(ChatGetAllUsersSuccess(allUsers: allUsers));
+        } else {
+          allUsersPageNumber++;
+          allUsers.addAll(users);
+          emit(ChatGetAllUsersSuccess(allUsers: allUsers));
+        }
+      },
+    );
   }
 
   //Done
@@ -141,7 +154,13 @@ class ChatCubit extends Cubit<ChatState> {
       userId: userId!,
     );
     result.fold(
-      (error) => emit(ChatGetChatsOfUserFailure(errorMessage: error)),
+      (error) {
+        if (error is NoInternetFailure) {
+          emit(ChatNetworkState());
+        } else {
+          emit(ChatFailureState());
+        }
+      },
       (chats) {
         if (chats.isEmpty) {
           allChatsOfUserEndOfPagination = true;
@@ -225,7 +244,7 @@ class ChatCubit extends Cubit<ChatState> {
     MessageModel message = msg;
     final String oldText = message.messageText ?? '';
     message.messageText = messageController.text;
-    emit(ChatUpdateMsg());
+    emit(ChatUpdateMsg(msgId: message.messageId));
 
     final result = await chatRepo.updateMsg(
       messageId: message.messageId,
@@ -237,7 +256,7 @@ class ChatCubit extends Cubit<ChatState> {
 
     result.fold((err) {
       message.messageText = oldText;
-      emit(ChatUpdateMsg());
+      emit(ChatUpdateMsg(msgId: message.messageId));
     }, (success) {});
   }
 
@@ -488,8 +507,11 @@ class ChatCubit extends Cubit<ChatState> {
     if (chatId == currentChatId.toString()) {
       for (var message in messages) {
         if (message.messageId == msgId && message.senderId != currentUser) {
+          log('in if of loop');
+          log('Msg: $msg');
+
           message.messageText = msg;
-          emit(ChatUpdateMsg());
+          emit(ChatUpdateMsg(msgId: msgId));
         }
       }
     }
@@ -499,7 +521,7 @@ class ChatCubit extends Cubit<ChatState> {
       if (chat.messageId == msgId) {
         chat.messageText = msg;
         selectedMsgId = msgId;
-        emit(ChatUpdateMsg());
+        emit(ChatUpdateMsg(msgId: msgId));
       }
     }
   }
@@ -536,6 +558,7 @@ class ChatCubit extends Cubit<ChatState> {
       } else {
         final result = await chatRepo.searchForUsersThatHaveChatWithTheme(
           word: query,
+          id: currentUser,
         );
 
         result.fold(

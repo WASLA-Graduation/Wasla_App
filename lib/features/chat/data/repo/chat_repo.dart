@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/features/chat/data/models/all_users_chat_model.dart';
 import 'package:wasla/features/chat/data/models/chat_user_info.dart';
 import 'package:wasla/features/chat/data/models/chats_msg_model.dart';
@@ -42,14 +43,14 @@ abstract class ChatRepo {
     required int pageNumber,
     required int pageSize,
   });
-  Future<Either<String, List<AllUsersChatModel>>> getAllUsers({
+  Future<Either<Failure, List<AllUsersChatModel>>> getAllUsers({
     required int pageNumber,
     required int pageSize,
   });
   Future<Either<String, List<AllUsersChatModel>>> searchForUsers({
     required String word,
   });
-  Future<Either<String, List<UsersChatMsgModel>>>
+  Future<Either<Failure, List<UsersChatMsgModel>>>
   getUsersThatHaveChatWithTheme({
     required int pageNumber,
     required int pageSize,
@@ -57,7 +58,7 @@ abstract class ChatRepo {
   });
 
   Future<Either<String, List<UsersChatMsgModel>>>
-  searchForUsersThatHaveChatWithTheme({required String word});
+  searchForUsersThatHaveChatWithTheme({required String word,required String id});
   Future<Either<String, ChatUserInfo>> getChatUserInfo({
     required String userId,
   });

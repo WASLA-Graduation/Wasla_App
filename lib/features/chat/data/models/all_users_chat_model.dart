@@ -5,8 +5,10 @@ class AllUsersChatModel {
   final String name;
   final String image;
   final String bio;
+  final int chatId;
 
   AllUsersChatModel({
+    required this.chatId,
     required this.id,
     required this.name,
     required this.image,
@@ -19,6 +21,7 @@ class AllUsersChatModel {
       name: json[ApiKeys.name] ?? '',
       image: json[ApiKeys.imageSmall] ?? '',
       bio: json[ApiKeys.bio] ?? 'Never Give Up',
+      chatId: json[ApiKeys.chatId] ?? 0,
     );
   }
 }

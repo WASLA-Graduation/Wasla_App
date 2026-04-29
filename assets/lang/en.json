@@ -492,6 +492,8 @@
   "cashPayment": "Cash",
   "creditCard": "Credit Card",
   "deliveryFee": "Delivery fee",
+  "noChatsDesc": "No chats in the moment",
+  "noUsersDesc": "No users in the moment",
   "total": "Total",
   "cash": "Cash",
   "card": "Card",

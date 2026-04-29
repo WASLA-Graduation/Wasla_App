@@ -5,7 +5,7 @@ import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/service/Audio/audio_service.dart';
 import 'package:wasla/core/service/Audio/record_service.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/core/widgets/custom_err_get_data.dart';
+import 'package:wasla/core/widgets/error_widget.dart';
 import 'package:wasla/features/chat/data/models/chats_msg_model.dart';
 import 'package:wasla/features/chat/presentation/manager/cubit/chat_cubit.dart';
 import 'package:wasla/features/chat/presentation/widgets/chat_footer.dart';
@@ -33,8 +33,17 @@ class _ChatBodyState extends State<ChatBody> {
               current is ChatDeleteMsg ||
               current is ChatReadMsgs,
           builder: (context, state) {
-            if (state is ChatGetChatsOfUserFailure) {
-              return Expanded(child: CustomErrGetData());
+            if (state is ChatGetCahtFailure) {
+              return Expanded(
+                child: MyErrorWidget(
+                  onRetry: () {
+                    context.read<ChatCubit>().getChat(
+                      fromPagination: false,
+                      recieverId: widget.recieverId,
+                    );
+                  },
+                ),
+              );
             } else if (state is ChatGetCahtOfUserLoadig) {
               return Expanded(
                 child: Center(

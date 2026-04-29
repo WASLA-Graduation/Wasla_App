@@ -7,7 +7,6 @@ import 'package:wasla/features/chat/presentation/widgets/chat_item_audio_player_
 import 'package:wasla/features/chat/presentation/widgets/chat_msg_image_widget.dart';
 import 'package:wasla/features/chat/presentation/widgets/chat_msg_text_widget.dart';
 
-
 class MessageItemContent extends StatelessWidget {
   const MessageItemContent({
     super.key,
@@ -22,8 +21,7 @@ class MessageItemContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ChatCubit, ChatState>(
       buildWhen: (previous, current) =>
-          current is ChatUpdateMsg &&
-          message.messageId == context.read<ChatCubit>().selectedMsgId,
+          current is ChatUpdateMsg && current.msgId == message.messageId,
       builder: (context, state) {
         return buildMessageItem(context: context);
       },
@@ -45,12 +43,3 @@ class MessageItemContent extends StatelessWidget {
     }
   }
 }
-
-
-
-
-
-
-
-
-
