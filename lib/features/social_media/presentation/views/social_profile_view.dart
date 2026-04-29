@@ -32,8 +32,8 @@ class _SocialProfileViewState extends State<SocialProfileView> {
         child: BlocStatusHandler<SocialMediaCubit, SocialMediaState>(
           body: SocialProfileBody(userId: widget.userData[AppStrings.id]),
           onRetry: () {
-            getProfile();
             context.read<SocialMediaCubit>().onRetry();
+            getProfile();
           },
           isNetwork: (state) => state is SocialMediaNetworkState,
           isError: (state) => state is SocialMediaFailureState,

@@ -25,7 +25,6 @@ class WaslaApp extends StatelessWidget {
         builder: (context, state) {
           final globalCubit = context.read<GlobalCubit>();
           changeThemeStatusBar(globalCubit.themeMode);
-          // SharedPreferencesHelper.remove(key: AppStrings.onboardingVisited);
 
           return ScreenUtilInit(
             designSize: const Size(375, 812),

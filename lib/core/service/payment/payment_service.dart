@@ -9,10 +9,10 @@ abstract class PaymentService {
   static Future<Either<String, String>> createPayment({
     required String userId,
     required String serviceProviderId,
-    required int serviceId,
     required int amount,
     required int serviceProviderType,
     required int bookingId,
+    required int entityType,
     int paymentMethod = 1,
   }) async {
     try {
@@ -22,11 +22,11 @@ abstract class PaymentService {
         body: {
           ApiKeys.userId: userId,
           ApiKeys.serviceProviderId: serviceProviderId,
-          ApiKeys.serviceId: serviceId,
           ApiKeys.amount: amount,
-          ApiKeys.serviceProviderType: serviceProviderType,
-          ApiKeys.bookingId: bookingId,
           ApiKeys.paymentMethod: paymentMethod,
+          ApiKeys.entityId: bookingId,
+          ApiKeys.entityType: entityType,
+          ApiKeys.serviceType: serviceProviderType,
         },
       );
       return Right(response[ApiKeys.data]);

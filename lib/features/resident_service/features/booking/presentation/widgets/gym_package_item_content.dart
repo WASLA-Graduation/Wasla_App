@@ -28,7 +28,7 @@ class PackageItemContent extends StatelessWidget {
         Text(
           context.isArabic ? model.nameAr : model.nameEn,
           style: Theme.of(context).textTheme.headlineMedium,
-          maxLines: 2,
+          maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
         const SizedBox(),
@@ -102,13 +102,14 @@ class GymBookingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<GymResidentCubit>();
     return BlocConsumer<GymResidentCubit, GymResidentState>(
-      buildWhen: (previous, current) => bookingId == cubit.serviceIdFlag,
+      listenWhen: (previous, current) =>
+          current is GymResidentBookingState && current.itemId == bookingId,
+      buildWhen: (previous, current) =>
+          current is GymResidentBookingState && current.itemId == bookingId,
       listener: (context, state) {
         if (state is GymResidentBookingFailure) {
           toastAlert(color: AppColors.error, msg: state.errMsg);
-        } else if (state is GymResidentBookingSuccess &&
-            cubit.serviceIdFlag == bookingId) {
-          cubit.serviceIdFlag = -1;
+        } else if (state is GymResidentBookingSuccess) {
           // showDialog(
           //   barrierDismissible: false,
           //   context: context,
@@ -129,7 +130,7 @@ class GymBookingButton extends StatelessWidget {
           },
           fontSize: 12,
           height: 25,
-          text: bookingId == cubit.serviceIdFlag
+          text: state is GymResidentBookingLoading
               ? 'loading'.tr(context)
               : 'bookNow'.tr(context),
         );

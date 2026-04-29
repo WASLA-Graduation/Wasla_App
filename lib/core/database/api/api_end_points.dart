@@ -161,4 +161,5 @@ abstract class ApiEndPoints {
   static const String restaurantMarkOrderAsPreparing = 'api/RestaurantOrder/start-preparing-order';
   static const String restaurantMarkOrderAsDelivered = 'api/RestaurantOrder/mark-order-delivered';
   static const String reportForSomething = 'api/Social/Report';
+  static const String checkTokenStatus = 'api/Account/validate-token';
 }

@@ -14,7 +14,6 @@ class GymResidentBookingModel extends GeneralResidentBookingsModel {
   final ServiceNameModel serviceName;
   final int bookingStatus;
 
-
   GymResidentBookingModel({
     required this.bookingId,
     required this.gymName,
@@ -37,9 +36,7 @@ class GymResidentBookingModel extends GeneralResidentBookingsModel {
     return GymResidentBookingModel(
       bookingId: json[ApiKeys.bookingId] ?? 0,
       gymName: json[ApiKeys.gymName] ?? '',
-      imageUrl: json[ApiKeys.imageUrl] == null || json[ApiKeys.imageUrl] == ''
-          ? ''
-          : ApiEndPoints.gymBaseUrl + json[ApiKeys.imageUrl],
+      imageUrl: ApiEndPoints.imageBaseUrl + json[ApiKeys.imageUrl],
       bookingTime: DateTime.parse(
         json[ApiKeys.bookingTime] ?? DateTime.now().toString(),
       ),

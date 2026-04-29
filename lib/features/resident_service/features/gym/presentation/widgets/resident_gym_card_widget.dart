@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
+import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/custom_circle_with_data_list.dart';
 import 'package:wasla/core/widgets/custom_details_card_widget.dart';
 import 'package:wasla/core/widgets/readmore_text.dart';
 import 'package:wasla/features/profile/data/models/gym_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_text_identfier_widget.dart';
+import 'package:wasla/features/resident_service/features/gym/presentation/manager/cubit/gym_resident_cubit.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/widgets/gym_details_card_text.dart';
 import 'package:wasla/features/reviews/presentation/widgets/add_review_widget.dart';
 import 'package:wasla/features/reviews/presentation/widgets/custom_reviws_list.dart';
@@ -35,7 +38,10 @@ class ResidentGymCardWidget extends StatelessWidget {
           onTap: () {
             context.pushScreen(
               AppRoutes.gymResidentSeePackagesScreen,
-              arguments: gym.id,
+              arguments: {
+                AppStrings.id: gym.id,
+                AppStrings.cubit: context.read<GymResidentCubit>(),
+              },
             );
           },
         ),

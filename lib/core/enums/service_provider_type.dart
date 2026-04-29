@@ -11,3 +11,9 @@ enum ServiceProviderTypeEnum {
     );
   }
 }
+
+
+enum EntityType{
+  booking,
+  order
+}

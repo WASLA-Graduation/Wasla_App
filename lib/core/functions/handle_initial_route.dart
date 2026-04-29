@@ -1,8 +1,10 @@
+
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
 import 'package:wasla/core/extensions/service_role_extension.dart';
 import 'package:wasla/core/functions/get_right_route.dart';
+import 'package:wasla/core/repo/global_repo.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 
 String handleInitialRoute() {
@@ -17,10 +19,14 @@ String handleInitialRoute() {
     if (isSignedIn == null) {
       return AppRoutes.signInScreen;
     } else {
-      final String? role =
-          SharedPreferencesHelper.get(key: ApiKeys.role) as String?;
+      if (GlobalRepo.isValidToken) {
+        final String? role =
+            SharedPreferencesHelper.get(key: ApiKeys.role) as String?;
 
-      return getRightRoute(role: ServiceRoleExtension.fromString(role!));
+        return getRightRoute(role: ServiceRoleExtension.fromString(role!));
+      } else {
+        return AppRoutes.signInScreen;
+      }
     }
   }
 }

@@ -1,4 +1,3 @@
-import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/enums/booking_status.dart';
 
@@ -27,7 +26,7 @@ class GymBookingModel {
     return GymBookingModel(
       bookingId: json[ApiKeys.bookingId] ?? 0,
       name: json[ApiKeys.name] ?? '',
-      imageUrl: ApiEndPoints.imageBaseUrl + json[ApiKeys.imageUrl],
+      imageUrl: json[ApiKeys.imageUrl],
       bookingTime: DateTime.parse(
         json[ApiKeys.bookingTime] ?? DateTime.now().toIso8601String(),
       ),

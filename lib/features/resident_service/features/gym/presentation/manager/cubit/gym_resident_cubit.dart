@@ -1,4 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/enums/payment_method.dart';
+import 'package:wasla/core/enums/service_provider_type.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/helpers/url_helper.dart';
 import 'package:wasla/core/repo/global_repo.dart';
@@ -26,6 +29,10 @@ class GymResidentCubit extends Cubit<GymResidentState> {
   int serviceIdFlag = -1;
   String selecedGymId = '';
 
+  void onRetry() {
+    emit(GymResidentOnRetryState());
+  }
+
   Future<void> getAllGyms({required bool fromPagination}) async {
     if (totalGyms == allGyms.length) {
       return;
@@ -40,23 +47,35 @@ class GymResidentCubit extends Cubit<GymResidentState> {
       pageSize: pageSize,
     );
 
-    result.fold((err) => emit(GymResidentGetAllGymsFailure(errMsg: err)), (
-      success,
-    ) {
-      if (success.gyms.isNotEmpty) {
-        pageNumber++;
-        totalGyms = success.totalCount;
-        allGyms.addAll(success.gyms);
-      }
-      emit(GymResidentGetAllGymsSuccess());
-    });
+    result.fold(
+      (err) {
+        if (err is NoInternetFailure) {
+          emit(GymResidentNetworkState());
+        } else {
+          emit(GymResidentFailureState());
+        }
+      },
+      (success) {
+        if (success.gyms.isNotEmpty) {
+          pageNumber++;
+          totalGyms = success.totalCount;
+          allGyms.addAll(success.gyms);
+        }
+        emit(GymResidentGetAllGymsSuccess());
+      },
+    );
   }
 
   Future<void> getGymDetails({required String gymId}) async {
-    emit(GymResidentGetGymDetailsLoading());
     final result = await GlobalRepo.geGymProfile(gymId: gymId);
     result.fold(
-      (error) => emit(GymResidentGetGymDetailsFailure(errMsg: error)),
+      (error) {
+        if (error is NoInternetFailure) {
+          emit(GymResidentNetworkState());
+        } else {
+          emit(GymResidentFailureState());
+        }
+      },
       (success) {
         gym = success;
         emit(GymResidentGetGymDetailsSuccess());
@@ -69,7 +88,13 @@ class GymResidentCubit extends Cubit<GymResidentState> {
     emit(GymResidentGetGymPackagesLoading());
     final result = await GlobalRepo.getGymPackagesAndOffers(gymId: gymId);
     result.fold(
-      (error) => emit(GymResidentGetGymPackagesFailure(errMsg: error)),
+      (error) {
+        if (error is NoInternetFailure) {
+          emit(GymResidentNetworkState());
+        } else {
+          emit(GymResidentFailureState());
+        }
+      },
       (success) {
         gymPackages = success;
         emit(GymResidentGetGymPackagesSuccess());
@@ -82,8 +107,7 @@ class GymResidentCubit extends Cubit<GymResidentState> {
     required int bookingId,
     required int amount,
   }) async {
-    serviceIdFlag = bookingId;
-    emit(GymResidentBookingLoading());
+    emit(GymResidentBookingLoading(itemId: bookingId));
     final String? residentId = await getUserId();
     final result = await gymResidentRepo.bookAtGym(
       gymId: gymId,
@@ -92,26 +116,31 @@ class GymResidentCubit extends Cubit<GymResidentState> {
     );
     result.fold(
       (error) {
-        serviceIdFlag = -1;
-        emit(GymResidentBookingFailure(errMsg: error));
+        emit(GymResidentBookingFailure(errMsg: error, itemId: bookingId));
       },
       (success) async {
         bookingReturnedDataModel = success;
         final paymentResult = await PaymentService.createPayment(
           userId: residentId,
           serviceProviderId: gymId,
-          serviceId: bookingId,
           amount: amount,
-          serviceProviderType: 1,
           bookingId: success.bookingId,
+          serviceProviderType: ServiceProviderTypeEnum.gym.index + 1,
+          entityType: EntityType.booking.index,
+          paymentMethod: PaymentMethod.creditCard.index + 1,
         );
         paymentResult.fold(
           (error) {
-            emit(GymResidentBookingFailure(errMsg: error));
+            emit(GymResidentBookingFailure(errMsg: error, itemId: bookingId));
           },
           (paymentUrl) {
+            emit(
+              GymResidentBookingSuccess(
+                bookingId: success.bookingId,
+                itemId: bookingId,
+              ),
+            );
             UrlHelper.openWebsite(paymentUrl);
-            emit(GymResidentBookingSuccess(qrCodeUrl: ''));
           },
         );
       },

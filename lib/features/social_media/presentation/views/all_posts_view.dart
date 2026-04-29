@@ -26,8 +26,8 @@ class _AllPostsViewState extends State<AllPostsView> {
         child: BlocStatusHandler<SocialMediaCubit, SocialMediaState>(
           body: const AllPostsBody(),
           onRetry: () {
-            getAllPosts();
             context.read<SocialMediaCubit>().onRetry();
+            getAllPosts();
           },
           isNetwork: (state) => state is SocialMediaNetworkState,
           isError: (state) => state is SocialMediaFailureState,

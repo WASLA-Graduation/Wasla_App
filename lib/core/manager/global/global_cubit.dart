@@ -10,6 +10,7 @@ class GlobalCubit extends Cubit<GlobalState> {
   Locale locale = const Locale('en');
 
   GlobalCubit() : super(GlobalInitial()) {
+
     getAppTheme();
     getAppLanguage();
   }

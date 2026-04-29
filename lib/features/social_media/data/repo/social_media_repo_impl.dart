@@ -117,7 +117,6 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
           ApiKeys.pageSize: pageSize,
           ApiKeys.pageNumber: pageNumber,
           ApiKeys.currentUserId: currentUserId,
-          ApiKeys.flag: true,
         },
       );
 
@@ -254,7 +253,7 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
           ApiKeys.pageNumber: pageNumber,
           ApiKeys.currentUserId: currentUserId,
           ApiKeys.postId: postId,
-          ApiKeys.flag: true,
+          // ApiKeys.flag: true,
         },
       );
 

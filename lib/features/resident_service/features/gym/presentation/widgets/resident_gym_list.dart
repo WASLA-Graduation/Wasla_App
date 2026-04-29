@@ -8,8 +8,7 @@ import 'package:wasla/features/resident_service/features/gym/presentation/manage
 import 'package:wasla/features/resident_service/features/gym/presentation/widgets/resident_gym_item.dart';
 
 class ResidentGymList extends StatelessWidget {
-  const ResidentGymList({super.key, required this.isLoading});
-  final bool isLoading;
+  const ResidentGymList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,17 +44,19 @@ class ResidentGymList extends StatelessWidget {
               ),
             ),
           ),
-          if (isLoading)
-            const Padding(
-              padding: EdgeInsets.only(bottom: 20),
-              child: CircularProgressIndicator(),
-            ),
+
+          BlocBuilder<GymResidentCubit, GymResidentState>(
+            builder: (context, state) {
+              return state is GymResidentGetAllGymsFromPaginationLoading
+                  ? const Padding(
+                      padding: EdgeInsets.only(bottom: 20),
+                      child: CircularProgressIndicator(),
+                    )
+                  : const SizedBox.shrink();
+            },
+          ),
         ],
       ),
     );
   }
 }
-
-
-
-

@@ -7,6 +7,8 @@ import 'package:wasla/features/auth/presentation/views/technicant_complete_info_
 import 'package:wasla/features/profile/presentation/views/restaurant_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
+import 'package:wasla/features/resident_service/features/gym/data/repo/gym_resident_repo_impl.dart';
+import 'package:wasla/features/resident_service/features/gym/presentation/manager/cubit/gym_resident_cubit.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/cart/restaurant_cart_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/details/resident_restaurant_repo_impl.dart';
@@ -353,21 +355,34 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.gymResidentScreen,
-      builder: (context, state) => GymResidentView(),
+      builder: (context, state) => BlocProvider(
+        create: (context) =>
+            GymResidentCubit(GymResidentRepoImpl(api: sl<ApiConsumer>())),
+        child: GymResidentView(),
+      ),
     ),
     GoRoute(
       path: AppRoutes.gymResidentDetailsScreen,
       builder: (context, state) {
         final Map<String, dynamic> details =
             state.extra as Map<String, dynamic>;
-        return ResidentGymDetailsView(details: details);
+        return BlocProvider(
+          create: (context) =>
+              GymResidentCubit(GymResidentRepoImpl(api: sl<ApiConsumer>())),
+          child: ResidentGymDetailsView(details: details),
+        );
       },
     ),
     GoRoute(
       path: AppRoutes.gymResidentSeePackagesScreen,
       builder: (context, state) {
-        final String gymId = state.extra as String;
-        return ResidentGymSeePakcagesView(gymId: gymId);
+        final Map<String, dynamic> data = state.extra as Map<String, dynamic>;
+        return BlocProvider.value(
+          value: data[AppStrings.cubit] as GymResidentCubit,
+          child: ResidentGymSeePakcagesView(
+            gymId: data[AppStrings.id] as String,
+          ),
+        );
       },
     ),
     GoRoute(

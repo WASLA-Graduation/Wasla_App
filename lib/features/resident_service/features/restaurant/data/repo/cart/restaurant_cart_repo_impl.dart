@@ -107,7 +107,7 @@ class RestaurantCartRepoImpl extends RestaurantCartRepo {
           ApiKeys.restaurantId: restaurantId,
           ApiKeys.address: address,
           ApiKeys.notes: notes,
-          ApiKeys.paymentMethod: paymentMethod == PaymentMethod.cash ? 3 : 1,
+          ApiKeys.paymentMethod: paymentMethod.index +1,
         },
       );
 

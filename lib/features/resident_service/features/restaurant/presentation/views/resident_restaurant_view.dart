@@ -48,8 +48,8 @@ class _ResidentRestaurantViewState extends State<ResidentRestaurantView> {
       body: BlocStatusHandler<ResidentRestaurantCubit, ResidentRestaurantState>(
         body: const ResidentRestaurantBody(),
         onRetry: () {
-          getData();
           context.read<ResidentRestaurantCubit>().onRetry();
+          getData();
         },
         isNetwork: (state) => state is ResidentRestaurantNetworkState,
         isError: (state) => state is ResidentRestaurantFailureState,

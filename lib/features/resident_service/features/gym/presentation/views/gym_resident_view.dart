@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/favourite/presentation/manager/cubit/favourite_cubit.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/manager/cubit/gym_resident_cubit.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/widgets/gym_resident_body.dart';
@@ -26,9 +27,18 @@ class _GymResidentViewState extends State<GymResidentView> {
         forceMaterialTransparency: true,
         title: Text("gyms".tr(context)),
       ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-        child: GymResidentViewBody(),
+      body: BlocStatusHandler<GymResidentCubit, GymResidentState>(
+        body: const GymResidentViewBody(),
+        onRetry: () {
+          context.read<GymResidentCubit>().onRetry();
+          getAllGyms();
+        },
+        isNetwork: (state) => state is GymResidentNetworkState,
+        isError: (state) => state is GymResidentFailureState,
+        buildWhen: (previous, current) =>
+            current is GymResidentNetworkState ||
+            current is GymResidentFailureState ||
+            current is GymResidentOnRetryState,
       ),
     );
   }

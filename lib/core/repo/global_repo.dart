@@ -4,6 +4,7 @@ import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/database/cache/secure_storage_helper.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
@@ -12,10 +13,14 @@ import 'package:wasla/features/restaurant/home/data/models/restaurant_model.dart
 import 'package:wasla/features/technicant/features/home/data/models/technician_model.dart';
 
 abstract class GlobalRepo {
-  static Future<Either<String, GymModel>> geGymProfile({
+  static bool isValidToken = false;
+  static Future<Either<Failure, GymModel>> geGymProfile({
     required String gymId,
   }) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final response = await sl<ApiConsumer>().get(
         ApiEndPoints.getGymProfile,
 
@@ -23,16 +28,18 @@ abstract class GlobalRepo {
       );
       return Right(GymModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(ServerFailure(e.errorModel.errorMessage));
     } catch (e) {
-      return Left(e.toString());
+      return Left(ServerFailure(e.toString()));
     }
   }
 
-  static Future<Either<String, List<GymPackageModel>>> getGymPackagesAndOffers({
-    required String gymId,
-  }) async {
+  static Future<Either<Failure, List<GymPackageModel>>>
+  getGymPackagesAndOffers({required String gymId}) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final response = await sl<ApiConsumer>().get(
         ApiEndPoints.gymPackage,
         queryParameters: {ApiKeys.serviceProviderId: gymId},
@@ -43,9 +50,9 @@ abstract class GlobalRepo {
 
       return Right(packages);
     } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(ServerFailure(e.errorModel.errorMessage));
     } catch (e) {
-      return Left(e.toString());
+      return Left(ServerFailure(e.toString()));
     }
   }
 
@@ -86,6 +93,25 @@ abstract class GlobalRepo {
       return Left(ServerFailure(e.errorModel.errorMessage));
     } catch (e) {
       return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  static Future<void> checkTokenValidate() async {
+    try {
+      final token = await SecureStorageHelper.get(key: ApiKeys.token);
+      if (!await sl<NetworkInfo>().isConnected) {
+        isValidToken = false;
+        return;
+      }
+
+      final response = await sl<ApiConsumer>().post(
+        ApiEndPoints.checkTokenStatus,
+        body: {ApiKeys.token: token},
+      );
+      isValidToken = response[ApiKeys.data];
+    } catch (e) {
+      isValidToken = false;
+      return;
     }
   }
 }

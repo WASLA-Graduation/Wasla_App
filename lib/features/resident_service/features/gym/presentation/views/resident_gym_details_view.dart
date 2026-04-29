@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/utils/app_strings.dart';
+import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/manager/cubit/gym_resident_cubit.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/widgets/resident_gym_details_body.dart';
 import 'package:wasla/features/reviews/presentation/manager/cubit/reviews_cubit.dart';
@@ -23,11 +24,20 @@ class _ResidentGymDetailsViewState extends State<ResidentGymDetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.details[AppStrings.gymName]),
-        forceMaterialTransparency: true,
+      appBar: AppBar(title: Text(widget.details[AppStrings.gymName])),
+      body: BlocStatusHandler<GymResidentCubit, GymResidentState>(
+        body: const ResidentGymDetailsViewBody(),
+        onRetry: () {
+          context.read<GymResidentCubit>().onRetry();
+          callApi();
+        },
+        isNetwork: (state) => state is GymResidentNetworkState,
+        isError: (state) => state is GymResidentFailureState,
+        buildWhen: (previous, current) =>
+            current is GymResidentNetworkState ||
+            current is GymResidentFailureState ||
+            current is GymResidentOnRetryState,
       ),
-      body: const ResidentGymDetailsViewBody(),
     );
   }
 

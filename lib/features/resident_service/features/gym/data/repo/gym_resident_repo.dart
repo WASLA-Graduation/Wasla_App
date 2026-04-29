@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/features/resident_service/features/gym/data/models/booking_returned_data_model.dart';
 import 'package:wasla/features/resident_service/features/gym/data/models/gym_data_model.dart';
 
 abstract class GymResidentRepo {
-  Future<Either<String, GymPaginationModel>> getAllGym({
+  Future<Either<Failure, GymPaginationModel>> getAllGym({
     required int pageNumber,
     required int pageSize,
   });

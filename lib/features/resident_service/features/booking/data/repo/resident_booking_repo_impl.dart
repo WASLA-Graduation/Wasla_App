@@ -1,3 +1,4 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
@@ -70,6 +71,7 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
       final response = await api.get(
         ApiEndPoints.getResidentBookingsWithGym + residentId,
       );
+
       final List<GymResidentBookingModel> bookings = [];
       for (var booking in response[ApiKeys.data]) {
         if (booking[ApiKeys.isPaid]) {

@@ -520,7 +520,9 @@
         "noPostsDesc": "لا يوجد منشورات في الوقت الحالي",
           "report": "تقرير",
             "reportSuccess": "تم ارسال التقرير بنجاح",
-              "dataRequired": "البيانات المطلوبة"
+              "dataRequired": "البيانات المطلوبة",
+                "bookingWithGym": " تم حجز مع الجيم بنجاح"
+
 
 
 
