@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signalr_netcore/signalr_client.dart';
+import 'package:wasla/core/database/api/api_keys.dart';
+import 'package:wasla/core/database/cache/secure_storage_helper.dart';
 import 'package:wasla/core/service/signalR/models/booking_hub_model.dart';
 import 'package:wasla/features/doctor_service/features/home/presentation/manager/cubit/doctor_home_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
@@ -10,7 +12,15 @@ class BookingSignalRService {
 
   Future<void> connect(BuildContext context) async {
     _connection = HubConnectionBuilder()
-        .withUrl("https://waslammka.runasp.net/bookingHub")
+        .withUrl(
+          "https://waslammka.runasp.net/bookingHub",
+          options: HttpConnectionOptions(
+            accessTokenFactory: () async {
+              final token = await SecureStorageHelper.get(key: ApiKeys.token);
+              return token ?? '';
+            },
+          ),
+        )
         .withAutomaticReconnect()
         .build();
 
@@ -26,7 +36,7 @@ class BookingSignalRService {
       context.read<DoctorCubit>().whenSlotOfServiceCancelBook(
         bookingHubModel: bookingHubModel,
       );
-        context.read<DoctorHomeCubit>().whenServiceBookedOrCanceled(
+      context.read<DoctorHomeCubit>().whenServiceBookedOrCanceled(
         booking: bookingHubModel,
       );
     });

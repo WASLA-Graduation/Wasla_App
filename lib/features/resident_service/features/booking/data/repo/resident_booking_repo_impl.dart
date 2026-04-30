@@ -30,6 +30,7 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
         ApiEndPoints.getBookingDetailsForUser,
         queryParameters: {ApiKeys.userId: userId},
       );
+
       final List<DoctorResidentBookingModel> bookings = [];
       for (var booking in response[ApiKeys.data]) {
         bookings.add(DoctorResidentBookingModel.fromJson(booking));
@@ -213,6 +214,4 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
       return Left(e.toString());
     }
   }
-
-
 }

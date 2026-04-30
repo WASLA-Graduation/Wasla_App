@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/enums/service_provider_type.dart';
+import 'package:wasla/core/functions/toast_alert.dart';
+import 'package:wasla/core/service/payment/payment_service.dart';
 import 'package:wasla/core/service/signalR/doctor_booking_hub.dart';
+import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/all_services/doctor_booking_view_body.dart';
@@ -17,15 +22,41 @@ class DoctorBookingView extends StatefulWidget {
 
 class _DoctorBookingViewState extends State<DoctorBookingView> {
   final signalR = BookingSignalRService();
+  late final AppLifecycleListener listner;
 
   @override
   void initState() {
     callFristDay();
+    listner = AppLifecycleListener(
+      onResume: () {
+        checkPaymentStatus();
+      },
+    );
     super.initState();
+  }
+
+  void checkPaymentStatus() async {
+    final cubit = context.read<DoctorCubit>();
+    final int bookingId = cubit.doctorBookingId;
+    if (bookingId != -1) {
+      final result = await PaymentService.checkPaymentStatus(
+        entityType: EntityType.booking,
+        entityId: bookingId,
+      );
+      cubit.doctorBookingId = -1;
+      result.fold((err) {}, (isPaid) {
+        if (isPaid) {
+          showToast('bookingDone'.tr(context), color: AppColors.acceptGreen);
+          context.pop();
+          context.pop();
+        }
+      });
+    }
   }
 
   @override
   void dispose() {
+    listner.dispose();
     signalR.disconnect();
     super.dispose();
   }
@@ -61,7 +92,10 @@ class _DoctorBookingViewState extends State<DoctorBookingView> {
     // cubit.addDayTimeSlotToList(
     //   serviceDay: widget.doctorServiceModel.serviceDays[0],
     // );
-    cubit.changeDayCurrentIndexAndUpadatTimeSlote(0, serviceDay: widget.doctorServiceModel.serviceDays[0]);
+    cubit.changeDayCurrentIndexAndUpadatTimeSlote(
+      0,
+      serviceDay: widget.doctorServiceModel.serviceDays[0],
+    );
     cubit.currentServiceId = widget.doctorServiceModel.id;
     cubit.signalRSevice.currentRoute = AppRoutes.doctorBookingScreen;
   }

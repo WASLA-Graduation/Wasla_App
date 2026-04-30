@@ -1,14 +1,20 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/enums/payment_method.dart';
+import 'package:wasla/core/enums/service_provider_type.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/get_time_between_now_and_any_time.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
+import 'package:wasla/core/helpers/url_helper.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
+import 'package:wasla/core/service/payment/payment_service.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/core/service/signalR/models/booking_hub_model.dart';
 import 'package:wasla/core/service/signalR/models/service_hub_model.dart';
@@ -43,6 +49,10 @@ class DoctorCubit extends Cubit<DoctorState> {
 
   List<String> dayListTimeSlots = [];
 
+  void onRetry() {
+    emit(DoctorOnRetryState());
+  }
+
   String doctorBookingTypeGroupValue = "Examination";
   int gruoupValueIndex = 1;
   int? serviceSelectedDayAndTimeId;
@@ -50,6 +60,13 @@ class DoctorCubit extends Cubit<DoctorState> {
   String? doctorId;
   int? dayOfWeek;
   List<File> images = [];
+
+  int doctorBookingId = -1;
+  PaymentMethod paymentMethod = PaymentMethod.cash;
+  void changePaymentMethod(PaymentMethod paymentMethod) {
+    this.paymentMethod = paymentMethod;
+    emit(DoctortUpdatePaymentStauts());
+  }
 
   void uploadIImages(List<File> image) {
     images = image;
@@ -113,7 +130,11 @@ class DoctorCubit extends Cubit<DoctorState> {
     final response = await doctorRepo.getSpecialization();
     response.fold(
       (error) {
-        emit(DoctorGetSpecialityListFailure(errMsg: error));
+        if (error is NoInternetFailure) {
+          emit(DoctorNetworkState());
+        } else {
+          emit(DoctorFailureState());
+        }
       },
       (success) {
         specialityList = success;
@@ -136,7 +157,11 @@ class DoctorCubit extends Cubit<DoctorState> {
     );
     response.fold(
       (error) {
-        emit(DoctorGetBySpecialityListFailure(errMsg: error));
+        if (error is NoInternetFailure) {
+          emit(DoctorNetworkState());
+        } else {
+          emit(DoctorFailureState());
+        }
       },
       (success) {
         doctors = success;
@@ -152,7 +177,11 @@ class DoctorCubit extends Cubit<DoctorState> {
     final response = await doctorRepo.getDoctorService(userId: doctorId);
     response.fold(
       (error) {
-        emit(DoctorGetServicesListFailure(errMsg: error));
+        if (error is NoInternetFailure) {
+          emit(DoctorNetworkState());
+        } else {
+          emit(DoctorFailureState());
+        }
       },
       (success) {
         services = success;
@@ -187,8 +216,33 @@ class DoctorCubit extends Cubit<DoctorState> {
         (error) {
           emit(DoctorBookServiceFailure(errMsg: error));
         },
-        (success) {
-          emit(DoctorBookServiceSuccess());
+        (success) async {
+          final String? residentId = await getUserId();
+          doctorBookingId = success;
+          final paymentResult = await PaymentService.createPayment(
+            userId: residentId!,
+            serviceProviderId: doctorId!,
+            amount: doctorServiceModel.price.toInt(),
+            bookingId: doctorBookingId,
+            serviceProviderType: ServiceProviderTypeEnum.doctor.index + 1,
+            entityType: EntityType.booking.index,
+            paymentMethod: paymentMethod.index + 1,
+          );
+          paymentResult.fold(
+            (error) {
+              log('payment error $error');
+
+              emit(DoctorBookServiceFailure(errMsg: error));
+            },
+            (paymentUrl) {
+              if (paymentUrl == null) {
+                emit(DoctorBookServiceWithCashSuccess());
+              } else {
+                UrlHelper.openWebsite(paymentUrl);
+                emit(DoctorBookServiceWithCreditCardSuccess());
+              }
+            },
+          );
         },
       );
     }
@@ -206,8 +260,8 @@ class DoctorCubit extends Cubit<DoctorState> {
             //   timeSlotIds.remove(time.id);
             //   dayListTimeSlots.remove(time.start);
             // }
-             timeSlotIds.remove(time.id);
-              dayListTimeSlots.remove(time.start);
+            timeSlotIds.remove(time.id);
+            dayListTimeSlots.remove(time.start);
             timeCurrentIndex = -1;
             serviceSelectedDayAndTimeId = null;
           }

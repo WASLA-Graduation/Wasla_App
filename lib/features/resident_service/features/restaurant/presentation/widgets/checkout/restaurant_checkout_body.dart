@@ -59,7 +59,20 @@ class RestaurantCheckoutBody extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 SizedBox(height: AppSizes.paddingSizeFifteen),
-                CheckoutPaymentMethodWidget(),
+                BlocBuilder<RestaurantCartCubit, RestaurantCartState>(
+                  buildWhen: (previous, current) =>
+                      current is RestaurantUpdatePaymentStauts,
+                  builder: (context, state) {
+                    final cubit = context.read<RestaurantCartCubit>();
+
+                    return PaymentMethodSelector(
+                      groupValue: cubit.paymentMethod,
+                      onChanged: (value) {
+                        cubit.changePaymentMethod(value);
+                      },
+                    );
+                  },
+                ),
               ],
             ),
           ),

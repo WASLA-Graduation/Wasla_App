@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/all_services/see_all_services_body.dart';
 
@@ -33,11 +34,21 @@ class _DoctorSeeSerevicesViewState extends State<DoctorSeeSerevicesView> {
     return Scaffold(
       appBar: AppBar(title: Text("services".tr(context))),
 
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-        child: DoctorSeeSerevicesViewBody(),
+      body: BlocStatusHandler<DoctorCubit, DoctorState>(
+        body: const DoctorSeeSerevicesViewBody(),
+        onRetry: () {
+          context.read<DoctorCubit>().onRetry();
+          getDoctorSevices();
+        },
+        isNetwork: (state) => state is DoctorNetworkState,
+        isError: (state) => state is DoctorFailureState,
+        buildWhen: (previous, current) =>
+            current is DoctorNetworkState ||
+            current is DoctorFailureState ||
+            current is DoctorOnRetryState,
       ),
     );
+    // child: DoctorSeeSerevicesViewBody(),
   }
 
   void getDoctorSevices() async {

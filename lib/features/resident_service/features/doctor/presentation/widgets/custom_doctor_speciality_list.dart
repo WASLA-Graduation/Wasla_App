@@ -11,8 +11,7 @@ class CustomDoctorSpecialityList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<DoctorCubit>();
-    return BlocConsumer<DoctorCubit, DoctorState>(
-      listener: (context, state) {},
+    return BlocBuilder<DoctorCubit, DoctorState>(
       builder: (context, state) {
         return SizedBox(
           height: 40,
@@ -20,7 +19,7 @@ class CustomDoctorSpecialityList extends StatelessWidget {
               ? const SpecialityLoadingList()
               : ListView.builder(
                   physics: BouncingScrollPhysics(),
-                  itemCount: cubit.specialityList.length ,
+                  itemCount: cubit.specialityList.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => GestureDetector(
                     onTap: () {

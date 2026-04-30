@@ -5,7 +5,7 @@ import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/core/utils/assets.dart';
+import 'package:wasla/core/widgets/empty_data_widget.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/manager/cubit/doctor_cubit.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_list_item.dart';
 
@@ -17,21 +17,7 @@ class DoctorListWidget extends StatelessWidget {
     final cubit = context.read<DoctorCubit>();
     return BlocBuilder<DoctorCubit, DoctorState>(
       builder: (context, state) {
-        if (state is DoctorGetBySpecialityListFailure ||
-            state is DoctorGetSpecialityListFailure) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(Assets.assetsImagesError, height: 150),
-              const SizedBox(height: 20),
-              Text(
-                "errorFetchData".tr(context),
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ],
-          );
-        } else if (state is DoctorGetBySpecialityListLoading ||
+        if (state is DoctorGetBySpecialityListLoading ||
             state is DoctorGetSpecialityListLoading) {
           return Center(
             child: SpinKitFadingCircle(
@@ -41,19 +27,13 @@ class DoctorListWidget extends StatelessWidget {
           );
         } else {
           return cubit.doctors.isEmpty
-              ? Center(
-                  child: Text(
-                    "noDoctors".tr(context),
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                )
-              : ListView.separated(
+              ? EmptyStateWidget(title: 'noDoctors'.tr(context))
+              : ListView.builder(
                   padding: const EdgeInsets.only(top: 0),
-                  separatorBuilder: (_, index) => const SizedBox(height: 5),
                   itemCount: cubit.doctors.length,
                   physics: BouncingScrollPhysics(),
                   itemBuilder: (_, index) => Padding(
-                    padding: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 8),
                     child: InkWell(
                       onTap: () {
                         context.pushScreen(

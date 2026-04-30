@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/utils/app_sizes.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/custom_doctor_speciality_list.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_list_widget.dart';
 
@@ -8,8 +9,12 @@ class DoctorViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSizes.marginDefault,
+        vertical: AppSizes.paddingSizeEight,
+      ),
       child: Column(
+        spacing: AppSizes.paddingSizeThelve,
         children: [
           CustomDoctorSpecialityList(),
           Expanded(child: DoctorListWidget()),

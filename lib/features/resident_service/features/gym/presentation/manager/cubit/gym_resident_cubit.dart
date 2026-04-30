@@ -140,7 +140,7 @@ class GymResidentCubit extends Cubit<GymResidentState> {
                 itemId: bookingId,
               ),
             );
-            UrlHelper.openWebsite(paymentUrl);
+            UrlHelper.openWebsite(paymentUrl!);
           },
         );
       },

@@ -2,11 +2,14 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
+import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/repo/doctor_repo.dart';
@@ -16,9 +19,12 @@ class DoctorRepoImpl extends DoctorRepo {
 
   DoctorRepoImpl({required this.api});
   @override
-  Future<Either<String, List<DoctorSpecializationaModel>>>
+  Future<Either<Failure, List<DoctorSpecializationaModel>>>
   getSpecialization() async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final response = await api.get(ApiEndPoints.getDoctorSpecializations);
       final List<DoctorSpecializationaModel> specializations = [];
       for (var specialization in response[ApiKeys.data]) {
@@ -28,15 +34,20 @@ class DoctorRepoImpl extends DoctorRepo {
       }
       return Right(specializations);
     } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
   @override
-  Future<Either<String, List<DoctorDataModel>>> getDoctorsBySpecialization({
+  Future<Either<Failure, List<DoctorDataModel>>> getDoctorsBySpecialization({
     required int specializationId,
   }) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final response = await api.get(
         ApiEndPoints.getDoctorBySpecialist + specializationId.toString(),
       );
@@ -46,15 +57,20 @@ class DoctorRepoImpl extends DoctorRepo {
       }
       return Right(doctors);
     } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
   @override
-  Future<Either<String, List<DoctorServiceModel>>> getDoctorService({
+  Future<Either<Failure, List<DoctorServiceModel>>> getDoctorService({
     required String userId,
   }) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final response = await api.get(ApiEndPoints.doctorGetServices + userId);
       final List<DoctorServiceModel> services = [];
       for (var service in response[ApiKeys.data]) {
@@ -62,12 +78,14 @@ class DoctorRepoImpl extends DoctorRepo {
       }
       return Right(services);
     } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 
   @override
-  Future<Either<String, Null>> bookService({
+  Future<Either<String, int>> bookService({
     required int serviceId,
     required String userId,
     required String doctorId,
@@ -79,7 +97,7 @@ class DoctorRepoImpl extends DoctorRepo {
     List<File>? images,
   }) async {
     try {
-      await api.post(
+      final response = await api.post(
         ApiEndPoints.doctorBookService,
         body: FormData.fromMap({
           ApiKeys.userId: userId,
@@ -97,9 +115,12 @@ class DoctorRepoImpl extends DoctorRepo {
 
         headers: {"Content-Type": "multipart/form-data"},
       );
-      return Right(null);
+
+      return Right(response[ApiKeys.data]);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 
