@@ -113,6 +113,7 @@ class GymResidentCubit extends Cubit<GymResidentState> {
       gymId: gymId,
       serviceId: bookingId,
       residentId: residentId!,
+      isPaymentOnline: true,
     );
     result.fold(
       (error) {
@@ -140,7 +141,7 @@ class GymResidentCubit extends Cubit<GymResidentState> {
                 itemId: bookingId,
               ),
             );
-            UrlHelper.openWebsite(paymentUrl!);
+            UrlHelper.openWebsite(paymentUrl);
           },
         );
       },

@@ -95,6 +95,7 @@ class DoctorRepoImpl extends DoctorRepo {
     required int bookingType,
     required int serviceProviderType,
     List<File>? images,
+    required bool isPaymentOnline
   }) async {
     try {
       final response = await api.post(
@@ -105,6 +106,7 @@ class DoctorRepoImpl extends DoctorRepo {
           ApiKeys.serviceProviderId: doctorId,
           ApiKeys.serviceDayId: serviceDayId,
           ApiKeys.price: price,
+          ApiKeys.isPaymentOnline: isPaymentOnline,
           ApiKeys.bookingDate: bookingDate,
           ApiKeys.bookingType: bookingType,
           ApiKeys.serviceProviderType: 1,

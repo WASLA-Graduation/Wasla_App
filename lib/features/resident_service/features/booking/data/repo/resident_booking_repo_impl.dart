@@ -33,7 +33,9 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
 
       final List<DoctorResidentBookingModel> bookings = [];
       for (var booking in response[ApiKeys.data]) {
-        bookings.add(DoctorResidentBookingModel.fromJson(booking));
+        if (booking[ApiKeys.isPaid]) {
+          bookings.add(DoctorResidentBookingModel.fromJson(booking));
+        }
       }
       return Right(bookings);
     } on ServerException catch (e) {

@@ -18,7 +18,10 @@ class DoctorResidentBookingModel extends GeneralResidentBookingsModel {
   final String serviceName;
   final int price;
 
+  final bool isPaid;
+
   DoctorResidentBookingModel({
+    required this.isPaid,
     required this.id,
     required this.start,
     required this.end,
@@ -33,7 +36,7 @@ class DoctorResidentBookingModel extends GeneralResidentBookingsModel {
          baseBookingId: id,
          baseName: serviceProviderName,
          baseServiceName: serviceName,
-         baseStatus: DoctorBookingStatus.values[status-1].name,
+         baseStatus: DoctorBookingStatus.values[status - 1].name,
          baseImage: serviceProviderProfilePhoto,
          baseDate: formatStringDate(date) + localizedDays(index: day),
          baseDuration:
@@ -53,6 +56,7 @@ class DoctorResidentBookingModel extends GeneralResidentBookingsModel {
           ApiEndPoints.imageBaseUrl + json[ApiKeys.serviceProviderProfilePhoto],
       serviceName: json[ApiKeys.serviceName] ?? "",
       price: json[ApiKeys.price] ?? 0,
+      isPaid: json[ApiKeys.isPaid] ?? false,
     );
   }
 }

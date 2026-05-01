@@ -12,5 +12,6 @@ abstract class GymResidentRepo {
     required String residentId,
     required String gymId,
     required int serviceId,
+    required bool isPaymentOnline
   });
 }

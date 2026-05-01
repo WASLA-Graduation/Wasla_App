@@ -45,6 +45,7 @@ class GymResidentRepoImpl extends GymResidentRepo {
     required String residentId,
     required String gymId,
     required int serviceId,
+    required bool isPaymentOnline
   }) async {
     try {
       final response = await api.post(
@@ -53,6 +54,8 @@ class GymResidentRepoImpl extends GymResidentRepo {
           ApiKeys.residentId: residentId,
           ApiKeys.gymId: gymId,
           ApiKeys.serviceId: serviceId,
+          ApiKeys.isPaymentOnline: isPaymentOnline,
+
         },
       );
       return Right(BookingReturnedDataModel.fromJson(response[ApiKeys.data]));

@@ -15,6 +15,7 @@ abstract class ApiKeys {
   static const flag = 'flag';
   static const notes = 'notes';
   static const entityId = 'entityId';
+  static const isPaymentOnline = 'isPaymentOnline';
   static const entityType = 'entityType';
   static const cartItemId = 'cartItemId';
   static const numberOfPersons = 'numberOfPersons';

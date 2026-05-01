@@ -200,6 +200,7 @@ class DoctorCubit extends Cubit<DoctorState> {
       final String? userId = await getUserId();
 
       final response = await doctorRepo.bookService(
+        isPaymentOnline: paymentMethod == PaymentMethod.creditCard,
         serviceId: currentServiceId,
         userId: userId!,
         doctorId: doctorId!,
@@ -217,32 +218,33 @@ class DoctorCubit extends Cubit<DoctorState> {
           emit(DoctorBookServiceFailure(errMsg: error));
         },
         (success) async {
-          final String? residentId = await getUserId();
-          doctorBookingId = success;
-          final paymentResult = await PaymentService.createPayment(
-            userId: residentId!,
-            serviceProviderId: doctorId!,
-            amount: doctorServiceModel.price.toInt(),
-            bookingId: doctorBookingId,
-            serviceProviderType: ServiceProviderTypeEnum.doctor.index + 1,
-            entityType: EntityType.booking.index,
-            paymentMethod: paymentMethod.index + 1,
-          );
-          paymentResult.fold(
-            (error) {
-              log('payment error $error');
+          if (paymentMethod == PaymentMethod.cash) {
+            emit(DoctorBookServiceWithCashSuccess());
+            return;
+          } else {
+            final String? residentId = await getUserId();
+            doctorBookingId = success;
+            final paymentResult = await PaymentService.createPayment(
+              userId: residentId!,
+              serviceProviderId: doctorId!,
+              amount: doctorServiceModel.price.toInt(),
+              bookingId: doctorBookingId,
+              serviceProviderType: ServiceProviderTypeEnum.doctor.index + 1,
+              entityType: EntityType.booking.index,
+              paymentMethod: paymentMethod.index + 1,
+            );
+            paymentResult.fold(
+              (error) {
+                log('payment error $error');
 
-              emit(DoctorBookServiceFailure(errMsg: error));
-            },
-            (paymentUrl) {
-              if (paymentUrl == null) {
-                emit(DoctorBookServiceWithCashSuccess());
-              } else {
+                emit(DoctorBookServiceFailure(errMsg: error));
+              },
+              (paymentUrl) {
                 UrlHelper.openWebsite(paymentUrl);
                 emit(DoctorBookServiceWithCreditCardSuccess());
-              }
-            },
-          );
+              },
+            );
+          }
         },
       );
     }

@@ -3,12 +3,11 @@ import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
-import 'package:wasla/core/enums/payment_method.dart';
 import 'package:wasla/core/enums/service_provider_type.dart';
 import 'package:wasla/core/service/service_locator.dart';
 
 abstract class PaymentService {
-  static Future<Either<String, String?>> createPayment({
+  static Future<Either<String, String>> createPayment({
     required String userId,
     required String serviceProviderId,
     required int amount,
@@ -31,11 +30,7 @@ abstract class PaymentService {
           ApiKeys.serviceType: serviceProviderType,
         },
       );
-      if (paymentMethod == PaymentMethod.creditCard.index + 1) {
-        return Right(response[ApiKeys.data]);
-      } else {
-        return Right(null);
-      }
+      return Right(response[ApiKeys.data]);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

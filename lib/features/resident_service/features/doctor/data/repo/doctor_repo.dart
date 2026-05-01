@@ -25,5 +25,6 @@ abstract class DoctorRepo {
     required int bookingType,
     required int serviceProviderType,
     List<File>? images,
+    required bool isPaymentOnline
   });
 }
