@@ -335,7 +335,7 @@ class ResidentDriverCubit extends Cubit<ResidentDriverState> {
 
   void startLiveTracking() {
     liveTrackingTimer?.cancel();
-    liveTrackingTimer = Timer.periodic(const Duration(seconds: 3), (
+    liveTrackingTimer = Timer.periodic(const Duration(seconds: 2), (
       timer,
     ) async {
       if (isDriverArrived) {
