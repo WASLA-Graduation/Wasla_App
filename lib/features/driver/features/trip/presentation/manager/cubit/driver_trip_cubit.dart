@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -19,21 +20,25 @@ class DriverTripCubit extends Cubit<DriverTripState> {
   final DriverTripRepo driverTripRepo;
   final mapController = MapController();
 
-  LatLng passengerLocation = LatLng(30.0770, 31.3400);
+  LatLng passengerLocation = const LatLng(30.0770, 31.3400);
+
   LatLng? driverLocation;
+  LatLng? previousDriverLocation;
 
   List<LatLng> routePoints = [];
+
   double driverRotation = 0.0;
 
   Timer? liveTrackingTimer;
+
   bool isDriverArrived = false;
   bool isStartedTrip = false;
+
   int tripId = -1;
   int tripIdStored = -1;
+  TripModel? tripDetails;
 
   final Distance distance = const Distance();
-  Timer? driverLocationTimer;
-  TripModel? tripDetails;
 
   void onRetry() {
     emit(DriverTripOnRetryState());
@@ -41,19 +46,32 @@ class DriverTripCubit extends Cubit<DriverTripState> {
 
   Future<void> fetchDriverLocation() async {
     final result = await MapServices.getCurrentLocation();
-    result.fold((error) {}, (location) {
-      driverLocation = LatLng(location.latitude!, location.longitude!);
-    });
+
+    result.fold(
+      (error) {
+        log("Location error: $error");
+      },
+      (location) {
+        previousDriverLocation = driverLocation;
+        driverLocation = LatLng(location.latitude!, location.longitude!);
+      },
+    );
   }
 
   Future<void> initializeTrip() async {
     await fetchDriverLocation();
+
     if (driverLocation != null) {
       routePoints = await MapServices.getBestRoute(
         start: driverLocation!,
         end: passengerLocation,
       );
+
+      updateDriverRotation();
     }
+
+    // log('routePoints: $routePoints');
+
     emit(DriverChangeMyLocation());
   }
 
@@ -70,19 +88,23 @@ class DriverTripCubit extends Cubit<DriverTripState> {
     if (routePoints.isEmpty || driverLocation == null) return false;
 
     double minDistance = double.infinity;
+
     for (final point in routePoints) {
       final d = distance.as(LengthUnit.Meter, driverLocation!, point);
-      if (d < minDistance) minDistance = d;
+      if (d < minDistance) {
+        minDistance = d;
+      }
     }
+
     return minDistance > 50;
   }
 
   void updateDriverRotation() {
-    if (routePoints.length < 2) return;
+    if (previousDriverLocation == null || driverLocation == null) return;
 
     driverRotation = MapServices.calculateBearing(
-      routePoints.first,
-      routePoints[1],
+      previousDriverLocation!,
+      driverLocation!,
     );
   }
 
@@ -90,7 +112,8 @@ class DriverTripCubit extends Cubit<DriverTripState> {
     if (driverLocation == null) return;
 
     final d = distance.as(LengthUnit.Meter, driverLocation!, passengerLocation);
-    if (d < 10) {
+
+    if (d < 15) {
       isDriverArrived = true;
       stopLiveTracking();
       emit(DriverWhenArrived());
@@ -111,14 +134,17 @@ class DriverTripCubit extends Cubit<DriverTripState> {
       await fetchDriverLocation();
 
       if (driverLocation != null) {
-        routePoints = await MapServices.getBestRoute(
-          start: driverLocation!,
-          end: passengerLocation,
-        );
+        if (isDriverOffRoute()) {
+          await recalculateRoute();
+        }
       }
 
       updateDriverRotation();
       checkArrival();
+
+      if (driverLocation != null) {
+        mapController.move(driverLocation!, 15);
+      }
 
       emit(DriverChangeMyLocation());
     });
@@ -129,12 +155,15 @@ class DriverTripCubit extends Cubit<DriverTripState> {
   }
 
   void backToOriginalLocation() {
-    if (driverLocation != null) {
-      mapController.move(driverLocation!, 12);
-      emit(DriverBackToMyLocation());
-    }
+    if (driverLocation == null) return;
+
+    mapController.move(driverLocation!, 15);
+
+    emit(DriverBackToMyLocation());
   }
 
+  ////End Methods of tracking
+  Timer? driverLocationTimer;
   Future<void> cancelRide() async {
     emit(DriverCancelRideLoading());
     final result = await driverTripRepo.cancelRide(

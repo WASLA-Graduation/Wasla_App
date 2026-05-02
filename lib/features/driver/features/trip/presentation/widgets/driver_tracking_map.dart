@@ -10,12 +10,17 @@ class DriverTrackingMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<DriverTripCubit>();
+
     return BlocBuilder<DriverTripCubit, DriverTripState>(
       buildWhen: (_, current) =>
           current is DriverChangeMyLocation ||
           current is DriverBackToMyLocation,
-    
+
       builder: (context, state) {
+        if (cubit.driverLocation == null) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
         return FlutterMap(
           mapController: cubit.mapController,
           options: MapOptions(
@@ -53,6 +58,7 @@ class DriverTrackingMap extends StatelessWidget {
                     size: 25,
                   ),
                 ),
+
                 Marker(
                   point: cubit.driverLocation!,
                   width: 50,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:latlong2/latlong.dart';
@@ -31,6 +33,7 @@ class _DriverMapTrackingViewState extends State<DriverMapTrackingView> {
   }
 
   void startTracking() async {
+    log('Disha');
     final cubit = context.read<DriverTripCubit>();
     cubit.initializeTrip().then((_) {
       cubit.passengerLocation = LatLng(
