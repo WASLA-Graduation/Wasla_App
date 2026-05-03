@@ -1,8 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
+import 'package:wasla/core/service/signalR/chat_hub.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/custom_circle_with_data_list.dart';
@@ -35,7 +37,23 @@ class ResidentTechnacalDetailsWidget extends StatelessWidget {
           child: ResidentTechDetailsCardText(technical: technician),
         ),
         const SizedBox(height: 18),
-        CustomCircleWithDataList(items: _getItemList(context)),
+        CustomCircleWithDataList(
+          items: _getItemList(context),
+
+          onTap: () async {
+            final chatHub = ChatHub();
+            chatHub.init();
+            await context.push(
+              AppRoutes.chatScreen,
+              extra: {
+                AppStrings.id: techId,
+                AppStrings.name: technician.fullName,
+                AppStrings.photo: technician.profilePhotoUrl,
+              },
+            );
+            chatHub.disconnect();
+          },
+        ),
         const SizedBox(height: 18),
         TextDetailsIdentfierWidget(
           leading: "aboutMe".tr(context),
@@ -84,8 +102,8 @@ class ResidentTechnacalDetailsWidget extends StatelessWidget {
       ),
       CircleStatModel(
         icon: Assets.assetsImagesChatFilled,
-        title: "reviwes".tr(context).toLowerCase(),
-        value: "${10}+",
+        title: "message".tr(context).toLowerCase(),
+        value: "chat".tr(context).toLowerCase(),
       ),
     ];
   }

@@ -13,7 +13,6 @@ import 'package:wasla/features/resident_service/features/home/presentation/widge
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_service_category_list.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/user_event/user_event_recommended_list.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/user_event/user_event_top_week_list.dart';
-import 'package:wasla/randoms/isolates.dart';
 
 class ResidentHomeBody extends StatelessWidget {
   const ResidentHomeBody({super.key});
@@ -61,14 +60,7 @@ class ResidentHomeBody extends StatelessWidget {
                   child: CustomIdentfierWidget(
                     leadingText: "spacialOffers".tr(context),
                     actionText: "seeAll".tr(context),
-                    onTap: () async {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const IsolatesScreen(),
-                        ),
-                      );
-                    },
+                    onTap: () async {},
                   ),
                 ),
 

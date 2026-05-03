@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_circle_with_data.dart';
 
 class CustomCircleWithDataList extends StatelessWidget {
-  const CustomCircleWithDataList({
-    super.key,
-    required this.items,
-  });
+  const CustomCircleWithDataList({super.key, required this.items, this.onTap});
 
   final List<CircleStatModel> items;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -16,18 +14,21 @@ class CustomCircleWithDataList extends StatelessWidget {
       children: List.generate(
         items.length,
         (index) => Expanded(
-          child: CircleAvatarWithDetailsWidget(
-            icon: items[index].icon,
-            title: items[index].title,
-            num: items[index].value,
+          child: InkWell(
+            onTap: () {
+              if (index == items.length - 1) onTap!();
+            },
+            child: CircleAvatarWithDetailsWidget(
+              icon: items[index].icon,
+              title: items[index].title,
+              num: items[index].value,
+            ),
           ),
         ),
       ),
     );
   }
 }
-
-
 
 class CircleStatModel {
   final String icon;
@@ -40,4 +41,3 @@ class CircleStatModel {
     required this.value,
   });
 }
-

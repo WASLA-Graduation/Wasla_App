@@ -95,7 +95,7 @@ class OrderHeader extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: _MetaItem(
-                    label: 'date'.tr(context),
+                    label: 'createdAt'.tr(context),
                     value: formatedDate,
                   ),
                 ),

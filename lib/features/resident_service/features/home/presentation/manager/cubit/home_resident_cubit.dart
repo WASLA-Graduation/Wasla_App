@@ -67,11 +67,15 @@ class HomeResidentCubit extends Cubit<HomeResidentState> {
     });
   }
 
+  bool _isFetchingAllServiceProviders = false;
+
   Future<void> getAllServiceProviders({required bool fromPagination}) async {
-    if (isEndOfAllServiceProviders ||
-        state is HomeResidentGetServicesLoadingFromPagination) {
+    if (isEndOfAllServiceProviders || _isFetchingAllServiceProviders) {
       return;
     }
+
+    _isFetchingAllServiceProviders = true;
+
     if (fromPagination) {
       emit(HomeResidentGetServicesLoadingFromPagination());
     } else {
@@ -103,6 +107,8 @@ class HomeResidentCubit extends Cubit<HomeResidentState> {
         );
       },
     );
+
+    _isFetchingAllServiceProviders = false;
   }
 
   Future<void> searchInAllServiceProviders({

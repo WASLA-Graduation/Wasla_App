@@ -1,3 +1,4 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
@@ -54,7 +55,7 @@ class ResidentTechnicianRepoImpl extends ResidentTechnicianRepo {
         queryParameters: {
           ApiKeys.pageNumber: pageNumber,
           ApiKeys.pageSize: pageSize,
-          ApiKeys.specialtySmall: speciality,
+          if (speciality != 0) ApiKeys.specialtySmall: speciality,
         },
       );
 
@@ -62,9 +63,12 @@ class ResidentTechnicianRepoImpl extends ResidentTechnicianRepo {
       for (var s in response[ApiKeys.data][ApiKeys.data]) {
         technicians.add(ResidentTechnicianModel.fromJson(s));
       }
+
       return Right(technicians);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 

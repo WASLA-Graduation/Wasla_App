@@ -12,7 +12,7 @@ class TechnicianModel extends UserBaseModel {
   final int specialty;
   final String profilePhotoUrl;
   final List<String> documentsUrls;
-  final int rate;
+  final double rate;
   final bool isAvailable;
 
   TechnicianModel({
@@ -51,26 +51,10 @@ class TechnicianModel extends UserBaseModel {
       specialty: json['specialty'] ?? 0,
       profilePhotoUrl: json['profilePhotoUrl'] ?? '',
       documentsUrls: List<String>.from(json['documentsUrls'] ?? []),
-      rate: json['rate'] ?? 0,
+      rate: (json['rate'] as num?)?.toDouble() ?? 0,
       isAvailable: json['isAvailable'] ?? false,
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'email': email,
-      'fullName': fullName,
-      'phone': phone,
-      'birthDay': birthDay,
-      'experienceYears': experienceYears,
-      'description': description,
-      'latitude': latitude,
-      'longitude': longitude,
-      'specialty': specialty,
-      'profilePhotoUrl': profilePhotoUrl,
-      'documentsUrls': documentsUrls,
-      'rate': rate,
-      'isAvailable': isAvailable,
-    };
-  }
+
 }

@@ -31,8 +31,8 @@ class _ResidentTechnicianViewState extends State<ResidentTechnicianView> {
       body: BlocStatusHandler<ResidentTechnicianCubit, ResidentTechnicianState>(
         body: ResidentTechnicianBody(),
         onRetry: () {
-          getScreenData();
           context.read<ResidentTechnicianCubit>().whenRetry();
+          getScreenData();
         },
         isNetwork: (state) => state is ResidentTechnicianNetwork,
         isError: (state) => state is ResidentTechnicianFailure,

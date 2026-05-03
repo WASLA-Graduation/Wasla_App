@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
+import 'package:wasla/core/service/signalR/chat_hub.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/custom_circle_with_data_list.dart';
@@ -35,10 +37,26 @@ class ResidentRestaurantDetailsWidget extends StatelessWidget {
           child: ResidetnRestDetailsCardWidget(restaurant: restaurant),
         ),
         const SizedBox(height: 18),
-        CustomCircleWithDataList(items: _getItemList(context)),
+        CustomCircleWithDataList(
+          items: _getItemList(context),
+          onTap: () async {
+            final chatHub = ChatHub();
+            chatHub.init();
+            await context.push(
+              AppRoutes.chatScreen,
+              extra: {
+                AppStrings.id: restaurant.id,
+                AppStrings.name: restaurant.name,
+                AppStrings.photo: restaurant.gallery.first,
+              },
+            );
+            chatHub.disconnect();
+          },
+        ),
         const SizedBox(height: 18),
         TextDetailsIdentfierWidget(
-          leading: "aboutMe".tr(context),
+          bigFont: true,
+          leading: "aboutRestaurant".tr(context),
           trailing: "menu".tr(context),
           onTap: () {
             context.pushScreen(
@@ -52,6 +70,7 @@ class ResidentRestaurantDetailsWidget extends StatelessWidget {
         ReadmoreText(maxLines: 2, text: restaurant.description),
         const SizedBox(height: 15),
         TextDetailsIdentfierWidget(
+          bigFont: true,
           leading: "reservation".tr(context),
           trailing: "bookNow".tr(context),
           onTap: () {
@@ -96,8 +115,8 @@ class ResidentRestaurantDetailsWidget extends StatelessWidget {
       ),
       CircleStatModel(
         icon: Assets.assetsImagesChatFilled,
-        title: "reviwes".tr(context).toLowerCase(),
-        value: "${10}+",
+        title: "message".tr(context).toLowerCase(),
+        value: "chat",
       ),
     ];
   }

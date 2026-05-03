@@ -198,10 +198,7 @@ class ChatCubit extends Cubit<ChatState> {
     required bool fromPagination,
     required String recieverId,
   }) async {
-    if (currentChatId.isEmpty) {
-      emit(ChatGetCahtOfUserSuccess(messages: []));
-      return;
-    }
+  
     if (chatEndOfPagination ||
         fromPagination && state is ChatGetCahtLoadigFromPagination) {
       return;
@@ -214,27 +211,31 @@ class ChatCubit extends Cubit<ChatState> {
     }
 
     final String? userId = await getUserId();
-
     final result = await chatRepo.getUserChat(
       pageNumber: chatPageNumber,
       pageSize: chatPageSize,
       senderId: userId!,
       receiverId: recieverId,
     );
-    result.fold((error) => emit(ChatGetCahtFailure(errorMessage: error)), (
-      success,
-    ) {
-      if (success.messages.data.isEmpty) {
-        chatEndOfPagination = true;
 
-        emit(ChatGetCahtOfUserSuccess(messages: success.messages.data));
-      } else {
-        chatPageNumber++;
+    result.fold(
+      (error) {
+        emit(ChatGetCahtFailure(errorMessage: error));
+      },
+      (success) {
+        currentChatId=success.chatId.toString();
+        if (success.messages.data.isEmpty) {
+          chatEndOfPagination = true;
 
-        messages.addAll(success.messages.data);
-        emit(ChatGetCahtOfUserSuccess(messages: messages));
-      }
-    });
+          emit(ChatGetCahtOfUserSuccess(messages: messages));
+        } else {
+          chatPageNumber++;
+          messages.addAll(success.messages.data);
+
+          emit(ChatGetCahtOfUserSuccess(messages: messages));
+        }
+      },
+    );
   }
 
   //Done

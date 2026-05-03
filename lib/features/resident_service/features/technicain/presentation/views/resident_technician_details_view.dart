@@ -44,15 +44,15 @@ class _ResidentTechnicianDetailsViewState
             if (state is ResidentTechnicianNetwork) {
               return NoInternetWidget(
                 onRetry: () {
-                  getScreenData();
                   context.read<ResidentTechnicianCubit>().whenRetry();
+                  getScreenData();
                 },
               );
             } else if (state is ResidentTechnicianFailure) {
               return MyErrorWidget(
                 onRetry: () {
-                  getScreenData();
                   context.read<ResidentTechnicianCubit>().whenRetry();
+                  getScreenData();
                 },
               );
             }

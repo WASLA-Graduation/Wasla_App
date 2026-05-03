@@ -1,8 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
+import 'package:wasla/core/service/signalR/chat_hub.dart';
+import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/readmore_text.dart';
 import 'package:wasla/features/resident_service/features/doctor/data/models/doctor_data_model.dart';
@@ -13,6 +16,7 @@ import 'package:wasla/core/widgets/custom_circle_with_data_list.dart';
 import 'package:wasla/core/widgets/custom_details_card_widget.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_text_identfier_widget.dart';
 import 'package:wasla/features/reviews/presentation/widgets/add_review_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class DoctorDetailsBody extends StatelessWidget {
   const DoctorDetailsBody({super.key, required this.doctor});
@@ -31,7 +35,22 @@ class DoctorDetailsBody extends StatelessWidget {
             child: CustomDoctorDetailsText(doctor: doctor),
           ),
           const SizedBox(height: 18),
-          CustomCircleWithDataList(items: _getItemList(context)),
+          CustomCircleWithDataList(
+            items: _getItemList(context),
+            onTap: () async {
+              final chatHub = ChatHub();
+              chatHub.init();
+              await context.push(
+                AppRoutes.chatScreen,
+                extra: {
+                  AppStrings.id: doctor.id,
+                  AppStrings.name: doctor.fullName,
+                  AppStrings.photo: doctor.imageUrl,
+                },
+              );
+              chatHub.disconnect();
+            },
+          ),
           const SizedBox(height: 20),
           TextDetailsIdentfierWidget(
             leading: "aboutMe".tr(context),
@@ -82,8 +101,8 @@ class DoctorDetailsBody extends StatelessWidget {
       ),
       CircleStatModel(
         icon: Assets.assetsImagesChatFilled,
-        title: "reviews".tr(context).toLowerCase(),
-        value: "100+",
+        title: "message".tr(context).toLowerCase(),
+        value: "chat".tr(context).toLowerCase(),
       ),
     ];
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/helpers/url_helper.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_doc_text_details.dart';
 import 'package:wasla/features/restaurant/home/data/models/restaurant_model.dart';
@@ -15,18 +16,21 @@ class ResidetnRestDetailsCardWidget extends StatelessWidget {
       children: [
         _buildDoctorName(context),
         Divider(height: 15, color: AppColors.primaryColor, thickness: .1),
-        CustomTextWithColonWidget(
-          date: restaurant.ownerName,
+        CustomScrollableRowData(
+          value: restaurant.ownerName,
           title: "owener".tr(context),
         ),
         const SizedBox(height: 3),
-        CustomTextWithColonWidget(
-          date: restaurant.name,
+        CustomScrollableRowData(
+          value: restaurant.name,
           title: "restaurantName".tr(context),
         ),
         const SizedBox(height: 3),
-        CustomTextWithColonWidget(
-          date: restaurant.phoneNumber,
+        CustomScrollableRowData(
+          onTap: () {
+            UrlHelper.callPhone(restaurant.phoneNumber);
+          },
+          value: restaurant.phoneNumber,
           title: "phone".tr(context),
         ),
       ],

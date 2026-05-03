@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
-import 'package:wasla/core/enums/technician_booking_status.dart';
+import 'package:wasla/core/enums/technicant_speciality.dart';
+import 'package:wasla/core/helpers/url_helper.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_doc_text_details.dart';
 import 'package:wasla/features/technicant/features/home/data/models/technician_model.dart';
@@ -16,20 +17,23 @@ class ResidentTechDetailsCardText extends StatelessWidget {
       children: [
         _buildDoctorName(context),
         Divider(height: 15, color: AppColors.primaryColor, thickness: .1),
-        CustomTextWithColonWidget(
-          date: TechnicianBookingStatus.getTitle(
+        CustomScrollableRowData(
+          value: TechnicantSpeciality.getTitle(
             index: technical.specialty - 1,
           ).tr(context),
           title: "specialty".tr(context),
         ),
         const SizedBox(height: 3),
-        CustomTextWithColonWidget(
-          date: technical.experienceYears.toString(),
+        CustomScrollableRowData(
+          value: technical.experienceYears.toString(),
           title: "yearaExperience".tr(context),
         ),
         const SizedBox(height: 3),
-        CustomTextWithColonWidget(
-          date: technical.phone,
+        CustomScrollableRowData(
+          onTap: () {
+            UrlHelper.callPhone(technical.phone);
+          },
+          value: technical.phone,
           title: "phone".tr(context),
         ),
       ],

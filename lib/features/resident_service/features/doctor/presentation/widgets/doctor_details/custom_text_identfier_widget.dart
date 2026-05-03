@@ -5,11 +5,13 @@ class TextDetailsIdentfierWidget extends StatelessWidget {
   final String leading;
   final String trailing;
   final VoidCallback? onTap;
+  final bool? bigFont;
   const TextDetailsIdentfierWidget({
     super.key,
     required this.leading,
     required this.trailing,
     this.onTap,
+    this.bigFont,
   });
 
   @override
@@ -25,10 +27,15 @@ class TextDetailsIdentfierWidget extends StatelessWidget {
 
             child: Text(
               trailing,
-              style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                color: AppColors.primaryColor,
-                fontWeight: FontWeight.bold,
-              ),
+              style: bigFont == true
+                  ? Theme.of(context).textTheme.headlineMedium!.copyWith(
+                      color: AppColors.primaryColor,
+                      fontWeight: FontWeight.bold,
+                    )
+                  : Theme.of(context).textTheme.displaySmall!.copyWith(
+                      color: AppColors.primaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
             ),
           ),
         ),

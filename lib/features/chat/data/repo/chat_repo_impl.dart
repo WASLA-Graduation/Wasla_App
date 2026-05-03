@@ -172,9 +172,26 @@ class ChatRepoImpl extends ChatRepo {
           ApiKeys.pageSizeCap: pageSize,
         },
       );
+      if (response[ApiKeys.data] == null) {
+        return Right(
+          ChatMessagesModel(
+            chatId: 0,
+            messages: MessagesPage(
+              data: [],
+              pageNumber: pageNumber,
+              pageSize: pageSize,
+              totalCount: 0,
+            ),
+            receiverId: receiverId,
+            senderId: senderId,
+          ),
+        );
+      }
       return Right(ChatMessagesModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    }catch (e) {
+      return Left(e.toString());
     }
   }
 

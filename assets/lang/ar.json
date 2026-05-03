@@ -526,7 +526,11 @@
                     "allServices": "جميع الخدمات",
                       "recommend": "توصيات لك",
   "topOfTheWeek": "أفضل الأسبوع",
-    "noRecommendations": "لا توصيات في الوقت الحالي"
+    "noRecommendations": "لا توصيات في الوقت الحالي",
+      "aboutRestaurant": "حول المطعم",
+        "createdAt": "تم الانشاء في"
+
+
 
 
 

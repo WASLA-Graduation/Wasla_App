@@ -124,7 +124,7 @@ class _TechnicianInfoSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 6),
-          _StarRating(rate: technician.rate),
+          _StarRating(rate: technician.rate.toInt()),
           SizedBox(height: spacing),
           Divider(
             color: isDark

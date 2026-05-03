@@ -4,7 +4,7 @@ class ResidentTechnicianModel {
   final String description;
   final String imageUrl;
   final String phoneNumber;
-  final int rating;
+  final double rating;
   final String specialization;
   final int yearsOfExperience;
 
@@ -21,27 +21,16 @@ class ResidentTechnicianModel {
 
   factory ResidentTechnicianModel.fromJson(Map<String, dynamic> json) {
     return ResidentTechnicianModel(
-      id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      imageUrl: json['imageUrl'],
-      phoneNumber: json['phoneNumber'],
-      rating: json['rating'],
-      specialization: json['specialization'],
-      yearsOfExperience: json['yearsOfExperience'],
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+      description: json['description'] ?? '',
+      imageUrl: json['imageUrl'] ?? '',
+      phoneNumber: json['phoneNumber'] ?? '',
+      rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
+      specialization: json['specialization'] ?? '',
+      yearsOfExperience: json['yearsOfExperience'] ?? 0,
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'description': description,
-      'imageUrl': imageUrl,
-      'phoneNumber': phoneNumber,
-      'rating': rating,
-      'specialization': specialization,
-      'yearsOfExperience': yearsOfExperience,
-    };
-  }
+
 }

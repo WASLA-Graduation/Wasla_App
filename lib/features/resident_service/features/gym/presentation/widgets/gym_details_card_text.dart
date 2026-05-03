@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/helpers/url_helper.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/profile/data/models/gym_model.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/doctor_details/custom_doc_text_details.dart';
@@ -15,18 +16,21 @@ class GymDetailsCardText extends StatelessWidget {
       children: [
         _buildDoctorName(context),
         Divider(height: 15, color: AppColors.primaryColor, thickness: .1),
-        CustomTextWithColonWidget(
-          date: gym.ownerName,
+        CustomScrollableRowData(
+          value: gym.ownerName,
           title: "owener".tr(context),
         ),
         const SizedBox(height: 3),
-        CustomTextWithColonWidget(
-          date: gym.businessName,
+        CustomScrollableRowData(
+          value: gym.businessName,
           title: "gymName".tr(context),
         ),
         const SizedBox(height: 3),
-        CustomTextWithColonWidget(
-          date: gym.phones.isEmpty ? '' : gym.phones[0],
+        CustomScrollableRowData(
+          onTap: () {
+            UrlHelper.callPhone(gym.phones.isEmpty ? '' : gym.phones[0]);
+          },
+          value: gym.phones.isEmpty ? '' : gym.phones[0],
           title: "phone".tr(context),
         ),
       ],

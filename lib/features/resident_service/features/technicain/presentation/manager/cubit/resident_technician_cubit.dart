@@ -17,7 +17,7 @@ class ResidentTechnicianCubit extends Cubit<ResidentTechnicianState> {
   int pageNumber = 1;
   double price = 0;
   bool endOfTechnicianPagination = false;
-  int currentSpeciality = 1;
+  int currentSpeciality = 0;
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTimeSlot = TimeOfDay.now();
 
@@ -76,7 +76,7 @@ class ResidentTechnicianCubit extends Cubit<ResidentTechnicianState> {
     } else {
       emit(ResidentGetTechniciansSpecializationsLoading());
     }
-
+      
     final result = await repo.getTechniciansBySpeciality(
       pageNumber: pageNumber,
       pageSize: pageSize,
