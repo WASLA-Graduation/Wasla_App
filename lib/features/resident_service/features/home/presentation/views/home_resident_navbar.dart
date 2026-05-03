@@ -16,6 +16,8 @@ class HomeResidentNavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeResidentCubit, HomeResidentState>(
+      buildWhen: (previous, current) =>
+          current is HomeResidentUpadateBottomNavBarCurrentIndex,
       builder: (context, state) {
         final cubit = context.read<HomeResidentCubit>();
 

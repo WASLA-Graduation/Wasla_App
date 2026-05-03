@@ -522,7 +522,9 @@
             "reportSuccess": "تم ارسال التقرير بنجاح",
               "dataRequired": "البيانات المطلوبة",
                 "bookingWithGym": " تم حجز مع الجيم بنجاح",
-                  "searchServices": "بحث عن خدمات"
+                  "searchServices": "بحث عن خدمات",
+                    "allServices": "جميع الخدمات"
+
 
 
 

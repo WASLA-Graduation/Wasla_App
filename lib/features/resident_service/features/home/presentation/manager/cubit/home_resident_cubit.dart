@@ -52,22 +52,16 @@ class HomeResidentCubit extends Cubit<HomeResidentState> {
 
   void updateNavBarCurrentIndex(int index) {
     navBarcurrentIndex = index;
-    emit(HomeResidentUpadateCurrentIndex());
+    emit(HomeResidentUpadateBottomNavBarCurrentIndex());
   }
 
   Future<void> getResidentProfile() async {
-    emit(HomeResidentGetProfileLoading());
     final String? userId = await SecureStorageHelper.get(key: ApiKeys.userId);
     final response = await homeRepo.getResidentProfile(userId: userId!);
-    response.fold(
-      (error) {
-        emit(HomeResidentGetProfileFailure(errMsg: error));
-      },
-      (success) {
-        user = success;
-        emit(HomeResidentGetProfileSuccess());
-      },
-    );
+    response.fold((error) {}, (success) {
+      user = success;
+      emit(HomeResidentGetProfileSuccess());
+    });
   }
 
   Future<void> getAllServiceProviders({required bool fromPagination}) async {

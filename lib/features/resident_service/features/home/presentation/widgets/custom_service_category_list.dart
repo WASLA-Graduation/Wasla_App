@@ -9,23 +9,23 @@ class CustomServiceCategoryList extends StatelessWidget {
   final int listLength;
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      runSpacing: 20,
-      spacing: 20,
-      children: List.generate(
-        listLength,
-        (index) => InkWell(
-          onTap: () {},
-          child: InkWell(
-            onTap: () {
-              context.pushScreen(CategoryServiceModel.categories[index].route);
-            },
-            child: CustomServiceCategoryItem(
-              service: CategoryServiceModel.categories[index],
-            ),
-          ),
-        ),
+    return SliverGrid.builder(
+      itemCount: listLength,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 12,
+        childAspectRatio: 0.85,
       ),
+      itemBuilder: (context, index) {
+        return InkWell(
+          onTap: () =>
+              context.pushScreen(CategoryServiceModel.categories[index].route),
+          child: CustomServiceCategoryItem(
+            service: CategoryServiceModel.categories[index],
+          ),
+        );
+      },
     );
   }
 }

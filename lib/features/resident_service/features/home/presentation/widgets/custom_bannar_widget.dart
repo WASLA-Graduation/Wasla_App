@@ -10,20 +10,26 @@ class CustomBannarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      clipBehavior: Clip.hardEdge,
-      padding: const EdgeInsets.only(top: 20),
-      width: double.infinity,
-      height: 160,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
-        ),
-        borderRadius: BorderRadius.all(Radius.circular(25)),
-      ),
-      child: const CustomBannarPageSlider(),
+    return BlocBuilder<HomeResidentCubit, HomeResidentState>(
+      buildWhen: (previous, current) =>
+          current is HomeResidentUpadateCurrentIndex,
+      builder: (context, state) {
+        return Container(
+          clipBehavior: Clip.hardEdge,
+          padding: const EdgeInsets.only(top: 20),
+          width: double.infinity,
+          height: 160,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(25)),
+          ),
+          child: const CustomBannarPageSlider(),
+        );
+      },
     );
   }
 }
