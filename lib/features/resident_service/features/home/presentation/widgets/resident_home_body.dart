@@ -11,6 +11,8 @@ import 'package:wasla/core/widgets/custom_home_app_bar.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_identfier_widget.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/search/custom_search_bar.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_service_category_list.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/widgets/user_event/user_event_recommended_list.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/widgets/user_event/user_event_top_week_list.dart';
 import 'package:wasla/randoms/isolates.dart';
 
 class ResidentHomeBody extends StatelessWidget {
@@ -39,7 +41,7 @@ class ResidentHomeBody extends StatelessWidget {
             },
           ),
 
-          const SizedBox(height: 12),
+          SizedBox(height: AppSizes.paddingSizeThelve),
           Expanded(
             child: CustomScrollView(
               slivers: [
@@ -51,7 +53,9 @@ class ResidentHomeBody extends StatelessWidget {
                   ),
                 ),
 
-                const SliverToBoxAdapter(child: SizedBox(height: 12)),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppSizes.paddingSizeThelve),
+                ),
 
                 SliverToBoxAdapter(
                   child: CustomIdentfierWidget(
@@ -84,7 +88,34 @@ class ResidentHomeBody extends StatelessWidget {
                   listLength: CategoryServiceModel.categories.length,
                 ),
 
-                const SliverToBoxAdapter(child: SizedBox(height: 20)),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppSizes.paddingSizeThelve),
+                ),
+                SliverToBoxAdapter(
+                  child: Text(
+                    "recommend".tr(context),
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppSizes.paddingSizeFifteen),
+                ),
+
+                SliverToBoxAdapter(child: UserEventRecommendedList()),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppSizes.paddingSizeThelve),
+                ),
+                SliverToBoxAdapter(
+                  child: Text(
+                    "topOfTheWeek".tr(context),
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: AppSizes.paddingSizeFifteen),
+                ),
+
+                SliverToBoxAdapter(child: UserEventTopWeekList()),
               ],
             ),
           ),

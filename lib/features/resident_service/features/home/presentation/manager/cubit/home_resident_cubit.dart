@@ -1,8 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/cache/secure_storage_helper.dart';
+import 'package:wasla/core/enums/event_type.dart';
 import 'package:wasla/core/error/failure.dart';
+import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/service_provieders_search_model.dart';
+import 'package:wasla/features/resident_service/features/home/data/models/user_event_model.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
 import 'package:wasla/features/resident_service/features/home/data/repo/home_repo.dart';
 
@@ -159,6 +162,60 @@ class HomeResidentCubit extends Cubit<HomeResidentState> {
         );
       },
     );
+  }
+
+  Future<void> getRecommendedServiceProviders() async {
+    emit(HomeResidentGetRecommendedForYouLoading());
+
+    final String? userId = await getUserId();
+    final result = await homeRepo.getServiceProviderRecommendedForYou(
+      residentId: userId!,
+      top: 5,
+    );
+    result.fold(
+      (failure) {
+        if (failure is NoInternetFailure) {
+          emit(HomeResidentNetworkState());
+        } else {
+          emit(HomeResidentFailureState());
+        }
+      },
+      (success) {
+        emit(HomeResidentGetRecommendedForYouLoaded(recommendedList: success));
+      },
+    );
+  }
+
+  Future<void> getServiceProvidersTopOfTheWeek() async {
+    emit(HomeResidentGetTopOfTheWeekLoading());
+
+    final result = await homeRepo.getServiceProviderTopOfTheWeek(top: 5);
+    result.fold(
+      (failure) {
+        if (failure is NoInternetFailure) {
+          emit(HomeResidentNetworkState());
+        } else {
+          emit(HomeResidentFailureState());
+        }
+      },
+      (success) {
+        emit(HomeResidentGetTopOfTheWeekLoaded(topWeekList: success));
+      },
+    );
+  }
+
+  Future<void> createUserEvent({
+    required String serviceProviderId,
+    required EventType eventType,
+  }) async {
+    final String? userId = await getUserId();
+
+    final result = await homeRepo.createUserEvent(
+      eventType: eventType,
+      serviceProviderId: serviceProviderId,
+      userId: userId!,
+    );
+    result.fold((_) {}, (_) {});
   }
 
   void reset() {

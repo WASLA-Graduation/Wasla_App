@@ -170,4 +170,9 @@ abstract class ApiEndPoints {
   static const String checkTokenStatus = 'api/Account/validate-token';
   static const String getAllServiceProviders = 'api/ServiceProvider/All';
   static const String searchServiceProviders = 'api/ServiceProvider/Search';
+  static const String createUserEvent = 'api/UserEvent/CreateUserEvent';
+  static const String getTopServicesProviders =
+      'api/UserEvent/GetTopServiceProviders';
+  static const String getTopServicesProvidersGlobally =
+      'api/UserEvent/GetMostUsedServicesGlobally';
 }

@@ -27,6 +27,26 @@ final class HomeResidentGetServicesLoadingFromPagination
     extends HomeResidentState {}
 
 final class HomeResidentUpadateCurrentIndex extends HomeResidentState {}
-final class HomeResidentUpadateBottomNavBarCurrentIndex extends HomeResidentState {}
+
+final class HomeResidentUpadateBottomNavBarCurrentIndex
+    extends HomeResidentState {}
 
 final class HomeResidentGetProfileSuccess extends HomeResidentState {}
+
+///// get recommnded for you
+final class HomeResidentGetRecommendedForYouLoading extends HomeResidentState {}
+
+final class HomeResidentGetRecommendedForYouLoaded extends HomeResidentState {
+  final List<UserEventModel> recommendedList;
+
+  HomeResidentGetRecommendedForYouLoaded({required this.recommendedList});
+}
+
+///// get top of the week
+final class HomeResidentGetTopOfTheWeekLoading extends HomeResidentState {}
+
+final class HomeResidentGetTopOfTheWeekLoaded extends HomeResidentState {
+  final List<UserEventModel> topWeekList;
+
+  HomeResidentGetTopOfTheWeekLoaded({required this.topWeekList});
+}

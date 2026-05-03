@@ -40,5 +40,7 @@ class _ResidentHomeViewState extends State<ResidentHomeView> {
   void getData() async {
     final cubit = context.read<HomeResidentCubit>();
     cubit.getResidentProfile();
+    cubit.getRecommendedServiceProviders();
+    cubit.getServiceProvidersTopOfTheWeek();
   }
 }

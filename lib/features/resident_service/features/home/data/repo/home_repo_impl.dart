@@ -6,9 +6,11 @@ import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/enums/event_type.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/service_provieders_search_model.dart';
+import 'package:wasla/features/resident_service/features/home/data/models/user_event_model.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/user_model.dart';
 import 'package:wasla/features/resident_service/features/home/data/repo/home_repo.dart';
 
@@ -87,6 +89,87 @@ class HomeRepoImpl extends HomeRepo {
         result.add(ServiceProviedersSearchModel.fromJson(provider));
       }
       return Right(result);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<UserEventModel>>>
+  getServiceProviderRecommendedForYou({
+    required int top,
+    required String residentId,
+  }) async {
+    try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
+      final response = await api.get(
+        ApiEndPoints.getTopServicesProviders,
+        queryParameters: {ApiKeys.userId: residentId, ApiKeys.top: top},
+      );
+
+      List<UserEventModel> result = [];
+
+      for (var provider in response[ApiKeys.data]) {
+        result.add(UserEventModel.fromJson(provider));
+      }
+
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      log(e.toString());
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<UserEventModel>>> getServiceProviderTopOfTheWeek({
+    required int top,
+  }) async {
+    try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
+      final response = await api.get(
+        ApiEndPoints.getTopServicesProvidersGlobally,
+        queryParameters: {ApiKeys.top: top},
+      );
+
+      List<UserEventModel> result = [];
+
+      for (var provider in response[ApiKeys.data]) {
+        result.add(UserEventModel.fromJson(provider));
+      }
+
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      log(e.toString());
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<String, Null>> createUserEvent({
+    required String userId,
+    required String serviceProviderId,
+    required EventType eventType,
+  }) async {
+    try {
+      await api.post(
+        ApiEndPoints.createUserEvent,
+        body: {
+          ApiKeys.userId: userId,
+          ApiKeys.serviceProviderId: serviceProviderId,
+          ApiKeys.eventType: eventType.index + 1,
+        },
+      );
+      return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     } catch (e) {

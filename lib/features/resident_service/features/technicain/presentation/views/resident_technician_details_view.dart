@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/enums/event_type.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/widgets/error_widget.dart';
 import 'package:wasla/core/widgets/internet/no_internet_widget.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
 import 'package:wasla/features/resident_service/features/technicain/presentation/manager/cubit/resident_technician_cubit.dart';
 import 'package:wasla/features/resident_service/features/technicain/presentation/widgets/resident_technacal_details_body.dart';
 import 'package:wasla/features/reviews/presentation/manager/cubit/reviews_cubit.dart';
@@ -54,7 +56,9 @@ class _ResidentTechnicianDetailsViewState
                 },
               );
             }
-            return ResidentTechnicianDetailsBody(techId:widget.data[AppStrings.id] ,);
+            return ResidentTechnicianDetailsBody(
+              techId: widget.data[AppStrings.id],
+            );
           },
         ),
       ),
@@ -68,5 +72,9 @@ class _ResidentTechnicianDetailsViewState
     review.resetState();
     review.getReveiws(widget.data[AppStrings.id]);
     review.selectedUserId = widget.data[AppStrings.id];
+    context.read<HomeResidentCubit>().createUserEvent(
+      serviceProviderId: widget.data[AppStrings.id],
+      eventType: EventType.viewDetails,
+    );
   }
 }

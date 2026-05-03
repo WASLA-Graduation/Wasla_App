@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/enums/event_type.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/widgets/pagination_widget.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/manager/cubit/gym_resident_cubit.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/widgets/resident_gym_item.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
 
 class ResidentGymList extends StatelessWidget {
   const ResidentGymList({super.key});
@@ -34,6 +36,10 @@ class ResidentGymList extends StatelessWidget {
                       AppStrings.gymId: cubit.allGyms[index].id,
                       AppStrings.gymName: cubit.allGyms[index].name,
                     },
+                  );
+                  context.read<HomeResidentCubit>().createUserEvent(
+                    serviceProviderId: cubit.allGyms[index].id,
+                    eventType: EventType.viewDetails,
                   );
                 },
                 child: ResidentGymItem(

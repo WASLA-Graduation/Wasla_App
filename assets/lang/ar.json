@@ -523,7 +523,11 @@
               "dataRequired": "البيانات المطلوبة",
                 "bookingWithGym": " تم حجز مع الجيم بنجاح",
                   "searchServices": "بحث عن خدمات",
-                    "allServices": "جميع الخدمات"
+                    "allServices": "جميع الخدمات",
+                      "recommend": "توصيات لك",
+  "topOfTheWeek": "أفضل الأسبوع",
+    "noRecommendations": "لا توصيات في الوقت الحالي"
+
 
 
 

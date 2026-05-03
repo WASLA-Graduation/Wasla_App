@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/enums/event_type.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/custom_image_with_stack.dart';
@@ -8,6 +9,7 @@ import 'package:wasla/features/favourite/presentation/manager/cubit/favourite_cu
 import 'package:wasla/features/favourite/presentation/widgets/custom_bottom_sheet_romove_fav.dart';
 import 'package:wasla/features/resident_service/features/doctor/presentation/widgets/custom_doc_list_item_desc.dart';
 import 'package:wasla/features/resident_service/features/gym/data/models/gym_data_model.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
 
 class ResidentGymItem extends StatelessWidget {
   const ResidentGymItem({
@@ -72,6 +74,10 @@ class ResidentGymItem extends StatelessWidget {
                         );
                       } else {
                         cubit.addToFavourite(serviceId: gym.id);
+                          context.read<HomeResidentCubit>().createUserEvent(
+                          serviceProviderId: gym.id,
+                          eventType: EventType.addToFavorites,
+                        );
                       }
                     },
                   );
