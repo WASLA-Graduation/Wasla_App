@@ -152,14 +152,22 @@ abstract class ApiEndPoints {
       'api/RestaurantOrder/orders-restaurant';
   static const String getRestaurantChart = 'api/Restaurant/Charts';
   static const String addMenuToCart = 'api/RestaurantOrder/add-to-cart';
-  static const String getResidentCartWithRestaurant = 'api/RestaurantOrder/cart-items';
-  static const String updateQuantityCartWithRestaurant = 'api/RestaurantOrder/quantity-cart-item';
-  static const String removeItemFromCartWithRestaurant = 'api/RestaurantOrder/remove-from-cart';
+  static const String getResidentCartWithRestaurant =
+      'api/RestaurantOrder/cart-items';
+  static const String updateQuantityCartWithRestaurant =
+      'api/RestaurantOrder/quantity-cart-item';
+  static const String removeItemFromCartWithRestaurant =
+      'api/RestaurantOrder/remove-from-cart';
   static const String restaurantCheckout = 'api/RestaurantOrder/checkout';
   static const String checkPaymentStatus = 'api/payment/status';
-  static const String getResidentOrdersWithRestaurant = 'api/RestaurantOrder/orders-resident';
-  static const String restaurantMarkOrderAsPreparing = 'api/RestaurantOrder/start-preparing-order';
-  static const String restaurantMarkOrderAsDelivered = 'api/RestaurantOrder/mark-order-delivered';
+  static const String getResidentOrdersWithRestaurant =
+      'api/RestaurantOrder/orders-resident';
+  static const String restaurantMarkOrderAsPreparing =
+      'api/RestaurantOrder/start-preparing-order';
+  static const String restaurantMarkOrderAsDelivered =
+      'api/RestaurantOrder/mark-order-delivered';
   static const String reportForSomething = 'api/Social/Report';
   static const String checkTokenStatus = 'api/Account/validate-token';
+  static const String getAllServiceProviders = 'api/ServiceProvider/All';
+  static const String searchServiceProviders = 'api/ServiceProvider/Search';
 }

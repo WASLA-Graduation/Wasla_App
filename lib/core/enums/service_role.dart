@@ -4,6 +4,11 @@ enum ServiceRole {
   doctor,
   technician,
   restaurantOwner,
-  gymOwner,
-  
+  gymOwner;
+
+  static fromString(String value) {
+    if (value == 'gym') return ServiceRole.gymOwner;
+    if (value == 'restaurant') return ServiceRole.restaurantOwner;
+    return ServiceRole.values.firstWhere((e) => e.name == value);
+  }
 }

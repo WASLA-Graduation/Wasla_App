@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_recent_seach_item.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/widgets/search/custom_recent_seach_item.dart';
 
 class CustumSearchRecentList extends StatelessWidget {
   const CustumSearchRecentList({super.key});

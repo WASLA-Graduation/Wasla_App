@@ -51,7 +51,6 @@ import 'package:wasla/features/resident_service/features/doctor/presentation/vie
 import 'package:wasla/features/resident_service/features/home/presentation/views/all_services_view.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/views/home_resident_navbar.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/views/resident_home_view.dart';
-import 'package:wasla/features/resident_service/features/home/presentation/views/resident_search_viwe.dart';
 import 'package:wasla/features/social_media/presentation/views/add_post_view.dart';
 import 'package:wasla/features/social_media/presentation/views/all_posts_view.dart';
 import 'package:wasla/features/social_media/presentation/views/reactions_view.dart';
@@ -106,8 +105,7 @@ abstract class AppRouter {
         return MaterialPageRoute(builder: (_) => HomeResidentNavbar());
       case AppRoutes.allServicesScreen:
         return MaterialPageRoute(builder: (_) => AllServicesView());
-      case AppRoutes.residentSearchScreen:
-        return MaterialPageRoute(builder: (_) => ResidentSearchViwe());
+      
       case AppRoutes.doctorScreen:
         return MaterialPageRoute(builder: (_) => DoctorView());
       case AppRoutes.doctorDetailsScreen:

@@ -9,6 +9,7 @@ import 'package:wasla/features/profile/presentation/views/technician_edit_profil
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
 import 'package:wasla/features/resident_service/features/gym/data/repo/gym_resident_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/manager/cubit/gym_resident_cubit.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/views/resident_search_view.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/cart/restaurant_cart_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/details/resident_restaurant_repo_impl.dart';
@@ -114,7 +115,6 @@ import 'package:wasla/features/resident_service/features/doctor/presentation/vie
 import 'package:wasla/features/resident_service/features/home/presentation/views/all_services_view.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/views/home_resident_navbar.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/views/resident_home_view.dart';
-import 'package:wasla/features/resident_service/features/home/presentation/views/resident_search_viwe.dart';
 import 'package:wasla/features/social_media/presentation/views/add_post_view.dart';
 import 'package:wasla/features/social_media/presentation/views/all_posts_view.dart';
 import 'package:wasla/features/social_media/presentation/views/reactions_view.dart';
@@ -230,10 +230,7 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.allServicesScreen,
       builder: (context, state) => AllServicesView(),
     ),
-    GoRoute(
-      path: AppRoutes.residentSearchScreen,
-      builder: (context, state) => ResidentSearchViwe(),
-    ),
+
     GoRoute(
       path: AppRoutes.doctorScreen,
       builder: (context, state) => DoctorView(),
@@ -716,6 +713,12 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) {
         final Map<String, dynamic> data = state.extra as Map<String, dynamic>;
         return SocialReportView(data: data);
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.residentSearchScreen,
+      builder: (context, state) {
+        return ResidentSearchView();
       },
     ),
   ],

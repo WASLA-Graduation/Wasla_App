@@ -13,6 +13,7 @@ abstract class ApiKeys {
   static const restaurantId = 'restaurantId';
   static const address = 'address';
   static const flag = 'flag';
+  static const query = 'query';
   static const notes = 'notes';
   static const entityId = 'entityId';
   static const isPaymentOnline = 'isPaymentOnline';
