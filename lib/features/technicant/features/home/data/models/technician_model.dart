@@ -14,8 +14,10 @@ class TechnicianModel extends UserBaseModel {
   final List<String> documentsUrls;
   final double rate;
   final bool isAvailable;
+  final int numberOfResident;
 
   TechnicianModel({
+    required this.numberOfResident,
     required this.email,
     required this.fullName,
     required this.phone,
@@ -53,8 +55,7 @@ class TechnicianModel extends UserBaseModel {
       documentsUrls: List<String>.from(json['documentsUrls'] ?? []),
       rate: (json['rate'] as num?)?.toDouble() ?? 0,
       isAvailable: json['isAvailable'] ?? false,
+      numberOfResident: json['numberOfResident'] ?? 0,
     );
   }
-
-
 }

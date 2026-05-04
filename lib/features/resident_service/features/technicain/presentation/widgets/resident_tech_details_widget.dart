@@ -92,7 +92,7 @@ class ResidentTechnacalDetailsWidget extends StatelessWidget {
       CircleStatModel(
         icon: Assets.assetsImagesGroup,
         title: "resident".tr(context).toLowerCase(),
-        value: "10000+",
+        value: "${technician.numberOfResident}+",
       ),
 
       CircleStatModel(
