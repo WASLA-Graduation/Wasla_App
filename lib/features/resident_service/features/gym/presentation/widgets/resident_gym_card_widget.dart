@@ -86,7 +86,7 @@ class ResidentGymCardWidget extends StatelessWidget {
       CircleStatModel(
         icon: Assets.assetsImagesGroup,
         title: "trainnees".tr(context).toLowerCase(),
-        value: "10000+",
+        value: "${gym.numberOfResidents} +",
       ),
 
       CircleStatModel(

@@ -12,8 +12,10 @@ class GymModel extends UserBaseModel {
   final List<String> photos;
   final int reviewsCount;
   final double rating;
+  final int numberOfResidents;
 
   GymModel({
+    required this.numberOfResidents,
     required this.id,
     required this.businessName,
     required this.ownerName,
@@ -35,6 +37,7 @@ class GymModel extends UserBaseModel {
 
   factory GymModel.fromJson(Map<String, dynamic> json) {
     return GymModel(
+      numberOfResidents: json['numberOfResidents'] ?? 0,
       id: json[ApiKeys.id] ?? '',
       businessName: json[ApiKeys.businessName] ?? '',
       ownerName: json[ApiKeys.ownerName] ?? '',
