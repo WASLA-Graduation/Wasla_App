@@ -30,6 +30,11 @@ abstract class ProfileRepo {
   Future<Either<String, DoctorModel>> getDoctorProfile({
     required String userId,
   });
+  Future<Either<String, Null>> contacktWithAdmin({
+    required String email,
+    required String fullName,
+    required String message,
+  });
 
   Future<Either<String, Null>> updateDoctorInfo({
     required String userId,

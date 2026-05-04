@@ -26,6 +26,17 @@ final class ProfileChangePassFailure extends ProfileState {
   ProfileChangePassFailure({required this.errMsg});
 }
 
+
+///Help Center States
+final class HelpCenterAddContactLoading extends ProfileState {}
+
+final class HelpCenterAddContactSuccess extends ProfileState {}
+
+final class HelpCenterAddContactFailure extends ProfileState {
+  final String errMsg;
+  HelpCenterAddContactFailure({required this.errMsg});
+}
+
 final class ProfileUpdateInfoLoading extends ProfileState {}
 
 final class ProfileUpdateInfoSuccess extends ProfileState {}

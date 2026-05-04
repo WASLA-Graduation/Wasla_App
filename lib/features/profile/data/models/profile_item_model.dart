@@ -42,12 +42,12 @@ class ProfileItemModel {
     const ProfileItemModel(
       image: Assets.assetsImagesLock,
       title: "privacyPolicy",
-      route: "",
+      route: AppRoutes.privacyPlolicyScreen,
     ),
     const ProfileItemModel(
       image: Assets.assetsImagesHelp,
       title: "helpCenter",
-      route: "",
+      route:AppRoutes.helpCenterScreen,
     ),
   ];
 }

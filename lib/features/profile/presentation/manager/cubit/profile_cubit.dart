@@ -59,6 +59,23 @@ class ProfileCubit extends Cubit<ProfileState> {
   int vehicleColor = -1;
   int technicainSpecialityId = -1;
 
+  Future<void> addContact({
+    required String fullName,
+    required String email,
+    required String message,
+  }) async {
+    emit(HelpCenterAddContactLoading());
+    final res = await profileRepo.contacktWithAdmin(
+      email: email,
+      fullName: fullName,
+      message: message,
+    );
+    res.fold(
+      (l) => emit(HelpCenterAddContactFailure(errMsg: l)),
+      (r) => emit(HelpCenterAddContactSuccess()),
+    );
+  }
+
   void updateTechnicantDocuments(List<PlatformFile> documents) {
     technicantDocuments = documents;
     emit(ProfileUpdateTechnicantDocuments());

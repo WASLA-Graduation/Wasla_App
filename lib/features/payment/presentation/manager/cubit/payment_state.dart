@@ -18,4 +18,8 @@ final class PaymentOnRetryState extends PaymentState {}
 
 final class GetPaymentLoadingState extends PaymentState {}
 
-final class GetPaymentLoadedState extends PaymentState {}
+final class GetPaymentLoadedState extends PaymentState {
+  final List<BasePaymentModel> payments;
+
+  GetPaymentLoadedState({required this.payments});
+}

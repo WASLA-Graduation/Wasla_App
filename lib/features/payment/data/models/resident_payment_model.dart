@@ -1,3 +1,5 @@
+import 'package:wasla/core/enums/payment_method.dart';
+import 'package:wasla/core/enums/service_provider_type.dart';
 import 'package:wasla/features/payment/data/models/base_payment_model.dart';
 
 class ResidentPaymentModel extends BasePaymentModel {
@@ -20,10 +22,10 @@ class ResidentPaymentModel extends BasePaymentModel {
       entityId: json['entityId'] ?? 0,
       totalAmount: (json['totalAmount'] ?? 0).toDouble(),
       paymentDate: DateTime.parse(json['paymentDate']),
-      paymentMethod: json['paymentMethod'] ?? 0,
-      status: json['status'] ?? 0,
-      serviceType: json['serviceType'] ?? 0,
-      entityType: json['entityType'] ?? 0,
+      paymentMethod: PaymentMethod.values[json['paymentMethod'] -1 ?? 0],
+      status: PaymentStatus.values[json['status'] ?? 0],
+      serviceType: ServiceProviderTypeEnum.values[json['serviceType'] - 1 ?? 0],
+      entityType: EntityType.values[json['entityType'] ?? 0],
     );
   }
 }

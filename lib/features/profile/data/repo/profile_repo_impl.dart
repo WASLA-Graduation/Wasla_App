@@ -356,4 +356,24 @@ class ProfileRepoImpl extends ProfileRepo {
       return Left(e.toString());
     }
   }
+
+  @override
+  Future<Either<String, Null>> contacktWithAdmin({
+    required String email,
+    required String fullName,
+    required String message,
+  }) async {
+    try {
+      await api.post(
+        ApiEndPoints.addContact,
+        body: {"fullName": fullName, "email": email, "message": message},
+      );
+
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }

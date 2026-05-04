@@ -15,6 +15,7 @@ class PaymentView extends StatefulWidget {
 class _PaymentViewState extends State<PaymentView> {
   @override
   void initState() {
+    getMyPayments();
     super.initState();
   }
 
@@ -38,5 +39,7 @@ class _PaymentViewState extends State<PaymentView> {
     );
   }
 
-  void getMyPayments() {}
+  void getMyPayments() {
+    context.read<PaymentCubit>().getPaymets();
+  }
 }

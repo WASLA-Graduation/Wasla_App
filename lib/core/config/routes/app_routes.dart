@@ -102,4 +102,6 @@ abstract class AppRoutes {
   static const String residentRestaurantOrdersScreen = '/residentRestaurantOrdersScreen';
   static const String socialReportScreen = '/socialReportScreen';
   static const String paymentScreen = '/paymentScreen';
+  static const String privacyPlolicyScreen = '/privacyPlolicyScreen';
+  static const String helpCenterScreen = '/HelpCenterScreen';
 }

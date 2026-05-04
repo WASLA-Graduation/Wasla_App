@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
@@ -10,7 +12,7 @@ import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/payment/data/models/resident_payment_model.dart';
 import 'package:wasla/features/payment/data/models/service_provider_payment_model.dart';
 
-abstract class PaymentService {
+class PaymentService {
   static Future<Either<String, String>> createPayment({
     required String userId,
     required String serviceProviderId,
@@ -72,14 +74,19 @@ abstract class PaymentService {
         '${ApiEndPoints.getPaymentsForResident}$residentId',
       );
 
+      // log('$response');
+
       List<ResidentPaymentModel> payments = [];
       for (var payment in response[ApiKeys.data]) {
         payments.add(ResidentPaymentModel.fromJson(payment));
       }
+
       return Right(payments);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.errorModel.errorMessage));
     } catch (e) {
+
+      // log(e.toString());
       return Left(ServerFailure(e.toString()));
     }
   }

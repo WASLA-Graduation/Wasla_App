@@ -1,10 +1,14 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
+import 'package:wasla/features/payment/payment_service.dart';
+import 'package:wasla/features/payment/presentation/manager/cubit/payment_cubit.dart';
 import 'package:wasla/features/payment/presentation/views/payment_view.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/features/auth/presentation/views/restaurant_complete_info_view.dart';
 import 'package:wasla/features/auth/presentation/views/technicant_complete_info_view.dart';
+import 'package:wasla/features/profile/presentation/views/help_center_view.dart';
+import 'package:wasla/features/profile/presentation/views/privacy_policy_view.dart';
 import 'package:wasla/features/profile/presentation/views/restaurant_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
@@ -725,7 +729,22 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.paymentScreen,
       builder: (context, state) {
-        return PaymentView();
+        return BlocProvider(
+          create: (context) => PaymentCubit(PaymentService()),
+          child: PaymentView(),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.privacyPlolicyScreen,
+      builder: (context, state) {
+        return PrivacyPolicyView();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.helpCenterScreen,
+      builder: (context, state) {
+        return HelpCenterView();
       },
     ),
   ],

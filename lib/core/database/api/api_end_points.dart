@@ -176,6 +176,7 @@ abstract class ApiEndPoints {
   static const String getTopServicesProvidersGlobally =
       'api/UserEvent/GetMostUsedServicesGlobally';
   static const String getPaymentsForResident = 'api/payment/AllPayment/';
+  static const String addContact = 'api/Admin/AddContact';
   static const String getPaymentsForServiceProvider =
       '/api/payment/AllPaymentByServiceProvider/';
 }
