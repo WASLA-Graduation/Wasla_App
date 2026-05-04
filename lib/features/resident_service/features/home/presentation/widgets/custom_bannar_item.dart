@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
-import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/responsive/size_config.dart';
+import 'package:wasla/core/utils/app_colors.dart';
+import 'package:wasla/features/resident_service/features/home/data/models/bannar_model.dart';
 
 class CustomBannarItem extends StatelessWidget {
-  const CustomBannarItem({super.key});
+  const CustomBannarItem({super.key, required this.banner});
+
+  final BannerModel banner;
 
   @override
   Widget build(BuildContext context) {
@@ -21,28 +23,26 @@ class CustomBannarItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 FittedBox(
-                  fit: BoxFit.scaleDown,
                   child: Text(
-                    '30%',
+                    banner.title,
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: AppColors.whiteColor,
                     ),
                   ),
                 ),
                 FittedBox(
-                  fit: BoxFit.scaleDown,
                   child: Text(
-                    "Today's Special",
+                    banner.subtitle,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: AppColors.whiteColor,
                     ),
                   ),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Text(
+                  banner.description,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  "get discount on your first order",
                   style: Theme.of(
                     context,
                   ).textTheme.labelSmall!.copyWith(color: AppColors.whiteColor),
@@ -56,7 +56,7 @@ class CustomBannarItem extends StatelessWidget {
           height: 170,
           right: context.isArabic ? null : -30,
           left: context.isArabic ? -30 : null,
-          child: Image.asset(Assets.assetsImagesTest, fit: BoxFit.cover),
+          child: Image.asset(banner.image, fit: BoxFit.cover),
         ),
       ],
     );

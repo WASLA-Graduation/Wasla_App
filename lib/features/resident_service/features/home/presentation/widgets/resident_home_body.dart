@@ -60,7 +60,9 @@ class ResidentHomeBody extends StatelessWidget {
                   child: CustomIdentfierWidget(
                     leadingText: "spacialOffers".tr(context),
                     actionText: "seeAll".tr(context),
-                    onTap: () async {},
+                    onTap: () async {
+                      context.pushScreen(AppRoutes.allBannarsScreen);
+                    },
                   ),
                 ),
 

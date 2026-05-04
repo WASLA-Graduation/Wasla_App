@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/features/resident_service/features/home/data/models/bannar_model.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_bannar_item.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/widgets/custom_bannar_smooth_indicator.dart';
@@ -21,8 +22,6 @@ class CustomBannarWidget extends StatelessWidget {
           height: 160,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
               colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
             ),
             borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -45,14 +44,13 @@ class _CustomBannarPageSliderState extends State<CustomBannarPageSlider> {
   late PageController pageController;
   Timer? timer;
 
-  final int bannerCount = 3;
+  int get bannerCount => BannerModel.bannars.length;
 
   @override
   void initState() {
     super.initState();
 
     pageController = PageController(initialPage: 0);
-
     _animatedPageView();
   }
 
@@ -67,7 +65,7 @@ class _CustomBannarPageSliderState extends State<CustomBannarPageSlider> {
 
       pageController.animateToPage(
         nextIndex,
-        duration: const Duration(milliseconds: 1000),
+        duration: const Duration(milliseconds: 800),
         curve: Curves.easeInOut,
       );
 
@@ -93,7 +91,7 @@ class _CustomBannarPageSliderState extends State<CustomBannarPageSlider> {
             context.read<HomeResidentCubit>().updateCurrentIndex(index);
           },
           itemBuilder: (context, index) {
-            return const CustomBannarItem();
+            return CustomBannarItem(banner: BannerModel.bannars[index]);
           },
         ),
         const Align(

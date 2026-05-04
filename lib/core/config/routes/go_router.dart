@@ -14,6 +14,7 @@ import 'package:wasla/features/profile/presentation/views/technician_edit_profil
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
 import 'package:wasla/features/resident_service/features/gym/data/repo/gym_resident_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/manager/cubit/gym_resident_cubit.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/views/all_bannars_view.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/views/resident_search_view.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/cart/restaurant_cart_repo_impl.dart';
@@ -745,6 +746,12 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.helpCenterScreen,
       builder: (context, state) {
         return HelpCenterView();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.allBannarsScreen,
+      builder: (context, state) {
+        return AllBannarsView();
       },
     ),
   ],
