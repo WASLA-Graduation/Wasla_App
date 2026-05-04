@@ -132,12 +132,20 @@ class ChatHub {
 
   //  Send typing
   Future<void> sendTyping(String receiverId) async {
-    await hubConnection.invoke("Typing", args: [receiverId]);
+    try {
+      await hubConnection.invoke("Typing", args: [receiverId]);
+    } on Exception catch (e) {
+      log('Disha Typing..... Error ${e.toString()}');
+    }
   }
 
   ///  send Stop typing
   Future<void> stopTyping(String receiverId) async {
-    await hubConnection.invoke("StopTyping", args: [receiverId]);
+    try {
+      await hubConnection.invoke("StopTyping", args: [receiverId]);
+    } on Exception catch (e) {
+      log('Disha Stop Typing..... Error ${e.toString()}');
+    }
   }
 
   Future<void> disconnect() async {

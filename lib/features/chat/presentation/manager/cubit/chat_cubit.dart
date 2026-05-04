@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/enums/msg_type_enum.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
+import 'package:wasla/core/service/signalR/chat_hub.dart';
 import 'package:wasla/features/chat/data/models/all_users_chat_model.dart';
 import 'package:wasla/features/chat/data/models/chat_user_info.dart';
 import 'package:wasla/features/chat/data/models/chats_msg_model.dart';
@@ -46,6 +47,12 @@ class ChatCubit extends Cubit<ChatState> {
   double targetOffsetDx = 0.0;
   Timer? _searchTimer;
   bool isEdit = false;
+
+  ChatHub? chatHub;
+
+  Timer? typingTimer;
+
+  bool userIsTyping = false;
   final FocusNode msgFocusNode = FocusNode();
   MessageModel? editedMsg;
   void onRetry() {
@@ -84,7 +91,7 @@ class ChatCubit extends Cubit<ChatState> {
     currentUser = user!;
   }
 
-  void whenUserTyping() {
+  void whenUserTyping() async {
     if (messageController.text.isEmpty && images.isEmpty) {
       isSend = false;
       emit(ChatWhenUserTyping());
@@ -95,6 +102,26 @@ class ChatCubit extends Cubit<ChatState> {
       isSend = true;
       emit(ChatWhenUserTyping());
     }
+
+    final String receiverId = currentResceiver;
+
+    if (userIsTyping == false) {
+      ////start typing
+      userIsTyping = true;
+      chatHub = ChatHub();
+      await chatHub!.init();
+      chatHub!.sendTyping(receiverId);
+    }
+    if (typingTimer?.isActive ?? false) {
+      typingTimer?.cancel();
+    }
+    typingTimer = Timer(const Duration(seconds: 1), () async {
+      userIsTyping = false;
+
+      ///stop typing
+      await chatHub!.stopTyping(receiverId);
+      chatHub!.disconnect();
+    });
   }
 
   void whenUserUpdate({required MessageModel message}) {
