@@ -23,7 +23,6 @@ class CustomChooseReportBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-
       padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
       width: double.infinity,
       decoration: BoxDecoration(
@@ -103,7 +102,10 @@ class CustomChooseReportBottomSheet extends StatelessWidget {
       children: [
         Expanded(
           child: GeneralButton(
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {
+              Navigator.of(context).pop();
+              context.read<SocialMediaCubit>().reportReason = ReportReason.none;
+            },
             text: 'cancel'.tr(context),
             height: 45,
             fontSize: 15,
