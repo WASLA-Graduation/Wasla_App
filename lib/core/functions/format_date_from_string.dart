@@ -47,14 +47,25 @@ String formatDateToNotificationString(DateTime date) {
   final now = DateTime.now();
   final diff = now.difference(date);
 
-  if (diff.inDays == 0) {
-    //today
-    return '${DateFormat('h').format(date)}h ago';
-  } else if (diff.inDays == 1) {
-    return DateFormat('h:mm a').format(date);
-  } else if (diff.inDays < 7) {
-    return DateFormat('EEEE').format(date); // Mon, Tue, etc.
-  } else {
-    return DateFormat('dd MMM').format(date); // 10 May
+  if (diff.inMinutes < 1) {
+    return 'just now';
   }
+
+  if (diff.inMinutes < 60) {
+    return '${diff.inMinutes}m ago';
+  }
+
+  if (diff.inHours < 24 && now.day == date.day) {
+    return '${diff.inHours}h ago';
+  }
+
+  if (diff.inDays == 1 || now.difference(date).inHours < 48) {
+    return 'Yesterday ${DateFormat('h:mm a').format(date)}';
+  }
+
+  if (diff.inDays < 7) {
+    return DateFormat('EEEE').format(date);
+  }
+
+  return DateFormat('dd MMM').format(date);
 }

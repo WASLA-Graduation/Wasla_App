@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/features/notifications/data/models/notification_model.dart';
 import 'package:wasla/features/notifications/data/repo/notification_repo.dart';
@@ -14,6 +15,10 @@ class NotificationCubit extends Cubit<NotificationState> {
   int pageSize = 8;
   int totoalLastSeenNotifications = 0;
   bool theEndPaginations = false;
+
+  void onRetry() {
+    emit(NotificationOnRetryState());
+  }
 
   Future<void> fetchNotifications({required bool fromPagination}) async {
     if (theEndPaginations ||
@@ -34,26 +39,33 @@ class NotificationCubit extends Cubit<NotificationState> {
       pageSize: pageSize,
     );
 
-    result.fold((error) => emit(GetNotificationFailure(errMsg: error)), (
-      success,
-    ) {
-      if (success.notifications.isEmpty) {
-        theEndPaginations = true;
-      } else {
-        pageNumber++;
-        List<NotificationModel> sortedNotifications =
-            NotificationModel.sortNotificationsDescending(
-              success.notifications,
-            );
-        Map<String, List<NotificationModel>> newSections =
-            NotificationModel.sparateNotificationsToSections(
-              notifications: sortedNotifications,
-            );
-        mergetwomaps(notificationsSections, newSections);
-      }
+    result.fold(
+      (error) {
+        if (error is NoInternetFailure) {
+          emit(NotificationNetworkState());
+        } else {
+          emit(NotificationFailureState());
+        }
+      },
+      (success) {
+        if (success.notifications.isEmpty) {
+          theEndPaginations = true;
+        } else {
+          pageNumber++;
+          List<NotificationModel> sortedNotifications =
+              NotificationModel.sortNotificationsDescending(
+                success.notifications,
+              );
+          Map<String, List<NotificationModel>> newSections =
+              NotificationModel.sparateNotificationsToSections(
+                notifications: sortedNotifications,
+              );
+          mergetwomaps(notificationsSections, newSections);
+        }
 
-      emit(GEtNotificationLoaded(sections: notificationsSections));
-    });
+        emit(GEtNotificationLoaded(sections: notificationsSections));
+      },
+    );
   }
 
   //Done

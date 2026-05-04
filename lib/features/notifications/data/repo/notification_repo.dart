@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/features/notifications/data/models/notification_pagination_model.dart';
 
 abstract class NotificationRepo {
@@ -15,7 +16,7 @@ abstract class NotificationRepo {
   Future<Either<String, int>> getTotalNumbersOfUnReadLastSeen({
     required String userId,
   });
-  Future<Either<String, NotificationPaginationModel>> getAllNotifications({
+  Future<Either<Failure, NotificationPaginationModel>> getAllNotifications({
     required String userId,
     required int pageNumber,
     required int pageSize,

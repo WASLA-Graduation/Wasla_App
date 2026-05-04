@@ -4,6 +4,12 @@ sealed class NotificationState {}
 
 final class NotificationInitial extends NotificationState {}
 
+//basic 3 states
+final class NotificationFailureState extends NotificationState {}
+final class NotificationNetworkState extends NotificationState {}
+final class NotificationOnRetryState extends NotificationState {}
+
+
 final class GetNotificationLoading extends NotificationState {}
 final class GetNotificationFromPaginationLoading extends NotificationState {}
 
@@ -12,10 +18,7 @@ final class GEtNotificationLoaded extends NotificationState {
   GEtNotificationLoaded({required this.sections});
 }
 
-final class GetNotificationFailure extends NotificationState {
-  final String errMsg;
-  GetNotificationFailure({required this.errMsg});
-}
+
 
 final class DeleteNotificationSuccess extends NotificationState {}
 

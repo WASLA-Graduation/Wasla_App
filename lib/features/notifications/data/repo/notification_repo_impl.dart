@@ -1,8 +1,11 @@
 import 'package:dartz/dartz.dart';
+import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/error/failure.dart';
+import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/notifications/data/models/notification_pagination_model.dart';
 import 'package:wasla/features/notifications/data/repo/notification_repo.dart';
 
@@ -69,12 +72,15 @@ class NotificationRepoImpl implements NotificationRepo {
   }
 
   @override
-  Future<Either<String, NotificationPaginationModel>> getAllNotifications({
+  Future<Either<Failure, NotificationPaginationModel>> getAllNotifications({
     required String userId,
     required int pageNumber,
     required int pageSize,
   }) async {
     try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
       final response = await api.get(
         '${ApiEndPoints.getAllNotifications}$userId',
         queryParameters: {
@@ -86,7 +92,9 @@ class NotificationRepoImpl implements NotificationRepo {
         NotificationPaginationModel.fromJson(response[ApiKeys.data]),
       );
     } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 }
