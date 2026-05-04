@@ -80,7 +80,7 @@ String getRightPersonalInfoRoute() {
   final String? role = SharedPreferencesHelper.get(key: ApiKeys.role);
   switch (ServiceRoleExtension.fromString(role!)) {
     case ServiceRole.resident:
-      return AppRoutes.residentPersonalInfoScreen;
+      return AppRoutes.residentProfileInfoScreen;
     case ServiceRole.driver:
       return AppRoutes.driverProfileInfoScreen;
 

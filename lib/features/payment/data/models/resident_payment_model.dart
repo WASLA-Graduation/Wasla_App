@@ -22,9 +22,9 @@ class ResidentPaymentModel extends BasePaymentModel {
       entityId: json['entityId'] ?? 0,
       totalAmount: (json['totalAmount'] ?? 0).toDouble(),
       paymentDate: DateTime.parse(json['paymentDate']),
-      paymentMethod: PaymentMethod.values[json['paymentMethod'] -1 ?? 0],
+      paymentMethod: PaymentMethod.values[json['paymentMethod'] - 1 ?? 0],
       status: PaymentStatus.values[json['status'] ?? 0],
-      serviceType: ServiceProviderTypeEnum.values[json['serviceType'] - 1 ?? 0],
+      serviceType: ServiceProviderTypeEnum.values[json['serviceType'] ?? 0],
       entityType: EntityType.values[json['entityType'] ?? 0],
     );
   }

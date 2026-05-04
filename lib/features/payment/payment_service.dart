@@ -74,19 +74,18 @@ class PaymentService {
         '${ApiEndPoints.getPaymentsForResident}$residentId',
       );
 
-      // log('$response');
-
       List<ResidentPaymentModel> payments = [];
       for (var payment in response[ApiKeys.data]) {
-        payments.add(ResidentPaymentModel.fromJson(payment));
+        if (payment['entityType'] <= 1) {
+          payments.add(ResidentPaymentModel.fromJson(payment));
+        }
       }
 
       return Right(payments);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.errorModel.errorMessage));
     } catch (e) {
-
-      // log(e.toString());
+      log(e.toString());
       return Left(ServerFailure(e.toString()));
     }
   }
@@ -104,7 +103,9 @@ class PaymentService {
 
       List<ServiceProviderPaymentModel> payments = [];
       for (var payment in response[ApiKeys.data]) {
-        payments.add(ServiceProviderPaymentModel.fromJson(payment));
+        if (payment['entityType'] <= 1) {
+          payments.add(ServiceProviderPaymentModel.fromJson(payment));
+        }
       }
       return Right(payments);
     } on ServerException catch (e) {
