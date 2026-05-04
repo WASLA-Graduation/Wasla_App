@@ -4,7 +4,9 @@ class RealTimeMsgModel {
   final String senderId;
   final String receiverId;
   final String? nameReceiver;
+  final String? nameSender;
   final String? profileReceiver;
+  final String? profileSender;
   final String? messageText;
   final String? audio;
   final int type;
@@ -16,6 +18,8 @@ class RealTimeMsgModel {
   final List<String> files;
 
   RealTimeMsgModel({
+    this.nameSender,
+    this.profileSender,
     required this.id,
     required this.chatId,
     required this.senderId,
@@ -35,6 +39,8 @@ class RealTimeMsgModel {
 
   factory RealTimeMsgModel.fromJson(Map<String, dynamic> map) {
     return RealTimeMsgModel(
+      nameSender: map['nameSender'],
+      profileSender: map['profileSender'],
       id: map['id'],
       chatId: map['chatId'],
       senderId: map['senderId'],

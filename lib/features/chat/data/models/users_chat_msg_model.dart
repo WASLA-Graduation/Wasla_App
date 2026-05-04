@@ -55,17 +55,25 @@ class UsersChatMsgModel {
     );
   }
 
-  factory UsersChatMsgModel.fromMap(RealTimeMsgModel realTimeModel, int count) {
+  factory UsersChatMsgModel.fromMap(
+    RealTimeMsgModel realTimeModel,
+    int count,
+    bool isMe,
+  ) {
     return UsersChatMsgModel(
       receiverId: realTimeModel.receiverId,
       unreadMessageCount: count,
       senderId: realTimeModel.senderId,
       chatId: realTimeModel.chatId,
-      name: realTimeModel.nameReceiver ?? '',
-      profileReceiver: realTimeModel.profileReceiver ?? '',
+      name: isMe
+          ? realTimeModel.nameReceiver ?? ''
+          : realTimeModel.nameSender ?? '',
+      profileReceiver: isMe
+          ? realTimeModel.profileReceiver ?? ''
+          : realTimeModel.profileSender ?? '',
       messageText: realTimeModel.messageText ?? '',
       messageId: realTimeModel.id,
-      isMine: realTimeModel.isMine,
+      isMine: isMe,
       audio: realTimeModel.audio,
       isEdit: realTimeModel.isEdited,
       type: realTimeModel.type,

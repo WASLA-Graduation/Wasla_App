@@ -30,6 +30,7 @@ class ChatCubit extends Cubit<ChatState> {
   int allChatsOfUserPageSize = 10;
   bool allChatsOfUserEndOfPagination = false;
   String currentUser = '';
+  String currentResceiver = '';
   int chatPageNumber = 1;
   int chatPageSize = 10;
   bool chatEndOfPagination = false;
@@ -198,7 +199,6 @@ class ChatCubit extends Cubit<ChatState> {
     required bool fromPagination,
     required String recieverId,
   }) async {
-  
     if (chatEndOfPagination ||
         fromPagination && state is ChatGetCahtLoadigFromPagination) {
       return;
@@ -223,7 +223,7 @@ class ChatCubit extends Cubit<ChatState> {
         emit(ChatGetCahtFailure(errorMessage: error));
       },
       (success) {
-        currentChatId=success.chatId.toString();
+        currentChatId = success.chatId.toString();
         if (success.messages.data.isEmpty) {
           chatEndOfPagination = true;
 
@@ -461,67 +461,70 @@ class ChatCubit extends Cubit<ChatState> {
 
   //Done
   handleWhenNewMsg({required RealTimeMsgModel user}) {
-    //add msg to chat
+    //when i in chat and there exist messages with this chat
     if (user.chatId.toString() == currentChatId.toString()) {
-      messages.insert(
-        0,
-        MessageModel(
-          messageText: user.messageText,
-          receiverId: user.receiverId,
-          senderId: user.senderId,
-          audio: user.audio,
-          messageId: user.id,
-          isMine: user.isMine,
-          type: user.type,
-          sentAt: user.sentAt,
-          readAt: user.readAt,
-          isEdited: user.isEdited,
-          files: user.files,
-        ),
-      );
+      messages.insert(0, _getNewMsg(user));
       readMsgs(chatId: currentChatId);
       emit(ChatGetCahtOfUserSuccess(messages: messages));
     }
-    //this case is new chat
-    if (currentChatId.isEmpty && user.senderId == currentUser) {
+    //when the new chat and i start it
+    else if (currentChatId.isEmpty && user.senderId == currentUser) {
       currentChatId = user.chatId.toString();
-      messages.insert(
-        0,
-        MessageModel(
-          messageText: user.messageText,
-          receiverId: user.receiverId,
-          senderId: user.senderId,
-          audio: user.audio,
-          messageId: user.id,
-          isMine: user.isMine,
-          type: user.type,
-          sentAt: user.sentAt,
-          readAt: user.readAt,
-          isEdited: user.isEdited,
-          files: user.files,
-        ),
-      );
+      messages.insert(0, _getNewMsg(user));
       readMsgs(chatId: currentChatId);
+      emit(ChatGetCahtOfUserSuccess(messages: messages));
+    }
+    ///when i in the chat and new user start it
+    else if (currentChatId.isEmpty && user.receiverId == currentUser) {
+      messages.insert(0, _getNewMsg(user));
+      //me in chat
+      if (currentResceiver.isNotEmpty) {
+        currentChatId = user.chatId.toString();
+        readMsgs(chatId: currentChatId);
+      }
       emit(ChatGetCahtOfUserSuccess(messages: messages));
     }
 
-    //add chat to list
+    //when chat exist in the current list
     for (var chat in allChatsOfUser) {
       if (chat.chatId == user.chatId) {
         int numOfUnreadMsgs = chat.unreadMessageCount + 1;
         allChatsOfUser.remove(chat);
         allChatsOfUser.insert(
           0,
-          UsersChatMsgModel.fromMap(user, numOfUnreadMsgs),
+          UsersChatMsgModel.fromMap(
+            user,
+            numOfUnreadMsgs,
+            currentUser == user.senderId,
+          ),
         );
         emit(ChatGetChatsOfUserSuccess(allChats: allChatsOfUser));
         return;
       }
     }
     // new chat
-    allChatsOfUser.insert(0, UsersChatMsgModel.fromMap(user, 1));
+    allChatsOfUser.insert(
+      0,
+      UsersChatMsgModel.fromMap(user, 1, currentUser == user.senderId),
+    );
 
     emit(ChatGetChatsOfUserSuccess(allChats: allChatsOfUser));
+  }
+
+  MessageModel _getNewMsg(RealTimeMsgModel user) {
+    return MessageModel(
+      messageText: user.messageText,
+      receiverId: user.receiverId,
+      senderId: user.senderId,
+      audio: user.audio,
+      messageId: user.id,
+      isMine: user.isMine,
+      type: user.type,
+      sentAt: user.sentAt,
+      readAt: user.readAt,
+      isEdited: user.isEdited,
+      files: user.files,
+    );
   }
 
   //Done

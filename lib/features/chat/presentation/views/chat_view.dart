@@ -23,6 +23,8 @@ class _ChatViewState extends State<ChatView> {
   @override
   void deactivate() {
     context.read<ChatCubit>().currentChatId = '';
+    context.read<ChatCubit>().currentResceiver = '';
+
     super.deactivate();
   }
 
@@ -40,6 +42,7 @@ class _ChatViewState extends State<ChatView> {
 
   void getChat() {
     final cubit = context.read<ChatCubit>();
+    cubit.currentResceiver = widget.data[AppStrings.id];
     cubit.messages.clear();
     cubit.resetMsg();
     cubit.userInfo = null;
