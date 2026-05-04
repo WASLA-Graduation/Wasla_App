@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
@@ -29,6 +31,8 @@ abstract class GlobalRepo {
 
         queryParameters: {ApiKeys.id: gymId},
       );
+
+      log('$response');
       return Right(GymModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
       return Left(ServerFailure(e.errorModel.errorMessage));
