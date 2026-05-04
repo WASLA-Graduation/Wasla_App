@@ -15,22 +15,24 @@ class SocialProfileTaps extends StatelessWidget {
     return BlocBuilder<SocialMediaCubit, SocialMediaState>(
       buildWhen: (previous, current) => current is GetUserPostsLoading,
       builder: (context, state) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: List.generate(PostType.values.length, (index) {
-            return CustomTapWidget(
-              isSelected: cubit.userProfileCurrentTap == index,
-              title: PostType.getTapName(index).tr(context),
-              onTap: () {
-                cubit.changeTapIndex(
-                  index: index,
-                  postType: PostType.values[index],
-                  userId: userId,
-                );
-              },
-            );
-          }),
-        );
+        return cubit.currentUser != userId
+            ? SizedBox()
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: List.generate(PostType.values.length, (index) {
+                  return CustomTapWidget(
+                    isSelected: cubit.userProfileCurrentTap == index,
+                    title: PostType.getTapName(index).tr(context),
+                    onTap: () {
+                      cubit.changeTapIndex(
+                        index: index,
+                        postType: PostType.values[index],
+                        userId: userId,
+                      );
+                    },
+                  );
+                }),
+              );
       },
     );
   }

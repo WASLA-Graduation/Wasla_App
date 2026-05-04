@@ -46,5 +46,6 @@ class _AllPostsViewState extends State<AllPostsView> {
     final String? userId = await getUserId();
     await cubit.getAllPosts(fromPagination: false);
     cubit.getUserProfile(userId: userId!);
+    cubit.getCurrentUser();
   }
 }

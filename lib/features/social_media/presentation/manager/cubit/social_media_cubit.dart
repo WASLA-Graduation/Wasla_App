@@ -41,6 +41,7 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
   bool endOfComments = false;
   String postContent = '';
   String commentContent = '';
+  String currentUser = '';
 
   Map<int, int> postDotIndex = {};
 
@@ -48,6 +49,11 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
     emit(SocialMediaOnRetryState());
   }
 
+
+
+void getCurrentUser()async{
+  currentUser = await getUserId()??'';
+}
   void updatePostImages({List<File>? newImages, List<String>? oldImages}) {
     if (newImages != null) {
       updatePostModel.newImages.addAll(newImages);
