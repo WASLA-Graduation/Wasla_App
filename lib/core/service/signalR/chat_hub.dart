@@ -109,28 +109,36 @@ class ChatHub {
       final chatId = info['chatId'];
     });
 
-    // /// ✍️ Typing
-    // hubConnection.on("UserTyping", (data) {
-    //   final senderId = data![0];
-    //   print("✍️ Typing from: $senderId");
-    // });
+    // Typing
+    hubConnection.on("UserTyping", (data) {
+      final map = data![0] as Map;
+      final senderId = map['senderId'];
+      chat.handleWhenAnotherUserIstypeTypingOrStopTyping(
+        userId: senderId,
+        isTyping: true,
+      );
+    });
 
-    // /// ✋ Stop Typing
-    // hubConnection.on("UserStopTyping", (data) {
-    //   final senderId = data![0];
-    //   print("✋ Stop Typing from: $senderId");
-    // });
+    //Stop Typing by user
+    hubConnection.on("UserStopTyping", (data) {
+      final map = data![0] as Map;
+      final senderId = map['senderId'];
+      chat.handleWhenAnotherUserIstypeTypingOrStopTyping(
+        userId: senderId,
+        isTyping: false,
+      );
+    });
   }
 
-  /// ✍️ Send typing
-  // Future<void> sendTyping(String receiverId) async {
-  //   await hubConnection.invoke("Typing", args: [receiverId]);
-  // }
+  //  Send typing
+  Future<void> sendTyping(String receiverId) async {
+    await hubConnection.invoke("Typing", args: [receiverId]);
+  }
 
-  // /// ✋ Stop typing
-  // Future<void> stopTyping(String receiverId) async {
-  //   await hubConnection.invoke("StopTyping", args: [receiverId]);
-  // }
+  ///  send Stop typing
+  Future<void> stopTyping(String receiverId) async {
+    await hubConnection.invoke("StopTyping", args: [receiverId]);
+  }
 
   Future<void> disconnect() async {
     await hubConnection.stop();

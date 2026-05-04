@@ -17,6 +17,17 @@ class GetChatSubTitle extends StatelessWidget {
 
     final bool isMe = cubit.currentUser == userChat.senderId;
     final MessageType messageType = MessageType.values[userChat.type - 1];
+
+    if (userChat.isTyping) {
+      return Text(
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        'typing'.tr(context),
+        style: Theme.of(
+          context,
+        ).textTheme.labelSmall!.copyWith(color: AppColors.seenColor),
+      );
+    }
     if (!isMe) {
       switch (messageType) {
         case MessageType.text:

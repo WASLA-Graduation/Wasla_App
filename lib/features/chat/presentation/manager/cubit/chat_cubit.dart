@@ -553,6 +553,32 @@ class ChatCubit extends Cubit<ChatState> {
     }
   }
 
+  handleWhenAnotherUserIstypeTypingOrStopTyping({
+    required String userId,
+    required bool isTyping,
+  }) {
+    ///outside the chat
+    for (var chat in allChatsOfUser) {
+      if (chat.senderId == userId) {
+        if (isTyping) {
+          chat.isTyping = true;
+        } else {
+          chat.isTyping = false;
+        }
+        emit(ChatGetChatsOfUserSuccess(allChats: allChatsOfUser));
+      }
+    }
+
+    if (currentResceiver == userId) {
+      if (isTyping) {
+        userInfo!.isTypeing = true;
+      } else {
+        userInfo!.isTypeing = false;
+      }
+      emit(ChatGetUserInfo());
+    }
+  }
+
   ////Searching
   Future<void> searchForAllUsers({required String query}) async {
     if (_searchTimer == null || _searchTimer!.isActive) {

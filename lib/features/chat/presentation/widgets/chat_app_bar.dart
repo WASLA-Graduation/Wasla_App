@@ -50,6 +50,8 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                       child: Text(
                         cubit.userInfo == null
                             ? ''
+                            : cubit.userInfo!.isTypeing
+                            ? 'typing'.tr(context)
                             : cubit.userInfo!.isOnline
                             ? 'online'.tr(context)
                             : '${'lastSeenAt'.tr(context)} ${formatDateToCustomString(cubit.userInfo!.lastSeen)}',

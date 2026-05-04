@@ -16,6 +16,7 @@ class UsersChatMsgModel {
   DateTime sentAt;
   DateTime? readAt;
   int unreadMessageCount;
+  bool isTyping = false;
 
   UsersChatMsgModel({
     required this.unreadMessageCount,

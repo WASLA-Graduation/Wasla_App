@@ -6,6 +6,7 @@ class ChatUserInfo {
   final String phone;
   bool isOnline;
   DateTime lastSeen;
+  bool isTypeing = false;
 
   ChatUserInfo({
     required this.isOnline,
