@@ -1,9 +1,14 @@
 import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/enums/report_enum.dart';
 import 'package:wasla/core/enums/social_enums.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
+import 'package:wasla/core/functions/toast_alert.dart';
+import 'package:wasla/core/service/service_locator.dart';
+import 'package:wasla/core/utils/app_colors.dart';
 
 import 'package:wasla/features/social_media/data/models/social_comment_model.dart';
 import 'package:wasla/features/social_media/data/models/social_post_model.dart';
@@ -43,17 +48,23 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
   String commentContent = '';
   String currentUser = '';
 
+  ReportReason reportReason = ReportReason.none;
+
   Map<int, int> postDotIndex = {};
+
+  void chooseReport({required ReportReason reportReason}) {
+    this.reportReason = reportReason;
+    emit(SocialChooseReportState());
+  }
 
   void onRetry() {
     emit(SocialMediaOnRetryState());
   }
 
+  void getCurrentUser() async {
+    currentUser = await getUserId() ?? '';
+  }
 
-
-void getCurrentUser()async{
-  currentUser = await getUserId()??'';
-}
   void updatePostImages({List<File>? newImages, List<String>? oldImages}) {
     if (newImages != null) {
       updatePostModel.newImages.addAll(newImages);
@@ -524,21 +535,19 @@ void getCurrentUser()async{
       reason: reason,
     );
     result.fold(
-      (failure) => emit(SocialReportFailureState(errorMessage: failure)),
-      (_) {
-        switch (targetType) {
-          case TargetType.post:
-            allPosts.removeWhere((post) => post.postId == targetId);
-            emit(GetAllPostsSuccess());
+      (failure) {
+        toastAlert(color: AppColors.error, msg: failure);
 
-            break;
-          case TargetType.comment:
-            postComments.removeWhere(
-              (comment) => comment.commentId == targetId,
-            );
-            emit(GetCommentsSuccess());
-            break;
-        }
+        reportReason = ReportReason.none;
+        emit(SocialReportFailureState(errorMessage: failure));
+      },
+      (_) {
+        toastAlert(
+          color: AppColors.green,
+          msg: 'reportSuccess'.tr(navigatorKey.currentContext!),
+        );
+
+        reportReason = ReportReason.none;
         emit(SocialReportSucessState());
       },
     );

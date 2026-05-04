@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
-import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/enums/social_enums.dart';
-import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
-import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/widgets/under_line_widget.dart';
+import 'package:wasla/features/social_media/presentation/widgets/custom_choose_report_bottom_sheet.dart';
 
 class ReportBottomSheet extends StatelessWidget {
   const ReportBottomSheet({
@@ -38,14 +36,34 @@ class ReportBottomSheet extends StatelessWidget {
           UnderLineWidget(),
           InkWell(
             onTap: () {
-              context.pushScreen(
-                AppRoutes.socialReportScreen,
-                arguments: {
-                  AppStrings.targetId: targetId,
-                  AppStrings.targetType: targetType,
+              // context.pushScreen(
+              //   AppRoutes.socialReportScreen,
+              //   arguments: {
+              //     AppStrings.targetId: targetId,
+              //     AppStrings.targetType: targetType,
+              //   },
+              // );
+
+              context.pop();
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                builder: (context) {
+                  return DraggableScrollableSheet(
+                    initialChildSize: 0.6,
+                    minChildSize: 0.4,
+                    maxChildSize: 0.9,
+                    expand: false,
+                    builder: (_, controller) {
+                      return CustomChooseReportBottomSheet(
+                        content: content,
+                        targetId: targetId,
+                        targetType: targetType,
+                      );
+                    },
+                  );
                 },
               );
-              context.pop();
             },
             child: Row(
               children: [
@@ -59,8 +77,7 @@ class ReportBottomSheet extends StatelessWidget {
             ),
           ),
 
-
-          const SizedBox()
+          const SizedBox(),
         ],
       ),
     );

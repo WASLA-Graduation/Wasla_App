@@ -552,7 +552,17 @@
 "fieldRequired": "هذا الحقل مطلوب",
 "invalidEmail": "يرجى إدخال بريد إلكتروني صحيح",
       "messageSent": "تم ارسال الرسالة بنجاح",
-          "typing": "جاري الكتابة"
+          "typing": "جاري الكتابة",
+          "spam": "رسائل مزعجة",
+  "harassment": "تحرش",
+  "hateSpeech": "خطاب كراهية",
+  "falseInformation": "معلومات خاطئة",
+  "violence": "عنف",
+  "other": "أخرى",
+    "reportDesc": " يرجى تحديد نوع المشكلة",
+      "reportWord": "ابلاغ"
+
+
 
 
 

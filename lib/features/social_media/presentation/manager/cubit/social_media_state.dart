@@ -94,6 +94,7 @@ final class UpdateCommentFailure extends SocialMediaState {
 
 /// state for report
 final class SocialReportLoadingState extends SocialMediaState {}
+final class SocialChooseReportState extends SocialMediaState {}
 
 final class SocialReportSucessState extends SocialMediaState {}
 
