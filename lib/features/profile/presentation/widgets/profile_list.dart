@@ -19,7 +19,7 @@ class ProfileList extends StatelessWidget {
 
       itemBuilder: (context, index) => InkWell(
         onTap: () {
-          if (index == 5) return;
+          if (index == 4) return;
           if ((index == 0 || index == 1)) {
             if (cubit.user != null) {
               context.pushScreen(
@@ -33,7 +33,7 @@ class ProfileList extends StatelessWidget {
         },
         child: ProfileItem(
           profileItemModel: ProfileItemModel.items[index],
-          trailing: index == 5
+          trailing: index == 4
               ? CustomSwitchButton(
                   onChanged: (value) {
                     context.read<GlobalCubit>().changeTheme(

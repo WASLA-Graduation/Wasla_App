@@ -4,7 +4,7 @@ import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/enums/service_provider_type.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
-import 'package:wasla/core/service/payment/payment_service.dart';
+import 'package:wasla/features/payment/payment_service.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/widgets/checkout/restaurant_checkout_body.dart';
 

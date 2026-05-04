@@ -25,14 +25,9 @@ class ProfileItemModel {
       route: getRightPersonalInfoRoute(),
     ),
     const ProfileItemModel(
-      image: Assets.assetsImagesNotification,
-      title: "notification",
-      route: "",
-    ),
-    const ProfileItemModel(
       image: Assets.assetsImagesPayment,
       title: "payment",
-      route: "",
+      route: AppRoutes.paymentScreen,
     ),
     const ProfileItemModel(
       image: Assets.assetsImagesLanguage,

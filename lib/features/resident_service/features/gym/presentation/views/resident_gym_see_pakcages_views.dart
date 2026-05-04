@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/enums/service_provider_type.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
-import 'package:wasla/core/service/payment/payment_service.dart';
+import 'package:wasla/features/payment/payment_service.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/manager/cubit/gym_resident_cubit.dart';

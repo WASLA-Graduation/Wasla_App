@@ -1,10 +1,14 @@
 import 'package:dartz/dartz.dart';
+import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
 import 'package:wasla/core/enums/service_provider_type.dart';
+import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/service/service_locator.dart';
+import 'package:wasla/features/payment/data/models/resident_payment_model.dart';
+import 'package:wasla/features/payment/data/models/service_provider_payment_model.dart';
 
 abstract class PaymentService {
   static Future<Either<String, String>> createPayment({
@@ -53,6 +57,53 @@ abstract class PaymentService {
       return Left(e.errorModel.errorMessage);
     } catch (e) {
       return Left(e.toString());
+    }
+  }
+
+  Future<Either<Failure, List<ResidentPaymentModel>>> getResidentPayments({
+    required String residentId,
+  }) async {
+    try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
+
+      final response = await sl<ApiConsumer>().get(
+        '${ApiEndPoints.getPaymentsForResident}$residentId',
+      );
+
+      List<ResidentPaymentModel> payments = [];
+      for (var payment in response[ApiKeys.data]) {
+        payments.add(ResidentPaymentModel.fromJson(payment));
+      }
+      return Right(payments);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, List<ServiceProviderPaymentModel>>>
+  getServiceProviderPayments({required String serviceProvider}) async {
+    try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
+
+      final response = await sl<ApiConsumer>().get(
+        '${ApiEndPoints.getPaymentsForServiceProvider}$serviceProvider',
+      );
+
+      List<ServiceProviderPaymentModel> payments = [];
+      for (var payment in response[ApiKeys.data]) {
+        payments.add(ServiceProviderPaymentModel.fromJson(payment));
+      }
+      return Right(payments);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 }

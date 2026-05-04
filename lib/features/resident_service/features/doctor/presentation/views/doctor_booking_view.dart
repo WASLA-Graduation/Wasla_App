@@ -5,7 +5,7 @@ import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/enums/service_provider_type.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
-import 'package:wasla/core/service/payment/payment_service.dart';
+import 'package:wasla/features/payment/payment_service.dart';
 import 'package:wasla/core/service/signalR/doctor_booking_hub.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/doctor_service/features/service/data/models/doctor_service_model.dart';

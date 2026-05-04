@@ -5,7 +5,7 @@ import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/helpers/url_helper.dart';
 import 'package:wasla/core/repo/global_repo.dart';
-import 'package:wasla/core/service/payment/payment_service.dart';
+import 'package:wasla/features/payment/payment_service.dart';
 import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
 import 'package:wasla/features/profile/data/models/gym_model.dart';
 import 'package:wasla/features/resident_service/features/gym/data/models/booking_returned_data_model.dart';

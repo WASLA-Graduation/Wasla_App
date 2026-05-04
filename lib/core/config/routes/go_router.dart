@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
+import 'package:wasla/features/payment/presentation/views/payment_view.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/features/auth/presentation/views/restaurant_complete_info_view.dart';
 import 'package:wasla/features/auth/presentation/views/technicant_complete_info_view.dart';
@@ -46,8 +47,8 @@ import 'package:wasla/randoms/animation_test.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/functions/handle_initial_route.dart';
 import 'package:wasla/core/service/Audio/audio_test.dart';
-import 'package:wasla/core/service/payment/views/payment_failure_view.dart';
-import 'package:wasla/core/service/payment/views/payment_success_view.dart';
+import 'package:wasla/features/payment/presentation/views/payment_failure_view.dart';
+import 'package:wasla/features/payment/presentation/views/payment_success_view.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/auth/presentation/views/driver_info_view.dart';
 import 'package:wasla/features/chat/data/models/chat_user_info.dart';
@@ -719,6 +720,12 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.residentSearchScreen,
       builder: (context, state) {
         return ResidentSearchView();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.paymentScreen,
+      builder: (context, state) {
+        return PaymentView();
       },
     ),
   ],

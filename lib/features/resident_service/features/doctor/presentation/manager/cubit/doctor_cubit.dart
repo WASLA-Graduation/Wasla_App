@@ -14,7 +14,7 @@ import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/helpers/url_helper.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
-import 'package:wasla/core/service/payment/payment_service.dart';
+import 'package:wasla/features/payment/payment_service.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/core/service/signalR/models/booking_hub_model.dart';
 import 'package:wasla/core/service/signalR/models/service_hub_model.dart';
