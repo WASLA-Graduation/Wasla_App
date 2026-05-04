@@ -74,7 +74,6 @@ abstract class GlobalRepo {
         ApiEndPoints.technicantGetProfile,
         queryParameters: {ApiKeys.id: technicianId},
       );
-            log('$response');
 
       return Right(TechnicianModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
@@ -96,6 +95,8 @@ abstract class GlobalRepo {
         ApiEndPoints.getRestaurntProfile,
         queryParameters: {ApiKeys.id: resturantId},
       );
+                  log('$response');
+
       return Right(RestaurantModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
       return Left(ServerFailure(e.errorModel.errorMessage));
