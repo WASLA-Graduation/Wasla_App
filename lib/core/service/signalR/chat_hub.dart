@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signalr_netcore/signalr_client.dart';
@@ -49,6 +50,7 @@ class ChatHub {
     hubConnection.on("UserOffline", (data) {
       final user = data![0] as Map;
       final userId = user['userId'];
+
       // final lastSeen = user['lastSeen'];
       chat.handleOnlineStatus(status: false, id: userId);
     });

@@ -95,11 +95,13 @@ class GetChatSubTitle extends StatelessWidget {
                     : Colors.grey,
                 size: 22,
               ),
-              Text(
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                userChat.messageText,
-                style: Theme.of(context).textTheme.labelSmall,
+              Flexible(
+                child: Text(
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  userChat.messageText,
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
               ),
             ],
           );
@@ -109,7 +111,9 @@ class GetChatSubTitle extends StatelessWidget {
             children: [
               Icon(
                 Icons.done_all,
-                color: userChat.readAt != null ? AppColors.seenColor : Colors.grey,
+                color: userChat.readAt != null
+                    ? AppColors.seenColor
+                    : Colors.grey,
                 size: 22,
               ),
               Icon(Icons.image, color: Colors.grey, size: 22),
@@ -121,15 +125,25 @@ class GetChatSubTitle extends StatelessWidget {
             children: [
               Icon(
                 Icons.done_all,
-                color: userChat.readAt != null ? AppColors.seenColor : Colors.grey,
+                color: userChat.readAt != null
+                    ? AppColors.seenColor
+                    : Colors.grey,
                 size: 22,
               ),
-              Icon(Icons.mic, color: Colors.grey, size: 22),
-              Text(
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                'voiceMessage'.tr(context),
-                style: Theme.of(context).textTheme.labelSmall,
+              Icon(
+                Icons.mic,
+                color: userChat.readAt != null
+                    ? AppColors.seenColor
+                    : Colors.grey,
+                size: 22,
+              ),
+              Flexible(
+                child: Text(
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  'voiceMessage'.tr(context),
+                  style: Theme.of(context).textTheme.labelSmall!.copyWith(),
+                ),
               ),
             ],
           );
@@ -139,15 +153,19 @@ class GetChatSubTitle extends StatelessWidget {
             children: [
               Icon(
                 Icons.done_all,
-                color: userChat.readAt != null ? AppColors.seenColor : Colors.grey,
+                color: userChat.readAt != null
+                    ? AppColors.seenColor
+                    : Colors.grey,
                 size: 22,
               ),
               Icon(Icons.image, color: Colors.grey, size: 22),
-              Text(
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                userChat.messageText,
-                style: Theme.of(context).textTheme.labelSmall,
+              Flexible(
+                child: Text(
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  userChat.messageText,
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
               ),
             ],
           );
