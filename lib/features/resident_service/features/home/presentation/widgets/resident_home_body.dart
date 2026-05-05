@@ -85,28 +85,10 @@ class ResidentHomeBody extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: SizedBox(height: AppSizes.paddingSizeThelve),
                 ),
-                SliverToBoxAdapter(
-                  child: Text(
-                    "recommend".tr(context),
-                    style: Theme.of(context).textTheme.labelMedium,
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: SizedBox(height: AppSizes.paddingSizeFifteen),
-                ),
 
                 SliverToBoxAdapter(child: UserEventRecommendedList()),
                 SliverToBoxAdapter(
                   child: SizedBox(height: AppSizes.paddingSizeThelve),
-                ),
-                SliverToBoxAdapter(
-                  child: Text(
-                    "topOfTheWeek".tr(context),
-                    style: Theme.of(context).textTheme.labelMedium,
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: SizedBox(height: AppSizes.paddingSizeFifteen),
                 ),
 
                 SliverToBoxAdapter(child: UserEventTopWeekList()),

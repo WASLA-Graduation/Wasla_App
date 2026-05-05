@@ -17,7 +17,7 @@ class RestaurantStatiticsCards extends StatelessWidget {
           children: [
             Expanded(
               child: CustomDocDashboardCard(
-                title: "numberOfResidents".tr(context),
+                title: "numberOfReservations".tr(context),
                 value:
                     cubit.restaurantChart?.numberOfReservations.toString() ??
                     0.toString(),
@@ -44,6 +44,8 @@ class RestaurantStatiticsCards extends StatelessWidget {
                     "${cubit.restaurantChart?.numOfOrders.toStringAsFixed(0) ?? 0} ",
               ),
             ),
+            const SizedBox(width: 15),
+
             Expanded(
               child: CustomDocDashboardCard(
                 title: "totalRevenue".tr(context),

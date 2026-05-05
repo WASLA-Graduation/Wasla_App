@@ -211,9 +211,9 @@ class ChatCubit extends Cubit<ChatState> {
       (chats) {
         if (chats.isEmpty) {
           allChatsOfUserEndOfPagination = true;
-          emit(ChatGetChatsOfUserSuccess(allChats: chats));
+          emit(ChatGetChatsOfUserSuccess(allChats: allChatsOfUser));
         } else {
-          allChatsOfUserPageSize++;
+          allChatsOfUserPageNumber++;
           allChatsOfUser.addAll(chats);
           emit(ChatGetChatsOfUserSuccess(allChats: allChatsOfUser));
         }

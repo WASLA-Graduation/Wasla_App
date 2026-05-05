@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
-import 'package:wasla/core/enums/notificatons_routes.dart';
+import 'package:wasla/core/enums/notifications_routes.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/notifications/data/models/notification_model.dart';

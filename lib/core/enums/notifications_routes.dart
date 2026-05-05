@@ -153,11 +153,13 @@ void navigateToRightRoute({
       break;
 
     case NotificationRoute.messageReceived:
-      final String fakeImage =
-          'https://waslammka.runasp.net/assets/images/user/1297fda0-c545-4054-9757-1ecf3fc77d48.png';
+      // final String fakeImage =
+      //     'https://waslammka.runasp.net/assets/images/user/1297fda0-c545-4054-9757-1ecf3fc77d48.png';
       List<String> parts = referenceId.split(',');
       String name = parts[0].trim();
       String id = parts[1].trim();
+      String image = parts[2].trim();
+
       final chatHub = ChatHub();
       chatHub.init();
       await navigatorKey.currentContext!.push(
@@ -165,7 +167,7 @@ void navigateToRightRoute({
         extra: {
           AppStrings.id: id,
           AppStrings.name: name,
-          AppStrings.photo: fakeImage,
+          AppStrings.photo: image,
         },
       );
 

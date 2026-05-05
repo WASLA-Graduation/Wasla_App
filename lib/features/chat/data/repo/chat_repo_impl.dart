@@ -10,6 +10,7 @@ import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/convert_image_to_json.dart';
+import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/chat/data/models/all_users_chat_model.dart';
 import 'package:wasla/features/chat/data/models/chat_user_info.dart';
@@ -190,7 +191,7 @@ class ChatRepoImpl extends ChatRepo {
       return Right(ChatMessagesModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
-    }catch (e) {
+    } catch (e) {
       return Left(e.toString());
     }
   }
@@ -204,6 +205,7 @@ class ChatRepoImpl extends ChatRepo {
       if (!await sl<NetworkInfo>().isConnected) {
         return Left(NoInternetFailure());
       }
+
       final response = await api.get(
         ApiEndPoints.getAllUserChats,
         queryParameters: {
@@ -212,9 +214,13 @@ class ChatRepoImpl extends ChatRepo {
         },
       );
 
+      final String? userId = await getUserId();
+
       List<AllUsersChatModel> users = [];
       for (var user in response[ApiKeys.data][ApiKeys.data]) {
-        users.add(AllUsersChatModel.fromJson(user));
+        if (user['id'] != userId) {
+          users.add(AllUsersChatModel.fromJson(user));
+        }
       }
       return Right(users);
     } on ServerException catch (e) {

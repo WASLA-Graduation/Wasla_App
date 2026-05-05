@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:googleapis_auth/auth_io.dart' as auth;
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
-import 'package:wasla/core/enums/notificatons_routes.dart';
+import 'package:wasla/core/enums/notifications_routes.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/chat/presentation/manager/cubit/chat_cubit.dart';
 import 'package:wasla/features/notifications/presentation/cubit/notification_cubit.dart';

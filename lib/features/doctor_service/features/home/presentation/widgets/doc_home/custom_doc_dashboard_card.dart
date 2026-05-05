@@ -26,21 +26,30 @@ class CustomDocDashboardCard extends StatelessWidget {
 
         spacing: 17,
         children: [
-          Text(
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-
-            title,
-            style: Theme.of(
-              context,
-            ).textTheme.displaySmall!.copyWith(color: AppColors.gray),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            child: Text(
+              title,
+              style: Theme.of(
+                context,
+              ).textTheme.displaySmall!.copyWith(color: AppColors.gray),
+            ),
           ),
 
-          Text(
-            value,
-            style: Theme.of(
-              context,
-            ).textTheme.displayMedium!.copyWith(color: AppColors.primaryColor),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            child: Row(
+              children: [
+                Text(
+                  value,
+                  style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
