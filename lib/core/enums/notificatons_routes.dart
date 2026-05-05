@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -11,6 +9,7 @@ import 'package:wasla/core/enums/service_role.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/service/service_locator.dart';
+import 'package:wasla/core/service/signalR/chat_hub.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/features/resident_service/features/booking/presentation/manager/cubit/resident_booking_cubit.dart';
 import 'package:wasla/features/resident_service/features/driver/presentation/manager/cubit/resident_driver_cubit.dart';
@@ -58,7 +57,6 @@ enum NotificationRoute {
 }
 
 void navigateToRightRoute({
-  required String image,
   required NotificationRoute route,
   required String referenceId,
 }) async {
@@ -155,7 +153,23 @@ void navigateToRightRoute({
       break;
 
     case NotificationRoute.messageReceived:
-      log(referenceId);
+      final String fakeImage =
+          'https://waslammka.runasp.net/assets/images/user/1297fda0-c545-4054-9757-1ecf3fc77d48.png';
+      List<String> parts = referenceId.split(',');
+      String name = parts[0].trim();
+      String id = parts[1].trim();
+      final chatHub = ChatHub();
+      chatHub.init();
+      await navigatorKey.currentContext!.push(
+        AppRoutes.chatScreen,
+        extra: {
+          AppStrings.id: id,
+          AppStrings.name: name,
+          AppStrings.photo: fakeImage,
+        },
+      );
+
+      chatHub.disconnect();
       break;
 
     case NotificationRoute.driverCompleteInfoScreen:

@@ -92,7 +92,6 @@ class NotificationListSection extends StatelessWidget {
                 );
 
                 navigateToRightRoute(
-                  image: notification.image!,
                   route: route,
                   referenceId: notification.serviceProviderId,
                 );

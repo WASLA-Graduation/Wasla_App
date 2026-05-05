@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -46,8 +47,13 @@ class FcmNotifications {
     if (route != NotificationRoute.rideAccepted) {
       if (route == NotificationRoute.messageReceived) {
         final cubit = navigatorKey.currentContext?.read<ChatCubit>();
+        final String referenceId = message.data['refrenceId'];
+        List<String> parts = referenceId.split(',');
+        String receiverId = parts[1].trim();
 
-        ///check for you in chat or no
+        if (receiverId != cubit?.currentResceiver) {
+          LocalNotifications.showNormalNotificaton(message: message);
+        }
       } else {
         LocalNotifications.showNormalNotificaton(message: message);
       }
@@ -147,7 +153,6 @@ class FcmNotifications {
         int.parse(message.data['type']),
       );
       navigateToRightRoute(
-        image: message.data['imageUrl'],
         route: route,
         referenceId: message.data['refrenceId'],
       );
@@ -163,7 +168,6 @@ class FcmNotifications {
         int.parse(message.data['type']),
       );
       navigateToRightRoute(
-        image: message.data['imageUrl'],
         route: route,
         referenceId: message.data['refrenceId'],
       );

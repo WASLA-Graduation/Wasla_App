@@ -49,10 +49,10 @@ abstract class LocalNotifications {
       int.parse(data['type']),
     );
 
+
     navigateToRightRoute(
       route: route,
       referenceId: data['refrenceId'],
-      image: data['imageUrl'],
     );
   }
 }
