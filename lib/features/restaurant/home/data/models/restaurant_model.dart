@@ -10,9 +10,11 @@ class RestaurantModel extends UserBaseModel {
   final int restaurantCategoryId;
   final String restaurantCategoryName;
   final String profile;
+  final int numberOfCompletedOrders;
   final List<String> gallery;
 
   RestaurantModel({
+    required this.numberOfCompletedOrders,
     required this.id,
     required this.email,
     required this.name,
@@ -34,6 +36,7 @@ class RestaurantModel extends UserBaseModel {
 
   factory RestaurantModel.fromJson(Map<String, dynamic> json) {
     return RestaurantModel(
+      numberOfCompletedOrders: json['numberOfCompletedOrders'] ?? 0,
       id: json['id'] ?? '',
       email: json['email'] ?? '',
       name: json['name'] ?? '',

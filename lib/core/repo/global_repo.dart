@@ -1,6 +1,4 @@
 
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
@@ -95,7 +93,6 @@ abstract class GlobalRepo {
         ApiEndPoints.getRestaurntProfile,
         queryParameters: {ApiKeys.id: resturantId},
       );
-                  log('$response');
 
       return Right(RestaurantModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {

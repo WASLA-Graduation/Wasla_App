@@ -105,7 +105,7 @@ class ResidentRestaurantDetailsWidget extends StatelessWidget {
       CircleStatModel(
         icon: Assets.assetsImagesGroup,
         title: "resident".tr(context).toLowerCase(),
-        value: "10000+",
+        value: "${restaurant.numberOfCompletedOrders}+",
       ),
 
       CircleStatModel(
