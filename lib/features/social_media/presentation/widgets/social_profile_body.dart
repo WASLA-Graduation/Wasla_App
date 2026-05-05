@@ -23,8 +23,11 @@ class SocialProfileBody extends StatelessWidget {
                   current is GetUserProfileLoading ||
                   current is GetUserProfileSuccess,
               builder: (context, state) {
+                final cubit = context.read<SocialMediaCubit>();
                 return SocailProfilePhotoAndName(
-                  profile: context.read<SocialMediaCubit>().userProfile,
+                  profile: userId == cubit.currentUser
+                      ? cubit.currentUserProfile
+                      : cubit.userProfile,
                 );
               },
             ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/cached_network_image_widget.dart';
 
 class CircleNeworkImage extends StatelessWidget {
@@ -24,7 +23,7 @@ class CircleNeworkImage extends StatelessWidget {
         ? Skeletonizer(
             child: CircleAvatar(
               radius: size! / 2,
-              backgroundColor: AppColors.gray,
+              backgroundColor: Colors.grey.shade300,
             ),
           )
         : InkWell(

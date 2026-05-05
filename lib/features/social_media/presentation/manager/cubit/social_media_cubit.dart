@@ -31,6 +31,7 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
   bool userEndOfPosts = false;
 
   SocialProfileModel? userProfile;
+  SocialProfileModel? currentUserProfile;
 
   List<SocialPostModel> userPosts = [];
   int userProfileCurrentTap = 0;
@@ -61,7 +62,7 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
     emit(SocialMediaOnRetryState());
   }
 
-  void getCurrentUser() async {
+  Future<void> getCurrentUser() async {
     currentUser = await getUserId() ?? '';
   }
 
@@ -458,6 +459,7 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
 
   Future<void> getUserProfile({required String userId}) async {
     emit(GetUserProfileLoading());
+
     final result = await socialMediaRepo.getUserProfile(userId: userId);
     result.fold(
       (failure) {
@@ -468,7 +470,11 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
         }
       },
       (userProfile) {
-        this.userProfile = userProfile;
+        if (currentUser == userId) {
+          currentUserProfile = userProfile;
+        } else {
+          this.userProfile = userProfile;
+        }
         emit(GetUserProfileSuccess());
       },
     );

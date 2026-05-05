@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/service/signalR/chat_hub.dart';
 import 'package:wasla/core/utils/app_strings.dart';
+import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/social_media/presentation/manager/cubit/social_media_cubit.dart';
 import 'package:wasla/features/social_media/presentation/widgets/social_profile_body.dart';
@@ -24,9 +28,43 @@ class _SocialProfileViewState extends State<SocialProfileView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        forceMaterialTransparency: true,
-
-        title: Text(widget.userData[AppStrings.name]),
+        title: Text(
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+          widget.userData[AppStrings.name],
+        ),
+        actions: [
+          Visibility(
+            visible:
+                context.read<SocialMediaCubit>().currentUser !=
+                widget.userData[AppStrings.id],
+            child: IconButton(
+              onPressed: () async {
+                final chatHub = ChatHub();
+                chatHub.init();
+                await context.push(
+                  AppRoutes.chatScreen,
+                  extra: {
+                    AppStrings.id: widget.userData[AppStrings.id],
+                    AppStrings.name: widget.userData[AppStrings.name],
+                    AppStrings.photo:
+                        context
+                            .read<SocialMediaCubit>()
+                            .userProfile
+                            ?.profilePhoto ??
+                        '',
+                  },
+                );
+                chatHub.disconnect();
+              },
+              icon: Image.asset(
+                Assets.assetsImagesChatFilled,
+                height: 22,
+                width: 22,
+              ),
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: BlocStatusHandler<SocialMediaCubit, SocialMediaState>(

@@ -22,20 +22,20 @@ class SocialAppBar extends StatelessWidget {
           spacing: 10,
           children: [
             CircleNeworkImage(
-              imageUrl: cubit.userProfile?.profilePhoto ?? '',
+              imageUrl: cubit.currentUserProfile?.profilePhoto ?? '',
               onTap: () async {
                 if (cubit.userProfile != null) {
                   final String? currentUser = await getUserId();
                   context.pushScreen(
                     AppRoutes.socialProfileScreen,
                     arguments: {
-                      AppStrings.name: cubit.userProfile?.userName ?? '',
+                      AppStrings.name: cubit.currentUserProfile?.userName ?? '',
                       AppStrings.id: currentUser,
                     },
                   );
                 }
               },
-              isLoading: cubit.userProfile == null,
+              isLoading: cubit.currentUserProfile == null,
             ),
             Expanded(child: _buildTextField(context)),
             // _buildNotificationIcon(context),

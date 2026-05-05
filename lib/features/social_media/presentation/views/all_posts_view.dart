@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/social_media/presentation/manager/cubit/social_media_cubit.dart';
 import 'package:wasla/features/social_media/presentation/widgets/all_posts_body.dart';
@@ -43,9 +42,8 @@ class _AllPostsViewState extends State<AllPostsView> {
   void getAllPosts() async {
     final cubit = context.read<SocialMediaCubit>();
     cubit.reset();
-    final String? userId = await getUserId();
-    await cubit.getAllPosts(fromPagination: false);
-    cubit.getUserProfile(userId: userId!);
-    cubit.getCurrentUser();
+    await cubit.getCurrentUser();
+    cubit.getUserProfile(userId: cubit.currentUser);
+    cubit.getAllPosts(fromPagination: false);
   }
 }
