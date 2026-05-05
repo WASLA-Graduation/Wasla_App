@@ -42,6 +42,11 @@ final class GymResidentBookingSuccess extends GymResidentBookingState {
 
   GymResidentBookingSuccess({required this.bookingId, required super.itemId});
 }
+final class GymResidentBookingSuccessFromCash extends GymResidentBookingState {
+  final int bookingId;
+
+  GymResidentBookingSuccessFromCash({required this.bookingId, required super.itemId});
+}
 
 final class GymResidentBookingFailure extends GymResidentBookingState {
   final String errMsg;

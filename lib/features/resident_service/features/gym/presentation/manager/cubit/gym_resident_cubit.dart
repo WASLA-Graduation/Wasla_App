@@ -29,6 +29,8 @@ class GymResidentCubit extends Cubit<GymResidentState> {
   int serviceIdFlag = -1;
   String selecedGymId = '';
 
+  PaymentMethod paymentMethod = PaymentMethod.cash;
+
   void onRetry() {
     emit(GymResidentOnRetryState());
   }
@@ -120,30 +122,41 @@ class GymResidentCubit extends Cubit<GymResidentState> {
         emit(GymResidentBookingFailure(errMsg: error, itemId: bookingId));
       },
       (success) async {
-        bookingReturnedDataModel = success;
-        final paymentResult = await PaymentService.createPayment(
-          userId: residentId,
-          serviceProviderId: gymId,
-          amount: amount,
-          bookingId: success.bookingId,
-          serviceProviderType: ServiceProviderTypeEnum.gym.index + 1,
-          entityType: EntityType.booking.index,
-          paymentMethod: PaymentMethod.creditCard.index + 1,
-        );
-        paymentResult.fold(
-          (error) {
-            emit(GymResidentBookingFailure(errMsg: error, itemId: bookingId));
-          },
-          (paymentUrl) {
-            emit(
-              GymResidentBookingSuccess(
-                bookingId: success.bookingId,
-                itemId: bookingId,
-              ),
-            );
-            UrlHelper.openWebsite(paymentUrl);
-          },
-        );
+        if (paymentMethod == PaymentMethod.cash) {
+          emit(
+            GymResidentBookingSuccessFromCash(
+              bookingId: bookingId,
+              itemId: bookingId,
+            ),
+          );
+
+          return;
+        } else {
+          bookingReturnedDataModel = success;
+          final paymentResult = await PaymentService.createPayment(
+            userId: residentId,
+            serviceProviderId: gymId,
+            amount: amount,
+            bookingId: success.bookingId,
+            serviceProviderType: ServiceProviderTypeEnum.gym.index + 1,
+            entityType: EntityType.booking.index,
+            paymentMethod: paymentMethod.index + 1,
+          );
+          paymentResult.fold(
+            (error) {
+              emit(GymResidentBookingFailure(errMsg: error, itemId: bookingId));
+            },
+            (paymentUrl) {
+              emit(
+                GymResidentBookingSuccess(
+                  bookingId: success.bookingId,
+                  itemId: bookingId,
+                ),
+              );
+              UrlHelper.openWebsite(paymentUrl);
+            },
+          );
+        }
       },
     );
   }

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/enums/payment_method.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
+import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
+import 'package:wasla/features/resident_service/features/booking/presentation/widgets/gym_booking_bottom_sheet.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/manager/cubit/gym_resident_cubit.dart';
 
 class PackageItemContent extends StatelessWidget {
@@ -100,7 +103,6 @@ class GymBookingButton extends StatelessWidget {
   final int price;
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<GymResidentCubit>();
     return BlocConsumer<GymResidentCubit, GymResidentState>(
       listenWhen: (previous, current) =>
           current is GymResidentBookingState && current.itemId == bookingId,
@@ -109,23 +111,28 @@ class GymBookingButton extends StatelessWidget {
       listener: (context, state) {
         if (state is GymResidentBookingFailure) {
           toastAlert(color: AppColors.error, msg: state.errMsg);
-        } else if (state is GymResidentBookingSuccess) {
-          // showDialog(
-          //   barrierDismissible: false,
-          //   context: context,
-          //   builder: (context) {
-          //     return QrCodeDialog(qrCode: state.qrCodeUrl);
-          //   },
-          // );
+        } else if (state is GymResidentBookingSuccessFromCash) {
+          toastAlert(
+            color: AppColors.primaryColor,
+            msg: "bookingDone".tr(context),
+          );
+          context.popScreen();
         }
       },
       builder: (context, state) {
         return GeneralButton(
           onPressed: () async {
-            await cubit.bookAtGym(
-              bookingId: bookingId,
-              gymId: cubit.selecedGymId,
-              amount: price,
+            final cubit = context.read<GymResidentCubit>();
+            cubit.paymentMethod = PaymentMethod.wallet;
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => BlocProvider.value(
+                value: cubit,
+                child: GymBookingBottomSheet(
+                  bookingId: bookingId,
+                  price: price,
+                ),
+              ),
             );
           },
           fontSize: 12,
