@@ -50,7 +50,6 @@ abstract class LocalNotifications {
     );
 
     navigateToRightRoute(
-      name: '',
       route: route,
       referenceId: data['refrenceId'],
       image: data['imageUrl'],

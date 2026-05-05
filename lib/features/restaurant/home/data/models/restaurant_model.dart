@@ -10,8 +10,8 @@ class RestaurantModel extends UserBaseModel {
   final int restaurantCategoryId;
   final String restaurantCategoryName;
   final String profile;
-  final int numberOfCompletedOrders;
   final List<String> gallery;
+  final int numberOfCompletedOrders;
 
   RestaurantModel({
     required this.numberOfCompletedOrders,

@@ -59,7 +59,6 @@ enum NotificationRoute {
 
 void navigateToRightRoute({
   required String image,
-  required String name,
   required NotificationRoute route,
   required String referenceId,
 }) async {

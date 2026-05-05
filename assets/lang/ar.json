@@ -564,7 +564,12 @@
       "qr":"اظهار الكود",
       "gymPaymentSuccessMessage": " تم الحجز بنجاح مع الجيم",
 "restaurantPaymentSuccessMessage": " تم الحجز بنجاح مع المطعم",
-    "download": "تم التنزيل بنجاح"
+    "download": "تم التنزيل بنجاح",
+        "viewCV": "عرض السيرة الذاتية",
+              "contact": "التواصل",
+              "basicInfo": "معلومات اساسية"
+
+
 
 
 

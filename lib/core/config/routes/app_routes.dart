@@ -105,4 +105,5 @@ abstract class AppRoutes {
   static const String privacyPlolicyScreen = '/privacyPlolicyScreen';
   static const String helpCenterScreen = '/helpCenterScreen';
   static const String allBannarsScreen = '/allBannarsScreen';
+  static const String restaurantProfileScreen = '/restaurantProfileScreen';
 }

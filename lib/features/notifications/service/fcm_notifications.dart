@@ -147,7 +147,6 @@ class FcmNotifications {
         int.parse(message.data['type']),
       );
       navigateToRightRoute(
-        name: '',
         image: message.data['imageUrl'],
         route: route,
         referenceId: message.data['refrenceId'],
@@ -164,7 +163,6 @@ class FcmNotifications {
         int.parse(message.data['type']),
       );
       navigateToRightRoute(
-        name: '',
         image: message.data['imageUrl'],
         route: route,
         referenceId: message.data['refrenceId'],

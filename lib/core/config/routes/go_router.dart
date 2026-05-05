@@ -10,6 +10,7 @@ import 'package:wasla/features/auth/presentation/views/technicant_complete_info_
 import 'package:wasla/features/profile/presentation/views/help_center_view.dart';
 import 'package:wasla/features/profile/presentation/views/privacy_policy_view.dart';
 import 'package:wasla/features/profile/presentation/views/restaurant_edit_profile.dart';
+import 'package:wasla/features/profile/presentation/views/restaurant_profile_info.dart';
 import 'package:wasla/features/profile/presentation/views/technician_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
 import 'package:wasla/features/resident_service/features/gym/data/repo/gym_resident_repo_impl.dart';
@@ -433,9 +434,8 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.paymentSuccessScreen,
       builder: (context, state) {
-
-        final Map<String ,dynamic> data= state.extra as Map<String ,dynamic>;
-        return PaymentSuccessView(data: data,);
+        final Map<String, dynamic> data = state.extra as Map<String, dynamic>;
+        return PaymentSuccessView(data: data);
       },
     ),
     GoRoute(
@@ -758,6 +758,14 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutes.allBannarsScreen,
       builder: (context, state) {
         return AllBannarsView();
+      },
+    ),
+
+    GoRoute(
+      path: AppRoutes.restaurantProfileScreen,
+      builder: (context, state) {
+        final RestaurantModel restaurantModel = state.extra as RestaurantModel;
+        return RestaurantProfileInfo(restaurant: restaurantModel);
       },
     ),
   ],

@@ -91,7 +91,7 @@ String getRightPersonalInfoRoute() {
       return AppRoutes.technicantInfoScreen;
 
     case ServiceRole.restaurantOwner:
-      return AppRoutes.residentPersonalInfoScreen;
+      return AppRoutes.restaurantProfileScreen;
 
     case ServiceRole.gymOwner:
       return AppRoutes.gymProfileInfoScreen;

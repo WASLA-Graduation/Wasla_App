@@ -1,21 +1,20 @@
-
 import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
-import 'package:wasla/core/helpers/files_helper.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_sizes.dart';
 import 'package:wasla/core/widgets/custom_circle_network_image.dart';
-import 'package:wasla/features/doctor_service/features/home/data/models/doctor_model.dart';
+import 'package:wasla/features/restaurant/home/data/models/restaurant_model.dart';
 
-class DoctorProfileInfo extends StatelessWidget {
-  const DoctorProfileInfo({super.key, required this.doctorModel});
-  final DoctorModel doctorModel;
+class RestaurantProfileInfo extends StatelessWidget {
+  const RestaurantProfileInfo({super.key, required this.restaurant});
+
+  final RestaurantModel restaurant;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('profileInformation'.tr(context))),
+      appBar: AppBar(title: Text('aboutRestaurant'.tr(context))),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(
           horizontal: AppSizes.marginDefault,
@@ -25,74 +24,72 @@ class DoctorProfileInfo extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
 
+            /// IMAGE
             CircleNeworkImage(
-              imageUrl: doctorModel.image,
+              imageUrl: restaurant.profile,
               isLoading: false,
               size: 110,
             ),
 
             const SizedBox(height: 20),
 
+            _buildSectionTitle("basicInfo".tr(context)),
             _buildInfoCard(
               context,
-              icon: Icons.person,
-              title: 'name'.tr(context),
-              value: doctorModel.fullName,
+              icon: Icons.restaurant,
+              title: "name".tr(context),
+              value: restaurant.name,
             ),
             _buildInfoCard(
               context,
+              icon: Icons.category,
+              title: "category".tr(context),
+              value: restaurant.restaurantCategoryName,
+            ),
+            _buildInfoCard(
+              context,
+              icon: Icons.person,
+              title: "ownerName".tr(context),
+              value: restaurant.ownerName,
+            ),
+
+            
+            _buildSectionTitle("contact".tr(context)),
+            _buildInfoCard(
+              context,
               icon: Icons.email,
-              title: 'email'.tr(context),
-              value: doctorModel.email,
+              title: "email".tr(context),
+              value: restaurant.email,
             ),
             _buildInfoCard(
               context,
               icon: Icons.phone,
-              title: 'phone'.tr(context),
-              value: doctorModel.phone,
-            ),
-            _buildInfoCard(
-              context,
-              icon: Icons.cake,
-              title: 'dateOfBirth'.tr(context),
-              value: doctorModel.birthDay,
+              title: "phone".tr(context),
+              value: restaurant.phoneNumber,
             ),
 
-            _buildInfoCard(
-              context,
-              icon: Icons.medical_services,
-              title: 'specialty'.tr(context),
-              value: doctorModel.specializationName,
-            ),
-            _buildInfoCard(
-              context,
-              icon: Icons.school,
-              title: 'universityName'.tr(context),
-              value: doctorModel.universityName,
-            ),
-            _buildInfoCard(
-              context,
-              icon: Icons.calendar_today,
-              title: 'graduationYear'.tr(context),
-              value: doctorModel.graduationYear.toString(),
-            ),
-            _buildInfoCard(
-              context,
-              icon: Icons.work,
-              title: 'experience'.tr(context),
-              value: "${doctorModel.experienceYears} ${'years'.tr(context)}",
-            ),
-            _buildInfoCard(
-              context,
-              icon: Icons.local_hospital,
-              title: 'hospital'.tr(context),
-              value: doctorModel.hospitalname,
-            ),
-
+            /// DESCRIPTION
             _buildDescriptionCard(context),
 
-            _buildCvCard(context),
+            /// GALLERY
+            _buildGallery(context),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Align(
+        alignment: AlignmentDirectional.centerStart,
+        child: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
@@ -156,51 +153,50 @@ class DoctorProfileInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'description'.tr(context),
+            "description".tr(context),
             style: TextStyle(fontSize: 12, color: Colors.grey[600]),
           ),
           const SizedBox(height: 6),
-          Text(doctorModel.description.isEmpty ? "-" : doctorModel.description),
+          Text(
+            restaurant.description.isEmpty
+                ? "-"
+                : restaurant.description,
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildCvCard(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        final file = await FileHelper.downloadFile(url: doctorModel.cv);
-        if (file != null) {
-          FileHelper.openFile(file);
-        }
-      },
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 20),
-        padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(14),
-        ),
-        child: Row(
-          children: [
-            Icon(Icons.picture_as_pdf, color: Theme.of(context).primaryColor),
+  Widget _buildGallery(BuildContext context) {
+    if (restaurant.gallery.isEmpty) return const SizedBox();
 
-            const SizedBox(width: 12),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSectionTitle("restaurantGalary".tr(context)),
 
-            Expanded(
-              child: Text(
-                'viewCV'.tr(context),
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.w600,
+        SizedBox(
+          height: 100,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: restaurant.gallery.length,
+            separatorBuilder: (_, __) => const SizedBox(width: 10),
+            itemBuilder: (context, index) {
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.network(
+                  restaurant.gallery[index],
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
                 ),
-              ),
-            ),
-
-            const Icon(Icons.arrow_forward_ios, size: 16),
-          ],
+              );
+            },
+          ),
         ),
-      ),
+
+        const SizedBox(height: 20),
+      ],
     );
   }
 }

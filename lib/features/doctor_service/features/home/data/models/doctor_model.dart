@@ -29,9 +29,9 @@ class DoctorModel extends UserBaseModel {
     required this.cv,
     required this.experienceYears,
     required this.graduationYear,
-    required this.latitude,
-    required this.longitude,
     required this.hospitalname,
+    required this.longitude,
+    required this.latitude,
     required this.numberOfpatients,
   }) : super(
          fullNameBase: fullName,
