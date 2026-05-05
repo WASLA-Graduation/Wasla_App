@@ -1,3 +1,4 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
@@ -88,6 +89,7 @@ class NotificationRepoImpl implements NotificationRepo {
           ApiKeys.pageSize: pageSize,
         },
       );
+
       return Right(
         NotificationPaginationModel.fromJson(response[ApiKeys.data]),
       );

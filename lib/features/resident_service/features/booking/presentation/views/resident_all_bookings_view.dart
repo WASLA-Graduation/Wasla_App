@@ -61,7 +61,6 @@ class _ResidentAllBookingsViewState extends State<ResidentAllBookingsView> {
   }
 
   void getResidentBookings() async {
-    context.read<ResidentBookingCubit>().resetState();
     context.read<ResidentBookingCubit>().getAllBookingsByStatus();
   }
 }

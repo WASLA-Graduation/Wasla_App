@@ -9,6 +9,7 @@ import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/enums/notificatons_routes.dart';
 import 'package:wasla/core/service/service_locator.dart';
+import 'package:wasla/features/chat/presentation/manager/cubit/chat_cubit.dart';
 import 'package:wasla/features/notifications/presentation/cubit/notification_cubit.dart';
 import 'package:wasla/features/notifications/service/local_notificatons.dart';
 
@@ -43,9 +44,15 @@ class FcmNotifications {
     final int routeIndex = int.parse(message.data['type']);
     final route = NotificationRoute.fromInt(routeIndex);
     if (route != NotificationRoute.rideAccepted) {
-      LocalNotifications.showNormalNotificaton(message: message);
-      //for accept trip
+      if (route == NotificationRoute.messageReceived) {
+        final cubit = navigatorKey.currentContext?.read<ChatCubit>();
+
+        ///check for you in chat or no
+      } else {
+        LocalNotifications.showNormalNotificaton(message: message);
+      }
     }
+
     navigateToRouteRealTime(message: message);
     navigatorKey.currentContext
         ?.read<NotificationCubit>()
@@ -140,6 +147,8 @@ class FcmNotifications {
         int.parse(message.data['type']),
       );
       navigateToRightRoute(
+        name: '',
+        image: message.data['imageUrl'],
         route: route,
         referenceId: message.data['refrenceId'],
       );
@@ -155,6 +164,8 @@ class FcmNotifications {
         int.parse(message.data['type']),
       );
       navigateToRightRoute(
+        name: '',
+        image: message.data['imageUrl'],
         route: route,
         referenceId: message.data['refrenceId'],
       );

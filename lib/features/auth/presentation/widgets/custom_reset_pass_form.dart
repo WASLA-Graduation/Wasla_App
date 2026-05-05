@@ -9,7 +9,6 @@ import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_spaces.dart';
 import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
-import 'package:wasla/features/auth/presentation/widgets/custom_done_widget.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_lable_add_widget.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_text_form_field.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
-import 'package:wasla/core/functions/download_image.dart';
+import 'package:wasla/core/functions/toast_alert.dart';
+import 'package:wasla/core/helpers/files_helper.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/cached_network_image_widget.dart';
 import 'package:wasla/core/widgets/general_button.dart';
@@ -44,10 +45,15 @@ class QrCodeDialog extends StatelessWidget {
             GeneralButton(
               text: 'downloadQr'.tr(context),
               onPressed: () {
-                downloadImage(qrCode);
-                if (context.mounted) {
-                  Navigator.pop(context);
-                }
+                FileHelper.downloadFile(url: qrCode).then((value) {
+                  showToast(
+                    'download'.tr(context),
+                    color: AppColors.acceptGreen,
+                  );
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                  }
+                });
               },
             ),
           ],

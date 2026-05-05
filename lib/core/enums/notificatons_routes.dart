@@ -1,14 +1,21 @@
+import 'dart:developer';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
+import 'package:wasla/core/enums/booking_filter.dart';
 import 'package:wasla/core/enums/service_role.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/service/service_locator.dart';
+import 'package:wasla/core/utils/app_strings.dart';
+import 'package:wasla/features/resident_service/features/booking/presentation/manager/cubit/resident_booking_cubit.dart';
 import 'package:wasla/features/resident_service/features/driver/presentation/manager/cubit/resident_driver_cubit.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
+import 'package:wasla/features/restaurant/home/presentation/manager/cubit/restaurant_dashboard_cubit.dart';
 import 'package:wasla/features/reviews/presentation/manager/cubit/reviews_cubit.dart';
 
 enum NotificationRoute {
@@ -37,7 +44,13 @@ enum NotificationRoute {
   userTechnicianBookingCancelled, // 22
   technicianCancelBooking, // 23
   postCommented, // 24
-  postReacted; // 25
+  postReacted, // 25
+  residentCancelDoctorBooking, // 26
+  restaurantReservationAccepted, //27
+  restaurantNewReservation, //28
+  orderStartedPreparing, //29
+  socialHidden, //30
+  orderCancelled; //31
 
   static NotificationRoute fromInt(int index) {
     return NotificationRoute.values[index];
@@ -45,6 +58,8 @@ enum NotificationRoute {
 }
 
 void navigateToRightRoute({
+  required String image,
+  required String name,
   required NotificationRoute route,
   required String referenceId,
 }) async {
@@ -65,7 +80,7 @@ void navigateToRightRoute({
     case NotificationRoute.gymPaymentSuccess:
       navigatorKey.currentContext!.push(
         AppRoutes.paymentSuccessScreen,
-        extra: referenceId,
+        extra: {'fromGym': true, 'qr': referenceId},
       );
       break;
 
@@ -114,78 +129,200 @@ void navigateToRightRoute({
       break;
 
     case NotificationRoute.doctorCompleteInfoScreen:
-      // TODO: implement
-      break;
-
+      return;
     case NotificationRoute.doctorBookingScreen:
-      // TODO: implement
+      navigatorKey.currentContext!.pushAndRemoveAllScreens(
+        AppRoutes.doctorNavbarScreen,
+      );
+
       break;
 
     case NotificationRoute.doctorEditBookingScreen:
-      // TODO: implement
+      final cubit = navigatorKey.currentContext!.read<HomeResidentCubit>();
+      cubit.updateNavBarCurrentIndex(1);
+      navigatorKey.currentContext!.pushAndRemoveAllScreens(
+        AppRoutes.residenBottomNavBar,
+      );
       break;
 
     case NotificationRoute.doctorCancelBookingScreen:
-      // TODO: implement
+      final cubit = navigatorKey.currentContext!.read<HomeResidentCubit>();
+
+      cubit.updateNavBarCurrentIndex(1);
+
+      navigatorKey.currentContext!.pushAndRemoveAllScreens(
+        AppRoutes.residenBottomNavBar,
+      );
       break;
 
     case NotificationRoute.messageReceived:
-      // TODO: implement
+      log(referenceId);
       break;
 
     case NotificationRoute.driverCompleteInfoScreen:
-      // TODO: implement
-      break;
+      return;
 
     case NotificationRoute.gymCompleteInfoScreen:
-      // TODO: implement
-      break;
+      return;
 
     case NotificationRoute.gymPackageBooked:
-      navigatorKey.currentContext!.push(
-        AppRoutes.gymResidentSeePackagesScreen,
-        extra: referenceId,
+      navigatorKey.currentContext!.pushAndRemoveAllScreens(
+        AppRoutes.gymBottomNavBarScreen,
       );
       break;
 
     case NotificationRoute.gymPackageExpired:
-      // TODO: implement
+      final cubit = navigatorKey.currentContext!.read<HomeResidentCubit>();
+      final bookingCubit = navigatorKey.currentContext!
+          .read<ResidentBookingCubit>();
+      cubit.updateNavBarCurrentIndex(1);
+
+      bookingCubit.updateBookingTaps(bookingFilter: BookingFilter.gymBookings);
+      navigatorKey.currentContext!.pushAndRemoveAllScreens(
+        AppRoutes.residenBottomNavBar,
+      );
       break;
 
     case NotificationRoute.gymBookingCancelled:
-      // TODO: implement
-      break;
+      final String? currentRole = await SharedPreferencesHelper.get(
+        key: ApiKeys.role,
+      );
+      final bool isResident = currentRole == ServiceRole.resident.name;
+
+      if (!isResident) {
+        navigatorKey.currentContext!.pushAndRemoveAllScreens(
+          AppRoutes.gymBottomNavBarScreen,
+        );
+        break;
+      } else {
+        final cubit = navigatorKey.currentContext!.read<HomeResidentCubit>();
+        final bookingCubit = navigatorKey.currentContext!
+            .read<ResidentBookingCubit>();
+        cubit.updateNavBarCurrentIndex(1);
+
+        bookingCubit.updateBookingTaps(
+          bookingFilter: BookingFilter.gymBookings,
+        );
+        navigatorKey.currentContext!.pushAndRemoveAllScreens(
+          AppRoutes.residenBottomNavBar,
+        );
+        break;
+      }
 
     case NotificationRoute.residentCompleteInfoScreen:
-      // TODO: implement
-      break;
+      return;
 
     case NotificationRoute.technicianCompleteInfoScreen:
-      // TODO: implement
-      break;
-
+      return;
     case NotificationRoute.technicianAcceptBooking:
-      // TODO: implement
+      final cubit = navigatorKey.currentContext!.read<HomeResidentCubit>();
+      final bookingCubit = navigatorKey.currentContext!
+          .read<ResidentBookingCubit>();
+      cubit.updateNavBarCurrentIndex(1);
+
+      bookingCubit.updateBookingTaps(
+        bookingFilter: BookingFilter.technicianBookings,
+      );
+      navigatorKey.currentContext!.pushAndRemoveAllScreens(
+        AppRoutes.residenBottomNavBar,
+      );
       break;
 
     case NotificationRoute.technicianRejectBooking:
-      // TODO: implement
+      final cubit = navigatorKey.currentContext!.read<HomeResidentCubit>();
+      final bookingCubit = navigatorKey.currentContext!
+          .read<ResidentBookingCubit>();
+      cubit.updateNavBarCurrentIndex(1);
+
+      bookingCubit.updateBookingTaps(
+        bookingFilter: BookingFilter.technicianBookings,
+      );
+      navigatorKey.currentContext!.pushAndRemoveAllScreens(
+        AppRoutes.residenBottomNavBar,
+      );
       break;
 
     case NotificationRoute.userTechnicianBookingCancelled:
-      // TODO: implement
+      final int bookingId = int.parse(referenceId);
+      navigatorKey.currentContext!.push(
+        AppRoutes.technicianBookingDetailsScreen,
+        extra: bookingId,
+      );
       break;
 
     case NotificationRoute.technicianCancelBooking:
-      // TODO: implement
+      final cubit = navigatorKey.currentContext!.read<HomeResidentCubit>();
+      final bookingCubit = navigatorKey.currentContext!
+          .read<ResidentBookingCubit>();
+      cubit.updateNavBarCurrentIndex(1);
+
+      bookingCubit.updateBookingTaps(
+        bookingFilter: BookingFilter.technicianBookings,
+      );
+      navigatorKey.currentContext!.pushAndRemoveAllScreens(
+        AppRoutes.residenBottomNavBar,
+      );
       break;
 
     case NotificationRoute.postCommented:
-      // TODO: implement
+      final cubit = navigatorKey.currentContext!.read<HomeResidentCubit>();
+      if (cubit.user != null) {
+        final String? userId = await getUserId();
+        navigatorKey.currentContext!.pushScreen(
+          AppRoutes.socialProfileScreen,
+          arguments: {
+            AppStrings.name: cubit.user!.fullName,
+            AppStrings.id: userId,
+          },
+        );
+      }
       break;
 
     case NotificationRoute.postReacted:
-      // TODO: implement
+      final cubit = navigatorKey.currentContext!.read<HomeResidentCubit>();
+      if (cubit.user != null) {
+        final String? userId = await getUserId();
+        navigatorKey.currentContext!.pushScreen(
+          AppRoutes.socialProfileScreen,
+          arguments: {
+            AppStrings.name: cubit.user!.fullName,
+            AppStrings.id: userId,
+          },
+        );
+      }
+      break;
+    case NotificationRoute.residentCancelDoctorBooking:
+      navigatorKey.currentContext!.pushAndRemoveAllScreens(
+        AppRoutes.doctorNavbarScreen,
+      );
+      break;
+
+    case NotificationRoute.restaurantReservationAccepted:
+      navigatorKey.currentContext!.push(
+        AppRoutes.paymentSuccessScreen,
+        extra: {'fromGym': false, 'qr': referenceId},
+      );
+      break;
+    case NotificationRoute.restaurantNewReservation:
+      final cubit = navigatorKey.currentContext!
+          .read<RestaurantDashboardCubit>();
+
+      cubit.updateBottomNavBarIndex(2);
+      navigatorKey.currentContext!.pushAndRemoveAllScreens(
+        AppRoutes.restuarantBottomNavBar,
+      );
+      break;
+    case NotificationRoute.orderStartedPreparing:
+      navigatorKey.currentContext!.push(
+        AppRoutes.residentRestaurantOrdersScreen,
+      );
+      break;
+    case NotificationRoute.socialHidden:
+      return;
+    case NotificationRoute.orderCancelled:
+      navigatorKey.currentContext!.push(
+        AppRoutes.residentRestaurantOrdersScreen,
+      );
       break;
   }
 }

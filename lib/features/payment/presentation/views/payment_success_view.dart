@@ -3,9 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/widgets/custom_qr_dialog.dart';
 
 class PaymentSuccessView extends StatefulWidget {
-  const PaymentSuccessView({super.key});
+  const PaymentSuccessView({super.key, required this.data});
+
+  final Map<String, dynamic> data;
 
   @override
   State<PaymentSuccessView> createState() => _PaymentSuccessViewState();
@@ -96,7 +99,9 @@ class _PaymentSuccessViewState extends State<PaymentSuccessView>
                 FadeTransition(
                   opacity: _fadeAnim,
                   child: Text(
-                    'paymentSuccessMessage'.tr(context),
+                    widget.data['fromGym']
+                        ? 'gymPaymentSuccessMessage'.tr(context)
+                        : 'restaurantPaymentSuccessMessage'.tr(context),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15,
@@ -141,9 +146,14 @@ class _PaymentSuccessViewState extends State<PaymentSuccessView>
                     width: double.infinity,
                     height: 56,
                     child: ElevatedButton(
-                      onPressed: () => context.pushAndRemoveAllScreens(
-                        AppRoutes.residenBottomNavBar,
-                      ),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return QrCodeDialog(qrCode: widget.data['qr']);
+                          },
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF6B4EFF),
                         shape: RoundedRectangleBorder(
@@ -152,7 +162,7 @@ class _PaymentSuccessViewState extends State<PaymentSuccessView>
                         elevation: 0,
                       ),
                       child: Text(
-                        'backToHome'.tr(context),
+                        'qr'.tr(context),
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,

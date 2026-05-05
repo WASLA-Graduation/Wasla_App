@@ -230,7 +230,9 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.residenBottomNavBar,
-      builder: (context, state) => HomeResidentNavbar(),
+      builder: (context, state) {
+        return HomeResidentNavbar();
+      },
     ),
     GoRoute(
       path: AppRoutes.allServicesScreen,
@@ -430,7 +432,11 @@ final GoRouter appRouter = GoRouter(
 
     GoRoute(
       path: AppRoutes.paymentSuccessScreen,
-      builder: (context, state) => PaymentSuccessView(),
+      builder: (context, state) {
+
+        final Map<String ,dynamic> data= state.extra as Map<String ,dynamic>;
+        return PaymentSuccessView(data: data,);
+      },
     ),
     GoRoute(
       path: AppRoutes.paymentFailureScreen,
