@@ -566,7 +566,8 @@
   "cart": "Cart",
   "emptyCart": "Your cart is empty",
   "emptyCartSub": "Add items from the menu to get started",
-  "remove": "Remove"
+  "remove": "Remove",
+  "orderCancelled": "Order Cancelled Successfully"
 
 
 

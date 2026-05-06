@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/enums/restauant_reservation_status.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/utils/app_colors.dart';
@@ -25,6 +26,10 @@ class OrderButtons extends StatelessWidget {
           showToast(state.errorMessage, color: AppColors.red);
         } else if (state is MarkOrderAsPreparedFailureState) {
           showToast(state.errorMessage, color: AppColors.red);
+        } else if (state is CancelOrderFailureState) {
+          showToast(state.errorMessage, color: AppColors.red);
+        } else if (state is CancelOrderSucessState) {
+          showToast('orderCancelled'.tr(context), color: AppColors.green);
         }
       },
       buildWhen: (previous, current) =>
@@ -32,24 +37,41 @@ class OrderButtons extends StatelessWidget {
       listenWhen: (previous, current) =>
           current is ChangeOrderStatusState && current.orderId == order.id,
       builder: (context, state) {
-        return Visibility(
-          visible:
-              withButtons &&
-              (order.status == OrderStatus.paid ||
-                  order.status == OrderStatus.preparing ||
-                  order.status == OrderStatus.onTheWay),
-          child: Padding(
-            padding: const EdgeInsets.all(14),
-            child: OrderActions(
-              onPrepard: () {
-                context.read<OrdersCubit>().markOrderAsReady(order: order);
-              },
-              onConfirm: () {
-                context.read<OrdersCubit>().markOrderAsDone(order: order);
-              },
-              status: order.status,
-            ),
-          ),
+        return Row(
+          children: [
+            if (order.status == OrderStatus.preparing ||
+                order.status == OrderStatus.paid)
+              Expanded(
+                child: PrepardOrCancelButton(
+                  isCancel: true,
+                  label: 'cancel'.tr(context),
+                  onTap: () {
+                    context.read<OrdersCubit>().cancelOrder(order: order);
+                  },
+                ),
+              ),
+
+            if (withButtons &&
+                (order.status == OrderStatus.paid ||
+                    order.status == OrderStatus.preparing ||
+                    order.status == OrderStatus.onTheWay))
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(14),
+                  child: OrderActions(
+                    onPrepard: () {
+                      context.read<OrdersCubit>().markOrderAsReady(
+                        order: order,
+                      );
+                    },
+                    onConfirm: () {
+                      context.read<OrdersCubit>().markOrderAsDone(order: order);
+                    },
+                    status: order.status,
+                  ),
+                ),
+              ),
+          ],
         );
       },
     );

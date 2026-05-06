@@ -67,7 +67,7 @@ class OrderItem extends StatelessWidget {
                       child: OrderTotalsSection(order: order),
                     ),
 
-                    const Divider(height: 0, thickness: 0.5),
+                    const Divider(height: 20, thickness: 0.5),
 
                     OrderButtons(order: order, withButtons: withButtons),
                   ],

@@ -21,7 +21,11 @@ class OrderActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return status == OrderStatus.paid
-        ? _PrepardlButton(onTap: onPrepard)
+        ? PrepardOrCancelButton(
+            onTap: onPrepard,
+            label: 'markAsPrepared'.tr(context),
+            isCancel: false,
+          )
         : _ConfirmButton(
             label: confirmLabel ?? 'markAsDelevared'.tr(context),
             onTap: onConfirm,
@@ -29,10 +33,18 @@ class OrderActions extends StatelessWidget {
   }
 }
 
-class _PrepardlButton extends StatelessWidget {
-  const _PrepardlButton({required this.onTap});
+class PrepardOrCancelButton extends StatelessWidget {
+  const PrepardOrCancelButton({
+    super.key,
+    required this.onTap,
+    this.isCancel,
+    required this.label,
+  });
 
   final VoidCallback onTap;
+
+  final bool? isCancel;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -41,15 +53,18 @@ class _PrepardlButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: onTap,
         style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.orange,
-          side: BorderSide(color: AppColors.orange, width: 0.5),
+          foregroundColor: isCancel == true ? AppColors.red : AppColors.orange,
+          side: BorderSide(
+            color: isCancel == true ? AppColors.red : AppColors.orange,
+            width: 0.5,
+          ),
           padding: const EdgeInsets.symmetric(vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
           textStyle: Theme.of(context).textTheme.displaySmall,
         ),
-        child: Text('markAsPrepared'.tr(context)),
+        child: Text(label),
       ),
     );
   }

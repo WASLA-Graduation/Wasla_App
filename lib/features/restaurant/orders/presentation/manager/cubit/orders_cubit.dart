@@ -238,7 +238,7 @@ class OrdersCubit extends Cubit<OrdersState> {
   Future<void> cancelOrder({required BaseOrderModel order}) async {
     final result = await orders.cancelOrder(
       orderId: order.id,
-      isResident: BaseOrderModel is ResidentOrderModel,
+      isResident: order is ResidentOrderModel,
     );
     result.fold(
       (failure) {
