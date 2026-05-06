@@ -11,7 +11,7 @@ class RestaurantEditProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('edit_profile'.tr(context))),
-      body: RestaurantEditProfileBody(restaurantModel: restaurant),
+      body:  RestaurantEditProfileBody(restaurantModel: restaurant),
     );
   }
 }

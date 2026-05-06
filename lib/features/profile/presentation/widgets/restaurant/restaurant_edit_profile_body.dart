@@ -19,7 +19,10 @@ class RestaurantEditProfileBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCubit>();
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.paddingSizeDefault),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSizes.paddingSizeDefault,
+        vertical: AppSizes.paddingSizeSmall,
+      ),
       child: Column(
         spacing: AppSizes.paddingSizeLarge,
         children: [
