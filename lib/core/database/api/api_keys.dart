@@ -41,6 +41,7 @@ abstract class ApiKeys {
   static const serviceProviderProfilePhoto = 'serviceProviderProfilePhoto';
   static const roleName = 'roleName';
   static const isResident = 'IsResident';
+  static const isResidentCamel = 'isResident';
   static const newStatus = 'newStatus';
   static const images = 'images';
   static const photo = 'photo';

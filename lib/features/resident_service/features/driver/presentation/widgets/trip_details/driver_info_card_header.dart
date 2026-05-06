@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/service/signalR/chat_hub.dart';
+import 'package:wasla/core/utils/app_strings.dart';
+import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/custom_circle_network_image.dart';
 import 'package:wasla/features/resident_service/features/driver/data/models/resident_trip_model.dart';
 
@@ -11,10 +16,7 @@ class DriverInfoCardHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: CircleNeworkImage(
-        imageUrl: trip.driverImage,
-        isLoading: false,
-      ),
+      leading: CircleNeworkImage(imageUrl: trip.driverImage, isLoading: false),
 
       title: Text(
         trip.driverName,
@@ -32,12 +34,28 @@ class DriverInfoCardHeader extends StatelessWidget {
       trailing: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            trip.rating.toString(),
-            style: Theme.of(context).textTheme.labelMedium,
+          IconButton(
+            onPressed: () async {
+              final chatHub = ChatHub();
+              chatHub.init();
+              await context.push(
+                AppRoutes.chatScreen,
+                extra: {
+                  AppStrings.id: trip.driverId,
+                  AppStrings.name: trip.driverName,
+                  AppStrings.photo: trip.driverImage,
+                },
+              );
+              chatHub.disconnect();
+            },
+            icon: Image.asset(
+              Assets.assetsImagesChatFilled,
+              height: 18,
+              width: 18,
+            ),
           ),
           Text(
-            'reviews'.tr(context),
+            'message'.tr(context),
             style: Theme.of(context).textTheme.labelSmall,
           ),
         ],

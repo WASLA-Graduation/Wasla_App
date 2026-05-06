@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
@@ -53,7 +52,11 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
     try {
       await api.put(
         ApiEndPoints.updateBookingStatus,
-        queryParameters: {ApiKeys.bookingId: bookingId, ApiKeys.status: status},
+        queryParameters: {
+          ApiKeys.bookingId: bookingId,
+          ApiKeys.status: status,
+          ApiKeys.isResidentCamel: true,
+        },
       );
 
       return Right(null);
@@ -94,7 +97,10 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
     required int bookingId,
   }) async {
     try {
-      await api.put('${ApiEndPoints.gymCancelBooking}$bookingId');
+      await api.put(
+        '${ApiEndPoints.gymCancelBooking}$bookingId',
+        queryParameters: {ApiKeys.isResidentCamel: true},
+      );
       return const Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
@@ -158,6 +164,9 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
     try {
       await api.put(
         ApiEndPoints.technicianCancelBooking + bookingId.toString(),
+        queryParameters: {
+          ApiKeys.isResidentCamel: true
+        }
       );
 
       return const Right(null);

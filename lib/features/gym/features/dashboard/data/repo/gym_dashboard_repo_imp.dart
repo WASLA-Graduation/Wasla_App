@@ -84,7 +84,10 @@ class GymDashboardRepoImp extends GymDashboardRepo {
     required int bookingId,
   }) async {
     try {
-      await api.put('${ApiEndPoints.gymCancelBooking}$bookingId');
+      await api.put(
+        '${ApiEndPoints.gymCancelBooking}$bookingId',
+        queryParameters: {ApiKeys.isResidentCamel: false},
+      );
       return const Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);

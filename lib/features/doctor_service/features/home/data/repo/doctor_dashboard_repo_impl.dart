@@ -56,7 +56,11 @@ class DoctorDashboardRepoImpl extends DoctorDashboardRepo {
     try {
       await api.put(
         ApiEndPoints.updateBookingStatus,
-        queryParameters: {ApiKeys.bookingId: bookingId, ApiKeys.status: status},
+        queryParameters: {
+          ApiKeys.bookingId: bookingId,
+          ApiKeys.status: status,
+          ApiKeys.isResidentCamel: false,
+        },
       );
 
       return Right(null);

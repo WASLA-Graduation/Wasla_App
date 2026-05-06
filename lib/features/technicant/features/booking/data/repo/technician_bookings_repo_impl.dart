@@ -54,6 +54,7 @@ class TechnicianBookingsRepoImpl extends TechnicianBookingsRepo {
     try {
       await api.put(
         ApiEndPoints.technicianCancelBooking + bookingId.toString(),
+        queryParameters: {ApiKeys.isResidentCamel: false},
       );
 
       return const Right(null);
