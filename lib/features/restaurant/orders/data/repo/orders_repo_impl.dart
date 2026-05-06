@@ -174,4 +174,23 @@ class OrdersRepoImpl extends OrdersRepo {
       return Left(e.toString());
     }
   }
+
+  @override
+  Future<Either<String, Null>> cancelOrder({
+    required int orderId,
+    required bool isResident,
+  }) async {
+    try {
+      await api.put(
+        ApiEndPoints.cancelOrder,
+        queryParameters: {
+          ApiKeys.isResident: isResident,
+          ApiKeys.orderId: orderId,
+        },
+      );
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
 }

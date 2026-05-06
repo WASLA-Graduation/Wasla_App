@@ -171,6 +171,7 @@ abstract class ApiEndPoints {
   static const String getAllServiceProviders = 'api/ServiceProvider/All';
   static const String searchServiceProviders = 'api/ServiceProvider/Search';
   static const String createUserEvent = 'api/UserEvent/CreateUserEvent';
+  static const String cancelOrder = 'api/RestaurantOrder/cancel-order';
   static const String getTopServicesProviders =
       'api/UserEvent/GetTopServiceProviders';
   static const String getTopServicesProvidersGlobally =

@@ -29,4 +29,8 @@ abstract class OrdersRepo {
   });
   Future<Either<String, Null>> markOrderAsDelivered({required int id});
   Future<Either<String, Null>> markOrderAsPrepared({required int id});
+  Future<Either<String, Null>> cancelOrder({
+    required int orderId,
+    required bool isResident,
+  });
 }
