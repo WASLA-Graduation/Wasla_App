@@ -495,14 +495,14 @@ class ChatCubit extends Cubit<ChatState> {
       emit(ChatGetCahtOfUserSuccess(messages: messages));
     }
     //when the new chat and i start it
-    else if (currentChatId.isEmpty && user.senderId == currentUser) {
+    else if (currentResceiver==user.receiverId && user.senderId == currentUser) {
       currentChatId = user.chatId.toString();
       messages.insert(0, _getNewMsg(user));
       readMsgs(chatId: currentChatId);
       emit(ChatGetCahtOfUserSuccess(messages: messages));
     }
     ///when i in the chat and new user start it
-    else if (currentChatId.isEmpty && user.receiverId == currentUser) {
+    else if (user.senderId==currentResceiver && user.receiverId == currentUser) {
       messages.insert(0, _getNewMsg(user));
       //me in chat
       if (currentResceiver.isNotEmpty) {

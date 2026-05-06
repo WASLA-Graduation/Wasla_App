@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
@@ -35,6 +36,8 @@ class AllUsersChatList extends StatelessWidget {
                         .chatId
                         .toString();
                   }
+
+                  // log('Chat Id Is ${context.read<ChatCubit>().currentChatId}');
                   context.pushScreen(
                     AppRoutes.chatScreen,
                     arguments: {
