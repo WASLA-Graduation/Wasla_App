@@ -35,7 +35,7 @@ class _ResidentRestaurantViewState extends State<ResidentRestaurantView> {
                 onPressed: () => context.pushScreen(
                   AppRoutes.residentRestaurantOrdersScreen,
                 ),
-                icon: Icon(
+                icon: const Icon(
                   Icons.outdoor_grill_rounded,
                   color: AppColors.primaryColor,
                   size: 28,
