@@ -57,6 +57,7 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
   }
 
   Future<void> getMenuItems({required String restaurantId}) async {
+    allCategoriesItems.clear();
     emit(ResidentGetMenuCategoryItemsLoadingState());
     final result = await menu.getMenuItems(restaurantId: restaurantId);
     result.fold(

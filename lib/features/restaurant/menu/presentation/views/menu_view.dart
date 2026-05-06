@@ -36,14 +36,14 @@ class _MenuViewState extends State<MenuView> {
               );
             },
           );
-        }
+        },
       ),
       appBar: AppBar(title: Text('menu'.tr(context))),
       body: BlocStatusHandler<ResidentMenuCubit, ResidentMenuState>(
         body: const MenuBody(),
         onRetry: () {
-          getMenu();
           context.read<ResidentMenuCubit>().onRetry();
+          getMenu();
         },
         isNetwork: (state) => state is ResidentMenuNetworkState,
         isError: (state) => state is ResidentMenuFailureState,
