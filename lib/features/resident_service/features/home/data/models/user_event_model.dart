@@ -25,15 +25,4 @@ class UserEventModel {
       rating: (json['rating'] ?? 0).toDouble(),
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'description': description,
-      'image': image,
-      'roleName': roleName,
-      'rating': rating,
-    };
-  }
 }

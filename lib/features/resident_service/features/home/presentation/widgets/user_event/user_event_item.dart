@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/app_sizes.dart';
@@ -29,7 +28,7 @@ class UserEventItem extends StatelessWidget {
               width: double.infinity,
               child: CustomCachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: ApiEndPoints.imageBaseUrl + userEvent.image,
+                imageUrl: userEvent.image,
               ),
             ),
           ),
