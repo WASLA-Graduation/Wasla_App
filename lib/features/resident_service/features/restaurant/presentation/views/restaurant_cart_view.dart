@@ -27,8 +27,8 @@ class _RestaurantCartViewState extends State<RestaurantCartView> {
       body: BlocStatusHandler<RestaurantCartCubit, RestaurantCartState>(
         body: RestaurantCartBody(restaurantId: widget.restaurantId),
         onRetry: () {
-          getMyCart();
           context.read<RestaurantCartCubit>().onRetry();
+          getMyCart();
         },
         isNetwork: (state) => state is RestaurantCartNetworkState,
         isError: (state) => state is RestaurantCartFailureState,

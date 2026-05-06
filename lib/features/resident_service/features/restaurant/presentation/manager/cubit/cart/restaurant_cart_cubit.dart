@@ -27,6 +27,7 @@ class RestaurantCartCubit extends Cubit<RestaurantCartState> {
   }
 
   Future<void> getMyCart({required String restaurantId}) async {
+    cartList.clear();
     emit(RestaurantGetCartLoadingState());
     final String? residentId = await getUserId();
     final result = await cart.getCartItems(
