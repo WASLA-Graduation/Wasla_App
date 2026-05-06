@@ -1,5 +1,4 @@
 
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:latlong2/latlong.dart';
@@ -93,7 +92,6 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
           ApiKeys.vehicleType: vehicleType,
         },
       );
-      log("Current Trip Id : ${response[ApiKeys.data]}");
       return Right(response[ApiKeys.data]);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);

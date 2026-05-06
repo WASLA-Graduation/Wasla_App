@@ -50,7 +50,7 @@ class ResidentDriverCubit extends Cubit<ResidentDriverState> {
 
   void startLoadingTimer() {
     cancelTripTimer?.cancel();
-    cancelTripTimer = Timer(const Duration(minutes: 1), () {
+    cancelTripTimer = Timer(const Duration(minutes: 2), () {
       cancelRide();
       cancelTripTimer = null;
     });

@@ -15,6 +15,7 @@ class DriverInfoCardHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      minTileHeight: 80,
       contentPadding: EdgeInsets.zero,
       leading: CircleNeworkImage(imageUrl: trip.driverImage, isLoading: false),
 
@@ -31,34 +32,23 @@ class DriverInfoCardHeader extends StatelessWidget {
         style: Theme.of(context).textTheme.labelSmall,
       ),
 
-      trailing: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IconButton(
-            onPressed: () async {
-              final chatHub = ChatHub();
-              chatHub.init();
-              await context.push(
-                AppRoutes.chatScreen,
-                extra: {
-                  AppStrings.id: trip.driverId,
-                  AppStrings.name: trip.driverName,
-                  AppStrings.photo: trip.driverImage,
-                },
-              );
-              chatHub.disconnect();
+      trailing: IconButton(
+        padding: EdgeInsets.zero,
+        constraints: const BoxConstraints(),
+        onPressed: () async {
+          final chatHub = ChatHub();
+          chatHub.init();
+          await context.push(
+            AppRoutes.chatScreen,
+            extra: {
+              AppStrings.id: trip.driverId,
+              AppStrings.name: trip.driverName,
+              AppStrings.photo: trip.driverImage,
             },
-            icon: Image.asset(
-              Assets.assetsImagesChatFilled,
-              height: 18,
-              width: 18,
-            ),
-          ),
-          Text(
-            'message'.tr(context),
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
-        ],
+          );
+          chatHub.disconnect();
+        },
+        icon: Image.asset(Assets.assetsImagesChatFilled, height: 22, width: 22),
       ),
     );
   }

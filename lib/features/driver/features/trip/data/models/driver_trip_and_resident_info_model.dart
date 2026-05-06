@@ -1,5 +1,6 @@
 class TripModel {
   final String residentName;
+  final String residentId;
   final String residentPhone;
   final String residentImage;
   final String pickUpPlace;
@@ -13,6 +14,7 @@ class TripModel {
   final double duration;
 
   TripModel({
+    required this.residentId,
     required this.residentName,
     required this.residentPhone,
     required this.residentImage,
@@ -41,6 +43,7 @@ class TripModel {
       price: (json['price'] as num).toDouble(),
       distance: (json['distance'] as num).toDouble(),
       duration: (json['duration'] as num).toDouble(),
+      residentId: json['residentId'],
     );
   }
 }

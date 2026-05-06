@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:wasla/features/driver/features/trip/presentation/manager/cubit/driver_trip_cubit.dart';
 import 'package:wasla/features/driver/features/trip/presentation/widgets/driver_tracking_body.dart';
 
@@ -33,13 +32,11 @@ class _DriverMapTrackingViewState extends State<DriverMapTrackingView> {
   }
 
   void startTracking() async {
-    log('Disha');
+    log('Start Tracking');
+
     final cubit = context.read<DriverTripCubit>();
     cubit.initializeTrip().then((_) {
-      cubit.passengerLocation = LatLng(
-        cubit.tripDetails!.pickUpLatitude,
-        cubit.tripDetails!.pickUpLongitude,
-      );
+      log('After init');
       cubit.startLiveTracking();
     });
   }

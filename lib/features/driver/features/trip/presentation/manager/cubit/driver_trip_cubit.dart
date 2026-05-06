@@ -52,14 +52,21 @@ class DriverTripCubit extends Cubit<DriverTripState> {
         log("Location error: $error");
       },
       (location) {
-        previousDriverLocation = driverLocation;
         driverLocation = LatLng(location.latitude!, location.longitude!);
       },
     );
   }
 
   Future<void> initializeTrip() async {
-    await fetchDriverLocation();
+    passengerLocation = LatLng(
+      tripDetails!.pickUpLatitude,
+      tripDetails!.pickUpLongitude,
+    );
+    // await fetchDriverLocation();
+
+    if (driverLocation == null) {
+      log('Driver Locaion Null Ya Disha');
+    }
 
     if (driverLocation != null) {
       routePoints = await MapServices.getBestRoute(
@@ -69,8 +76,6 @@ class DriverTripCubit extends Cubit<DriverTripState> {
 
       updateDriverRotation();
     }
-
-    // log('routePoints: $routePoints');
 
     emit(DriverChangeMyLocation());
   }
@@ -142,9 +147,9 @@ class DriverTripCubit extends Cubit<DriverTripState> {
       updateDriverRotation();
       checkArrival();
 
-      if (driverLocation != null) {
-        mapController.move(driverLocation!, 15);
-      }
+      // if (driverLocation != null) {
+      //   mapController.move(driverLocation!, 15);
+      // }
 
       emit(DriverChangeMyLocation());
     });

@@ -41,8 +41,9 @@ class _SuggestedTripViewState extends State<SuggestedTripView> {
     );
   }
 
-  void getTripDetails() {
+  void getTripDetails() async {
     final cubit = context.read<DriverTripCubit>();
+    // await cubit.fetchDriverLocation();
     cubit.tripId = widget.tripId;
     cubit.tripIdStored = widget.tripId;
     cubit.tripDetails = null;

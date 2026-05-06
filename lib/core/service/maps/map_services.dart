@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:math' as Math;
 
 import 'package:dartz/dartz.dart';
@@ -78,6 +79,7 @@ abstract class MapServices {
     required LatLng start,
     required LatLng end,
   }) async {
+    log('Called Best Route Method');
     final url =
         "https://router.project-osrm.org/route/v1/driving/"
         "${start.longitude},${start.latitude};"
@@ -92,6 +94,8 @@ abstract class MapServices {
     List<LatLng> routePoints = coordinates.map<LatLng>((point) {
       return LatLng(point[1], point[0]);
     }).toList();
+
+    log('routePoints: $routePoints');
 
     return routePoints;
   }
