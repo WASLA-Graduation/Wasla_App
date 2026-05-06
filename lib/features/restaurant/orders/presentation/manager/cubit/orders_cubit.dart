@@ -234,4 +234,20 @@ class OrdersCubit extends Cubit<OrdersState> {
       emit(MarkOrderAsOnTheWayState(id: orderId));
     }
   }
+
+  Future<void> cancelOrder({required BaseOrderModel order}) async {
+    final result = await orders.cancelOrder(
+      orderId: order.id,
+      isResident: BaseOrderModel is ResidentOrderModel,
+    );
+    result.fold(
+      (failure) {
+        emit(CancelOrderFailureState(errorMessage: failure, id: order.id));
+      },
+      (success) {
+        order.status = OrderStatus.canceled;
+        emit(CancelOrderSucessState(id: order.id));
+      },
+    );
+  }
 }

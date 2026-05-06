@@ -142,3 +142,15 @@ final class MarkOrderAsOnTheWayState extends ChangeOrderStatusState {
 
   MarkOrderAsOnTheWayState({required this.id}) : super(id);
 }
+
+final class CancelOrderFailureState extends ChangeOrderStatusState {
+  final String errorMessage;
+  final int id;
+  CancelOrderFailureState({required this.errorMessage, required this.id})
+    : super(id);
+}
+
+final class CancelOrderSucessState extends ChangeOrderStatusState {
+  final int id;
+  CancelOrderSucessState({required this.id}) : super(id);
+}
