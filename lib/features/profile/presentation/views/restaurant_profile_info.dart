@@ -24,7 +24,6 @@ class RestaurantProfileInfo extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
 
-            /// IMAGE
             CircleNeworkImage(
               imageUrl: restaurant.profile,
               isLoading: false,
@@ -68,10 +67,8 @@ class RestaurantProfileInfo extends StatelessWidget {
               value: restaurant.phoneNumber,
             ),
 
-            /// DESCRIPTION
             _buildDescriptionCard(context),
 
-            /// GALLERY
             _buildGallery(context),
           ],
         ),
