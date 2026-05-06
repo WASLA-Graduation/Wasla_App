@@ -15,6 +15,8 @@ class ResidentRestaurantReservationView extends StatelessWidget {
       appBar: AppBar(title: Text('reservation'.tr(context))),
 
       body: ResidentRestaurantReservationViewBody(restaurantId: restaurantId),
+
+      resizeToAvoidBottomInset: false,
     );
   }
 }

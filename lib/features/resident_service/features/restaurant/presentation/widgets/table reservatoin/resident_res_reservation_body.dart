@@ -11,16 +11,21 @@ import 'package:wasla/features/doctor_service/features/service/presentation/widg
 import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/details/resident_restaurant_cubit.dart';
 
 class ResidentRestaurantReservationViewBody extends StatelessWidget {
-  const ResidentRestaurantReservationViewBody({
+  ResidentRestaurantReservationViewBody({
     super.key,
     required this.restaurantId,
   });
   final String restaurantId;
 
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.marginDefault),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSizes.marginDefault,
+        vertical: AppSizes.paddingSizeSmall,
+      ),
       child: Column(
         children: [
           CustomDatePickerWidget(
@@ -48,20 +53,30 @@ class ResidentRestaurantReservationViewBody extends StatelessWidget {
             },
           ),
           SizedBox(height: AppSizes.paddingSizeDefault),
-          CustomTextFormField(
-            initealValue: context
-                .read<ResidentRestaurantCubit>()
-                .numberOfPersons
-                .toString(),
-            keyboardTyp: TextInputType.number,
-            withTitle: true,
-            title: 'numberOfPersons'.tr(context),
-            hint: 'numberOfPersons'.tr(context),
-            withBorder: true,
-            onChanged: (value) {
-              context.read<ResidentRestaurantCubit>().numberOfPersons =
-                  int.tryParse(value) ?? 0;
-            },
+          Form(
+            key: formKey,
+            child: CustomTextFormField(
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "dataRequired".tr(context);
+                }
+                int n = int.tryParse(value) ?? 1;
+                if (n < 1) {
+                  return "dataRequired".tr(context);
+                }
+                return null;
+              },
+              initealValue: 1.toString(),
+              keyboardTyp: TextInputType.number,
+              withTitle: true,
+              title: 'numberOfPersons'.tr(context),
+              hint: 'numberOfPersons'.tr(context),
+              withBorder: true,
+              onChanged: (value) {
+                context.read<ResidentRestaurantCubit>().numberOfPersons =
+                    int.tryParse(value) ?? 1;
+              },
+            ),
           ),
 
           const Spacer(),
@@ -80,9 +95,12 @@ class ResidentRestaurantReservationViewBody extends StatelessWidget {
                   if (state is ResidentRestaurantReservationLoadingState) {
                     return;
                   }
-                  context
-                      .read<ResidentRestaurantCubit>()
-                      .reservationWithRestaurant(restaurantId: restaurantId);
+
+                  if (formKey.currentState!.validate()) {
+                    context
+                        .read<ResidentRestaurantCubit>()
+                        .reservationWithRestaurant(restaurantId: restaurantId);
+                  }
                 },
                 text: state is ResidentRestaurantReservationLoadingState
                     ? 'loading'.tr(context)
