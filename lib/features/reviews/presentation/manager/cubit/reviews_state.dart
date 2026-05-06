@@ -26,22 +26,36 @@ final class AddReviewFailure extends ReviewsState {
   AddReviewFailure({required this.errMsg});
 }
 
-final class DeleteReviewsuccess extends ReviewsState {}
+abstract class ReviewActions extends ReviewsState {
+  final int reviewId;
 
-final class DeleteReviewLoading extends ReviewsState {}
-
-final class DeleteReviewFailure extends ReviewsState {
-  final String errMsg;
-
-  DeleteReviewFailure({required this.errMsg});
+  ReviewActions({required this.reviewId});
 }
 
-final class UpdateReviewsuccess extends ReviewsState {}
+final class DeleteReviewsuccess extends ReviewActions {
+  DeleteReviewsuccess({required super.reviewId});
+}
 
-final class UpdateReviewLoading extends ReviewsState {}
+final class DeleteReviewLoading extends ReviewActions {
+  DeleteReviewLoading({required super.reviewId});
+}
 
-final class UpdateReviewFailure extends ReviewsState {
+final class DeleteReviewFailure extends ReviewActions {
   final String errMsg;
 
-  UpdateReviewFailure({required this.errMsg});
+  DeleteReviewFailure({required this.errMsg, required super.reviewId});
+}
+
+final class UpdateReviewsuccess extends ReviewActions {
+  UpdateReviewsuccess({required super.reviewId});
+}
+
+final class UpdateReviewLoading extends ReviewActions {
+  UpdateReviewLoading({required super.reviewId});
+}
+
+final class UpdateReviewFailure extends ReviewActions {
+  final String errMsg;
+
+  UpdateReviewFailure({required this.errMsg, required super.reviewId});
 }

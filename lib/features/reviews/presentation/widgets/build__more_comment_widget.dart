@@ -23,6 +23,11 @@ class BuildMoreCommentWidget extends StatelessWidget {
     final cubit = context.read<ReviewsCubit>();
 
     return BlocConsumer<ReviewsCubit, ReviewsState>(
+      listenWhen: (previous, current) =>
+          current is ReviewActions && current.reviewId == reviewModel.reviewId,
+      buildWhen: (previous, current) =>
+          current is ReviewActions && current.reviewId == reviewModel.reviewId,
+
       listener: (context, state) {
         if (state is DeleteReviewsuccess) {
           toastAlert(

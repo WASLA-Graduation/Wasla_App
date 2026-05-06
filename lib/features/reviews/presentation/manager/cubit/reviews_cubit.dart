@@ -15,7 +15,7 @@ class ReviewsCubit extends Cubit<ReviewsState> {
   String reviewValue = '';
   int ratingIndex = 0;
   String? selectedUserId;
-  int starsCount = -1;
+  int starsCount = 3;
 
   void updateReviewValue(String value) {
     reviewValue = value;
@@ -26,7 +26,7 @@ class ReviewsCubit extends Cubit<ReviewsState> {
 
   void updateRatingStars(int index) {
     if (index == starsCount) {
-      starsCount = -1;
+      starsCount = 3;
     } else {
       starsCount = index;
     }
@@ -64,7 +64,7 @@ class ReviewsCubit extends Cubit<ReviewsState> {
     String? userId = await getUserId();
     final response = await reviewsRepo.addReview(
       comment: reviewValue,
-      rating: starsCount == -1 ? 3 : starsCount + 1,
+      rating: starsCount == -1 ? 0 : starsCount + 1,
       serviceProviderId: serviceProviderId,
       userId: userId!,
     );
@@ -80,21 +80,21 @@ class ReviewsCubit extends Cubit<ReviewsState> {
   }
 
   Future<void> deleteReview({required int reviewId}) async {
-    emit(DeleteReviewLoading());
+    emit(DeleteReviewLoading(reviewId: reviewId));
     final response = await reviewsRepo.deleteReview(reviewId: reviewId);
     response.fold(
       (error) {
-        emit(DeleteReviewFailure(errMsg: error));
+        emit(DeleteReviewFailure(errMsg: error, reviewId: reviewId));
       },
       (success) {
         reviewList.removeWhere((element) => element.reviewId == reviewId);
-        emit(DeleteReviewsuccess());
+        emit(DeleteReviewsuccess(reviewId: reviewId));
       },
     );
   }
 
   Future<void> updateReview({required ReviewModel selectedReveiw}) async {
-    emit(UpdateReviewLoading());
+    emit(UpdateReviewLoading(reviewId:selectedReveiw.reviewId ));
 
     final response = await reviewsRepo.updateReview(
       reviewId: selectedReveiw.reviewId,
@@ -103,7 +103,7 @@ class ReviewsCubit extends Cubit<ReviewsState> {
     );
     response.fold(
       (error) {
-        emit(UpdateReviewFailure(errMsg: error));
+        emit(UpdateReviewFailure(errMsg: error, reviewId:selectedReveiw.reviewId ));
       },
       (success) {
         for (var review in reviewList) {
@@ -113,7 +113,7 @@ class ReviewsCubit extends Cubit<ReviewsState> {
         }
         reviewValue = "";
 
-        emit(UpdateReviewsuccess());
+        emit(UpdateReviewsuccess( reviewId:selectedReveiw.reviewId ));
       },
     );
   }
@@ -141,6 +141,6 @@ class ReviewsCubit extends Cubit<ReviewsState> {
     reviewValue = "";
     reviewValueController.clear();
     ratingIndex = 0;
-    starsCount = -1;
+    starsCount = 3;
   }
 }
