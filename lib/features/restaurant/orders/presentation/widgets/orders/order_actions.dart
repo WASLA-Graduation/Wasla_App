@@ -58,13 +58,16 @@ class PrepardOrCancelButton extends StatelessWidget {
             color: isCancel == true ? AppColors.red : AppColors.orange,
             width: 0.5,
           ),
-          padding: const EdgeInsets.symmetric(vertical: 12),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
           textStyle: Theme.of(context).textTheme.displaySmall,
         ),
-        child: Text(label),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(children: [Text(label)]),
+        ),
       ),
     );
   }
