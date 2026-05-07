@@ -12,6 +12,7 @@ import 'package:wasla/features/gym/features/dashboard/presentation/manager/cubit
 import 'package:wasla/features/gym/features/dashboard/presentation/views/gym_dashboard_view.dart';
 import 'package:wasla/features/gym/features/packages/presentation/views/gym_packages_view.dart';
 import 'package:wasla/features/profile/presentation/views/profile_view.dart';
+import 'package:wasla/features/social_media/presentation/views/all_posts_view.dart';
 
 class GymBottomNavBar extends StatelessWidget {
   const GymBottomNavBar({super.key});
@@ -53,9 +54,10 @@ class GymBottomNavBar extends StatelessWidget {
   }
 
   static List<Widget> screens = [
-    GymDashboardView(),
-    GymPackagesView(),
-    LastUsersViwe(),
+    const GymDashboardView(),
+    const GymPackagesView(),
+    const LastUsersViwe(),
+    const AllPostsView(),
     const ProfileView(),
   ];
 
@@ -63,6 +65,7 @@ class GymBottomNavBar extends StatelessWidget {
     'home'.tr(context),
     'packages'.tr(context),
     'chat'.tr(context),
+    'community'.tr(context),
     'profile'.tr(context),
   ];
 
@@ -70,6 +73,8 @@ class GymBottomNavBar extends StatelessWidget {
     Assets.assetsImagesHomeOutlined,
     Assets.assetsImagesDumbbleOutlined,
     Assets.assetsImagesChatOutlined,
+    Assets.assetsImagesPeopleOutlined,
+
     Assets.assetsImagesPersonOutlined,
   ];
 
@@ -77,6 +82,7 @@ class GymBottomNavBar extends StatelessWidget {
     Assets.assetsImagesHomeFilled,
     Assets.assetsImagesDumbbellFilled,
     Assets.assetsImagesChatFilled,
+    Assets.assetsImagesGroup,
     Assets.assetsImagesPeronFilled,
   ];
 }

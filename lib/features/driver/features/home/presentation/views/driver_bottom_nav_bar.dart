@@ -11,6 +11,7 @@ import 'package:wasla/features/driver/features/home/presentation/manager/cubit/d
 import 'package:wasla/features/driver/features/home/presentation/views/driver_dashboard_view.dart';
 import 'package:wasla/features/driver/features/trip/presentation/manager/cubit/driver_trip_cubit.dart';
 import 'package:wasla/features/profile/presentation/views/profile_view.dart';
+import 'package:wasla/features/social_media/presentation/views/all_posts_view.dart';
 
 class DriverBottomNavBar extends StatefulWidget {
   const DriverBottomNavBar({super.key});
@@ -19,9 +20,10 @@ class DriverBottomNavBar extends StatefulWidget {
   State<DriverBottomNavBar> createState() => _DriverBottomNavBarState();
 
   static List<Widget> screens = [
-    DriverDashboardView(),
-    DriverBookingsView(),
-    LastUsersViwe(),
+    const DriverDashboardView(),
+    const DriverBookingsView(),
+    const LastUsersViwe(),
+    const AllPostsView(),
     const ProfileView(),
   ];
 }
@@ -80,6 +82,8 @@ class _DriverBottomNavBarState extends State<DriverBottomNavBar> {
     'home'.tr(context),
     'booking'.tr(context),
     'chat'.tr(context),
+    'community'.tr(context),
+
     'profile'.tr(context),
   ];
 
@@ -87,6 +91,7 @@ class _DriverBottomNavBarState extends State<DriverBottomNavBar> {
     Assets.assetsImagesHomeOutlined,
     Assets.assetsImagesBookingOutlined,
     Assets.assetsImagesChatOutlined,
+    Assets.assetsImagesPeopleOutlined,
     Assets.assetsImagesPersonOutlined,
   ];
 
@@ -94,6 +99,7 @@ class _DriverBottomNavBarState extends State<DriverBottomNavBar> {
     Assets.assetsImagesHomeFilled,
     Assets.assetsImagesBookingFilled,
     Assets.assetsImagesChatFilled,
+    Assets.assetsImagesGroup,
     Assets.assetsImagesPeronFilled,
   ];
 

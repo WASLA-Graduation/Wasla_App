@@ -216,8 +216,9 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
     required int commentId,
   }) async {
     try {
+      
       await api.put(
-        'api/Social/Commnet',
+        'api/Social/Comment',
         queryParameters: {
           ApiKeys.content: content,
           ApiKeys.commentId: commentId,

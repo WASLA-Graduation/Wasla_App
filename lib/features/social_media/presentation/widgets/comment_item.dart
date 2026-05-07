@@ -68,22 +68,24 @@ class CommentItem extends StatelessWidget {
 
                 title: Row(
                   children: [
-                    InkWell(
-                      onTap: () {
-                        context.pushScreen(
-                          AppRoutes.socialProfileScreen,
-                          arguments: {
-                            AppStrings.name: comment.userName,
+                    Flexible(
+                      child: InkWell(
+                        onTap: () {
+                          context.pushScreen(
+                            AppRoutes.socialProfileScreen,
+                            arguments: {
+                              AppStrings.name: comment.userName,
 
-                            AppStrings.id: comment.userId,
-                          },
-                        );
-                      },
-                      child: Text(
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        comment.userName,
-                        style: Theme.of(context).textTheme.labelMedium,
+                              AppStrings.id: comment.userId,
+                            },
+                          );
+                        },
+                        child: Text(
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          comment.userName,
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
                       ),
                     ),
 

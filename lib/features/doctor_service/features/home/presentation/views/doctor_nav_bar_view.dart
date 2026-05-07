@@ -12,6 +12,7 @@ import 'package:wasla/features/doctor_service/features/home/presentation/views/d
 import 'package:wasla/features/doctor_service/features/service/presentation/views/service_view.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/custom_doc_add_service_float_button.dart';
 import 'package:wasla/features/profile/presentation/views/profile_view.dart';
+import 'package:wasla/features/social_media/presentation/views/all_posts_view.dart';
 
 class DoctorNavBarView extends StatelessWidget {
   const DoctorNavBarView({super.key});
@@ -53,9 +54,11 @@ class DoctorNavBarView extends StatelessWidget {
   }
 
   static List<Widget> screens = [
-    DoctorDashboardView(),
-    ServiceView(),
-    LastUsersViwe(),
+    const DoctorDashboardView(),
+    const ServiceView(),
+    const LastUsersViwe(),
+    const AllPostsView(),
+
     const ProfileView(),
   ];
 
@@ -63,6 +66,7 @@ class DoctorNavBarView extends StatelessWidget {
     'home'.tr(context),
     'service'.tr(context),
     'chat'.tr(context),
+    'community'.tr(context),
     'profile'.tr(context),
   ];
 
@@ -70,6 +74,7 @@ class DoctorNavBarView extends StatelessWidget {
     Assets.assetsImagesHomeOutlined,
     Assets.assetsImagesDoctorKitOutlined,
     Assets.assetsImagesChatOutlined,
+    Assets.assetsImagesPeopleOutlined,
     Assets.assetsImagesPersonOutlined,
   ];
 
@@ -77,6 +82,7 @@ class DoctorNavBarView extends StatelessWidget {
     Assets.assetsImagesHomeFilled,
     Assets.assetsImagesDoctorKitFilled,
     Assets.assetsImagesChatFilled,
+    Assets.assetsImagesGroup,
     Assets.assetsImagesPeronFilled,
   ];
 }

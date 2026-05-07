@@ -78,7 +78,7 @@ class DocBookingDataCard extends StatelessWidget {
           _buildTextWidget(
             context,
             title: "date".tr(context),
-            value: model.date,
+            value: model.date.split(' ').first,
           ),
           _buildTextWidget(
             context,

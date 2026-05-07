@@ -8,6 +8,7 @@ import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/bottom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:wasla/features/chat/presentation/views/last_users_viwe.dart';
 import 'package:wasla/features/profile/presentation/views/profile_view.dart';
+import 'package:wasla/features/social_media/presentation/views/all_posts_view.dart';
 import 'package:wasla/features/technicant/features/booking/data/repo/technician_bookings_repo_impl.dart';
 import 'package:wasla/features/technicant/features/booking/presentation/manager/cubit/technician_booking_cubit.dart';
 import 'package:wasla/features/technicant/features/booking/presentation/views/technician_bookings_view.dart';
@@ -47,7 +48,7 @@ class TechnicantBottomNavBarView extends StatelessWidget {
   }
 
   static List<Widget> screens = [
-    TechnicianDashboardView(),
+    const TechnicianDashboardView(),
     BlocProvider(
       lazy: true,
       create: (context) => TechnicianBookingCubit(
@@ -55,14 +56,17 @@ class TechnicantBottomNavBarView extends StatelessWidget {
       ),
       child: TechnicianBookingsView(),
     ),
-    LastUsersViwe(),
-    ProfileView(),
+    const LastUsersViwe(),
+    const AllPostsView(),
+    const ProfileView(),
   ];
 
   List<String> getTitles(BuildContext context) => [
     'home'.tr(context),
     'booking'.tr(context),
     'chat'.tr(context),
+    'community'.tr(context),
+
     'profile'.tr(context),
   ];
 
@@ -70,6 +74,7 @@ class TechnicantBottomNavBarView extends StatelessWidget {
     Assets.assetsImagesHomeOutlined,
     Assets.assetsImagesBookingOutlined,
     Assets.assetsImagesChatOutlined,
+    Assets.assetsImagesPeopleOutlined,
     Assets.assetsImagesPersonOutlined,
   ];
 
@@ -77,6 +82,7 @@ class TechnicantBottomNavBarView extends StatelessWidget {
     Assets.assetsImagesHomeFilled,
     Assets.assetsImagesBookingFilled,
     Assets.assetsImagesChatFilled,
+    Assets.assetsImagesGroup,
     Assets.assetsImagesPeronFilled,
   ];
 }

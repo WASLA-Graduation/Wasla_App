@@ -13,7 +13,10 @@ class AllPostsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.marginDefault),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSizes.marginDefault,
+        vertical: AppSizes.paddingSizeSmall,
+      ),
       child: Column(
         spacing: 30,
         children: [
