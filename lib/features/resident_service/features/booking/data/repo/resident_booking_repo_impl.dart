@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/connection/network_info.dart';
@@ -32,7 +31,6 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
         queryParameters: {ApiKeys.userId: userId},
       );
 
-      log('${response['data']}');
 
       final List<DoctorResidentBookingModel> bookings = [];
       for (var booking in response[ApiKeys.data]) {
