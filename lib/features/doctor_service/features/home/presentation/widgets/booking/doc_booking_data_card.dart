@@ -73,12 +73,12 @@ class DocBookingDataCard extends StatelessWidget {
           _buildTextWidget(
             context,
             title: "day".tr(context),
-            value: localizedDays(index: model.day),
+            value: localizedDays(index: model.day).tr(context),
           ),
           _buildTextWidget(
             context,
             title: "date".tr(context),
-            value: model.date.split(' ').first,
+            value: getSectionTitle(model.date),
           ),
           _buildTextWidget(
             context,

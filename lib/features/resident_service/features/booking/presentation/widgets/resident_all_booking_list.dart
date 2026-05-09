@@ -16,7 +16,7 @@ class ResidentAllBookingsList extends StatelessWidget {
     return BlocBuilder<ResidentBookingCubit, ResidentBookingState>(
       buildWhen: (previous, current) =>
           current is ResidentAllGetBookingSuccess ||
-          current is ResidentCancelBookingSuccess ||
+          // current is ResidentCancelBookingSuccess ||
           current is ResidentGetBookingLoading,
       builder: (context, state) {
         if (state is ResidentGetBookingLoading ||

@@ -19,6 +19,21 @@ String formatTimeOfDay(TimeOfDay time) {
   return "$hour:$minute:00";
 }
 
+String toIsoTime(TimeOfDay timeOfDay) {
+  final dateTime = DateTime(
+    1970,
+    1,
+    1,
+    timeOfDay.hour,
+    timeOfDay.minute,
+  );
+
+  return "${dateTime.hour.toString().padLeft(2, '0')}:"
+      "${dateTime.minute.toString().padLeft(2, '0')}:"
+      "${dateTime.second.toString().padLeft(2, '0')}."
+      "${dateTime.millisecond.toString().padLeft(3, '0')}Z";
+}
+
 String formatDateToCustomString(DateTime date) {
   final now = DateTime.now();
   final diff = now.difference(date);

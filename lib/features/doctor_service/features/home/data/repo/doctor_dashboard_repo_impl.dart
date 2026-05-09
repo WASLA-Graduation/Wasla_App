@@ -1,3 +1,4 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
@@ -37,6 +38,7 @@ class DoctorDashboardRepoImpl extends DoctorDashboardRepo {
       final response = await api.get(
         '${ApiEndPoints.doctorGetAllBooking}$doctorId/$status',
       );
+
       final List<DoctorBookingModel> allBookings = [];
       for (var booking in response[ApiKeys.data]) {
         allBookings.add(DoctorBookingModel.fromJson(booking));

@@ -45,6 +45,8 @@ class _ResidentSearchViewState extends State<ResidentSearchView> {
               current is HomeResidentOnRetryState,
         ),
       ),
+
+      resizeToAvoidBottomInset: false,
     );
   }
 

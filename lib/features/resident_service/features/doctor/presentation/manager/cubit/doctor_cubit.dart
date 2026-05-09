@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/enums/payment_method.dart';
 import 'package:wasla/core/enums/service_provider_type.dart';
@@ -209,9 +208,9 @@ class DoctorCubit extends Cubit<DoctorState> {
         bookingType: gruoupValueIndex,
         serviceProviderType: 1,
         images: images.isEmpty ? null : images,
-        bookingDate: DateFormat(
-          "yyyy-MM-dd",
-        ).format(getNextDayFromZeroIndex(dayOfWeek!)),
+        bookingDate: getNextDayFromZeroIndex(
+          dayOfWeek!,
+        ).toUtc().toIso8601String(),
       );
       response.fold(
         (error) {

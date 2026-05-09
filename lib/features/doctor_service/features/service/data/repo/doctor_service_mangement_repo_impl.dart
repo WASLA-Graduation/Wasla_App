@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
@@ -16,6 +18,7 @@ class DoctorServiceMangementRepoImpl extends DoctorServiceMangementRepo {
   }) async {
     try {
       final response = await api.get(ApiEndPoints.doctorGetServices + userId);
+
       final List<DoctorServiceModel> services = [];
       for (var service in response[ApiKeys.data]) {
         services.add(DoctorServiceModel.fromJson(service));
@@ -62,6 +65,9 @@ class DoctorServiceMangementRepoImpl extends DoctorServiceMangementRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      log(e.toString());
+      return Left(e.toString());
     }
   }
 
@@ -91,5 +97,4 @@ class DoctorServiceMangementRepoImpl extends DoctorServiceMangementRepo {
       return Left(e.errorModel.errorMessage);
     }
   }
-
 }

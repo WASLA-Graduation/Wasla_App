@@ -18,15 +18,23 @@ final class ResidentAllGetBookingSuccess extends ResidentBookingState {}
 
 final class ResidentGetBookingLoading extends ResidentBookingState {}
 
-final class ResidentCancelBookingSuccess extends ResidentBookingState {
+///// cancel Booking Actions
+
+abstract class ResidentBookingActions extends ResidentBookingState {
   final int bookingId;
 
-  ResidentCancelBookingSuccess({required this.bookingId});
+  ResidentBookingActions({required this.bookingId});
 }
 
-final class ResidentCancelBookingFailure extends ResidentBookingState {
-  final String errMsg;
-  final int bookingId;
+final class ResidentCancelBookingSuccess extends ResidentBookingActions {
+  ResidentCancelBookingSuccess({required super.bookingId});
+}
 
-  ResidentCancelBookingFailure({required this.bookingId, required this.errMsg});
+final class ResidentCancelBookingFailure extends ResidentBookingActions {
+  final String errMsg;
+
+  ResidentCancelBookingFailure({
+    required super.bookingId,
+    required this.errMsg,
+  });
 }

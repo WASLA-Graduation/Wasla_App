@@ -34,7 +34,7 @@ class _DoctorEditBookingViewState extends State<DoctorEditBookingView> {
 
   void inintializeTime() {
     context.read<DoctorHomeCubit>().currentChoosenDate =
-        convertStringToDateTime(widget.bookingModel.date);
+        widget.bookingModel.date;
     context.read<DoctorHomeCubit>().currentChoosenFromTime =
         convertStringToTimeOfDay(widget.bookingModel.start);
     context.read<DoctorHomeCubit>().currentChoosenToTime =

@@ -6,7 +6,7 @@ class DoctorBookingModel {
   final String serviceName;
   final String userName;
   final String userImage;
-  final String date;
+  final DateTime date;
   final String start;
   final String end;
   final int day;
@@ -38,7 +38,7 @@ class DoctorBookingModel {
       serviceName: json[ApiKeys.serviceName] ?? "",
       userName: json[ApiKeys.userName] ?? "",
       userImage: ApiEndPoints.imageBaseUrl + (json[ApiKeys.userImage] ?? ""),
-      date: json[ApiKeys.date] ?? "",
+      date: DateTime.parse(json[ApiKeys.date] ?? ""),
       start: json[ApiKeys.start] ?? "",
       end: json[ApiKeys.end] ?? "",
       day: json[ApiKeys.day] ?? 0,

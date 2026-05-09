@@ -20,11 +20,11 @@ class CustomResidentCancelButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ResidentBookingCubit, ResidentBookingState>(
+    return BlocConsumer<ResidentBookingCubit, ResidentBookingState>(
+      buildWhen: (previous, current) =>
+          current is ResidentBookingActions && current.bookingId == bookingId,
       listenWhen: (previous, current) =>
-          current is ResidentCancelBookingFailure ||
-          current is ResidentCancelBookingSuccess &&
-              current.bookingId == bookingId,
+          current is ResidentBookingActions && current.bookingId == bookingId,
       listener: (context, state) {
         if (state is ResidentCancelBookingSuccess) {
           toastAlert(
@@ -35,7 +35,7 @@ class CustomResidentCancelButton extends StatelessWidget {
           toastAlert(color: AppColors.error, msg: state.errMsg);
         }
       },
-      child: Visibility(
+      builder: (BuildContext context, ResidentBookingState state) => Visibility(
         visible: isUpcoming,
         child: InkWell(
           onTap: () async {
