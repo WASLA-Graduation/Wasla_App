@@ -20,6 +20,7 @@ class ResidentRestaurantCubit extends Cubit<ResidentRestaurantState> {
   bool endOfPagination = false;
   int categoryId = 0;
   int numberOfPersons = 1;
+  List<RestaurantModel> restaurants = [];
 
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTimeSlot = TimeOfDay.now();
@@ -33,10 +34,9 @@ class ResidentRestaurantCubit extends Cubit<ResidentRestaurantState> {
       this.categoryId = categoryId;
       pageNumber = 1;
       endOfPagination = false;
+      restaurants.clear();
       emit(ResidentRestaurantSelectCategoryState());
       getRestaurantsByCategory(fromPagination: false);
-
-      ///call getRestaurantsByCategory
     }
   }
 
@@ -79,9 +79,10 @@ class ResidentRestaurantCubit extends Cubit<ResidentRestaurantState> {
           endOfPagination = true;
         } else {
           pageNumber++;
+          restaurants.addAll(success);
         }
 
-        emit(GetRestaurantsByCategoryLoadedState(restaurants: success));
+        emit(GetRestaurantsByCategoryLoadedState(restaurants: restaurants));
       },
     );
   }

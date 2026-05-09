@@ -35,7 +35,7 @@ class _ResidentAllRestaurantsListState
             ),
           );
         } else if (state is GetRestaurantsByCategoryLoadedState) {
-          restaurants.addAll(state.restaurants);
+          restaurants = state.restaurants;
         }
 
         return restaurants.isEmpty
