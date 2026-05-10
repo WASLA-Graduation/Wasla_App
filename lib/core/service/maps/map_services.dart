@@ -94,7 +94,7 @@ abstract class MapServices {
       return LatLng(point[1], point[0]);
     }).toList();
 
-    log('routePoints: $routePoints');
+    // log('routePoints: $routePoints');
 
     return routePoints;
   }

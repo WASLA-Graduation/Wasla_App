@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
+import 'package:wasla/core/helpers/url_helper.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/driver/features/trip/data/models/driver_trip_and_resident_info_model.dart';
 import 'package:wasla/features/driver/features/trip/presentation/manager/cubit/driver_trip_cubit.dart';
@@ -72,9 +73,14 @@ class _TripData extends StatelessWidget {
           visible: isResidentInfo,
           child: Column(
             children: [
-              SuggestedTripBoxData(
-                title: 'phone'.tr(context),
-                data: trip.residentPhone,
+              InkWell(
+                onTap: () {
+                  UrlHelper.callPhone(trip.residentPhone);
+                },
+                child: SuggestedTripBoxData(
+                  title: 'phone'.tr(context),
+                  data: trip.residentPhone,
+                ),
               ),
               Divider(height: 25, thickness: 0.5, color: Colors.grey.shade300),
             ],

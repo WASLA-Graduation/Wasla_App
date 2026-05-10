@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -360,6 +361,7 @@ class ChatCubit extends Cubit<ChatState> {
     final MessageType msgType = MessageType.values[type];
     switch (msgType) {
       case MessageType.text:
+        log('Send Ya Disha');
         await chatRepo.sendMsg(
           receiverId: userInfo!.id,
           type: type + 1,
@@ -488,6 +490,10 @@ class ChatCubit extends Cubit<ChatState> {
 
   //Done
   handleWhenNewMsg({required RealTimeMsgModel user}) {
+    ///when bug more than one hub are work at the same time
+    bool isDuplicate = messages.any((msg) => msg.messageId == user.id);
+    if (isDuplicate) return;
+
     //when i in chat and there exist messages with this chat
     if (user.chatId.toString() == currentChatId.toString()) {
       messages.insert(0, _getNewMsg(user));
@@ -495,14 +501,16 @@ class ChatCubit extends Cubit<ChatState> {
       emit(ChatGetCahtOfUserSuccess(messages: messages));
     }
     //when the new chat and i start it
-    else if (currentResceiver==user.receiverId && user.senderId == currentUser) {
+    else if (currentResceiver == user.receiverId &&
+        user.senderId == currentUser) {
       currentChatId = user.chatId.toString();
       messages.insert(0, _getNewMsg(user));
       readMsgs(chatId: currentChatId);
       emit(ChatGetCahtOfUserSuccess(messages: messages));
     }
     ///when i in the chat and new user start it
-    else if (user.senderId==currentResceiver && user.receiverId == currentUser) {
+    else if (user.senderId == currentResceiver &&
+        user.receiverId == currentUser) {
       messages.insert(0, _getNewMsg(user));
       //me in chat
       if (currentResceiver.isNotEmpty) {

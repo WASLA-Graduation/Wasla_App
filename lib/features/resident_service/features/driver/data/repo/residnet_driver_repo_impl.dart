@@ -92,7 +92,6 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
           ApiKeys.vehicleType: vehicleType,
         },
       );
-      log("trip Id : $response");
       return Right(response[ApiKeys.data]);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
@@ -134,8 +133,8 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
 
       return Right(
         LatLng(
-          response[ApiKeys.data][ApiKeys.latitudeSmall],
-          response[ApiKeys.data][ApiKeys.longitudeSmall],
+          response[ApiKeys.data][ApiKeys.result][ApiKeys.latitudeSmall],
+          response[ApiKeys.data][ApiKeys.result][ApiKeys.longitudeSmall],
         ),
       );
     } on ServerException catch (e) {

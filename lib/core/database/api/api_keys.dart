@@ -14,6 +14,7 @@ abstract class ApiKeys {
   static const orderId = 'orderId';
   static const eventType = 'eventType';
   static const address = 'address';
+  static const result = 'result';
   static const flag = 'flag';
   static const top = 'top';
   static const query = 'query';
