@@ -133,8 +133,8 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
 
       return Right(
         LatLng(
-          response[ApiKeys.data][ApiKeys.result][ApiKeys.latitudeSmall],
-          response[ApiKeys.data][ApiKeys.result][ApiKeys.longitudeSmall],
+          response[ApiKeys.data][ApiKeys.latitudeSmall],
+          response[ApiKeys.data][ApiKeys.longitudeSmall],
         ),
       );
     } on ServerException catch (e) {
