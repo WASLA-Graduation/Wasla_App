@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 
 class SocialPostModel {
@@ -10,7 +11,7 @@ class SocialPostModel {
   bool isSaved;
   final int postId;
   String content;
-   List<String> files;
+  List<String> files;
   int numberOfReacts;
   int numberOfSaves;
   int numberofComments;
@@ -71,5 +72,46 @@ class SocialPostModel {
       ApiKeys.createdAt: createdAt.toIso8601String(),
       ApiKeys.updatedAt: updatedAt?.toIso8601String(),
     };
+  }
+}
+
+class SocialPostAdapter extends TypeAdapter<SocialPostModel> {
+  @override
+  int get typeId => 0;
+
+  @override
+  void write(BinaryWriter writer, SocialPostModel obj) {
+    writer.writeString(obj.userId);
+    writer.writeString(obj.userName);
+    writer.writeString(obj.profilePhoto);
+    writer.writeBool(obj.isLoved);
+    writer.writeBool(obj.isSaved);
+    writer.writeInt(obj.postId);
+    writer.writeString(obj.content);
+    writer.writeStringList(obj.files);
+    writer.writeInt(obj.numberOfReacts);
+    writer.writeInt(obj.numberOfSaves);
+    writer.writeInt(obj.numberofComments);
+    writer.write(obj.createdAt.toIso8601String());
+    writer.write(obj.updatedAt?.toIso8601String());
+  }
+
+  @override
+  SocialPostModel read(BinaryReader reader) {
+    return SocialPostModel(
+      userId: reader.readString(),
+      userName: reader.readString(),
+      profilePhoto: reader.readString(),
+      isLoved: reader.readBool(),
+      isSaved: reader.readBool(),
+      postId: reader.readInt(),
+      content: reader.readString(),
+      files: reader.readStringList(),
+      numberOfReacts: reader.readInt(),
+      numberOfSaves: reader.readInt(),
+      numberofComments: reader.readInt(),
+      createdAt: DateTime.parse(reader.read()),
+      updatedAt: reader.read() != null ? DateTime.parse(reader.read()) : null,
+    );
   }
 }

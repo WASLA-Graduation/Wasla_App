@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:wasla/app/wasla_app.dart';
+import 'package:wasla/core/database/cache/hive_service.dart';
 import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
 import 'package:wasla/core/repo/global_repo.dart';
 import 'package:wasla/core/service/service_locator.dart';
@@ -12,6 +13,7 @@ void main() async {
   await SharedPreferencesHelper.init();
   await Firebase.initializeApp();
   initializeServiceLocator();
+  HiveService.init();
 
   FcmNotifications.whenTappedOnBackgroundNotificaton();
 
