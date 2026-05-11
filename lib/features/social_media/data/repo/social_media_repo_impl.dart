@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -10,6 +11,7 @@ import 'package:wasla/core/enums/social_enums.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/convert_image_to_json.dart';
 import 'package:wasla/core/service/service_locator.dart';
+import 'package:wasla/features/social_media/data/local/social_local_data_source.dart';
 
 import 'package:wasla/features/social_media/data/models/social_comment_model.dart';
 import 'package:wasla/features/social_media/data/models/social_post_model.dart';
@@ -20,7 +22,9 @@ import 'package:wasla/features/social_media/data/repo/social_media_repo.dart';
 class SocialMediaRepoImpl extends SocialMediaRepo {
   final ApiConsumer api;
 
-  SocialMediaRepoImpl({required this.api});
+  final SocialLocalDataSource socialLocalDataSource;
+
+  SocialMediaRepoImpl({required this.socialLocalDataSource, required this.api});
 
   @override
   Future<Either<String, Null>> addPost({
@@ -108,7 +112,16 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
   }) async {
     try {
       if (!await sl<NetworkInfo>().isConnected) {
-        return Left(NoInternetFailure());
+        if (pageNumber == 1) {
+          final posts = await socialLocalDataSource.getCachedPosts();
+          if (posts.isNotEmpty) {
+            return Right(posts);
+          } else {
+            return Left(NoInternetFailure());
+          }
+        } else {
+          return Right([]);
+        }
       }
 
       final reponse = await api.get(
@@ -124,10 +137,16 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
       for (var post in reponse[ApiKeys.data][ApiKeys.data]) {
         posts.add(SocialPostModel.fromJson(post));
       }
+
+      if (pageNumber == 1) {
+        await socialLocalDataSource.cachePosts(posts);
+      }
+
       return Right(posts);
     } on ServerException catch (error) {
       return Left(ServerFailure(error.errorModel.errorMessage));
     } catch (e) {
+      log(e.toString());
       return Left(ServerFailure(e.toString()));
     }
   }
@@ -216,7 +235,6 @@ class SocialMediaRepoImpl extends SocialMediaRepo {
     required int commentId,
   }) async {
     try {
-      
       await api.put(
         'api/Social/Comment',
         queryParameters: {

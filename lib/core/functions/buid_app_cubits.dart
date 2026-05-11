@@ -41,6 +41,7 @@ import 'package:wasla/features/restaurant/home/data/repo/restaurant_dashboard_re
 import 'package:wasla/features/restaurant/home/presentation/manager/cubit/restaurant_dashboard_cubit.dart';
 import 'package:wasla/features/reviews/data/repo/reviews_repo_imp.dart';
 import 'package:wasla/features/reviews/presentation/manager/cubit/reviews_cubit.dart';
+import 'package:wasla/features/social_media/data/local/social_local_data_source.dart';
 import 'package:wasla/features/social_media/data/repo/social_media_repo_impl.dart';
 import 'package:wasla/features/social_media/presentation/manager/cubit/social_media_cubit.dart';
 import 'package:wasla/features/technicant/features/home/data/repo/technicant_dashboard_repo_impl.dart';
@@ -111,8 +112,12 @@ List<SingleChildWidget> get buildAppCubits {
       lazy: true,
     ),
     BlocProvider(
-      create: (context) =>
-          SocialMediaCubit(SocialMediaRepoImpl(api: sl<ApiConsumer>())),
+      create: (context) => SocialMediaCubit(
+        SocialMediaRepoImpl(
+          api: sl<ApiConsumer>(),
+          socialLocalDataSource: SocialLocalDataSourceImpl(),
+        ),
+      ),
       lazy: true,
     ),
     BlocProvider(

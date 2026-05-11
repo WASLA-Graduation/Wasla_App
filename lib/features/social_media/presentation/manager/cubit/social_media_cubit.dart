@@ -463,11 +463,11 @@ class SocialMediaCubit extends Cubit<SocialMediaState> {
     final result = await socialMediaRepo.getUserProfile(userId: userId);
     result.fold(
       (failure) {
-        if (failure is NoInternetFailure) {
-          emit(SocialMediaNetworkState());
-        } else {
-          emit(SocialMediaFailureState());
-        }
+        // if (failure is NoInternetFailure) {
+        //   emit(SocialMediaNetworkState());
+        // } else {
+        //   emit(SocialMediaFailureState());
+        // }
       },
       (userProfile) {
         if (currentUser == userId) {

@@ -1,12 +1,10 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:wasla/features/social_media/data/models/social_post_model.dart';
+import 'package:wasla/core/utils/app_strings.dart';
 
 class HiveService {
   static Future<void> init() async {
     await Hive.initFlutter();
-    //register adapters
-
-    Hive.registerAdapter(SocialPostAdapter());
+    HiveService.openBox(boxName: AppStrings.socialBox);
   }
 
   static Future<void> openBox({required String boxName}) async {
@@ -20,7 +18,7 @@ class HiveService {
   static Future<void> put({
     required String boxName,
     required String key,
-    dynamic value,
+    required dynamic value,
   }) async {
     final box = getBox(boxName: boxName);
     await box.put(key, value);

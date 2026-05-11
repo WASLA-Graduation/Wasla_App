@@ -17,4 +17,7 @@ abstract class AppStrings {
   static const String reason= 'reason';
   static const String targetId= 'targetId';
   static const String targetType= 'targetType';
+  static const String socialBox= 'socialBox';
+  static const String postsList= 'postsList';
+  static const String postsTimeStamp= 'postsTimeStamp';
 }

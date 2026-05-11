@@ -13,7 +13,8 @@ void main() async {
   await SharedPreferencesHelper.init();
   await Firebase.initializeApp();
   initializeServiceLocator();
-  HiveService.init();
+  await HiveService.init();
+  
 
   FcmNotifications.whenTappedOnBackgroundNotificaton();
 
