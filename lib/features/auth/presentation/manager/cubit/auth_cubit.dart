@@ -8,6 +8,7 @@ import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/cache/secure_storage_helper.dart';
 import 'package:wasla/core/database/cache/shared_preferences_helper.dart';
 import 'package:wasla/core/enums/driver_enums.dart';
+import 'package:wasla/core/enums/otp_type.dart';
 import 'package:wasla/core/functions/validate_text_form_field.dart';
 import 'package:wasla/core/utils/app_strings.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
@@ -140,7 +141,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthTogglePass());
   }
 
-  void resendCodeTimer() {
+  void resendCodeTimer({required OtpType verificationType}) {
     remainingSeconds = 60;
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (remainingSeconds > 0) {
@@ -149,7 +150,7 @@ class AuthCubit extends Cubit<AuthState> {
       } else {
         remainingSeconds = 60;
         enableButton = false;
-        forgotPassCheckEmail();
+        forgotPassCheckEmail(verificationType: verificationType);
       }
     });
   }
@@ -300,10 +301,11 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  Future<void> verifyEmail() async {
+  Future<void> verifyEmail({required OtpType type}) async {
     emit(AuthVerifyEmailLoading());
 
     final response = await authRepo.verifyEmail(
+      otpType: type,
       email: email,
       verificationCode: otpCode,
     );
@@ -317,9 +319,12 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  Future<void> forgotPassCheckEmail() async {
+  Future<void> forgotPassCheckEmail({required OtpType verificationType}) async {
     emit(AuthForgotPassCheckEmailLoading());
-    final response = await authRepo.forgotPassCheckEmail(email: email);
+    final response = await authRepo.forgotPassCheckEmail(
+      email: email,
+      verificationType: verificationType,
+    );
     response.fold(
       (error) {
         emit(AuthForgotPassCheckEmailFailure(errMsg: error));
@@ -339,6 +344,7 @@ class AuthCubit extends Cubit<AuthState> {
     final response = await authRepo.resetPassword(
       email: email,
       newPassword: password,
+      otp: otpCode,
     );
     response.fold(
       (error) {

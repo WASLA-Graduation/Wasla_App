@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/enums/otp_type.dart';
 import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import 'package:wasla/features/auth/presentation/widgets/verificatio_code_body.dart';
 
@@ -28,6 +30,10 @@ class _VerificationCodeViewState extends State<VerificationCodeView> {
   }
 
   void resendCodeTimer() {
-    context.read<AuthCubit>().resendCodeTimer();
+    context.read<AuthCubit>().resendCodeTimer(
+      verificationType: widget.nextRoute == AppRoutes.resetPassScreen
+          ? OtpType.forgetdPass
+          : OtpType.registeration,
+    );
   }
 }

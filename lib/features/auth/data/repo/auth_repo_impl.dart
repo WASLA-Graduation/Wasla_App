@@ -6,6 +6,7 @@ import 'package:wasla/core/database/api/api_consumer.dart';
 import 'package:wasla/core/database/api/api_end_points.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
 import 'package:wasla/core/database/api/errors/api_exceptions.dart';
+import 'package:wasla/core/enums/otp_type.dart';
 import 'package:wasla/core/functions/convert_image_to_json.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
 import 'package:wasla/features/auth/data/models/restaurant_catergories_model.dart';
@@ -44,6 +45,7 @@ class AuthRepoImpl extends AuthRepo {
   Future<Either<String, Null>> verifyEmail({
     required String email,
     required String verificationCode,
+    required OtpType otpType,
   }) async {
     try {
       await api.post(
@@ -51,6 +53,7 @@ class AuthRepoImpl extends AuthRepo {
         body: {
           ApiKeys.email: email,
           ApiKeys.verificationCode: verificationCode,
+          ApiKeys.type: otpType.index,
         },
       );
       return Right(null);
@@ -62,11 +65,15 @@ class AuthRepoImpl extends AuthRepo {
   @override
   Future<Either<String, Null>> forgotPassCheckEmail({
     required String email,
+    required OtpType verificationType,
   }) async {
     try {
       await api.post(
         ApiEndPoints.forgotPassCheckEmail,
-        body: {ApiKeys.email: email},
+        body: {
+          ApiKeys.email: email,
+          ApiKeys.verificationType: verificationType.index,
+        },
       );
       return Right(null);
     } on ServerException catch (e) {
@@ -78,11 +85,16 @@ class AuthRepoImpl extends AuthRepo {
   Future<Either<String, Null>> resetPassword({
     required String email,
     required String newPassword,
+    required String otp,
   }) async {
     try {
       await api.post(
         ApiEndPoints.forgotPass,
-        body: {ApiKeys.email: email, ApiKeys.newPassword: newPassword},
+        body: {
+          ApiKeys.email: email,
+          ApiKeys.newPassword: newPassword,
+          ApiKeys.otp: otp,
+        },
       );
       return Right(null);
     } on ServerException catch (e) {

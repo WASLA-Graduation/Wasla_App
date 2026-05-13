@@ -10,8 +10,10 @@ abstract class ApiKeys {
   static const bio = 'bio';
   static const lan = 'lan';
   static const documents = 'Documents';
+  static const otp = 'otp';
   static const restaurantId = 'restaurantId';
   static const orderId = 'orderId';
+  static const verificationType = 'verificationType';
   static const eventType = 'eventType';
   static const address = 'address';
   static const result = 'result';

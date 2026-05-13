@@ -17,6 +17,8 @@
       "continueWithGoogle": "تابع باستخدام جوجل",
       "continueWithFacebook": "تابع باستخدام فيسبوك",
       "signInWithPassword": "تسجيل الدخول باستخدام كلمة المرور",
+              "passwordChangedSuccessfully": "تم تغيير الباسورد بنجاح",
+
       "or": "أو",
       "dontHaveAccount": "ليس لديك حساب؟",
       "createAccount": "أنشئ حسابك",

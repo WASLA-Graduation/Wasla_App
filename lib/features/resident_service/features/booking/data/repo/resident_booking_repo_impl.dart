@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
@@ -30,7 +29,6 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
         ApiEndPoints.getBookingDetailsForUser,
         queryParameters: {ApiKeys.userId: userId},
       );
-
 
       final List<DoctorResidentBookingModel> bookings = [];
       for (var booking in response[ApiKeys.data]) {
@@ -215,7 +213,11 @@ class ResidentBookingRepoImpl extends ResidentBookingRepo {
     try {
       await api.put(
         ApiEndPoints.restaurantChangeStatusOfBooking,
-        queryParameters: {ApiKeys.reservationId: bookingId, ApiKeys.status: 2},
+        queryParameters: {
+          ApiKeys.reservationId: bookingId,
+          ApiKeys.status: 2,
+          ApiKeys.isResidentCamel: true,
+        },
       );
 
       return const Right(null);

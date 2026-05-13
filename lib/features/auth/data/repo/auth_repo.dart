@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:wasla/core/enums/otp_type.dart';
 import 'package:wasla/core/models/doctor_specializationa_model.dart';
 import 'package:wasla/features/auth/data/models/restaurant_catergories_model.dart';
 import 'package:wasla/features/auth/data/models/roles_model.dart';
@@ -17,11 +18,16 @@ abstract class AuthRepo {
   Future<Either<String, Null>> verifyEmail({
     required String email,
     required String verificationCode,
+    required OtpType otpType,
   });
-  Future<Either<String, Null>> forgotPassCheckEmail({required String email});
+  Future<Either<String, Null>> forgotPassCheckEmail({
+    required String email,
+    required OtpType verificationType,
+  });
   Future<Either<String, Null>> resetPassword({
     required String email,
     required String newPassword,
+    required String otp,
   });
   Future<Either<String, SignInDataModel>> signInWithEmailAndPassword({
     required String email,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/enums/otp_type.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/get_right_route.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
@@ -24,14 +25,17 @@ class SignInButton extends StatelessWidget {
           toastAlert(color: AppColors.red, msg: state.errMsg);
         } else if (state is AuthSignInSuccess) {
           if (!cubit.dataModel!.isVerified) {
-            cubit.forgotPassCheckEmail().then((value) {
-              context.pushReplacementScreen(
-                AppRoutes.verifyScreen,
-                arguments: getRightCompleteServiceRoute(
-                  role: cubit.dataModel!.role,
-                ),
-              );
-            });
+            ///to send verification code to email
+            cubit
+                .forgotPassCheckEmail(verificationType: OtpType.registeration)
+                .then((value) {
+                  context.pushReplacementScreen(
+                    AppRoutes.verifyScreen,
+                    arguments: getRightCompleteServiceRoute(
+                      role: cubit.dataModel!.role,
+                    ),
+                  );
+                });
           } else if (!cubit.dataModel!.isCompleteRegister) {
             context.pushReplacementScreen(
               getRightCompleteServiceRoute(role: cubit.dataModel!.role),

@@ -25,20 +25,7 @@ class CustomResetPassForm extends StatelessWidget {
         if (state is AuthResetPassFailure) {
           toastAlert(color: AppColors.error, msg: state.errMsg);
         } else if (state is AuthResetPassSuccess) {
-          // showDialog(
-          //   context: context,
-          //   builder: (context) => const CustomDoneWidget(),
-          // ).then((val) {
-          //   Future.delayed(
-          //     Duration(seconds: 3),
-          //     () {
-          //       context.popScreen();
-          //       context.pushReplacementScreen(AppRoutes.signInScreen);
-          //     },
-          //   );
-          // });
-
-          showToast('passwordResetSuccess'.tr(context), color: AppColors.green);
+          showToast('passwordChangedSuccessfully'.tr(context), color: AppColors.green);
           context.pushReplacementScreen(AppRoutes.signInScreen);
         }
       },

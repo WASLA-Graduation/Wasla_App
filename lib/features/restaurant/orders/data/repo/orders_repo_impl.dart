@@ -61,6 +61,7 @@ class OrdersRepoImpl extends OrdersRepo {
         queryParameters: {
           ApiKeys.reservationId: bookingId,
           ApiKeys.status: status,
+          ApiKeys.isResidentCamel: false,
         },
       );
 
