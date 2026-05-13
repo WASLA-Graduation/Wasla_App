@@ -1,19 +1,17 @@
 flutter_native_splash:
+  android: true
+  ios: true
+  
   color: "#ffffff"
   color_dark: "#ffffff" 
-  image: assets/images/waslaLogo.png
+  image: assets/images/wasla_logo.png
+  image_dark: assets/images/wasla_logo.png
 
   android_12:
-    image: assets/images/waslaLogo.png
-    icon_background_color: "#ffffff"
-    icon_background_color_dark: "#ffffff"  
+    image: assets/images/wasla_logo_android12.png
+    image_dark: assets/images/wasla_logo_android12.png
     color: "#ffffff"        
     color_dark: "#ffffff"
 
-  android: true
-  ios: true
-  web: true
 
-  android_gravity: center
-  ios_content_mode: center
-  web_image_mode: center
+

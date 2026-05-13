@@ -383,7 +383,11 @@ class Assets {
   static const String assetsImagesVision = "assets/images/vision.png";
 
   /// Assets for assetsImagesWaslaLogo
-  /// assets/images/waslaLogo.png
-  static const String assetsImagesWaslaLogo = "assets/images/waslaLogo.png";
+  /// assets/images/wasla_logo.png
+  static const String assetsImagesWaslaLogo = "assets/images/wasla_logo.png";
+
+  /// Assets for assetsImagesWaslaLogoAndroid12
+  /// assets/images/wasla_logo_android12.png
+  static const String assetsImagesWaslaLogoAndroid12 = "assets/images/wasla_logo_android12.png";
 }
 
