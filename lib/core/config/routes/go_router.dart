@@ -128,13 +128,14 @@ import 'package:wasla/features/social_media/presentation/views/reactions_view.da
 import 'package:wasla/features/social_media/presentation/views/social_profile_view.dart';
 import 'package:wasla/features/splash/presentation/views/splash_view.dart';
 import 'package:wasla/randoms/download_file.dart';
+import 'package:wasla/randoms/scroll/scrallable_list.dart';
 import 'package:wasla/randoms/stack_test.dart';
 
 final GoRouter appRouter = GoRouter(
   navigatorKey: navigatorKey,
 
   initialLocation: handleInitialRoute(),
-  // initialLocation: AppRoutes.stackTestScreen,
+  // initialLocation: AppRoutes.scrollableListScreen,
   redirect: (context, state) {
     if (state.uri.toString().contains('wasla://payment/success')) {
       return AppRoutes.paymentSuccessScreen;
@@ -148,6 +149,10 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.testAudioScreen,
       builder: (context, state) => AudioTest(),
+    ),
+    GoRoute(
+      path: AppRoutes.scrollableListScreen,
+      builder: (context, state) => ScrallableList(),
     ),
     GoRoute(
       path: AppRoutes.stackTestScreen,
