@@ -48,8 +48,8 @@ class _LastUsersViweState extends State<LastUsersViwe> {
       body: BlocStatusHandler<ChatCubit, ChatState>(
         body: const LastUsersBody(),
         onRetry: () {
-          getAllChats();
           context.read<ChatCubit>().onRetry();
+          getAllChats();
         },
         isNetwork: (state) => state is ChatNetworkState,
         isError: (state) => state is ChatFailureState,

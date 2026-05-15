@@ -42,6 +42,9 @@ class _ChatViewState extends State<ChatView> {
 
   void getChat() {
     final cubit = context.read<ChatCubit>();
+    if (cubit.currentUser.isEmpty) {
+      cubit.getCurrentUser();
+    }
     cubit.currentResceiver = widget.data[AppStrings.id];
     cubit.messages.clear();
     cubit.resetMsg();

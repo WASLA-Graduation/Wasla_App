@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
@@ -38,7 +37,7 @@ class DoctorDetailsBody extends StatelessWidget {
           CustomCircleWithDataList(
             items: _getItemList(context),
             onTap: () async {
-              final chatHub = ChatHub();
+              ChatHub chatHub = ChatHub();
               chatHub.init();
               await context.push(
                 AppRoutes.chatScreen,
