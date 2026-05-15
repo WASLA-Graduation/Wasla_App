@@ -129,7 +129,7 @@ class AuthRepoImpl extends AuthRepo {
       final response = await api.get(ApiEndPoints.getRols);
       final List<RolesModel> roles = [];
       for (var role in response[ApiKeys.data]) {
-        if (role[ApiKeys.roleName] == 'admin') continue;
+        if (role[ApiKeys.roleName] == 'admin' ||role[ApiKeys.roleName] == 'superadmin' ) continue;
 
         if (role[ApiKeys.roleName] == 'gym') {
           role[ApiKeys.value] = 'gymOwner';
