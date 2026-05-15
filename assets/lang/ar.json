@@ -18,6 +18,10 @@
       "continueWithFacebook": "تابع باستخدام فيسبوك",
       "signInWithPassword": "تسجيل الدخول باستخدام كلمة المرور",
               "passwordChangedSuccessfully": "تم تغيير الباسورد بنجاح",
+                      "updateReservation": "تحديث الحجز",
+                              "reservationUpdatedSuccessfully": "تم تحديث الحجز بنجاح",
+
+
 
       "or": "أو",
       "dontHaveAccount": "ليس لديك حساب؟",

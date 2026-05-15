@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/enums/booking_filter.dart';
+import 'package:wasla/core/enums/restauant_reservation_status.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/resident_service/features/booking/data/models/general_resident_bookings_model.dart';
+import 'package:wasla/features/resident_service/features/booking/presentation/manager/cubit/resident_booking_cubit.dart';
 import 'package:wasla/features/resident_service/features/booking/presentation/widgets/custom_resdient_canceld_button.dart';
+import 'package:wasla/features/resident_service/features/booking/presentation/widgets/custom_update_booking_reservation.dart';
 
 class BookingItemData extends StatelessWidget {
   const BookingItemData({
@@ -87,19 +92,28 @@ class BookingItemData extends StatelessWidget {
             context,
           ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
         ),
-        Text(
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+        Row(
+          spacing: 10,
 
-          model.baseDuration!,
-          style: Theme.of(
-            context,
-          ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
+          children: [
+            Expanded(
+              child: Text(
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                model.baseDuration!,
+                style: Theme.of(
+                  context,
+                ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
+              ),
+            ),
+
+            if (model.baseStatus == ReservationStatus.pending.name &&
+                context.read<ResidentBookingCubit>().bookingFilter ==
+                    BookingFilter.restaurantBookings)
+              CustomUpdateReservationButton(model: model),
+          ],
         ),
       ],
     );
   }
 }
-
-
-

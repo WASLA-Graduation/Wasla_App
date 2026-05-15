@@ -17,10 +17,12 @@ import 'package:wasla/features/resident_service/features/gym/data/repo/gym_resid
 import 'package:wasla/features/resident_service/features/gym/presentation/manager/cubit/gym_resident_cubit.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/views/all_bannars_view.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/views/resident_search_view.dart';
+import 'package:wasla/features/resident_service/features/restaurant/data/models/Update_restaurant_reservation_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/cart/restaurant_cart_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/repo/details/resident_restaurant_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/cart/restaurant_cart_cubit.dart';
+import 'package:wasla/features/resident_service/features/restaurant/presentation/views/update_reservation_view.dart';
 import 'package:wasla/features/restaurant/orders/presentation/views/resident_restaurant_orders_view.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/views/restaurant_cart_view.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/views/restaurant_checkout_view.dart';
@@ -644,12 +646,24 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.residentRestaurantReservationScreen,
       builder: (context, state) {
-        final Map<String, dynamic> data = state.extra as Map<String, dynamic>;
-        return BlocProvider.value(
-          value: data[AppStrings.cubit] as ResidentRestaurantCubit,
-          child: ResidentRestaurantReservationView(
-            restaurantId: data[AppStrings.id],
+        final String restaurantId = state.extra as String;
+        return BlocProvider(
+          create: (context) => ResidentRestaurantCubit(
+            ResidentRestaurantRepoImpl(api: sl<ApiConsumer>()),
           ),
+          child: ResidentRestaurantReservationView(restaurantId: restaurantId),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.updateReservationScreen,
+      builder: (context, state) {
+        final reservationModel = state.extra as UpdateRestaurantReservationModel;
+        return BlocProvider(
+          create: (context) => ResidentRestaurantCubit(
+            ResidentRestaurantRepoImpl(api: sl<ApiConsumer>()),
+          ),
+          child: UpdateReservationView(reservationModel: reservationModel),
         );
       },
     ),

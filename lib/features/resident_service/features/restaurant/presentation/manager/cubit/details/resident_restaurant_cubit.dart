@@ -137,4 +137,18 @@ class ResidentRestaurantCubit extends Cubit<ResidentRestaurantState> {
       emit(ResidentRestaurantReservationFailureState(message: failure));
     }, (success) => emit(ResidentRestaurantReservationSuccessState()));
   }
+
+  Future<void> updateReservation({required int reservatoinId}) async {
+    emit(ResidentRestaurantReservationLoadingState());
+    final result = await repo.updateReservation(
+      reservationId: reservatoinId,
+      numberOfPersons: numberOfPersons,
+      date: DateFormat('yyyy-MM-dd').format(selectedDate),
+      time: convertTimeToGoodFormat(selectedTimeSlot),
+    );
+
+    result.fold((failure) {
+      emit(ResidentRestaurantReservationFailureState(message: failure));
+    }, (success) => emit(ResidentRestaurantReservationSuccessState()));
+  }
 }

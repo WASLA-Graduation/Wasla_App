@@ -11,6 +11,7 @@ abstract class AppRoutes {
   static const String doctorCompleteInfoScreen = '/doctorCompleteInfoScreen';
   static const String resturentInfoScreen = '/resturentInfoScreen';
   static const String scrollableListScreen = '/scrollableListScreen';
+  static const String updateReservationScreen = '/updateReservationScreen';
   static const String authMapScreen = '/authMapScreen';
   static const String residentHomeScreen = '/residentHomeScreen';
   static const String residenBottomNavBar = '/residenBottomNavBar';
@@ -92,15 +93,19 @@ abstract class AppRoutes {
   static const String restuarantBottomNavBar = '/restuarantBottomNavBarScreen';
   static const String restuarantEditProfile = '/restuarantEditProfileScreen';
   static const String residentRestaurant = '/residentRestaurantScreen';
-  static const String residentRestaurantDetailsScreen = '/residentRestaurantDetailsScreen';
-  static const String residentRestaurantReservationScreen = '/residentRestaurantReservationScreen';
-  static const String residentRestaurantMenuScreen = '/residentRestaurantMenuScreen';
+  static const String residentRestaurantDetailsScreen =
+      '/residentRestaurantDetailsScreen';
+  static const String residentRestaurantReservationScreen =
+      '/residentRestaurantReservationScreen';
+  static const String residentRestaurantMenuScreen =
+      '/residentRestaurantMenuScreen';
   static const String addMenuItemScreen = '/addMenuItemScreen';
   static const String updateMenuItemScreen = '/updateMenuItemScreen';
   static const String orderScreen = '/orderScreen';
   static const String restaurantCartScreen = '/restaurantCartScreen';
   static const String restaurantCheckoutScreen = '/restaurantCheckoutScreen';
-  static const String residentRestaurantOrdersScreen = '/residentRestaurantOrdersScreen';
+  static const String residentRestaurantOrdersScreen =
+      '/residentRestaurantOrdersScreen';
   static const String socialReportScreen = '/socialReportScreen';
   static const String paymentScreen = '/paymentScreen';
   static const String privacyPlolicyScreen = '/privacyPlolicyScreen';

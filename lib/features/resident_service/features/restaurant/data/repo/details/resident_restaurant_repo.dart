@@ -19,6 +19,10 @@ abstract class ResidentRestaurantRepo {
     required String date,
     required String time,
   });
-
-
+  Future<Either<String, Null>> updateReservation({
+    required int numberOfPersons,
+    required int reservationId,
+    required String date,
+    required String time,
+  });
 }

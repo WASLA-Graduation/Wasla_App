@@ -69,3 +69,4 @@ final class ResidentRestaurantReservationFailureState
 
   ResidentRestaurantReservationFailureState({required this.message});
 }
+

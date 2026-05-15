@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/enums/booking_filter.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/utils/app_sizes.dart';
@@ -8,16 +10,24 @@ import 'package:wasla/core/widgets/custom_date_picker_widget.dart';
 import 'package:wasla/core/widgets/general_button.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_text_form_field.dart';
 import 'package:wasla/features/doctor_service/features/service/presentation/widgets/custom_choose_time_widget.dart';
+import 'package:wasla/features/resident_service/features/booking/presentation/manager/cubit/resident_booking_cubit.dart';
+import 'package:wasla/features/resident_service/features/home/presentation/manager/cubit/home_resident_cubit.dart';
+import 'package:wasla/features/resident_service/features/restaurant/data/models/Update_restaurant_reservation_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/presentation/manager/cubit/details/resident_restaurant_cubit.dart';
 
 class ResidentRestaurantReservationViewBody extends StatelessWidget {
   ResidentRestaurantReservationViewBody({
     super.key,
     required this.restaurantId,
+    this.reservationModel,
   });
   final String restaurantId;
 
+  final UpdateRestaurantReservationModel? reservationModel;
+
   final formKey = GlobalKey<FormState>();
+
+  bool get isEdit => reservationModel != null;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +39,7 @@ class ResidentRestaurantReservationViewBody extends StatelessWidget {
       child: Column(
         children: [
           CustomDatePickerWidget(
-            currentDate: DateTime.now(),
+            currentDate: reservationModel?.reservationDate ?? DateTime.now(),
             onDateChange: (date) => context
                 .read<ResidentRestaurantCubit>()
                 .updateSelectedDate(date: date),
@@ -66,7 +76,8 @@ class ResidentRestaurantReservationViewBody extends StatelessWidget {
                 }
                 return null;
               },
-              initealValue: 1.toString(),
+              initealValue:
+                  reservationModel?.numberOfPersons.toString() ?? 1.toString(),
               keyboardTyp: TextInputType.number,
               withTitle: true,
               title: 'numberOfPersons'.tr(context),
@@ -85,8 +96,28 @@ class ResidentRestaurantReservationViewBody extends StatelessWidget {
               if (state is ResidentRestaurantReservationFailureState) {
                 showToast(state.message, color: Colors.red);
               } else if (state is ResidentRestaurantReservationSuccessState) {
-                showToast('bookingDone'.tr(context), color: Colors.green);
-                context.popScreen();
+                showToast(
+                  isEdit
+                      ? 'reservationUpdatedSuccessfully'.tr(context)
+                      : 'bookingDone'.tr(context),
+                  color: Colors.green,
+                );
+
+                if (isEdit) {
+                  ///for reset
+                  context.read<ResidentBookingCubit>().updateBookingTaps(
+                    bookingFilter: BookingFilter.technicianBookings,
+                  );
+                  context.read<HomeResidentCubit>().updateNavBarCurrentIndex(1);
+                  context.read<ResidentBookingCubit>().updateBookingTaps(
+                    bookingFilter: BookingFilter.restaurantBookings,
+                  );
+                  context.pushAndRemoveAllScreens(
+                    AppRoutes.residenBottomNavBar,
+                  );
+                } else {
+                  context.popScreen();
+                }
               }
             },
             builder: (context, state) {
@@ -97,13 +128,23 @@ class ResidentRestaurantReservationViewBody extends StatelessWidget {
                   }
 
                   if (formKey.currentState!.validate()) {
-                    context
-                        .read<ResidentRestaurantCubit>()
-                        .reservationWithRestaurant(restaurantId: restaurantId);
+                    if (isEdit) {
+                      context.read<ResidentRestaurantCubit>().updateReservation(
+                        reservatoinId: reservationModel!.reservationId,
+                      );
+                    } else {
+                      context
+                          .read<ResidentRestaurantCubit>()
+                          .reservationWithRestaurant(
+                            restaurantId: restaurantId,
+                          );
+                    }
                   }
                 },
                 text: state is ResidentRestaurantReservationLoadingState
                     ? 'loading'.tr(context)
+                    : isEdit
+                    ? "updateReservation".tr(context)
                     : 'bookNow'.tr(context),
               );
             },

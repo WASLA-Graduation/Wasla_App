@@ -95,4 +95,28 @@ class ResidentRestaurantRepoImpl extends ResidentRestaurantRepo {
     }
   }
 
+  @override
+  Future<Either<String, Null>> updateReservation({
+    required int numberOfPersons,
+    required int reservationId,
+    required String date,
+    required String time,
+  }) async {
+    try {
+      await api.put(
+        ApiEndPoints.updateRestaurantReservation,
+        body: {
+          ApiKeys.reservationId: reservationId,
+          ApiKeys.numberOfPersons: numberOfPersons,
+          ApiKeys.reservationDate: date,
+          ApiKeys.reservationTime: time,
+        },
+      );
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }
