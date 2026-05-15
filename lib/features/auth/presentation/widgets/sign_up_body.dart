@@ -10,9 +10,7 @@ import 'package:wasla/core/widgets/custom_desc_text_widget.dart';
 import 'package:wasla/features/auth/data/models/drop_down_menu_item.dart';
 import 'package:wasla/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_auth_form.dart';
-import 'package:wasla/features/auth/presentation/widgets/custom_divder_text.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_drop_down_menu.dart';
-import 'package:wasla/features/auth/presentation/widgets/custom_social_auth_widget.dart';
 import 'package:wasla/features/auth/presentation/widgets/custom_text_span_widget.dart';
 import 'package:wasla/features/auth/presentation/widgets/sign_up_button.dart';
 
@@ -63,10 +61,10 @@ class SignUpBody extends StatelessWidget {
         ),
         const VerticalSpace(height: 3),
         SignUpButton(),
-        VerticalSpace(height: 3),
-        CustomDividerText(text: "orContinueWith".tr(context)),
-        VerticalSpace(height: 3),
-        CustomSocialAuthWidget(),
+        // VerticalSpace(height: 3),
+        // CustomDividerText(text: "orContinueWith".tr(context)),
+        // VerticalSpace(height: 3),
+        // CustomSocialAuthWidget(),
         VerticalSpace(height: 3),
         CustomTextSpanWidget(
           onTap: () => context.pushReplacementScreen(AppRoutes.signInScreen),
