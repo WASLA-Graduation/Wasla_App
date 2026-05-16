@@ -17,6 +17,8 @@ class WaslaApp extends StatelessWidget {
   const WaslaApp({super.key});
 
   @override
+
+  
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return MultiBlocProvider(
