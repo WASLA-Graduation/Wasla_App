@@ -47,6 +47,7 @@ class DriverCubit extends Cubit<DriverState> {
   }
 
   Future<void> getDriverStatistics() async {
+    reset();
     final String? driverId = await getUserId();
     emit(DriverGetDashboardDataLoading());
     final res = await driverRepo.getDriverChart(driverId: driverId!);
@@ -85,5 +86,11 @@ class DriverCubit extends Cubit<DriverState> {
         }
       }
     }
+  }
+
+  void reset() {
+    driverChart = null;
+    yearDataModel = null;
+    initalSelectedYear = '';
   }
 }

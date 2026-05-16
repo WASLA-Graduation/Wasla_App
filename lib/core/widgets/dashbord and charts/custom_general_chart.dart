@@ -6,10 +6,7 @@ import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/doctor_service/features/home/data/models/doctor_chart_model.dart';
 
 class CustomAreaChart extends StatelessWidget {
-  const CustomAreaChart({
-    super.key,
-    required this.points,
-  });
+  const CustomAreaChart({super.key, required this.points});
 
   final List<ChartPoint> points;
 
@@ -26,14 +23,17 @@ class CustomAreaChart extends StatelessWidget {
         initialVisibleMaximum: 5,
       ),
       primaryYAxis: NumericAxis(
+        minimum: 0,
         majorGridLines: const MajorGridLines(width: 1),
       ),
       series: <SplineAreaSeries<ChartPoint, String>>[
         SplineAreaSeries<ChartPoint, String>(
           dataSource: points,
-          xValueMapper: (data, _) =>
-              getMonth(data.month).tr(context),
-          yValueMapper: (data, _) => data.value,
+          xValueMapper: (data, _) => getMonth(data.month).tr(context),
+
+          // 🔥 هنا أهم تعديل: لو صفر نخليه رقم صغير جدًا
+          yValueMapper: (data, _) => data.value == 0 ? 0.1 : data.value,
+
           color: AppColors.primaryColor.withOpacity(0.25),
           borderColor: AppColors.primaryColor,
           borderWidth: 3,
@@ -44,31 +44,21 @@ class CustomAreaChart extends StatelessWidget {
   }
 }
 
-
 extension YearDataChartExtension on YearDataModel {
   List<ChartPoint> toChartPoints() {
-    final Map<int, double> monthMap = {
-      for (var m in months) m.month: m.amount,
-    };
+    final Map<int, double> monthMap = {for (var m in months) m.month: m.amount};
 
     return List.generate(12, (index) {
       final monthNumber = index + 1;
 
-      return ChartPoint(
-        month: monthNumber,
-        value: monthMap[monthNumber] ?? 0,
-      );
+      return ChartPoint(month: monthNumber, value: monthMap[monthNumber] ?? 0);
     });
   }
 }
-
 
 class ChartPoint {
   final int month;
   final double value;
 
-  const ChartPoint({
-    required this.month,
-    required this.value,
-  });
+  const ChartPoint({required this.month, required this.value});
 }
