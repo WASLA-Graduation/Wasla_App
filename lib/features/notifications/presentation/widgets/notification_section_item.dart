@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/functions/format_date_from_string.dart';
 import 'package:wasla/core/widgets/custom_circle_network_image.dart';
 import 'package:wasla/features/notifications/data/models/notification_model.dart';
@@ -13,7 +14,13 @@ class NotificationSectionItem extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 6),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: notification.isRead ? Colors.white : Colors.grey.shade300,
+        color: notification.isRead
+            ? context.isDarkMode
+                  ? Colors.black
+                  : Colors.white
+            : context.isDarkMode
+            ? Colors.grey.shade800
+            : Colors.grey.shade300,
         borderRadius: BorderRadius.circular(14),
         boxShadow: const [
           BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3)),

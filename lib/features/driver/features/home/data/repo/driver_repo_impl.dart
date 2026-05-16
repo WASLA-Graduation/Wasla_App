@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
@@ -44,6 +46,8 @@ class DriverRepoImpl extends DriverRepo {
         return Left(NoInternetFailure());
       }
       final response = await api.get(ApiEndPoints.getDriverChart + driverId);
+
+
       return Right(DriverStatisticsModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (error) {
       return Left(ServerFailure(error.errorModel.errorMessage));

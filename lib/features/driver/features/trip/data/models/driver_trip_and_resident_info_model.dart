@@ -31,11 +31,11 @@ class TripModel {
 
   factory TripModel.fromJson(Map<String, dynamic> json) {
     return TripModel(
-      residentName: json['residentName'],
-      residentPhone: json['residentPhone'],
-      residentImage: json['residentImage'],
-      pickUpPlace: json['pickUpPlace'],
-      dropOffPlace: json['dropOffPlace'],
+      residentName: json['residentName'] ?? '',
+      residentPhone: json['residentPhone'] ?? "",
+      residentImage: json['residentImage'] ?? "",
+      pickUpPlace: json['pickUpPlace'] ?? '',
+      dropOffPlace: json['dropOffPlace'] ?? '',
       pickUpLatitude: (json['pickUpLatitude'] as num).toDouble(),
       pickUpLongitude: (json['pickUpLongitude'] as num).toDouble(),
       pickUpTime: DateTime.parse(json['pickUpTime']),

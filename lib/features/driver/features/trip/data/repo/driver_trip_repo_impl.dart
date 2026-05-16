@@ -1,3 +1,4 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:wasla/core/connection/network_info.dart';
@@ -28,8 +29,7 @@ class DriverTripRepoImpl extends DriverTripRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
-    }
-    catch (e) {
+    } catch (e) {
       return Left(e.toString());
     }
   }
@@ -41,7 +41,7 @@ class DriverTripRepoImpl extends DriverTripRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
-    }catch (e) {
+    } catch (e) {
       return Left(e.toString());
     }
   }
@@ -53,8 +53,7 @@ class DriverTripRepoImpl extends DriverTripRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
-    }
-    catch (e) {
+    } catch (e) {
       return Left(e.toString());
     }
   }
@@ -72,8 +71,7 @@ class DriverTripRepoImpl extends DriverTripRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
-    }
-    catch (e) {
+    } catch (e) {
       return Left(e.toString());
     }
   }
@@ -95,7 +93,7 @@ class DriverTripRepoImpl extends DriverTripRepo {
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
-    }catch (e) {
+    } catch (e) {
       return Left(e.toString());
     }
   }
@@ -132,6 +130,7 @@ class DriverTripRepoImpl extends DriverTripRepo {
       final response = await api.get(
         ApiEndPoints.getTripDetailsForDriver + tripId.toString(),
       );
+
       return Right(TripModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
       return Left(ServerFailure(e.errorModel.errorMessage));

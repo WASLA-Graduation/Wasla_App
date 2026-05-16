@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/widgets/bloc_status_handler.dart';
@@ -22,6 +24,7 @@ class _SuggestedTripViewState extends State<SuggestedTripView> {
 
   @override
   Widget build(BuildContext context) {
+    log("Trip Id :${widget.tripId}  ");
     return Scaffold(
       body: SafeArea(
         child: BlocStatusHandler<DriverTripCubit, DriverTripState>(

@@ -92,7 +92,7 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
           ApiKeys.vehicleType: vehicleType,
         },
       );
-      // log("Trip Id : ${response[ApiKeys.data]}");
+      log("Trip Id : ${response[ApiKeys.data]}");
       return Right(response[ApiKeys.data]);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);

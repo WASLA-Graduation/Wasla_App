@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:wasla/core/connection/network_info.dart';
 import 'package:wasla/core/database/api/api_consumer.dart';
@@ -22,10 +24,13 @@ class TechnicantDashboardRepoImpl extends TechnicantDashboardRepo {
       if (!await sl<NetworkInfo>().isConnected) {
         return Left(NoInternetFailure());
       }
+
       final response = await api.get(
         ApiEndPoints.technicianGetChart,
         queryParameters: {'TechnicianId': id},
       );
+            // log('$response');
+
 
       return Right(TechnicianStatisticsModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
